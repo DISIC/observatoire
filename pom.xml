@@ -6,10 +6,10 @@
     <artifactId>parent-platform</artifactId>
     <version>9.11.2</version>
   </parent>
-  <groupId>com.xwiki.projects.dinsic.demat</groupId>
-  <artifactId>xwiki-dinsic-demat-parent</artifactId>
+  <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
+  <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
   <packaging>pom</packaging>
-  <name>XWiki Projects - DINSIC - Demat - Parent POM</name>
+  <name>XWiki Projects - DINSIC - Wiki Demarches - Parent POM</name>
   <version>1.0-SNAPSHOT</version>
   <properties>
     <platform.version>9.11.3</platform.version>
