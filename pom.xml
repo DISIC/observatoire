@@ -21,14 +21,18 @@
     <xwiki.license.skip>true</xwiki.license.skip>
   </properties>
   <scm>
-    <connection>scm:svn:https://svn.xwikisas.com/svnroot/xwiki/projects/dinsic-demat/trunk</connection>
-    <developerConnection>scm:svn:https://svn.xwikisas.com/svnroot/xwiki/projects/dinsic-demat/trunk</developerConnection>
-    <url>https://svn.xwikisas.com/svnroot/xwiki/projects/dinsic-demat/trunk</url>
+    <connection>scm:git:git://github.com/DISIC/wikidemarches.git</connection>
+    <developerConnection>scm:git:git@github.com:DISIC/wikidemarches.git</developerConnection>
+    <url>https://github.com/DISIC/wikidemarches/tree/master</url>
   </scm>
   <developers>
     <developer>
       <id>slauriere</id>
       <name>Stephane Laurière</name>
+    </developer>
+    <developer>
+      <id>lucaa</id>
+      <name>Anca Luca</name>
     </developer>
   </developers>
   <distributionManagement>
