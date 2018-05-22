@@ -27,11 +27,11 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1524840754000</creationDate>
+  <creationDate>1526657565000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1524840754000</date>
-  <contentUpdateDate>1524840754000</contentUpdateDate>
+  <date>1526915732000</date>
+  <contentUpdateDate>1526915732000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -39,40 +39,45 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-#if($request.outputSyntax=="plain")
+#if ($request.outputSyntax=="plain")
 $response.setContentType("application/json")
-#set($constraint ="")
-#foreach($param in ["particuliers", "professionnels", "collectivites", "associations"])
-  #if($request.getParameter($param) == "true")#set($constraint = $constraint + "'" + $param + "',")#end
+#set ($constraint ="")
+#set ($property = $request.property)
+#foreach ($param in ["particuliers", "professionnels", "collectivites", "associations"])
+  #if ($request.getParameter($param) == "true")
+    #set ($constraint = $constraint + "'" + $param + "',")
+  #end
+  #if ($property == "evenements" &amp;&amp; $constraint.indexOf("professionnels") &lt; 0 &amp;&amp; ($constraint.indexOf("collectivites") &gt;=0 || $constraint.indexOf("associations") &gt;=0))
+    #set ($constraint = $constraint + "'professionnels',")
+  #end
 #end
-#if($constraint.length()&gt;0)
-  #set($length = $constraint.length() - 1)
-  #set($constraint = $constraint.substring(0, $length))
+#if ($constraint.length()&gt;0)
+  #set ($length = $constraint.length() - 1)
+  #set ($constraint = $constraint.substring(0, $length))
 #else
-  #set($constraint = "''")
+  #set ($constraint = "''")
 #end
-#set($property = $request.property)
-#if($property == "publics")
-#set($xwql = "where doc.object(Publics.Code.PublicsClass).categorie in ($constraint) and doc.fullName &lt;&gt; 'Publics.Code.PublicsTemplate' order by doc.title")
-#else
-#set($xwql = "where doc.object(Evenements.Code.EvenementsClass).categorie in ($constraint) and doc.fullName &lt;&gt; 'Evenements.Code.EvenementsTemplate' order by doc.title")
+#if ($property == "publics")
+  #set ($xwql = "where doc.object(Publics.Code.PublicsClass).categorie in ($constraint) and doc.fullName &lt;&gt; 'Publics.Code.PublicsTemplate' order by doc.title")
+#elseif ($property == "evenements")
+  #set ($xwql = "where doc.object(Evenements.Code.EvenementsClass).categorie in ($constraint) and doc.fullName &lt;&gt; 'Evenements.Code.EvenementsTemplate' order by doc.title")
 #end
-#set($results = $services.query.xwql($xwql).execute())
+#set ($results = $services.query.xwql($xwql).execute())
 {{{
 {"links":[
-  {"href":"https://dinsic2.demo.xwiki.com/xwiki/rest/wikis/demat/classes/Demarches.Code.DemarchesClass/properties/$property","rel":"http://www.xwiki.org/rel/property","type":null,"hrefLang":null}],
+  {"href":"/xwiki/rest/wikis/demat/classes/Demarches.Code.DemarchesClass/properties/$property","rel":"http://www.xwiki.org/rel/property","type":null,"hrefLang":null}],
   "propertyValues":
-#if($request.fp.startsWith("Publics") || $request.fp.startsWith("Evenements"))
- #set($label = $xwiki.getDocument($request.fp).getTitle())
- #set($entry = {"value": $request.fp, "metaData": {"label": $label}})
+#if ($request.fp.startsWith("Publics") || $request.fp.startsWith("Evenements"))
+ #set ($label = $xwiki.getDocument($request.fp).getTitle())
+ #set ($entry = {"value": $request.fp, "metaData": {"label": $label}})
  $jsontool.serialize([${entry}])
 #else
   #set($list = [])
-  #foreach($item in $results)
-    #set($label = $xwiki.getDocument($item).getTitle())
+  #foreach ($item in $results)
+    #set ($label = $xwiki.getDocument($item).getTitle())
     ##{"value":"${escapetool.javascript($item)}","metaData":{"label":"${escapetool.javascript($label)}"}},
-    #set($entry = {"value": $item, "metaData": {"label": $label}})
-    #set($discard = $list.add($entry))
+    #set ($entry = {"value": $item, "metaData": {"label": $label}})
+    #set ($discard = $list.add($entry))
   #end
   $jsontool.serialize(${list})
 #end
