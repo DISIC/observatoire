@@ -25,33 +25,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
+    <artifactId>xwiki-dinsic-wikidemarches-applications</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>xwiki-dinsic-wikidemarches-wikis-wikidemat</artifactId>
-  <name>XWiki Projects - DINSIC Wiki Demarches - Demat Wiki</name>
-  <packaging>xar</packaging>
-  <dependencies>
-    <dependency>
-      <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-      <artifactId>xwiki-dinsic-wikidemarches-applications-demarches</artifactId>
-      <version>${project.version}</version>
-      <type>xar</type>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <version>${platform.version}</version>
-        <configuration>
-          <skip>true</skip>
-          <includeDependencies>true</includeDependencies>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <artifactId>xwiki-dinsic-wikidemarches-applications-demarches</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Demarches Application</name>
+  <packaging>xar</packaging>  
 </project>
