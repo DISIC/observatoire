@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1526657565000</creationDate>
-  <parent>demat:Demarches.Code.WebHome</parent>
+  <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1526659028000</date>
@@ -133,7 +133,7 @@
       <extensionPointId>org.xwiki.platform.template.header.after</extensionPointId>
     </property>
     <property>
-      <name>demat:Demarches.Code.Menu</name>
+      <name>wikidemat:Demarches.Code.Menu</name>
     </property>
     <property>
       <parameters/>
