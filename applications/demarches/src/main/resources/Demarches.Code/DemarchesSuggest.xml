@@ -37,7 +37,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content>{{velocity}}
 #if ($request.outputSyntax=="plain")
 $response.setContentType("application/json")
