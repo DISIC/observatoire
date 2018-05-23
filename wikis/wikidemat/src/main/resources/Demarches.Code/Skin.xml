@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1526657565000</creationDate>
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1527062184000</date>
+  <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -121,6 +121,48 @@ $doc.displayRendered($field, $prefix, $object)##
     </property>
     <property>
       <path>displayer_dblist.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.Skin</name>
+    <number>1</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>e5325cd4-42f8-4498-8228-0667cb26c2c2</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#set($displayPageHeader = true)</content>
+    </property>
+    <property>
+      <path>layoutExtraVars.vm</path>
     </property>
   </object>
   <object>
