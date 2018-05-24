@@ -40,6 +40,13 @@
       <type>xar</type>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
+      <artifactId>xwiki-dinsic-wikidemarches-applications-publication</artifactId>
+      <version>${project.version}</version>
+      <type>xar</type>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
