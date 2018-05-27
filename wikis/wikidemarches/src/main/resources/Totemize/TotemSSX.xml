@@ -1,0 +1,230 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Totemize.TotemSSX" locale="">
+  <web>Totemize</web>
+  <name>TotemSSX</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1527352925000</creationDate>
+  <parent>wikidemarches:Totemize.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1527450266000</date>
+  <contentUpdateDate>1527352925000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content/>
+  <object>
+    <name>Totemize.TotemSSX</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>aa23f73a-8281-464d-a626-af8a8626cfcd</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>/* 
+First of all, repair the margin of the mainContentArea so that the xwikicontent element is not spaced from the side of the browser. The size here is dependent of the gutter size, even if I hardcoded it.
+This allows any row in the content of the document to start at the leftmost of the window _without_ breaking the gutter for the text in a standard page.
+*/
+#mainContentArea {
+  padding-left: @grid-gutter-width / 2;
+  padding-right: @grid-gutter-width / 2;
+  padding-bottom: 0;
+}
+
+/* Move document header bottom margin inside the document header row - as bottom padding, and remove xcontent top margin */
+.document-header {
+  margin-bottom:0;
+  padding-bottom: 20px;
+}
+
+#mainContentArea &gt; .xcontent {
+  margin-top: 0;
+}
+
+/* Remove the breadcrumb - because it's not a row - and the hr between title and content. If you want to keep breadcrumb customize the skin to put it in a row and in a column. */
+#hierarchy, .xcontent &gt; hr {
+  display:none;
+}
+
+/*
+ * If the breadcrumb was fixed (from custom skin) and displayed as a row, we'll do the following:
+ * * display in navbar color
+ * * re-show the actual breadcrumb (hidden above)
+ * * move it up over the padding of the main content area, like the title row is
+ */
+.hierarchy-row {
+  background-color: @breadcrumb-bg;
+  color: @breadcrumb-color;
+  #hierarchy {
+    display: block;
+  }
+  margin-top: -20px;
+}
+
+/*
+ * Cleanup box shadows which make it difficult to visually unify consecutive rows - esp main menu and title row
+ */
+
+#mainContentArea, #xdocFooter, #docextrapanes {
+  box-shadow: none;
+}
+
+/*
+  Clean up spacing between header and title / hierarchy / content rows - reset everything to 0
+*/
+#mainContentArea {
+  padding-top: 0px;
+}
+
+#hierarchy {
+  margin-bottom: 0;
+}
+
+.hierarchy-row {
+  margin-top: 0;
+}
+
+.document-header {
+  margin-top: 0;
+}
+
+/* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows: 
+- document header row
+- document content row - which contains the xwikicontent column which contains all the rows in the document content.
+
+Visually, there's the title row and then all the rows from the document content, stacked.
+*/
+
+/**/</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+</xwikidoc>

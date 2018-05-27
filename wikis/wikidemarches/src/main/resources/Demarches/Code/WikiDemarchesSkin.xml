@@ -1,0 +1,583 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Code.WikiDemarchesSkin" locale="">
+  <web>Demarches.Code</web>
+  <name>WikiDemarchesSkin</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1527348369000</creationDate>
+  <parent>wikidemarches:Demarches.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1527444888000</date>
+  <contentUpdateDate>1527348411000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Wiki Demarches Skin</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content/>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>0</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>5288ac2a-8775-46ee-8719-4150585cbb5d</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#set($displayDocExtra = false)
+#set($displayContentFooter = false)
+#set($displayContentMenu = $hasAdmin &amp;&amp; $isAdvancedUser)
+#set($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
+#set($displayDrawer = $hasAdmin &amp;&amp; $isAdvancedUser)
+#set($displayQuickSearch = ($doc.fullName != 'Main.WebHome' &amp;&amp; $doc.fullName != 'Main.Search'))
+
+#set($displayDocChanges = false)
+
+#* These will be handled from the pages *#
+#set($displayDocTitle = true)
+#set($displayTitleContentSeparator = true)
+
+#set($extraFooterTemplate = 'footer_demarches.vm')</content>
+    </property>
+    <property>
+      <path>layoutExtraVars.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>1</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>bdf847bb-61ad-4f0f-8cbf-83f9c7cc4bb1</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#template('xwikivars.vm')
+#if($isInServletMode &amp;&amp; $displayBreadcrumbs) ## Visible only in a page
+  &lt;div class="row hierarchy-row"&gt;&lt;div class="col-xs-12"&gt;
+  #template('hierarchy_macros.vm')
+  #######################################################
+  ##                   CONTROLLER
+  ##
+  ## Call the appropiate breadcrumb depending on the
+  ## configuration.
+  #######################################################
+  #if($services.parentchild.isParentChildMechanismEnabled())
+    #hierarchy_parentChild()
+  #else
+    ##
+    ## Default mode: display the hierarchy for the current page
+    ##
+    #hierarchy($NULL {'id': 'hierarchy', 'limit': 5, 'treeNavigation': true})
+  #end
+  &lt;/div&gt;&lt;/div&gt;
+#end</content>
+    </property>
+    <property>
+      <path>hierarchy.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>2</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>4d64de53-4526-4904-ad5e-355c51073928</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>##
+## Top Menu
+##
+#if ($isInServletMode)## Visible only in a page
+  #template("menus_macros.vm")
+
+  ## Top Menu
+  #xwikitopmenustart()
+
+    ## Left menu
+    #xwikitopmenuleftstart()
+      #displaySimpleSecureUIX('org.xwiki.platform.topmenu.left')
+    #xwikitopmenuleftend()
+
+    ## Right menu
+    #xwikitopmenurightstart()
+      #if ($displayDrawer)
+        #displayDrawerActivator()
+      #end
+      #displaySimpleSecureUIX('org.xwiki.platform.topmenu.right')
+    #xwikitopmenurightend()
+
+  ## End of Top Menu
+  #xwikitopmenuend()
+
+  #if($displayDrawer)
+    #template("drawer.vm")
+  #end
+#end
+#**
+ * Display the drawer activator with an humberger-style icon.
+ *#
+#macro(displayDrawerActivator)
+  &lt;li&gt;
+    &lt;a class="icon-navbar drawer-toggle" id="tmDrawerActivator" title="$services.localization.render('core.menu.drawer')"&gt;&lt;span class="sr-only"&gt;$services.localization.render('core.menu.toggleNavigation')&lt;/span&gt;$services.icon.renderHTML('menu')&lt;/a&gt;
+  &lt;/li&gt;
+#end
+</content>
+    </property>
+    <property>
+      <path>menus_view.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>3</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>d6e8df68-cf71-455a-a914-262c47fd7534</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#if($displayDocTitle)
+&lt;div class="row document-header"&gt;
+  &lt;div class="document-info col-xs-12 #if($displayContentMenu)col-md-7#end"&gt;
+    ## --------------------------------------------------------
+    ## Display UI Extensions before the title element
+    ## --------------------------------------------------------
+    #foreach ($uix in $services.uix.getExtensions('org.xwiki.platform.template.title.before'))
+      $services.rendering.render($uix.execute(), 'xhtml/1.0')
+    #end
+    &lt;div id="document-title"&gt;&lt;h1&gt;$titleToDisplay&lt;/h1&gt;&lt;/div&gt;
+    #if (!$doc.isNew() &amp;&amp; $displayDocChanges)
+      &lt;div class="xdocLastModification"&gt;
+        #if (!$doc.isMostRecent())
+          $services.localization.render(
+            'core.document.modificationWithVersion',
+            ["&lt;a href='$tdoc.getURL('view', ""rev=$tdoc.version"")'&gt;$tdoc.version&lt;/a&gt;",
+            $xwiki.getUserName($tdoc.author),
+            $xwiki.formatDate($tdoc.date)
+          ])
+        #else
+          $services.localization.render('core.footer.modification', [$xwiki.getUserName($tdoc.author), $xwiki.formatDate($tdoc.date)])
+        #end
+      &lt;/div&gt;
+    #end
+  &lt;/div&gt;
+  #if($displayContentMenu)
+    &lt;div class="document-menu col-xs-12 col-md-5"&gt;
+      #template("menus_content.vm")
+    &lt;/div&gt;
+  #end
+&lt;/div&gt;
+#if($displayTitleContentSeparator)
+&lt;hr/&gt;
+#end
+#end</content>
+    </property>
+    <property>
+      <path>contentheader.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>4</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>544b32b6-9f72-4f88-8e83-32e803261fc8</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#if($isInServletMode)## Visible only in a page
+#if("$!extraFooterTemplate" != '')
+  #template($extraFooterTemplate)
+#end
+&lt;div id="footerglobal"&gt;
+  &lt;div id="xwikilicence"&gt;$!copyright&lt;/div&gt;
+  #set ($version = $xwiki.getSpacePreference('version'))
+  #if ("$!version" == "")
+    #set ($version = $xwiki.getXWikiPreference("version"))
+  #end
+  #if ("$!version" != "")
+    ## The version information coming from preferences is usually Velocity code, so make sure to evaluate it.
+    &lt;div id="xwikiplatformversion"&gt;#evaluate($version)&lt;/div&gt;
+  #else
+    &lt;div id="xwikiplatformversion"&gt;
+      #set($productURL = $services.extension.core.repository.environmentExtension.website)
+      #if ($productURL)
+        &lt;a href="$services.extension.core.repository.environmentExtension.website"&gt;
+      #end
+          $services.extension.core.repository.environmentExtension.name $xwiki.getVersion()
+      #if ($productURL)
+        &lt;/a&gt;
+      #end
+    &lt;/div&gt;
+  #end
+&lt;/div&gt;
+#end
+### TODO: Format the footer for pdf output</content>
+    </property>
+    <property>
+      <path>footer.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>5</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>ca8a3caf-14e6-42c7-878d-8592b4d46a30</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>&lt;div class="row demarches-footer"&gt;
+  &lt;div class="col-xs-12"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</content>
+    </property>
+    <property>
+      <path>footer_demarches.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>0</number>
+    <className>XWiki.XWikiSkins</className>
+    <guid>8838d3c6-06e3-4563-8954-3e0ee6b88272</guid>
+    <class>
+      <name>XWiki.XWikiSkins</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <baseskin>
+        <disabled>0</disabled>
+        <name>baseskin</name>
+        <number>2</number>
+        <prettyName>Base Skin</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </baseskin>
+      <edit.vm>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>edit.vm</name>
+        <number>10</number>
+        <prettyName>Edit</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </edit.vm>
+      <footer.vm>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>footer.vm</name>
+        <number>7</number>
+        <prettyName>Footer</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </footer.vm>
+      <header.vm>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>header.vm</name>
+        <number>6</number>
+        <prettyName>Header</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </header.vm>
+      <logo>
+        <disabled>0</disabled>
+        <name>logo</name>
+        <number>3</number>
+        <prettyName>Logo</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </logo>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <outputSyntax>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>outputSyntax</name>
+        <number>4</number>
+        <prettyName>Output Syntax</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>html/5.0=HTML 5|xhtml/1.0=XHTML 1.0</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </outputSyntax>
+      <style.css>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>style.css</name>
+        <number>5</number>
+        <prettyName>Style</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </style.css>
+      <view.vm>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>view.vm</name>
+        <number>9</number>
+        <prettyName>View</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </view.vm>
+      <viewheader.vm>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>viewheader.vm</name>
+        <number>8</number>
+        <prettyName>View Header</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </viewheader.vm>
+    </class>
+    <property>
+      <baseskin>flamingo</baseskin>
+    </property>
+    <property>
+      <edit.vm/>
+    </property>
+    <property>
+      <footer.vm/>
+    </property>
+    <property>
+      <header.vm/>
+    </property>
+    <property>
+      <logo>logo.svg</logo>
+    </property>
+    <property>
+      <name>Wiki demarches skin</name>
+    </property>
+    <property>
+      <outputSyntax>html/5.0</outputSyntax>
+    </property>
+    <property>
+      <style.css/>
+    </property>
+    <property>
+      <view.vm/>
+    </property>
+    <property>
+      <viewheader.vm/>
+    </property>
+  </object>
+</xwikidoc>
