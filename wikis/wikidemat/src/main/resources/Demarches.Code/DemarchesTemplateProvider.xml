@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1524498428000</creationDate>
+  <creationDate>1526657565000</creationDate>
   <parent>Demarches.Code.DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1524498428000</date>
-  <contentUpdateDate>1524498428000</contentUpdateDate>
+  <date>1527239905000</date>
+  <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title>Demarches Template Provider</title>
   <comment/>
@@ -255,7 +255,7 @@
       <template>Demarches.Code.DemarchesTemplate</template>
     </property>
     <property>
-      <terminal>0</terminal>
+      <terminal>1</terminal>
     </property>
     <property>
       <visibilityRestrictions/>

@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1526657565000</creationDate>
   <parent>Directions.Code.DirectionsClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1527502222000</date>
+  <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title>Directions Template Provider</title>
   <comment/>
@@ -255,7 +255,7 @@
       <template>Directions.Code.DirectionsTemplate</template>
     </property>
     <property>
-      <terminal>0</terminal>
+      <terminal>1</terminal>
     </property>
     <property>
       <visibilityRestrictions/>
