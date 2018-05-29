@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527449538000</date>
-  <contentUpdateDate>1527447064000</contentUpdateDate>
+  <date>1527604251000</date>
+  <contentUpdateDate>1527601089000</contentUpdateDate>
   <version>1.1</version>
   <title>Home</title>
   <comment/>
@@ -53,10 +53,13 @@
     (%class='demarches-searchbox%)(((
       ## display the global search here:
       {{html clean='false'}}
+      ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
+      ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+      #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
       &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end"&gt;
         &lt;label for="headerglobalsearchinput"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
         &lt;div class="input-group"&gt;
-          &lt;input type="text" class='form-control' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" id="headerglobalsearchinput" /&gt;
+          &lt;input type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
           &lt;span class='input-group-btn'&gt;
             &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;$services.localization.render('wikidemarches.search.button')&lt;/button&gt;
           &lt;/span&gt;
@@ -214,9 +217,11 @@
       text-align: left;
       color: tint(@navbar-default-bg, 80%);
     }
-    #headerglobalsearchinput {
-      /* Overwrite default style of global search input */
+    input {
+      /* Make a style comparable to the style of the default global search input */
       width: 100%;
+      border-radius: 0;
+      border: 0;
     }
     button.btn {
       background-color: lighten(@navbar-default-bg, 10%);
@@ -224,6 +229,16 @@
       padding-bottom: @padding-base-vertical + 1px;
     }
   }
+}
+
+/* On the search suggest of the main page, displaying a button to hide suggestions does not make sense */
+.searchSuggest div.hide-button-wrapper {
+  display: none;
+}
+
+/* search suggest results should be displayed bigger */
+div.suggestItem {
+  font-size: 1em;
 }
 
 .demarches-statsrow {

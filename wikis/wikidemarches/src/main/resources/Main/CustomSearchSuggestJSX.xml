@@ -1,0 +1,216 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Main.CustomSearchSuggestJSX" locale="">
+  <web>Main</web>
+  <name>CustomSearchSuggestJSX</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1527598099000</creationDate>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1527603612000</date>
+  <contentUpdateDate>1527598099000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content/>
+  <object>
+    <name>Main.CustomSearchSuggestJSX</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>f61cda62-7bd9-47ea-8683-6bc93407a337</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>default</cache>
+    </property>
+    <property>
+      <code>// custom search suggest, copied from searchSuggest.js, hookable on any input. 
+// The customization is done for layouting, to have a list of suggestions that is always as wide as the parent form of the input on which the suggestions are hooked.
+// it copies the init function from searchSuggest.js (unfortunately with all the preparation of sources form the suggest config).
+// it's prototype, because the original searchSuggest.js is prototype
+var XWiki = (function (XWiki) {
+  var init = function() {
+    /*
+    ## Iterate over the sources defined in the configuration document, and create a source array to be passed to the
+    ## search suggest contructor.
+    #set ($sources = [])
+    #set ($searchSuggestConfig = $xwiki.getDocument('XWiki.SearchSuggestConfig'))
+    #foreach ($source in $searchSuggestConfig.getObjects('XWiki.SearchSuggestSourceClass'))
+      #if ($source.getProperty('activated').value == 1)
+        #set ($engine = $source.getProperty('engine').value)
+        #if ("$!engine" == '')
+          ## For backward compatibility we consider the search engine to be Lucene when it's no specified.
+          #set ($engine = 'lucene')
+        #end
+        #set ($discard = $xwiki.getDocument('XWiki.SearchCode').getRenderedContent())
+        #if ($engine == $searchEngine)
+          #set ($name = $source.getProperty('name').value)
+          #if ($services.localization.get($name))
+            #set ($name = $services.localization.render($name))
+          #else
+            ## Evaluate the Velocity code for backward compatibility.
+            #set ($name = "#evaluate($name)")
+          #end
+          #set ($icon = $source.getProperty('icon').value)
+          #if ($icon.startsWith('icon:'))
+            #set ($icon = $xwiki.getSkinFile("icons/silk/${icon.substring(5)}.png"))
+          #else
+            ## Evaluate the Velocity code for backward compatibility.
+            #set ($icon = "#evaluate($icon)")
+          #end
+          #set ($service = $source.getProperty('url').value)
+          #set ($parameters = {
+            'query': $source.getProperty('query').value,
+            'nb': $source.getProperty('resultsNumber').value
+          })
+          #if ($xwiki.exists($service))
+            #set ($discard = $parameters.put('outputSyntax', 'plain'))
+            #set ($service = $xwiki.getURL($service, 'get', $escapetool.url($parameters)))
+          #else
+            ## Evaluate the Velocity code for backward compatibility.
+            #set ($service = "#evaluate($service)")
+            #set ($service = "$service#if ($service.contains('?'))&amp;#else?#end$escapetool.url($parameters)")
+          #end
+          #set ($highlight = $source.getProperty('highlight').value == 1)
+          #set ($discard = $sources.add({
+            'name': $name,
+            'varname': 'input',
+            'script': $service,
+            'icon': $icon,
+            'highlight': $highlight
+          }))
+        #end
+      #end
+    #end
+    */
+    var sources = $jsontool.serialize($sources);
+    // start custom part:
+    $$('.withsearchsuggest-input').each(function(suggestedInput){
+      var searchSuggestObj = new XWiki.SearchSuggest(suggestedInput, sources);
+      //if there is a parent form, make a suggest that has the same size as the parentForm
+      var parentForm = suggestedInput.up('form');
+      if (parentForm) {
+         searchSuggestObj.suggest.options.align = 'left';
+         searchSuggestObj.suggest.options.width = parentForm.getWidth();
+      }
+    });
+    // done
+    return true;
+  };
+
+  // When the document is loaded, install search suggestions
+  (XWiki.isInitialized &amp;&amp; init())
+  || document.observe('xwiki:dom:loading', init);
+
+  return XWiki;
+
+})(XWiki);</code>
+    </property>
+    <property>
+      <name>Custom Search Suggest JSX</name>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+</xwikidoc>

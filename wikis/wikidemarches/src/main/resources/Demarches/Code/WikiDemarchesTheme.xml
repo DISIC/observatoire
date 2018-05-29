@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527449891000</date>
+  <date>1527602203000</date>
   <contentUpdateDate>1527413730000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches theme</title>
@@ -1011,6 +1011,20 @@
       font-size: 2.5em;
       line-height: @navbar-height;
     }
+  }
+}
+
+/*
+ * A couple of adjustments on the search suggest, related to the fact that there is a single source of results. Easier to hack from CSS than to modify the source of results.
+ */
+.searchSuggest {
+  /* Hide the source, there is only one. */
+  .sourceName {
+    display: none;
+  }
+  /* hide the info (document location), it's always the same */
+  ul.suggestList .info {
+    display: none;
   }
 }
 
