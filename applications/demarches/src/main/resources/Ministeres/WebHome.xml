@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1526657566000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1527605248000</date>
+  <contentUpdateDate>1526657566000</contentUpdateDate>
   <version>1.1</version>
   <title>Ministères</title>
   <comment/>
@@ -58,6 +58,16 @@
 #set ($columns = ['doc.title', 'doc.date', 'doc.author', '_actions'])
 #livetable('ministeres' $columns $columnsProperties $options)
 {{/velocity}}</content>
+  <attachment>
+    <filename>ministeres.csv</filename>
+    <mimetype>text/csv</mimetype>
+    <author>xwiki:XWiki.Admin</author>
+    <date>1526659628000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>SUQsU2lnbGUsTm9tDQpBQyxBQyxBdXRvcml0w6kgZGUgbGEgY29uY3VycmVuY2UNCkNOSUwsQ05JTCxDTklMDQpJREYsSURGLElERg0KTUEsTUEsTUENCk1BQUYsTUFBRixNQUFGDQpNQUVFLE1BRUUsTUFFRQ0KTUFTUyxNQVNTLE1BU1MNCk1DQyxNQ0MsTUNDDQpNRSxNRSxNRQ0KTUVTUixNRVNSLE1FU1INCk1JLE1JLE1JDQpNSU5FRixNSU5FRixNSU5FRg0KTUosTUosTUoNCk1TQ1MsTVNDUyxNU0NTDQpNVEVGUCxNVEVGUCxNVEVGUA0KTVRFUyxNVEVTLE1URVMNClBNLFBNLFBN</content>
+    <filesize>273</filesize>
+  </attachment>
   <object>
     <name>Ministeres.WebHome</name>
     <number>0</number>
@@ -138,206 +148,6 @@
     </property>
     <property>
       <description/>
-    </property>
-  </object>
-  <object>
-    <name>Ministeres.WebHome</name>
-    <number>0</number>
-    <className>BatchImport.BatchImportClass</className>
-    <guid>5c92d22c-610f-4097-90d2-acdbbb1ceebb</guid>
-    <class>
-      <name>BatchImport.BatchImportClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <classname>
-        <disabled>0</disabled>
-        <name>classname</name>
-        <number>5</number>
-        <picker>0</picker>
-        <prettyName>classname</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </classname>
-      <clearname>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>radio</displayFormType>
-        <displayType>yesno</displayType>
-        <name>clearname</name>
-        <number>12</number>
-        <prettyName>Clear name</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </clearname>
-      <datafilename>
-        <disabled>0</disabled>
-        <name>datafilename</name>
-        <number>3</number>
-        <picker>0</picker>
-        <prettyName>datafilename</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </datafilename>
-      <datafileprefix>
-        <disabled>0</disabled>
-        <name>datafileprefix</name>
-        <number>7</number>
-        <picker>0</picker>
-        <prettyName>datafileprefix</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </datafileprefix>
-      <defaultdateformat>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>defaultdateformat</name>
-        <number>11</number>
-        <picker>0</picker>
-        <prettyName>Default date format</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </defaultdateformat>
-      <fieldsfortags>
-        <disabled>0</disabled>
-        <name>fieldsfortags</name>
-        <number>9</number>
-        <picker>0</picker>
-        <prettyName>fieldsfortags</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </fieldsfortags>
-      <fileimport>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType/>
-        <name>fileimport</name>
-        <number>13</number>
-        <prettyName>fileimport</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </fileimport>
-      <fileupload>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType/>
-        <name>fileupload</name>
-        <number>12</number>
-        <prettyName>fileupload</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </fileupload>
-      <listseparator>
-        <disabled>0</disabled>
-        <name>listseparator</name>
-        <number>10</number>
-        <picker>0</picker>
-        <prettyName>List Separator</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </listseparator>
-      <mapping>
-        <disabled>0</disabled>
-        <editor>Text</editor>
-        <name>mapping</name>
-        <number>1</number>
-        <picker>0</picker>
-        <prettyName>mapping</prettyName>
-        <rows>15</rows>
-        <size>80</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </mapping>
-      <metadatafilename>
-        <disabled>0</disabled>
-        <name>metadatafilename</name>
-        <number>2</number>
-        <picker>0</picker>
-        <prettyName>metadatafilename</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </metadatafilename>
-      <pageprefix>
-        <disabled>0</disabled>
-        <name>pageprefix</name>
-        <number>8</number>
-        <picker>0</picker>
-        <prettyName>pageprefix</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </pageprefix>
-      <space>
-        <disabled>0</disabled>
-        <name>space</name>
-        <number>6</number>
-        <picker>0</picker>
-        <prettyName>space</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </space>
-    </class>
-    <property>
-      <classname>Ministeres.Code.MinisteresClass</classname>
-    </property>
-    <property>
-      <defaultdateformat/>
-    </property>
-    <property>
-      <listseparator>,</listseparator>
-    </property>
-    <property>
-      <mapping>Nom=title1
-Nom=doc.title
-ID=doc.name
-Sigle=sigle</mapping>
-    </property>
-    <property>
-      <metadatafilename>ministeres.csv</metadatafilename>
-    </property>
-    <property>
-      <space>Ministeres</space>
     </property>
   </object>
   <object>

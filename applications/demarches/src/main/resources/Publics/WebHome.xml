@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1526657566000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1527500447000</date>
+  <contentUpdateDate>1526657566000</contentUpdateDate>
   <version>1.1</version>
   <title>Publics</title>
   <comment/>
@@ -59,6 +59,16 @@
 #set ($columns = ['categorie', 'doc.title', 'doc.date', 'doc.author', '_actions'])
 #livetable('publics' $columns $columnsProperties $options)
 {{/velocity}}</content>
+  <attachment>
+    <filename>publics.csv</filename>
+    <mimetype>text/csv</mimetype>
+    <author>xwiki:XWiki.Admin</author>
+    <date>1526660275000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>SUQsQ2F0w6lnb3JpZSxQdWJsaWMsDQoxLHBhcnRpY3VsaWVycyxBZ2VudHMgZGUgbGEgZm9uY3Rpb24gcHVibGlxdWUsDQoyLHBhcnRpY3VsaWVycyxBc3N1csOpcywNCjMscGFydGljdWxpZXJzLENvbnNvbW1hdGV1cnMsDQo0LHBhcnRpY3VsaWVycyxDb250cmlidWFibGVzLA0KNSxwYXJ0aWN1bGllcnMsRGVtYW5kZXVyIGQnZW1wbG9pLA0KNixwYXJ0aWN1bGllcnMsRWxlY3RldXJzLA0KNyxwYXJ0aWN1bGllcnMsRW5mYW50cywNCjgscGFydGljdWxpZXJzLMOJdHJhbmdlciBlbiBGcmFuY2UsDQo5LHBhcnRpY3VsaWVycyzDiXR1ZGlhbnQsDQoxMCxwYXJ0aWN1bGllcnMsRmFtaWxsZSwNCjExLHBhcnRpY3VsaWVycyxGcmFuw6dhaXMgw6AgbCfDqXRyYW5nZXIsDQoxMixwYXJ0aWN1bGllcnMsSmV1bmVzLA0KMTMscGFydGljdWxpZXJzLEp1c3RpY2lhYmxlcywNCjE0LHBhcnRpY3VsaWVycyxMaWNlbmNpw6lzLA0KMTUscGFydGljdWxpZXJzLFBhcmVudHMgZCfDqWzDqHZlLA0KMTYscGFydGljdWxpZXJzLFBlcnNvbm5lcyBhZ8OpZXMsDQoxNyxwYXJ0aWN1bGllcnMsUGVyc29ubmVzIGhhbmRpY2Fww6llcywNCjE4LHBhcnRpY3VsaWVycyxQZXJzb25uZXMgc2FucyByZXNzb3VyY2VzLA0KMTkscGFydGljdWxpZXJzLFB1YmxpY3MgZnJhZ2lsZXMsDQoyMCxwYXJ0aWN1bGllcnMsUmVzc29ydGlzc2FudCBldXJvcMOpZW5zLA0KMjEscGFydGljdWxpZXJzLFJldHJhaXTDqXMsDQoyMixwYXJ0aWN1bGllcnMsU2FsYXJpw6lzLA0KMjMscGFydGljdWxpZXJzLFNhbGFyacOpcyBkw6l0YWNow6lzLA0KMjQscGFydGljdWxpZXJzLFNlbmlvcnMsDQoyNSxwcm9mZXNzaW9ubmVscyxBZ3JpY3VsdGV1cnMsDQoyNixwcm9mZXNzaW9ubmVscyxBcnRpc2FucywNCjI3LHByb2Zlc3Npb25uZWxzLEFydGlzdGVzLA0KMjgscHJvZmVzc2lvbm5lbHMsQXV0by1lbnRyZXByZW5ldXJzLA0KMjkscHJvZmVzc2lvbm5lbHMsQ29tbWVyw6dhbnRzLA0KMzAscHJvZmVzc2lvbm5lbHMsSW5kdXN0cmllbHMsDQozMSxwcm9mZXNzaW9ubmVscyxFbnRyZXByaXNlcyBkZSBCVFAsDQozMixwcm9mZXNzaW9ubmVscyxFbnRyZXByaXNlcyBkZSB0cmFuc3BvcnQsDQozMyxwcm9mZXNzaW9ubmVscyxFdGFibGlzc2VtZW50cyBkZSBzYW50w6ksDQozNCxwcm9mZXNzaW9ubmVscyxFdGFibGlzc2VtZW50cyBldCBzZXJ2aWNlcyBzb2NpYXV4IGV0IG3DqWRpY28tc29jaWF1eCwNCjM1LHByb2Zlc3Npb25uZWxzLEV0YWJsaXNzZW1lbnRzIHNwb3J0aWZzLA0KMzYscHJvZmVzc2lvbm5lbHMsRm9yYWlucywNCjM3LHByb2Zlc3Npb25uZWxzLEluZHVzdHJpZSBwaGFybWFjZXV0aXF1ZSwNCjM4LHByb2Zlc3Npb25uZWxzLE1pbGl0YWlyZXMsDQozOSxwcm9mZXNzaW9ubmVscyxPcMOpcmF0ZXVycyBmdW7DqXJhaXJlcywNCjQwLHByb2Zlc3Npb25uZWxzLFBldGl0ZSBldCBtb3llbm5lcyBlbnRyZXByaXNlcywNCjQxLHByb2Zlc3Npb25uZWxzLFByb2Zlc3Npb25zIGxpYsOpcmFsZXMsDQo0Mixwcm9mZXNzaW9ubmVscyxQcm9mZXNzaW9ubmVscyBkZSBzYW50w6ksDQo0Myxwcm9mZXNzaW9ubmVscyxFbnRyZXByaXNlcyxham91dA0KNDQsY29sbGVjdGl2aXRlcyxDb21tdW5lcyxham91dA0KNDUsY29sbGVjdGl2aXRlcyxEw6lwYXJ0ZW1lbnRzLGFqb3V0DQo0Nixwcm9mZXNzaW9ubmVscyxQcm9wcmnDqXRhaXJlIGQnw6lxdWlwZW1lbnRzIHNwb3J0aWZzLGFqb3V0DQo0Nyxjb2xsZWN0aXZpdGVzLFByb3RlY3Rpb24gTWF0ZXJuZWxsZSBldCBJbmZhbnRpbGUsYWpvdXQNCjQ4LHByb2Zlc3Npb25uZWxzLE9yZ2FuaXNhdGV1cnMgZCfDqXbDqG5lbWVudHMgc3BvcnRpZnMsYWpvdXQNCjQ5LHByb2Zlc3Npb25uZWxzLFByb2Zlc3Npb25uZWxzLGFqb3V0DQo1MCxwYXJ0aWN1bGllcnMsUGFydGljdWxpZXJzLGFqb3V0DQo1MSxwcm9mZXNzaW9ubmVscyxBc3NvY2lhdGlvbnMsYWpvdXQNCjUyLHByb2Zlc3Npb25uZWxzLENvbGxlY3Rpdml0w6lzIGxvY2FsZXMsYWpvdXQNCjUzLHByb2Zlc3Npb25uZWxzLEZvbmRhdGlvbnMsYWpvdXQ=</content>
+    <filesize>2039</filesize>
+  </attachment>
   <object>
     <name>Publics.WebHome</name>
     <number>0</number>
@@ -139,206 +149,6 @@
     </property>
     <property>
       <description/>
-    </property>
-  </object>
-  <object>
-    <name>Publics.WebHome</name>
-    <number>0</number>
-    <className>BatchImport.BatchImportClass</className>
-    <guid>2d4348f2-085b-48fa-83a6-8f434677c88d</guid>
-    <class>
-      <name>BatchImport.BatchImportClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <classname>
-        <disabled>0</disabled>
-        <name>classname</name>
-        <number>5</number>
-        <picker>0</picker>
-        <prettyName>classname</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </classname>
-      <clearname>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>radio</displayFormType>
-        <displayType>yesno</displayType>
-        <name>clearname</name>
-        <number>12</number>
-        <prettyName>Clear name</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </clearname>
-      <datafilename>
-        <disabled>0</disabled>
-        <name>datafilename</name>
-        <number>3</number>
-        <picker>0</picker>
-        <prettyName>datafilename</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </datafilename>
-      <datafileprefix>
-        <disabled>0</disabled>
-        <name>datafileprefix</name>
-        <number>7</number>
-        <picker>0</picker>
-        <prettyName>datafileprefix</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </datafileprefix>
-      <defaultdateformat>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>defaultdateformat</name>
-        <number>11</number>
-        <picker>0</picker>
-        <prettyName>Default date format</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </defaultdateformat>
-      <fieldsfortags>
-        <disabled>0</disabled>
-        <name>fieldsfortags</name>
-        <number>9</number>
-        <picker>0</picker>
-        <prettyName>fieldsfortags</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </fieldsfortags>
-      <fileimport>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType/>
-        <name>fileimport</name>
-        <number>13</number>
-        <prettyName>fileimport</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </fileimport>
-      <fileupload>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType/>
-        <name>fileupload</name>
-        <number>12</number>
-        <prettyName>fileupload</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </fileupload>
-      <listseparator>
-        <disabled>0</disabled>
-        <name>listseparator</name>
-        <number>10</number>
-        <picker>0</picker>
-        <prettyName>List Separator</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </listseparator>
-      <mapping>
-        <disabled>0</disabled>
-        <editor>Text</editor>
-        <name>mapping</name>
-        <number>1</number>
-        <picker>0</picker>
-        <prettyName>mapping</prettyName>
-        <rows>15</rows>
-        <size>80</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </mapping>
-      <metadatafilename>
-        <disabled>0</disabled>
-        <name>metadatafilename</name>
-        <number>2</number>
-        <picker>0</picker>
-        <prettyName>metadatafilename</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </metadatafilename>
-      <pageprefix>
-        <disabled>0</disabled>
-        <name>pageprefix</name>
-        <number>8</number>
-        <picker>0</picker>
-        <prettyName>pageprefix</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </pageprefix>
-      <space>
-        <disabled>0</disabled>
-        <name>space</name>
-        <number>6</number>
-        <picker>0</picker>
-        <prettyName>space</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </space>
-    </class>
-    <property>
-      <classname>Publics.Code.PublicsClass</classname>
-    </property>
-    <property>
-      <defaultdateformat/>
-    </property>
-    <property>
-      <listseparator>,</listseparator>
-    </property>
-    <property>
-      <mapping>Catégorie=categorie
-Public=doc.title
-Public=title
-ID=doc.name</mapping>
-    </property>
-    <property>
-      <metadatafilename>publics.csv</metadatafilename>
-    </property>
-    <property>
-      <space>Publics</space>
     </property>
   </object>
   <object>
