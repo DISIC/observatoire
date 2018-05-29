@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1524498425000</creationDate>
+  <creationDate>1526657567000</creationDate>
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1524498425000</date>
-  <contentUpdateDate>1524498425000</contentUpdateDate>
+  <date>1527520764000</date>
+  <contentUpdateDate>1526657567000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -59,7 +59,7 @@
         <customDisplay/>
         <disabled>0</disabled>
         <displayType>checkbox</displayType>
-        <hint/>
+        <hint>Élement qualitatif permettant de caractériser la dématérialisation</hint>
         <multiSelect>1</multiSelect>
         <name>caracteristiquesDemat</name>
         <number>27</number>
@@ -73,7 +73,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect</values>
+        <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect|mobile=Adapté mobile</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </caracteristiquesDemat>
       <caracteristiquesDematPrevues>
@@ -81,7 +81,7 @@
         <customDisplay/>
         <disabled>0</disabled>
         <displayType>checkbox</displayType>
-        <hint/>
+        <hint>Element qualitatif permettant de caractériser la dématérialisation prévue</hint>
         <multiSelect>1</multiSelect>
         <name>caracteristiquesDematPrevues</name>
         <number>28</number>
@@ -95,7 +95,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect</values>
+        <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect|mobile=Adapté mobile</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </caracteristiquesDematPrevues>
       <categoriesPublics>
@@ -122,7 +122,7 @@
       </categoriesPublics>
       <dateMiseEnLigne>
         <customDisplay/>
-        <dateFormat>dd/MM/yyyy</dateFormat>
+        <dateFormat>MM/yyyy</dateFormat>
         <disabled>0</disabled>
         <emptyIsToday>0</emptyIsToday>
         <hint>Date de mise en ligne, prévisionnelle ou réalisée</hint>
@@ -154,7 +154,18 @@
       <direction>
         <cache>0</cache>
         <classname/>
-        <customDisplay/>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($direction = $xwiki.getDocument($value))
+#if ($xcontext.action == 'get')
+  #if ($direction.sigle) $direction.sigle #else $value #end
+#elseif ($xcontext.action == 'view')
+  $direction.displayTitle
+#else
+  #template('displayer_dblist.vm')
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <disabled>0</disabled>
         <displayType>input</displayType>
         <hint>Direction ou établissement à laquelle / auquel est rattachée la démarche</hint>
@@ -169,10 +180,10 @@
         <separators/>
         <size>1</size>
         <sort>value</sort>
-        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Directions.Code.DirectionsClass' and doc.fullName&lt;&gt;'Directions.Code.DirectionsTemplate'</sql>
+        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Directions.Code.DirectionsClass' and doc.fullName&lt;&gt;'Directions.Code.DirectionsTemplate' order by doc.title asc</sql>
         <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
+        <validationMessage>Demarches.Code.DemarchesClass_direction.validation</validationMessage>
+        <validationRegExp>/^.+$/</validationRegExp>
         <valueField/>
         <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
       </direction>
@@ -230,20 +241,31 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </formulaires>
-      <groupe>
+      <groupes>
+        <cache>0</cache>
+        <classname/>
         <customDisplay/>
         <disabled>0</disabled>
-        <hint>Groupe auquel est rattachée la démarche (exemple : Portail des signalements)</hint>
-        <name>groupe</name>
+        <displayType>input</displayType>
+        <hint>Groupes au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
+        <idField/>
+        <multiSelect>1</multiSelect>
+        <name>groupes</name>
         <number>9</number>
         <picker>1</picker>
-        <prettyName>Groupe</prettyName>
-        <size>30</size>
+        <prettyName>Groupes</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql/>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </groupe>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </groupes>
       <identifiantsEli>
         <customDisplay/>
         <disabled>0</disabled>
@@ -261,12 +283,28 @@
       <ministeres>
         <cache>0</cache>
         <classname/>
-        <customDisplay/>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($xcontext.action == 'get')
+  #foreach ($ministere in $value)
+    #set($ministereDocument = $xwiki.getDocument($ministere))
+    #if ($ministereDocument.sigle) $ministereDocument.sigle #else $ministereDocument.fullName #end
+  #end
+#elseif ($xcontext.action == 'view')
+  #foreach ($ministere in $value)
+    #set($ministereDocument = $xwiki.getDocument($ministere))
+    $ministereDocument.displayTitle
+  #end
+#else
+  #template('displayer_dblist.vm')
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <disabled>0</disabled>
         <displayType>input</displayType>
         <hint>Ministère auquel est rattachée la démarche</hint>
         <idField/>
-        <multiSelect>0</multiSelect>
+        <multiSelect>1</multiSelect>
         <name>ministeres</name>
         <number>7</number>
         <picker>1</picker>
@@ -276,7 +314,7 @@
         <separators/>
         <size>5</size>
         <sort>value</sort>
-        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Ministeres.Code.MinisteresClass' and doc.fullName&lt;&gt;'Ministeres.Code.MinisteresTemplate'</sql>
+        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Ministeres.Code.MinisteresClass' and doc.fullName&lt;&gt;'Ministeres.Code.MinisteresTemplate' order by doc.title asc</sql>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
@@ -389,18 +427,29 @@
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
       </objet>
       <organismesTraitement>
+        <cache>0</cache>
+        <classname/>
         <customDisplay/>
         <disabled>0</disabled>
-        <hint>Organisme(s) ou type(s) d'organisme recevant la démarche et la gérant, séparés par des virgules en cas de valeurs multiples</hint>
+        <displayType>input</displayType>
+        <hint>Organisme(s) ou type(s) d'organisme recevant la démarche et la gérant</hint>
+        <idField/>
+        <multiSelect>1</multiSelect>
         <name>organismesTraitement</name>
         <number>10</number>
         <picker>1</picker>
         <prettyName>Organismes de traitement</prettyName>
-        <size>30</size>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql/>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
       </organismesTraitement>
       <pourcentageDemat>
         <customDisplay/>
@@ -547,7 +596,29 @@
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
       </textes>
       <title1>
-        <customDisplay>{{include reference="AppWithinMinutes.Title"/}}</customDisplay>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+  #set ($className = $object.getxWikiClass().name)
+  #if ($doc.fullName == $className)
+    ## We are editing the class so the title must be read from / written to the template document.
+    #set ($name = 'templateTitle')
+    #set ($value = $xwiki.getDocument("$stringtool.removeEnd($className, 'Class')Template").title)
+  #else
+    ## We are editing an application entry so the title must be read from / written to the current document.
+    #set ($name = 'title')
+    #set ($value = $tdoc.title)
+  #end
+  &lt;input type="text" name="$name" value="$!escapetool.xml($value)"
+    #if ($xwiki.getXWikiPreference('xwiki.title.mandatory') == 1)class="required"#end/&gt;
+#elseif ("$!type" != '')
+  ## Render the title of the current document.
+  $tdoc.getRenderedTitle('xhtml/1.0')
+#else
+  The display mode is not specified!
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <disabled>0</disabled>
         <hint>Nom de la démarche (longueur maximale : 255 caractères)</hint>
         <name>title1</name>
@@ -631,14 +702,10 @@
       </volumetrieDemat>
     </class>
     <property>
-      <caracteristiquesDemat>
-        <value>aucune</value>
-      </caracteristiquesDemat>
+      <caracteristiquesDemat/>
     </property>
     <property>
-      <caracteristiquesDematPrevues>
-        <value>aucune</value>
-      </caracteristiquesDematPrevues>
+      <caracteristiquesDematPrevues/>
     </property>
     <property>
       <categoriesPublics/>
@@ -650,7 +717,7 @@
       <dematObligatoire>0</dematObligatoire>
     </property>
     <property>
-      <direction>Directions.1</direction>
+      <direction/>
     </property>
     <property>
       <evenements/>
@@ -668,18 +735,13 @@
       <identifiantsEli/>
     </property>
     <property>
-      <ministere>Ministeres.1</ministere>
-    </property>
-    <property>
       <ministeres/>
     </property>
     <property>
       <niveauDemat/>
     </property>
     <property>
-      <niveauPrevu>
-        <value>aucun</value>
-      </niveauPrevu>
+      <niveauPrevu/>
     </property>
     <property>
       <nomComplet/>
@@ -691,7 +753,9 @@
       <objet/>
     </property>
     <property>
-      <organismesTraitement/>
+      <organismesTraitement>
+        <value/>
+      </organismesTraitement>
     </property>
     <property>
       <publics/>
@@ -706,10 +770,10 @@
       <remarques/>
     </property>
     <property>
-      <statut>aucun</statut>
+      <statut>active</statut>
     </property>
     <property>
-      <statutProjetDemat>aucun</statutProjetDemat>
+      <statutProjetDemat>encours</statutProjetDemat>
     </property>
     <property>
       <textes/>
