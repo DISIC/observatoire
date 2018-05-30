@@ -55,7 +55,6 @@
         <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
         <version>${platform.version}</version>
         <configuration>
-          <skip>true</skip>
           <includeDependencies>true</includeDependencies>
         </configuration>
       </plugin>

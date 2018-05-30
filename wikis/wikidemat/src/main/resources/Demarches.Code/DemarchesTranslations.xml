@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarchesTranslations</name>
   <language/>
-  <defaultLanguage>en</defaultLanguage>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1526657567000</creationDate>
@@ -37,7 +37,7 @@
   <title/>
   <comment/>
   <minorEdit>false</minorEdit>
-  <syntaxId>xwiki/2.1</syntaxId>
+  <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
   <content># Class fields
 Demarches.Code.DemarchesClass_title1=Nom

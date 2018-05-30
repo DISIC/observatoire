@@ -50,7 +50,8 @@
         <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
         <version>${platform.version}</version>
         <configuration>
-          <skip>true</skip>
+          <!-- Default language of the applications is French (for translation files) -->
+          <defaultLanguage>fr</defaultLanguage>
         </configuration>
       </plugin>
     </plugins>
