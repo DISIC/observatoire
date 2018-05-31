@@ -31,17 +31,19 @@
   <parent>wikidemat:Publication.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527105612000</date>
-  <contentUpdateDate>1527105612000</contentUpdateDate>
+  <date>1527757778000</date>
+  <contentUpdateDate>1527757778000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity}}
-(%class='box'%)(((
+  <content>{{include reference="Publication.Code.PublicationUtils"/}}
+
+{{velocity}}
 = $services.localization.render('publication.view.config') =
+(%class='box'%)(((
 #set($class = $doc.getObject('Publication.Code.PublicationConfigClass').xWikiClass)
 #foreach($prop in $class.properties)
   ; $doc.displayPrettyName($prop.name)
@@ -51,43 +53,37 @@
 ##
 #set($dopreview = "$!request.previewdocs" == 'true')
 ##
+#macro(displayClassFields $l10nKey $classFieldsMap)
+  $!services.localization.render($l10nKey)
+  #foreach($sPair in $classFieldsMap.entrySet())
+    #set($class = $xwiki.getDocument($sPair.key).getxWikiClass())
+    * $sPair.key #if ($class != $NULL)(%style="color: #0a0"%)$services.icon.render('check')(%%)#{else}(%style="color: #f00"%)$services.icon.render('delete')(%%)#end
+    
+    #foreach ($sField in $sPair.value)
+      ** $sField #if ($class.get($sField) != $NULL)(%style="color: #0a0"%)$services.icon.render('check')(%%)#{else}(%style="color: #f00"%)$services.icon.render('delete')(%%)#end
+    
+    #end
+  #end
+#end
+
 #if ($dopreview)
   = $services.localization.render('publication.view.preview') =
   #set($filter = "$!doc.getObject('Publication.Code.PublicationConfigClass').getProperty('filter').value")
   #set($targetwiki = "$!doc.getObject('Publication.Code.PublicationConfigClass').getProperty('targetwiki').value")
   #if ($filter != '' &amp;&amp; $targetwiki != '')
-    ## build the skip list from the excludeFields parameter
-    #set($skipList = {})
-    #set($excludes = "$!doc.getObject('Publication.Code.PublicationConfigClass').getProperty('excludeFields').value")
-    #if ($excludes != '')
-      #foreach($e in $excludes.split("\n"))
-        #set($e = $e.trim())
-        #set($ePair = $e.split(':'))
-        #if ($ePair.size() == 2 &amp;&amp; $ePair[0].trim().length() &gt; 0 &amp;&amp; $ePair[1].trim().length() &gt; 0)
-          #set($classSkips = $skipList.get($ePair[0].trim()))
-          #if ($classSkips == $NULL)
-            #set($classSkips = [])
-            #set($discard = $skipList.put($ePair[0], $classSkips))
-          #end
-          #set($discard = $classSkips.add($ePair[1].trim()))
-        #end
-      #end
-    #end
+    ## build the skip list from the excludeFields property
+    #set ($skipMap = {})
+    #buildClassFieldsMap($skipMap, 'excludeFields')
+    ## build the denormalize list from the denormalizeFields property
+    #set ($denormalizeMap = {})
+    #buildClassFieldsMap($denormalizeMap, 'denormalizeFields')
     ## display documents that will be copied
     #set($results = $services.query.xwql($filter).execute())
     #if ($results.size() &gt; 0)
-      $!services.localization.render('publication.view.preview.exclude.explanation')
-
-      #foreach($sPair in $skipList.entrySet())
-        #set($excludeClass = $xwiki.getDocument($sPair.key).getxWikiClass())
-        * $sPair.key #if ($excludeClass != $NULL)(%style="color: #0a0"%)$services.icon.render('check')(%%)#{else}(%style="color: #f00"%)$services.icon.render('delete')(%%)#end
-
-        #foreach ($sField in $sPair.value)
-          ** $sField #if ($excludeClass.get($sField) != $NULL)(%style="color: #0a0"%)$services.icon.render('check')(%%)#{else}(%style="color: #f00"%)$services.icon.render('delete')(%%)#end
-
-        #end
-      #end
-
+      #displayClassFields('publication.view.preview.exclude.explanation', $skipMap)      
+      
+      #displayClassFields('publication.view.preview.denormalize.explanation', $denormalizeMap)
+      
       $!services.localization.render('publication.view.preview.documents.explanation')
       |=$services.localization.render('publication.view.preview.nb')|=$services.localization.render('publication.view.preview.docsource')|=$services.localization.render('publication.view.preview.doctarget')
       #foreach($r in $results)
@@ -103,24 +99,21 @@
 {{html}}
 #if ("$!request.confirm" != 'true')
   #if (!$dopreview)
-    &lt;form class="xform" action="" method="POST" onsubmit="return window.confirm('$services.localization.render('publication.view.preview.button.confirm');"&gt;
+    &lt;form class="xform" style="display: inline" action="" method="POST"&gt;
       &lt;input type="hidden" name="previewdocs" value="true" /&gt;
-      &lt;div class="buttonwrapper"&gt;
-        &lt;button type="submit" class="button"&gt;$services.localization.render('publication.view.preview.button')&lt;/button&gt;
-      &lt;/div&gt;
+        &lt;button type="submit" class="btn btn-info"&gt;$services.localization.render('publication.view.preview.button')&lt;/button&gt;
     &lt;/form&gt;
   #end
-  &lt;form class="xform" action="" method="POST" onsubmit="return window.confirm('$escapetool.javascript($services.localization.render('publication.view.run.button.confirm'))');"&gt;
+  &lt;form class="xform" style="display: inline" action="" method="POST" onsubmit="return window.confirm('$escapetool.javascript($services.localization.render('publication.view.run.button.confirm'))');"&gt;
     &lt;input type="hidden" name="confirm" value="true" /&gt;
-    &lt;div class="buttonwrapper"&gt;
-      &lt;button type="submit" class="button"&gt;$services.localization.render('publication.view.run.button')&lt;/button&gt;
-    &lt;/div&gt;
+      &lt;button type="submit" class="btn btn-info"&gt;$services.localization.render('publication.view.run.button')&lt;/button&gt;
   &lt;/form&gt;
 #end
 {{/html}}
 {{/velocity}}
 
 {{job id="publishJob/{{velocity}}$xcontext.database/$doc.name/$datetool.get('yyyy-MM-dd/HH:mm:ss'){{/velocity}}" grouppath="{{velocity}}publishJob/$xcontext.database/$doc.name{{/velocity}}" start="{{velocity}}$request.confirm{{/velocity}}"}}
+  {{include reference="Publication.Code.PublicationUtils"/}}
   {{velocity}}
   $services.logging.setLevel($doc.fullName, 'info')
   #set($logger = $services.logging.getLogger($doc.fullName))
@@ -129,24 +122,13 @@
   #set($filter = "$!doc.getObject('Publication.Code.PublicationConfigClass').getProperty('filter').value")
   #set($targetwiki = "$!doc.getObject('Publication.Code.PublicationConfigClass').getProperty('targetwiki').value")
   #if ($filter != '' &amp;&amp; $targetwiki != '')
-    ## build the skip list from the excludeFields parameter
-    #set($skipList = {})
-    #set($excludes = "$!doc.getObject('Publication.Code.PublicationConfigClass').getProperty('excludeFields').value")
-    #if ($excludes != '')
-      #foreach($e in $excludes.split("\n"))
-        #set($e = $e.trim())
-        #set($ePair = $e.split(':'))
-        #if ($ePair.size() == 2 &amp;&amp; $ePair[0].trim().length() &gt; 0 &amp;&amp; $ePair[1].trim().length() &gt; 0)
-          #set($classSkips = $skipList.get($ePair[0].trim()))
-          #if ($classSkips == $NULL)
-            #set($classSkips = [])
-            #set($discard = $skipList.put($ePair[0], $classSkips))
-          #end
-          #set($discard = $classSkips.add($ePair[1].trim()))
-        #end
-      #end
-    #end
-    $logger.info("Starting publication of documents answering query {} to {}, with the following skipList: {} ", $filter, $targetwiki, $skipList)
+    ## build the skip list from the excludeFields property
+    #set ($skipMap = {})
+    #buildClassFieldsMap($skipMap, 'excludeFields')
+    ## build the denormalize list from the denormalizeFields property
+    #set ($denormalizeMap = {})
+    #buildClassFieldsMap($denormalizeMap, 'denormalizeFields')
+    $logger.info("Starting publication of documents answering query {} to {}, with the following skipMap: {} ", $filter, $targetwiki, $skipMap)
     ## copy documents one by one
     $progress.endStep()
     #set($results = $services.query.xwql($filter).execute())
@@ -164,17 +146,18 @@
             ## copy the title and the content of the source document to the target document
             #set($discard = $targetDoc.setTitle($sourceDoc.getTitle()))
             #set($discard = $targetDoc.setContent($sourceDoc.getContent()))
-            ## 
+            ##
             ## Set default language of the target document: this must absolutely be done here and nowhere else (after having set stuff on the document, so that the clone of the document is already created before we call .getDocument() and this acts on the clone)
-            ## 
+            ##
             #set($discard = $targetDoc.getDocument().setDefaultLocale($sourceDoc.getDefaultLocale()))
-            ## copy the objects of this document, paying attention to the skip list
+            ## copy the objects of this document, paying attention to the skip list and to the denormalize list
             ## TODO: this script does not handle non-contiguous objects, it always adds them contiguous, so if there is a hole in the objects of the source document and it's published twice, this will create as many objects in the target documents as there are holes in the source document.
             ## I'm not handling this case now because it's overcomplicated
             #foreach($objsByClass in $sourceDoc.getxWikiObjects().entrySet())
               #set($classToCopy = $objsByClass.key)
               $logger.info('Copying all objects of class {}', $classToCopy)
-              #set($classToCopyExcludes = $skipList.get($classToCopy))
+              #set($classToCopyExcludes = $skipMap.get($classToCopy))
+              #set($classToCopyDenormalizeFields = $denormalizeMap.get($classToCopy))
               #foreach($objToCopy in $objsByClass.value)
                 #if ($objToCopy != $NULL)
                   #set($targetObj = $targetDoc.getObject($classToCopy, $objToCopy.number))
@@ -182,9 +165,40 @@
                     #set($targetObj = $targetDoc.newObject($classToCopy))
                   #end
                   ## copy all properties except for the skips
-                  #foreach ($p in $objToCopy.properties)
-                    #if ($classToCopyExcludes == $NULL || !$classToCopyExcludes.contains($p.name))
-                      #set($discard = $targetObj.set($p.name, $p.value))
+                  ## and denormalize the declared properties
+                  #foreach($prop in $objToCopy.xWikiClass.properties)
+                    #if ($classToCopyExcludes == $NULL || !$classToCopyExcludes.contains($prop.name))
+                      #set ($objPropValue = $objToCopy.getProperty($prop.name).getValue())
+                      #if($classToCopyDenormalizeFields != $NULL &amp;&amp; $classToCopyDenormalizeFields.contains($prop.name))
+                        #set ($mapValues = $prop.mapValues)
+                        #if ($objPropValue &amp;&amp; $objPropValue.size() &gt; 0)
+                          ## we have a multi-select property
+                          #set ($denormalizedValues = [])
+                          #foreach($normalizedValue in $objPropValue)
+                            #set ($denormalizedValue = $mapValues[$normalizedValue].value)
+                            #if ($denormalizedValue != $NULL)
+                              #set ($discard = $denormalizedValues.add($denormalizedValue))
+                            #else
+                              ## if the normalized value is not found in the map of values, copy it as is
+                              ## without denormalization
+                              #set ($discard = $denormalizedValues.add($normalizedValue))
+                            #end
+                          #end
+                          #set ($discard = $targetObj.set($prop.name, $denormalizedValues))
+                        #else
+                          ## we have a single-select property
+                          #set ($denormalizedValue = $mapValues[$objPropValue])
+                          #if ($denormalizedValue != $NULL)
+                            #set ($discard = $targetObj.set($prop.name, $denormalizedValue))
+                          #else
+                            #set ($discard = $targetObj.set($prop.name, $objPropValue))
+                          #end
+                        #end
+                      #else
+                        #if ($objPropValue)
+                          #set ($discard = $targetObj.set($prop.name, $objPropValue))
+                        #end
+                      #end
                     #end
                   #end
                 #else
@@ -195,7 +209,7 @@
             #end
             ##
             ## TODO: copy attachments!!!!
-            ## 
+            ##
             ## Done, save the target document
             #set($discard = $targetDoc.save())
             $logger.info('Document {} was saved!', $targetDoc.documentReference)
@@ -216,7 +230,8 @@
     $logger.warn('No filter or target wiki found, cannot proceed with publication')
   #end
   {{/velocity}}
-{{/job}}</content>
+{{/job}}
+</content>
   <object>
     <name>Publication.Code.PublicationConfigViewSheet</name>
     <number>0</number>

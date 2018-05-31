@@ -24,15 +24,15 @@
   <web>Publication.Code</web>
   <name>Translations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage>en</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1527086407000</creationDate>
   <parent>Publication.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527139502000</date>
-  <contentUpdateDate>1527139502000</contentUpdateDate>
+  <date>1527757483000</date>
+  <contentUpdateDate>1527757483000</contentUpdateDate>
   <version>1.1</version>
   <title>Translations</title>
   <comment/>
@@ -41,18 +41,20 @@
   <hidden>true</hidden>
   <content>Publication.Code.PublicationConfigClass_filter=Filtre (XWQL)
 Publication.Code.PublicationConfigClass_excludeFields=Champs à exclure
-Publication.Code.PublicationConfigClass_targetwiki=Wiki destination
+Publication.Code.PublicationConfigClass_denormalizeFields=Champs à dénormaliser
+Publication.Code.PublicationConfigClass_targetwiki=Wiki de destination
 publication.view.preview.nb=Numéro
 publication.view.preview.docsource=De
-publication.view.preview.doctarget=À
+publication.view.preview.doctarget=Vers
 publication.view.preview=Prévisualisation
-publication.view.run=Execution
+publication.view.run=Exécution
 publication.view.config=Configuration
-publication.view.preview.button=Prévisualisation
-publication.view.preview.exclude.explanation=Les propriétés suivantes seront exclues de la copie:
-publication.view.preview.documents.explanation=Les documents suivants seront copiés:
+publication.view.preview.button=Prévisualiser
+publication.view.preview.exclude.explanation=Les propriétés suivantes seront exclues de la copie :
+publication.view.preview.documents.explanation=Les documents suivants seront copiés :
+publication.view.preview.denormalize.explanation=Les propriétés suivantes seront dénormalisées :
 publication.view.run.button=Publier
-publication.view.run.button.confirm=Confirmez-vous la publication des documents?
+publication.view.run.button.confirm=Confirmez-vous la publication des documents ?
 publication.livetable.doc.title=Nom 
 publication.livetable.doc.location=Emplacement
 publication.livetable.doc.author=Dernier auteur 
