@@ -52,6 +52,13 @@
         <configuration>
           <!-- Default language of the applications is French (for translation files) -->
           <defaultLanguage>fr</defaultLanguage>
+          <!-- Overwrite inherited setting for the titles verification, to allow any title for the preferences page -->
+          <titles>
+            <property>
+              <name>.*WebPreferences</name>
+              <value>.*</value>
+            </property>
+          </titles>
         </configuration>
       </plugin>
     </plugins>
