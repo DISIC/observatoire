@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527520515000</date>
-  <contentUpdateDate>1527520515000</contentUpdateDate>
+  <date>1527870741000</date>
+  <contentUpdateDate>1527870741000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -41,13 +41,38 @@
   <hidden>true</hidden>
   <content>{{velocity output="none"}}
 #macro (displayProperty $propName $isMandatory)
+  #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
+  #set ($hint = $NULL)
+  #set ($isBoolean = false)
+  #foreach ($prop in $clazz.properties)
+    #if ($prop.name == $propName)
+      #set ($hint = $prop.hint)
+      #set ($isBoolean = ($prop.type == 'BooleanClass'))
+    #end
+  #end
   #set ($fieldIsInvalid = false)
   #if ($xcontext.validationStatus.propertyErrors.contains($propName))
     #set($fieldIsInvalid = true)
   #end
+  #if ($isBoolean &amp;&amp; $context.display == 'edit')
+  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.display($propName)$doc.displayPrettyName($propName, $isMandatory, false)&lt;/label&gt;
+  : #if ($hint)(% class="xHint" %)$services.localization.render($hint)#end
+  
+  #else
   ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.displayPrettyName($propName, $isMandatory, false)&lt;/label&gt;
-  (% class="xHint" %)$services.localization.render('hint')
-  : #if ($fieldIsInvalid)(% class='validation-failure' %)#end$doc.display($propName)#if($fieldIsInvalid){{html}}&lt;span&gt;$services.localization.render("Demarches.Code.DemarchesSheet_${propName}.validation.empty")&lt;/span&gt;{{/html}}#end
+  #if ($hint)(% class="xHint" %)$services.localization.render($hint)#end
+  
+  #end
+  #if ($fieldIsInvalid)
+  
+    (% class='validation-failure' %)
+  #end
+  #if(!$isBoolean || $context.display != 'edit')
+  : $doc.display($propName)
+  #end
+   #if($fieldIsInvalid)
+     {{error}}$services.localization.render("Demarches.Code.DemarchesClass_${propName}.validation"){{/error}}
+   #end
 #end
 {{/velocity}}
 
@@ -56,6 +81,14 @@
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.ssx.use('Demarches.Code.Skin'))
 #set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
+#if($xcontext.action == 'edit')
+  #set($type="edit")
+  &lt;input type="hidden" name="xvalidate" value="1" /&gt;
+  &lt;input type="hidden" name="async" value="false" /&gt;
+  ## Groovy script to validate empty title or empty direction
+  &lt;input type="hidden" name="xvalidation" value="Demarches.Code.ValidationScriptGroovy" /&gt;
+#end
+
 #if ($xcontext.validationStatus.errors.size() &gt; 0 || $xcontext.validationStatus.exceptions.size() &gt; 0)
 
   {{error}}
@@ -75,65 +108,13 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-#if ($xcontext.action != 'view')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_title1"#end&gt;$doc.displayPrettyName('title1', true, false)&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Nom de la démarche (longueur maximale : 255 caractères)')
-  #set($fieldIsInvalid = false)
-  #if ($xcontext.validationStatus.propertyErrors.contains('title1'))
-    #set($fieldIsInvalid = true)
-  #end
-  #if($fieldIsInvalid)
-
-    (% class='demarches-validation-failure' %)
-  #end
-  : $doc.display('title1')
-  #if($fieldIsInvalid)
-    {{error}}$services.localization.render('Demarches.Code.DemarchesClass_title1.validation'){{/error}}
-  #end
+#if($context.action != 'view')
+  #displayProperty('title1', true)
 #end
-  ##foreach($propName in ['nomComplet', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'groupe', 'organismeTraitement', 'textes', 'identifiantsEli'])
-    ##displayProperty($propName, false)
-  ##end
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_nomComplet"#end&gt;$escapetool.xml($doc.displayPrettyName('nomComplet', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Nom complet de la démarche dans le cas où celui-ci excède 255 caractères')
-  : $doc.display('nomComplet')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_statut"#end&gt;$escapetool.xml($doc.displayPrettyName('statut', false, false))&lt;/label&gt;
-  : $doc.display('statut')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_formulaires"#end&gt;$escapetool.xml($doc.displayPrettyName('formulaires', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Référence(s) d''un ou plusieurs CERFA séparé(e)s par des virgules')
-  : $doc.display('formulaires')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_objet"#end&gt;$escapetool.xml($doc.displayPrettyName('objet', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Objet de la démarche')
-  : $doc.display('objet')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_ministeres"#end&gt;$escapetool.xml($doc.displayPrettyName('ministeres', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Ministère auquel est rattachée la démarche')
-  : $doc.display('ministeres')
-  #set($fieldIsInvalid = false)
-  #if ($xcontext.validationStatus.propertyErrors.contains('direction'))
-    #set($fieldIsInvalid = true)
-  #end
-  #if($fieldIsInvalid)
-
-    (% class='demarches-validation-failure' %)
-  #end
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_direction"#end&gt;$escapetool.xml($doc.displayPrettyName('direction', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Direction ou établissement à laquelle / auquel est rattachée la démarche')
-  : $doc.display('direction')
-  #if($fieldIsInvalid)
-    {{error}}$services.localization.render('Demarches.Code.DemarchesClass_direction.validation'){{/error}}
-  #end
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_groupes"#end&gt;$escapetool.xml($doc.displayPrettyName('groupes', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Groupes au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)')
-  : $doc.display('groupes')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_organismesTraitement"#end&gt;$escapetool.xml($doc.displayPrettyName('organismesTraitement', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Organisme(s) ou type(s) d''organisme recevant la démarche et la gérant, séparés par des virgules en cas de valeurs multiples')
-  : $doc.display('organismesTraitement')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_textes"#end&gt;$escapetool.xml($doc.displayPrettyName('textes', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Textes de lois associés à la démarche')
-  : $doc.display('textes')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_identifiantsEli"#end&gt;$escapetool.xml($doc.displayPrettyName('identifiantsEli', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Identifiants de textes dans le journal officiel, séparés par des virgules')
-  : $doc.display('identifiantsEli')
+#foreach($propName in ['nomComplet', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
+  #set ($mandatory = ($propName == 'direction'))
+  #displayProperty($propName, $mandatory)
+#end
 )))
   &lt;/div&gt;
 &lt;/div&gt;
@@ -142,15 +123,9 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_categoriesPublics"#end&gt;$escapetool.xml($doc.displayPrettyName('categoriesPublics', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Catégorie(s) de public(s) concerné(s) par la démarche')
-  : $doc.display('categoriesPublics')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_publics"#end&gt;$escapetool.xml($doc.displayPrettyName('publics', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Public(s) concerné(s) par la démarche')
-  : $doc.display('publics')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_evenements"#end&gt;$escapetool.xml($doc.displayPrettyName('evenements', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Événements de vie associés à la démarche')
-  : $doc.display('evenements')
+#foreach($propName in ['categoriesPublics', 'publics', 'evenements'])
+  #displayProperty($propName, false)
+#end
 )))
   &lt;/div&gt;
 &lt;/div&gt;
@@ -161,20 +136,9 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_volumetrie"#end&gt;$escapetool.xml($doc.displayPrettyName('volumetrie', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Nombre total de démarches reçues par an (estimation)')
-  : #if ($xcontext.action == 'view' &amp;&amp; $doc.getValue('volumetrie')) $numbertool.format('integer', $doc.getValue('volumetrie')) #else $doc.display('volumetrie') #end
-  
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_volumetrieDemat"#end&gt;$escapetool.xml($doc.displayPrettyName('volumetrieDemat', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Nombre de démarches reçues par la voie d''une téléprocédure ou d''un EDI par an.')
-  : #if ($xcontext.action == 'view' &amp;&amp; $doc.getValue('volumetrieDemat')) $numbertool.format('integer', $doc.getValue('volumetrieDemat')) #else $doc.display('volumetrieDemat') #end
-  
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_pourcentageDemat"#end&gt;$escapetool.xml($doc.displayPrettyName('pourcentageDemat', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Estimation du pourcentage de démarches réalisées sur une téléprocédure ou un EDI par an')
-  : $doc.display('pourcentageDemat')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_niveauVolumetrie"#end&gt;$escapetool.xml($doc.displayPrettyName('niveauVolumetrie', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Intervalle dans lequel se situe la volumétrie')
-  : $doc.display('niveauVolumetrie')
+#foreach($propName in ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
+  #displayProperty($propName, false)
+#end
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -183,26 +147,9 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_niveauDemat"#end&gt;$escapetool.xml($doc.displayPrettyName('niveauDemat', false, false))&lt;/label&gt;
-  : $doc.display('niveauDemat')
-  #if ($context.display == 'edit')
-    ; &lt;label for="Demarches.Code.DemarchesClass_0_dematObligatoire"&gt;$doc.display('dematObligatoire')$escapetool.xml($doc.displayPrettyName('dematObligatoire', false, false))&lt;/label&gt;
-    : (% class="xHint" %)$services.localization.render('Ce champ indique si les usagers sont obligés de remplir la démarche en dématérialisation.')
-  #else
-    ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_dematObligatoire"#end&gt;$escapetool.xml($doc.displayPrettyName('dematObligatoire', false, false))&lt;/label&gt;##
-      (% class="xHint" %)$services.localization.render('Ce champ indique si les usagers sont obligés de remplir la démarche en dématérialisation.')
-    : $doc.display('dematObligatoire')
-  #end
-  #if ($context.display == 'edit')
-    ; &lt;label for="Demarches.Code.DemarchesClass_0_exclusionSve"&gt;$doc.display('exclusionSve')$escapetool.xml($doc.displayPrettyName('exclusionSve', false, false))&lt;/label&gt;
-    : (% class="xHint" %)$services.localization.render('Démarche exclue du SVE par décret')
-  #else
-    ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_exclusionSve"#end&gt;$escapetool.xml($doc.displayPrettyName('exclusionSve', false, false))&lt;/label&gt;##
-      (% class="xHint" %)$services.localization.render('Démarche exclue du SVE par décret')
-    : $doc.display('exclusionSve')
-  #end
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_caracteristiquesDemat"#end&gt;$escapetool.xml($doc.displayPrettyName('caracteristiquesDemat', false, false))&lt;/label&gt;
-  : $doc.display('caracteristiquesDemat')
+#foreach($propName in ['niveauDemat', 'dematObligatoire', 'exclusionSve', 'caracteristiquesDemat'])
+  #displayProperty($propName, false)
+#end
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -211,12 +158,9 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_referenceBddForm"#end&gt;$escapetool.xml($doc.displayPrettyName('referenceBddForm', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Référence de la démarche dans la base BDDForm (numéro de CERFA)')
-  : $doc.display('referenceBddForm')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_referenceServicePublic"#end&gt;$doc.displayPrettyName('referenceServicePublic', true, false)&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Référence de la démarche dans la base Service Public')
-  : $doc.display('referenceServicePublic')
+#foreach($propName in ['referenceBddForm', 'referenceServicePublic'])
+  #displayProperty($propName, false)
+#end
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -225,15 +169,9 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_urlInfos"#end&gt;$escapetool.xml($doc.displayPrettyName('urlInfos', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Adresse web des informations concernant la démarche')
-  : $doc.display('urlInfos')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_urlDemarche"#end&gt;$escapetool.xml($doc.displayPrettyName('urlDemarche', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Adresse web permettant d''effectuer la démarche')
-  : $doc.display('urlDemarche')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_urlFiche"#end&gt;$escapetool.xml($doc.displayPrettyName('urlFiche', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Adresse web de documentation de la démarche ou du CERFA')
-  : $doc.display('urlFiche')
+#foreach($propName in ['urlInfos', 'urlDemarche', 'urlFiche'])
+  #displayProperty($propName, false)
+#end
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -242,8 +180,7 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_remarques"#end&gt;$escapetool.xml($doc.displayPrettyName('remarques', false, false))&lt;/label&gt;
-  : $doc.display('remarques')
+#displayProperty('remarques', false)
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -256,32 +193,14 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_nomProjet"#end&gt;$escapetool.xml($doc.displayPrettyName('nomProjet', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Nom du projet de dématérialisation auquel est rattachée la démarche')
-  : $doc.display('nomProjet')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_statutProjetDemat"#end&gt;$escapetool.xml($doc.displayPrettyName('statutProjetDemat', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Statut du projet de dématérialisation incluant la planification de celle-ci')
-  : $doc.display('statutProjetDemat')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_dateMiseEnLigne"#end&gt;$escapetool.xml($doc.displayPrettyName('dateMiseEnLigne', false, false))&lt;/label&gt;##
-    (% class="xHint" %)$services.localization.render('Date de mise en ligne, prévisionnelle ou réalisée')
-  : $doc.display('dateMiseEnLigne')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_niveauPrevu"#end&gt;$escapetool.xml($doc.displayPrettyName('niveauPrevu', false, false))&lt;/label&gt;
-  : $doc.display('niveauPrevu')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_caracteristiquesDematPrevues"#end&gt;$escapetool.xml($doc.displayPrettyName('caracteristiquesDematPrevues', false, false))&lt;/label&gt;
-  : $doc.display('caracteristiquesDematPrevues')
-
+#foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'niveauPrevu', 'caracteristiquesDematPrevues'])
+  #displayProperty($propName, false)
+#end
 )))
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-#if($xcontext.action == 'edit')
-  #set($type="edit")
-    &lt;input type="hidden" name="xvalidate" value="1" /&gt;
-    &lt;input type="hidden" name="async" value="false" /&gt;
-    ## Groovy script to validate empty title or empty direction
-    &lt;input type="hidden" name="xvalidation" value="Demarches.Code.ValidationScriptGroovy" /&gt;
-#end
 {{/html}}
 {{/velocity}}</content>
   <object>
