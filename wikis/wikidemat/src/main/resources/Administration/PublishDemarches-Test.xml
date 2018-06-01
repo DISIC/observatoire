@@ -31,7 +31,7 @@
   <parent>wikidemat:Administration.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527167070000</date>
+  <date>1527696243000</date>
   <contentUpdateDate>1527167070000</contentUpdateDate>
   <version>1.1</version>
   <title>Publication des démarches - Test</title>
@@ -54,6 +54,23 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
+      <denormalizeFields>
+        <contenttype>---</contenttype>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>---</editor>
+        <hint/>
+        <name>denormalizeFields</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>denormalizeFields</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </denormalizeFields>
       <excludeFields>
         <contenttype>---</contenttype>
         <customDisplay/>
@@ -93,7 +110,7 @@
         <disabled>0</disabled>
         <hint/>
         <name>targetwiki</name>
-        <number>3</number>
+        <number>4</number>
         <picker>0</picker>
         <prettyName>targetwiki</prettyName>
         <size>30</size>
@@ -104,6 +121,10 @@
       </targetwiki>
     </class>
     <property>
+      <denormalizeFields>Demarches.Code.DemarchesClass:publics
+Demarches.Code.DemarchesClass:evenements</denormalizeFields>
+    </property>
+    <property>
       <excludeFields>Demarches.Code.DemarchesClass:nomProjet
 Demarches.Code.DemarchesClass:niveauPrevu
 Demarches.Code.DemarchesClass:caracteristiquesDematPrevues
@@ -113,7 +134,7 @@ Demarches.Code.DemarchesClass:remarques
 </excludeFields>
     </property>
     <property>
-      <filter>from doc.object(Demarches.Code.DemarchesClass) as demarche where doc.space = 'Demarches' and doc.name like '8%'</filter>
+      <filter>from doc.object(Demarches.Code.DemarchesClass) as demarche where doc.space = 'Demarches' and doc.name like '820'</filter>
     </property>
     <property>
       <targetwiki>wikidemarches</targetwiki>
