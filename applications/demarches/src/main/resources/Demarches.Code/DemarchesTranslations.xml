@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1524498425000</creationDate>
+  <creationDate>1526657567000</creationDate>
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1524498425000</date>
-  <contentUpdateDate>1524498425000</contentUpdateDate>
+  <date>1528041239000</date>
+  <contentUpdateDate>1528041239000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -48,7 +48,7 @@ Demarches.Code.DemarchesClass_referenceServicePublic=Référence Service Public
 Demarches.Code.DemarchesClass_objet=Objet
 Demarches.Code.DemarchesClass_ministeres=Ministère
 Demarches.Code.DemarchesClass_direction=Direction ou établissement
-Demarches.Code.DemarchesClass_groupe=Groupe
+Demarches.Code.DemarchesClass_groupes=Groupes
 Demarches.Code.DemarchesClass_organismesTraitement=Organismes de traitement
 Demarches.Code.DemarchesClass_textes=Textes de référence
 Demarches.Code.DemarchesClass_identifiantsEli=Identifiants ELI
@@ -131,7 +131,7 @@ demarches.livetable.referenceServicePublic=Référence Service Public
 demarches.livetable.objet=Objet
 demarches.livetable.ministeres=Ministère
 demarches.livetable.direction=Direction ou établissement
-demarches.livetable.groupe=Groupe
+demarches.livetable.groupes=Groupes
 demarches.livetable.organismesTraitement=Organismes de traitement
 demarches.livetable.textes=Textes de référence
 demarches.livetable.identifiantsEli=Identifiants ELI
