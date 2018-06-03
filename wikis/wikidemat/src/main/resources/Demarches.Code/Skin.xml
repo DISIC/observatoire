@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527583673000</date>
+  <date>1528040351000</date>
   <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -152,7 +152,17 @@
 
 #HEntrE9es {
   display: none;
-}</code>
+}
+
+.validation-failure input {
+  background-color: #f2dede;
+  margin-bottom: 7px;
+}
+
+.validation-failure .selectize-input {
+  background-color: #f2dede;
+}
+</code>
     </property>
     <property>
       <contentType>CSS</contentType>

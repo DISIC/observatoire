@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527870741000</date>
-  <contentUpdateDate>1527870741000</contentUpdateDate>
+  <date>1528038827000</date>
+  <contentUpdateDate>1528038827000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -55,24 +55,23 @@
     #set($fieldIsInvalid = true)
   #end
   #if ($isBoolean &amp;&amp; $context.display == 'edit')
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.display($propName)$doc.displayPrettyName($propName, $isMandatory, false)&lt;/label&gt;
-  : #if ($hint)(% class="xHint" %)$services.localization.render($hint)#end
-  
+  &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.display($propName)$doc.displayPrettyName($propName, $isMandatory, false)&lt;/label&gt;
+  #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end  
+  &lt;/dt&gt;
   #else
-  ; &lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.displayPrettyName($propName, $isMandatory, false)&lt;/label&gt;
-  #if ($hint)(% class="xHint" %)$services.localization.render($hint)#end
+  &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.displayPrettyName($propName, $isMandatory, false)&lt;/label&gt;
+  #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
   
   #end
-  #if ($fieldIsInvalid)
-  
-    (% class='validation-failure' %)
-  #end
+  &lt;/dt&gt;
+  &lt;dd #if ($fieldIsInvalid)class="validation-failure"#end&gt;
   #if(!$isBoolean || $context.display != 'edit')
-  : $doc.display($propName)
+  $doc.display($propName)
   #end
-   #if($fieldIsInvalid)
-     {{error}}$services.localization.render("Demarches.Code.DemarchesClass_${propName}.validation"){{/error}}
-   #end
+    #if($fieldIsInvalid)
+      {{error}}$services.localization.render("Demarches.Code.DemarchesClass_${propName}.validation"){{/error}}
+    #end
+  &lt;/dd&gt;
 #end
 {{/velocity}}
 
@@ -108,6 +107,7 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #if($context.action != 'view')
   #displayProperty('title1', true)
 #end
@@ -115,6 +115,7 @@
   #set ($mandatory = ($propName == 'direction'))
   #displayProperty($propName, $mandatory)
 #end
+&lt;/dl&gt;
 )))
   &lt;/div&gt;
 &lt;/div&gt;
@@ -123,9 +124,11 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #foreach($propName in ['categoriesPublics', 'publics', 'evenements'])
   #displayProperty($propName, false)
 #end
+&lt;/dl&gt;
 )))
   &lt;/div&gt;
 &lt;/div&gt;
@@ -136,9 +139,11 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #foreach($propName in ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
   #displayProperty($propName, false)
 #end
+&lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -147,9 +152,11 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #foreach($propName in ['niveauDemat', 'dematObligatoire', 'exclusionSve', 'caracteristiquesDemat'])
   #displayProperty($propName, false)
 #end
+&lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -158,9 +165,11 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #foreach($propName in ['referenceBddForm', 'referenceServicePublic'])
   #displayProperty($propName, false)
 #end
+&lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -169,9 +178,11 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #foreach($propName in ['urlInfos', 'urlDemarche', 'urlFiche'])
   #displayProperty($propName, false)
 #end
+&lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -180,7 +191,9 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #displayProperty('remarques', false)
+&lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
@@ -193,9 +206,11 @@
   &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
+&lt;dl&gt;
 #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'niveauPrevu', 'caracteristiquesDematPrevues'])
   #displayProperty($propName, false)
 #end
+&lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
