@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528040351000</date>
+  <date>1528139547000</date>
   <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -150,6 +150,7 @@
   display: visible;
 }
 
+/** hide the title 'Entrées' in livetables */
 #HEntrE9es {
   display: none;
 }
