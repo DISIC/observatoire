@@ -31,7 +31,7 @@
   <parent>wikidemarches:Totemize.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527450266000</date>
+  <date>1528186439000</date>
   <contentUpdateDate>1527352925000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -151,7 +151,7 @@ This allows any row in the content of the document to start at the leftmost of t
 /* Move document header bottom margin inside the document header row - as bottom padding, and remove xcontent top margin */
 .document-header {
   margin-bottom:0;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
 }
 
 #mainContentArea &gt; .xcontent {
@@ -203,6 +203,11 @@ This allows any row in the content of the document to start at the leftmost of t
 
 .document-header {
   margin-top: 0;
+}
+
+
+.document-header #document-title h1 {
+    margin-bottom: 0;
 }
 
 /* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows: 
