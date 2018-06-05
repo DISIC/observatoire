@@ -31,7 +31,7 @@
   <parent>XWiki.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527450392000</date>
+  <date>1528212571000</date>
   <contentUpdateDate>1527079612000</contentUpdateDate>
   <version>1.1</version>
   <title>XWiki Preferences</title>
@@ -2995,7 +2995,6 @@ Your account on ${wikiname} has been successfully activated. You can now login a
 ## protected. In addition it makes the login redirect to the feeds page in some cases.
 #if($doc.fullName != "XWiki.XWikiLogin")
 &lt;link rel="alternate" type="application/rss+xml" title="Wiki Feed RSS" href="$xwiki.getURL('Main.WebRss', 'view', 'xpage=rdf')" /&gt;
-&lt;link rel="alternate" type="application/rss+xml" title="Blog RSS Feed" href="$xwiki.getURL('Blog.GlobalBlogRss', 'view', 'xpage=plain')" /&gt;
 #end</meta>
     </property>
     <property>
@@ -3065,7 +3064,7 @@ Your account on ${wikiname} has been successfully activated. You can now login a
       <timezone/>
     </property>
     <property>
-      <title>$tdoc.getRenderedTitle('plain/1.0') - XWiki</title>
+      <title>$tdoc.getRenderedTitle('plain/1.0')#if ($doc.fullName != 'Main.WebHome') – TopDémarches#end</title>
     </property>
     <property>
       <upload_maxsize>33554432</upload_maxsize>

@@ -31,16 +31,16 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527450166000</date>
-  <contentUpdateDate>1527450166000</contentUpdateDate>
+  <date>1528207124000</date>
+  <contentUpdateDate>1528207124000</contentUpdateDate>
   <version>1.1</version>
   <title>WikiDemarchesTranslations</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content>wikidemarches.sitename=Wikidémarches
-wikidemarches.home.title=Evaluez votre démarche pour aider l'administration à améliorer le service public
+  <content>wikidemarches.sitename=TopDémarches
+wikidemarches.home.title=Évaluez votre démarche pour aider à améliorer le service public
 wikidemarches.home.subtitle=
 wikidemarches.search.label=Démarche recherchée
 wikidemarches.search.inputText=ex : Passeport, Acte de naissance...
