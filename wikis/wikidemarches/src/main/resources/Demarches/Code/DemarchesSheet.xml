@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528205998000</date>
-  <contentUpdateDate>1528205998000</contentUpdateDate>
+  <date>1528276443000</date>
+  <contentUpdateDate>1528276443000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -52,13 +52,6 @@
     &lt;/dd&gt;
   #end
 #end
-#macro (createRandomName)
-  #set ($random = $mathtool.random(1, 1000000000))
-  #set ($random = "Avis.${random}")
-  #if ($xwiki.exists($random))
-    #createRandomName()
-  #end
-#end
 {{/velocity}}
 
 {{velocity}}
@@ -67,28 +60,37 @@
   #set ($discard = $xwiki.ssx.use('Demarches.Code.WikiDemarchesSkin'))
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($obj)
-     #set ($cerfa = $obj.getProperty('formulaires').getValue())
      #set ($ministeres = $obj.getProperty('ministeres').getValue())
-     #set ($urlDemarche = $obj.getProperty('urlDemarche').getValue())
-     #if ($ministeres) #set ($ministere = $xwiki.getDocument($ministeres.get('0'))) #end
-     &lt;div class="subtitle"&gt;#if ($cerfa)CERFA : $cerfa #if ($ministere)|#end#end $ministere.displayTitle&lt;/div&gt;
-     #if ($urlDemarche)&lt;div class="subtitle-url"&gt;&lt;a href="$urlDemarche"&gt;$urlDemarche&lt;/a&gt;&lt;/div&gt;#end
+     #set ($categoriesPublics = $obj.getProperty('categoriesPublics').getValue())
+     #if ($categoriesPublics &amp;&amp; $categoriesPublics.size() &gt; 0)
+       #set ($map = $obj.getProperty('categoriesPublics').propertyClass.mapValues)
+       #set ($str = '')
+       #foreach ($p in $categoriesPublics)
+         #if ($map[$p])
+           #set ($str = "${str}$map[$p].value, ")
+         #end
+       #end
+       #set ($str = $str.substring(0, $mathtool.sub($str.length(),2)))
+     #end
+     #if ($ministeres &amp;&amp; $ministeres.size() &gt; 0) #set ($ministere = $xwiki.getDocument($ministeres.get('0'))) #end
+     &lt;div class="subtitle"&gt;#if ($ministere) $ministere.displayTitle #end #if ($str) #if ($ministere.displayTitle)|#end $str#end &lt;/div&gt;
   #end
 {{/html}}
 {{/velocity}}
 
 {{velocity}}
 {{html wiki="true"}}
-  &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').URL" method="POST"&gt;
-#createRandomName()
-#set ($newDoc = $xwiki.getDocument($random))
-#set ($obj = $newDoc.newObject('Avis.Code.AvisClass'))
-#foreach($prop in $obj.xWikiClass.properties)
-  $newDoc.display($prop.name, 'edit')
-#end
-  &lt;input type="hidden" name="target-document" value="${newDoc.fullName}" /&gt;
+#if ($request.save)
+  {{include reference="Avis.Code.NewAvisHandler" /}}
+#else
+  &lt;form action="$doc.URL" method="POST"&gt;
+  #set ($obj = $doc.newObject('Avis.Code.AvisClass'))
+  #foreach($prop in $obj.xWikiClass.properties)
+    $doc.display($prop.name, 'edit')
+  #end
   &lt;p&gt;&lt;input class="btn btn-success" type="submit" name="save" value="Envoyer"&gt;&lt;/p&gt;
   &lt;/form&gt;
+#end
 {{/html}}
 {{/velocity}}
 
