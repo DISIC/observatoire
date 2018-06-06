@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528276443000</date>
-  <contentUpdateDate>1528276443000</contentUpdateDate>
+  <date>1528300596000</date>
+  <contentUpdateDate>1528298102000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -52,45 +52,73 @@
     &lt;/dd&gt;
   #end
 #end
+
+#macro (displaySubTitle)
+#set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
+#if ($obj)
+  #set ($ministeres = $obj.getProperty('ministeres').value)
+  #set ($categoriesPublics = $obj.getProperty('categoriesPublics').value)
+  #if ($categoriesPublics &amp;&amp; $categoriesPublics.size() &gt; 0)
+    #set ($map = $obj.getProperty('categoriesPublics').propertyClass.mapValues)
+    #set ($str = '')
+    #foreach ($p in $categoriesPublics)
+      #if ($map[$p])
+        #set ($str = "${str}$map[$p].value, ")
+      #end
+    #end
+    #set ($str = $str.substring(0, $mathtool.sub($str.length(),2)))
+  #end
+  #if ($ministeres &amp;&amp; $ministeres.size() &gt; 0)#set ($ministere = $xwiki.getDocument($ministeres.get('0')))#end
+  &lt;div class="subtitle"&gt;#if ($ministere) $ministere.displayTitle #end #if ($str) #if ($ministere.displayTitle)/ #end $str #end&lt;/div&gt;
+#end
+#end
+
+#macro (displayObjectForm $obj $showProperties $showPrettyNameProperties)
+#foreach($prop in $obj.xWikiClass.properties)
+  #if ($showProperties.contains($prop.name))
+    #if ($obj.xWikiClass.name == 'XWiki.RatingsClass' &amp;&amp; $prop.name == 'vote')
+      &lt;h2&gt;$services.localization.render('Avis.Code.AvisClass_global')&lt;/h2&gt;
+    #elseif (!$showPrettyNameProperties || $showPrettyNameProperties.contains($prop.name))
+      &lt;h2&gt;$doc.displayPrettyName($prop.name)&lt;/h2&gt;
+    #end
+    &lt;div&gt;$doc.display($prop.name, 'edit', $obj)&lt;/div&gt;
+  #end
+#end
+#end
 {{/velocity}}
 
 {{velocity}}
 {{html}}
-  #set ($discard = $xwiki.ssx.use('Totemize.TotemSSX'))
-  #set ($discard = $xwiki.ssx.use('Demarches.Code.WikiDemarchesSkin'))
-  #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
-  #if ($obj)
-     #set ($ministeres = $obj.getProperty('ministeres').getValue())
-     #set ($categoriesPublics = $obj.getProperty('categoriesPublics').getValue())
-     #if ($categoriesPublics &amp;&amp; $categoriesPublics.size() &gt; 0)
-       #set ($map = $obj.getProperty('categoriesPublics').propertyClass.mapValues)
-       #set ($str = '')
-       #foreach ($p in $categoriesPublics)
-         #if ($map[$p])
-           #set ($str = "${str}$map[$p].value, ")
-         #end
-       #end
-       #set ($str = $str.substring(0, $mathtool.sub($str.length(),2)))
-     #end
-     #if ($ministeres &amp;&amp; $ministeres.size() &gt; 0) #set ($ministere = $xwiki.getDocument($ministeres.get('0'))) #end
-     &lt;div class="subtitle"&gt;#if ($ministere) $ministere.displayTitle #end #if ($str) #if ($ministere.displayTitle)|#end $str#end &lt;/div&gt;
-  #end
+#set ($discard = $xwiki.ssx.use('Totemize.TotemSSX'))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.WikiDemarchesSkin'))
+#set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
+#displaySubTitle
+&lt;input class="avis-btn btn btn-info" type="submit" name="avis-btn" value="$services.localization.render('Donner un avis')"&gt;
 {{/html}}
 {{/velocity}}
 
+----
+
 {{velocity}}
 {{html wiki="true"}}
-#if ($request.save)
-  {{include reference="Avis.Code.NewAvisHandler" /}}
-#else
-  &lt;form action="$doc.URL" method="POST"&gt;
-  #set ($obj = $doc.newObject('Avis.Code.AvisClass'))
-  #foreach($prop in $obj.xWikiClass.properties)
-    $doc.display($prop.name, 'edit')
-  #end
+&lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').URL" method="POST" class="xform avis-form"&gt;
+  #set ($rating = $doc.newObject('XWiki.RatingsClass'))
+  #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+  &lt;div class="modalite"&gt;
+    #displayObjectForm($avis,['modalite'])
+  &lt;/div&gt;
+  &lt;div class="rating-container"&gt;
+    #displayObjectForm($rating,['vote'],['vote'])
+  &lt;/div&gt;
+  &lt;div class="demat-eval-container"&gt;
+    #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'])
+  &lt;/div&gt;
+  &lt;div class="demat-vote-container"&gt;
+    #displayObjectForm($avis,['vote'], ['vote'])
+  &lt;/div&gt;
+  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
   &lt;p&gt;&lt;input class="btn btn-success" type="submit" name="save" value="Envoyer"&gt;&lt;/p&gt;
-  &lt;/form&gt;
-#end
+&lt;/form&gt;
 {{/html}}
 {{/velocity}}
 
@@ -205,100 +233,20 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>require.config({
-  paths: {
-    'xwiki-selectize': "$xwiki.getSkinFile('uicomponents/suggest/xwiki.selectize.js', true)" +
-      "?v=$escapetool.url($xwiki.version)"
-  }
-});
-
-require(['jquery', 'xwiki-selectize'], function($) {
+      <code>require(['jquery'], function($) {
   'use strict';
- 
-  var getSelectizeOptions = function(select) {
-   // TODO: Add event on change of publicCategories 
-   $(select[0].form["Demarches.Code.DemarchesClass_0_categoriesPublics"]).on('change', function() {
-     console.log("clearing loaded searches...")
-     $('.suggest-propertyValues').clearLoadedSearches();
-   })
-
-   var loadURL = [
-      '$request.contextPath', 'rest',
-      'wikis', encodeURIComponent(XWiki.currentWiki),
-      'classes', encodeURIComponent(select.attr('data-className')),
-      'properties', encodeURIComponent(select.attr('data-propertyName')),
-      'values'
-    ].join('/');
-  return {
-      create: true,
-      load: function(text, callback) {
-        if (select.attr('data-propertyName')=="publics" || select.attr('data-propertyName')=="evenements") {
-         var categories = select[0].form["Demarches.Code.DemarchesClass_0_categoriesPublics"];
-         var params = [ categories[0].value + "=" + categories[0].checked,
-             categories[1].value + "=" + categories[1].checked,
-             categories[2].value + "=" + categories[2].checked,
-             categories[3].value + "=" + categories[3].checked].join('&amp;');
-         loadURL = [
-           '$request.contextPath', 'wiki', encodeURIComponent(XWiki.currentWiki),
-           'view/Demarches/Code/DemarchesSuggest?outputSyntax=plain&amp;xpage=plain&amp;' + params + '&amp;property=' + encodeURIComponent(select.attr('data-propertyName'))
-         ].join('/');
-      }
   
-      $.getJSON(loadURL, {
-          'fp': text,
-          'limit': 100
-        }).then(function(response) {
-          if (response &amp;&amp; $.isArray(response.propertyValues)) {
-            return response.propertyValues.map(getSuggestion);
-          } else {
-            return [];
-          }
-        }).done(callback).fail(callback);
-      }
-    };
-  };
-
-  var getSuggestion = function(propertyValue) {
-    var metaData = propertyValue.metaData || {};
-    return {
-      value: propertyValue.value,
-      label: metaData.label,
-      icon: metaData.icon,
-      url: metaData.url
-    };
-  };
-
-  $.fn.suggestPropertyValues = function() {
-    return this.each(function() {
-      $(this).xwikiSelectize(getSelectizeOptions($(this)));
-    });
-  };
-
-  $.fn.clearLoadedSearches = function() {
-    return this.each(function() {
-      if ($(this)[0].selectize) {
-        var selectize = $(this)[0].selectize;
-        selectize.loadedSearches = {};
-        //selectize.options = {};
-        //selectize.clearOptions();
-        var opts = selectize.options;
-        for (var value in opts) {
-          if (opts.hasOwnProperty(value) &amp;&amp; selectize.items.indexOf(value) == -1) {
-            selectize.removeOption(value); 
-          }
-        }        
-      }
-    });
-  };
-
-  $('.suggest-propertyValues').suggestPropertyValues();
+  $('.avis-btn').click( function() {
+    $('.avis-form').show();
+  });
+  
 });</code>
     </property>
     <property>
       <name/>
     </property>
     <property>
-      <parse>1</parse>
+      <parse>0</parse>
     </property>
     <property>
       <use>onDemand</use>

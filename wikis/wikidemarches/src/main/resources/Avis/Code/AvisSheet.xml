@@ -27,24 +27,37 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1528186554000</creationDate>
-  <parent>AvisClass</parent>
+  <creationDate>1528217276000</creationDate>
+  <parent>Avis.Code.AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528186554000</date>
-  <contentUpdateDate>1528186554000</contentUpdateDate>
+  <date>1528296403000</date>
+  <contentUpdateDate>1528296403000</contentUpdateDate>
   <version>1.1</version>
-  <title/>
+  <title>#if($doc.name == 'AvisSheet')Avis Sheet#{else}$services.display.title($doc, {'displayerHint': 'default'})#end</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>true</hidden>
+  <hidden>false</hidden>
   <content>{{velocity}}
-{{html wiki="true"}}
-#set ($discard = $doc.use('Avis.Code.AvisClass'))
+#macro (displayObject $className $dontPrettyProps)
+== $className ==
+#set ($obj = $doc.getObject($className))
+#set ($class = $obj.xWikiClass)
+#foreach($prop in $class.properties)
+  #if (!$dontPrettyProps || !$dontPrettyProps.contains($prop.name))
+    ; $prop.prettyName
+    : $doc.display($prop.name,$obj)
+  #else
+    $doc.display($prop.name,$obj)
+  #end
+
+#end
+#end
 (% class="xform" %)
 (((
+#displayObject('XWiki.RatingsClass')
+#displayObject('Avis.Code.AvisClass',['facile','comprehensible','rapide'])
 )))
-{{/html}}
 {{/velocity}}</content>
 </xwikidoc>

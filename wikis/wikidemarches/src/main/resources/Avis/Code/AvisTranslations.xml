@@ -31,8 +31,8 @@
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528186554000</date>
-  <contentUpdateDate>1528186554000</contentUpdateDate>
+  <date>1528293952000</date>
+  <contentUpdateDate>1528293952000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -66,7 +66,52 @@ avis.entry.name=Avis
 
 # Deprecated keys
 avis.dataSpace.title=Data
-</content>
+
+#Properties
+Avis.Code.AvisClass_modalite=Comment avez-vous effectué cette démarche ?
+Avis.Code.AvisClass_modalite_dematerialisé=Dématérialisé
+Avis.Code.AvisClass_modalite_non-dematerialisé=Non dématérialisé
+Avis.Code.AvisClass_global=Globalement, êtes-vous statisfait(e) de votre démarche ?
+Avis.Code.AvisClass_global_1=Pas du tout satisfait(e)
+Avis.Code.AvisClass_global_2=Très satisfait(e)
+Avis.Code.AvisClass_facile=Était-ce facile à faire ?
+Avis.Code.AvisClass_facile_1=Pas du tout facile
+Avis.Code.AvisClass_facile_2=Pas facile
+Avis.Code.AvisClass_facile_3=Moyen
+Avis.Code.AvisClass_facile_4=Facile
+Avis.Code.AvisClass_facile_5=Très facile
+Avis.Code.AvisClass_facile_1_hint=Pas du tout facile
+Avis.Code.AvisClass_facile_2_hint=Pas facile
+Avis.Code.AvisClass_facile_3_hint=Moyen
+Avis.Code.AvisClass_facile_4_hint=Facile
+Avis.Code.AvisClass_facile_5_hint=Très facile
+Avis.Code.AvisClass_comprehensible=Était-ce compréhensible ?
+Avis.Code.AvisClass_comprehensible_1=Pas du tout compréhensible
+Avis.Code.AvisClass_comprehensible_2=Pas compréhensible
+Avis.Code.AvisClass_comprehensible_3=Moyen
+Avis.Code.AvisClass_comprehensible_4=Facile à comprendre
+Avis.Code.AvisClass_comprehensible_5=Très facile à comprendre
+Avis.Code.AvisClass_comprehensible_1_hint=Pas du tout compréhensible
+Avis.Code.AvisClass_comprehensible_2_hint=Pas compréhensible
+Avis.Code.AvisClass_comprehensible_3_hint=Moyen
+Avis.Code.AvisClass_comprehensible_4_hint=Facile à comprendre
+Avis.Code.AvisClass_comprehensible_5_hint=Très facile à comprendre
+Avis.Code.AvisClass_rapide=Était-ce assez rapide ?
+Avis.Code.AvisClass_rapide_1=Beaucoup trop long
+Avis.Code.AvisClass_rapide_2=Trop long
+Avis.Code.AvisClass_rapide_3=Moyen
+Avis.Code.AvisClass_rapide_4=Rapide
+Avis.Code.AvisClass_rapide_5=Très rapide
+Avis.Code.AvisClass_rapide_1_hint=Beaucoup trop long
+Avis.Code.AvisClass_rapide_2_hint=Trop long
+Avis.Code.AvisClass_rapide_3_hint=Moyen
+Avis.Code.AvisClass_rapide_4_hint=Rapide
+Avis.Code.AvisClass_rapide_5_hint=Très rapide
+Avis.Code.AvisClass_accompagnement=Avez-vous eu besoin d'accompagnement pour effectuer cette démarche ?
+Avis.Code.AvisClass_accompagnement_0=Non, j'ai réussi à la faire seul(e).
+Avis.Code.AvisClass_accompagnement_1=Oui, quelqu'un m'a aidé.
+Avis.Code.AvisClass_suggestion=Avez-vous un dysfonctionnement ou une suggestion à signaler ?
+Avis.Code.AvisClass_vote=Souhaitez-vous que cette démarche soit dématérialisée ?</content>
   <object>
     <name>Avis.Code.AvisTranslations</name>
     <number>0</number>
