@@ -80,7 +80,7 @@
 #set($displayContentFooter = false)
 #set($displayContentMenu = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
-#set($displayDrawer = $hasAdmin &amp;&amp; $isAdvancedUser)
+#set($displayDrawer = !$isGuest)
 #set($displayQuickSearch = ($doc.fullName != 'Main.WebHome' &amp;&amp; $doc.fullName != 'Main.Search'))
 
 #set($displayDocChanges = false)
