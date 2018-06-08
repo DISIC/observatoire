@@ -31,8 +31,8 @@
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528293952000</date>
-  <contentUpdateDate>1528293952000</contentUpdateDate>
+  <date>1528451589000</date>
+  <contentUpdateDate>1528451589000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -73,26 +73,27 @@ avis.dataSpace.title=Data
 
 #Properties
 Avis.Code.AvisClass_modalite=Comment avez-vous effectué cette démarche ?
-Avis.Code.AvisClass_modalite_dematerialisé=Dématérialisé
-Avis.Code.AvisClass_modalite_non-dematerialisé=Non dématérialisé
+Avis.Code.AvisClass_modalite_en-ligne-entièrement=en ligne, jusqu'au bout
+Avis.Code.AvisClass_modalite_en-ligne-partiellement=en ligne, mais pas jusqu'au bout
+Avis.Code.AvisClass_modalite_autrement=autre
 Avis.Code.AvisClass_score=Globalement, êtes-vous statisfait(e) de votre démarche ?
 Avis.Code.AvisClass_score_1=Pas du tout satisfait(e)
 Avis.Code.AvisClass_score_2=Pas satisfait(e)
 Avis.Code.AvisClass_score_3=Moyen
 Avis.Code.AvisClass_score_4=Satisfait(e)
 Avis.Code.AvisClass_score_5=Très satisfait(e)
-Avis.Code.AvisClass_facile=Était-ce facile à faire ?
+Avis.Code.AvisClass_facile=Était-ce facile à utiliser ?
 Avis.Code.AvisClass_facile_1=Pas du tout facile
 Avis.Code.AvisClass_facile_2=Pas facile
 Avis.Code.AvisClass_facile_3=Moyen
 Avis.Code.AvisClass_facile_4=Facile
 Avis.Code.AvisClass_facile_5=Très facile
-Avis.Code.AvisClass_comprehensible=Était-ce compréhensible ?
-Avis.Code.AvisClass_comprehensible_1=Pas du tout compréhensible
-Avis.Code.AvisClass_comprehensible_2=Pas compréhensible
+Avis.Code.AvisClass_comprehensible=Les questions étaient-elles compréhensibles ?
+Avis.Code.AvisClass_comprehensible_1=Pas du tout compréhensibles
+Avis.Code.AvisClass_comprehensible_2=Pas compréhensibles
 Avis.Code.AvisClass_comprehensible_3=Moyen
-Avis.Code.AvisClass_comprehensible_4=Facile à comprendre
-Avis.Code.AvisClass_comprehensible_5=Très facile à comprendre
+Avis.Code.AvisClass_comprehensible_4=Faciles à comprendre
+Avis.Code.AvisClass_comprehensible_5=Très faciles à comprendre
 Avis.Code.AvisClass_rapide=Était-ce assez rapide ?
 Avis.Code.AvisClass_rapide_1=Beaucoup trop long
 Avis.Code.AvisClass_rapide_2=Trop long
