@@ -40,13 +40,56 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-#set ($uin = $services.uin.next)
-#set ($target = $xwiki.getDocument("Avis.${uin}"))
-#set ($object = $target.addObjectFromRequest('XWiki.RatingsClass'))
-#set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
-#set ($discard = $target.saveWithProgrammingRights())
-{{info}}
-$services.localization.render('wikidemarches.avis.thanks')
-{{/info}}
+## only if something was submitted to this page, save
+#if ("$!request.saveavis" != '')
+  #set ($uin = $services.uin.next)
+  ## get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
+  #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
+  #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
+  ## save with programming rights, the current user will not have the right to edit the Avis document
+  #set ($discard = $target.saveWithProgrammingRights())
+  {{info}}
+    $services.localization.render('wikidemarches.avis.thanks')
+  {{/info}}
+#end
 {{/velocity}}</content>
+  <object>
+    <name>Avis.Code.NewAvisHandler</name>
+    <number>0</number>
+    <className>XWiki.RequiredRightClass</className>
+    <guid>9c2cbf3d-fcbe-4da6-b765-b80a4c34c2e5</guid>
+    <class>
+      <name>XWiki.RequiredRightClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <level>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>level</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>level</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>edit|programming</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </level>
+    </class>
+    <property>
+      <level>programming</level>
+    </property>
+  </object>
 </xwikidoc>

@@ -54,23 +54,96 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
-      <dysfonctionnement>
-        <contenttype>PureText</contenttype>
-        <customDisplay/>
+      <accompagnement>
+        <customDisplay>{{velocity}}
+{{html wiki="false"}}
+#set ($className = ${object.xWikiClass.name})
+#if ($type == 'edit')
+  #foreach ($val in [0, 1])
+  #set ($checked = ($value == $val))
+  #if ($checked)#set ($checked = "checked")#else#set ($checked = "")#end
+  &lt;div&gt;
+    &lt;label for="${prefix}${name}_${val}"&gt;&lt;input id="${prefix}${name}_${val}" name="${prefix}${name}" type="radio" value="$val" $checked&gt; 
+    $services.localization.render("${className}_${name}_$val")
+    &lt;/label&gt;
+  &lt;/div&gt;
+  #end
+  &lt;label for="${prefix}${name}_none"&gt;
+    &lt;input type="hidden" id="${prefix}${name}_none" name="${prefix}${name}" value=""&gt; 
+  &lt;/label&gt;
+#else
+$value
+#end
+{{/html}}
+{{/velocity}}
+
+</customDisplay>
+        <defaultValue/>
         <disabled>0</disabled>
-        <editor>Text</editor>
+        <displayFormType>radio</displayFormType>
+        <displayType/>
         <hint/>
-        <name>dysfonctionnement</name>
+        <name>accompagnement</name>
         <number>7</number>
-        <picker>0</picker>
-        <prettyName>Avez-vous un dysfonctionnement à signaler ?</prettyName>
-        <rows>5</rows>
-        <size>40</size>
+        <prettyName>Avez-vous eu besoin d'accompagnement pour effectuer cette démarche ?</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </dysfonctionnement>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </accompagnement>
+      <comprehensible>
+        <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>comprehensible</name>
+        <number>5</number>
+        <numberType>integer</numberType>
+        <prettyName>Était-ce compréhensible ?</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </comprehensible>
+      <demarche>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <hint/>
+        <idField/>
+        <multiSelect>0</multiSelect>
+        <name>demarche</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Démarche</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>value</sort>
+        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Demarches.Code.DemarchesClass' and doc.fullName&lt;&gt;'Demarches.Code.DemarchesTemplate' order by doc.title asc</sql>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </demarche>
+      <facile>
+        <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>facile</name>
+        <number>4</number>
+        <numberType>integer</numberType>
+        <prettyName>Était-ce facile à faire ?</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </facile>
       <modalite>
         <cache>0</cache>
         <customDisplay/>
@@ -79,7 +152,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>modalite</name>
-        <number>1</number>
+        <number>2</number>
         <picker>0</picker>
         <prettyName>Comment avez-vous effectué cette démarche ?</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -90,56 +163,14 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>enligne=En ligne|autre=Autre</values>
+        <values>dematerialisé|non-dematerialisé</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </modalite>
-      <q1>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>q1</name>
-        <number>6</number>
-        <numberType>integer</numberType>
-        <prettyName>Globalement, êtes-vous statisfait(e) de votre démarche ?</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-      </q1>
-      <q2>
+      <rapide>
         <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
         <disabled>0</disabled>
         <hint/>
-        <name>q2</name>
-        <number>6</number>
-        <numberType>integer</numberType>
-        <prettyName>Était-ce facile à faire ?</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-      </q2>
-      <q3>
-        <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
-        <disabled>0</disabled>
-        <hint/>
-        <name>q3</name>
-        <number>6</number>
-        <numberType>integer</numberType>
-        <prettyName>Était-ce compréhensible ?</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-      </q3>
-      <q4>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>q4</name>
+        <name>rapide</name>
         <number>6</number>
         <numberType>integer</numberType>
         <prettyName>Était-ce assez rapide ?</prettyName>
@@ -148,22 +179,53 @@
         <validationMessage/>
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-      </q4>
-      <q5>
+      </rapide>
+      <score>
+        <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>score</name>
+        <number>3</number>
+        <numberType>integer</numberType>
+        <prettyName>score</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </score>
+      <suggestion>
+        <contenttype>PureText</contenttype>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <hint/>
+        <name>suggestion</name>
+        <number>8</number>
+        <picker>0</picker>
+        <prettyName>Avez-vous un dysfonctionnement à signaler ?</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </suggestion>
+      <vote>
         <customDisplay/>
         <defaultValue/>
         <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
+        <displayFormType>checkbox</displayFormType>
         <displayType/>
         <hint/>
-        <name>q5</name>
-        <number>6</number>
-        <prettyName>Avez-vous eu besoin d'accompagnement pour effectuer cette démarche ?</prettyName>
+        <name>vote</name>
+        <number>9</number>
+        <prettyName>Vote</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </q5>
+      </vote>
     </class>
   </object>
 </xwikidoc>

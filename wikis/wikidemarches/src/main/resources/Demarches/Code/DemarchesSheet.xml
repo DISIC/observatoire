@@ -76,9 +76,7 @@
 #macro (displayObjectForm $obj $showProperties $showPrettyNameProperties)
 #foreach($prop in $obj.xWikiClass.properties)
   #if ($showProperties.contains($prop.name))
-    #if ($obj.xWikiClass.name == 'XWiki.RatingsClass' &amp;&amp; $prop.name == 'vote')
-      &lt;h2&gt;$services.localization.render('Avis.Code.AvisClass_global')&lt;/h2&gt;
-    #elseif (!$showPrettyNameProperties || $showPrettyNameProperties.contains($prop.name))
+    #if (!$showPrettyNameProperties || $showPrettyNameProperties.contains($prop.name))
       &lt;h2&gt;$doc.displayPrettyName($prop.name)&lt;/h2&gt;
     #end
     &lt;div&gt;$doc.display($prop.name, 'edit', $obj)&lt;/div&gt;
@@ -91,35 +89,39 @@
 {{html}}
 #set ($discard = $xwiki.ssx.use('Totemize.TotemSSX'))
 #set ($discard = $xwiki.ssx.use('Demarches.Code.WikiDemarchesSkin'))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
 #displaySubTitle
-&lt;input class="avis-btn btn btn-info" type="submit" name="avis-btn" value="$services.localization.render('Donner un avis')"&gt;
+&lt;button class="avis-btn btn btn-info" name="avis-btn"&gt;$escapetool.xml($services.localization.render('wikidemarches.demarche.vote.button'))&lt;/button&gt;
 {{/html}}
 {{/velocity}}
 
 ----
 
 {{velocity}}
-{{html wiki="true"}}
-&lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').URL" method="POST" class="xform avis-form"&gt;
-  #set ($rating = $doc.newObject('XWiki.RatingsClass'))
-  #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-  &lt;div class="modalite"&gt;
-    #displayObjectForm($avis,['modalite'])
-  &lt;/div&gt;
-  &lt;div class="rating-container"&gt;
-    #displayObjectForm($rating,['vote'],['vote'])
-  &lt;/div&gt;
-  &lt;div class="demat-eval-container"&gt;
-    #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'])
-  &lt;/div&gt;
-  &lt;div class="demat-vote-container"&gt;
-    #displayObjectForm($avis,['vote'], ['vote'])
-  &lt;/div&gt;
-  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
-  &lt;p&gt;&lt;input class="btn btn-success" type="submit" name="save" value="Envoyer"&gt;&lt;/p&gt;
-&lt;/form&gt;
-{{/html}}
+#if ($doc.getObject('Demarches.Code.DemarchesClass') != $NULL)
+  {{html wiki="true"}}
+  &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform avis-form"&gt;
+    #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+    &lt;div class="modalite"&gt;
+      #displayObjectForm($avis,['modalite'])
+    &lt;/div&gt;
+    &lt;div class="rating-container"&gt;
+      #displayObjectForm($avis,['score'],[])
+    &lt;/div&gt;
+    &lt;div class="demat-eval-container"&gt;
+      #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'])
+    &lt;/div&gt;
+    &lt;div class="demat-vote-container"&gt;
+      #displayObjectForm($avis,['vote'], ['vote'])
+    &lt;/div&gt;
+    &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
+    &lt;div class='buttonwrapper'&gt;
+      &lt;input class="button btn btn-primary" type="submit" name="saveavis" value="$escapetool.xml($services.localization.render('wikidemarches.demarche.vote.send'))" /&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+  {{/html}}
+#end
 {{/velocity}}
 
 {{velocity}}
@@ -247,6 +249,131 @@
     </property>
     <property>
       <parse>0</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.DemarchesSheet</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>1e7a2eef-3e99-4681-a21f-a61c878b4d95</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>default</cache>
+    </property>
+    <property>
+      <code>/*
+ * Add a little padding on desktop, so that it looks nicer
+ */
+@media (min-width: @screen-md-min) {
+  .xcontent {
+    padding-left: @grid-gutter-width;
+    padding-right: @grid-gutter-width;
+  }
+
+  .document-header {
+    padding-top: 25px;
+  }
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
     </property>
     <property>
       <use>onDemand</use>

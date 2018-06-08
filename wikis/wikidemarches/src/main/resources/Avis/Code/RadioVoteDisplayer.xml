@@ -60,7 +60,7 @@
     #foreach($v in [$minValue..$maxValue])
       &lt;li class='radiovote-form-listclass'&gt;
         #set($optionId = "xwiki-form-${name}-${object.number}-${velocityCount}")
-        &lt;input name="${prefix}${name}" id="$optionId" type="radio" value="$v" #if($value == $v)checked="checked"#end title="$escapetool.xml($services.localization.render("${theClass.name}_${name}_${v}_hint"))"/&gt;
+        &lt;input name="${prefix}${name}" id="$optionId" type="radio" value="$v" #if($value == $v)checked="checked"#end /&gt;
         &lt;label for="$optionId"&gt;$escapetool.xml($services.localization.render("${theClass.name}_${name}_${v}"))&lt;/label&gt;
       &lt;/li&gt;
     #end
@@ -68,8 +68,7 @@
     &lt;input name="${prefix}${name}" value="" type="hidden" /&gt;
   &lt;/fieldset&gt;
 #else
-  ; $doc.displayPrettyName($name, false, false)
-  : $!value
+  $!value
 #end
 {{/html}}
 {{/velocity}}</content>
@@ -205,16 +204,10 @@
       text-align: center;
       vertical-align: top;
       label {
-        display: none;
+        display: block;
         text-align: center;
         font-weight: normal;
         font-size: 0.85em;
-      }
-      &amp;:first-child label {
-        display: block;
-      }
-      &amp;:last-child label {
-        display: block;
       }
 
       input {

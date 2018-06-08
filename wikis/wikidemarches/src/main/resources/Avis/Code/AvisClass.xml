@@ -175,6 +175,20 @@ $value
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </rapide>
+    <score>
+      <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>score</name>
+      <number>3</number>
+      <numberType>integer</numberType>
+      <prettyName>score</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+    </score>
     <suggestion>
       <contenttype>PureText</contenttype>
       <customDisplay/>

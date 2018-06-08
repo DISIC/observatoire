@@ -44,7 +44,12 @@ wikidemarches.home.title=Évaluez votre démarche pour aider à améliorer le se
 wikidemarches.home.subtitle=
 wikidemarches.search.label=Démarche recherchée
 wikidemarches.search.inputText=ex : Passeport, Acte de naissance...
-wikidemarches.search.button=Trouver ma démarche</content>
+wikidemarches.search.button=Trouver ma démarche
+
+#Avis
+wikidemarches.avis.thanks=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
+wikidemarches.demarche.vote.button=Donner un avis
+wikidemarches.demarche.vote.send=Envoyer</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>

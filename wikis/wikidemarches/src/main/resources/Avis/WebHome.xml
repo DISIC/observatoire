@@ -41,9 +41,12 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'doc.title': {"link":"view"},
-  'doc.location': {"html":true},
-  'doc.date': {},
+  'doc.creationDate': {},
+  'doc.name': {"link":"view"},
+  'demarche': {},
+  'modalite': {},
+  'score': {"html":true},
+  'suggestion': {"filterable":false,"sortable":false,"html":true},
   'doc.author': {"link":"author"},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
@@ -53,10 +56,10 @@
   'tagCloud': true,
   'rowCount': 15,
   'maxPages': 10,
-  'selectedColumn': 'doc.title',
-  'defaultOrder': 'asc'
+  'selectedColumn': 'doc.creationDate',
+  'defaultOrder': 'desc'
 })
-#set ($columns = ['doc.title', 'doc.location', 'doc.date', 'doc.author', '_actions'])
+#set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'modalite', 'score', 'suggestion', 'doc.author', '_actions'])
 #livetable('avis' $columns $columnsProperties $options)
 {{/velocity}}</content>
   <object>
@@ -132,7 +135,7 @@
       <class>Avis.Code.AvisClass</class>
     </property>
     <property>
-      <columns>doc.title doc.location doc.date doc.author _actions</columns>
+      <columns>doc.creationDate doc.name demarche modalite score suggestion doc.author _actions</columns>
     </property>
     <property>
       <dataSpace/>

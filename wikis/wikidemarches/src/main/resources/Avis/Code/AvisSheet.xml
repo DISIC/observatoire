@@ -38,15 +38,14 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content>{{velocity}}
 #macro (displayObject $className $dontPrettyProps)
-== $className ==
 #set ($obj = $doc.getObject($className))
 #set ($class = $obj.xWikiClass)
 #foreach($prop in $class.properties)
   #if (!$dontPrettyProps || !$dontPrettyProps.contains($prop.name))
-    ; $prop.prettyName
+    ; $doc.displayPrettyName($prop.name, false, false)
     : $doc.display($prop.name,$obj)
   #else
     $doc.display($prop.name,$obj)
@@ -56,8 +55,11 @@
 #end
 (% class="xform" %)
 (((
-#displayObject('XWiki.RatingsClass')
-#displayObject('Avis.Code.AvisClass',['facile','comprehensible','rapide'])
+#set($skippedPrettyProps = [])
+#if ($xcontext.action == 'edit')
+  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide'])
+#end
+#displayObject('Avis.Code.AvisClass',$skippedPrettyProps)
 )))
 {{/velocity}}</content>
 </xwikidoc>
