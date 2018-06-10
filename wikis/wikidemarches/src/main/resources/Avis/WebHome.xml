@@ -61,6 +61,8 @@
 })
 #set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'modalite', 'score', 'suggestion', 'doc.author', '_actions'])
 #livetable('avis' $columns $columnsProperties $options)
+
+{{addExcelExportToLivetable livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')"/}}
 {{/velocity}}</content>
   <object>
     <name>Avis.WebHome</name>
