@@ -106,7 +106,7 @@ Demarches.Code.DemarchesClass_remarques=Remarques
 
 # Live table generic keys
 demarches.livetable.doc.title=Titre de la page
-demarches.livetable.doc.name=Nom de la page
+demarches.livetable.doc.name=Identifiant
 demarches.livetable.doc.space=Espace
 demarches.livetable.doc.fullname=Nom complet de la page
 demarches.livetable.doc.location=Emplacement
