@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1526657565000</creationDate>
   <parent>MinisteresClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1528727441000</date>
+  <contentUpdateDate>1528727441000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -60,13 +60,14 @@
 #set ($columnsProperties = {
   'doc.title': {"displayName":"Nom","link":"view"},
   'evenements': {},
-  'direction': {"displayName":"Direction"},
-  'groupe': {},
+  'ministeres': {},
+  'direction': {"displayName":"Direction", "html":true},
+  'groupes': {},
   'categoriesPublics': {"displayName":"Catégories de publics"},
   'niveauDemat': {"displayName":"Niveau démat."},
   'nomProjet': {"displayName":"Projet"},
   'statutProjetDemat': {"displayName":"Statut projet"},
-  'dateMiseEnLigne': {},
+  'statut': {'displayName': 'Statut'},
   'doc.date': {},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
@@ -80,8 +81,10 @@
   'defaultOrder': 'asc',
   'extraParams' : $extraParams
 })
-#set ($columns = ['doc.title', 'evenements', 'direction', 'groupe', 'categoriesPublics', 'niveauDemat', 'nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'doc.date', '_actions'])
+#set ($columns = ['doc.title', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
 #livetable('demarches' $columns $columnsProperties $options)
+
+{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
 #end
 {{/velocity}}</content>
 </xwikidoc>
