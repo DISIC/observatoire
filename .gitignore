@@ -31,3 +31,4 @@ nbproject
 .sonar-ide.properties
 .clover
 *~
+/bin/

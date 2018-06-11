@@ -31,15 +31,28 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527105811000</date>
-  <contentUpdateDate>1527105811000</contentUpdateDate>
+  <date>1528746890000</date>
+  <contentUpdateDate>1528746890000</contentUpdateDate>
   <version>1.1</version>
-  <title>Administration</title>
+  <title>Administration de TopDémarches interne</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{children/}}
+  <content>
+== Mise à jour de la langue par défaut des pages
 
- </content>
+* [[FarmTools.DefaultLanguageUpdater]]
+
+
+== Publication de TopDémarches interne vers TopDémarches externe
+
+* [[Publication des directions, ministères, événements, publics&gt;&gt;PublishDirectionsEvenementsMinisteresPublics]]
+* [[Publication des démarches&gt;&gt;Publish Demarches]]
+* [[Publication des démarches - Test&gt;&gt;PublishDemarches-Test]]
+
+== Création des groupes associés aux directions
+
+* [[Création des groupes associés aux directions&gt;&gt;GroupManager]]
+</content>
 </xwikidoc>

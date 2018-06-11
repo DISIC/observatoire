@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
-  <parent>Demarches.Code.WebHome</parent>
+  <creationDate>1526657565000</creationDate>
+  <parent>demat:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1528751398000</date>
+  <contentUpdateDate>1528751398000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -40,24 +40,16 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-#macro(directions)
-#set($isDematAdmin = false)
-#set($list = $xwiki.searchDocuments(",BaseObject as obj, StringProperty as prop where doc.fullName=obj.name and obj.className='XWiki.XWikiGroups' and obj.id=prop.id.id and prop.id.name='member' and prop.value = '${xcontext.user}'"))
-#if($list.contains("XWiki.XWikiAdminGroup")||$list.contains("XWiki.AdminDematerialisationGroup"))
-#set($isDematAdmin = true)
+#macro(fillUserDirections)
+  #set ($user = $!xcontext.user)
+  ##FIXME: there should be a way to avoid this hack
+  #if ($user.indexOf(':')&gt;0)
+    #set ($idx = $user.indexOf(':') + 1)
+    #set ($user = $user.substring($idx))
+  #end
+  #set ($xwql = "from doc.object(XWiki.XWikiGroups) obj where obj.member = :user and doc.fullName like '%Directions%' order by doc.name")
+  #set($userDirections = $services.query.xwql($xwql).bindValue("user", $user).setWiki("xwiki").execute())
 #end
-#set($directionList = [])
-#set($ministereList = [])
-#foreach($item in $list)
- #if($item.startsWith("XWiki.Direction"))
-  #set($direction = $item.replaceAll("XWiki.Direction","").replaceAll("Group",""))
-  #set($ok = $directionList.add($direction))
- #elseif($item.startsWith("XWiki.Ministere"))
-  #set($ministere = $item.replaceAll("XWiki.Ministere","").replaceAll("Group",""))
-  #set($ok = $ministereList.add($ministere)) 
- #end
-#end
-#end
-#directions()
+#fillUserDirections()
 {{/velocity}}</content>
 </xwikidoc>
