@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528735260000</date>
-  <contentUpdateDate>1528733924000</contentUpdateDate>
+  <date>1528735981000</date>
+  <contentUpdateDate>1528735903000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -131,7 +131,7 @@
       #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'],[])
     &lt;/div&gt;
     &lt;div class="demat-vote-container"&gt;
-      ##displayObjectForm($avis,['vote'], ['vote'],[])
+      #displayObjectForm($avis,['vote'], ['vote'],[])
     &lt;/div&gt;
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
     &lt;div class='buttonwrapper'&gt;
@@ -270,9 +270,11 @@
     if (modalite == 'autrement') {
       $('.demat-eval-container').hide();
       $('.raison').show();
+      $('.demat-vote-container').show();
     } else {
       $('.demat-eval-container').show();
       $('.raison').hide();
+      $('.demat-vote-container').hide();
     }
   }
   
