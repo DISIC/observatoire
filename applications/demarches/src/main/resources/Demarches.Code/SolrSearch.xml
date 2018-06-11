@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528211897000</date>
-  <contentUpdateDate>1528211897000</contentUpdateDate>
+  <date>1528739344000</date>
+  <contentUpdateDate>1528739344000</contentUpdateDate>
   <version>1.1</version>
   <title>SolrSearch</title>
   <comment/>
@@ -59,6 +59,9 @@
   },
   'highlightEnabled' : false
 })
+## include custom search suggest in the same way as in Main.WebHome
+## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+#set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
 {{/velocity}}
 
 {{include reference="Main.SolrSearchConfig" /}}
@@ -118,6 +121,48 @@
       #displaySearchFacetBody($facetField)
     &lt;/div&gt;
   #end
+#end
+
+##override displaySearchForm in order to add the class "withsearchsuggest-input" to the search input so that
+##the field provides live suggestion like on the home page
+#macro (displaySearchForm)
+  #set($void = $services.progress.startStep('#displaySearchForm'))
+  {{html clean="false"}}
+  &lt;form class="search-form row" action="$doc.getURL()" role="search"&gt;
+    &lt;div class="hidden"&gt;
+      &lt;input type="hidden" name="sort" value="$!escapetool.xml($sort)"/&gt;
+      &lt;input type="hidden" name="sortOrder" value="$!escapetool.xml($sortOrder)"/&gt;
+      &lt;input type="hidden" name="highlight" value="$highlightEnabled"/&gt;
+      &lt;input type="hidden" name="facet" value="$facetEnabled"/&gt;
+      ## The parameter used to determine if the request has been redirected with default search filters.
+      &lt;input type="hidden" name="r" value="$!escapetool.xml($request.r)"/&gt;
+      #if ("$!request.debug" != '')
+        &lt;input type="hidden" name="debug" value="$escapetool.xml($request.debug)"/&gt;
+      #end
+      ## Preserve the current facet values when submitting a new search query.
+      #foreach ($entry in $request.parameterMap.entrySet())
+        #if ($entry.key.startsWith('f_') || $entry.key.startsWith('l_'))
+          #foreach ($value in $entry.value)
+            &lt;input type="hidden" name="$escapetool.xml($entry.key)" value="$escapetool.xml($value)"/&gt;
+          #end
+        #end
+      #end
+    &lt;/div&gt;
+    &lt;div class="col-xs-12 col-sm-6"&gt;
+      &lt;div class="input-group"&gt;
+        &lt;input type="search" name="text" class="form-control withTip useTitleAsTip withsearchsuggest-input"
+          title="$services.localization.render('search.page.bar.query.title')" value="$escapetool.xml($text)"/&gt;
+        &lt;span class="input-group-btn"&gt;
+          &lt;button type="submit" class="btn btn-primary"&gt;
+            $services.icon.renderHTML('search')
+            &lt;span class="sr-only"&gt;$services.localization.render('search.page.bar.submit')&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+  {{/html}}
+  #set($void = $services.progress.endStep())
 #end
 {{/velocity}}
 
