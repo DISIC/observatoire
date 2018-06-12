@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528814725000</date>
-  <contentUpdateDate>1528808694000</contentUpdateDate>
+  <date>1528820437000</date>
+  <contentUpdateDate>1528820437000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -73,18 +73,45 @@
 #end
 #end
 
-#macro (displayObjectForm $obj $showProperties $showPrettyNameProperties $mandatoryProperties)
+#macro (displayObjectForm $obj $showProperties $showPrettyNameProperties)
 #if ("$!headingLevel" == '')
   #set($headingLevel = 2)
 #end
 #foreach($prop in $obj.xWikiClass.properties)
+  #set ($validationRegExp = $prop.getProperty('validationRegExp').value)
+  #set ($isMandatory = $validationRegExp.trim().length() &gt; 0)  
   #if ($showProperties.contains($prop.name))
     #if ($showPrettyNameProperties.contains($prop.name))
       &lt;fieldset class="form-${prop.type.toLowerCase()}"&gt;
-      #set ($isMandatory = $mandatoryProperties.contains($prop.name))
-      &lt;legend aria-level="$headingLevel"&gt;$doc.displayPrettyName($prop.name)&lt;/legend&gt;
+      #if ($prop.type == 'StaticListClass'  || $prop.type == 'BooleanClass')
+        &lt;legend aria-level="$headingLevel"&gt;
+        $doc.displayPrettyName($prop.name)
+        #if ($isMandatory)
+          &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt;
+        #end
+        &lt;/legend&gt;
+      #else
+        &lt;label for="${obj.xWikiClass.name}_${obj.number}_${prop.name}"&gt;
+        $doc.displayPrettyName($prop.name)
+        #if ($isMandatory)
+          &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt;
+        #end
+        &lt;/label&gt;
+      #end
     #end
+    #if ($prop.name != 'modalite')
     &lt;div&gt;$doc.display($prop.name, 'edit', $obj)&lt;/div&gt;
+    #else
+      &lt;ul&gt;
+        #foreach ($value in $prop.getListValues())
+          &lt;li&gt;
+          &lt;input #if ($isMandatory)aria-required="true"#end id="xwiki-form-${prop.name}-${obj.number}-$value" name="${obj.xWikiClass.name}_${obj.number}_${prop.name}" type="radio" value="$value"&gt;
+          &lt;label for="xwiki-form-${prop.name}-${obj.number}-$value"&gt;$services.localization.render("${obj.xWikiClass.name}_${prop.name}_$value")&lt;/label&gt;
+          &lt;/li&gt;
+        #end
+      &lt;/ul&gt;
+      &lt;input name="${obj.xWikiClass.name}_${obj.number}_${prop.name}" type="hidden" value=""&gt;
+    #end
     #if ($showPrettyNameProperties.contains($prop.name))
     &lt;/fieldset&gt;
     #end
@@ -125,6 +152,11 @@
 #if ($demarche != $NULL)
   {{html wiki="true"}}
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform avis-form"&gt;
+  == Donnez votre avis sur cette démarche
+  
+  &lt;div class="info-box-mandatory"&gt;
+  Les champs marqués de &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
+  &lt;/div&gt;
     #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
     #if ($demarche.getProperty('niveauDemat') &amp;&amp; $demarche.getProperty('niveauDemat').value &amp;&amp; $demarche.getProperty('niveauDemat').value.size() &gt; 0)
       #set ($niveauDemat = $demarche.getProperty('niveauDemat').value)
@@ -140,19 +172,19 @@
       #end
     #end
     &lt;div class="modalite"&gt;
-      #displayObjectForm($avis,['modalite'],['modalite'],['modalite'])
+      #displayObjectForm($avis,['modalite'],['modalite'])
     &lt;/div&gt;
     &lt;div class="raison"&gt;
-      #displayObjectForm($avis,['raison'],['raison'],[])
+      #displayObjectForm($avis,['raison'],['raison'])
     &lt;/div&gt;
     &lt;div class="rating-container"&gt;
-      #displayObjectForm($avis,['score'],[],['score'])
+      #displayObjectForm($avis,['score'],[])
     &lt;/div&gt;
     &lt;div class="demat-eval-container"&gt;
-      #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'],[])
+      #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'])
     &lt;/div&gt;
     &lt;div class="demat-vote-container"&gt;
-      #displayObjectForm($avis,['vote'], ['vote'],[])
+      #displayObjectForm($avis,['vote'], ['vote'])
     &lt;/div&gt;
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()" /&gt;

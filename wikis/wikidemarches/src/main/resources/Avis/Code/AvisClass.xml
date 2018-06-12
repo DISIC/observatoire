@@ -31,7 +31,7 @@
   <parent>Avis.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528733075000</date>
+  <date>1528818240000</date>
   <contentUpdateDate>1528186553000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Class</title>
@@ -157,7 +157,7 @@ $value
       <sort>none</sort>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
-      <validationRegExp/>
+      <validationRegExp>.+</validationRegExp>
       <values>en-ligne-entièrement|en-ligne-partiellement|autrement</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </modalite>
@@ -208,7 +208,7 @@ $value
       <size>30</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
-      <validationRegExp/>
+      <validationRegExp>.+</validationRegExp>
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </score>
     <suggestion>

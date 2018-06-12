@@ -31,8 +31,8 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528207124000</date>
-  <contentUpdateDate>1528207124000</contentUpdateDate>
+  <date>1528817877000</date>
+  <contentUpdateDate>1528817877000</contentUpdateDate>
   <version>1.1</version>
   <title>WikiDemarchesTranslations</title>
   <comment/>
@@ -49,7 +49,8 @@ wikidemarches.search.button=Trouver ma démarche
 #Avis
 wikidemarches.avis.thanks=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
 wikidemarches.demarche.vote.button=Donner un avis
-wikidemarches.demarche.vote.send=Envoyer</content>
+wikidemarches.demarche.vote.send=Envoyer
+wikidemarches.demarche.obligatoire=(obligatoire)</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>
