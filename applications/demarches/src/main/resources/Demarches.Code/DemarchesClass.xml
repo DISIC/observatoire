@@ -31,7 +31,7 @@
   <parent>Demarches.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528787921000</date>
+  <date>1528788597000</date>
   <contentUpdateDate>1526657567000</contentUpdateDate>
   <version>1.1</version>
   <title>Demarches Class</title>
@@ -368,6 +368,7 @@
       <number>22</number>
       <prettyName>Niveau de la volumétrie</prettyName>
       <script>{{velocity}}
+{{html clean="false"}}
 #set ($boundaries = [0,100,1000,10000,100000,500000,1000000,5000000])
 #set ($volumetrie = $!{object.getProperty("volumetrie").value})
 #if ($volumetrie)
@@ -392,6 +393,7 @@
     5 000 000 et plus
   #end
 #end
+{{/html}}
 {{/velocity}}</script>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -479,6 +481,7 @@
       <number>21</number>
       <prettyName>Pourcentage de dématérialisation</prettyName>
       <script>{{velocity}}
+{{html clean="false"}}
 #set ($volumetrieDemat = $object.getProperty("volumetrieDemat").getValue())
 #set ($volumetrie = $object.getProperty("volumetrie").getValue())
 #set ($volumetrieDemat = $volumetrieDemat*100)
@@ -487,6 +490,7 @@
   #set ($percent = $mathtool.roundTo(1,$percent))
   ${percent}%
 #end
+{{/html}}
 {{/velocity}}</script>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
