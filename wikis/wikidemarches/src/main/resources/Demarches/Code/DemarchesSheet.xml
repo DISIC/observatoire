@@ -31,7 +31,7 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528808694000</date>
+  <date>1528814725000</date>
   <contentUpdateDate>1528808694000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -278,16 +278,6 @@
       <code>require(['jquery'], function($) {
   'use strict';
   
-  $('.avis-btn').click( function() {
-    $('.avis-form').show();
-  });
-  
-  $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
-    if(this.checked) {
-      toggleForm(this.value);
-    }
-  });
-  
   function toggleForm(modalite) {
     if (modalite == 'autrement') {
       $('.demat-eval-container').hide();
@@ -301,9 +291,19 @@
   }
   
   $(document).ready(function() {
+    $('.avis-btn').click( function() {
+      $('.avis-form').show();
+    });
+
+    $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
+      if(this.checked) {
+        toggleForm(this.value);
+      }
+    });    
+    
     var modalite = $("input[name='Avis.Code.AvisClass_0_modalite']:checked").val(); 
     toggleForm(modalite);
-});
+  });
   
 });</code>
     </property>
