@@ -31,8 +31,8 @@
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528733244000</date>
-  <contentUpdateDate>1528733244000</contentUpdateDate>
+  <date>1528820904000</date>
+  <contentUpdateDate>1528820904000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -79,7 +79,7 @@ Avis.Code.AvisClass_modalite_autrement=Autre
 Avis.Code.AvisClass_raison=Pour quelle raison ?
 Avis.Code.AvisClass_raison_pas-trouvé=Je n'ai pas trouvé la démarche en ligne
 Avis.Code.AvisClass_raison_autre=Autre raison
-Avis.Code.AvisClass_score=Globalement, êtes-vous statisfait(e) de votre démarche ?
+Avis.Code.AvisClass_score=Globalement, êtes-vous satisfait(e) de votre démarche ?
 Avis.Code.AvisClass_score_1=Pas du tout satisfait(e)
 Avis.Code.AvisClass_score_2=Pas satisfait(e)
 Avis.Code.AvisClass_score_3=Moyen
