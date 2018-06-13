@@ -31,7 +31,7 @@
   <parent>wikidemarches:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528300629000</date>
+  <date>1528874406000</date>
   <contentUpdateDate>1527348411000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches Skin</title>
@@ -476,6 +476,9 @@
     ## The version information coming from preferences is usually Velocity code, so make sure to evaluate it.
     &lt;div id="xwikiplatformversion"&gt;#evaluate($version)&lt;/div&gt;
   #else
+    &lt;div class="legal-terms"&gt;
+      $services.localization.render('wikidemarches.legal-notice')
+    &lt;/div&gt;
     &lt;div id="xwikiplatformversion"&gt;
       #set($productURL = $services.extension.core.repository.environmentExtension.website)
       #if ($productURL)
