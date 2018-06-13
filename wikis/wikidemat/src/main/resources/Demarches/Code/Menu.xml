@@ -31,22 +31,16 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528751659000</date>
-  <contentUpdateDate>1528751659000</contentUpdateDate>
+  <date>1528900051000</date>
+  <contentUpdateDate>1528900051000</contentUpdateDate>
   <version>1.1</version>
   <title>Menu Dématérialisation</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{include document="Demarches.Code.Macros" output="none"/}}
-
-{{velocity}}* [[Accueil&gt;&gt;Main.WebHome||queryString="force="]]
+  <content>{{velocity}}* [[Accueil&gt;&gt;Main.WebHome||queryString="force="]]
 * [[Démarches&gt;&gt;Demarches.WebHome]]
-#foreach($item in $userDirections)
-  #set ($directionKey = $xwiki.getDocument($item).name)
-  * [[${directionKey}&gt;&gt;Directions.${directionKey}]]
-#end
 * [[Documentation&gt;&gt;Documentation.WebHome]]{{/velocity}}</content>
   <object>
     <name>Demarches.Code.Menu</name>
