@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1526657566000</creationDate>
   <parent>Directions.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1528897881000</date>
+  <contentUpdateDate>1526657566000</contentUpdateDate>
   <version>1.1</version>
   <title>Directions Class</title>
   <comment/>
@@ -74,12 +74,26 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </ministere>
+    <nom>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>nom</name>
+      <number>2</number>
+      <picker>0</picker>
+      <prettyName>Nom</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+    </nom>
     <sigle>
       <customDisplay/>
       <disabled>0</disabled>
       <hint/>
       <name>sigle</name>
-      <number>2</number>
+      <number>1</number>
       <picker>0</picker>
       <prettyName>Sigle</prettyName>
       <size>30</size>
@@ -88,19 +102,6 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </sigle>
-    <title1>
-      <customDisplay>{{include reference="AppWithinMinutes.Title"/}}</customDisplay>
-      <disabled>0</disabled>
-      <hint/>
-      <name>title1</name>
-      <number>1</number>
-      <prettyName>Nom</prettyName>
-      <script/>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-    </title1>
   </class>
   <object>
     <name>Directions.Code.DirectionsClass</name>
