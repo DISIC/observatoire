@@ -28,10 +28,9 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1527598099000</creationDate>
-  <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527603612000</date>
+  <date>1528970055000</date>
   <contentUpdateDate>1527598099000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -185,11 +184,11 @@ var XWiki = (function (XWiki) {
     // start custom part:
     $$('.withsearchsuggest-input').each(function(suggestedInput){
       var searchSuggestObj = new XWiki.SearchSuggest(suggestedInput, sources);
-      //if there is a parent form, make a suggest that has the same size as the parentForm
-      var parentForm = suggestedInput.up('form');
-      if (parentForm) {
+      //if there is a parent input, make a suggest that has the same size as the parentInput
+      var parentInput = suggestedInput.up('.input-group');
+      if (parentInput) {
          searchSuggestObj.suggest.options.align = 'left';
-         searchSuggestObj.suggest.options.width = parentForm.getWidth();
+         searchSuggestObj.suggest.options.width = parentInput.getWidth();
       }
     });
     // done
