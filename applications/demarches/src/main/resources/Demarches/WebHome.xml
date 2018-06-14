@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1526657564000</creationDate>
+  <creationDate>1527081469000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527067940000</date>
-  <contentUpdateDate>1527067600000</contentUpdateDate>
+  <date>1528813747000</date>
+  <contentUpdateDate>1528813747000</contentUpdateDate>
   <version>1.1</version>
   <title>Démarches</title>
   <comment/>
@@ -44,13 +44,12 @@
   'doc.title': {"displayName":"Nom","link":"view"},
   'evenements': {},
   'ministeres': {},
-  'direction': {"displayName":"Direction"},
-  'groupe': {},
+  'direction': {"displayName":"Direction", "html":true},
   'categoriesPublics': {"displayName":"Catégories de publics"},
   'niveauDemat': {"displayName":"Niveau démat."},
   'nomProjet': {"displayName":"Projet"},
   'statutProjetDemat': {"displayName":"Statut projet"},
-  'dateMiseEnLigne': {},
+  'statut': {'displayName': 'Statut'},
   'doc.date': {},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
@@ -64,319 +63,10 @@
   'defaultOrder': 'asc',
   'extraParams' : 'direction/join_mode=or&amp;ministeres/join_mode=or&amp;publics/join_mode=or&amp;evenements/join_mode=or'
 })
-#set ($columns = ['doc.title', 'evenements', 'ministeres', 'direction', 'groupe', 'categoriesPublics', 'niveauDemat', 'statutProjetDemat', 'dateMiseEnLigne'])
+#set ($columns = ['doc.title', 'evenements', 'ministeres', 'direction', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
 #livetable('demarches' $columns $columnsProperties $options)
+
 {{/velocity}}</content>
-  <object>
-    <name>Demarches.WebHome</name>
-    <number>0</number>
-    <className>AppWithinMinutes.LiveTableClass</className>
-    <guid>750ca554-ef56-40d0-8003-c9f15075bcb3</guid>
-    <class>
-      <name>AppWithinMinutes.LiveTableClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <class>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>class</name>
-        <number>1</number>
-        <picker>0</picker>
-        <prettyName>Class</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </class>
-      <columns>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>columns</name>
-        <number>3</number>
-        <picker>0</picker>
-        <prettyName>Live Table Columns</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </columns>
-      <dataSpace>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>dataSpace</name>
-        <number>4</number>
-        <picker>0</picker>
-        <prettyName>Data Location</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </dataSpace>
-      <description>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <editor>---</editor>
-        <name>description</name>
-        <number>2</number>
-        <picker>0</picker>
-        <prettyName>Description</prettyName>
-        <rows>5</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </description>
-    </class>
-    <property>
-      <class>Demarches.Code.DemarchesClass</class>
-    </property>
-    <property>
-      <columns>title1 evenements ministeres direction groupe categoriesPublics niveauDemat nomProjet statutProjetDemat dateMiseEnLigne doc.date _actions</columns>
-    </property>
-    <property>
-      <dataSpace/>
-    </property>
-    <property>
-      <description/>
-    </property>
-  </object>
-  <object>
-    <name>Demarches.WebHome</name>
-    <number>0</number>
-    <className>BatchImport.BatchImportClass</className>
-    <guid>cca4f1fb-f5da-4137-85e1-66f71fce10a6</guid>
-    <class>
-      <name>BatchImport.BatchImportClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <classname>
-        <disabled>0</disabled>
-        <name>classname</name>
-        <number>5</number>
-        <picker>0</picker>
-        <prettyName>classname</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </classname>
-      <clearname>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>radio</displayFormType>
-        <displayType>yesno</displayType>
-        <name>clearname</name>
-        <number>12</number>
-        <prettyName>Clear name</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </clearname>
-      <datafilename>
-        <disabled>0</disabled>
-        <name>datafilename</name>
-        <number>3</number>
-        <picker>0</picker>
-        <prettyName>datafilename</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </datafilename>
-      <datafileprefix>
-        <disabled>0</disabled>
-        <name>datafileprefix</name>
-        <number>7</number>
-        <picker>0</picker>
-        <prettyName>datafileprefix</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </datafileprefix>
-      <defaultdateformat>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>defaultdateformat</name>
-        <number>11</number>
-        <picker>0</picker>
-        <prettyName>Default date format</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </defaultdateformat>
-      <fieldsfortags>
-        <disabled>0</disabled>
-        <name>fieldsfortags</name>
-        <number>9</number>
-        <picker>0</picker>
-        <prettyName>fieldsfortags</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </fieldsfortags>
-      <fileimport>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType/>
-        <name>fileimport</name>
-        <number>13</number>
-        <prettyName>fileimport</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </fileimport>
-      <fileupload>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType/>
-        <name>fileupload</name>
-        <number>12</number>
-        <prettyName>fileupload</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </fileupload>
-      <listseparator>
-        <disabled>0</disabled>
-        <name>listseparator</name>
-        <number>10</number>
-        <picker>0</picker>
-        <prettyName>List Separator</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </listseparator>
-      <mapping>
-        <disabled>0</disabled>
-        <editor>Text</editor>
-        <name>mapping</name>
-        <number>1</number>
-        <picker>0</picker>
-        <prettyName>mapping</prettyName>
-        <rows>15</rows>
-        <size>80</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </mapping>
-      <metadatafilename>
-        <disabled>0</disabled>
-        <name>metadatafilename</name>
-        <number>2</number>
-        <picker>0</picker>
-        <prettyName>metadatafilename</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </metadatafilename>
-      <pageprefix>
-        <disabled>0</disabled>
-        <name>pageprefix</name>
-        <number>8</number>
-        <picker>0</picker>
-        <prettyName>pageprefix</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </pageprefix>
-      <space>
-        <disabled>0</disabled>
-        <name>space</name>
-        <number>6</number>
-        <picker>0</picker>
-        <prettyName>space</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </space>
-    </class>
-    <property>
-      <classname>Demarches.Code.DemarchesClass</classname>
-    </property>
-    <property>
-      <defaultdateformat>MM/yyyy</defaultdateformat>
-    </property>
-    <property>
-      <listseparator>,</listseparator>
-    </property>
-    <property>
-      <mapping>Remarques=remarques
-Sigle ministères=ministeres
-Fiche signalétique=urlFiche
-Identifiants ELI=identifiantsEli
-Référence Service Public=referenceServicePublic
-Dématérialisation obligatoire=dematObligatoire
-Référence BDD Form=referenceBddForm
-Publics=publics
-Statut du projet de dématérialisation=statutProjetDemat
-Niveau de dématérialisation=niveauDemat
-Démarche exclue du SVE=exclusionSve
-Adresse web démarche=urlDemarche
-Nom raccourci de la démarche=doc.title
-Organismes de traitement=organismesTraitement
-Catégories de publics concernés=categoriesPublics
-Direction ou établissement=direction
-Formulaires (CERFA)=formulaires
-Textes de référence=textes
-Niveau de dématérialisation prévu=niveauPrevu
-Caractéristiques=caracteristiquesDemat
-Adresse web infos=urlInfos
-Date de mise en ligne=dateMiseEnLigne
-Objet=objet
-Volumétrie de la démarche=volumetrie
-Identifiant de la démarche=doc.name
-Volumétrie de la dématérialisation=volumetrieDemat
-Nom de projet=nomProjet
-Événements de vie=evenements
-Caractéristiques prévues=caracteristiquesDematPrevues
-Nom complet de la démarche=nomComplet
-Groupe=groupe
-Statut de la démarche=statut</mapping>
-    </property>
-    <property>
-      <metadatafilename>mtefp-210518.csv</metadatafilename>
-    </property>
-    <property>
-      <space>Demarches</space>
-    </property>
-  </object>
   <object>
     <name>Demarches.WebHome</name>
     <number>0</number>
