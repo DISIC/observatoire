@@ -31,7 +31,7 @@
   <parent>wikidemarches:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528874406000</date>
+  <date>1528991596000</date>
   <contentUpdateDate>1527348411000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches Skin</title>
@@ -477,7 +477,7 @@
     &lt;div id="xwikiplatformversion"&gt;#evaluate($version)&lt;/div&gt;
   #else
     &lt;div class="legal-terms"&gt;
-      $services.localization.render('wikidemarches.legal-notice')
+      &lt;a href="$xwiki.getDocument('Main.MentionsLegales').URL"&gt;$services.localization.render('wikidemarches.legal-notice')&lt;/a&gt;
     &lt;/div&gt;
     &lt;div id="xwikiplatformversion"&gt;
       #set($productURL = $services.extension.core.repository.environmentExtension.website)
