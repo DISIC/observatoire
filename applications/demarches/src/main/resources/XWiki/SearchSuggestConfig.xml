@@ -1121,13 +1121,13 @@ qf=property.XWiki.XWikiUsers.last_name^10 property.XWiki.XWikiUsers.first_name^5
     <property>
       <query>fq=type:DOCUMENT
 fq=class:Demarches.Code.DemarchesClass
-qf=title^10 property.Demarches.Code.DemarchesClass_nom^10 property.Demarches.Code.DemarchesClass_cerfa^10 object.Demarches.Code.DemarchesClass^1</query>
+qf=title^10 property.Demarches.Code.DemarchesClass_nomComplet^10 property.Demarches.Code.DemarchesClass_cerfa^10 property.Demarches.Code.DemarchesClass_objet^10 object.Demarches.Code.DemarchesClass^1</query>
     </property>
     <property>
       <resultsNumber>8</resultsNumber>
     </property>
     <property>
-      <url>XWiki.SuggestSolrService</url>
+      <url>Demarches.Code.SuggestSolrService</url>
     </property>
   </object>
 </xwikidoc>
