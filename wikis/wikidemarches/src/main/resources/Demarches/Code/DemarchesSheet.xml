@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528992667000</date>
-  <contentUpdateDate>1528992667000</contentUpdateDate>
+  <date>1529047719000</date>
+  <contentUpdateDate>1529047719000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -74,17 +74,17 @@
 #end
 
 #macro (displayObjectForm $obj $showProperties $showPrettyNameProperties)
-#if ("$!headingLevel" == '')
-  #set($headingLevel = 2)
-#end
 #foreach($prop in $obj.xWikiClass.properties)
   #set ($validationRegExp = $prop.getProperty('validationRegExp').value)
   #set ($isMandatory = $validationRegExp.trim().length() &gt; 0)  
   #if ($showProperties.contains($prop.name))
     #if ($showPrettyNameProperties.contains($prop.name))
+      &lt;div class="field"&gt;
+      #if ($prop.name != 'suggestion')
       &lt;fieldset class="form-${prop.type.toLowerCase()}"&gt;
+      #end
       #if ($prop.type == 'StaticListClass'  || $prop.type == 'BooleanClass')
-        &lt;legend aria-level="$headingLevel"&gt;
+        &lt;legend&gt;
         $doc.displayPrettyName($prop.name)
         #if ($isMandatory)
           &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt;
@@ -100,7 +100,9 @@
       #end
     #end
     #if ($prop.name != 'modalite')
-    &lt;div&gt;$doc.display($prop.name, 'edit', $obj)&lt;/div&gt;
+    #if ($prop.name != 'suggestion')&lt;div&gt;#end
+    $doc.display($prop.name, 'edit', $obj)
+    #if ($prop.name != 'suggestion')&lt;/div&gt;#end
     #else
       &lt;ul&gt;
         #foreach ($value in $prop.getListValues())
@@ -112,8 +114,9 @@
       &lt;/ul&gt;
       &lt;input name="${obj.xWikiClass.name}_${obj.number}_${prop.name}" type="hidden" value=""&gt;
     #end
-    #if ($showPrettyNameProperties.contains($prop.name))
+    #if ($showPrettyNameProperties.contains($prop.name) &amp;&amp; $prop.name != 'suggestion')
     &lt;/fieldset&gt;
+    &lt;/div&gt;
     #end
   #end
 #end
