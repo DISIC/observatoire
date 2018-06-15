@@ -31,7 +31,7 @@
   <parent>Avis.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528818240000</date>
+  <date>1529051449000</date>
   <contentUpdateDate>1528186553000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Class</title>
@@ -51,7 +51,7 @@
     <validationScript/>
     <accompagnement>
       <customDisplay>{{velocity}}
-{{html wiki="false"}}
+{{html clean="false" wiki="false"}}
 #set ($className = ${object.xWikiClass.name})
 #if ($type == 'edit')
   #foreach ($val in [0, 1])
@@ -67,7 +67,7 @@
     &lt;input type="hidden" id="${prefix}${name}_none" name="${prefix}${name}" value=""&gt; 
   &lt;/label&gt;
 #else
-$value
+$!value
 #end
 {{/html}}
 {{/velocity}}

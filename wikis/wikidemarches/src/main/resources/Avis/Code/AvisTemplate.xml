@@ -56,7 +56,7 @@
       <validationScript/>
       <accompagnement>
         <customDisplay>{{velocity}}
-{{html wiki="false"}}
+{{html clean="false" wiki="false"}}
 #set ($className = ${object.xWikiClass.name})
 #if ($type == 'edit')
   #foreach ($val in [0, 1])
@@ -72,7 +72,7 @@
     &lt;input type="hidden" id="${prefix}${name}_none" name="${prefix}${name}" value=""&gt; 
   &lt;/label&gt;
 #else
-$value
+$!value
 #end
 {{/html}}
 {{/velocity}}
@@ -84,7 +84,7 @@ $value
         <displayType/>
         <hint/>
         <name>accompagnement</name>
-        <number>7</number>
+        <number>8</number>
         <prettyName>Avez-vous eu besoin d'accompagnement pour effectuer cette démarche ?</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
@@ -96,7 +96,7 @@ $value
         <disabled>0</disabled>
         <hint/>
         <name>comprehensible</name>
-        <number>5</number>
+        <number>6</number>
         <numberType>integer</numberType>
         <prettyName>Était-ce compréhensible ?</prettyName>
         <size>30</size>
@@ -135,7 +135,7 @@ $value
         <disabled>0</disabled>
         <hint/>
         <name>facile</name>
-        <number>4</number>
+        <number>5</number>
         <numberType>integer</numberType>
         <prettyName>Était-ce facile à faire ?</prettyName>
         <size>30</size>
@@ -162,16 +162,38 @@ $value
         <sort>none</sort>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
-        <validationRegExp/>
+        <validationRegExp>.+</validationRegExp>
         <values>en-ligne-entièrement|en-ligne-partiellement|autrement</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </modalite>
+      <raison>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>radio</displayType>
+        <hint/>
+        <multiSelect>0</multiSelect>
+        <name>raison</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>Pour quelle raison</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>pas-trouvé|autre</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </raison>
       <rapide>
         <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
         <disabled>0</disabled>
         <hint/>
         <name>rapide</name>
-        <number>6</number>
+        <number>7</number>
         <numberType>integer</numberType>
         <prettyName>Était-ce assez rapide ?</prettyName>
         <size>30</size>
@@ -185,13 +207,13 @@ $value
         <disabled>0</disabled>
         <hint/>
         <name>score</name>
-        <number>3</number>
+        <number>4</number>
         <numberType>integer</numberType>
-        <prettyName>score</prettyName>
+        <prettyName>Score</prettyName>
         <size>30</size>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
-        <validationRegExp/>
+        <validationRegExp>.+</validationRegExp>
         <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
       </score>
       <suggestion>
@@ -201,7 +223,7 @@ $value
         <editor>Text</editor>
         <hint/>
         <name>suggestion</name>
-        <number>8</number>
+        <number>9</number>
         <picker>0</picker>
         <prettyName>Avez-vous un dysfonctionnement à signaler ?</prettyName>
         <rows>5</rows>
@@ -219,7 +241,7 @@ $value
         <displayType/>
         <hint/>
         <name>vote</name>
-        <number>9</number>
+        <number>10</number>
         <prettyName>Vote</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
