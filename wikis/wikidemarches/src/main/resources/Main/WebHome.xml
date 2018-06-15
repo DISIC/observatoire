@@ -222,6 +222,11 @@
       border-radius: 0;
       border: 0;
     }
+    /* Move loading graphic to the right */
+    input[type="text"].loading {
+      background-position: right 0.5em center;
+      padding-left: @padding-base-horizontal;
+    }
     button.btn {
       background-color: lighten(@navbar-default-bg, 10%);
       padding-top: @padding-base-vertical + 1px;
@@ -233,6 +238,11 @@
 /* On the search suggest of the main page, displaying a button to hide suggestions does not make sense */
 .searchSuggest div.hide-button-wrapper {
   display: none;
+}
+
+/* The suggest should have blue margins (same as the search band) so that we don't see the suggest list when it appears _before_ the results */
+div.suggestItems.searchSuggest {
+  border-color: @navbar-default-bg;
 }
 
 /* search suggest results should be displayed bigger */

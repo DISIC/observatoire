@@ -184,6 +184,8 @@ var XWiki = (function (XWiki) {
     // start custom part:
     $$('.withsearchsuggest-input').each(function(suggestedInput){
       var searchSuggestObj = new XWiki.SearchSuggest(suggestedInput, sources);
+      /* Don't insert anything before suggestions, this way the suggestions box is invisible as long as there isn't at least one result. The "no results" message is also not displayed */
+      searchSuggestObj.suggest.options.insertBeforeSuggestions = null;
       //if there is a parent input, make a suggest that has the same size as the parentInput
       var parentInput = suggestedInput.up('.input-group');
       if (parentInput) {
