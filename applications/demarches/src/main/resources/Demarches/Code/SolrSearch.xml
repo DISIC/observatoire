@@ -42,7 +42,7 @@
   <content>{{velocity output="false"}}
 #set ($solrConfig = {
   'queryFields': {
-    'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^10 property.Demarches.Code.DemarchesClass.cerfa^10 property.Demarches.Code.DemarchesClass.objet^10 object.Demarches.Code.DemarchesClass^1'
+    'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'
   },
   'filterQuery': [
     'type:DOCUMENT',
@@ -70,6 +70,8 @@
 {{include reference="Main.SolrSearchConfig" /}}
 
 {{include reference="Main.SolrSearchMacros" /}}
+
+{{include reference="Demarches.Code.SolrSearchMacros" /}}
 
 {{velocity output="false"}}
 
@@ -170,18 +172,8 @@
 
 ## override get search results to explicitly add url matching to the query, for the 3 url fields
 #macro (getSearchResults)
-  ## 1. prepare some extra query, for searching in the urls as well, based on the user query string
-  ## only if the query string is longer than 5 characters
-  #if ($text.length() &gt; 5)
-    ## TODO: use a dismax query escape function here, don't do it manually, but for now it's ok
-    #set($userFilledText = $text.replaceAll(':', '\\:').replaceAll('/', '\\/').replaceAll('"', ''))
-    #set($extraQueryURL = "property.Demarches.Code.DemarchesClass.urlDemarche:(*${userFilledText}*) property.Demarches.Code.DemarchesClass.urlInfos:(*${userFilledText}*) property.Demarches.Code.DemarchesClass.urlFiche:(*${userFilledText}*)")
-  #end
-  ## 2. do some cleanup of special characters in the user searched text, for some special cases: replace :// in the url address. 
-  ## TODO: I think &amp; and ? should also be escaped if the query string is an URL
-  ## escape user search text, for the case when :// appear together (as part of an URL, escape them). In all other cases, let special syntax be used
-  #set($searchedText = "$text.replaceAll('://', '\\:\\/\\/')")
-  #set ($queryString = "$!{searchedText} $!{extraQueryURL}")
+  #set($queryString = '')
+  #prepareSolrDemarchesQuery($text, $queryString)
   ##
   ## Create the query and set the query string.
   #set ($query = $services.query.createQuery($queryString, 'solr'))
