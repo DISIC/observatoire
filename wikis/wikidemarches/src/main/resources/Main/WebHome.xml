@@ -56,7 +56,7 @@
       ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
       ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
       #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
-      &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end"&gt;
+      &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
         &lt;label for="headerglobalsearchinput"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
         &lt;div class="input-group"&gt;
           &lt;input type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;

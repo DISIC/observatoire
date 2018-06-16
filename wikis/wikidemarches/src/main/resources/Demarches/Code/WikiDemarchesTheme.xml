@@ -1010,6 +1010,7 @@
     &gt; * {
       font-size: 2.5em;
       line-height: @navbar-height;
+      display: block;
     }
   }
 }
@@ -1029,7 +1030,6 @@
 }
 
 
- 
 
 
 

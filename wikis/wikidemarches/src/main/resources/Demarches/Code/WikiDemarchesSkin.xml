@@ -466,7 +466,7 @@
 #if("$!extraFooterTemplate" != '')
   #template($extraFooterTemplate)
 #end
-&lt;div id="footerglobal"&gt;
+&lt;footer id="footerglobal" role="contentinfo"&gt;
   &lt;div id="xwikilicence"&gt;$!copyright&lt;/div&gt;
   #set ($version = $xwiki.getSpacePreference('version'))
   #if ("$!version" == "")
@@ -490,7 +490,7 @@
       #end
     &lt;/div&gt;
   #end
-&lt;/div&gt;
+&lt;/footer&gt;
 #end
 ### TODO: Format the footer for pdf output</content>
     </property>
