@@ -25,16 +25,15 @@
       For all other URLs we prepend the "/bin/" prefix so that they get routed to the XWiki Action Servlet.
     </note>
     <from>^/(.*)$</from>
-    <to type="forward">/wiki/wikidemarches/$1</to>
+    <to type="forward">/bin/$1</to>
   </rule>
 
   <outbound-rule>
     <note>
       Rewrite outbound URLs to remove the "/wiki/demarches" part when there are two paths after it.
     </note>
-    <from>/wiki/wikidemarches/(.*)$</from>
+    <from>/bin/(.*)$</from>
     <to>/$1</to>
   </outbound-rule>
-
 </urlrewrite>
 
