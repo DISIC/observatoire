@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529398430000</date>
-  <contentUpdateDate>1529398430000</contentUpdateDate>
+  <date>1529483388000</date>
+  <contentUpdateDate>1529483388000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -40,19 +40,6 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="none"}}
-#macro (displayProperty $propName)
-  #set ($obj = $doc.getObject("Demarches.Code.DemarchesClass"))
-  #set ($value = $obj.getProperty($propName).getValue())
-  #if ($value != $NULL &amp;&amp; ($value.size() &gt; 0 || $value.toString().trim().length() &gt; 0))
-    &lt;dt&gt;
-      &lt;label&gt;$doc.displayPrettyName($propName, false, false)&lt;/label&gt;
-    &lt;/dt&gt;
-    &lt;dd&gt;
-      $doc.display($propName)
-    &lt;/dd&gt;
-  #end
-#end
-
 #macro (displaySubTitle)
 #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($obj)
@@ -84,56 +71,26 @@
 #end
 #end
 
-#macro (displayObjectForm $obj $showProperties $showPrettyNameProperties)
+#macro(setDefaultModalite $avis)
+#if ($demarche.getProperty('niveauDemat') &amp;&amp; $demarche.getProperty('niveauDemat').value &amp;&amp; $demarche.getProperty('niveauDemat').value.size() &gt; 0)
+  #set ($niveauDemat = $demarche.getProperty('niveauDemat').value)
+  #set ($dematCriteres = ['teleprocedure', 'formulaire'])
+  #foreach ($niveau in $niveauDemat)
+    #if ($dematCriteres.contains($niveau))
+      #set ($discard = $avis.set('modalite','en-ligne-entièrement'))
+      #set ($flag = true)
+    #end
+  #end
+  #if (!$flag)
+    #set ($discard = $avis.set('modalite','autrement'))
+  #end
+#end
+#end
+
+#macro (displayObjectForm $obj $showProperties)
 #foreach($prop in $obj.xWikiClass.properties)
-  #set ($validationRegExp = $prop.getProperty('validationRegExp').value)
-  #set ($isMandatory = $validationRegExp.trim().length() &gt; 0)  
   #if ($showProperties.contains($prop.name))
-    #if ($showPrettyNameProperties.contains($prop.name))
-      &lt;div class="field"&gt;
-      #if ($prop.name != 'suggestion')
-      &lt;fieldset class="form-${prop.type.toLowerCase()}"&gt;
-      #end
-      #if ($prop.type == 'StaticListClass'  || $prop.type == 'BooleanClass')
-        &lt;legend&gt;
-        $doc.displayPrettyName($prop.name)
-        #if ($isMandatory)
-          &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt;
-        #end
-        &lt;/legend&gt;
-      #else
-        &lt;label for="${obj.xWikiClass.name}_${obj.number}_${prop.name}"&gt;
-        $doc.displayPrettyName($prop.name)
-        #if ($isMandatory)
-          &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt;
-        #end
-        &lt;/label&gt;
-      #end
-    #end
-    #if ($prop.name != 'modalite')
-      #if ($prop.name != 'suggestion')&lt;div&gt;#end
-      $doc.display($prop.name, 'edit', $obj)
-      #if ($prop.name != 'suggestion')&lt;/div&gt;#end
-    #else
-      &lt;ul&gt;
-        #foreach ($value in $prop.getListValues())
-          #set ($val = $obj.getProperty('modalite').value)
-          #set ($checked = '')
-          #if ($val == $value)#set($checked = 'checked')#end
-          &lt;li&gt;
-          &lt;input #if ($isMandatory)required#end id="xwiki-form-${prop.name}-${obj.number}-$value" name="${obj.xWikiClass.name}_${obj.number}_${prop.name}" type="radio" value="$value" $checked&gt;
-          &lt;label for="xwiki-form-${prop.name}-${obj.number}-$value"&gt;$services.localization.render("${obj.xWikiClass.name}_${prop.name}_$value")&lt;/label&gt;
-          &lt;/li&gt;
-        #end
-      &lt;/ul&gt;
-      &lt;input name="${obj.xWikiClass.name}_${obj.number}_${prop.name}" type="hidden" value=""&gt;
-    #end
-    #if ($prop.name != 'suggestion')
-      &lt;/fieldset&gt;
-    #end
-    #if ($showPrettyNameProperties.contains($prop.name))
-    &lt;/div&gt;
-    #end
+    $doc.display($prop.name, 'edit', $obj)
   #end
 #end
 #end
@@ -154,13 +111,13 @@
 #displaySubTitle
 
 #set ($messageKey = $request.session.getAttribute('avis-handler-operation-message'))
-  #if ("$!messageKey" != '')
-    ## Clean the session and display the message.
-    #set ($discard = $request.session.removeAttribute('avis-handler-operation-message'))
-    #displayMessage($messageKey)
-  #else
+#if ("$!messageKey" != '')
+  ## Clean the session and display the message.
+  #set ($discard = $request.session.removeAttribute('avis-handler-operation-message'))
+  #displayMessage($messageKey)
+#else
   &lt;button class="avis-btn btn btn-info" name="avis-btn"&gt;$escapetool.xml($services.localization.render('wikidemarches.demarche.vote.button'))&lt;/button&gt;
-  #end
+#end
 {{/html}}
 {{/velocity}}
 
@@ -171,40 +128,26 @@
 #if ($demarche != $NULL)
   {{html wiki="true"}}
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform avis-form"&gt;
-  == Donnez votre avis sur cette démarche
-  
+  == Donnez votre avis
+
   &lt;div class="info-box-mandatory"&gt;
   Les champs marqués de &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
   &lt;/div&gt;
     #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-    #if ($demarche.getProperty('niveauDemat') &amp;&amp; $demarche.getProperty('niveauDemat').value &amp;&amp; $demarche.getProperty('niveauDemat').value.size() &gt; 0)
-      #set ($niveauDemat = $demarche.getProperty('niveauDemat').value)
-      #set ($dematCriteres = ['teleprocedure', 'formulaire'])
-      #foreach ($niveau in $niveauDemat)
-        #if ($dematCriteres.contains($niveau))
-          #set ($discard = $avis.set('modalite','en-ligne-entièrement'))
-          #set ($flag = true)
-        #end
-      #end
-      #if (!$flag)
-        #set ($discard = $avis.set('modalite','autrement'))
-      #end
-    #end
+    #setDefaultModalite($avis)
     &lt;div class="modalite"&gt;
-      #displayObjectForm($avis,['modalite'],['modalite'])
-    &lt;/div&gt;
-    &lt;div class="raison"&gt;
-      #displayObjectForm($avis,['raison'],['raison'])
+      #displayObjectForm($avis,['modalite'])
     &lt;/div&gt;
     &lt;div class="rating-container"&gt;
-      #displayObjectForm($avis,['score'],[])
+      #displayObjectForm($avis,['score'])
     &lt;/div&gt;
     &lt;div class="demat-eval-container"&gt;
-      #displayObjectForm($avis,['facile','comprehensible','rapide','accompagnement','suggestion'], ['accompagnement','suggestion'])
+      #displayObjectForm($avis,['facile','comprehensible','aide','difficultes'])
     &lt;/div&gt;
     &lt;div class="demat-vote-container"&gt;
-      #displayObjectForm($avis,['vote'], ['vote'])
+      #displayObjectForm($avis,['vote'])
     &lt;/div&gt;
+
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()" /&gt;
     &lt;div class='buttonwrapper'&gt;
@@ -215,35 +158,7 @@
 #end
 {{/velocity}}
 
-{{velocity}}
-#if ($false)
-{{html wiki="true"}}
-&lt;div class="row"&gt;
-&lt;div class="col-lg-6 col-md-6 col-sm-6 col"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Informations&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['categoriesPublics', 'publics', 'evenements'])
-  #displayProperty($propName)
-#end
-#foreach($propName in ['niveauDemat', 'dematObligatoire'])
-  #displayProperty($propName)
-#end
-#foreach($propName in ['urlInfos'])
-  #displayProperty($propName)
-#end
-&lt;/dl&gt;
-)))
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-{{/html}}
-#end
-{{/velocity}}</content>
+</content>
   <object>
     <name>Demarches.Code.DemarchesSheet</name>
     <number>0</number>

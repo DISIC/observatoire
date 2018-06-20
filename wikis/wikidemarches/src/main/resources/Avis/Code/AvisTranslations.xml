@@ -31,8 +31,8 @@
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529049576000</date>
-  <contentUpdateDate>1529049576000</contentUpdateDate>
+  <date>1529480635000</date>
+  <contentUpdateDate>1529480635000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -72,47 +72,48 @@ avis.livetable.emptyvalue=-
 
 # Other keys
 avis.entry.name=Avis
+avis.valider=Valider
+avis.revenir=Revenir
+avis.envoyer=Envoyer
 
 # Deprecated keys
 avis.dataSpace.title=Data
 
 #Properties
-Avis.Code.AvisClass_modalite=Comment avez-vous effectué cette démarche ?
+Avis.Code.AvisClass_modalite=Comment avez-vous fait cette démarche ?
 Avis.Code.AvisClass_modalite_en-ligne-entièrement=En ligne, jusqu'au bout
 Avis.Code.AvisClass_modalite_en-ligne-partiellement=En ligne, mais pas jusqu'au bout
 Avis.Code.AvisClass_modalite_autrement=Autre
-Avis.Code.AvisClass_raison=Pour quelle raison ?
-Avis.Code.AvisClass_raison_pas-trouvé=Je n'ai pas trouvé la démarche en ligne
-Avis.Code.AvisClass_raison_autre=Autre raison
-Avis.Code.AvisClass_score=Globalement, êtes-vous satisfait(e) de votre démarche ?
-Avis.Code.AvisClass_score_1=Pas du tout satisfait(e)
-Avis.Code.AvisClass_score_2=Pas satisfait(e)
-Avis.Code.AvisClass_score_3=Moyen
-Avis.Code.AvisClass_score_4=Satisfait(e)
-Avis.Code.AvisClass_score_5=Très satisfait(e)
+Avis.Code.AvisClass_score=Comment s'est passée cette démarche, pour vous ?
+Avis.Code.AvisClass_score_1=Pas bien
+Avis.Code.AvisClass_score_2=Moyen
+Avis.Code.AvisClass_score_3=Très bien
+Avis.Code.AvisClass_vote=Auriez-vous préféré faire cette démarche en ligne ?
+Avis.Code.AvisClass_step-2=Pour terminer, pouvez-vous nous en dire plus ?
 Avis.Code.AvisClass_facile=Était-ce facile à utiliser ?
-Avis.Code.AvisClass_facile_1=Pas du tout facile
-Avis.Code.AvisClass_facile_2=Pas facile
-Avis.Code.AvisClass_facile_3=Moyen
-Avis.Code.AvisClass_facile_4=Facile
-Avis.Code.AvisClass_facile_5=Très facile
-Avis.Code.AvisClass_comprehensible=Les questions étaient-elles compréhensibles ?
-Avis.Code.AvisClass_comprehensible_1=Pas du tout compréhensibles
-Avis.Code.AvisClass_comprehensible_2=Pas compréhensibles
-Avis.Code.AvisClass_comprehensible_3=Moyen
-Avis.Code.AvisClass_comprehensible_4=Faciles à comprendre
-Avis.Code.AvisClass_comprehensible_5=Très faciles à comprendre
-Avis.Code.AvisClass_rapide=Était-ce assez rapide ?
-Avis.Code.AvisClass_rapide_1=Beaucoup trop long
-Avis.Code.AvisClass_rapide_2=Trop long
-Avis.Code.AvisClass_rapide_3=Moyen
-Avis.Code.AvisClass_rapide_4=Rapide
-Avis.Code.AvisClass_rapide_5=Très rapide
-Avis.Code.AvisClass_accompagnement=Avez-vous eu besoin d'accompagnement pour effectuer cette démarche ?
-Avis.Code.AvisClass_accompagnement_0=Non, j'ai réussi à la faire seul(e).
-Avis.Code.AvisClass_accompagnement_1=Oui, quelqu'un m'a aidé.
-Avis.Code.AvisClass_suggestion=Avez-vous un dysfonctionnement ou une suggestion à signaler ?
-Avis.Code.AvisClass_vote=Souhaitez-vous que cette démarche soit dématérialisée ?</content>
+Avis.Code.AvisClass_facile_1=Mauvais
+Avis.Code.AvisClass_facile_2=Moyen
+Avis.Code.AvisClass_facile_3=Bon
+Avis.Code.AvisClass_comprehensible=Le langage employé était facile à comprendre ?
+Avis.Code.AvisClass_comprehensible_1=Mauvais
+Avis.Code.AvisClass_comprehensible_2=Moyen
+Avis.Code.AvisClass_comprehensible_3=Bon
+Avis.Code.AvisClass_aide=Avez-vous eu besoin d'aide ?
+Avis.Code.AvisClass_aide_proche=Un(e) proche
+Avis.Code.AvisClass_aide_association=Une association
+Avis.Code.AvisClass_aide_agent=Un agent administratif
+Avis.Code.AvisClass_aide_internet=Internet (site, forum, ...)
+Avis.Code.AvisClass_aide_autre=Autre
+Avis.Code.AvisClass_difficultes=Avez-vous rencontré ces difficultés ?
+Avis.Code.AvisClass_difficultes_dysfonctionnement=La démarche n'a pas fonctionné
+Avis.Code.AvisClass_difficultes_mobile=Le site ne s'affichait pas bien sur mobile
+Avis.Code.AvisClass_difficultes_pieces-jointes=Pièces jointes
+Avis.Code.AvisClass_difficultes_autre=Autre
+Avis.Code.AvisClass_merci_1=Merci d'avoir donné votre avis.
+Avis.Code.AvisClass_merci_2=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
+
+
+</content>
   <object>
     <name>Avis.Code.AvisTranslations</name>
     <number>0</number>

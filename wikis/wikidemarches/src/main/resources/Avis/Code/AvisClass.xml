@@ -31,7 +31,7 @@
   <parent>Avis.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529051449000</date>
+  <date>1529483349000</date>
   <contentUpdateDate>1528186553000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Class</title>
@@ -49,43 +49,28 @@
     <defaultWeb/>
     <nameField/>
     <validationScript/>
-    <accompagnement>
-      <customDisplay>{{velocity}}
-{{html clean="false" wiki="false"}}
-#set ($className = ${object.xWikiClass.name})
-#if ($type == 'edit')
-  #foreach ($val in [0, 1])
-  #set ($checked = ($value == $val))
-  #if ($checked)#set ($checked = "checked")#else#set ($checked = "")#end
-  &lt;div&gt;
-    &lt;label for="${prefix}${name}_${val}"&gt;&lt;input id="${prefix}${name}_${val}" name="${prefix}${name}" type="radio" value="$val" $checked&gt; 
-    $services.localization.render("${className}_${name}_$val")
-    &lt;/label&gt;
-  &lt;/div&gt;
-  #end
-  &lt;label for="${prefix}${name}_none"&gt;
-    &lt;input type="hidden" id="${prefix}${name}_none" name="${prefix}${name}" value=""&gt; 
-  &lt;/label&gt;
-#else
-$!value
-#end
-{{/html}}
-{{/velocity}}
-
-</customDisplay>
-      <defaultValue/>
+    <aide>
+      <cache>0</cache>
+      <customDisplay>{{include reference="Avis.Code.ListDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
-      <displayFormType>radio</displayFormType>
-      <displayType/>
+      <displayType>checkbox</displayType>
       <hint/>
-      <name>accompagnement</name>
-      <number>8</number>
-      <prettyName>Avez-vous eu besoin d'accompagnement pour effectuer cette démarche ?</prettyName>
+      <multiSelect>1</multiSelect>
+      <name>aide</name>
+      <number>9</number>
+      <picker>0</picker>
+      <prettyName>Aide</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-    </accompagnement>
+      <values>proche|association|agent|internet|autre</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </aide>
     <comprehensible>
       <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
@@ -93,7 +78,7 @@ $!value
       <name>comprehensible</name>
       <number>6</number>
       <numberType>integer</numberType>
-      <prettyName>Était-ce compréhensible ?</prettyName>
+      <prettyName>Compréhensible</prettyName>
       <size>30</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -125,6 +110,28 @@ $!value
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </demarche>
+    <difficultes>
+      <cache>0</cache>
+      <customDisplay>{{include reference="Avis.Code.ListDisplayer" /}}</customDisplay>
+      <disabled>0</disabled>
+      <displayType>checkbox</displayType>
+      <hint/>
+      <multiSelect>1</multiSelect>
+      <name>difficultes</name>
+      <number>8</number>
+      <picker>0</picker>
+      <prettyName>Difficultés</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <values>dysfonctionnement|mobile|pieces-jointes|autre</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </difficultes>
     <facile>
       <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
@@ -132,7 +139,7 @@ $!value
       <name>facile</name>
       <number>5</number>
       <numberType>integer</numberType>
-      <prettyName>Était-ce facile à faire ?</prettyName>
+      <prettyName>Facile</prettyName>
       <size>30</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -141,7 +148,7 @@ $!value
     </facile>
     <modalite>
       <cache>0</cache>
-      <customDisplay/>
+      <customDisplay>{{include reference="Avis.Code.ListDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
       <displayType>radio</displayType>
       <hint/>
@@ -149,7 +156,7 @@ $!value
       <name>modalite</name>
       <number>2</number>
       <picker>0</picker>
-      <prettyName>Comment avez-vous effectué cette démarche ?</prettyName>
+      <prettyName>Modalité</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators>|, </separators>
@@ -161,42 +168,6 @@ $!value
       <values>en-ligne-entièrement|en-ligne-partiellement|autrement</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </modalite>
-    <raison>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>radio</displayType>
-      <hint/>
-      <multiSelect>0</multiSelect>
-      <name>raison</name>
-      <number>3</number>
-      <picker>0</picker>
-      <prettyName>Pour quelle raison</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>pas-trouvé|autre</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </raison>
-    <rapide>
-      <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
-      <disabled>0</disabled>
-      <hint/>
-      <name>rapide</name>
-      <number>7</number>
-      <numberType>integer</numberType>
-      <prettyName>Était-ce assez rapide ?</prettyName>
-      <size>30</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-    </rapide>
     <score>
       <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
@@ -211,28 +182,11 @@ $!value
       <validationRegExp>.+</validationRegExp>
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </score>
-    <suggestion>
-      <contenttype>PureText</contenttype>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <editor>Text</editor>
-      <hint/>
-      <name>suggestion</name>
-      <number>9</number>
-      <picker>0</picker>
-      <prettyName>Avez-vous un dysfonctionnement à signaler ?</prettyName>
-      <rows>5</rows>
-      <size>40</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-    </suggestion>
     <vote>
       <customDisplay/>
       <defaultValue/>
       <disabled>0</disabled>
-      <displayFormType>checkbox</displayFormType>
+      <displayFormType>radio</displayFormType>
       <displayType/>
       <hint/>
       <name>vote</name>
