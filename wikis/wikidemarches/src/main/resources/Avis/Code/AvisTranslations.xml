@@ -31,8 +31,8 @@
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529480635000</date>
-  <contentUpdateDate>1529480635000</contentUpdateDate>
+  <date>1529487893000</date>
+  <contentUpdateDate>1529487893000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -75,6 +75,9 @@ avis.entry.name=Avis
 avis.valider=Valider
 avis.revenir=Revenir
 avis.envoyer=Envoyer
+avis.thanks=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
+avis.vote.button=Donner un avis
+avis.obligatoire=(obligatoire)
 
 # Deprecated keys
 avis.dataSpace.title=Data
@@ -89,6 +92,8 @@ Avis.Code.AvisClass_score_1=Pas bien
 Avis.Code.AvisClass_score_2=Moyen
 Avis.Code.AvisClass_score_3=Très bien
 Avis.Code.AvisClass_vote=Auriez-vous préféré faire cette démarche en ligne ?
+Avis.Code.AvisClass_vote_true=Oui
+Avis.Code.AvisClass_vote_false=Non
 Avis.Code.AvisClass_step-2=Pour terminer, pouvez-vous nous en dire plus ?
 Avis.Code.AvisClass_facile=Était-ce facile à utiliser ?
 Avis.Code.AvisClass_facile_1=Mauvais

@@ -31,7 +31,7 @@
   <parent>Avis.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529483349000</date>
+  <date>1529487720000</date>
   <contentUpdateDate>1528186553000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Class</title>
@@ -57,7 +57,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>aide</name>
-      <number>9</number>
+      <number>7</number>
       <picker>0</picker>
       <prettyName>Aide</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -76,7 +76,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>comprehensible</name>
-      <number>6</number>
+      <number>5</number>
       <numberType>integer</numberType>
       <prettyName>Compréhensible</prettyName>
       <size>30</size>
@@ -118,7 +118,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>difficultes</name>
-      <number>8</number>
+      <number>6</number>
       <picker>0</picker>
       <prettyName>Difficultés</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -137,7 +137,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>facile</name>
-      <number>5</number>
+      <number>4</number>
       <numberType>integer</numberType>
       <prettyName>Facile</prettyName>
       <size>30</size>
@@ -173,7 +173,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>score</name>
-      <number>4</number>
+      <number>3</number>
       <numberType>integer</numberType>
       <prettyName>Score</prettyName>
       <size>30</size>
@@ -183,19 +183,26 @@
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </score>
     <vote>
-      <customDisplay/>
-      <defaultValue/>
+      <cache>0</cache>
+      <customDisplay>{{include reference="Avis.Code.ListDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
-      <displayFormType>radio</displayFormType>
-      <displayType/>
+      <displayType>radio</displayType>
       <hint/>
+      <multiSelect>0</multiSelect>
       <name>vote</name>
-      <number>10</number>
+      <number>8</number>
+      <picker>0</picker>
       <prettyName>Vote</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      <values>true|false</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </vote>
   </class>
   <object>

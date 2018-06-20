@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529483388000</date>
-  <contentUpdateDate>1529483388000</contentUpdateDate>
+  <date>1529488988000</date>
+  <contentUpdateDate>1529488988000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -116,7 +116,7 @@
   #set ($discard = $request.session.removeAttribute('avis-handler-operation-message'))
   #displayMessage($messageKey)
 #else
-  &lt;button class="avis-btn btn btn-info" name="avis-btn"&gt;$escapetool.xml($services.localization.render('wikidemarches.demarche.vote.button'))&lt;/button&gt;
+  &lt;button class="avis-btn btn btn-info" name="avis-btn"&gt;$escapetool.xml($services.localization.render('avis.vote.button'))&lt;/button&gt;
 #end
 {{/html}}
 {{/velocity}}
@@ -151,7 +151,7 @@
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()" /&gt;
     &lt;div class='buttonwrapper'&gt;
-      &lt;input class="button btn btn-primary" type="submit" name="save-avis" value="$escapetool.xml($services.localization.render('wikidemarches.demarche.vote.send'))" /&gt;
+      &lt;input class="button btn btn-primary" type="submit" name="save-avis" value="$escapetool.xml($services.localization.render('avis.valider'))" /&gt;
     &lt;/div&gt;
   &lt;/form&gt;
   {{/html}}
