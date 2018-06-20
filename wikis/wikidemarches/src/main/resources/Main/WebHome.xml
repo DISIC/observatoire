@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529050201000</date>
-  <contentUpdateDate>1529050201000</contentUpdateDate>
+  <date>1529513563000</date>
+  <contentUpdateDate>1529513304000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -69,19 +69,24 @@
     )))
   )))
 )))
+#set ($demarchesIds = {1:[290, 435, 12, 1023, 880], 2:[974, 310, 222, 555, 666]})
 (%class='row demarches-statsrow'%)(((
   (%class='col-xs-12 col-md-8 col-md-push-2'%)(((
     (%class='row'%) (((
-      #foreach($i in [1..4])
-        (%class='col-xs-12 col-sm-6 col-md-3'%)(((
+       (%class='col-xs-12 col-sm-12 col-md-12'%)(((
+         (%class='demarches-statsblock%)(((
+           == Démarches les plus courantes ==
+         )))
+       )))
+    )))
+    (%class='row'%) (((
+      #foreach($i in [1..2])
+        (%class='col-xs-12 col-sm-6 col-md-6'%)(((
            (%class='demarches-statsblock%)(((
-             == List no $i ==
-
-             * Lorem ipsum dolor sit amet
-             * consectetur adipiscing elit.
-             * Nam dolor odio, pulvinar
-             * sed sapien ac, fermentum
-             * venenatis mauris
+           #foreach ($id in $demarchesIds[$i])
+             #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
+             * [[$ddoc.displayTitle&gt;&gt;$ddoc.fullName]]
+           #end
            )))
         )))
       #end
@@ -258,8 +263,14 @@ div.suggestItem {
     ul {
       margin-left: 0;
       padding-left: 0;
-      line-height: 1.8em;
+      line-height: 1.4em;
       list-style-position: inside;
+      list-style: none;
+      padding-top: 1em;
+      
+      li {
+        padding-bottom: 1em;
+      }
     }
   }
 }</code>
