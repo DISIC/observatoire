@@ -47,7 +47,11 @@
 #if ("$!maxValue" == '')
   #set($maxValue = 3)
 #end
+#if ($mathtool.sub($maxValue, $minValue) == 2 &amp;&amp; (!$faicons || $faicons.size() == 0))
+  #set($faicons = ['frown-o', 'meh-o', 'smile-o'])
+#end
 #if ($type == 'edit')
+  #set($withIcons = $faicons &amp;&amp; $faicons.size() &gt; 0)
   #set ($validationRegExp = $field.getProperty('validationRegExp').value)
   #set ($isMandatory = $validationRegExp.trim().length() &gt; 0)
   #set($discard = $xwiki.ssx.use('Avis.Code.RadioVoteDisplayer'))
@@ -62,10 +66,21 @@
     #set($colNumber = $maxValue - $minValue + 1)
     &lt;ul class="col_${colNumber}"&gt;
     #foreach($v in [$minValue..$maxValue])
-      &lt;li class='radiovote-form-listclass'&gt;
+      &lt;li class='radiovote-form-listclass radiovote-val-${velocityCount}'&gt;
         #set($optionId = "xwiki-form-${name}-${object.number}-${velocityCount}")
-        &lt;input name="${prefix}${name}" id="$optionId" type="radio" value="$v" #if($value == $v)checked="checked"#end #if ($isMandatory)required#end/&gt;
-        &lt;label for="$optionId"&gt;$escapetool.xml($services.localization.render("${theClass.name}_${name}_${v}"))&lt;/label&gt;
+        &lt;label for="$optionId"&gt;
+          &lt;input #if($withIcons)class='withicon'#end name="${prefix}${name}" id="$optionId" type="radio" value="$v" #if($value == $v)checked="checked"#end #if ($isMandatory)required#end/&gt;
+          &lt;span class="radiovote-visual"&gt;
+            #if ($withIcons)
+              #set($currIcon = $faicons.get($mathtool.sub($velocityCount, 1)))
+              &lt;span class='radiovote-icon'&gt;
+                &lt;span class='fa fa-$!{currIcon}' /&gt;
+              &lt;/span&gt;
+              &lt;br /&gt;
+            #end
+            &lt;span class='radiovote-label'&gt;$escapetool.xml($services.localization.render("${theClass.name}_${name}_${v}"))&lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/label&gt;
       &lt;/li&gt;
     #end
     &lt;/ul&gt;
@@ -174,7 +189,24 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>.radiovote-form-listclass-group {
+      <code>@radiovote-iconsize: 2.8em;
+
+/* Some colors */
+@bad : #f00;
+// @medium : #ff0;
+@medium : #ffb400;
+@good : #23ae23;
+@badish : #ffb400;
+@goodish : #849a63;
+
+/* Some whitened versions of these colors */
+@bad-light : tint(@bad, 60%);
+@medium-light : tint(@medium, 60%);
+@good-light : tint(@good, 60%);
+@badish-light : tint(@badish, 60%);
+@goodish-light : tint(@goodish, 60%);
+
+.radiovote-form-listclass-group {
   legend {
     border-bottom: none;
     margin-top: @line-height-computed;
@@ -210,13 +242,34 @@
       label {
         display: block;
         text-align: center;
-        font-weight: normal;
-        font-size: 0.85em;
-      }
 
-      input {
-        width: 100%;
-        outline: 0;
+        .radiovote-label {
+          font-weight: normal;
+          font-size: 0.85em;
+        }
+
+        .radiovote-icon {
+          display: inline-block;
+          font-size: @radiovote-iconsize;
+          height: 1em;
+          width: 1em;
+          line-height:1em;
+          border-radius: 0.5em;
+        }
+        input {
+          width: 100%;
+          outline: 0;
+
+          &amp;.withicon {
+            position: absolute;
+            left:  -9000px;
+          }
+        }
+
+        input:checked + span.radiovote-icon {
+          background-color: #cccccc;
+          color: #fff;
+        }
       }
     }
   }
@@ -229,8 +282,44 @@
     width: 25%;
   }
 
-  ul.col_6 li {
-    width: 16.6667%;
+  ul.col_3 li {
+    width: 33%;
+    &amp;.radiovote-val-1 {
+      span.radiovote-icon, span.radiovote-label {
+        color: @bad-light;
+      }
+      input:checked + span.radiovote-visual span.radiovote-icon{
+        background-color: @bad-light;
+        color: @bad;
+      }
+      input:checked + span.radiovote-visual span.radiovote-label {
+        color: @bad;
+      }
+    }
+    &amp;.radiovote-val-2 {
+      span.radiovote-icon, span.radiovote-label {
+        color: @medium-light;
+      }
+      input:checked + span.radiovote-visual span.radiovote-icon {
+        background-color: @medium-light;
+        color: @medium;
+      }
+      input:checked + span.radiovote-visual span.radiovote-label {
+        color: @medium;
+      }
+    }
+    &amp;.radiovote-val-3{
+      span.radiovote-icon, span.radiovote-label {
+        color: @good-light;
+      }
+      input:checked + span.radiovote-visual span.radiovote-icon {
+        background-color: @good-light;
+        color: @good;
+      }
+      input:checked + span.radiovote-visual span.radiovote-label {
+        color: @good;
+      }
+    }
   }
 }</code>
     </property>
