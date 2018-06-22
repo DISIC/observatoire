@@ -43,14 +43,16 @@
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
 (%class='row demarches-searchrow'%)(((
-  (%class='col-xs-12 col-sm-8 col-sm-push-2'%)(((
-    == $services.localization.render('wikidemarches.home.title') ==
+  (%class='col-xs-12'%)(((
+    (%class='container'%)(((
+      == $services.localization.render('wikidemarches.home.title') ==
 
-    (%class='demarches-subtitle%)
-    $services.localization.render('wikidemarches.home.subtitle')
+      (%class='demarches-subtitle%)
+      $services.localization.render('wikidemarches.home.subtitle')
+    )))
   )))
-  (%class='col-xs-12 col-sm-8 col-sm-push-2 col-md-6 col-md-push-3'%)(((
-    (%class='demarches-searchbox%)(((
+  (%class='col-xs-12'%)(((
+    (%class='demarches-searchbox container'%)(((
       ## display the global search here:
       {{html clean='false'}}
       ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
@@ -71,25 +73,23 @@
 )))
 #set ($demarchesIds = {1:[290, 435, 12, 1023, 880], 2:[974, 310, 222, 555, 666]})
 (%class='row demarches-statsrow'%)(((
-  (%class='col-xs-12 col-md-8 col-md-push-2'%)(((
-    (%class='row'%) (((
-       (%class='col-xs-12 col-sm-12 col-md-12'%)(((
-         (%class='demarches-statsblock%)(((
-           == Démarches les plus courantes ==
-         )))
-       )))
+  (%class='col-xs-12'%)(((
+    (%class='demarches-statsblock container' %)(((
+       == Démarches les plus courantes ==
     )))
-    (%class='row'%) (((
-      #foreach($i in [1..2])
-        (%class='col-xs-12 col-sm-6 col-md-6'%)(((
-           (%class='demarches-statsblock%)(((
-           #foreach ($id in $demarchesIds[$i])
-             #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
-             * [[$ddoc.displayTitle&gt;&gt;$ddoc.fullName]]
-           #end
-           )))
-        )))
-      #end
+    (%class='container'%)(((
+      (%class='row'%) (((
+        #foreach($i in [1..2])
+          (%class='col-xs-12 col-sm-6 col-md-6'%)(((
+             (%class='demarches-statsblock%)(((
+             #foreach ($id in $demarchesIds[$i])
+               #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
+               * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
+             #end
+             )))
+          )))
+        #end
+      )))
     )))
   )))
 )))
@@ -192,7 +192,13 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>.demarches-searchrow {
+      <code>#contentcontainerinner {
+  width: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.demarches-searchrow {
   background-color: @navbar-default-bg;
   color: @navbar-default-color;
   text-align: center;
@@ -200,7 +206,7 @@
   padding-bottom: 2.4em;
 
   h2 {
-    font-size: 2.8em;
+    font-size: 2.5em;
   }
 
   p.demarches-subtitle {

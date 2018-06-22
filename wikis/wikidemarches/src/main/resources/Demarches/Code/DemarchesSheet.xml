@@ -81,9 +81,9 @@
       #set ($flag = true)
     #end
   #end
-  #if (!$flag)
-    #set ($discard = $avis.set('modalite','autrement'))
-  #end
+#end
+#if (!$flag)
+  #set ($discard = $avis.set('modalite','autrement'))
 #end
 #end
 
@@ -130,11 +130,11 @@
   {{html wiki="true"}}
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform avis-form"&gt;
 #if ("$!step" == '')
-  == Donnez votre avis
+  &lt;div class='form-preambule'&gt;
+    ==Donnez votre avis ==
 
-  &lt;span class="info-box-mandatory"&gt;
-  Les champs marqués de &lt;abbr title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
-  &lt;/span&gt;
+    &lt;span class="info-box-mandatory small"&gt;Les champs marqués de &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.&lt;/span&gt;
+  &lt;/div&gt;
   #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
   #setDefaultModalite($avis)
   &lt;div class="modalite"&gt;
@@ -142,9 +142,11 @@
   &lt;/div&gt;
   &lt;div class="rating-container"&gt;
     #displayObjectForm($avis,['score'])
-  &lt;/div&gt;  
+  &lt;/div&gt;
 #elseif ("$!step" == "avis.merci_1")
-  &lt;div class="message"&gt;$services.localization.render('avis.continuer')&lt;/div&gt;
+  &lt;div class='form-preambule'&gt;
+    ==$services.localization.render('avis.continuer')==
+  &lt;/div&gt;
   #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
   #set ($action = 'update-and-end')
   &lt;div class="eval-container"&gt;
@@ -406,18 +408,9 @@
  * Add a little padding on desktop, so that it looks nicer
  */
 @media (min-width: @screen-md-min) {
-  .xcontent {
-    padding-left: @grid-gutter-width;
-    padding-right: @grid-gutter-width;
-  }
-
   .document-header {
     padding-top: 25px;
   }
-}
-
-.message {
-  font-size: 22px;
 }
 
 .eval-container {
@@ -426,6 +419,29 @@
 
 .vote-container {
   display: none;
+}
+
+.listclass-group ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+fieldset {
+  margin-bottom: 1.5em;
+}
+
+.form-preambule {
+  margin-bottom: 3em;
+
+  h2 {
+    margin: 0;
+    font-weight: bold;
+  }
+}
+
+.subtitle, .info-box-mandatory {
+  color: @gray-light;
 }
 </code>
     </property>

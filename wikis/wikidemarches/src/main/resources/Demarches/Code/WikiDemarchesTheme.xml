@@ -839,19 +839,19 @@
       <body-bg>#ffffff</body-bg>
     </property>
     <property>
-      <brand-danger>#CC3333</brand-danger>
+      <brand-danger>#E62623</brand-danger>
     </property>
     <property>
-      <brand-info>#336699</brand-info>
+      <brand-info>#2370C0</brand-info>
     </property>
     <property>
       <brand-primary>#0088CC</brand-primary>
     </property>
     <property>
-      <brand-success>#008000</brand-success>
+      <brand-success>#00AC07</brand-success>
     </property>
     <property>
-      <brand-warning>#D09000</brand-warning>
+      <brand-warning>#D58000</brand-warning>
     </property>
     <property>
       <breadcrumb-bg>#384285</breadcrumb-bg>
@@ -863,10 +863,10 @@
       <breadcrumb-separator>/</breadcrumb-separator>
     </property>
     <property>
-      <btn-danger-bg/>
+      <btn-danger-bg>#E62623</btn-danger-bg>
     </property>
     <property>
-      <btn-danger-color/>
+      <btn-danger-color>#FFFFFF</btn-danger-color>
     </property>
     <property>
       <btn-default-bg>#ECECEC</btn-default-bg>
@@ -881,10 +881,10 @@
       <btn-font-weight>normal</btn-font-weight>
     </property>
     <property>
-      <btn-info-bg/>
+      <btn-info-bg>#2370C0</btn-info-bg>
     </property>
     <property>
-      <btn-info-color/>
+      <btn-info-color>#ffffff</btn-info-color>
     </property>
     <property>
       <btn-primary-bg>#0088CC</btn-primary-bg>
@@ -893,16 +893,16 @@
       <btn-primary-color>#FFFFFF</btn-primary-color>
     </property>
     <property>
-      <btn-success-bg>#4D9244</btn-success-bg>
+      <btn-success-bg>#00AC07</btn-success-bg>
     </property>
     <property>
       <btn-success-color>#FFFFFF</btn-success-color>
     </property>
     <property>
-      <btn-warning-bg/>
+      <btn-warning-bg>#D58000</btn-warning-bg>
     </property>
     <property>
-      <btn-warning-color/>
+      <btn-warning-color>#FFFFFF</btn-warning-color>
     </property>
     <property>
       <component-active-bg/>
@@ -929,7 +929,7 @@
       <dropdown-link-hover-color/>
     </property>
     <property>
-      <font-family-base/>
+      <font-family-base>"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif</font-family-base>
     </property>
     <property>
       <font-family-monospace/>
@@ -941,7 +941,7 @@
       <font-family-serif/>
     </property>
     <property>
-      <font-size-base/>
+      <font-size-base>1em</font-size-base>
     </property>
     <property>
       <headings-color/>
@@ -968,7 +968,52 @@
       <legend-color/>
     </property>
     <property>
-      <lessCode>/*
+      <lessCode>// We can't use Velocity so we can't obtain the URL using the WebJars script service. As a workaround we modify the icon
+// font path because we know the Bootstrap fonts are loaded from a WebJar also.
+@import (css) replace(@icon-font-path, "/bootstrap/.*", "/open-sans/1.1.0/css/open-sans.min.css");
+
+/*
+ * Bootstrap corrections to make the site accessible: font-size in em
+ */
+html {
+  font-size: 100%;
+}
+
+.form-control,
+textarea,
+select,
+input[type="text"],
+input[type="password"] {
+  height: auto;
+}
+
+.input-group-btn {
+  font-size: inherit;
+}
+
+#footerglobal {
+  font-size: 80%;
+}
+
+#document-title h1 {
+  font-size: 2.5em;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+legend {
+  font-size: 1.20em;
+}
+
+/* Bootstrap variables */
+@line-height-base: 1.5;
+
+/*XWiki Corrections */
+
+/*
   Correct the breadcrumb color, to make it actually read the configured color (including for links), otherwise we might have contrast issues.
 */
 .breadcrumb {
@@ -985,6 +1030,21 @@
   .btn-default {
     color: @breadcrumb-color;
   }
+}
+
+/*
+ * Cleanup box shadows which make it difficult to visually unify consecutive rows - esp main menu and title row
+ */
+
+#mainContentArea, #xdocFooter, #docextrapanes {
+  box-shadow: none;
+}
+
+/*
+ * .small class should have font at 80%
+ */
+.small {
+  font-size: 80%;
 }
 
 /*
@@ -1008,7 +1068,8 @@
     display: block;
     line-height: @navbar-height;
     &gt; * {
-      font-size: 2.5em;
+      font-size: 110%;
+      font-weight: bold;
       line-height: @navbar-height;
       display: block;
     }
@@ -1029,14 +1090,42 @@
   }
 }
 
+/*
+ * layout
+ */
+#contentcontainerinner {
+  .container();
+}
 
+/*
+ * Footer is the same color as body content and same text color, and aligned left
+ */
+#footerglobal {
+  background-color: @body-bg;
+  color: @text-color;
+  text-align: left;
+}
+
+#footerglobal a, 
+#footerglobal a:hover {
+  color: @link-color;
+}
+
+/*
+ * Mandatory form elements
+ */
+abbr.asterix {
+  color: @brand-danger;
+  border-bottom: 0; 
+  text-decoration: none;
+}
 
 
 
 </lessCode>
     </property>
     <property>
-      <link-color>#0088CC</link-color>
+      <link-color>#0d7bc6</link-color>
     </property>
     <property>
       <logo>Marianne-temp.png</logo>
@@ -1081,7 +1170,7 @@
       <table-border-color/>
     </property>
     <property>
-      <text-color>#333333</text-color>
+      <text-color>#222222</text-color>
     </property>
     <property>
       <xwiki-page-content-bg>#FFFFFF</xwiki-page-content-bg>
