@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527602203000</date>
+  <date>1529687051000</date>
   <contentUpdateDate>1527413730000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches theme</title>
@@ -972,6 +972,9 @@
 // font path because we know the Bootstrap fonts are loaded from a WebJar also.
 @import (css) replace(@icon-font-path, "/bootstrap/.*", "/open-sans/1.1.0/css/open-sans.min.css");
 
+/* Extra Bootstrap variables / fixes */
+@line-height-base: 1.5;
+
 /*
  * Bootstrap corrections to make the site accessible: font-size in em
  */
@@ -984,6 +987,11 @@ textarea,
 select,
 input[type="text"],
 input[type="password"] {
+  height: auto;
+}
+
+select[size="0"],
+select[size="1"]{
   height: auto;
 }
 
@@ -1008,10 +1016,14 @@ legend {
   font-size: 1.20em;
 }
 
-/* Bootstrap variables */
-@line-height-base: 1.5;
-
 /*XWiki Corrections */
+
+/*
+ * Text smaller correction, to work properly with any font-size
+ */
+.text-smaller {
+  font-size: @font-size-base * 0.9;
+}
 
 /*
   Correct the breadcrumb color, to make it actually read the configured color (including for links), otherwise we might have contrast issues.
@@ -1048,31 +1060,56 @@ legend {
 }
 
 /*
-  Make some room around the logo on the topbar
-*/
-#menuview .navbar {
-  padding: @grid-gutter-width @grid-gutter-width / 2;
+ * Footerglobal is a row. It should not have padding as well... if we didn't put a proper column in it by default, we should have.
+ * Now we have a container fixed so it's important to reset it.
+ */
+#footerglobal {
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.navbar .demarches-titlebar-sitename {
-  color: @navbar-default-color;
-  /* Reset h1, which is displayed on the main page */
-  h1 {
-    margin: 0;
-    font-size: 1em;
-  }
-  &gt; a {
-    max-width: none;
-    padding: 0;
-    font-size: 1em;
-    display: block;
-    line-height: @navbar-height;
-    &gt; * {
-      font-size: 110%;
-      font-weight: bold;
-      line-height: @navbar-height;
-      display: block;
+/*
+ * Custom wikidemarches stuff!
+ */
+
+/*
+ * Make some room around the logo on the topbar
+ */
+#menuview .navbar {
+  padding-top: @grid-gutter-width;
+  padding-bottom: @grid-gutter-width;
+}
+
+/*
+ * Display site name next to logo
+ */
+.navbar-brand {
+  font-size: 110%;
+  line-height: inherit;
+  .demarches-titlebar-sitename {
+    color: @navbar-default-color;
+    display: inline-block;
+    padding-left: 1ex;
+    font-weight: bold;
+    /* Reset h1, which is displayed on the main page */
+    h1 {
+      margin: 0;
+      font-size: 1em;
+      font-weight: inherit;
     }
+  }
+}
+
+/* Custom size of the navbar on desktop */
+@navbar-height-desktop: 50px;
+
+@media (min-width: @screen-sm-min) {
+  .navbar {
+    min-height: @navbar-height-desktop;
+  }
+  .navbar-brand,
+  #menuview .navbar-brand img {
+    height: @navbar-height-desktop;
   }
 }
 
@@ -1093,7 +1130,7 @@ legend {
 /*
  * layout
  */
-#contentcontainerinner {
+#contentcontainerinner, #xwikieditorinner {
   .container();
 }
 
@@ -1152,7 +1189,7 @@ abbr.asterix {
       <navbar-default-link-hover-color>#ffffff</navbar-default-link-hover-color>
     </property>
     <property>
-      <navbar-height>50px</navbar-height>
+      <navbar-height>30px</navbar-height>
     </property>
     <property>
       <panel-bg>#F5F5F5</panel-bg>
@@ -1174,104 +1211,6 @@ abbr.asterix {
     </property>
     <property>
       <xwiki-page-content-bg>#FFFFFF</xwiki-page-content-bg>
-    </property>
-  </object>
-  <object>
-    <name>Demarches.Code.WikiDemarchesTheme</name>
-    <number>0</number>
-    <className>XWiki.UIExtensionClass</className>
-    <guid>858232c1-fafd-4009-a455-42d2693f94aa</guid>
-    <class>
-      <name>XWiki.UIExtensionClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <content>
-        <disabled>0</disabled>
-        <editor>Text</editor>
-        <name>content</name>
-        <number>3</number>
-        <prettyName>Extension Content</prettyName>
-        <rows>10</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </content>
-      <extensionPointId>
-        <disabled>0</disabled>
-        <name>extensionPointId</name>
-        <number>1</number>
-        <prettyName>Extension Point ID</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </extensionPointId>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>2</number>
-        <prettyName>Extension ID</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <parameters>
-        <contenttype>PureText</contenttype>
-        <disabled>0</disabled>
-        <editor>PureText</editor>
-        <name>parameters</name>
-        <number>4</number>
-        <prettyName>Extension Parameters</prettyName>
-        <rows>10</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </parameters>
-      <scope>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>scope</name>
-        <number>5</number>
-        <prettyName>Extension Scope</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>wiki=Current Wiki|user=Current User|global=Global</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </scope>
-    </class>
-    <property>
-      <content>{{velocity}}
-{{html clean='false'}}
-  #set($eltname = 'span')
-  #if ($doc.fullName == 'Main.WebHome')
-    #set($eltname = 'h1')
-  #end
-  &lt;li class='demarches-titlebar-sitename'&gt;
-    &lt;a href="$xwiki.getURL('Main.WebHome')"&gt;&lt;${eltname}&gt;$services.localization.render('wikidemarches.sitename')&lt;/${eltname}&gt;&lt;/a&gt;
-  &lt;/li&gt;
-{{/html}}
-{{/velocity}}</content>
-    </property>
-    <property>
-      <extensionPointId>org.xwiki.platform.topmenu.left</extensionPointId>
-    </property>
-    <property>
-      <name>demarches.sitename</name>
-    </property>
-    <property>
-      <parameters/>
-    </property>
-    <property>
-      <scope>wiki</scope>
     </property>
   </object>
 </xwikidoc>
