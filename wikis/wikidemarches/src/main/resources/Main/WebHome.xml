@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529513563000</date>
-  <contentUpdateDate>1529513304000</contentUpdateDate>
+  <date>1529686367000</date>
+  <contentUpdateDate>1529685282000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -42,57 +42,50 @@
   #set($discard = $xwiki.ssx.use('Totemize.TotemSSX'))
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
-(%class='row demarches-searchrow'%)(((
-  (%class='col-xs-12'%)(((
+  (%class='row demarches-searchrow'%)(((
     (%class='container'%)(((
+      (%class='demarches-headline'%)
       == $services.localization.render('wikidemarches.home.title') ==
 
       (%class='demarches-subtitle%)
       $services.localization.render('wikidemarches.home.subtitle')
+      (%class='demarches-searchbox'%)(((
+        ## display the global search here:
+        {{html clean='false'}}
+        ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
+        ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+        #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
+        &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
+          &lt;label for="headerglobalsearchinput"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
+          &lt;div class="input-group"&gt;
+            &lt;input type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
+            &lt;span class='input-group-btn'&gt;
+              &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;$services.localization.render('wikidemarches.search.button')&lt;/button&gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+        {{/html}}
+      )))
     )))
   )))
-  (%class='col-xs-12'%)(((
-    (%class='demarches-searchbox container'%)(((
-      ## display the global search here:
-      {{html clean='false'}}
-      ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
-      ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
-      #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
-      &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
-        &lt;label for="headerglobalsearchinput"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
-        &lt;div class="input-group"&gt;
-          &lt;input type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
-          &lt;span class='input-group-btn'&gt;
-            &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;$services.localization.render('wikidemarches.search.button')&lt;/button&gt;
-          &lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-      {{/html}}
-    )))
-  )))
-)))
-#set ($demarchesIds = {1:[290, 435, 12, 1023, 880], 2:[974, 310, 222, 555, 666]})
-(%class='row demarches-statsrow'%)(((
-  (%class='col-xs-12'%)(((
-    (%class='demarches-statsblock container' %)(((
-       == Démarches les plus courantes ==
-    )))
-    (%class='container'%)(((
-      (%class='row'%) (((
+  #set ($demarchesIds = {1:[290, 435, 12, 1023, 880], 2:[974, 310, 222, 555, 666]})
+  (%class='row demarches-statsrow'%)(((
+    (%class='container' %)(((
+      (%class='row demarches-statsblock'%) (((
+        (%class='col-xs-12'%)(((
+          ==Démarches les plus courantes ==
+        )))
         #foreach($i in [1..2])
           (%class='col-xs-12 col-sm-6 col-md-6'%)(((
-             (%class='demarches-statsblock%)(((
-             #foreach ($id in $demarchesIds[$i])
-               #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
-               * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
-             #end
-             )))
+            #foreach ($id in $demarchesIds[$i])
+              #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
+              * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
+            #end
           )))
         #end
       )))
     )))
   )))
-)))
 {{/velocity}}</content>
   <object>
     <name>Main.WebHome</name>
@@ -202,22 +195,16 @@
   background-color: @navbar-default-bg;
   color: @navbar-default-color;
   text-align: center;
-  padding-top: 1.2em;
-  padding-bottom: 2.4em;
+  padding-bottom: 3em;
 
-  h2 {
-    font-size: 2.5em;
+  h2.demarches-headline {
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 1em;
   }
 
   p.demarches-subtitle {
-    margin-top: 1.2em;
-    margin-bottom: 1.2em;
-    font-family: Open Sans, sans;
-    font-size: 1.5em;
-  }
-
-  .search-form .col-sm-6 {
-    .make-sm-column-push(3);
+    margin-bottom: 1em;
   }
 
   #globalsearch {
@@ -244,6 +231,13 @@
       padding-bottom: @padding-base-vertical + 1px;
     }
   }
+
+  .demarches-headline,
+  .demarches-searchbox,
+  .demarches-subtitle {
+    padding-left: @grid-gutter-width / 2;
+    padding-right: @grid-gutter-width / 2;
+  }
 }
 
 /* On the search suggest of the main page, displaying a button to hide suggestions does not make sense */
@@ -269,14 +263,23 @@ div.suggestItem {
     ul {
       margin-left: 0;
       padding-left: 0;
-      line-height: 1.4em;
       list-style-position: inside;
       list-style: none;
       padding-top: 1em;
-      
+
       li {
         padding-bottom: 1em;
       }
+    }
+  }
+}
+
+/* Some adjustment on larger devices: increase the font size of the title row */
+@media (min-width: @screen-sm-min) {
+  .demarches-searchrow {
+    h2.demarches-headline {
+      font-size: 2.5em;
+      margin-top: 1em;
     }
   }
 }</code>
