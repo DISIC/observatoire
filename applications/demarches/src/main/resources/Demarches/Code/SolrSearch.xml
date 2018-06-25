@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529316984000</date>
-  <contentUpdateDate>1529316937000</contentUpdateDate>
+  <date>1529945852000</date>
+  <contentUpdateDate>1529945580000</contentUpdateDate>
   <version>1.1</version>
   <title>SolrSearch</title>
   <comment/>
@@ -62,9 +62,6 @@
   },
   'highlightEnabled' : false
 })
-## include custom search suggest in the same way as in Main.WebHome
-## $searchSuggestConfigHash is computed in the skin, in javascript.vm
-#set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
 {{/velocity}}
 
 {{include reference="Main.SolrSearchConfig" /}}
@@ -75,9 +72,24 @@
 
 {{velocity output="false"}}
 
-##override the displayResults macro to remove location, author, highlight
+##override the displayResults macro to remove location, author, highlight and to change markup
+## contains directly the content of displaySearchResultTitle
 #macro (displaySearchResult_document $searchResult)
-  #displaySearchResultTitle()
+  #set ($showLocale = $searchResult.locale != '' &amp;&amp; $searchResult.locale != "$xcontext.locale")
+  #set ($titleURL = $xwiki.getURL($searchResultReference))
+  #if ($showLocale)
+    #set ($titleURL = $xwiki.getURL($searchResultReference, 'view', "language=$searchResult.locale"))
+  #end
+  &lt;li class="search-result-title-wd"&gt;
+    #*$services.icon.renderHTML('file-white')*#
+    &lt;a href="$titleURL"&gt;$escapetool.xml($searchResult.title_)&lt;/a&gt;
+    #if ($showLocale)
+      &lt;span title="$escapetool.xml($services.localization.render('solr.result.language'))"
+        class="search-result-language" &gt;($escapetool.xml($searchResult.locale))&lt;/span&gt;
+    #end
+    ## Scoring debug data.
+    &lt;div class="search-result-debug"&gt;$!escapetool.xml($searchResponse.explainMap.get($searchResult.id))&lt;/div&gt;
+  &lt;/li&gt;
 #end
 
 ##override the displaySearchResultsSort macro to remove the highlight, facet and sort options
@@ -131,6 +143,9 @@
 ##override displaySearchForm in order to add the class "withsearchsuggest-input" to the search input so that
 ##the field provides live suggestion like on the home page
 #macro (displaySearchForm)
+  ## include custom search suggest in the same way as in Main.WebHome
+  ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+  #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
   #set($void = $services.progress.startStep('#displaySearchForm'))
   {{html clean="false"}}
   &lt;form class="search-form row" action="$doc.getURL()" role="search"&gt;
@@ -153,7 +168,7 @@
         #end
       #end
     &lt;/div&gt;
-    &lt;div class="col-xs-12 col-sm-6"&gt;
+    &lt;div class="col-xs-12 col-sm-8 col-md-9"&gt;
       &lt;div class="input-group"&gt;
         &lt;input type="search" name="text" class="form-control withTip useTitleAsTip withsearchsuggest-input"
           title="$services.localization.render('search.page.bar.query.title')" value="$escapetool.xml($text)"/&gt;
@@ -203,19 +218,183 @@
     'defaultItemsPerPage': $rows,
     'position': 'top'
   })
-  {{html clean="false"}}#pagination($paginationParameters){{/html}}
-  (% class="search-results" %)(((
+  {{html clean="false"}}#pagination($paginationParameters)
+  &lt;ul class='search-results'&gt;
     #foreach ($searchResult in $results)
-      #displaySearchResult($searchResult)
+      #set ($searchResultReference = $services.solr.resolve($searchResult))
+      ## call directly the search result document, otherwise we'll have some div elements all around the results which break the list of results
+      #displaySearchResult_document($searchResult)
     #end
-  )))
+  &lt;/ul&gt;
   #set ($discard = $paginationParameters.put('position', 'bottom'))
-  {{html clean="false"}}#pagination($paginationParameters){{/html}}
+  #pagination($paginationParameters){{/html}}
 
 #end
 {{/velocity}}
 
 {{velocity}}
+  #set($discard = $xwiki.ssx.use('Demarches.Code.SolrSearch'))
   #handleSolrSearchRequest
 {{/velocity}}</content>
+  <object>
+    <name>Demarches.Code.SolrSearch</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>6eacb3da-3e7f-41b6-b1fb-c9304b7bd419</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>/* Remove the little border between the search facet header and its body,
+ *  as it doesn't work properly for search facets that display on 2 lines 
+ */
+div.search-facet-header:after {
+  border: none;
+}
+
+.search-facet.expanded:last-of-type div.search-facet-header:after {
+  border: none;
+}
+
+/* Not sure why the title spacing is removed on this page, putting it back */
+div#document-title &gt; h1 {
+  margin-bottom: (@line-height-computed / 2)
+}
+
+/* Custom search results lists styling */
+.search-form button.btn {
+  .btn-gradient(lighten(@navbar-default-bg, 5%));
+  .btn-border(@navbar-default-bg);
+}
+
+
+ul.search-results {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+ul.search-results li.search-result-title-wd {
+  padding-bottom: 1.5em;
+}
+
+ul.search-results li.search-result-title-wd:last-of-type {
+  padding-bottom: 0;
+}
+
+.new-demarche {
+  margin-top: 1.5em;
+  text-align: center;
+}
+
+@media (min-width: @screen-sm-min) {
+  .new-demarche {
+    text-align: inherit;
+    margin-top: 0.75em;
+  }
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
 </xwikidoc>

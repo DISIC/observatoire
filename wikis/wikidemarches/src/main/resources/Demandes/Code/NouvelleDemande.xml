@@ -31,10 +31,10 @@
   <parent>Main.Search</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529934729000</date>
-  <contentUpdateDate>1529934729000</contentUpdateDate>
+  <date>1529938735000</date>
+  <contentUpdateDate>1529938735000</contentUpdateDate>
   <version>1.1</version>
-  <title>Ajouter une démarche manquante</title>
+  <title>$services.localization.render('wikidemarches.demande.creation')</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>

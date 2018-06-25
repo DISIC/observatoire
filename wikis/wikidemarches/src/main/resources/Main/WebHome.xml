@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529785231000</date>
-  <contentUpdateDate>1529783116000</contentUpdateDate>
+  <date>1529946225000</date>
+  <contentUpdateDate>1529944480000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -59,7 +59,10 @@
           &lt;div class="input-group"&gt;
             &lt;input type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
             &lt;span class='input-group-btn'&gt;
-              &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;$services.localization.render('wikidemarches.search.button')&lt;/button&gt;
+              &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;
+              $services.icon.renderHTML('search')
+                &lt;span class="sr-only"&gt;$services.localization.render('wikidemarches.search.button')&lt;/span&gt;
+              &lt;/button&gt;
             &lt;/span&gt;
           &lt;/div&gt;
         &lt;/form&gt;
@@ -67,20 +70,20 @@
       )))
     )))
   )))
-  #set ($demarchesIds = {1:[290, 435, 12, 1023, 880], 2:[974, 310, 222, 555, 666]})
+  #set ($demarchesIds = [290, 12, 435, 1023, 880, 974, 310, 222, 555, 666])
   (%class='row demarches-statsrow'%)(((
     (%class='container' %)(((
       (%class='row demarches-statsblock'%) (((
         (%class='col-xs-12'%)(((
           ==Démarches les plus courantes ==
         )))
-        #foreach($i in [1..2])
-          (%class='col-xs-12 col-sm-6 col-md-6'%)(((
-            #foreach ($id in $demarchesIds[$i])
-              #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
-              * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
-            #end
-          )))
+        #foreach ($id in $demarchesIds)
+          #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
+          * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
+          ## new list after the first 5 items
+          #if ($velocityCount == 5)
+
+          #end
         #end
       )))
     )))
@@ -233,8 +236,8 @@
     }
     button.btn {
       background-color: lighten(@navbar-default-bg, 10%);
-      padding-top: @padding-base-vertical + 1px;
-      padding-bottom: @padding-base-vertical + 1px;
+      padding-top: @padding-base-vertical;
+      padding-bottom: @padding-base-vertical;
     }
   }
 
@@ -265,27 +268,40 @@ div.suggestItem {
   .demarches-statsblock {
     h2 {
       text-align: center;
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
     }
     ul {
       margin-left: 0;
+      margin-bottom: 0;
+      margin-top: 0;
       padding-left: 0;
       list-style-position: inside;
       list-style: none;
-      padding-top: 1em;
+      .make-xs-column(12);
+      .make-sm-column(6);
 
       li {
-        padding-bottom: 1em;
+        padding-bottom: 1.5em;
       }
     }
   }
 }
 
-/* Some adjustment on larger devices: increase the font size of the title row */
+/* Some adjustment on larger devices:
+ * * increase the font size of the title row
+ * * add max width to the searchbox
+ */
 @media (min-width: @screen-sm-min) {
   .demarches-searchrow {
     h2.demarches-headline {
       font-size: 2.5em;
       margin-top: 1em;
+    }
+    .demarches-searchbox {
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 }</code>
