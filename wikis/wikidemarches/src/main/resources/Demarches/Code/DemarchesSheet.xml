@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529944269000</date>
-  <contentUpdateDate>1529944269000</contentUpdateDate>
+  <date>1529945684000</date>
+  <contentUpdateDate>1529945684000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -94,7 +94,7 @@
 #end
 
 #macro (displayMessage $key)
-(% id="nmdf-1" %)(((
+(% id="wd-1" %)(((
 {{success}}
     $services.localization.render($key)
 {{/success}}
@@ -157,7 +157,7 @@
     #displayObjectForm($avis,['vote'])
   &lt;/div&gt;
   &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
-  &lt;input type="hidden" name="xredirect" value="$doc.getURL()#nmdf-1" /&gt;
+  &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1" /&gt;
   &lt;input type="hidden" name="avis-action" value="$action" /&gt;
   &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
   &lt;div class='buttonwrapper'&gt;
@@ -172,7 +172,6 @@
 #end
 #end
 {{/velocity}}
-
 </content>
   <object>
     <name>Demarches.Code.DemarchesSheet</name>
