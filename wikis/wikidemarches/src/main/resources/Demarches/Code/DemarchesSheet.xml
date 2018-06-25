@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529780295000</date>
-  <contentUpdateDate>1529780295000</contentUpdateDate>
+  <date>1529917662000</date>
+  <contentUpdateDate>1529917662000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -94,9 +94,11 @@
 #end
 
 #macro (displayMessage $key)
+(% id="nmdf-1" %)(((
 {{success}}
     $services.localization.render($key)
 {{/success}}
+)))
 #end
 {{/velocity}}
 
@@ -128,9 +130,9 @@
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform avis-form"&gt;
 #if ("$!step" == '')
   &lt;div class='form-preambule'&gt;
-    ==Donnez votre avis ==
+    ==$services.localization.render('avis.invite')==
 
-    &lt;span class="info-box-mandatory small"&gt;Les champs marqués de &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.&lt;/span&gt;
+    &lt;span class="info-box-mandatory small"&gt;$services.localization.render('avis.mandatory-info')&lt;/span&gt;
   &lt;/div&gt;
   #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
   #setDefaultModalite($avis)
@@ -155,7 +157,7 @@
     #displayObjectForm($avis,['vote'])
   &lt;/div&gt;
   &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
-  &lt;input type="hidden" name="xredirect" value="$doc.getURL()" /&gt;
+  &lt;input type="hidden" name="xredirect" value="$doc.getURL()#nmdf-1" /&gt;
   &lt;input type="hidden" name="avis-action" value="$action" /&gt;
   &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
   &lt;div class='buttonwrapper'&gt;
@@ -428,6 +430,7 @@
 .vote-container {
   display: none;
 }
+
 
 .listclass-group ul {
   list-style-type: none;
