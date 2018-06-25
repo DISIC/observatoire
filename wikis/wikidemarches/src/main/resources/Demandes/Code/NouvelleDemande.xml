@@ -31,8 +31,8 @@
   <parent>Main.Search</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529929340000</date>
-  <contentUpdateDate>1529929340000</contentUpdateDate>
+  <date>1529934729000</date>
+  <contentUpdateDate>1529934729000</contentUpdateDate>
   <version>1.1</version>
   <title>Ajouter une démarche manquante</title>
   <comment/>
@@ -77,7 +77,7 @@
   $services.localization.render('avis.mandatory-info')
   &lt;/span&gt;
   ----
-  &lt;form action="$doc.getURL()" method="POST" class="xform demande-form"&gt;
+  &lt;form action="$doc.getURL()" method="POST" class="xform wd-form demande-form"&gt;
   &lt;fieldset class="form-computedfieldclass"&gt;
     &lt;div&gt;
       &lt;label for="Demandes.Code.DemandesClass_0_contenu" style="padding-bottom:0.5em"&gt;$services.localization.render('Demandes.Code.DemandesClass_nom') &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;&lt;/label&gt;
@@ -86,18 +86,12 @@
       &lt;input required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" value="$!value"/&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
-  &lt;div class="buttonwrapper" style="padding-top:0.5em;"&gt;
+  &lt;div class="buttonwrapper"&gt;
     &lt;input name="Demandes.Code.DemandesClass_0_type" type="hidden" value="demande-dematerialisation"&gt;
     &lt;input class="btn btn-primary" name="save-demande" type="submit" value="$services.localization.render('demandes.ajouter')"&gt;
   &lt;/div&gt;
 &lt;/form&gt;
-
-
 #end
 {{/html}}
-{{/velocity}}
-
-
-
-</content>
+{{/velocity}}</content>
 </xwikidoc>
