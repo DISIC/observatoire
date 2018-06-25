@@ -50,7 +50,7 @@
   &lt;legend&gt;
     $doc.displayPrettyName($name, false, false)
     #if ($isMandatory)
-      &lt;abbr title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
+      &lt;abbr class='asterix' title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
     #end
   &lt;/legend&gt;
   &lt;ul&gt;

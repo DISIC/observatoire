@@ -31,7 +31,7 @@
   <parent>wikidemarches:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528991596000</date>
+  <date>1529750120000</date>
   <contentUpdateDate>1527348411000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches Skin</title>
@@ -40,121 +40,16 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content/>
-  <object>
-    <name>Demarches.Code.WikiDemarchesSkin</name>
-    <number>0</number>
-    <className>XWiki.StyleSheetExtension</className>
-    <guid>74d4281f-3c6f-4575-ba29-08e8eced333b</guid>
-    <class>
-      <name>XWiki.StyleSheetExtension</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <cache>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>cache</name>
-        <number>5</number>
-        <prettyName>Caching policy</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>long|short|default|forbid</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </cache>
-      <code>
-        <contenttype>PureText</contenttype>
-        <disabled>0</disabled>
-        <editor>PureText</editor>
-        <name>code</name>
-        <number>2</number>
-        <prettyName>Code</prettyName>
-        <rows>20</rows>
-        <size>50</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </code>
-      <contentType>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>contentType</name>
-        <number>6</number>
-        <prettyName>Content Type</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>CSS|LESS</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </contentType>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>1</number>
-        <prettyName>Name</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <parse>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType>yesno</displayType>
-        <name>parse</name>
-        <number>4</number>
-        <prettyName>Parse content</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </parse>
-      <use>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>use</name>
-        <number>3</number>
-        <prettyName>Use this extension</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>currentPage|onDemand|always</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </use>
-    </class>
-    <property>
-      <cache>long</cache>
-    </property>
-    <property>
-      <code>.avis-form {
-  display: none;
-}</code>
-    </property>
-    <property>
-      <contentType>CSS</contentType>
-    </property>
-    <property>
-      <name>SSX</name>
-    </property>
-    <property>
-      <parse/>
-    </property>
-    <property>
-      <use>currentPage</use>
-    </property>
-  </object>
+  <attachment>
+    <filename>favicon.ico</filename>
+    <mimetype>image/vnd.microsoft.icon</mimetype>
+    <author>xwiki:XWiki.Admin</author>
+    <date>1529571886000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</content>
+    <filesize>13094</filesize>
+  </attachment>
   <object>
     <name>Demarches.Code.WikiDemarchesSkin</name>
     <number>0</number>
@@ -196,7 +91,9 @@
 #set($displayContentMenu = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set($displayDrawer = !$isGuest)
-#set($displayQuickSearch = ($doc.fullName != 'Main.WebHome' &amp;&amp; $doc.fullName != 'Main.Search'))
+#set($displayQuickSearch = false)
+#set($discard = $xwiki.ssx.use('IconThemes.FontAwesome'))
+#set($discard = $xwiki.jsx.use('IconThemes.FontAwesome'))
 
 #set($displayDocChanges = false)
 
@@ -467,6 +364,8 @@
   #template($extraFooterTemplate)
 #end
 &lt;footer id="footerglobal" role="contentinfo"&gt;
+  &lt;div class='container'&gt;
+  &lt;hr&gt;
   &lt;div id="xwikilicence"&gt;$!copyright&lt;/div&gt;
   #set ($version = $xwiki.getSpacePreference('version'))
   #if ("$!version" == "")
@@ -476,9 +375,6 @@
     ## The version information coming from preferences is usually Velocity code, so make sure to evaluate it.
     &lt;div id="xwikiplatformversion"&gt;#evaluate($version)&lt;/div&gt;
   #else
-    &lt;div class="legal-terms"&gt;
-      &lt;a href="$xwiki.getDocument('Main.MentionsLegales').URL"&gt;$services.localization.render('wikidemarches.legal-notice')&lt;/a&gt;
-    &lt;/div&gt;
     &lt;div id="xwikiplatformversion"&gt;
       #set($productURL = $services.extension.core.repository.environmentExtension.website)
       #if ($productURL)
@@ -490,6 +386,7 @@
       #end
     &lt;/div&gt;
   #end
+  &lt;/div&gt;
 &lt;/footer&gt;
 #end
 ### TODO: Format the footer for pdf output</content>
@@ -541,6 +438,484 @@
     </property>
     <property>
       <path>footer_demarches.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>6</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>16ea8e18-0bd0-4351-8a4d-cae072b648fa</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>## -------------------------------------------------------------------------------------------------------------------
+## In non-Servlet mode (in Portlet mode for example) we don't display the &lt;HTML&gt;, &lt;HEAD&gt; and &lt;BODY&gt;
+## elements.
+## -------------------------------------------------------------------------------------------------------------------
+#if($isInServletMode)
+## TODO this should be more specific
+#if("$!request.noDoctype" != "true")
+&lt;!DOCTYPE html&gt;
+#end
+#macro(xwikiDataAttribute $name $value)
+  data-xwiki-${name}="$escapetool.xml($value)"
+#end
+&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="$xcontext.locale" xml:lang="$xcontext.locale"
+  ## NOTE: you should not use these attributes in javascript directly, but via the 'xwiki-meta' module instead:
+  ## http://platform.xwiki.org/xwiki/bin/view/DevGuide/JavaScriptAPI#HGetsomeinformationaboutthecurrentdocument
+  #xwikiDataAttribute('reference', $services.model.serialize($doc.documentReference, 'default'))
+  #xwikiDataAttribute('document', $doc.fullName)##deprecated, use 'reference' instead
+  #xwikiDataAttribute('wiki', $doc.wiki)##deprecated, use 'reference' instead
+  #xwikiDataAttribute('space', $doc.space)##deprecated, use 'reference' instead
+  #xwikiDataAttribute('page', $doc.name)##deprecated, use 'reference' instead
+  #xwikiDataAttribute('version', $doc.version)
+  #xwikiDataAttribute('rest-url', $services.rest.url($doc.documentReference))
+  #xwikiDataAttribute('form-token', "$!{services.csrf.token}")&gt;
+  &lt;head&gt;
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Ensure that the Content-Type meta directive is the first one in the header.
+    ## See http://www.w3.org/International/tutorials/tutorial-char-enc/
+    ## ---------------------------------------------------------------------------------------------------------------
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=$xwiki.encoding" /&gt;
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Compute the title.
+    ## ---------------------------------------------------------------------------------------------------------------
+    #if(!$title)
+      #set($title = $!xwiki.getSpacePreference('title'))
+      #if($title != '')
+        ## Evaluate the title since it can have velocity code.
+        #set($title = "#evaluate($title)")
+        ## Don`t forget to escape it.
+        #set($title = "$escapetool.xml($title)")
+      #else
+        #set($title = "XWiki - $escapetool.xml($!doc.space) - $escapetool.xml($!tdoc.displayTitle)")
+      #end
+    #else
+      #set($title = $escapetool.xml($title))
+    #end
+    &lt;title&gt;$title&lt;/title&gt;
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Force Compatibility mode for IE browsers to use the latest rendering mode. In order to work, the declaration 
+    ## needs to be placed in the &lt;head&gt;, before all other elements except for the &lt;title&gt; and other &lt;meta&gt; elements
+    ## See http://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx#SETMODE
+    ## ---------------------------------------------------------------------------------------------------------------
+    #set($userAgent = $request.getHeader('User-Agent'))
+    #if($userAgent.contains('MSIE') || $userAgent.contains('Trident'))
+      ## Add a meta-tag to disable the IE compatibility mode
+      &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+      ## Add the equivalent HTTP header to disable the compatibility mode (the meta is not enough on intranet sites)
+      #set($discard = $response.addHeader('X-UA-Compatible', 'IE=edge'))
+    #end
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Enable Responsiveness for phones
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Favicons
+    ## Legacy, for IE
+    &lt;link rel="shortcut icon" href="$xwiki.getSkinFile('favicon.ico')" /&gt;
+    ## Don't send the other favicons, we don't have these versions for the Marianne
+    ## Present, HTML5
+    ## &lt;link rel="icon" href="$xwiki.getSkinFile('icons/xwiki/favicon16.png')" type="image/png" /&gt;
+    ## The future, scalable icons
+    ## &lt;link rel="icon" href="$xwiki.getSkinFile('icons/xwiki/favicon.svg')" type="image/svg+xml" /&gt;
+    ## For smart phones and tablets
+    ## &lt;link rel="apple-touch-icon" href="$xwiki.getSkinFile('icons/xwiki/favicon144.png')" /&gt;
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Universal edit button. See http://universaleditbutton.org
+    ## ---------------------------------------------------------------------------------------------------------------
+    #if($xcontext.action=="view")
+      &lt;link rel="alternate" type="application/x-wiki" title="Edit" href="$doc.getURL("edit")" /&gt;
+    #end
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Make sure search engine spiders give the plain page instead of ?viewer=comments, ?viewer=code etc.
+    ## ---------------------------------------------------------------------------------------------------------------    
+    &lt;link rel="canonical" href="$doc.getURL('view')" /&gt;
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Add user-defined Meta directives.
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Note: Velocity code, so it needs to be evaluated.
+    #evaluate($!xwiki.getSpacePreference("meta"))
+    ## ---------------------------------------------------------------------------------------------------------------
+    ## Hook for inserting Link extensions. This will be replaced with the pulled link references.
+    ## ---------------------------------------------------------------------------------------------------------------
+    &lt;!-- com.xpn.xwiki.plugin.skinx.LinkExtensionPlugin --&gt;
+    &lt;link href="$services.webjars.url('drawer', 'css/drawer.min.css')" rel="stylesheet" type="text/css" /&gt;
+    #template("stylesheets.vm")
+    #template("javascript.vm")
+  &lt;/head&gt;
+  #set($bodyTagName = 'body')
+#else ## Portlet Mode
+  #template("stylesheets.vm")
+  #template("javascript.vm")
+  #set($bodyTagName = 'div')
+#end
+## TODO: fix this from css
+#set($bodyAction = $xcontext.action)
+#if($xcontext.action == "admin" || $xcontext.action == "import" || $xcontext.action == "export")
+  #set($bodyAction = "view")
+#end
+## These elements will be closed in the htmlfooter.vm file
+&lt;$bodyTagName id="body" class="skin-flamingo wiki-${xcontext.database} space-${escapetool.xml($doc.space.replaceAll(' ', '_'))} ${bodyAction}body #if($showLeftPanels == "0")hideleft#end#if($showRightPanels == "0")hideright#end#if($hidecolumns &amp;&amp; ($!hidecolumns == 1))hidelefthideright#end #if($showLeftPanels != "0" &amp;&amp; $showRightPanels != "0" &amp;&amp; $!hidecolumns != 1)content#end panel-left-width-${leftPanelsWidth} panel-right-width-${rightPanelsWidth} drawer drawer-right drawer-close"&gt;
+&lt;div id="xwikimaincontainer"&gt;
+&lt;div id="xwikimaincontainerinner"&gt;
+</content>
+    </property>
+    <property>
+      <path>htmlheader.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>7</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>9191793f-b9e5-44b7-b244-4e8758cda94a</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>### Ensure this template is only called once (for performance reasons), since it's called from several places
+#if ($hasMenuMacrosBeenCalled)
+  #break
+#else
+  #set ($hasMenuMacrosBeenCalled = true)
+#end
+###
+###    GLOBALS
+###
+#set ($isAdminAppInstalled = $xwiki.exists($services.model.createDocumentReference('', 'XWiki', 'AdminSheet')))
+###
+###    Toplevel Menu
+###
+#macro(xwikitopmenustart)
+  &lt;nav class="navbar navbar-default actionmenu"&gt;
+    &lt;div class="container"&gt;
+      ## Brand and toggle get grouped for better mobile display
+      &lt;div class="navbar-header"&gt;
+        #if (!$displayPageHeader)
+          #template("companylogo.vm")
+        #end
+      &lt;/div&gt;
+      ## Collect the nav links, forms, and other content for toggling
+      &lt;div id="xwikimainmenu"&gt;
+#end
+
+###
+###    Toplevel Menu
+###
+#macro(xwikitopmenuend)
+      &lt;/div&gt;## /.navbar-collapse
+    &lt;/div&gt; ## / container-fluid
+  &lt;/nav&gt;
+#end
+
+###
+###    Toplevel Left Menu
+###
+#macro(xwikitopmenuleftstart)
+  &lt;ul class="nav navbar-nav navbar-left"&gt;
+    #submenuseparator()
+#end
+
+###
+###    Toplevel Left Menu
+###
+#macro(xwikitopmenuleftend)
+  &lt;/ul&gt;
+#end
+
+###
+###    Toplevel Right Menu
+###
+#macro(xwikitopmenurightstart)
+  &lt;ul class="nav navbar-nav navbar-right"&gt;
+#end
+
+###
+###    Toplevel Right Menu
+###
+#macro(xwikitopmenurightend)
+  &lt;/ul&gt;
+#end
+
+###
+###    Toplevel Menu entry with subitems
+###
+### Generate a menu entry and start the subitem section
+###
+### @param actionurl The URL this entry points to
+### @param linktext The menu item text
+###
+#macro(xwikitopmenuentrystart $actionurl $linktext $id $class $icon $iconImg)
+  #set($sep = '__SEPARATOR__')
+  #set($linkName = $linktext)
+  #set($linkTitle = $linktext) 
+  #if ($linktext.contains($sep))
+    #set($linkWords = $linktext.split($sep, 2))
+    #set($linkName = $linkWords.get(1))
+    #set($linkTitle = "${linkWords.get(0)}: ${linkWords.get(1)}")
+  #end
+  &lt;li class="dropdown dropdown-split text-left" #if(!$stringtool.isBlank($id))id="$id"#end&gt;
+    ## The menu label. On large screens (tablet and desktop) the label is a link that triggers the default menu action
+    ## (e.g. navigation) and the menu is opened using a separated caret. On extra small screens (phones) the label opens
+    ## the menu and the default menu action is the first item in the menu.
+    &lt;a href="$actionurl" class="dropdown-split-left dropdown-toggle $!class" data-toggle="dropdown" title="$linkTitle"&gt;
+      ## This caret is displayed only on extra small screens to indicate that the label toggles the menu.
+      #glyphicon($icon)$!{iconImg} $linkName &lt;b class="caret"&gt;&lt;/b&gt;
+    ## Don't leave any space between the anchors because they have display:inline-block on large screens.
+    &lt;/a&gt;&lt;a href="#" class="dropdown-split-right dropdown-toggle hidden-xs $!class" data-toggle="dropdown"&gt;
+      ## This caret is used to toggle the menu on large screens (tablet and desktop).
+      &lt;b class="caret"&gt;&lt;/b&gt;
+    &lt;/a&gt;
+    &lt;ul class="dropdown-menu"&gt;
+#end
+
+###
+###    Toplevel Menu entry without subitems
+###
+### Generate a menu entry withut subitems
+###
+### @param actionurl The URL this entry points to
+### @param linktext The menu item text
+###
+#macro(xwikitopmenuentry $actionurl $linktext $id $class $icon $extraAttributes)
+  #submenuitem($actionurl $linktext $id $class $icon $extraAttributes)
+#end
+
+###
+###    Menu subitem entry
+###
+### Generate a submenu entry
+###
+### @param actionurl The URL this entry points to
+### @param linktext The menu item text
+###
+#macro(submenuitem $actionurl $linktext $linkid $class $icon $extraAttributes)
+  #set($sep = '__SEPARATOR__')
+  #set($linkName = $linktext)
+  #set($linkTitle = $linktext) 
+  #if ($linktext.contains($sep))
+    #set($linkWords = $linktext.split($sep))
+    #set($linkName = $linkWords.get(1))
+    #set($linkTitle = "${linkWords.get(0)}: ${linkWords.get(1)}")
+  #end
+  &lt;li class="$!class"&gt;&lt;a href="$actionurl" #if(!$stringtool.isBlank($linkid))id="$linkid"#end title="$linkTitle" $!extraAttributes&gt;$services.icon.renderHTML($icon) $linkName&lt;/a&gt;&lt;/li&gt;
+#end
+
+###
+###    Menu disabled subitem entry
+###
+### Generate a disabled submenu entry
+###
+### @param text The menu item text
+###
+#macro(submenuitemdisabled $text)
+&lt;span class="submenuitem disable"&gt;$text&lt;/span&gt;
+#end
+
+###
+###    Toplevel Menu entry separator
+###
+#macro(xwikitopmenuseparator)
+  &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
+#end
+
+###
+###    Menu submenu separator
+###
+#macro(submenuseparator)
+  &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
+#end
+
+###
+###    Toplevel Menu entry end
+###
+### End the subitem section
+###
+#macro(xwikitopmenuentryend)
+    &lt;/ul&gt;
+  &lt;/li&gt;
+#end
+
+#macro(xwikibutton $actionurl $linktext $id $class $icon)
+  &lt;a href="$actionurl" class="btn $!class" role="button" #if(!$stringtool.isBlank($id))id="$id"#end&gt;#glyphicon($icon) $linktext&lt;/a&gt;
+#end
+
+#macro(xwikibuttonentrystart $actionurl $linktext $id $class $icon)
+  &lt;div class="btn-group text-left" #if(!$stringtool.isBlank($id))id="$id"#end&gt;
+    &lt;button type="button" class="btn $!class dropdown-toggle" data-toggle="dropdown"&gt;#glyphicon($icon) $linktext &lt;span class="caret"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" role="menu"&gt;
+#end
+
+#macro(xwikisplitbuttonentrystart $actionurl $linktext $id $class $icon)
+  &lt;div class="btn-group text-left" #if(!$stringtool.isBlank($id))id="$id"#end&gt;
+    &lt;a href="$actionurl" class="btn $!class"&gt;#glyphicon($icon) $linktext&lt;/a&gt;
+    &lt;button type="button" class="btn $!class dropdown-toggle" data-toggle="dropdown"&gt;
+      &lt;span class="caret"&gt;&lt;/span&gt;
+      &lt;span class="sr-only"&gt;Toggle Dropdown&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" role="menu"&gt;
+#end
+
+#macro(xwikibuttonentryend $actionurl $linktext $id $class $icon)
+    &lt;/ul&gt;
+  &lt;/div&gt;
+#end
+
+#**
+ * Display extension points only if the author of the UIX has the admin right on the wiki.
+ *
+ * @param $name name of the extension points to display
+ * @since 7.3RC1
+ *#
+#macro(displaySimpleSecureUIX $name)
+  #foreach($uix in $services.uix.getExtensions($name, {'sortByParameter' : 'order'}))
+    #if ($services.security.authorization.hasAccess('admin', $uix.authorReference, $services.wiki.currentWikiDescriptor.reference))
+      $services.rendering.render($uix.execute(), 'html/5.0')
+    #end
+  #end
+#end</content>
+    </property>
+    <property>
+      <path>menus_macros.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>8</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>89c91811-44ff-4004-b15e-b5a7c779b5fe</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>################################
+##       COMPANY LOGO
+################################
+#if("$!{themeDocFullName}" == '')
+  #set($themeDocFullName = "$!xwiki.getUserPreference('colorTheme')")
+#end
+#if($themeDocFullName == '')
+  #set($themeDocFullName = 'ColorThemes.DefaultColorTheme')
+#end
+#set($themeDoc = $xwiki.getDocument($themeDocFullName))
+#set($themeObj = $themeDoc.getObject('FlamingoThemesCode.ThemeClass'))
+#if($themeObj)
+  #set($logoname = $themeObj.getValue('logo'))
+#else
+  #set($themeObj = $themeDoc.getObject('ColorThemes.ColorThemeClass'))
+  #set($logoname = $themeObj.getValue('logoImage'))
+#end
+#if("$!{logoname}" != '')
+  #set($logourl = $themeDoc.getAttachmentURL($logoname))
+#else
+  #set($logoname = $xwiki.getSkinPreference('logo', 'logo.svg'))
+  #set($logo = $!prefdoc.getAttachment($logoname))
+  #if(!$logo)
+    #set($logourl = $xwiki.getSkinFile($logoname))
+  #else
+    #set($logourl = $prefdoc.getAttachmentURL($logo.filename))
+  #end
+#end
+&lt;div id="companylogo"&gt;
+  &lt;a href="$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)" title="Home" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
+    &lt;img src="$!logourl" alt="Wiki Logo"/&gt;
+    ## Site title next to the logo
+    #set($eltname = 'span')
+    #if ($doc.fullName == 'Main.WebHome')
+      #set($eltname = 'h1')
+    #end
+    &lt;span class='demarches-titlebar-sitename'&gt;
+      &lt;${eltname}&gt;$services.localization.render('wikidemarches.sitename')&lt;/${eltname}&gt;
+    &lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</content>
+    </property>
+    <property>
+      <path>companylogo.vm</path>
     </property>
   </object>
   <object>
