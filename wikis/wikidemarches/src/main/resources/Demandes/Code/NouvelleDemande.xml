@@ -31,8 +31,8 @@
   <parent>Main.Search</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529511523000</date>
-  <contentUpdateDate>1529511523000</contentUpdateDate>
+  <date>1529921626000</date>
+  <contentUpdateDate>1529921626000</contentUpdateDate>
   <version>1.1</version>
   <title>Ajouter une démarche manquante</title>
   <comment/>
@@ -63,22 +63,24 @@
 
 {{velocity}}
 {{html wiki="true"}}
+#set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($messageKey = $request.session.getAttribute('demande-handler-operation-message'))
 #if ("$!messageKey" != '')
+  ----
   ## Clean the session and display the message.
   #set ($discard = $request.session.removeAttribute('demande-handler-operation-message'))
   #displayMessage($messageKey)
 #else
   #set ($demande = $doc.newObject('Demandes.Code.DemandesClass'))
   #set ($value = $request.text)
-  &lt;span class="info-box-mandatory"&gt;
-  Les champs marqués de &lt;abbr title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt; sont obligatoires.
+  &lt;span class="info-box-mandatory small"&gt;
+  $services.localization.render('avis.mandatory-info')
   &lt;/span&gt;
-  
+  ----
   &lt;form action="$doc.getURL()" method="POST" class="xform demande-form"&gt;
   &lt;fieldset class="form-computedfieldclass"&gt;
     &lt;div&gt;
-      &lt;label for="Demandes.Code.DemandesClass_0_contenu"&gt;Nom de la démarche &lt;abbr title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+      &lt;label for="Demandes.Code.DemandesClass_0_contenu"&gt;$services.localization.render('Demandes.Code.DemandesClass_nom') &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;&lt;/label&gt;
     &lt;/div&gt;
     &lt;div&gt;
       &lt;input required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" value="$!value"/&gt;
@@ -86,7 +88,7 @@
   &lt;/fieldset&gt;
   &lt;div class="buttonwrapper"&gt;
     &lt;input name="Demandes.Code.DemandesClass_0_type" type="hidden" value="demande-dematerialisation"&gt;
-    &lt;input class="button btn btn-primary" name="save-demande" type="submit" value="Ajouter"&gt;
+    &lt;input class="btn btn-primary" name="save-demande" type="submit" value="$services.localization.render('demandes.ajouter')"&gt;
   &lt;/div&gt;
 &lt;/form&gt;
 
