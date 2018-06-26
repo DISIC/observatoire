@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529946225000</date>
-  <contentUpdateDate>1529944480000</contentUpdateDate>
+  <date>1530001016000</date>
+  <contentUpdateDate>1530001016000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -70,7 +70,7 @@
       )))
     )))
   )))
-  #set ($demarchesIds = [290, 12, 435, 1023, 880, 974, 310, 222, 555, 666])
+  #set ($demarchesIds = [1289,1290,1220,1291,1265,1292,829,1293,1294,823])
   (%class='row demarches-statsrow'%)(((
     (%class='container' %)(((
       (%class='row demarches-statsblock'%) (((
