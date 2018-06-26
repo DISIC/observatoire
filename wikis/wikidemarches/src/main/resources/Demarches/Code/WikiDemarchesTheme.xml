@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529785175000</date>
+  <date>1530001949000</date>
   <contentUpdateDate>1527413730000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches theme</title>
@@ -1095,6 +1095,24 @@ select[size="1"]{
   }
 }
 
+/* On mobile, make it such that the logo passes on 1 row */
+@media (max-width: @screen-sm-min) {
+  #menuview {
+    .navbar-brand {
+      font-size: 100%;
+    }
+    .navbar-left {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .navbar-nav {
+      margin: 0;
+    }
+  }
+}
+
+
+
 /*
  * A couple of adjustments on the search suggest, related to the fact that there is a single source of results. Easier to hack from CSS than to modify the source of results.
  */
@@ -1267,6 +1285,7 @@ Visually, there's the title row and then all the rows from the document content,
   padding-left: 0;
   padding-right: 0;
 }
+
 
 
 </lessCode>
