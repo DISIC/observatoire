@@ -31,7 +31,7 @@
   <parent>wikidemarches:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529750120000</date>
+  <date>1530017794000</date>
   <contentUpdateDate>1527348411000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches Skin</title>
@@ -88,6 +88,7 @@
     <property>
       <content>#set($displayDocExtra = false)
 #set($displayContentFooter = false)
+#set($displayDocChanges = false)
 #set($displayContentMenu = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set($displayDrawer = !$isGuest)
@@ -95,13 +96,9 @@
 #set($discard = $xwiki.ssx.use('IconThemes.FontAwesome'))
 #set($discard = $xwiki.jsx.use('IconThemes.FontAwesome'))
 
-#set($displayDocChanges = false)
-
 #* These will be handled from the pages *#
 #set($displayDocTitle = true)
-#set($displayTitleContentSeparator = true)
-
-#set($extraFooterTemplate = 'footer_demarches.vm')</content>
+#set($displayTitleContentSeparator = true)</content>
     </property>
     <property>
       <path>layoutExtraVars.vm</path>
@@ -367,6 +364,9 @@
   &lt;div class='container'&gt;
   &lt;hr&gt;
   &lt;div id="xwikilicence"&gt;$!copyright&lt;/div&gt;
+  &lt;div id='wd-customfooterinfo'&gt;
+    $services.localization.render('wikidemarches.footer.administrationlinks.intro') : &lt;a href="http://service-public.fr/" target="_blank" title="Service-public.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;Service-public.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://legifrance.gouv.fr/" target="_blank" title="Legifrance.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;Legifrance.gouv.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://data.gouv.fr/" target="_blank" title="data.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;data.gouv.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://gouvernement.fr/" target="_blank" title="Gouvernement.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;Gouvernement.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://france.fr/" target="_blank" title="France.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;France.fr&lt;/a&gt;
+  &lt;/div&gt;
   #set ($version = $xwiki.getSpacePreference('version'))
   #if ("$!version" == "")
     #set ($version = $xwiki.getXWikiPreference("version"))
@@ -393,51 +393,6 @@
     </property>
     <property>
       <path>footer.vm</path>
-    </property>
-  </object>
-  <object>
-    <name>Demarches.Code.WikiDemarchesSkin</name>
-    <number>5</number>
-    <className>XWiki.XWikiSkinFileOverrideClass</className>
-    <guid>ca8a3caf-14e6-42c7-878d-8592b4d46a30</guid>
-    <class>
-      <name>XWiki.XWikiSkinFileOverrideClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <content>
-        <disabled>0</disabled>
-        <editor>PureText</editor>
-        <name>content</name>
-        <number>2</number>
-        <prettyName>Content</prettyName>
-        <rows>15</rows>
-        <size>80</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </content>
-      <path>
-        <disabled>0</disabled>
-        <name>path</name>
-        <number>1</number>
-        <prettyName>Path</prettyName>
-        <size>255</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </path>
-    </class>
-    <property>
-      <content>&lt;div class="row demarches-footer"&gt;
-  &lt;div class="col-xs-12"&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</content>
-    </property>
-    <property>
-      <path>footer_demarches.vm</path>
     </property>
   </object>
   <object>
@@ -488,7 +443,7 @@
 #macro(xwikiDataAttribute $name $value)
   data-xwiki-${name}="$escapetool.xml($value)"
 #end
-&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="$xcontext.locale" xml:lang="$xcontext.locale"
+&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="$xcontext.locale" xml:lang="$xcontext.locale" dir="ltr" 
   ## NOTE: you should not use these attributes in javascript directly, but via the 'xwiki-meta' module instead:
   ## http://platform.xwiki.org/xwiki/bin/view/DevGuide/JavaScriptAPI#HGetsomeinformationaboutthecurrentdocument
   #xwikiDataAttribute('reference', $services.model.serialize($doc.documentReference, 'default'))
