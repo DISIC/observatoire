@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529945852000</date>
-  <contentUpdateDate>1529945580000</contentUpdateDate>
+  <date>1530088684000</date>
+  <contentUpdateDate>1530088684000</contentUpdateDate>
   <version>1.1</version>
   <title>SolrSearch</title>
   <comment/>
@@ -140,14 +140,15 @@
   #end
 #end
 
-##override displaySearchForm in order to add the class "withsearchsuggest-input" to the search input so that
-##the field provides live suggestion like on the home page
+## Override displaySearchForm in order to add the class "withsearchsuggest-input" to the search input so that
+## the field provides live suggestion like on the home page, and to add a label for the input field.
 #macro (displaySearchForm)
   ## include custom search suggest in the same way as in Main.WebHome
   ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
   #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
   #set($void = $services.progress.startStep('#displaySearchForm'))
   {{html clean="false"}}
+  &lt;label for="search-input"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
   &lt;form class="search-form row" action="$doc.getURL()" role="search"&gt;
     &lt;div class="hidden"&gt;
       &lt;input type="hidden" name="sort" value="$!escapetool.xml($sort)"/&gt;
@@ -170,8 +171,8 @@
     &lt;/div&gt;
     &lt;div class="col-xs-12 col-sm-8 col-md-9"&gt;
       &lt;div class="input-group"&gt;
-        &lt;input type="search" name="text" class="form-control withTip useTitleAsTip withsearchsuggest-input"
-          title="$services.localization.render('search.page.bar.query.title')" value="$escapetool.xml($text)"/&gt;
+        &lt;input type="search" id="search-input" name="text" class="form-control withTip useTitleAsTip withsearchsuggest-input"
+          placeholder="$services.localization.render('wikidemarches.search.inputText')" value="$escapetool.xml($text)"/&gt;
         &lt;span class="input-group-btn"&gt;
           &lt;button type="submit" class="btn btn-primary"&gt;
             $services.icon.renderHTML('search')

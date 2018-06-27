@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530001949000</date>
+  <date>1530089557000</date>
   <contentUpdateDate>1527413730000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches theme</title>
@@ -989,6 +989,7 @@ select,
 input[type="text"],
 input[type="password"] {
   height: auto;
+  border-radius: 0;
 }
 
 select[size="0"],
@@ -998,6 +999,10 @@ select[size="1"]{
 
 .input-group-btn {
   font-size: inherit;
+}
+
+.input-group-btn:last-child &gt; .btn {
+  border-radius: 0;
 }
 
 #footerglobal {
@@ -1285,9 +1290,6 @@ Visually, there's the title row and then all the rows from the document content,
   padding-left: 0;
   padding-right: 0;
 }
-
-
-
 </lessCode>
     </property>
     <property>
