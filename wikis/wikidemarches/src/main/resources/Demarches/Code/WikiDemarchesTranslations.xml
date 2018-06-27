@@ -45,12 +45,14 @@ wd.accessibilite=Accessibilité
 wikidemarches.obligatoire=(obligatoire)
 
 #Démarches
-wikidemarches.sitename=NoterMaDémarche.gouv.fr
-wikidemarches.home.title=Évaluez votre démarche en ligne pour améliorer le service public
-wikidemarches.home.subtitle=Contribuez à la transformation numérique de l'État en demandant la dématerialisation de formulaires papier et en donnant votre avis sur vos démarches adminstratives en ligne.
+wikidemarches.sitename=NosDémarches.gouv.fr
+wikidemarches.siteheadline=Améliorons les services publics en ligne
+wikidemarches.home.title=Évaluez votre démarche en ligne
+wikidemarches.home.subtitle=
+wikidemarches.home.subsearchhint=Votre démarche n'était pas disponible en ligne&amp;nbsp;? Vous pourrez demander sa dématérialisation.
 wikidemarches.search.label=Démarche recherchée
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
-wikidemarches.search.button=Trouver ma démarche
+wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
 
 #Demandes

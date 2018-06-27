@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530089557000</date>
+  <date>1530103381000</date>
   <contentUpdateDate>1527413730000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches theme</title>
@@ -1071,20 +1071,33 @@ select[size="1"]{
  * Display site name next to logo
  */
 .navbar-brand {
-  font-size: 110%;
+  font-size: 100%;
   line-height: inherit;
   .demarches-titlebar-sitename {
     color: @navbar-default-color;
     display: inline-block;
+    vertical-align: middle;
     padding-left: 1ex;
-    font-weight: bold;
     /* Reset h1, which is displayed on the main page */
     h1 {
       margin: 0;
       font-size: 1em;
       font-weight: inherit;
     }
+    .demarches-titlebar-name {
+      font-size: 110%;
+      font-weight: bold;
+
+      span {
+        display: block;
+      }
+    }
   }
+}
+
+#menuview .navbar-brand img {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Custom size of the navbar on desktop */
@@ -1103,8 +1116,15 @@ select[size="1"]{
 /* On mobile, make it such that the logo passes on 1 row */
 @media (max-width: @screen-sm-min) {
   #menuview {
-    .navbar-brand {
+    .demarches-titlebar-sitename {
+      padding-left: 0.75ex;
+      line-height: 1.1;
+    }
+    .demarches-titlebar-name {
       font-size: 100%;
+    }
+    .demarches-titlebar-headline {
+      font-size: 0.75em;
     }
     .navbar-left {
       margin-left: 0;
@@ -1156,12 +1176,17 @@ legend {
 }
 
 /*
- * Footer is the same color as body content and same text color, and aligned left
+ * Footer is the same color as body content and same text color, and aligned left on desktop &amp; tablet
  */
 #footerglobal {
   background-color: @body-bg;
   color: @text-color;
-  text-align: left;
+}
+
+@media (min-width: @screen-sm-min) {
+  #footerglobal {
+    text-align: left;
+  }
 }
 
 #footerglobal a, 
@@ -1282,6 +1307,8 @@ Visually, there's the title row and then all the rows from the document content,
 /*
  * Custom layout, to make content fixed width as well - header and footer are done from the skin, with real containers.
  */
+@container-large-desktop: (960px + @grid-gutter-width);
+
 #contentcontainerinner, #xwikieditorinner {
   .container();
 }

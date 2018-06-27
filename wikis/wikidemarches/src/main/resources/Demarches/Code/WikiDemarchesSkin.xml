@@ -31,7 +31,7 @@
   <parent>wikidemarches:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530017794000</date>
+  <date>1530097851000</date>
   <contentUpdateDate>1527348411000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches Skin</title>
@@ -863,7 +863,10 @@
       #set($eltname = 'h1')
     #end
     &lt;span class='demarches-titlebar-sitename'&gt;
-      &lt;${eltname}&gt;$services.localization.render('wikidemarches.sitename')&lt;/${eltname}&gt;
+      &lt;span class='demarches-titlebar-name'&gt;
+        &lt;${eltname}&gt;$services.localization.render('wikidemarches.sitename')&lt;/${eltname}&gt;
+      &lt;/span&gt;
+      &lt;span class='demarches-titlebar-headline'&gt;$services.localization.render('wikidemarches.siteheadline')&lt;/span&gt;
     &lt;/span&gt;
   &lt;/a&gt;
 &lt;/div&gt;

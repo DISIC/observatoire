@@ -65,6 +65,7 @@
               &lt;/button&gt;
             &lt;/span&gt;
           &lt;/div&gt;
+          &lt;div class='demarches-subform'&gt;$services.localization.render('wikidemarches.home.subsearchhint')&lt;/div&gt;
         &lt;/form&gt;
         {{/html}}
       )))
@@ -230,7 +231,6 @@
       display: block;
       font-weight: normal;
       text-align: left;
-      color: tint(@navbar-default-bg, 80%);
     }
     input {
       /* Make a style comparable to the style of the default global search input */
@@ -254,6 +254,12 @@
   .demarches-searchbox {
     padding-left: @grid-gutter-width / 2;
     padding-right: @grid-gutter-width / 2;
+  }
+
+  .demarches-subform {
+    text-align: left;
+    margin-top: 5px;
+    .text-smaller;
   }
 }
 
