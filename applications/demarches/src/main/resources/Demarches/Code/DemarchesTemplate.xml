@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1526657567000</creationDate>
+  <creationDate>1527081469000</creationDate>
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527520764000</date>
-  <contentUpdateDate>1526657567000</contentUpdateDate>
+  <date>1527696152000</date>
+  <contentUpdateDate>1527081469000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -288,7 +288,7 @@
 #if ($xcontext.action == 'get')
   #foreach ($ministere in $value)
     #set($ministereDocument = $xwiki.getDocument($ministere))
-    #if ($ministereDocument.sigle) $ministereDocument.sigle #else $ministereDocument.fullName #end
+    #if ($velocityCount &gt; 1), #{end}#if ($ministereDocument.sigle)${ministereDocument.sigle}#{else}${ministereDocument.fullName}#end
   #end
 #elseif ($xcontext.action == 'view')
   #foreach ($ministere in $value)
@@ -340,9 +340,37 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>aucun=Aucun|formulaire=Formulaire en ligne|pdfnonremplissable=PDF non remplissable|pdfremplissable=PDF remplissable|edi=EDI|teleservice=Téléprocédure</values>
+        <values>aucun=Aucun|formulaire=Formulaire en ligne|pdfnonremplissable=PDF non remplissable|pdfremplissable=PDF remplissable|edi=EDI|teleprocedure=Téléprocédure</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </niveauDemat>
+      <niveauDematBoolean>
+        <customDisplay>{{velocity}}
+{{html clean='false' wiki='false'}}
+#set ($dematCriteres = ['teleprocedure', 'formulaire'])
+#set ($niveauDemat = $object.getProperty('niveauDemat').value)
+#set ($isDemat = 0)
+#if ($niveauDemat &amp;&amp; $niveauDemat.size() &gt; 0)
+  #foreach ($niveau in $niveauDemat)
+    #if ($dematCriteres.contains($niveau))
+      #set ($isDemat = 1)
+      #break
+    #end
+  #end
+  $services.localization.render("yesno_${isDemat}")
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>niveauDematBoolean</name>
+        <number>34</number>
+        <prettyName>niveauDematBoolean</prettyName>
+        <script/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+      </niveauDematBoolean>
       <niveauPrevu>
         <cache>0</cache>
         <customDisplay/>
@@ -372,7 +400,34 @@
         <name>niveauVolumetrie</name>
         <number>22</number>
         <prettyName>Niveau de la volumétrie</prettyName>
-        <script/>
+        <script>{{velocity}}
+{{html clean="false"}}
+#set ($boundaries = [0,100,1000,10000,100000,500000,1000000,5000000])
+#set ($volumetrie = $!{object.getProperty("volumetrie").value})
+#if ($volumetrie)
+  #set ($top = $NULL)
+  #foreach($elt in $boundaries)
+    #if ($volumetrie &lt;= $elt)
+      #set ($top = $elt)
+      #break
+    #end
+  #end
+  #if ($top)
+    #if ($top == 0)
+      #set ($top =  $boundaries.get(1))
+    #end
+    #set ($idx1 = $boundaries.indexOf($top))
+    #set ($idx2 = $mathtool.sub($idx1,1))
+    #set ($bottom = $boundaries.get($idx2))
+    #set ($bottom = $numbertool.format('integer', $bottom))
+    #set ($top = $numbertool.format('integer', $top))
+    [${bottom} - ${top}]
+  #else
+    5 000 000 et plus
+  #end
+#end
+{{/html}}
+{{/velocity}}</script>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
@@ -458,7 +513,18 @@
         <name>pourcentageDemat</name>
         <number>21</number>
         <prettyName>Pourcentage de dématérialisation</prettyName>
-        <script/>
+        <script>{{velocity}}
+{{html clean="false"}}
+#set ($volumetrieDemat = $object.getProperty("volumetrieDemat").getValue())
+#set ($volumetrie = $object.getProperty("volumetrie").getValue())
+#set ($volumetrieDemat = $volumetrieDemat*100)
+#if ($volumetrie &gt; 0 &amp;&amp; $volumetrieDemat)
+  #set ($percent = $mathtool.div($volumetrieDemat,$volumetrie))
+  #set ($percent = $mathtool.roundTo(1,$percent))
+  ${percent}%
+#end
+{{/html}}
+{{/velocity}}</script>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>

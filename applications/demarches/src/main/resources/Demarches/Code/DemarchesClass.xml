@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1526657567000</creationDate>
+  <creationDate>1527081469000</creationDate>
   <parent>Demarches.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528788597000</date>
-  <contentUpdateDate>1526657567000</contentUpdateDate>
+  <date>1530031095000</date>
+  <contentUpdateDate>1527081469000</contentUpdateDate>
   <version>1.1</version>
   <title>Demarches Class</title>
   <comment/>
@@ -283,7 +283,7 @@
 #if ($xcontext.action == 'get')
   #foreach ($ministere in $value)
     #set($ministereDocument = $xwiki.getDocument($ministere))
-    #if ($ministereDocument.sigle) $ministereDocument.sigle #else $ministereDocument.fullName #end
+    #if ($velocityCount &gt; 1), #{end}#if ($ministereDocument.sigle)${ministereDocument.sigle}#{else}${ministereDocument.fullName}#end
   #end
 #elseif ($xcontext.action == 'view')
   #foreach ($ministere in $value)
@@ -338,6 +338,34 @@
       <values>aucun=Aucun|formulaire=Formulaire en ligne|pdfnonremplissable=PDF non remplissable|pdfremplissable=PDF remplissable|edi=EDI|teleprocedure=Téléprocédure</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </niveauDemat>
+    <niveauDematBoolean>
+      <customDisplay>{{velocity}}
+{{html clean='false' wiki='false'}}
+#set ($dematCriteres = ['teleprocedure', 'formulaire'])
+#set ($niveauDemat = $object.getProperty('niveauDemat').value)
+#set ($isDemat = 0)
+#if ($niveauDemat &amp;&amp; $niveauDemat.size() &gt; 0)
+  #foreach ($niveau in $niveauDemat)
+    #if ($dematCriteres.contains($niveau))
+      #set ($isDemat = 1)
+      #break
+    #end
+  #end
+  $services.localization.render("yesno_${isDemat}")
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>niveauDematBoolean</name>
+      <number>34</number>
+      <prettyName>niveauDematBoolean</prettyName>
+      <script/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+    </niveauDematBoolean>
     <niveauPrevu>
       <cache>0</cache>
       <customDisplay/>
