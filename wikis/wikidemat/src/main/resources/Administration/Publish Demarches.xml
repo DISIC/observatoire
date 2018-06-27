@@ -31,7 +31,7 @@
   <parent>wikidemat:Administration.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527839225000</date>
+  <date>1530092801000</date>
   <contentUpdateDate>1527167076000</contentUpdateDate>
   <version>1.1</version>
   <title>Publication des démarches</title>
@@ -134,7 +134,7 @@ Demarches.Code.DemarchesClass:remarques
 </excludeFields>
     </property>
     <property>
-      <filter>from doc.object(Demarches.Code.DemarchesClass) as demarche where doc.space = 'Demarches'</filter>
+      <filter>from doc.object(Demarches.Code.DemarchesClass) as demarche where doc.space = 'Demarches' and demarche.statut='active'</filter>
     </property>
     <property>
       <targetwiki>wikidemarches</targetwiki>
