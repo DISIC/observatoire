@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530002883000</date>
-  <contentUpdateDate>1530002883000</contentUpdateDate>
+  <date>1530087400000</date>
+  <contentUpdateDate>1530087400000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -55,9 +55,9 @@
         ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
         #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
         &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
-          &lt;label for="headerglobalsearchinput"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
+          &lt;label for="search-input"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
           &lt;div class="input-group"&gt;
-            &lt;input type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
+            &lt;input id="search-input" type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
             &lt;span class='input-group-btn'&gt;
               &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;
               $services.icon.renderHTML('search')
@@ -85,6 +85,14 @@
 
           #end
         #end
+      )))
+    )))
+  )))
+  (%class='row demarches-dashboardrow'%)(((
+    (%class='container' %)(((
+      (%class='demarches-dashboardlink'%) (((
+        ----
+        ==[[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome]]==
       )))
     )))
   )))
@@ -284,6 +292,17 @@ div.suggestItem {
         padding-bottom: 1.5em;
       }
     }
+  }
+}
+
+.demarches-dashboardrow {
+  text-align: center;
+  h2 {
+    padding-top: 1.5em;
+    padding-bottom: 0.75em;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1em;
   }
 }
 
