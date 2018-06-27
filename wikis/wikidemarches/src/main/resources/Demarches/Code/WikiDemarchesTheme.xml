@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530103381000</date>
+  <date>1530113231000</date>
   <contentUpdateDate>1527413730000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches theme</title>
@@ -1082,6 +1082,7 @@ select[size="1"]{
     h1 {
       margin: 0;
       font-size: 1em;
+      line-height: 1.5;
       font-weight: inherit;
     }
     .demarches-titlebar-name {
@@ -1119,10 +1120,14 @@ select[size="1"]{
     .demarches-titlebar-sitename {
       padding-left: 0.75ex;
       line-height: 1.1;
+      h1 {
+        line-height: 1.1;
+      }
     }
     .demarches-titlebar-name {
       font-size: 100%;
     }
+
     .demarches-titlebar-headline {
       font-size: 0.75em;
     }
