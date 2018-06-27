@@ -31,7 +31,7 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528878479000</date>
+  <date>1530020494000</date>
   <contentUpdateDate>1528878478000</contentUpdateDate>
   <version>1.1</version>
   <title>Demandes</title>
@@ -138,7 +138,7 @@
       <dataSpace/>
     </property>
     <property>
-      <description/>
+      <description>{{addExcelExportToLivetable livetable="demandes" withAllFields="true" filename="demandes"/}}</description>
     </property>
   </object>
   <object>
