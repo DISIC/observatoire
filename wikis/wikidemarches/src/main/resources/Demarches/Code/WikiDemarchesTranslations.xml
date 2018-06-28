@@ -31,8 +31,8 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530182312000</date>
-  <contentUpdateDate>1530182312000</contentUpdateDate>
+  <date>1530201412000</date>
+  <contentUpdateDate>1530201412000</contentUpdateDate>
   <version>1.1</version>
   <title>WikiDemarchesTranslations</title>
   <comment/>
@@ -42,10 +42,11 @@
   <content>#General
 wd.legal-notice=Mentions légales
 wd.accessibilite=Accessibilité
+wd.contact=Contact
 wikidemarches.obligatoire=(obligatoire)
 
 #Démarches
-wikidemarches.sitename=NosDémarches.gouv.fr
+wikidemarches.sitename=NosDemarches.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
 wikidemarches.home.title=Évaluez votre démarche en ligne
 wikidemarches.home.subtitle=
@@ -67,12 +68,16 @@ wikidemarches.footer.administrationlinks.newwindow=nouvelle fenêtre
 
 # Tableau de bord
 wikidemarches.dematdashboard.title=Tableau de bord de la dématérialisation
-wikidemarches.dematdashboard.intro=Ce tableau recense près de 1300 démarches administratives dont 258 sont dématérialisées à ce jour, sous forme de formulaire en ligne ou de téléprocédure.
-wikidemarches.dematdashboard.warning=Attention : ce recensement, en cours, est appelé à être complété dans les prochains mois par les administrations et grâce à vos retours.
-wikidemarches.dematdashboard.download=Téléchargez le fichier .csv
+wikidemarches.dematdashboard.intro=
+# wikidemarches.dematdashboard.intro=Ce tableau recense plus d'un millier de démarches administratives dont 258 sont dématérialisées à ce jour, sous forme de formulaire en ligne ou de téléprocédure.
+wikidemarches.dematdashboard.warning=Le recensement est en cours, il sera complété et fiabilisé dans les prochains mois par les administrations et grâce à vos retours.
+# wikidemarches.dematdashboard.warning=Attention : ce recensement, en cours, est appelé à être complété dans les prochains mois par les administrations et grâce à vos retours.
+wikidemarches.dematdashboard.download=Télécharger le fichier .csv
+wikidemarches.dematdashboard.download.hint={0}
 wikidemarches.dematdashboard.homelink=Voir le tableau de bord
 wikidemarches.dematdashboard.hometitle=Suivez l'avancée de la dématérialisation
-wikidemarches.dematdashboard.homesubtitle=100 % des démarches administratives accessibles en ligne au 1er janvier 2022. C’est l’une des mesures phares annoncée par le gouvernement pour accélérer la transformation numérique de l’administration française menée dans le cadre de la démarche Action Publique 2022.</content>
+wikidemarches.dematdashboard.homesubtitle=
+# wikidemarches.dematdashboard.homesubtitle=« 100 % des démarches administratives accessibles en ligne au 1er janvier 2022 » est l'une des mesures phares annoncée par le gouvernement pour accélérer la transformation numérique de l’administration française, dans le cadre de la démarche « Action Publique 2022 ».</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>

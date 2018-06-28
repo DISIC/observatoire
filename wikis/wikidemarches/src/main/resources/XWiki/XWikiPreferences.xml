@@ -31,7 +31,7 @@
   <parent>XWiki.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530018839000</date>
+  <date>1530199367000</date>
   <contentUpdateDate>1527079612000</contentUpdateDate>
   <version>1.1</version>
   <title>XWiki Preferences</title>
@@ -3087,7 +3087,7 @@ ${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&a
       <version>&lt;span&gt;&lt;/span&gt;</version>
     </property>
     <property>
-      <webcopyright>#set($sl = $services.localization)&amp;copy; 2018 $sl.render('wikidemarches.sitename') | &lt;a href="$xwiki.getURL('Main.MentionsLegales')"&gt;$sl.render('wd.legal-notice')&lt;/a&gt; | &lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$sl.render('wd.accessibilite')&lt;/a&gt;</webcopyright>
+      <webcopyright/>
     </property>
     <property>
       <xwiki.title.mandatory>0</xwiki.title.mandatory>
