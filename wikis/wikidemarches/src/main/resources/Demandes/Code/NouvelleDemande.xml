@@ -31,8 +31,8 @@
   <parent>Main.Search</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529938735000</date>
-  <contentUpdateDate>1529938735000</contentUpdateDate>
+  <date>1530177714000</date>
+  <contentUpdateDate>1530177714000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.demande.creation')</title>
   <comment/>
@@ -80,10 +80,14 @@
   &lt;form action="$doc.getURL()" method="POST" class="xform wd-form demande-form"&gt;
   &lt;fieldset class="form-computedfieldclass"&gt;
     &lt;div&gt;
-      &lt;label for="Demandes.Code.DemandesClass_0_contenu" style="padding-bottom:0.5em"&gt;$services.localization.render('Demandes.Code.DemandesClass_nom') &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+      &lt;label for="Demandes.Code.DemandesClass_0_contenu" style="padding-bottom:0.5em"&gt;
+      &lt;span&gt;$services.localization.render('Demandes.Code.DemandesClass_description') &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;&lt;/span&gt;
+      &lt;span class="xHint"&gt;$services.localization.render('Demandes.Code.DemandesClass_description_hint')&lt;/span&gt;&lt;/label&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;input required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" value="$!value"/&gt;
+      &lt;textarea required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" rows="5"&gt;
+      $!value
+      &lt;/textarea&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
   &lt;div class="buttonwrapper"&gt;
