@@ -30,8 +30,8 @@
   <creationDate>1252454400000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530103603000</date>
-  <contentUpdateDate>1530103582000</contentUpdateDate>
+  <date>1530179061000</date>
+  <contentUpdateDate>1530179010000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -94,7 +94,10 @@
       (%class='demarches-dashboardlink'%) (((
         ==$services.localization.render('wikidemarches.dematdashboard.hometitle')==
 
-        [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button secondary']]
+        (%class='demarches-dashboardsubtitle'%)
+        $services.localization.render('wikidemarches.dematdashboard.homesubtitle')
+
+        [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button btn btn-primary']]
       )))
     )))
   )))
@@ -309,6 +312,10 @@ div.suggestItem {
     margin-bottom: 1.5em;
   }
   padding-bottom: 1.5em;
+
+  .demarches-dashboardsubtitle {
+    text-align: left;
+  }
 }
 
 /* Some adjustment on larger devices:
