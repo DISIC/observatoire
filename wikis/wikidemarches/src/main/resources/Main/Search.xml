@@ -31,28 +31,13 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529943152000</date>
-  <contentUpdateDate>1529943152000</contentUpdateDate>
+  <date>1530192216000</date>
+  <contentUpdateDate>1530192216000</contentUpdateDate>
   <version>1.1</version>
   <title>#if("$!{request.text}" == '')$services.localization.render('search.page.title.noquery')#else$services.localization.render('search.page.title.query', [$request.text])#end</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>true</hidden>
-  <content>{{include document="Demarches.Code.SolrSearch" /}}
-
-{{velocity}}
-##We don't want to send the HTML below to XHR requests aiming at refreshing the search page with newly applied criteria.
-#if ($xcontext.action == 'view')
-#set ($search = $!request.text)
-{{html clean="false" wiki="true"}}
-&lt;div class="new-demarche"&gt;
-  &lt;div&gt;$services.localization.render('wikidemarches.demande.demarche-absente')&lt;/div&gt;
-  &lt;div class='buttonwrapper'&gt;
-    &lt;a class='button btn btn-primary' href="$xwiki.getDocument('Demandes.Code.NouvelleDemande').getURL()?text=$escapetool.url($search)"&gt;$services.localization.render('wikidemarches.demande.creation')&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-{{/html}}
-#end
-{{/velocity}}</content>
+  <content>{{include document="Demarches.Code.SolrSearch" /}}</content>
 </xwikidoc>
