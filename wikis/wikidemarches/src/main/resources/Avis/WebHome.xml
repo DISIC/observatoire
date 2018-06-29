@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529504572000</date>
-  <contentUpdateDate>1529504572000</contentUpdateDate>
+  <date>1530280675000</date>
+  <contentUpdateDate>1530280675000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis</title>
   <comment/>
@@ -43,6 +43,7 @@
 #set ($columnsProperties = {
   'doc.creationDate': {},
   'doc.name': {"link":"view"},
+  'session': {},
   'demarche': {},
   'modalite': {},
   'score': {"html":true},
@@ -59,7 +60,7 @@
   'selectedColumn': 'doc.creationDate',
   'defaultOrder': 'desc'
 })
-#set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'modalite', 'score', 'facile', 'comprehensible', 'difficultes', 'aide', 'vote', 'doc.author', '_actions'])
+#set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'demarche', 'modalite', 'score', 'facile', 'comprehensible', 'difficultes', 'aide', 'vote', 'doc.author', '_actions'])
 #livetable('avis' $columns $columnsProperties $options)
 
 {{addExcelExportToLivetable livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')"/}}
