@@ -62,7 +62,7 @@
         <hint/>
         <multiSelect>1</multiSelect>
         <name>aide</name>
-        <number>7</number>
+        <number>8</number>
         <picker>0</picker>
         <prettyName>Aide</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -81,7 +81,7 @@
         <disabled>0</disabled>
         <hint/>
         <name>comprehensible</name>
-        <number>5</number>
+        <number>6</number>
         <numberType>integer</numberType>
         <prettyName>Compréhensible</prettyName>
         <size>30</size>
@@ -100,7 +100,7 @@
         <idField/>
         <multiSelect>0</multiSelect>
         <name>demarche</name>
-        <number>1</number>
+        <number>2</number>
         <picker>0</picker>
         <prettyName>Démarche</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -123,7 +123,7 @@
         <hint/>
         <multiSelect>1</multiSelect>
         <name>difficultes</name>
-        <number>6</number>
+        <number>7</number>
         <picker>0</picker>
         <prettyName>Difficultés</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -142,7 +142,7 @@
         <disabled>0</disabled>
         <hint/>
         <name>facile</name>
-        <number>4</number>
+        <number>5</number>
         <numberType>integer</numberType>
         <prettyName>Facile</prettyName>
         <size>30</size>
@@ -159,7 +159,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>modalite</name>
-        <number>2</number>
+        <number>3</number>
         <picker>0</picker>
         <prettyName>Modalité</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -178,7 +178,7 @@
         <disabled>0</disabled>
         <hint/>
         <name>score</name>
-        <number>3</number>
+        <number>4</number>
         <numberType>integer</numberType>
         <prettyName>Score</prettyName>
         <size>30</size>
@@ -187,6 +187,20 @@
         <validationRegExp>.+</validationRegExp>
         <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
       </score>
+      <sessionId>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>sessionId</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>ID de session</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </sessionId>
       <vote>
         <cache>0</cache>
         <customDisplay>{{include reference="Avis.Code.ListDisplayer" /}}</customDisplay>
@@ -195,7 +209,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>vote</name>
-        <number>8</number>
+        <number>9</number>
         <picker>0</picker>
         <prettyName>Vote</prettyName>
         <relationalStorage>1</relationalStorage>
