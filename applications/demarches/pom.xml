@@ -27,7 +27,7 @@
   <parent>
     <artifactId>xwiki-dinsic-wikidemarches-applications</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-applications-demarches</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - Demarches Application</name>
