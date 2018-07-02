@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528139547000</date>
+  <date>1530522378000</date>
   <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -305,6 +305,115 @@ $doc.displayRendered($field, $prefix, $object)##
     </property>
     <property>
       <path>layoutExtraVars.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.Skin</name>
+    <number>2</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>909a37ae-08e3-4e75-a239-415f96e1b524</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#macro (livetable_filter $column $columnProperties $xproperty)
+  #set ($filterType = $columnProperties.type)
+  #if ("$!filterType" == '')
+    ## Determine the filter type from the xproperty type.
+    #set ($filterTypeByXPropertyType = {
+      'Boolean': 'boolean',
+      'DBList': 'suggest',
+      'DBTreeList': 'suggest',
+      'Date': 'date',
+      'Email': 'text',
+      'Groups': 'suggest',
+      'Number': 'number',
+      'Page': 'text',
+      'StaticList': 'list',
+      'String': 'text',
+      'TextArea': 'text',
+      'Users': 'suggest'
+    })
+    #set ($filterType = $filterTypeByXPropertyType.get($xproperty.classType))
+    #if ("$!filterType" == '')
+      ## If we get here then it means the column is filterable but we could not determine the filter type. Use the text
+      ## filter in this case because it is the most generic.
+      #set ($filterType = 'text')
+    #end
+  #end
+  #if ($filterType == 'list' || $filterType == 'multilist')
+    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column"
+      #if ($filterType == 'multilist')
+        class="xwiki-livetable-multilist" multiple="multiple"&gt;
+      #else
+        &gt;&lt;option value=""&gt;$services.localization.render('platform.livetable.selectAll')&lt;/option&gt;
+        &lt;option disabled="disabled"&gt;────&lt;/option&gt;
+      #end
+    #set ($storedValues = $xproperty.listValues)
+    #set ($displayedValues = $xproperty.mapValues)
+    #foreach ($storedValue in $storedValues)
+      #set ($l10nKey = "${xproperty.className}_${column}_$storedValue")
+      #set ($displayedValue = $services.localization.render($l10nKey))
+      #if ($displayedValue == $l10nKey)
+        #set ($displayedValue = $displayedValues.get($storedValue).value)
+      #end
+      &lt;option value="$storedValue"&gt;$displayedValue&lt;/option&gt;
+    #end
+    &lt;/select&gt;
+  #elseif ($filterType == 'boolean')
+    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column"&gt;
+      &lt;option value=""&gt;$services.localization.render('platform.livetable.selectAll')&lt;/option&gt;
+      &lt;option value="0"&gt;$services.localization.render('no')&lt;/option&gt;
+      &lt;option value="1"&gt;$services.localization.render('yes')&lt;/option&gt;
+    &lt;/select&gt;
+  #elseif ($filterType == 'text' || $filterType == 'number')
+    &lt;input id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column" type="text"
+      #if ("$!columnProperties.size" != '')size="$!escapetool.xml($columnProperties.size)"#end
+      title="$escapetool.xml($services.localization.render('platform.livetable.filtersTitle',
+        [$services.localization.render("${transprefix}$column")]))" /&gt;
+  #elseif ($filterType == 'suggest' &amp;&amp; $xproperty)
+    #set ($discard = $xwiki.linkx.use($services.webjars.url('selectize.js', 'css/selectize.css'),
+      {'type': 'text/css', 'rel': 'stylesheet'}))
+    #set ($discard = $xwiki.ssfx.use('uicomponents/suggest/xwiki.selectize.css', true))
+    ## we replace the call to the default suggestPropertyValues.js by a JS provided by DemarchesSheet
+    #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet',
+      {'forceSkinAction' : true, 'language' : $xcontext.locale}))
+    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$!escapetool.xml($column)"
+      class="suggest-propertyValues" multiple="multiple" size="1"
+      data-className="$!escapetool.xml($xproperty.className)" data-propertyName="$!escapetool.xml($xproperty.name)"&gt;
+    &lt;/select&gt;
+  #end
+#end</content>
+    </property>
+    <property>
+      <path>macros.vm</path>
     </property>
   </object>
   <object>
