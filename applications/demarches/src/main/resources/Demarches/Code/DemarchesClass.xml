@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1527081469000</creationDate>
+  <creationDate>1526657567000</creationDate>
   <parent>Demarches.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530031095000</date>
-  <contentUpdateDate>1527081469000</contentUpdateDate>
+  <date>1530262416000</date>
+  <contentUpdateDate>1526657567000</contentUpdateDate>
   <version>1.1</version>
   <title>Demarches Class</title>
   <comment/>
@@ -636,7 +636,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>prevu=Prévu|encours=En cours|termine=Terminé</values>
+      <values>aucun=Aucun|prévu=Prévu|en cours=En cours|terminé=Terminé</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutProjetDemat>
     <textes>
