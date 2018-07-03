@@ -1,0 +1,65 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Avis.Admin.AvisScoreInvalide" locale="">
+  <web>Avis.Admin</web>
+  <name>AvisScoreInvalide</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1530636744000</creationDate>
+  <parent>wikidemarches:Avis.Admin.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1530637105000</date>
+  <contentUpdateDate>1530636960000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Effacer les avis invalides</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{velocity}}
+{{info}}Ce script cherche et permet de nettoyer tous les avis n'ayant pas de score ou avec un score au dessus de 3 ou en dessous de 1.{{/info}}
+
+#set($isConfirmed = "$!request.confirm" == 'true')
+#set($invalidAvis = $services.query.hql("select doc.fullName, sc.value from XWikiDocument doc, BaseObject obj, IntegerProperty sc where obj.name=doc.fullName and obj.className = 'Avis.Code.AvisClass' and obj.id = sc.id.id and sc.id.name='score' and (sc.value is null or sc.value &gt; 3 or sc.value &lt; 1) order by doc.date desc").execute())
+#if($invalidAvis.size() &gt; 0)
+  |=No|=Avis|=Date|=Score invalide#if($isConfirmed)|=Effacé#end
+
+  #foreach($iA in $invalidAvis)
+    #set($iADoc = $xwiki.getDocument($iA[0]))
+    |$velocityCount|$iADoc.fullName|$iADoc.creationDate|$!iA[1]#if($isConfirmed)|$iADoc.delete() Oui #end
+  
+  #end
+
+  #if (!$isConfirmed)
+    [[Effacer les avis invalides&gt;&gt;path:$doc.getURL('view', 'confirm=true')||class='button btn btn-primary']]
+  #else
+    [[OK&gt;&gt;$doc.fullName||class='button secondary']]
+  #end
+#else
+  Aucun avis invalide trouvé.
+#end
+{{/velocity}}</content>
+</xwikidoc>
