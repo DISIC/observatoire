@@ -31,7 +31,7 @@
   <parent>wikidemarches:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530199718000</date>
+  <date>1530627720000</date>
   <contentUpdateDate>1527348411000</contentUpdateDate>
   <version>1.1</version>
   <title>Wiki Demarches Skin</title>
@@ -363,7 +363,7 @@
 &lt;footer id="footerglobal" role="contentinfo"&gt;
   &lt;div class='container'&gt;
   &lt;hr&gt;
-  &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.MentionsLegales')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/div&gt;
+  &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.MentionsLegales')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.A propos')""&gt;$services.localization.render('wd.about')&lt;/a&gt;&lt;/div&gt;
   &lt;div id='wd-customfooterinfo'&gt;
     $services.localization.render('wikidemarches.footer.administrationlinks.intro') : &lt;a href="http://service-public.fr/" target="_blank" title="Service-public.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;Service-public.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://legifrance.gouv.fr/" target="_blank" title="Legifrance.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;Legifrance.gouv.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://data.gouv.fr/" target="_blank" title="data.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;data.gouv.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://gouvernement.fr/" target="_blank" title="Gouvernement.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;Gouvernement.fr&lt;/a&gt; &amp;ndash; &lt;a href="http://france.fr/" target="_blank" title="France.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;France.fr&lt;/a&gt;
   &lt;/div&gt;
