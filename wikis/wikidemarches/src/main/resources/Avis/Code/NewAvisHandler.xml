@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530639103000</date>
-  <contentUpdateDate>1530639103000</contentUpdateDate>
+  <date>1530640193000</date>
+  <contentUpdateDate>1530640193000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -92,16 +92,14 @@
   #end
 #elseif ($action == 'update-and-end')
   #set ($id = "$!request['avis-id']")
-  #if ($id != $NULL)
+  #if ($id != $NULL &amp;&amp; $xwiki.exists("Avis.${id}"))
     #set ($target = $xwiki.getDocumentAsAuthor("Avis.${id}"))
-    #if ($xwiki.exists($target.fullName))
-      #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
-      #set ($object = $target.getObject('Avis.Code.AvisClass'))
-      #validateAvis($object)
-      #if($validated)
-        #set ($discard = $target.saveWithProgrammingRights())
-        $request.session.setAttribute('avis-step', 'avis.merci_2')
-      #end
+    #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
+    #set ($object = $target.getObject('Avis.Code.AvisClass'))
+    #validateAvis($object)
+    #if($validated)
+      #set ($discard = $target.saveWithProgrammingRights())
+      $request.session.setAttribute('avis-step', 'avis.merci_2')
     #end
   #end
 #end
