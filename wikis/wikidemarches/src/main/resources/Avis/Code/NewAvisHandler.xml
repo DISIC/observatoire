@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530632495000</date>
-  <contentUpdateDate>1530632495000</contentUpdateDate>
+  <date>1530639103000</date>
+  <contentUpdateDate>1530639103000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -40,6 +40,39 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
+## - if prop type is StaticList, checks that value is in the static list
+## - if prop type is DBList, checks that the value is an existing document
+## - if prop type is number, checks nothing because the field cannot have a value that is not a number
+## TODO: weird that value is an empty array for unset fields of type StaticList
+#macro(validatePropertyValue $value $prop $validationMap)
+  #if (!$value) #set ($value = '') #end
+  #set ($validated = false)
+  #if ($prop.type == 'StaticListClass')
+    #set ($authorizedValues = $prop.listValues)
+    #set ($validated = $authorizedValues.contains($value) || $value == '' || $value.size() == 0)
+  #elseif ($prop.type == 'DBListClass')
+    #set ($validated = $value.length() &gt; 0 &amp;&amp; $xwiki.exists($value))
+  #elseif ($prop.type == 'NumberClass')
+    #set ($validated = true)
+  #else
+    #set ($validated = true)
+  #end
+  #set ($validationMap[$prop.name] = $validated)
+#end
+
+#macro(validateAvis $avisObject)
+  #set ($clazz = $xwiki.getClass('Avis.Code.AvisClass'))
+  #set ($validationMap = {})
+  #foreach($prop in $clazz.properties)
+    #set ($value = $avisObject.getProperty($prop.name).value)
+    #validatePropertyValue($value $prop $validationMap)
+  #end
+  #set ($validated = true)
+  #foreach ($value in $validationMap.values())
+    #set ($validated = $validated &amp;&amp; $value)
+  #end
+#end
+
 #set ($action = "$!request['avis-action']")
 #if ($action == 'create-and-end' || $action == 'create-and-continue')
   #set ($uin = $services.uin.next)
@@ -51,11 +84,8 @@
     #set ($discard = $object.set("sessionId", $sessionId))
   #end
   ## save with programming rights as the current user will not have the right to edit the Avis document
-  ## save only if the Demarche exists, and a score and a modalite have been set
-  #set ($demarche = $object.getProperty('demarche').getValue())
-  #set ($score = $object.getProperty('score').getValue())
-  #set ($modalite = $object.getProperty('modalite').getValue())
-  #if ($xwiki.exists($demarche) &amp;&amp; $score &amp;&amp; $modalite)
+  #validateAvis($object)
+  #if ($validated)
     #set ($discard = $target.saveWithProgrammingRights())
   #else
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
@@ -64,9 +94,15 @@
   #set ($id = "$!request['avis-id']")
   #if ($id != $NULL)
     #set ($target = $xwiki.getDocumentAsAuthor("Avis.${id}"))
-    #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
-    #set ($discard = $target.saveWithProgrammingRights())
-    $request.session.setAttribute('avis-step', 'avis.merci_2')
+    #if ($xwiki.exists($target.fullName))
+      #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
+      #set ($object = $target.getObject('Avis.Code.AvisClass'))
+      #validateAvis($object)
+      #if($validated)
+        #set ($discard = $target.saveWithProgrammingRights())
+        $request.session.setAttribute('avis-step', 'avis.merci_2')
+      #end
+    #end
   #end
 #end
 
