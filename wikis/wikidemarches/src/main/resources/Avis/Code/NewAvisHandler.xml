@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530640193000</date>
-  <contentUpdateDate>1530640193000</contentUpdateDate>
+  <date>1530696439000</date>
+  <contentUpdateDate>1530696439000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -40,24 +40,38 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-## - if prop type is StaticList, checks that value is in the static list
-## - if prop type is DBList, checks that the value is an existing document
-## - if prop type is number, checks nothing because the field cannot have a value that is not a number
-## TODO: weird that value is an empty array for unset fields of type StaticList
+#* - if prop type is StaticList, checks that value is in the static list
+ * - if prop type is DBList, checks that the value is an existing document
+ * - if prop type is number, checks nothing because the field cannot have a value that is not a number
+ * TODO: weird that value is an empty array for unset fields of type StaticList
+ *#
 #macro(validatePropertyValue $value $prop $validationMap)
   #if (!$value) #set ($value = '') #end
   #set ($validated = false)
   #if ($prop.type == 'StaticListClass')
     #set ($authorizedValues = $prop.listValues)
-    #set ($validated = $authorizedValues.contains($value) || $value == '' || $value.size() == 0)
+    ## if the property is a checkbox, the value is an array so all values have to be validated
+    #if ($value.size() &gt; 0)
+      #set ($validated = true)
+      #foreach ($val in $value)
+        #set ($validated = $validated &amp;&amp; $authorizedValues.contains($val))
+      #end
+    #else
+      #set ($validated = $authorizedValues.contains($value) || $value == '' || $value.size() == 0)
+    #end
   #elseif ($prop.type == 'DBListClass')
     #set ($validated = $value.length() &gt; 0 &amp;&amp; $xwiki.exists($value))
   #elseif ($prop.type == 'NumberClass')
-    #set ($validated = true)
+    #if ($prop.name == 'score')
+      #set ($validated = $value &gt; 0 &amp;&amp; $value &lt; 4)
+    #else
+      #set ($validated = true)
+    #end
   #else
     #set ($validated = true)
   #end
   #set ($validationMap[$prop.name] = $validated)
+  ##* $prop.name $prop.type: $value - $authorizedValues $validated
 #end
 
 #macro(validateAvis $avisObject)
@@ -88,6 +102,7 @@
   #if ($validated)
     #set ($discard = $target.saveWithProgrammingRights())
   #else
+    $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #elseif ($action == 'update-and-end')
@@ -100,6 +115,9 @@
     #if($validated)
       #set ($discard = $target.saveWithProgrammingRights())
       $request.session.setAttribute('avis-step', 'avis.merci_2')
+    #else
+      $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
+      $response.sendRedirect($xwiki.getURL('Main.WebHome'))
     #end
   #end
 #end
