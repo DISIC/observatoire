@@ -31,8 +31,8 @@
   <parent>DemandesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530200420000</date>
-  <contentUpdateDate>1530200420000</contentUpdateDate>
+  <date>1530716793000</date>
+  <contentUpdateDate>1530716793000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -40,7 +40,7 @@
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
   <content># Class fields
-Demandes.Code.DemandesClass_content1=contenu
+Demandes.Code.DemandesClass_contenu=contenu
 Demandes.Code.DemandesClass_type=type
 Demandes.Code.DemandesClass_type_dematerialisation=Demande de dématérialisation
 Demandes.Code.DemandesClass_type_contact=Demande de contact
@@ -48,7 +48,7 @@ Demandes.Code.DemandesClass_description=Description de la démarche
 Demandes.Code.DemandesClass_description_hint=Informations sur la démarche que vous n’avez pas trouvée sur ce site : nom de la démarche, adresse URL, administration avec laquelle vous étiez en contact…
 
 # Live table generic keys
-demandes.livetable.doc.title=Titre de la page
+demandes.livetable.doc.title=ID
 demandes.livetable.doc.name=Nom de la page
 demandes.livetable.doc.space=Espace
 demandes.livetable.doc.fullname=Nom complet de la page
@@ -57,6 +57,7 @@ demandes.livetable.doc.author=Dernier auteur
 demandes.livetable.doc.creator=Créateur
 demandes.livetable.doc.date=Date de dernière mise à jour
 demandes.livetable.doc.creationDate=Date de création
+demandes.livetable.contenu=Contenu
 demandes.livetable._avatar=Avatar
 demandes.livetable._images=Images
 demandes.livetable._attachments=Pièces jointes

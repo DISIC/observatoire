@@ -31,7 +31,7 @@
   <parent>Demandes.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528892039000</date>
+  <date>1530716280000</date>
   <contentUpdateDate>1528890549000</contentUpdateDate>
   <version>1.1</version>
   <title>Demandes Class</title>
@@ -50,7 +50,7 @@
     <nameField/>
     <validationScript/>
     <contenu>
-      <customDisplay>{{include reference="AppWithinMinutes.Content"/}}</customDisplay>
+      <customDisplay>{{include reference="Demandes.Code.DemandeContentViewer" /}}</customDisplay>
       <disabled>0</disabled>
       <hint>Contenu de la demande</hint>
       <name>contenu</name>

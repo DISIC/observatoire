@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530179910000</date>
-  <contentUpdateDate>1530179910000</contentUpdateDate>
+  <date>1530718783000</date>
+  <contentUpdateDate>1530718783000</contentUpdateDate>
   <version>1.1</version>
   <title>Demandes</title>
   <comment/>
@@ -41,9 +41,10 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'doc.title': {"link":"view", "displayName":"ID de la demande"},
+  'doc.title': {"link":"view"},
   'doc.date': {},
-  'doc.author': {"link":"author"},
+  'doc.author': {},
+  'contenu': {},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
 #set ($options = {
@@ -55,16 +56,18 @@
   'selectedColumn': 'doc.date',
   'defaultOrder': 'desc'
 })
-#set ($columns = ['doc.title', 'doc.date', 'doc.author', '_actions'])
+#set ($columns = ['doc.title', 'doc.date', 'doc.author', 'contenu', '_actions'])
 #livetable('demandes' $columns $columnsProperties $options)
-{{/velocity}}</content>
+{{/velocity}}
+
+{{addExcelExportToLivetable livetable="demandes" withPageName="false" withPageURL="false" withAllFields="true" filename="demandes.xls"/}}</content>
   <object>
     <name>Demandes.WebHome</name>
     <number>0</number>
-    <className>AppWithinMinutes.LiveTableClass</className>
-    <guid>d6c8ece0-4e12-4885-8b11-30be228a3acd</guid>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>dbbb2a51-a5fd-43a2-aaa5-3b5db22a8b1c</guid>
     <class>
-      <name>AppWithinMinutes.LiveTableClass</name>
+      <name>XWiki.StyleSheetExtension</name>
       <customClass/>
       <customMapping/>
       <defaultViewSheet/>
@@ -72,72 +75,108 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
-      <class>
-        <customDisplay/>
+      <cache>
+        <cache>0</cache>
         <disabled>0</disabled>
-        <name>class</name>
-        <number>1</number>
-        <picker>0</picker>
-        <prettyName>Class</prettyName>
-        <size>30</size>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
         <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </class>
-      <columns>
-        <customDisplay/>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
         <disabled>0</disabled>
-        <name>columns</name>
-        <number>3</number>
-        <picker>0</picker>
-        <prettyName>Live Table Columns</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </columns>
-      <dataSpace>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <name>dataSpace</name>
-        <number>4</number>
-        <picker>0</picker>
-        <prettyName>Data Location</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </dataSpace>
-      <description>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <editor>---</editor>
-        <name>description</name>
+        <editor>PureText</editor>
+        <name>code</name>
         <number>2</number>
-        <picker>0</picker>
-        <prettyName>Description</prettyName>
-        <rows>5</rows>
-        <size>40</size>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
         <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </description>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
     </class>
     <property>
-      <class>Demandes.Code.DemandesClass</class>
+      <cache>long</cache>
     </property>
     <property>
-      <columns>doc.title doc.location doc.date doc.author _actions</columns>
+      <code>/* smaller font and 100% width so that we can see the full table of avis */
+
+#contentcontainerinner {
+  font-size: 14px;
+  width: 100%;
+}</code>
     </property>
     <property>
-      <dataSpace/>
+      <contentType>CSS</contentType>
     </property>
     <property>
-      <description>{{addExcelExportToLivetable livetable="demandes" withAllFields="true" filename="demandes"/}}</description>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
     </property>
   </object>
   <object>
