@@ -55,7 +55,7 @@
       <nameField/>
       <validationScript/>
       <contenu>
-        <customDisplay>{{include reference="AppWithinMinutes.Content"/}}</customDisplay>
+        <customDisplay>{{include reference="Demandes.Code.DemandeContentViewer" /}}</customDisplay>
         <disabled>0</disabled>
         <hint>Contenu de la demande</hint>
         <name>contenu</name>
