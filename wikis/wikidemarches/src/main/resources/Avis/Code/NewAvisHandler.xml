@@ -31,8 +31,8 @@
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530696439000</date>
-  <contentUpdateDate>1530696439000</contentUpdateDate>
+  <date>1530698801000</date>
+  <contentUpdateDate>1530698801000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -43,15 +43,17 @@
 #* - if prop type is StaticList, checks that value is in the static list
  * - if prop type is DBList, checks that the value is an existing document
  * - if prop type is number, checks nothing because the field cannot have a value that is not a number
- * TODO: weird that value is an empty array for unset fields of type StaticList
+ * NB: when no checkbox is checked, value is an empty array
  *#
 #macro(validatePropertyValue $value $prop $validationMap)
-  #if (!$value) #set ($value = '') #end
+  #if (!$value)
+    #set ($value = '')
+  #end
   #set ($validated = false)
   #if ($prop.type == 'StaticListClass')
     #set ($authorizedValues = $prop.listValues)
     ## if the property is a checkbox, the value is an array so all values have to be validated
-    #if ($value.size() &gt; 0)
+    #if ($value.size() &amp;&amp; $value.size() &gt; 0)
       #set ($validated = true)
       #foreach ($val in $value)
         #set ($validated = $validated &amp;&amp; $authorizedValues.contains($val))
@@ -119,6 +121,9 @@
       $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
       $response.sendRedirect($xwiki.getURL('Main.WebHome'))
     #end
+  #else
+    $services.logging.getLogger($doc.fullName).warn('An attempt to update an invalid Avis was performed')
+    $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #end
 
