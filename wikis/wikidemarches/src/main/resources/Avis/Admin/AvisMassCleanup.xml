@@ -1,0 +1,370 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Avis.Admin.AvisMassCleanup" locale="">
+  <web>Avis.Admin</web>
+  <name>AvisMassCleanup</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1530722184000</creationDate>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1530744397000</date>
+  <contentUpdateDate>1530744396000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Effacer les avis par date de création</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{velocity}}
+#set($logger = $services.logging.getLogger($doc.fullName))
+#set($dateFormat = 'dd/MM/yyyy HH:mm:ss')
+#if ("$!request.action" == 'doremove')
+  #set($docsToRemove = $request.getParameterValues('todelete'))
+  #if ($docsToRemove &amp;&amp; $docsToRemove.size() &gt; 0)
+    |=Avis|=Effacé
+    #foreach($dTR in $docsToRemove)
+      #set($dTRDoc = $xwiki.getDocument($dTR))
+      |[[$dTRDoc.fullName]]| $dTRDoc.delete() $logger.warn("Avis $dTR was deleted") Oui
+    #end
+  #else
+    {{info}}Aucun Avis n'a été sélectionné pour l'effacement.{{/info}}
+  #end
+#elseif ("$!request.action" == 'dopreview' &amp;&amp; ("$!request.dtStart" != '' || "$!request.dtEnd" != ''))
+  #set($where = "")
+  #set($params = {})
+  #if ("$!request.dtStart" != '')
+    #set($dateStart = $datetool.toDate($dateFormat, "$!request.dtStart"))
+    #set($where = "$where and doc.creationDate &gt;= :dtStart ")
+    #set($discard = $params.put('dtStart', $dateStart))
+  #end
+  #if ("$!request.dtEnd" != '')
+    #set($dateEnd = $datetool.toDate($dateFormat, "$!request.dtEnd"))
+    #set($where = "$where and doc.creationDate &lt; :dtEnd ")
+    #set($discard = $params.put('dtEnd', $dateEnd))
+  #end
+  #set($selectedDocsHQL = $services.query.hql(", BaseObject obj where doc.fullName = obj.name and obj.className = 'Avis.Code.AvisClass' and doc.fullName != 'Avis.Code.AvisTemplate' $where order by doc.date desc"))
+  #foreach($pE in $params.entrySet())
+    #set($discard = $selectedDocsHQL.bindValue($pE.key, $pE.value))
+  #end
+  #set($selectedDocs = $selectedDocsHQL.execute())
+  #if($selectedDocs.size() &gt; 0)
+    {{html clean='false'}}
+    &lt;form method='post' action='$doc.getURL()' class='xform' &gt;
+    {{/html}}
+    |=No|=À effacer ? (%class="cleanupdocs-togglselect"%)((((%class="all"%)Tout(%%) / (%class="none"%)Aucun(%%)))) |=Avis|=Date
+    #foreach($sD in $selectedDocsHQL.execute())
+      #set($sDDoc = $xwiki.getDocument($sD))
+      |$velocityCount|{{html clean='false'}}&lt;input type='checkbox' name='todelete' value='$escapetool.xml($sDDoc.fullName)' /&gt;{{/html}}|[[$sD]]|$xwiki.formatDate($sDDoc.creationDate, $dateFormat)
+    #end
+
+    {{html clean='false'}}
+      &lt;div class='buttonwrapper'&gt;
+        &lt;input type='hidden' name='action' value='doremove' /&gt;
+        &lt;input type='submit' name='doremove' value='Effacer' class='button primary' /&gt;
+        &lt;a href='$escapetool.xml($doc.getURL())' class='button secondary'&gt;Annuler&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+    {{/html}}
+  #else
+    {{info}}Aucun avis ne correspond aux critères.
+    [[Retourner&gt;&gt;$doc.fullName]]{{/info}}
+  #end
+#else
+  ## A simple date picker widget.
+  #set ($discard = $xwiki.ssfx.use('uicomponents/widgets/datepicker/calendarDateSelect.css', true))
+  #set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/calendarDateSelect.js', {'forceSkinAction': true, 'language': $xcontext.locale}))
+  ## Used to parse and serialize the selected date using the date format specified in the XClass.
+  #set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/simpleDateFormat.js', {'forceSkinAction': true, 'language': $xcontext.locale}))
+  ## A wrapper over the CalendarDateSelect widget that uses the SimpleDateFormat to parse/serialize the dates.
+  #set ($discard = $xwiki.ssfx.use('uicomponents/widgets/datepicker/dateTimePicker.css', true))
+  #set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/dateTimePicker.js'))
+  {{html clean='false'}}
+    &lt;form action='' method='get' class='xform'&gt;
+      &lt;dl&gt;
+        &lt;dt&gt;
+          &lt;label for='dtStart'&gt;Entre (début) :&lt;/label&gt;
+        &lt;/dt&gt;
+        &lt;dd&gt;
+          &lt;input type="text" name='dtStart' id='dtStart' class="datetime t" title="$dateFormat"&gt;&lt;/input&gt;
+        &lt;/dd&gt;
+        &lt;dt&gt;
+          &lt;label for='dtEnd'&gt;Et (fin) : &lt;/label&gt;
+        &lt;/dt&gt;
+        &lt;dd&gt;
+          &lt;input type="text" name='dtEnd' id='dtEnd' class="datetime t" title="$dateFormat" &gt;&lt;/input&gt;
+        &lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;div class='buttonwrapper'&gt;
+        &lt;input type='hidden' name='action' value='dopreview' /&gt;
+        &lt;input type='submit' name='dopreview' value='Prévisualiser' class='button primary' /&gt;
+        &lt;input type='reset' name='' value='Annuler' class='button secondary' /&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  {{/html}}
+#end
+{{/velocity}}</content>
+  <object>
+    <name>Avis.Admin.AvisMassCleanup</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>5ab6ecf8-2b36-4dd5-8b2b-5a1eb3c0fd5b</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require(['jquery'], function($) {
+  $(document).ready(function() {
+    // toggle all or none
+    var toggler = function(from, checked) {
+      from.closest('form').find('input[name=todelete]').each(function(){
+        $(this).prop('checked', checked ? 'checked' : null);
+      });
+    };
+
+    $('.cleanupdocs-togglselect .all').click(function(){
+      toggler($(this), true);
+    });
+
+    $('.cleanupdocs-togglselect .none').click(function(){
+      toggler($(this), false);
+    });
+  });
+  //
+  // If there is a form containing the doremove action, add a confirmation before submit
+  $('input[name=action][value=doremove]').closest('form').submit(function(evt) {
+    if(!confirm('Êtes-vous sur(e) de vouloir effacer ces documents ? ')) {
+      evt.preventDefault();
+    }
+  });
+});</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <object>
+    <name>Avis.Admin.AvisMassCleanup</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>0eb43921-98f9-4fbf-92c2-a55e2640e342</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.cleanupdocs-togglselect {
+  font-weight: normal;
+  display: block;
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+    color: @link-color;
+  }
+  
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+</xwikidoc>
