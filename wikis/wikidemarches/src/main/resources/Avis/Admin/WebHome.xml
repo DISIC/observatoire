@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530638037000</creationDate>
+  <creationDate>1530637151000</creationDate>
   <parent>Avis.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530639100000</date>
-  <contentUpdateDate>1530639100000</contentUpdateDate>
+  <date>1530744315000</date>
+  <contentUpdateDate>1530744315000</contentUpdateDate>
   <version>1.1</version>
   <title>Administration des avis</title>
   <comment/>
@@ -41,5 +41,7 @@
   <hidden>false</hidden>
   <content>[[Effacer les avis sans score du tout&gt;&gt;doc:AvisNoScore]]
 
-[[Effacer les avis invalides&gt;&gt;doc:AvisScoreInvalide]]</content>
+[[Effacer les avis invalides&gt;&gt;doc:AvisScoreInvalide]]
+
+[[Effacer les avis par date de création&gt;&gt;doc:AvisMassCleanup]]</content>
 </xwikidoc>
