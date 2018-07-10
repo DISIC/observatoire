@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530099415000</date>
-  <contentUpdateDate>1530099415000</contentUpdateDate>
+  <date>1531239853000</date>
+  <contentUpdateDate>1531239001000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -102,6 +102,36 @@
 {{/success}}
 )))
 #end
+
+#macro(displayScoreStats)
+  #set($faicons = ['frown-o', 'meh-o', 'smile-o'])
+  #set($voteResults = $services.query.hql("select sc.value, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj ,IntegerProperty as sc, StringProperty dp where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and obj.id=sc.id.id and sc.id.name='score' and dp.id.id = obj.id and dp.id.name = 'demarche' and dp.value = :dem and sc.value &gt; 0 group by sc.value order by 1 asc").bindValue('dem', $doc.fullName).execute())
+  #set($totalVotes = 0)
+  #set($votesMap = {1 : 0, 2 : 0, 3: 0})
+  #foreach($r in $voteResults)
+    #set($totalVotes = $totalVotes + $r[1])
+    #set($discard = $votesMap.put($r[0], $r[1]))
+  #end
+  &lt;div class='row avis-stats'&gt;
+  &lt;div class='col-xs-12'&gt;
+    ==$services.localization.render('avis.score.title') &amp;ndash; $services.localization.render('avis.score.totalnumber', [$totalVotes])==
+  &lt;/div&gt;
+  &lt;div class='col-xs-12 col-sm-4'&gt;
+  &lt;div class='avis-stats-container'&gt;
+    #foreach($r in [3, 2, 1])
+      &lt;div class='avis-statstrow avis-statsrow-${r}'&gt;
+        &lt;div class='avis-statsrow-icon'&gt;&lt;span class='fa fa-${faicons.get($mathtool.sub($r, 1))}' title="$services.localization.render("Avis.Code.AvisClass_score_${r}")"/&gt;&lt;/div&gt;
+        #set($currentPercent = $mathtool.round($mathtool.mul($mathtool.div($votesMap.get($r), $totalVotes), 100)))
+        &lt;div class='avis-statstrow-amount'&gt;${currentPercent}%&lt;/div&gt;
+        &lt;div class='avis-statstrow-bar'&gt;
+          &lt;div class='avis-stats-bar' style="width: ${currentPercent}%"&gt;&amp;nbsp;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    #end
+  &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+#end
 {{/velocity}}
 
 {{velocity}}
@@ -109,9 +139,11 @@
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
 #displaySubTitle
+#displayScoreStats()
 {{/html}}
 {{/velocity}}
 
+(%class='demarche-avis-separator'%)
 ----
 
 {{velocity}}
@@ -464,6 +496,17 @@
   color: @gray-light;
 }
 
+.subtitle {
+  margin-bottom: 1.5em;
+}
+
+.demarche-avis-separator {
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+  /* same as the legend border */
+  border-top: 1px solid #e5e5e5;
+}
+
 .wd-form .buttonwrapper {
   padding-top: 0.75em;
   padding-bottom: 0.75em;
@@ -484,6 +527,73 @@
 
 .radiovote-form-listclass label {
   cursor: default;
+}
+
+/*
+ * Avis score statistics 
+ */
+.avis-stats h2 {
+  font-size: 1.0em; /* same size as the text titles */
+  margin-top: 0;
+}
+
+@bad : @brand-danger;
+@medium : @brand-warning;
+@good : @brand-success;
+
+.avis-stats-container {
+  display: table;
+  width: 100%;
+  line-height: 1.35;
+  .avis-statstrow {
+    display: table-row;
+    .avis-statsrow-icon , .avis-statstrow-amount , .avis-statstrow-bar {
+      display: table-cell;
+    }
+    .avis-statsrow-icon {
+      width: 1.5em;
+      text-align: left;
+      font-size: 1.2em;
+      line-height: 0.1;
+    }
+    .avis-statstrow-amount {
+      width: 3em;
+      text-align: left;
+      vertical-align: middle;
+      .text-smaller();
+    }
+    .avis-stats-bar {
+      display: inline-block;
+      background-color: #ccc;
+      height: 0.9em;
+      vertical-align : middle;
+      .text-smaller();
+    }
+  }
+  .avis-statsrow-1 {
+    .avis-statsrow-icon {
+      color: @bad;
+    }
+    .avis-stats-bar {
+      background-color: @bad;
+    }
+  }
+  .avis-statsrow-2 {
+    .avis-statsrow-icon {
+      color: @medium;
+    }
+    .avis-stats-bar {
+      background-color: @medium;
+    }
+  }
+  .avis-statsrow-3 {
+    .avis-statsrow-icon {
+      color: @good;
+    }
+    .avis-stats-bar {
+      background-color: @good;
+    }
+  }
 }</code>
     </property>
     <property>

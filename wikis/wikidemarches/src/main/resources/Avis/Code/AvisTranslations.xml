@@ -31,8 +31,8 @@
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530280719000</date>
-  <contentUpdateDate>1530280719000</contentUpdateDate>
+  <date>1531231528000</date>
+  <contentUpdateDate>1531231528000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -71,6 +71,8 @@ avis.livetable.emptyvalue=-
 # Live table specific keys
 
 # Other keys
+avis.score.title=Satisfaction globale
+avis.score.totalnumber={0} avis
 avis.entry.name=Avis
 avis.invite=Donnez votre avis
 avis.mandatory-info=Les champs marqués de &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
