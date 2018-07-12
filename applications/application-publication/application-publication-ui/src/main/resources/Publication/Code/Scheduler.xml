@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1531252951000</creationDate>
+  <creationDate>1531389212000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531343016000</date>
-  <contentUpdateDate>1531252951000</contentUpdateDate>
+  <date>1531391161000</date>
+  <contentUpdateDate>1531389212000</contentUpdateDate>
   <version>1.1</version>
   <title>Scheduler</title>
   <comment/>
@@ -147,10 +147,10 @@
       <contextLang>fr</contextLang>
     </property>
     <property>
-      <contextUser>xwiki:XWiki.slauriere</contextUser>
+      <contextUser>xwiki:XWiki.superadmin</contextUser>
     </property>
     <property>
-      <cron>0 0 0 * * ?</cron>
+      <cron>0 0 2 * * ?</cron>
     </property>
     <property>
       <jobClass>com.xpn.xwiki.plugin.scheduler.GroovyJob</jobClass>
