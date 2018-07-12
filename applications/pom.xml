@@ -35,6 +35,7 @@
   <modules>
     <module>demarches</module>
     <module>publication</module>
+    <module>application-publication</module>
   </modules>
   <build>
     <extensions>
