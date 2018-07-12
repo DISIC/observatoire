@@ -31,8 +31,8 @@
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531296607000</date>
-  <contentUpdateDate>1531296607000</contentUpdateDate>
+  <date>1531383002000</date>
+  <contentUpdateDate>1531383002000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -132,6 +132,45 @@
   &lt;/div&gt;
   &lt;/div&gt;
 #end
+
+#macro(displayScoreAverage)
+  #set($votesResults = $services.query.hql("select avg(sc.value), count(doc.fullName) from XWikiDocument as doc, BaseObject as obj ,IntegerProperty as sc, StringProperty dp where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and obj.id=sc.id.id and sc.id.name='score' and dp.id.id = obj.id and dp.id.name = 'demarche' and dp.value = :dem and sc.value &gt; 0").bindValue('dem', $doc.fullName).execute())
+  #set($votesAvg = $votesResults.get(0)[0])
+  #if (!$votesAvg)
+    #set($votesAvg = 0)
+  #end
+  #set($totalVotes = $votesResults.get(0)[1])
+  &lt;div class='avis-average-container'&gt;
+    ## what type of display we do?
+    #set($avgVisualValue = 1)
+    ## average as a percent
+    #set($percentAvg = $mathtool.mul($votesAvg, 100))
+    ## percents of filling for each of the 3 balls
+    #set($ballsPercents = {'1' : 0, '2' : 0, '3' : 0})
+    #if ($percentAvg &lt; 100)
+      #set($avgVisualValue = 1)
+      #set($ballsPercents = {'1' : $mathtool.sub($percentAvg, 0), '2' : 0, '3' : 0})
+    #elseif ($percentAvg &lt; 200)
+      #set($avgVisualValue = 2)
+      #set($ballsPercents = {'1' : 100, '2' : $mathtool.sub($percentAvg, 100), '3' : 0})
+    #else
+      #set($avgVisualValue = 3)
+      #set($ballsPercents = {'1' : 100, '2' : 100, '3' : $mathtool.sub($percentAvg, 200)})
+    #end
+    &lt;div class='avis-average-visual'&gt;
+      &lt;div class='avis-average-balls avis-average-balls-$!{avgVisualValue}' title='$mathtool.roundTo(2, ${votesAvg}) / 3'&gt;
+        #foreach($bp in $ballsPercents.entrySet())
+          &lt;div class='avis-average-ball'&gt;
+            &lt;div class='avis-average-ballcolor' &gt;&lt;/div&gt;
+            &lt;div class='avis-average-ballwhite' style='width: ${mathtool.sub(100, $bp.value)}%'&gt;&lt;/div&gt;
+            &lt;div class='avis-average-ballborder' &gt;&lt;/div&gt;
+          &lt;/div&gt;
+        #end
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.totalnumber', [$totalVotes])&lt;/div&gt;
+  &lt;/div&gt;
+#end
 {{/velocity}}
 
 {{velocity}}
@@ -139,7 +178,7 @@
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
 #displaySubTitle
-#displayScoreStats()
+#displayScoreAverage()
 {{/html}}
 {{/velocity}}
 
@@ -205,8 +244,7 @@
   {{/html}}
 #end
 #end
-{{/velocity}}
-</content>
+{{/velocity}}</content>
   <object>
     <name>Demarches.Code.DemarchesSheet</name>
     <number>0</number>
@@ -496,7 +534,7 @@
   color: @gray-light;
 }
 
-.subtitle {
+.subtitle + .avis-stats {
   margin-bottom: 1.5em;
 }
 
@@ -530,7 +568,7 @@
 }
 
 /*
- * Avis score statistics 
+ * Avis score statistics
  */
 .avis-stats h2 {
   font-size: 1.0em; /* same size as the text titles */
@@ -592,6 +630,54 @@
     }
     .avis-stats-bar {
       background-color: @good;
+    }
+  }
+}
+
+.avis-average-container {
+  display: table-row;
+  .avis-average-visual, .avis-average-desc {
+    display: table-cell;
+  }
+  .avis-average-desc {
+    padding-left: 0.8ex;
+  }
+  .avis-average-visual {
+    .avis-average-balls {
+      display: inline-block;
+      vertical-align: middle;
+      .avis-average-ball {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        position: relative;
+        .avis-average-ballborder {
+          display: inline-block;
+          border-width: 1px;
+          border-style: solid;
+          width: 1em;
+          height: 1em;
+          border-radius: 0.5em;
+          position: absolute;
+          border-color: @navbar-default-bg;
+        }
+        .avis-average-ballcolor {
+          display: inline-block;
+          height: 1em;
+          width: 1em;
+          border-radius: 0.5em;
+          position: absolute;
+          border-color: @navbar-default-bg;
+          background-color: @navbar-default-bg;
+        }
+        .avis-average-ballwhite {
+          display: inline-block;
+          position: absolute;
+          right: 0;
+          height: 1em;
+          background-color: #fff;
+        }
+      }
     }
   }
 }</code>
