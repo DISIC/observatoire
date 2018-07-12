@@ -165,7 +165,7 @@ public class PublicationJob extends AbstractPublicationJob
                     } else {
                         //no denormalization, plain value copy
                         //TODO: why can't we simply do set(propertyClass.getName(), objectPropertyValue, xcontext)
-                        //whatever type is objectPropertyValue: a list or not?
+                        //even for lists whatever type is objectPropertyValue: a list or not?
                         if ((objectPropertyValue instanceof List) && (((List) objectPropertyValue).size() > 0)) {
                             //we have a multi-valued property
                             List<Object> values = new ArrayList<>();

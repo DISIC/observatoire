@@ -31,7 +31,7 @@
   <artifactId>application-publication</artifactId>
   <name>Publication Application parent POM</name>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <developers>
     <developer>
       <id>slauriere</id>
