@@ -31,18 +31,21 @@
   <artifactId>application-publication</artifactId>
   <name>Publication Application parent POM</name>
   <packaging>pom</packaging>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <developers>
     <developer>
       <id>slauriere</id>
       <name>Stéphane Laurière</name>
     </developer>
+    <developer>
+      <id>lucaa</id>
+      <name>Anca Luca</name>
+    </developer>
   </developers>
   <scm>
-    <connection>scm:git:git://github.com/xwiki-contrib/application-publication.git</connection>
-    <developerConnection>scm:git:git@github.com:xwiki-contrib/application-publication.git</developerConnection>
-    <url>https://github.com/xwiki-contrib/application-publication.git</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:git://github.com/DISIC/wikidemarches.git</connection>
+    <developerConnection>scm:git:git@github.com:DISIC/wikidemarches.git</developerConnection>
+    <url>https://github.com/DISIC/wikidemarches/tree/master</url>
   </scm>
   <distributionManagement>
     <repository>
@@ -53,6 +56,5 @@
   </distributionManagement>
   <modules>
     <module>application-publication-api</module>
-    <module>application-publication-ui</module>
   </modules>
 </project>

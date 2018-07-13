@@ -41,11 +41,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-      <artifactId>xwiki-dinsic-wikidemarches-applications-publication</artifactId>
-      <version>${project.version}</version>
-      <type>xar</type>
-      <scope>provided</scope>
+      <groupId>org.xwiki.contrib</groupId>
+      <artifactId>application-publication-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
