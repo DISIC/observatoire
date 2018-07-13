@@ -10,7 +10,7 @@
   <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
   <packaging>pom</packaging>
   <name>XWiki Projects - DINSIC - Wiki Demarches - Parent POM</name>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <properties>
     <platform.version>9.11.3</platform.version>
     <!-- skip clirr, we don't need to check for api breakage (inherited from parent) -->
