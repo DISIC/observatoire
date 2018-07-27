@@ -41,9 +41,8 @@
   <hidden>true</hidden>
   <content>== Bienvenue sur l'outil de pilotage des démarches administratives ==
 
-{{include document="Demarches.Code.Macros"/}}
-
 {{velocity}}
+
 (% class="row" %)
 (((
 {{block title="Démarches administratives" image="" top-height="100" link-height="400" image-width="50" image-height="50" top-bgcolor="#384285" link-bgcolor="black" classes="col-lg-6 col-md-6 col-sm-6"}}

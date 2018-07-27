@@ -55,8 +55,8 @@
 #set ($directionFilter = '')
 #foreach($item in $userDirections)
   ## we check that the direction exists
-  #if ($xwiki.exists($item))
-    #set ($directionKey = $xwiki.getDocument($item).name)
+  #if ($xwiki.exists("xwiki:$item"))
+    #set ($directionKey = $xwiki.getDocument("xwiki:$item").name)
     #set ($directionFilter = "$directionFilter&amp;direction=Directions.$escapetool.url($directionKey)")
   #end
 #end
