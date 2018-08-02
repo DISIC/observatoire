@@ -25,42 +25,39 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
+    <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <version>1.2-SNAPSHOT</version>
   </parent>
-  <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
-  <name>XWiki Projects - DINSIC Wiki Demarches - Wikis</name>
-  <packaging>pom</packaging>
-  <modules>
-    <module>wikidemat</module>
-    <module>wikidemarches</module>
-    <module>wikidemarches-upgrade</module>
-    <module>xwiki</module>
-  </modules>
+  <artifactId>xwiki-dinsic-wikidemarches-wikis-wikidemarches-upgrade</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Demarches wiki upgrade package</name>
+  <packaging>xar</packaging>
+  <!-- Will depend on the full xar and will exclude non upgradable pages -->
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>xwiki-dinsic-wikidemarches-wikis-wikidemarches</artifactId>
+      <version>${project.version}</version>
+      <type>xar</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-handlers</artifactId>
-        <version>${platform.version}</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
         <groupId>org.xwiki.commons</groupId>
         <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <version>${platform.version}</version>
         <configuration>
-          <!-- Default language of the applications is French (for translation files) -->
-          <defaultLanguage>fr</defaultLanguage>
-          <!-- Overwrite inherited setting for the titles verification, to allow any title for the preferences page -->
-          <titles>
-            <property>
-              <name>.*WebPreferences</name>
-              <value>.*</value>
-            </property>
-          </titles>
+          <includeDependencies>true</includeDependencies>
+          <excludes>
+            <!-- We need this since we're overwriting default excludes -->
+            <exclude>**/META-INF/**</exclude>
+            <!-- Exclude preferences because we do this by default. However, on this particular project there is no reason to modify preferences directly in prod. -->
+            <exclude>**/XWiki/XWikiPreferences.xml</exclude>
+            <!-- Exclude pages that we modify directly on prod -->
+            <exclude>**/TableauDeBord/WebHome.xml</exclude>
+            <exclude>**/Main/A propos.xml</exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>
