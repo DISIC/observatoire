@@ -43,8 +43,10 @@
 
 {{velocity}}
 * [[Accueil&gt;&gt;Main.WebHome||queryString="force="]]
-#set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "#|t=demarches&amp;statut=active$directionFilter")
+#set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
+#set ($demandesUtilisateurs = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=demandeUtilisateur#|t=demarches&amp;statut=demandeUtilisateur")
 * {{html wiki="false" clean="false"}}&lt;a href="$demarchesListPage"&gt;Démarches&lt;/a&gt;{{/html}}
+* {{html wiki="false" clean="false"}}&lt;a href="$demandesUtilisateurs"&gt;Demandes utilisateurs&lt;/a&gt;{{/html}}
 * [[Documentation&gt;&gt;Documentation.WebHome]]
 {{/velocity}}</content>
   <object>
