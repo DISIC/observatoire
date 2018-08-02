@@ -95,7 +95,7 @@ public abstract class AbstractPublicationJob extends AbstractJob<DefaultRequest,
     }
 
     @Override
-    protected void runInternal() throws Exception
+    protected void runInternal()
     {
         try {
 

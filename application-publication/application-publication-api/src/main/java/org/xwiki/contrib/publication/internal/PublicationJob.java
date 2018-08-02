@@ -21,7 +21,6 @@ package org.xwiki.contrib.publication.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -68,15 +67,11 @@ public class PublicationJob extends AbstractPublicationJob
         progressManager.startStep("Read input");
         Map<String, List<String>> skipFieldsMap = buildClassFieldsMap(config.getExcludeFields());
         Map<String, List<String>> denormalizeFieldsMap = buildClassFieldsMap(config.getDenormalizeFields());
-        List list = this.executeQuery(config.getSourceWiki(), config.getQuery());
-        if (list.size() > 0) {
-            Iterator it = list.iterator();
-            while (it.hasNext()) {
-                String docFullName = (String) it.next();
-                XWikiDocument sourceDocument = getDocument(config.getSourceWiki(), docFullName);
-                XWikiDocument targetDocument = getDocument(config.getTargetWiki(), docFullName).clone();
-                publishDocument(sourceDocument, targetDocument, skipFieldsMap, denormalizeFieldsMap);
-            }
+        List<String> list = this.executeQuery(config.getSourceWiki(), config.getQuery());
+        for (String docFullName : list) {
+            XWikiDocument sourceDocument = getDocument(config.getSourceWiki(), docFullName);
+            XWikiDocument targetDocument = getDocument(config.getTargetWiki(), docFullName).clone();
+            publishDocument(sourceDocument, targetDocument, skipFieldsMap, denormalizeFieldsMap);
         }
     }
 
@@ -98,12 +93,9 @@ public class PublicationJob extends AbstractPublicationJob
         if (!originalTargetDocument.equals(targetDocument)) {
             xwiki.saveDocument(targetDocument, "publication-job", xcontext);
             logger.info("Document {} was saved.", serializer.serialize(targetDocument.getDocumentReference()));
-//            System.out.println("Document was saved: " + serializer.serialize(targetDocument.getDocumentReference()));
         } else {
             logger.info("Document was not updated since the last publication: {}.",
                     serializer.serialize(targetDocument.getDocumentReference()));
-//            System.out.println("Document was not updated since the last publication: " + serializer
-//                    .serialize(targetDocument.getDocumentReference()));
         }
     }
 
@@ -119,9 +111,7 @@ public class PublicationJob extends AbstractPublicationJob
         //target documents as there are holes in the source document. I'm not handling this case now because it's
         //overcomplicated
         Set<Map.Entry<DocumentReference, List<BaseObject>>> objectsByClass = sourceDocument.getXObjects().entrySet();
-        Iterator<Map.Entry<DocumentReference, List<BaseObject>>> itObjectsByClass = objectsByClass.iterator();
-        while (itObjectsByClass.hasNext()) {
-            Map.Entry<DocumentReference, List<BaseObject>> objectsByClassEntry = itObjectsByClass.next();
+        for (Map.Entry<DocumentReference, List<BaseObject>> objectsByClassEntry : objectsByClass) {
             DocumentReference classToCopy = objectsByClassEntry.getKey();
             logger.info("Copying all objects of class {}", classToCopy);
             LocalDocumentReference localClassToCopy = classToCopy.getLocalDocumentReference();
@@ -129,9 +119,7 @@ public class PublicationJob extends AbstractPublicationJob
             List<String> excludeFields = skipFieldsMap.get(className);
             List<String> denormalizeFields = denormalizeFieldsMap.get(className);
             List<BaseObject> objectsToCopy = objectsByClassEntry.getValue();
-            Iterator<BaseObject> itObjectToCopy = objectsToCopy.iterator();
-            while (itObjectToCopy.hasNext()) {
-                BaseObject objectToCopy = itObjectToCopy.next();
+            for (BaseObject objectToCopy : objectsToCopy) {
                 if (objectToCopy != null) {
                     BaseObject targetObject = targetDocument.getXObject(localClassToCopy, objectToCopy.getNumber());
                     if (targetObject == null) {
@@ -169,9 +157,8 @@ public class PublicationJob extends AbstractPublicationJob
                         if ((objectPropertyValue instanceof List) && (((List) objectPropertyValue).size() > 0)) {
                             //we have a multi-valued property
                             List<Object> values = new ArrayList<>();
-                            Iterator itValues = ((List) objectPropertyValue).iterator();
-                            while (itValues.hasNext()) {
-                                Object value = itValues.next();
+                            for (Object value : (List) objectPropertyValue) {
+                                //Object value = itValues.next();
                                 values.add(value);
                             }
                             targetObject.set(propertyClass.getName(), values, xcontext);
@@ -204,9 +191,7 @@ public class PublicationJob extends AbstractPublicationJob
         if ((objectPropertyValue instanceof List) && (((List) objectPropertyValue).size() > 0)) {
             //we have a multi-valued property
             List<Object> denormalizedValues = new ArrayList<>();
-            Iterator itNormalizedValues = ((List) objectPropertyValue).iterator();
-            while (itNormalizedValues.hasNext()) {
-                Object normalizedValue = itNormalizedValues.next();
+            for (Object normalizedValue : (List) objectPropertyValue) {
                 ListItem denormalizedValue = mapValues.get(normalizedValue);
                 if (denormalizedValue != null) {
                     denormalizedValues.add(denormalizedValue.getValue());
