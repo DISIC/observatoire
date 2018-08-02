@@ -40,48 +40,58 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>//{{code}}
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import org.apache.commons.lang3.StringUtils;
-import com.xpn.xwiki.validation.*;
-import com.xpn.xwiki.*;
-import com.xpn.xwiki.doc.*;
-import com.xpn.xwiki.objects.*;
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+import org.apache.commons.lang3.StringUtils
+import com.xpn.xwiki.validation.*
+import com.xpn.xwiki.*
+import com.xpn.xwiki.doc.*
+import com.xpn.xwiki.objects.*
 
 public class Val implements XWikiValidationInterface  {
     public boolean validateDocument(XWikiDocument doc, XWikiContext context) {
-      def res = true;
-      def docTitle = doc.getTitle();
+
+      def result = true
+      def docTitle = doc.getTitle()
       if (StringUtils.isBlank(docTitle)) {
-	    XWikiValidationStatus.addErrorToContext("Demarches.Code.DemarchesClass", "title1", "title1", "", context);
-        res = false;
+	    XWikiValidationStatus.addErrorToContext("Demarches.Code.DemarchesClass", "title1", "title1", "", context)
+        result = false
       }
 
-      def request = context.getRequest();
-      def date = request.getParameter("Demarches.Code.DemarchesClass_0_dateMiseEnLigne");
+      def request = context.getRequest()
+
+      def direction = request.getParameter("Demarches.Code.DemarchesClass_0_direction")
+      def statut = request.getParameter("Demarches.Code.DemarchesClass_0_statut")
+
+      if (statut != null &amp;&amp; !statut.equals("demandeUtilisateur") &amp;&amp; StringUtils.isBlank(direction)) {
+        XWikiValidationStatus.addErrorToContext("Demarches.Code.DemarchesClass", "direction", "direction", "", context)
+        result = false
+      }
+
+      def date = request.getParameter("Demarches.Code.DemarchesClass_0_dateMiseEnLigne")
       if (!isDateValid(date)) {
-        XWikiValidationStatus.addErrorToContext("Demarches.Code.DemarchesClass", "dateMiseEnLigne", "dateMiseEnLigne", "", context);
-        res = false;
+        XWikiValidationStatus.addErrorToContext("Demarches.Code.DemarchesClass", "dateMiseEnLigne", "dateMiseEnLigne", "", context)
+        result = false
       }
 
-      return res;
+      return result
     }
 
     protected boolean isDateValid(String dateStr) {
 
       if (dateStr == null || dateStr.trim().length() == 0)
-        return true;
+        return true
 
-      dateStr = dateStr.trim();
-      def pattern = Pattern.compile("[0-9][0-9]/[0-9][0-9][0-9][0-9]");
-      def matcher = pattern.matcher(dateStr);
+      dateStr = dateStr.trim()
+      def pattern = Pattern.compile("[0-9][0-9]/[0-9][0-9][0-9][0-9]")
+      def matcher = pattern.matcher(dateStr)
 
-      return matcher.matches();
+      return matcher.matches()
 
     }
 
     public boolean validateObject(BaseObject object, XWikiContext context) { 
-      return true;
+      return true
     }
 }
 //{{/code}}</content>

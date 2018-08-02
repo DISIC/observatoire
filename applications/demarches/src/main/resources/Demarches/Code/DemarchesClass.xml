@@ -154,7 +154,7 @@
 #set ($direction = $xwiki.getDocument($value))
 #if ($xcontext.action == 'get')
   #if ($direction.sigle) $direction.sigle #else $value #end
-#elseif ($xcontext.action == 'view')
+#elseif ($xcontext.action == 'view' &amp;&amp; $direction.name != 'WebHome')
   $direction.displayTitle
 #else
   #template('displayer_dblist.vm')
@@ -178,7 +178,7 @@
       <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Directions.Code.DirectionsClass' and doc.fullName&lt;&gt;'Directions.Code.DirectionsTemplate' order by doc.title asc</sql>
       <unmodifiable>0</unmodifiable>
       <validationMessage>Demarches.Code.DemarchesClass_direction.validation</validationMessage>
-      <validationRegExp>/^.+$/</validationRegExp>
+      <validationRegExp/>
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </direction>
@@ -614,7 +614,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>active=Active|inactive=Inactive</values>
+      <values>active=Active|inactive=Inactive|demandeUtilisateur=Demande utilisateur|nouvelleDemarche=Nouvelle démarche</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statut>
     <statutProjetDemat>
@@ -636,7 +636,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>aucun=Aucun|prévu=Prévu|en cours=En cours|terminé=Terminé</values>
+      <values>prevu=Prévu|encours=En cours|termine=Terminé</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutProjetDemat>
     <textes>
