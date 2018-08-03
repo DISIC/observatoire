@@ -47,8 +47,8 @@
   'demarche': {},
   'modalite': {},
   'score': {'displayName' : 'Avis', "html":true},
+  'ministeres': {'sortable': false, 'filterable': false},
   'suggestion': {"filterable":false,"sortable":false,"html":true},
-  'doc.author': {"link":"author"},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
 #set ($options = {
@@ -58,17 +58,14 @@
   'rowCount': 15,
   'maxPages': 10,
   'selectedColumn': 'doc.creationDate',
-  'defaultOrder': 'desc'
+  'defaultOrder': 'desc',
+  'resultPage': 'Avis.Code.LiveTableResults'
 })
-#set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'demarche', 'modalite', 'score', 'facile', 'comprehensible', 'difficultes', 'aide', 'vote', 'doc.author', '_actions'])
+#set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
 #livetable('avis' $columns $columnsProperties $options)
 
 {{addExcelExportToLivetable livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')"/}}
-{{/velocity}}
-
-----
-
-[[Statistiques&gt;&gt;Avis.Admin.Statistiques]]</content>
+{{/velocity}}</content>
   <object>
     <name>Avis.WebHome</name>
     <number>0</number>

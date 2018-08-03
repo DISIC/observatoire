@@ -50,6 +50,8 @@ avis.livetable.demarche=Démarche
 avis.livetable.modalite=Modalité
 avis.livetable.score=Avis global
 avis.livetable.aide=Aide
+avis.livetable.ministeres=Ministère(s)
+avis.livetable.direction=Direction
 avis.livetable.facile=Facilité
 avis.livetable.comprehensible=Simplicité
 avis.livetable.difficultes=Difficultés
@@ -120,6 +122,7 @@ Avis.Code.AvisClass_difficultes_dysfonctionnement=La démarche n'a pas fonctionn
 Avis.Code.AvisClass_difficultes_mobile=Le site ne s'affichait pas bien sur mobile
 Avis.Code.AvisClass_difficultes_pieces-jointes=Pièces jointes
 Avis.Code.AvisClass_difficultes_autre=Autre
+Avis.Code.AvisClass_commentaire=Pouvez-vous nous préciser brièvement ce qui vous a posé problème ?
 
 
 </content>
