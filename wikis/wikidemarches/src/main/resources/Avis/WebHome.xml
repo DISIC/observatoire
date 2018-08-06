@@ -47,7 +47,7 @@
   'demarche': {},
   'modalite': {},
   'score': {'displayName' : 'Avis', "html":true},
-  'ministeres': {'sortable': false, 'filterable': false},
+  'ministeres': {'sortable': true, 'filterable': false},
   'suggestion': {"filterable":false,"sortable":false,"html":true},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
@@ -55,7 +55,7 @@
   'className': 'Avis.Code.AvisClass',
   'translationPrefix': 'avis.livetable.',
   'tagCloud': true,
-  'rowCount': 15,
+  'rowCount': 100,
   'maxPages': 10,
   'selectedColumn': 'doc.creationDate',
   'defaultOrder': 'desc',
