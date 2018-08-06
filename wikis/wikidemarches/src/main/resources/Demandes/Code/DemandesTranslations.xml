@@ -45,7 +45,9 @@ Demandes.Code.DemandesClass_type=type
 Demandes.Code.DemandesClass_type_dematerialisation=Demande de dématérialisation
 Demandes.Code.DemandesClass_type_contact=Demande de contact
 Demandes.Code.DemandesClass_description=Description de la démarche
-Demandes.Code.DemandesClass_description_hint=Informations sur la démarche que vous n’avez pas trouvée sur ce site : nom de la démarche, adresse URL, administration avec laquelle vous étiez en contact…
+Demandes.Code.DemandesClass_description_hint=Informations sur la démarche que vous n’avez pas trouvée sur ce site : nom de la démarche, adresse web, administration avec laquelle vous étiez en contact…
+Demandes.Code.DemandesClass_url=Adresse web de la démarche
+Demandes.Code.DemandesClass_url_hint=Adresse web à laquelle cette démarche peut être remplie ou téléchargée
 
 # Live table generic keys
 demandes.livetable.doc.title=ID

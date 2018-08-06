@@ -40,10 +40,10 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity output="true"}}
-## only if something was submitted to this page, save
+## Save only if something was submitted to this page.
 #if ("$!request['save-demande']" != '')
   #set ($uin = $services.uin.next)
-  ## get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
+  ## Get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
   #set ($target = $xwiki.getDocumentAsAuthor("Demandes.${uin}"))
   #set ($content = $request.content)
   #set ($object = $target.addObjectFromRequest('Demandes.Code.DemandesClass'))
@@ -85,9 +85,19 @@
       &lt;span class="xHint"&gt;$services.localization.render('Demandes.Code.DemandesClass_description_hint')&lt;/span&gt;&lt;/label&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;textarea required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" rows="5"&gt;
+      &lt;textarea required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" rows="3"&gt;
       $!value
       &lt;/textarea&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset class="form-computedfieldclass"&gt;
+    &lt;div&gt;
+      &lt;label for="Demandes.Code.DemandesClass_0_url" style="padding-bottom:0.5em"&gt;
+      &lt;span&gt;$services.localization.render('Demandes.Code.DemandesClass_url')&lt;/span&gt;
+      &lt;span class="xHint"&gt;$services.localization.render('Demandes.Code.DemandesClass_url_hint')&lt;/span&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type="text" id="Demandes.Code.DemandesClass_0_url" name="url" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
   &lt;div class="buttonwrapper"&gt;

@@ -84,6 +84,23 @@
       <values>dematerialisation=Demande de dématérialisation|contact=Demande de contact</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </type>
+    <url>
+      <contenttype>FullyRenderedText</contenttype>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <editor>PureText</editor>
+      <hint>Adresse web de la démarche</hint>
+      <name>url</name>
+      <number>3</number>
+      <picker>0</picker>
+      <prettyName>URL</prettyName>
+      <rows>1</rows>
+      <size>80</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage>regexissue</validationMessage>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+    </url>
   </class>
   <object>
     <name>Demandes.Code.DemandesClass</name>
