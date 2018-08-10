@@ -31,7 +31,7 @@
   <parent>Demandes.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530716280000</date>
+  <date>1533724205000</date>
   <contentUpdateDate>1528890549000</contentUpdateDate>
   <version>1.1</version>
   <title>Demandes Class</title>
@@ -54,7 +54,7 @@
       <disabled>0</disabled>
       <hint>Contenu de la demande</hint>
       <name>contenu</name>
-      <number>2</number>
+      <number>3</number>
       <prettyName>Contenu de la demande</prettyName>
       <script/>
       <unmodifiable>0</unmodifiable>
@@ -62,6 +62,41 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
     </contenu>
+    <nom>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+  #set ($className = $object.getxWikiClass().name)
+  #if ($doc.fullName == $className)
+    ## We are editing the class so the title must be read from / written to the template document.
+    #set ($name = 'templateTitle')
+    #set ($value = $xwiki.getDocument("$stringtool.removeEnd($className, 'Class')Template").title)
+  #else
+    ## We are editing an application entry so the title must be read from / written to the current document.
+    #set ($name = 'title')
+    #set ($value = $tdoc.title)
+  #end
+  &lt;input type="text" name="$name" value="$!escapetool.xml($value)"
+    #if ($xwiki.getXWikiPreference('xwiki.title.mandatory') == 1)class="required"#end/&gt;
+#elseif ("$!type" != '')
+  ## Render the title of the current document.
+  $tdoc.getRenderedTitle('xhtml/1.0')
+#else
+  The display mode is not specified!
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>nom</name>
+      <number>1</number>
+      <prettyName>Nom</prettyName>
+      <script/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+    </nom>
     <type>
       <cache>0</cache>
       <customDisplay/>
@@ -70,7 +105,7 @@
       <hint>Type de demande</hint>
       <multiSelect>0</multiSelect>
       <name>type</name>
-      <number>1</number>
+      <number>2</number>
       <picker>0</picker>
       <prettyName>Type de demande</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -91,13 +126,13 @@
       <editor>PureText</editor>
       <hint>Adresse web de la démarche</hint>
       <name>url</name>
-      <number>3</number>
+      <number>4</number>
       <picker>0</picker>
       <prettyName>URL</prettyName>
       <rows>1</rows>
       <size>80</size>
       <unmodifiable>0</unmodifiable>
-      <validationMessage>regexissue</validationMessage>
+      <validationMessage/>
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
     </url>

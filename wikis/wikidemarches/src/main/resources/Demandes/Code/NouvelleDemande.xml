@@ -31,8 +31,8 @@
   <parent>Main.Search</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530177714000</date>
-  <contentUpdateDate>1530177714000</contentUpdateDate>
+  <date>1533735482000</date>
+  <contentUpdateDate>1533735482000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.demande.creation')</title>
   <comment/>
@@ -44,40 +44,31 @@
 #if ("$!request['save-demande']" != '')
   #set ($uin = $services.uin.next)
   ## Get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
-  #set ($target = $xwiki.getDocumentAsAuthor("Demandes.${uin}"))
+  #set ($demandeId = "Demandes.${uin}")
+  #set ($target = $xwiki.getDocumentAsAuthor($demandeId))
   #set ($content = $request.content)
   #set ($object = $target.addObjectFromRequest('Demandes.Code.DemandesClass'))
   #set ($discard = $target.setContent($content))
+  #set ($discard = $target.setTitle($uin))
   ## save with programming rights as the current user will not have the right to edit the Avis document
   #set ($discard = $target.saveWithProgrammingRights())
   ##TODO: see how we handle an error in saving the object
-  $request.session.setAttribute('demande-handler-operation-message', 'wikidemarches.demande.merci')
-#end
-
-#macro (displayMessage $key)
-{{success}}
-  $services.localization.render($key)
-{{/success}}
+  $request.session.setAttribute('avis-step', 'wikidemarches.demande.merci')
+  $request.session.setAttribute('demande-id', $demandeId)
+  $response.sendRedirect($xwiki.getURL('Demarches.0'))
 #end
 {{/velocity}}
 
 {{velocity}}
 {{html wiki="true"}}
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
-#set ($messageKey = $request.session.getAttribute('demande-handler-operation-message'))
-#if ("$!messageKey" != '')
-  ----
-  ## Clean the session and display the message.
-  #set ($discard = $request.session.removeAttribute('demande-handler-operation-message'))
-  #displayMessage($messageKey)
-#else
-  #set ($demande = $doc.newObject('Demandes.Code.DemandesClass'))
-  #set ($value = $request.text)
-  &lt;span class="info-box-mandatory small"&gt;
-  $services.localization.render('avis.mandatory-info')
-  &lt;/span&gt;
-  ----
-  &lt;form action="$doc.getURL()" method="POST" class="xform wd-form demande-form"&gt;
+#set ($demande = $doc.newObject('Demandes.Code.DemandesClass'))
+#set ($value = $request.text)
+&lt;span class="info-box-mandatory small"&gt;
+$services.localization.render('avis.mandatory-info')
+&lt;/span&gt;
+----
+&lt;form action="$doc.getURL()" method="POST" class="xform wd-form demande-form"&gt;
   &lt;fieldset class="form-computedfieldclass"&gt;
     &lt;div&gt;
       &lt;label for="Demandes.Code.DemandesClass_0_contenu" style="padding-bottom:0.5em"&gt;
@@ -85,7 +76,7 @@
       &lt;span class="xHint"&gt;$services.localization.render('Demandes.Code.DemandesClass_description_hint')&lt;/span&gt;&lt;/label&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;textarea required id="Demandes.Code.DemandesClass_0_contenu" name="content" style="width: 100%;" rows="3"&gt;
+      &lt;textarea required name="content" style="width: 100%;" rows="3"&gt;
       $!value
       &lt;/textarea&gt;
     &lt;/div&gt;
@@ -97,15 +88,14 @@
       &lt;span class="xHint"&gt;$services.localization.render('Demandes.Code.DemandesClass_url_hint')&lt;/span&gt;&lt;/label&gt;
     &lt;/div&gt;
     &lt;div&gt;
-    &lt;input type="text" id="Demandes.Code.DemandesClass_0_url" name="url" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
+    &lt;input type="text" name="Demandes.Code.DemandesClass_0_url" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
-  &lt;div class="buttonwrapper"&gt;
-    &lt;input name="Demandes.Code.DemandesClass_0_type" type="hidden" value="demande-dematerialisation"&gt;
+  &lt;div class="buttonwrapper"&gt;   
+    &lt;input type="hidden" name="Demandes.Code.DemandesClass_0_type" value="dematerialisation" /&gt;
     &lt;input class="btn btn-primary" name="save-demande" type="submit" value="$services.localization.render('demandes.ajouter')"&gt;
   &lt;/div&gt;
 &lt;/form&gt;
-#end
 {{/html}}
 {{/velocity}}</content>
 </xwikidoc>
