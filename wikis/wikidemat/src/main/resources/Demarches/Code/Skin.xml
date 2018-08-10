@@ -31,7 +31,7 @@
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530522378000</date>
+  <date>1533739754000</date>
   <contentUpdateDate>1526657565000</contentUpdateDate>
   <version>1.1</version>
   <title/>
@@ -297,7 +297,10 @@ $doc.displayRendered($field, $prefix, $object)##
       </path>
     </class>
     <property>
-      <content>#set ($displayPageHeader = true)
+      <content>## Don't display the header on the login screen as it breaks the layout
+#if ($xcontext.action != 'login')
+  #set ($displayPageHeader = true)
+#end
 #if(!$hasAdmin &amp;&amp; !$isAdvancedUser &amp;&amp; ($doc.name == 'WebHome'))
   #set ($displayContentMenu = false)
 #end
@@ -343,7 +346,759 @@ $doc.displayRendered($field, $prefix, $object)##
       </path>
     </class>
     <property>
-      <content>#macro (livetable_filter $column $columnProperties $xproperty)
+      <content/>
+    </property>
+    <property>
+      <path>macros1.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.Skin</name>
+    <number>3</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>b92612b5-58d6-46ea-926f-a73c2a5f9d52</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>###############################################################
+## Contains various standard Velocity macros automatically
+## loaded and usable everywhere (in Velocity).
+## 
+## It actually extends the macros.vm defined in the templates
+## directory by redefining or adding new macros.
+## 
+## Note that if you modify that file you will need to restart.
+###############################################################
+
+###
+###    Message box
+###
+#macro(xwikimessageboxstart $title $message)
+    &lt;div class="centered panel panel-default xwikimessage"&gt;
+     &lt;div class="panel-heading"&gt;
+      &lt;h3 class="panel-title"&gt;$title&lt;/h3&gt;
+     &lt;/div&gt;
+     &lt;div class="panel-body"&gt;
+      &lt;p class="xwikimessage"&gt;$message&lt;/p&gt;
+#end
+#macro(xwikimessageboxend)
+      &lt;/div&gt;
+    &lt;/div&gt;
+#end
+
+#macro(xwikimessagebox $title $message $urlyes $urlno $msgyes $msgno)
+#xwikimessageboxstart($title $message)
+      &lt;div class="buttons"&gt;&lt;a href="$urlyes" class="buttonwrapper"&gt;&lt;input type="button" class="button" value="$msgyes" onclick="location='$urlyes'; return false;"/&gt;&lt;/a&gt; &lt;a href="$urlno" class="buttonwrapper"&gt;&lt;input type="button" class="button secondary" value="$msgno" onclick="location='$urlno'; return false;"/&gt;&lt;/a&gt;&lt;/div&gt;
+#xwikimessageboxend()
+#end
+
+#**
+ * Displays a submit button, i.e. an &lt;tt&gt;input&lt;/tt&gt; element with &lt;tt&gt;type=submit&lt;/tt&gt;.
+ * For styling purposes, the button is wrapped in a span element.
+ * @param name The value of the &lt;tt&gt;name&lt;/tt&gt; attribute
+ * @param shortcut The keyboard shortcut for this button. The value will be displayed
+ *        as the title of the element. The actual shortcut is attached elsewhere, in
+ *        the javascript code.
+ * @param value The value of the &lt;tt&gt;value&lt;/tt&gt; attribute, i.e. the text displayed on
+ *        the button.
+ * @param class The class to use.
+ *#
+#macro(submitButton $name $shortcut $value $class)
+&lt;input class="btn $!class" type="submit" name="$name"#if($keyboardShortcutsEnabled) title="$shortcut"#end value="$value"/&gt;
+#end
+#**
+ * Displays a submit button for the editor. This macro calls submitButton,
+ * composing all its parameters based on the action's identifier and the
+ * identifier of the corresponding localized resources.
+ * @param action The identifier of the button's action.
+ * @param resourceIdentifier The key used to identify the localized resources.
+ * @param class The class to use.
+ *#
+#macro(editActionButton $action $resourceIdentifier $class)
+#submitButton("action_${action}", $services.localization.render("core.shortcuts.edit.${resourceIdentifier}"), $services.localization.render($resourceIdentifier), $class)
+#end
+
+#**
+ * AJAX Live table that displays XWiki data.
+ *
+ * Example of usage, in syntax 2.0:
+ * &lt;code&gt;
+ * {{velocity}}
+ * #set($columns = [ "_avatar", "first_name", "last_name", "email"])
+ * #set($columnsProperties = {
+ *                  "first_name" : { "type" : "text" , "size" : 10, "link" : "view"},
+ *                  "last_name" : { "type" : "text" , "size" : 10, "link" : "view"},
+ *                  "email" : { "type" : "text" , "size" : 20, "link" : "editor"},
+ *                  "_avatar" : { "type" : "none" , "size" : 20, "link" : "none", "html" : "true", "sortable":false }
+ *                })
+ * #set($options = {  "className":"XWiki.XWikiUsers",
+ *                    "translationPrefix" : "platform.index.",
+ *                    "tagCloud" : true,
+ *                    "rowCount": 15,
+ *                    "javascriptName" : "MyModule.myTable",
+ *                    "description: "The description of this table here", })
+ * #livetable("userstable" $columns $columnsProperties $options)
+ * {{/velocity}}
+ * &lt;/code&gt;
+ *
+ * @param divid the id of the table div
+ * @param collist the column list
+ * @param colprops the columns properties
+ * @param options the livetable options.
+ *#
+#macro(livetable $divid $collist $colprops $options)
+## Open wiki syntax wrappers.
+#if("$!options.outputOnlyHtml" != 'true')
+## Do not indent:
+#if($xwiki.getCurrentContentSyntaxId() != "xwiki/1.0")
+
+
+## We don't clean the HTML because we control the markup and because we want to preserve the whitespace characters in the
+## attribute values (e.g. if the live table id contains whitespaces)
+{{html clean="false"}}
+#else {pre} #end
+#end
+  ##
+  ## SX deps.
+  ##
+  #set($ok = $xwiki.jsfx.use('js/xwiki/table/livetable.js', true))
+  #set($ok = $xwiki.ssfx.use('js/xwiki/table/livetable.css', true))
+  ##
+  ## Options / defaults
+  ##
+  #if("$!options.translationPrefix" != '') #set($transprefix = $options.translationPrefix) #else #set($transprefix = '') #end
+  #if("$!options.selectedColumn" != '')  #set($selectedColumn = $options.selectedColumn) #end
+  #if("$!options.defaultOrder" == 'desc') #set($defaultOrder = 'desc') #else #set($defaultOrder = 'asc') #end
+  #if("$!options.rowCount" != '') #set($count = $options.rowCount) #else #set($count = 15) #end
+  #if("$!options.maxPages" != '') #set($maxPages = $options.maxPages) #else #set($maxPages = 10) #end
+  #if("$!options.selectedColumn" != '') #set($selectedColumn = $options.selectedColumn) #end
+  #if("$!options.callback" != '') #set($callback = $options.callback) #else #set($callback = '') #end
+  #if("$!options.tagCloud" == '' || $options.tagCloud == false) #set($tagcloud=false) #else #set($tagcloud = true) #end
+  #if ($options.selectedTags &amp;&amp; $options.selectedTags.size() &gt; 0)
+    #set ($selectedTags = $options.selectedTags)
+  #else
+    #set ($selectedTags = [])
+  #end
+  #if("$!options.javascriptName" != '') #set($jsName = $options.javascriptName) #else #set($jsName = "livetable_$divid") #end
+  #if("$!options.topFilters" != '') #set($topfilters = $options.topFilters) #end
+  #if("$options.pageSize" == '' || $!options.pageSize == false) #set($hasPageSize=false) #else #set($hasPageSize = true) #end
+  #if("$!options.pageSizeBounds" != '') #set($pageSizeBounds = $options.pageSizeBounds) #end
+  #set ($queryFilters = $options.queryFilters)
+  #if (!$queryFilters)
+    #set ($queryFilters = 'currentlanguage,hidden')
+  #end
+  #set($classname = "$!options.className")
+  ##
+  ## Columns informations
+  ##
+  #set ($dataColumns = [])
+  #set ($classParams = {})
+  #foreach($colname in $collist)
+    ## If the live table options don't specify which column to select then select the first non-special column.
+    #if("$!selectedColumn" == '' &amp;&amp; !$colname.startsWith('_'))
+      #set($selectedColumn = $colname)
+    #end
+    #if($colname != '_actions')
+      #set ($discard = $dataColumns.add($colname))
+      #set($propClassName = "$!{colprops.get($colname).get('class')}")
+      #if($propClassName != '')
+        #set ($discard = $classParams.put("${colname}_class", $propClassName))
+      #end
+      #set ($propMatchType = "$!colprops.get($colname).match")
+      #if ($propMatchType != '')
+        #set ($discard = $classParams.put("${colname}_match", $propMatchType))
+      #end
+    #end
+  #end
+  #if("$!options.url" != '')
+    #set($dataurl = $options.url)
+  #else
+    #set ($parameters = {
+      'outputSyntax': 'plain',
+      'transprefix': $transprefix,
+      'classname': $classname,
+      'collist': $stringtool.join($dataColumns, ','),
+      'queryFilters': $queryFilters
+    })
+    #set ($discard = $parameters.putAll($classParams))
+    #set ($resultPage = $options.resultPage)
+    #if ("$!resultPage" == '')
+      #set ($resultPage = 'XWiki.LiveTableResults')
+    #end
+    #set ($dataurl = $xwiki.getURL($resultPage, 'get', "$escapetool.url($parameters)&amp;$!options.extraParams"))
+  #end
+  ##
+  ## HTML Table
+  ##
+  #set ($htmlLiveTableId = $escapetool.xml($divid))
+&lt;div class="xwiki-livetable-container"&gt;
+  #if("$!topfilters" !='') #set($hasTopFilters = true) #else #set($hasTopFilters = false) #end
+  #if($tagcloud || $hasTopFilters)
+  &lt;div class="tipfilters"&gt;
+  #end
+  #if($hasTopFilters)
+  &lt;div id="${htmlLiveTableId}-topfilters" class="xwiki-livetable-topfilters-tip #if($tagcloud)splitted#end"&gt;
+    &lt;div&gt;
+      &lt;div class="xwiki-livetable-topfilters-container"&gt;
+      $topfilters
+      &lt;/div&gt;
+      &lt;div class="tippointer"&gt;
+        &lt;div&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  #end
+  #if($tagcloud)
+    #set($discard = $xwiki.ssx.use('XWiki.TagCloud'))
+    &lt;div id="${htmlLiveTableId}-tagcloud" class="xwiki-livetable-tagcloud-tip hidden #if($hasTopFilters)splitted#end"&gt;
+      &lt;div&gt;
+        &lt;div class="xwiki-livetable-tagcloud-container"&gt;
+          &lt;h2&gt;$services.localization.render('platform.livetable.tagsHelp') $services.localization.render('platform.livetable.tagsHelpCancel')&lt;/h2&gt;
+          &lt;div class="xwiki-livetable-tagcloud"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="tippointer"&gt;
+          &lt;div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  #end
+  #if($tagcloud || $hasTopFilters)
+  &lt;/div&gt;
+  #end
+  &lt;table id="${htmlLiveTableId}" class="xwiki-livetable"&gt;
+    #if("$!options.description" != '')
+      &lt;caption class="sr-only"&gt;$options.description&lt;/caption&gt;
+    #end
+    &lt;tr&gt;
+      &lt;td class="xwiki-livetable-pagination"&gt;
+        &lt;span id="${htmlLiveTableId}-limits" class="xwiki-livetable-limits"&gt;&lt;/span&gt;
+  #if($hasPageSize)
+        &lt;span id="${htmlLiveTableId}-pagesize" class="xwiki-livetable-pagesize"&gt;
+            &lt;span&gt;$services.localization.render('platform.livetable.pagesizeLabel')&lt;/span&gt;
+            &lt;span class="xwiki-livetable-pagesize-content" &gt;&lt;/span&gt;
+        &lt;/span&gt;
+  #end
+        &lt;span id="${htmlLiveTableId}-ajax-loader" class="xwiki-livetable-loader hidden"&gt;
+          &lt;img src="$xwiki.getSkinFile('icons/xwiki/ajax-loader-large.gif')" alt="$escapetool.xml($services.localization.render('platform.livetable.loading'))" title="" /&gt;
+        &lt;/span&gt;
+        &lt;span class="controlPagination"&gt;
+          &lt;a title="$escapetool.xml($services.localization.render('platform.livetable.paginationPagePrevTitle'))" class="prevPagination" href="#"&gt;&lt;span class="hidden"&gt;$services.localization.render('platform.livetable.paginationPagePrevTitle')&lt;/span&gt;&lt;/a&gt;
+          &lt;a title="$escapetool.xml($services.localization.render('platform.livetable.paginationPageNextTitle'))" class="nextPagination" href="#"&gt;&lt;span class="hidden"&gt;$services.localization.render('platform.livetable.paginationPageNextTitle')&lt;/span&gt;&lt;/a&gt;
+        &lt;/span&gt;
+        &lt;span class="pagination"&gt;
+          &lt;span class="xwiki-livetable-pagination-text"&gt;$services.localization.render('platform.livetable.paginationPage')&lt;/span&gt;
+          &lt;span class="xwiki-livetable-pagination-content" &gt;&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class="xwiki-livetable-display-container"&gt;
+        &lt;table class="xwiki-livetable-display"&gt;
+          &lt;thead class="xwiki-livetable-display-header"&gt;
+            &lt;tr&gt;
+            #set($columnCount = 0)
+            #foreach($colname in $collist)
+              #set($colprop = $colprops.get($colname))
+              #if(("$!colprop.filterable" == '' || $colprop.filterable != false) &amp;&amp; "$!colname" != '_actions')
+                #set($isFilterable = true)
+              #else
+                #set($isFilterable = false)
+              #end
+              #if(("$!colprop.sortable" == '' || $colprop.sortable != false) &amp;&amp; "$!colname" != '_actions')
+                #set($isSortable = true)
+              #else
+                #set($isSortable = false)
+              #end
+              ## Get the column's display name to use in the header.
+              #set($displayName = "#getLivetableColumnDisplayName($colname, $colprop, $transprefix)")
+              &lt;th class="xwiki-livetable-display-header-text $!colprop.headerClass #if($!colprop.type=='hidden')hidden#end #if($isSortable)sortable #if($colname == $selectedColumn)selected $defaultOrder#else asc#end#end#if ($colname == '_avatar') avatar#end" scope="col"&gt;
+                #if($isFilterable &amp;&amp; ("$!colprop.type"=="text"||"$!colprop.type"=="number"))&lt;label for="xwiki-livetable-${htmlLiveTableId}-filter-${velocityCount}"&gt;#end
+                #if($isSortable)&lt;a data-rel="${colname}"&gt;#end
+                $displayName
+                #if($isSortable)&lt;/a&gt;#end
+                #if($isFilterable &amp;&amp; ("$!colprop.type"=="text"||"$!colprop.type"=="number"))&lt;/label&gt;#end
+                #set($columnCount = $mathtool.add($columnCount, 1))
+              &lt;/th&gt;
+            #end
+            &lt;/tr&gt;
+            #livetable_filters($collist $colprops $classname)
+            &lt;tr class="xwiki-livetable-initial-message"&gt;
+              &lt;td colspan="${columnCount}"&gt;
+                &lt;div class="warningmessage"&gt;$services.localization.render('platform.livetable.environmentCannotLoadTableMessage')&lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody id="${htmlLiveTableId}-display" class="xwiki-livetable-display-body"&gt;&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class="xwiki-livetable-pagination"&gt;
+        &lt;span class="xwiki-livetable-limits"&gt;&lt;/span&gt;
+        &lt;span class="controlPagination"&gt;
+          &lt;a title="$escapetool.xml($services.localization.render('platform.livetable.paginationPagePrevTitle'))" class="prevPagination" href="#"&gt;&lt;span class="hidden"&gt;$services.localization.render('platform.livetable.paginationPagePrevTitle')&lt;/span&gt;&lt;/a&gt;
+          &lt;a title="$escapetool.xml($services.localization.render('platform.livetable.paginationPageNextTitle'))" class="nextPagination" href="#"&gt;&lt;span class="hidden"&gt;$services.localization.render('platform.livetable.paginationPageNextTitle')&lt;/span&gt;&lt;/a&gt;
+        &lt;/span&gt;
+        &lt;span class="pagination"&gt;
+          &lt;span class="xwiki-livetable-pagination-text"&gt;$services.localization.render('platform.livetable.paginationPage')&lt;/span&gt;
+          &lt;span class="xwiki-livetable-pagination-content" &gt;&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;div id="${htmlLiveTableId}-inaccessible-docs" class="hidden"&gt;
+    #info($services.localization.render('rightsmanager.documentrequireviewrights'))
+  &lt;/div&gt;
+  &lt;script type="text/javascript"&gt;
+  //&lt;![CDATA[
+(function() {
+  function startup() {
+    // Make sure the Livetable widgets exists (It does not in the WYSIWYG for example).
+    if (XWiki &amp;&amp; XWiki.widgets &amp;&amp; XWiki.widgets.LiveTable) {
+      #set ($jsLiveTableId = $escapetool.javascript($divid))
+      #set ($liveTableParams = {
+        'maxPages': $maxPages,
+        'limit': $count,
+        'selectedTags': $selectedTags
+      })
+      #if ($hasTopFilters)
+        #set ($cssLiveTableId = $escapetool.css($divid))
+        #set ($discard = $liveTableParams.put('filterNodes', [
+          "$escapetool.h$cssLiveTableId .xwiki-livetable-display-filters",
+          "${jsLiveTableId}-topfilters"
+        ]))
+      #end
+      #if ($hasPageSize &amp;&amp; "$!pageSizeBounds" != '')
+        #set ($discard = $liveTableParams.put('pageSizeBounds', $pageSizeBounds))
+      #end
+      #set ($callbackParam = "#livetablecallback($divid $collist $colprops $transprefix), ")
+      #if ($!callback != '')
+        #set ($callbackParam = "$callback, ")
+      #end
+      window[$jsontool.serialize($jsName)] = new XWiki.widgets.LiveTable("$dataurl", "$jsLiveTableId",
+        $callbackParam$jsontool.serialize($liveTableParams));
+      #if ($hasPageSize)
+        document.observe("xwiki:livetable:${jsLiveTableId}:loadingEntries", function() {
+          $('${jsLiveTableId}-pagesize').addClassName("hidden");
+        });
+        document.observe("xwiki:livetable:${jsLiveTableId}:loadingComplete", function() {
+          $('${jsLiveTableId}-pagesize').removeClassName("hidden");
+        });
+      #end
+      return true;
+    }
+    return false;
+  }
+  // Initialize liveTable
+  (XWiki &amp;&amp; XWiki.isInitialized &amp;&amp; startup()) || document.observe('xwiki:livetable:loading', startup);
+})();
+   //]]&gt;
+  &lt;/script&gt;
+&lt;/div&gt;## xwiki-livetable-container
+## Close wiki syntax wrappers. Do not modify the indentation below or it will generate unwanted paragraphs!
+#if("$!options.outputOnlyHtml" != 'true')#if($xwiki.getCurrentContentSyntaxId() != "xwiki/1.0"){{/html}}
+
+#else{/pre}#end##
+#end## end-wrappers
+#end## end-livetable-macro
+
+#macro (livetable_filters $columns $columnsProperties $xclassName)
+  &lt;tr class="xwiki-livetable-display-filters"&gt;
+    #foreach ($column in $columns)
+      #set ($columnProperties = $columnsProperties.get($column))
+      #if ($columnProperties.type != 'hidden')
+        &lt;td class="xwiki-livetable-display-header-filter"&gt;
+          #if ($columnProperties.filterable != false)
+            #set ($columnXClassName = $columnProperties.get('class'))
+            #set ($columnXPropertyName = $column)
+            #if (!$columnXClassName)
+              #if ($column.startsWith('doc.'))
+                #set ($columnXClassName = 'XWiki.DocumentClass')
+                #set ($columnXPropertyName = $column.substring(4))
+              #else
+                #set ($columnXClassName = $xclassName)
+              #end
+            #end
+            #set ($xclass = $xwiki.getDocument($columnXClassName).getxWikiClass())
+            #set ($xproperty = $xclass.get($columnXPropertyName))
+            #livetable_filter($column $columnProperties $xproperty)
+          #end
+        &lt;/td&gt;
+      #end
+    #end
+  &lt;/tr&gt;
+#end
+
+#macro (livetable_filter $column $columnProperties $xproperty)
+  #set ($filterType = $columnProperties.type)
+  #if ("$!filterType" == '')
+    ## Determine the filter type from the xproperty type.
+    #set ($filterTypeByXPropertyType = {
+      'Boolean': 'boolean',
+      'DBList': 'suggest',
+      'DBTreeList': 'suggest',
+      'Date': 'date',
+      'Email': 'text',
+      'Groups': 'suggest',
+      'Number': 'number',
+      'Page': 'text',
+      'StaticList': 'list',
+      'String': 'text',
+      'TextArea': 'text',
+      'Users': 'suggest'
+    })
+    #set ($filterType = $filterTypeByXPropertyType.get($xproperty.classType))
+    #if ("$!filterType" == '')
+      ## If we get here then it means the column is filterable but we could not determine the filter type. Use the text
+      ## filter in this case because it is the most generic.
+      #set ($filterType = 'text')
+    #end
+  #end
+  #if ($filterType == 'list' || $filterType == 'multilist')
+    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column"
+      #if ($filterType == 'multilist')
+        #set ($discard = $xwiki.jsfx.use('js/xwiki/table/livetablemulti.js', true))
+        #set ($discard = $xwiki.linkx.use($services.webjars.url('bootstrap-select', 'css/bootstrap-select.css'),
+          {'type': 'text/css', 'rel': 'stylesheet'}))
+        class="xwiki-livetable-multilist" multiple="multiple"&gt;
+      #else
+        &gt;&lt;option value=""&gt;$services.localization.render('platform.livetable.selectAll')&lt;/option&gt;
+        &lt;option disabled="disabled"&gt;────&lt;/option&gt;
+      #end
+    #set ($storedValues = $xproperty.listValues)
+    #set ($displayedValues = $xproperty.mapValues)
+    #foreach ($storedValue in $storedValues)
+      #set ($l10nKey = "${xproperty.className}_${column}_$storedValue")
+      #set ($displayedValue = $services.localization.render($l10nKey))
+      #if ($displayedValue == $l10nKey)
+        #set ($displayedValue = $displayedValues.get($storedValue).value)
+      #end
+      &lt;option value="$storedValue"&gt;$displayedValue&lt;/option&gt;
+    #end
+    &lt;/select&gt;
+  #elseif ($filterType == 'boolean')
+    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column"&gt;
+      &lt;option value=""&gt;$services.localization.render('platform.livetable.selectAll')&lt;/option&gt;
+      &lt;option value="0"&gt;$services.localization.render('no')&lt;/option&gt;
+      &lt;option value="1"&gt;$services.localization.render('yes')&lt;/option&gt;
+    &lt;/select&gt;
+  #elseif ($filterType == 'text' || $filterType == 'number')
+    &lt;input id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column" type="text"
+      #if ("$!columnProperties.size" != '')size="$!escapetool.xml($columnProperties.size)"#end
+      title="$escapetool.xml($services.localization.render('platform.livetable.filtersTitle',
+        [$services.localization.render("${transprefix}$column")]))" /&gt;
+  #elseif ($filterType == 'date')
+    #set ($discard = $xwiki.jsfx.use('js/xwiki/table/livetabledate.js', true))
+    #set ($discard = $xwiki.linkx.use($services.webjars.url('bootstrap-daterangepicker',
+      'css/bootstrap-daterangepicker.css'), {'type': 'text/css', 'rel': 'stylesheet'}))
+    ## Hidden input for date fields allows us to send timestamps to the server while displaying pretty dates.
+    &lt;input id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column" type="hidden" /&gt;
+    #set ($dateFormat = $xproperty.getValue('dateFormat'))
+    #if ("$!dateFormat" == '')
+      #set ($dateFormat = $xwiki.getXWikiPreference('dateformat', 'yyyy/MM/dd HH:mm'))
+    #end
+    &lt;input type="text" data-type="date" data-dateformat="$escapetool.xml($dateFormat)"
+      #if ("$!columnProperties.size" != '')size="$!escapetool.xml($columnProperties.size)"#end
+      title="$escapetool.xml($services.localization.render('platform.livetable.filtersTitle',
+      [$services.localization.render("${transprefix}$column")]))" /&gt;
+  #elseif ($filterType == 'suggest' &amp;&amp; $xproperty)
+    #set ($discard = $xwiki.linkx.use($services.webjars.url('selectize.js', 'css/selectize.bootstrap3.css'),
+      {'type': 'text/css', 'rel': 'stylesheet'}))
+    #set ($discard = $xwiki.ssfx.use('uicomponents/suggest/xwiki.selectize.css', true))
+    #set ($discard = $xwiki.jsfx.use('uicomponents/suggest/suggestPropertyValues.js',
+      {'forceSkinAction' : true, 'language' : $xcontext.locale}))
+    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$!escapetool.xml($column)"
+      class="suggest-propertyValues" multiple="multiple" size="1"
+      data-className="$!escapetool.xml($xproperty.className)" data-propertyName="$!escapetool.xml($xproperty.name)"&gt;
+    &lt;/select&gt;
+  #end
+#end
+
+#**
+ * Internal macro - Determine the name to be displayed in a livetable's column header. Strategy is as follows :
+ * - If defined, the 'displayName' passed as a column option wins.
+ * - If not, and if a i18n prefix has been passed, we use the localization tool with the prefix + the column name.
+ * - Finally, we fall back on the column name.
+ *
+ * @param colname the column name
+ * @param colprop the column properties map
+ * @param transprefix the translations prefix to use
+ *
+ * @internal
+ *#
+##
+#macro(getLivetableColumnDisplayName $colname $colprop $transprefix)
+  #if("$!colprop.displayName" != '')
+    #set($displayName = $colprop.displayName)##
+  #elseif($transprefix != '')
+    #set($displayName = $services.localization.render("${transprefix}${colname}"))##
+  #else
+    #set($displayName = $colname)##
+  #end
+$displayName##
+#end
+
+#**
+ * Internal macro - Used by the livetable macro to generate a JavaScript anonymous function
+ * that is passed to the LiveTable object constructor. This is function is dynamically written
+ * according to columns properties passed to the livetable macro.
+ *
+ * @param collist the list of columns
+ * @param colprops the columns properties
+ * @param transprefix the translation prefix
+ *
+ * @internal
+ *#
+#macro(livetablecallback $divid $collist $colprops $transprefix)
+function (row, i, table) {
+  // This callback method has been generated from Velocity.
+  ## Translate the column descriptor.
+  #foreach ($entry in $colprops.entrySet())
+    #if ("$!entry.value.displayName" == '' &amp;&amp; "$!transprefix" != '')
+      #set ($entry.value.displayName = $services.localization.render("${transprefix}$entry.key"))
+    #end
+  #end
+  #set ($actionsDescriptor = $colprops.get('_actions'))
+  #if ($actionsDescriptor)
+    #if (!$actionsDescriptor.labels)
+      #set ($actionsDescriptor.labels = {})
+    #end
+    #foreach ($action in $actionsDescriptor.actions)
+      #if (!$actionsDescriptor.labels.get($action))
+        #if ("$!transprefix" != '' &amp;&amp; $services.localization.get("${transprefix}_actions.$action"))
+          #set ($discard = $actionsDescriptor.labels.put($action,
+            $services.localization.render("${transprefix}_actions.$action")))
+        #elseif ($services.localization.get("platform.livetable._actions.$action"))
+          #set ($discard = $actionsDescriptor.labels.put($action,
+            $services.localization.render("platform.livetable._actions.$action")))
+        #end
+      #end
+    #end
+  #end
+  var columns = $jsontool.serialize($collist);
+  var columnDescriptors = $jsontool.serialize($colprops);
+  var className = $jsontool.serialize($classname);
+  if (!row['doc_viewable']) {
+    $($jsontool.serialize("${divid}-inaccessible-docs")).removeClassName('hidden');
+  }
+  ## NOTE: Don't use Velocity code below this line!
+  var tr = new Element('tr');
+  columns.forEach(function(column) {
+    var descriptor = columnDescriptors[column] || {};
+    if (descriptor.type === 'hidden') {
+      return;
+    }
+    // The column's display name to be used when displaying the reponsive version.
+    var displayName = descriptor.displayName || column;
+    var fieldName = column.replace(/^doc\./, 'doc_');
+    if (column === '_actions') {
+      var adminActions = ['admin', 'rename', 'rights'];
+      var td = new Element('td', {
+        'class': 'actions',
+        'data-title': displayName
+      });
+      (descriptor.actions || []).forEach(function(action, index) {
+        if (row['doc_has' + action] || action === 'view' || (row['doc_has' + action] === undefined &amp;&amp;
+            (row['doc_hasadmin'] || adminActions.indexOf(action) &lt; 0))) {
+          if (index &gt; 0) {
+            td.insert(' ');
+          }
+          var link = new Element('a', {
+            'href': row['doc_' + action + '_url'],
+            'class': 'action action' + action
+          }).update((descriptor.labels || {})[action] || action);
+          if (descriptor.ajaxActions &amp;&amp; descriptor.ajaxActions[action]) {
+            link.observe('click', function(event) {
+              event.stop();
+              new Ajax.Request(this.href, {
+                onSuccess: function() {
+                  eval((descriptor.actionCallbacks || {})[action]);
+                }
+              });
+            }.bindAsEventListener(link));
+          }
+          td.insert(link);
+        }
+      });
+      tr.appendChild(td);
+    } else {
+      var td = new Element('td', {
+        'class': [
+          fieldName,
+          'link' + (descriptor.link || ''),
+          'type' + (descriptor.type || '')
+        ].join(' '),
+        'data-title': displayName
+      });
+      var container = td;
+      if (descriptor.link &amp;&amp; row['doc_viewable']) {
+        var link = new Element(descriptor.link === 'editor' ? 'span' : 'a');
+        // Automatic: the link URL is in JSON results, with the '_url' sufix.
+        if (descriptor.link === 'auto') {
+          link.href = row[fieldName + '_url'] || row['doc_url'];
+        } else if (descriptor.link === 'field') {
+          if (row[fieldName + '_url']) {
+            link.href = row[fieldName + '_url'];
+          }
+        // Property editor
+        } else if (descriptor.link === 'editor') {
+          var propertyClassName = descriptor['class'] || className;
+          td.observe('click', function(event) {
+            var tag = event.element().down('span') || event.element();
+            editProperty(row['doc_fullName'], propertyClassName, column, function(value) {
+              tag.innerHTML = value;
+            });
+          });
+        // Author, space or wiki link.
+        } else if (row['doc_' + descriptor.link + '_url']) {
+          link.href = row['doc_' + descriptor.link + '_url'];
+        } else {
+          link.href = row['doc_url'];
+        }
+        td.appendChild(link);
+        container = link;
+      }
+      // The value can be passed as a string..
+      if (descriptor.html + '' === 'true') {
+        container.innerHTML = row[fieldName] || '';
+      } else if (row[fieldName] !== undefined &amp;&amp; row[fieldName] !== null) {
+        var text = row[fieldName] + '';
+        if (fieldName === 'doc_name' &amp;&amp; !row['doc_viewable']) {
+          text += '*';
+        }
+        container.update(text.escapeHTML());
+      }
+      tr.appendChild(td);
+    }
+  });
+  return tr;
+}
+#end
+##
+##
+#**
+ * Generates a vertical menu item from an object (a map)
+ *
+ * Expected format:
+ * item = map with the following fields:
+ *        'id'       : mandatory
+ *        'name'     : the text displayed for the corresponding menu item;
+ *                     optional, defaults to
+ *                     $services.localization.render("$!{translationPrefix}${item.id}")
+ *        'url'      : the "action" of the menu item; optional
+ *        'cssClass' : a specific css class for the menu item for custom
+ *                     styling; optional, defaults to ''
+ *        'children' : vector of items, allowing to recursively define submenus
+ *
+ * @param $item the menu item object, in the format described above
+ * @param $level the current level of the item, of the form '\*+'; the number of
+ *        stars indicates the depth of the item in the menu
+ * @param $options a map of options, where the following entries are currently used:
+ *        'translationPrefix' :  the translation prefix added to the id of each
+ *                     item, in order to generate the name; ignored for items whose
+ *                     name is specified
+ *        'crtItemId': identifier of the current menu item (for differential styling)
+ *#
+#macro(verticalNavigationItem $item $level $options)
+  #set ($class = "$!{item.cssClass}")
+  #set ($hasChildren = ($item.children &amp;&amp; $item.children.size() &gt; 0))
+  #if ($hasChildren)
+    #set ($class = "$class group")
+  #end
+  #if ($options.crtItemId == $item.id)
+    #set ($class = "$class current")
+    #if ($hasChildren)
+      #set ($class = "$class current-group")
+    #end
+  #end
+  #set ($class = $class.trim())
+  #set ($name = "$!{item.name}")
+  #if ($name == '')
+    #set ($name = $services.localization.render("$!{options.translationPrefix}${item.id}"))
+  #end
+  $level (% id="vertical-menu-${item.id}" class="${class}" %){{html}}&lt;a #if ("$!{item.url}" != '')href="$item.url"#{end}&gt;#if($item.glyphicon)$services.icon.renderHTML($item.glyphicon) #end$name&lt;/a&gt;{{/html}}
+  #if ($hasChildren)
+    #set ($children = [])
+    #sortCollectionOfMapsByField($item.children, 'order', 99999, 'asc', $children)
+    #foreach ($child in $children)
+      #verticalNavigationItem($child $level.concat('*') $options)
+    #end
+  #end
+#end
+
+#**
+ * Start a breadcrumb.
+ *
+ * Should be used in HTML.
+ *#
+#macro(breadcrumb_start)
+  &lt;ol class="breadcrumb"&gt;
+#end
+
+#**
+ * End of a breadcrumb
+ *
+ * Should be used in HTML.
+ *#
+#macro(breadcrumb_end)
+  &lt;/ol&gt;
+#end
+
+#**
+ * Display a line in the breadcrumb
+ *
+ * Should be used in HTML.
+ *#
+#macro(breadcrumb_line $link $title)
+  &lt;li&gt;&lt;a href="$link"&gt;$title&lt;/a&gt;&lt;/li&gt;
+#end
+
+#**
+ * Display the current line in the breadcrumb
+ *
+ * Should be used in HTML.
+ *#
+#macro(breadcrumb_current_line $title)
+  &lt;li class="active"&gt;$title&lt;/li&gt;
+#end
+
+###
+### Glyph Icon
+###
+### @param iconName The name of the icon to display, without the glyphicon prefix (eg: 'globe')
+#macro(glyphicon $iconName)
+#if("$!iconName"!='')&lt;span class="glyphicon glyphicon-${iconName}"&gt;&lt;/span&gt;#end
+#end
+
+#macro (livetable_filter $column $columnProperties $xproperty)
   #set ($filterType = $columnProperties.type)
   #if ("$!filterType" == '')
     ## Determine the filter type from the xproperty type.
