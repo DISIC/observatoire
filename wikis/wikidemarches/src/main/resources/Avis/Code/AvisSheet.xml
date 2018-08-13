@@ -40,13 +40,19 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-#macro (displayObject $className $dontPrettyProps)
+#macro (displayObject $className $skipPrettyProps)
 #set ($obj = $doc.getObject($className))
 #set ($class = $obj.xWikiClass)
 #foreach($prop in $class.properties)
-  #if (!$dontPrettyProps || !$dontPrettyProps.contains($prop.name))
+  #if (!$skipPrettyProps || !$skipPrettyProps.contains($prop.name))
     ; $doc.displayPrettyName($prop.name, false, false)
+    #if ($prop.name == 'demarche' &amp;&amp; $xcontext.action == "view")
+      ## for the "demarche" property, display a link in view mode
+      #set ($demarcheId = $obj.getProperty($prop.name).getValue())
+    : [[$demarcheId]]
+    #else
     : $doc.display($prop.name,$obj)
+    #end
   #else
     $doc.display($prop.name,$obj)
   #end
@@ -56,8 +62,11 @@
 (% class="xform" %)
 (((
 #set($skippedPrettyProps = [])
+## In edit mode, the custom displayers already display the pretty props, hence we skip them.
+## TODO: we should probably look into the displayers and skip pretty properties when a custom
+## displayer is used
 #if ($xcontext.action == 'edit')
-  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide'])
+  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide','modalite','difficultes','comprehensible','aide','vote'])
 #end
 #displayObject('Avis.Code.AvisClass',$skippedPrettyProps)
 )))

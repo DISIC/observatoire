@@ -177,14 +177,21 @@
 {{html wiki="true"}}
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
-#displaySubTitle
-#displayScoreAverage()
+#* Don't show the subtitle nor the score average when the user has just submitted a new
+# demande and is now invited to submit an avis via a "fake" demarche. "Fake" in the sense 
+# that at this step, the demande is not yet converted into a real demarche yet, however we
+# reuse the demarche sheet for submitting an avis, via the "Demarches.0" document.
+# See also: https://github.com/DISIC/wikidemarches/issues/158
+*#
+#if ($doc.fullName != 'Demarches.0')
+  #displaySubTitle()
+  #displayScoreAverage()
+#end
 {{/html}}
 {{/velocity}}
 
 (%class='demarche-avis-separator'%)
 ----
-
 {{velocity}}
 #set ($step = $request.session.getAttribute('avis-step'))
 #set ($action = 'create-and-continue')
@@ -201,7 +208,8 @@
 #if ($demarche != $NULL)
   {{html wiki="true"}}
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
-#if ("$!step" == '')
+#if ("$!step" == '' || "$!step" == 'wikidemarches.demande.merci')
+## The user is either visiting a demarche or a fake demarche after having submitted a demande
   &lt;div class='form-preambule'&gt;
     ==$services.localization.render('avis.invite')==
 
@@ -229,13 +237,23 @@
   &lt;div class="vote-container"&gt;
     #displayObjectForm($avis,['vote'])
   &lt;/div&gt;
-  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
+  ## If we're handling a validated demarche, the avis gets associated to it.
+  ## If not, the avis gets associated to the demande the user has just submitted.
+  #set ($demarcheOrDemandeId = $doc.fullName)
+  #if ($doc.fullName == "Demarches.0")
+    #set ($demarcheOrDemandeId = $request.session.getAttribute('demande-id'))
+    #if ("$!step" == 'avis.merci_1')
+      ## We don't need to leave the demande-id in the session since we retrieved it.
+      #set ($discard = $request.session.removeAttribute('demande-id'))
+    #end
+  #end
+  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheOrDemandeId" /&gt;
   &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1" /&gt;
   &lt;input type="hidden" name="avis-action" value="$action" /&gt;
   &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
   &lt;div class='buttonwrapper'&gt;
     #set ($submitLabel = $escapetool.xml($services.localization.render('avis.envoyer')))
-    #if ("$!step" == '')
+    #if ("$!step" == '' || "$!step" == 'wikidemarches.demande.merci')
       #set ($submitLabel = $escapetool.xml($services.localization.render('avis.valider')))
     #end
     &lt;input class="button btn btn-primary" type="submit" name="submit" value="$submitLabel" disabled/&gt;

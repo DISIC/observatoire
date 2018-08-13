@@ -97,13 +97,13 @@
       <name>demarche</name>
       <number>2</number>
       <picker>0</picker>
-      <prettyName>Démarche</prettyName>
+      <prettyName>Démarche ou demande de démarche</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
       <size>1</size>
       <sort>value</sort>
-      <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Demarches.Code.DemarchesClass' and doc.fullName&lt;&gt;'Demarches.Code.DemarchesTemplate' order by doc.title asc</sql>
+      <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and (obj.className='Demarches.Code.DemarchesClass' or obj.className='Demandes.Code.DemandesClass') and doc.fullName&lt;&gt;'Demarches.Code.DemarchesTemplate' order by doc.title asc</sql>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>

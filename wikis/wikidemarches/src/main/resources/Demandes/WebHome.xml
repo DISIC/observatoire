@@ -41,7 +41,7 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'doc.title': {"link":"view"},
+  'doc.title': {"displayName":"Nom","link":"view"},
   'doc.date': {},
   'doc.author': {},
   'contenu': {},
