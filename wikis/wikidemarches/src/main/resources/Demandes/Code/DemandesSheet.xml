@@ -39,8 +39,74 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity}}
+  <content>{{velocity output="none"}}
+#macro (displayProperty $propName $isMandatory)
+  #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
+  #set ($hint = $NULL)
+  #set ($isBoolean = false)
+  #foreach ($prop in $clazz.properties)
+    #if ($prop.name == $propName)
+      #set ($hint = $prop.hint)
+      #set ($isBoolean = ($prop.type == 'BooleanClass'))
+      #set ($isNumber = ($prop.type == 'NumberClass'))
+    #end
+  #end
+  #set ($fieldIsInvalid = false)
+  #if ($xcontext.validationStatus.propertyErrors.contains($propName))
+    #set($fieldIsInvalid = true)
+  #end
+  #if ($isBoolean &amp;&amp; $xcontext.action == 'edit')
+    &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.display($propName)$doc.displayPrettyName($propName, $isMandatory)&lt;/label&gt;
+      #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end  
+    &lt;/dt&gt;
+  #else
+    &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.displayPrettyName($propName, $isMandatory)&lt;/label&gt;
+    #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
+  
+  #end
+  &lt;/dt&gt;
+  &lt;dd #if ($fieldIsInvalid)class="validation-failure"#end&gt;
+    $doc.display($propName, 'edit')
+    #if($fieldIsInvalid)
+      {{error}}$services.localization.render("Demarches.Code.DemarchesClass_${propName}.validation"){{/error}}
+    #end
+  &lt;/dd&gt;
+#end
+{{/velocity}}
+
+{{velocity}}
+#set ($action = $request.action)
+#if ($action == 'convert' &amp;&amp; !$doc.getObject('Demarches.Code.DemarchesClass'))
+  #set ($demarche = $doc.newObject('Demarches.Code.DemarchesClass'))
+  #set ($discard = $doc.save())
+#end
+
+{{html wiki="true"}}
+#if($xcontext.action == 'edit')
+  #set($type="edit")
+  &lt;input type="hidden" name="xvalidate" value="1" /&gt;
+  &lt;input type="hidden" name="async" value="false" /&gt;
+#end
+
+#if ($xcontext.validationStatus.errors.size() &gt; 0 || $xcontext.validationStatus.exceptions.size() &gt; 0)
+
+  {{error}}
+  $services.localization.render('demarches.validation.error')
+  #if ($xcontext.validationStatus.exceptions.size() &gt; 0)
+    #foreach ($exception in $xcontext.validationStatus.exceptions)
+      $exception
+    #end
+  #end
+  {{/error}}
+  
+#end
+&lt;div class="row"&gt;
+
 #set ($discard = $doc.use('Demandes.Code.DemandesClass'))
+&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Demande&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
 (% class="xform" %)
 (((
   ; {{html wiki="true"}}&lt;label#if ($xcontext.action == 'edit') for="Demandes.Code.DemandesClass_0_nom"#end&gt;$escapetool.xml($doc.displayPrettyName('nom', false, false))&lt;/label&gt;{{/html}}##
@@ -56,5 +122,47 @@
     (% class="xHint" %)$services.localization.render('URL')
   : $doc.display('url')
 )))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+#if ($doc.getObject('Demarches.Code.DemarchesClass'))
+#set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.Skin'))
+#set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
+
+&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Démarche&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+  #displayProperty('title1', true)
+#foreach($propName in ['nomComplet', 'objet', 'ministeres'])
+  #set ($mandatory = ($propName == 'direction'))
+  #displayProperty($propName, $mandatory)
+#end
+&lt;/dl&gt;
+)))
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+#end
+&lt;/div&gt;
+
+#if (!$doc.getObject('Demarches.Code.DemarchesClass'))
+  &lt;form action="" method="GET"&gt;
+    &lt;input type="hidden" name="action" value="convert"/&gt;
+      &lt;input class="btn btn-primary" type="submit" name="convert-input" value="Convertir en démarche"&gt;
+  &lt;/form&gt;
+#else
+  &lt;form action="" method="GET"&gt;
+    &lt;input type="hidden" name="action" value="proceed"/&gt;
+    &lt;input class="btn btn-primary" type="submit" name="proceed-input" value="Procéder à la conversion"&gt;
+  &lt;/form&gt;
+#end
+##
+{{/html}}
 {{/velocity}}</content>
 </xwikidoc>

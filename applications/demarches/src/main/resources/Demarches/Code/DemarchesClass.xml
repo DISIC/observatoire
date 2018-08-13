@@ -280,7 +280,9 @@
       <classname/>
       <customDisplay>{{velocity}}
 {{html clean="false"}}
-#if ($xcontext.action == 'get')
+#if ($type == 'edit')
+  #template('displayer_dblist.vm')
+#elseif ($xcontext.action == 'get')
   #foreach ($ministere in $value)
     #set($ministereDocument = $xwiki.getDocument($ministere))
     #if ($velocityCount &gt; 1), #{end}#if ($ministereDocument.sigle)${ministereDocument.sigle}#{else}${ministereDocument.fullName}#end
@@ -290,8 +292,6 @@
     #set($ministereDocument = $xwiki.getDocument($ministere))
     $ministereDocument.displayTitle
   #end
-#else
-  #template('displayer_dblist.vm')
 #end
 {{/html}}
 {{/velocity}}</customDisplay>
