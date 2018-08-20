@@ -33,7 +33,6 @@
   <name>XWiki Projects - DINSIC Wiki Demarches - Applications</name>
   <packaging>pom</packaging>
   <modules>
-    <module>demarches</module>
     <module>publication</module>
   </modules>
   <build>

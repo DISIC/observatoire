@@ -48,8 +48,6 @@
     </snapshotRepository>
   </distributionManagement>
   <modules>
-    <module>applications</module>
     <module>wikis</module>
-    <module>application-publication</module>
   </modules>
 </project>
