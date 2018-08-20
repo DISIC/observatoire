@@ -51,16 +51,16 @@
   #set($userDirections = $services.query.xwql($xwql).bindValue("user", $user).setWiki("xwiki").execute())
 #end
 #macro(createDirectionFilterQueryString)
-#fillUserDirections()
-#set ($directionFilter = '')
-#foreach($item in $userDirections)
-  ## we check that the direction exists
-  #set ($directionKey = $xwiki.getDocument("xwiki:$item").name)
-  #set ($directionKey = "Directions.$directionKey")
-  #if ($xwiki.exists($directionKey))
-    #set ($directionFilter = "$directionFilter&amp;direction=$escapetool.url($directionKey)")
+  #fillUserDirections()
+  #set ($directionFilter = '')
+  #foreach($item in $userDirections)
+    ## we check that the direction exists
+    #set ($directionKey = $xwiki.getDocument("xwiki:$item").name)
+    #set ($directionKey = "Directions.$directionKey")
+    #if ($xwiki.exists($directionKey))
+      #set ($directionFilter = "$directionFilter&amp;direction=$escapetool.url($directionKey)")
+    #end
   #end
-#end
 #end
 #createDirectionFilterQueryString()
 {{/velocity}}</content>

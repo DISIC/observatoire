@@ -40,6 +40,54 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="none"}}
+## This sheet is used to display two types of objects: either Demarches or Avis
+################### Demarche view/edit form macros ########################
+#macro (displayProperty $propName $isMandatory)
+  #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
+  #set ($hint = $NULL)
+  #set ($isBoolean = false)
+  #foreach ($prop in $clazz.properties)
+    #if ($prop.name == $propName)
+      #set ($hint = $prop.hint)
+      #set ($isBoolean = ($prop.type == 'BooleanClass'))
+      #set ($isNumber = ($prop.type == 'NumberClass'))
+    #end
+  #end
+  #set ($fieldIsInvalid = false)
+  #if ($xcontext.validationStatus.propertyErrors.contains($propName))
+    #set($fieldIsInvalid = true)
+  #end
+  #if ($isBoolean &amp;&amp; $xcontext.action == 'edit')
+    &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.display($propName)$doc.displayPrettyName($propName, $isMandatory)&lt;/label&gt;
+      #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end  
+    &lt;/dt&gt;
+  #else
+    &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.displayPrettyName($propName, $isMandatory)&lt;/label&gt;
+    #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
+  
+  #end
+  &lt;/dt&gt;
+  &lt;dd #if ($fieldIsInvalid)class="validation-failure"#end&gt;
+    #if(!$isBoolean || $xcontext.action != 'edit')
+      #if ($isNumber &amp;&amp; $doc.getValue($propName))
+        #if ($xcontext.action == 'view')
+          $numbertool.format('integer', $doc.getValue($propName))
+        #else
+          $doc.display($propName)
+        #end
+      #else
+        $doc.display($propName)
+      #end
+    #end
+    #if($fieldIsInvalid)
+      {{error}}$services.localization.render("Demarches.Code.DemarchesClass_${propName}.validation"){{/error}}
+    #end
+  &lt;/dd&gt;
+#end
+{{/velocity}}
+
+{{velocity output="none"}}
+##Avis form macros
 #macro (displaySubTitle)
 #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($obj)
@@ -175,8 +223,12 @@
 
 {{velocity}}
 {{html wiki="true"}}
-#set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
+##set ($discard = $xwiki.ssx.use('Demarches.Code.Skin'))
+#set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
+
+############################# Subtitle ##########################################
 #* Don't show the subtitle nor the score average when the user has just submitted a new
 # demande and is now invited to submit an avis via a "fake" demarche. "Fake" in the sense 
 # that at this step, the demande is not yet converted into a real demarche yet, however we
@@ -187,12 +239,195 @@
   #displaySubTitle()
   #displayScoreAverage()
 #end
-{{/html}}
-{{/velocity}}
 
+############################# Tabs ################################
+#if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
+&lt;ul class="nav nav-tabs" id="tabs"&gt;
+  &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche"&gt;Démarche&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation"&gt;&lt;a href="#avis"&gt;Avis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+#end
+
+&lt;div class="tab-content"&gt;
+############################# Demarche tab #######################################
+#if ($xcontext.user != 'XWiki.XWikiGuest')
+&lt;div class="tab-pane fade active in" role="tabpanel" id="demarche" aria-labelledby="demarche-tab"&gt;
+
+#if($xcontext.action == 'edit')
+  #set($type="edit")
+  &lt;input type="hidden" name="xvalidate" value="1" /&gt;
+  &lt;input type="hidden" name="async" value="false" /&gt;
+  ## Groovy script to validate empty title or empty direction
+  &lt;input type="hidden" name="xvalidation" value="Demarches.Code.ValidationScriptGroovy" /&gt;
+#end
+
+#if ($xcontext.validationStatus.errors.size() &gt; 0 || $xcontext.validationStatus.exceptions.size() &gt; 0)
+
+  {{error}}
+  $services.localization.render('demarches.validation.error')
+  #if ($xcontext.validationStatus.exceptions.size() &gt; 0)
+    #foreach ($exception in $xcontext.validationStatus.exceptions)
+      $exception
+    #end
+  #end
+  {{/error}}
+  
+#end
+&lt;div class="row"&gt;
+&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Informations générales&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#if ($xcontext.action != 'view')
+  #displayProperty('title1', true)
+#end
+#if ($xcontext.action == 'view')
+&lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
+&lt;dd&gt;$doc.name&lt;/dd&gt;
+#end
+#foreach($propName in ['nomComplet', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
+  #set ($mandatory = ($propName == 'direction'))
+  #displayProperty($propName, $mandatory)
+#end
+&lt;/dl&gt;
+)))
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Catégorisation&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#foreach($propName in ['categoriesPublics', 'publics', 'evenements'])
+  #displayProperty($propName, false)
+#end
+&lt;/dl&gt;
+)))
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Volumétrie&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#foreach($propName in ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
+  #displayProperty($propName, false)
+#end
+&lt;/dl&gt;
+)))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Dématérialisation&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#foreach($propName in ['niveauDemat', 'dematObligatoire', 'exclusionSve', 'caracteristiquesDemat'])
+  #displayProperty($propName, false)
+#end
+&lt;/dl&gt;
+)))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Références&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#foreach($propName in ['referenceBddForm', 'referenceServicePublic'])
+  #displayProperty($propName, false)
+#end
+&lt;/dl&gt;
+)))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Adresses web&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#foreach($propName in ['urlInfos', 'urlDemarche', 'urlFiche'])
+  #displayProperty($propName, false)
+#end
+&lt;/dl&gt;
+)))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Remarques&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#displayProperty('remarques', false)
+&lt;/dl&gt;
+)))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+&lt;div class="col-lg-12 col-md-12 col-sm-12"&gt;
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-heading"&gt;Projet de dématérialisation&lt;/div&gt;
+  &lt;div class="panel-body"&gt;
+(% class="xform" %)
+(((
+&lt;dl&gt;
+#foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'niveauPrevu', 'caracteristiquesDematPrevues'])
+  #displayProperty($propName, false)
+#end
+&lt;/dl&gt;
+)))
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+##
+## Display excel export button if in view mode
+#if ($xcontext.action != 'edit')
+  #set($discard = $services.localization.use('document', 'Macros.AddExcelExportToLivetableMacroTranslations'))
+  #set($discard = $xwiki.ssx.use('Macros.AddExcelExportToLivetableMacro'))
+  &lt;form action="$xwiki.getURL('Macros.AddExcelExportToLivetableMacroResultsPage', 'get', 'outputSyntax=plain&amp;transprefix=demarches.livetable.')" method='post'&gt;
+    &lt;div class="buttonwrapper xwiki-livetable-tools-excelexport"&gt;
+      &lt;input type="hidden" name='classname' value='Demarches.Code.DemarchesClass' /&gt;
+      &lt;input type="hidden" name='collist' value='doc.name' /&gt;
+      &lt;input type="hidden" name='queryFilters' value='currentlanguage,hidden' /&gt;
+      &lt;input type="hidden" name='outputSyntaxType' value='excel' /&gt;
+      &lt;input type="hidden" name='limit' value='0' /&gt;
+      &lt;input type="hidden" name='withPageName' value='true' /&gt;
+      &lt;input type="hidden" name='withPageURL' value='true' /&gt;
+      &lt;input type="hidden" name='withAllFields' value='true' /&gt;
+      &lt;input type="hidden" name='doc.name' value="${escapetool.xml($doc.name)}" /&gt;
+      &lt;input type="hidden" name='excelFilename' value="$escapetool.xml("demarche_${doc.name}_${datetool.get('ddMMyyyyHHmmss')}")" /&gt;
+      &lt;button class='button' type='submit' name='exportexcel'&gt;&lt;span class='xwiki-livetable-tools-text'&gt;$services.localization.render('xwiki.macro.exportexcellivetable.title')&lt;/span&gt; &lt;span class='xwiki-livetable-tools-excel' /&gt;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+#end
+&lt;/div&gt;
+#end
+######################## Demarche tab end #########################
+
+######################## Avis tab ###################
+## Don't dispay the Avis section when not in view mode
+#if ($xcontext.action == 'view')
+## Display the avis as a tab if in authentified mode (otherwise there are issues with 
+## the fade mode)
+#if ($xcontext.user != 'XWiki.XWikiGuest')
+&lt;div class="tab-pane fade" role="tabpanel" id="avis" aria-labelledby="avis-tab"&gt;
+#end
 (%class='demarche-avis-separator'%)
 ----
-{{velocity}}
 #set ($step = $request.session.getAttribute('avis-step'))
 #set ($action = 'create-and-continue')
 #set ($avisDocId = $request.session.getAttribute('avis-id'))
@@ -206,7 +441,6 @@
 #if ("$!step" != "avis.merci_2")
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche != $NULL)
-  {{html wiki="true"}}
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
 #if ("$!step" == '' || "$!step" == 'wikidemarches.demande.merci')
 ## The user is either visiting a demarche or a fake demarche after having submitted a demande
@@ -233,7 +467,6 @@
     #displayObjectForm($avis,['facile','comprehensible','aide','difficultes'])
   &lt;/div&gt;
 #end
-
   &lt;div class="vote-container"&gt;
     #displayObjectForm($avis,['vote'])
   &lt;/div&gt;
@@ -248,7 +481,7 @@
     #end
   #end
   &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheOrDemandeId" /&gt;
-  &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1" /&gt;
+  &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
   &lt;input type="hidden" name="avis-action" value="$action" /&gt;
   &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
   &lt;div class='buttonwrapper'&gt;
@@ -259,15 +492,23 @@
     &lt;input class="button btn btn-primary" type="submit" name="submit" value="$submitLabel" disabled/&gt;
   &lt;/div&gt;
   &lt;/form&gt;
-  {{/html}}
 #end
 #end
+#if ($xcontext.user != 'XWiki.XWikiGuest')
+&lt;/div&gt;
+#end
+#end
+############################## Avis tab end ##############################
+
+&lt;/div&gt;
+
+{{/html}}
 {{/velocity}}</content>
   <object>
     <name>Demarches.Code.DemarchesSheet</name>
     <number>0</number>
     <className>XWiki.JavaScriptExtension</className>
-    <guid>04437620-9ec0-423b-81ae-7d34d52d4dae</guid>
+    <guid>22e95638-c3b9-4493-8cde-dd51185039d5</guid>
     <class>
       <name>XWiki.JavaScriptExtension</name>
       <customClass/>
@@ -345,9 +586,107 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>require(['jquery'], function($) {
+      <code>require.config({
+  paths: {
+    'xwiki-selectize': "$xwiki.getSkinFile('uicomponents/suggest/xwiki.selectize.js', true)" +
+      "?v=$escapetool.url($xwiki.version)"
+  }
+});
+
+require(['jquery','xwiki-selectize'], function($) {
   'use strict';
+ 
+  /** Demarche form functions */
   
+  var getSelectizeOptions = function(select) {
+
+   //we want the code below to get executed only when a Demarche gets edited, not when displaying a livetable
+   if (select[0].form) {
+	   $(select[0].form["Demarches.Code.DemarchesClass_0_categoriesPublics"]).on('change', function() {
+	     console.log("clearing loaded searches...")
+	     $('.suggest-propertyValues').clearLoadedSearches();
+	   })
+   }
+
+   var loadURL = [
+      '$request.contextPath', 'rest',
+      'wikis', encodeURIComponent(XWiki.currentWiki),
+      'classes', encodeURIComponent(select.attr('data-className')),
+      'properties', encodeURIComponent(select.attr('data-propertyName')),
+      'values'
+    ].join('/');
+  return {
+      create: true,
+      load: function(text, callback) {
+        if (select.attr('data-propertyName')=="publics" || select.attr('data-propertyName')=="evenements") {
+          //we don't want to change the request URL when we're not editing a Demarche but just browsing a Demarches livetable
+          if (select[0].form) {
+            var categories = select[0].form["Demarches.Code.DemarchesClass_0_categoriesPublics"];
+            var params = [ categories[0].value + "=" + categories[0].checked,
+               categories[1].value + "=" + categories[1].checked,
+               categories[2].value + "=" + categories[2].checked,
+               categories[3].value + "=" + categories[3].checked].join('&amp;');
+            loadURL = [
+             '$request.contextPath', 'wiki', encodeURIComponent(XWiki.currentWiki),
+             'view/Demarches/Code/DemarchesSuggest?outputSyntax=plain&amp;xpage=plain&amp;' + params + '&amp;property=' + encodeURIComponent(select.attr('data-propertyName'))
+            ].join('/');
+          }
+        } else if (select.attr('data-propertyName')=="ministeres") {
+          if (text.indexOf("Ministeres.") &lt; 0)
+            text = "Ministeres." + text;
+          $('.suggest-propertyValues').clearLoadedSearches();
+        }
+        
+        $.getJSON(loadURL, {
+          'fp': text,
+          'limit': 100
+        }).then(function(response) {
+          if (response &amp;&amp; $.isArray(response.propertyValues)) {
+            return response.propertyValues.map(getSuggestion);
+          } else {
+            return [];
+          }
+        }).done(callback).fail(callback);
+      }
+    };
+  };
+
+  var getSuggestion = function(propertyValue) {
+    var metaData = propertyValue.metaData || {};
+    return {
+      value: propertyValue.value,
+      label: metaData.label,
+      icon: metaData.icon,
+      url: metaData.url
+    };
+  };
+
+  $.fn.suggestPropertyValues = function() {
+    return this.each(function() {
+      $(this).xwikiSelectize(getSelectizeOptions($(this)));
+    });
+  };
+
+  $.fn.clearLoadedSearches = function() {
+    return this.each(function() {
+      if ($(this)[0].selectize) {
+        var selectize = $(this)[0].selectize;
+        selectize.loadedSearches = {};
+        //selectize.options = {};
+        //selectize.clearOptions();
+        var opts = selectize.options;
+        for (var value in opts) {
+          if (opts.hasOwnProperty(value) &amp;&amp; selectize.items.indexOf(value) == -1) {
+            selectize.removeOption(value); 
+          }
+        }        
+      }
+    });
+  };
+
+  $('.suggest-propertyValues').suggestPropertyValues();
+  
+  /** Avis functions */
   function updateVoteAndSubmitButton() {
     var modalite = $("input[name='Avis.Code.AvisClass_0_modalite']:checked").val(); 
     var score = $("input[name='Avis.Code.AvisClass_0_score']:checked").val(); 
@@ -369,11 +708,9 @@
       $('.eval-container').show();
       $('input[type="submit"]').prop('disabled', false);
     }
-    
   }
   
   $(document).ready(function() {
-    
     $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
       updateVoteAndSubmitButton();
     });
@@ -384,15 +721,29 @@
     
     updateEvaluationInputsVisibility();
     
+    $('#tabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
+    
+    if(window.location.hash) {
+      var hash = window.location.hash;
+      if (hash.indexOf('tab=avis') &gt;= 0) {
+        var tab = $('#tabs a[href="#avis"]');
+        //tabs are not always present: when the user is guest they're not displayed
+        if (tab &amp;&amp; tab.tab)
+          tab.tab('show')
+      }
+    } 
+    
   });
-  
 });</code>
     </property>
     <property>
-      <name/>
+      <name>JSX</name>
     </property>
     <property>
-      <parse>0</parse>
+      <parse>1</parse>
     </property>
     <property>
       <use>onDemand</use>
@@ -402,7 +753,7 @@
     <name>Demarches.Code.DemarchesSheet</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>1e7a2eef-3e99-4681-a21f-a61c878b4d95</guid>
+    <guid>c7bdc332-633a-4b30-b949-076e09f3b342</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>
@@ -563,6 +914,10 @@
   border-top: 1px solid #e5e5e5;
 }
 
+.nav-tabs {
+ margin-bottom: 1em;
+}
+
 .wd-form .buttonwrapper {
   padding-top: 0.75em;
   padding-bottom: 0.75em;
@@ -704,13 +1059,13 @@
       <contentType>LESS</contentType>
     </property>
     <property>
-      <name/>
+      <name>SSX</name>
     </property>
     <property>
-      <parse/>
+      <parse>1</parse>
     </property>
     <property>
-      <use>onDemand</use>
+      <use>currentPage</use>
     </property>
   </object>
 </xwikidoc>

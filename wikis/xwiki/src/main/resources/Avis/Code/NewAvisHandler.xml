@@ -91,7 +91,7 @@
 
 #set ($action = "$!request['avis-action']")
 #if ($action == 'create-and-end' || $action == 'create-and-continue')
-  #set ($uin = $services.uin.next)
+  #set ($uin = $services.uin.getNext('avis'))
   ## get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
   #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
   #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
@@ -145,7 +145,7 @@
     <name>Avis.Code.NewAvisHandler</name>
     <number>0</number>
     <className>XWiki.RequiredRightClass</className>
-    <guid>9c2cbf3d-fcbe-4da6-b765-b80a4c34c2e5</guid>
+    <guid>272297a0-c706-42ec-b87f-d30477d32439</guid>
     <class>
       <name>XWiki.RequiredRightClass</name>
       <customClass/>

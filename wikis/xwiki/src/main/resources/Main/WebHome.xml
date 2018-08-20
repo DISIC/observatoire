@@ -38,7 +38,9 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity}}
+  <content>{{include document="Demarches.Code.Macros"/}}
+
+{{velocity}}
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
   (%class='row demarches-searchrow'%)(((
@@ -101,12 +103,28 @@
       )))
     )))
   )))
+  #if ($xcontext.user != 'XWiki.XWikiGuest')
+  #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
+  (%class='row demarches-administration-row'%)(((
+    (%class='container' %)(((
+      (%class='demarches-administration-link'%) (((
+        ==$services.localization.render('wikidemarches.administration.home-title')==
+
+        (%class='demarches-administration-subtitle'%)
+        $services.localization.render('wikidemarches.administration.home-subtitle')
+
+{{html wiki="false" clean="false"}}&lt;a href="$demarchesListPage" class='button btn btn-primary'&gt;$services.localization.render('wikidemarches.administration.demarches.home-link')&lt;/a&gt;{{/html}} [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='button btn btn-primary']]
+      )))
+    )))
+  )))
+  #end
+  
 {{/velocity}}</content>
   <object>
     <name>Main.WebHome</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>986f3f10-3d0f-4f22-8571-d3de73f3e98e</guid>
+    <guid>3aed112b-7eb4-42bf-8232-a834ec048e78</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>
@@ -305,7 +323,7 @@ div.suggestItem {
   }
 }
 
-.demarches-dashboardrow {
+.demarches-dashboardrow, .demarches-administration-row {
   text-align: center;
   h2 {
     margin-top: 1.5em;
@@ -340,7 +358,7 @@ div.suggestItem {
       <contentType>LESS</contentType>
     </property>
     <property>
-      <name/>
+      <name>SSX</name>
     </property>
     <property>
       <parse/>

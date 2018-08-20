@@ -57,7 +57,14 @@ wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
 
-#Demandes
+# Demarche edition
+demarches.validation.error=Le formulaire n'a pas pu être validé en raison d'une ou plusieurs erreur(s) ci-dessous.
+Demarches.Code.DemarchesClass_title1.validation=Le champ « nom » ne doit pas être vide.
+Demarches.Code.DemarchesClass_dateMiseEnLigne.validation=Le champ « date de mise en ligne » doit être au format MM/YYYY.
+Demarches.Code.DemarchesClass_direction.validation=Une direction ou un établissement doit être sélectionné(e).
+Demarches.Code.DemarchesClass.new=Créer une démarche
+
+# Demarche submission by visitor
 wikidemarches.demande.creation=Ajouter une démarche manquante
 wikidemarches.demande.demarche-absente=Vous ne trouvez pas votre démarche ?
 wikidemarches.demande.envoyer=Envoyer
@@ -78,12 +85,23 @@ wikidemarches.dematdashboard.download.hint={0}
 wikidemarches.dematdashboard.homelink=Voir le tableau de bord
 wikidemarches.dematdashboard.hometitle=Suivez l'avancée de la dématérialisation
 wikidemarches.dematdashboard.homesubtitle=
-# wikidemarches.dematdashboard.homesubtitle=« 100 % des démarches administratives accessibles en ligne au 1er janvier 2022 » est l'une des mesures phares annoncée par le gouvernement pour accélérer la transformation numérique de l’administration française, dans le cadre de la démarche « Action Publique 2022 ».</content>
+# wikidemarches.dematdashboard.homesubtitle=« 100 % des démarches administratives accessibles en ligne au 1er janvier 2022 » est l'une des mesures phares annoncée par le gouvernement pour accélérer la transformation numérique de l’administration française, dans le cadre de la démarche « Action Publique 2022 ».
+
+# Administration
+wikidemarches.administration.home-title=Administrez les données
+wikidemarches.administration.home-subtitle=
+wikidemarches.administration.demarches.home-link=Démarches
+wikidemarches.administration.ministeres.home-link=Ministères
+wikidemarches.administration.directions.home-link=Directions
+wikidemarches.administration.publics.home-link=Publics
+wikidemarches.administration.evenements.home-link=Événements
+wikidemarches.administration.avis.home-link=Avis
+</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>
     <className>XWiki.TranslationDocumentClass</className>
-    <guid>34883634-42d4-41d5-b290-1a3d3bfdc463</guid>
+    <guid>1194b93a-f140-423c-840a-54542b3798c9</guid>
     <class>
       <name>XWiki.TranslationDocumentClass</name>
       <customClass/>
