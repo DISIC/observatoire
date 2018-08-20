@@ -29,14 +29,14 @@
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
-  <artifactId>xwiki-dinsic-wikidemarches-wikis-wikidemarches-upgrade</artifactId>
-  <name>XWiki Projects - DINSIC Wiki Demarches - Demarches wiki upgrade package</name>
+  <artifactId>xwiki-dinsic-wikidemarches-wikis-xwiki-upgrade</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Main wiki upgrade package</name>
   <packaging>xar</packaging>
   <!-- Will depend on the full xar and will exclude non upgradable pages -->
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>xwiki-dinsic-wikidemarches-wikis-wikidemarches</artifactId>
+      <artifactId>xwiki-dinsic-wikidemarches-wikis-main</artifactId>
       <version>${project.version}</version>
       <type>xar</type>
       <scope>provided</scope>

@@ -32,16 +32,4 @@
   <artifactId>xwiki-dinsic-wikidemarches-wikis-main</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - Main Wiki</name>
   <packaging>xar</packaging>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <version>${platform.version}</version>
-        <configuration>
-          <includeDependencies>true</includeDependencies>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

@@ -33,10 +33,8 @@
   <name>XWiki Projects - DINSIC Wiki Demarches - Wikis</name>
   <packaging>pom</packaging>
   <modules>
-    <module>wikidemat</module>
-    <module>wikidemarches</module>
-    <module>wikidemarches-upgrade</module>
     <module>xwiki</module>
+    <module>xwiki-upgrade</module>
   </modules>
   <build>
     <extensions>
