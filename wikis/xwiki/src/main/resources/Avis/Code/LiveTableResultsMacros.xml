@@ -301,9 +301,9 @@
         #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=directionProperty.id.id and directionProperty.id.name='direction' and upper(str(directionProperty.value)) like upper(?)")
         #set ($discard = $whereParams.add("%$filterValue%"))
       #elseif ($colName == 'ministeres')
-        #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche, DBStringListProperty ministeresProperty join ministeresProperty.list list")
-        #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=ministeresProperty.id.id and ministeresProperty.id.name='ministeres' and upper(str(list)) like upper(?)")
-        #set ($discard = $whereParams.add("%$filterValue%"))
+        #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche, DBStringListProperty ministeresProperty")
+        #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=ministeresProperty.id.id and ministeresProperty.id.name='ministeres' and ? in elements (ministeresProperty.list)")
+        #set ($discard = $whereParams.add("$filterValue"))
       #else
         #set ($discard = $tablelist.add($colName))
         #if ($colName.startsWith('doc.'))
