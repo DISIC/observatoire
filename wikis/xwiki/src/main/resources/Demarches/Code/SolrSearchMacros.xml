@@ -73,5 +73,176 @@
   #set ($return = $NULL)
   #setVariable("$return" "$!{searchedText} $!{prefixSearchedText} $!{extraQueryURL}")
 #end
+
+
+
+##override the displayResults macro to remove location, author, highlight and to change markup
+## contains directly the content of displaySearchResultTitle
+#macro (displaySearchResult_document $searchResult)
+  #set ($showLocale = $searchResult.locale != '' &amp;&amp; $searchResult.locale != "$xcontext.locale")
+  #set ($titleURL = $xwiki.getURL($searchResultReference))
+  #if ($showLocale)
+    #set ($titleURL = $xwiki.getURL($searchResultReference, 'view', "language=$searchResult.locale"))
+  #end
+  &lt;li class="search-result-title-wd"&gt;
+    #*$services.icon.renderHTML('file-white')*#
+    &lt;a href="$titleURL"&gt;$escapetool.xml($searchResult.title_)&lt;/a&gt;
+    #if ($showLocale)
+      &lt;span title="$escapetool.xml($services.localization.render('solr.result.language'))"
+        class="search-result-language" &gt;($escapetool.xml($searchResult.locale))&lt;/span&gt;
+    #end
+    ## Scoring debug data.
+    &lt;div class="search-result-debug"&gt;$!escapetool.xml($searchResponse.explainMap.get($searchResult.id))&lt;/div&gt;
+  &lt;/li&gt;
+#end
+
+##override the displaySearchResultsSort macro to remove the highlight, facet and sort options
+#macro (displaySearchResultsSort)
+#end
+
+##override displaySearchFacets in order to hide the facet actions
+#macro (displaySearchFacets $searchResponse)
+  #set($void = $services.progress.startStep('#displaySearchFacets'))
+  (% class="search-facets collapsed-xs xform" %)(((
+    (% class="search-facets-header" %)(((
+      **{{translation key="solr.facets.title"/}}** (% class="pull-right visible-xs" %)$services.icon.render('search-plus')
+
+      (% class="xHint" %)
+      {{translation key="solr.facets.hint"/}}
+    )))
+    {{html clean="false"}}
+      #foreach ($facetField in $searchResponse.facetFields)
+        #displaySearchFacet($facetField)
+      #end
+    {{/html}}
+  )))
+  #set($void = $services.progress.endStep())
+#end
+
+##override the displaySearchFacet macro so that the facets are unfolded by default
+#macro (displaySearchFacet $facetField)
+  #set ($facetRequestParameter = "f_$facetField.name")
+  #set ($facetRequestValues = $request.getParameterValues($facetRequestParameter))
+  #set ($facetValues = [])
+  #foreach ($facetValue in $facetField.values)
+    ## Keep only the values that have at least one match or that are specified on the request.
+    #if ($facetValue.count &gt; 0 || ($facetRequestValues &amp;&amp; $facetRequestValues.contains($facetValue.name)))
+      #set ($discard = $facetValues.add($facetValue))
+    #end
+  #end
+  ## Facets that perform a 'facet.prefix'-based drill down (see https://wiki.apache.org/solr/HierarchicalFaceting) don't
+  ## have any values (not even with 0 count) when the prefix specified on the request doesn't have any "sub-values", but
+  ## we still want to display them to allow the user to reset the filter.
+  #if ($facetValues.size() &gt; 0 || $facetRequestValues)
+    ## Show active facets (that have selected values or that have an explicit limit on the number of values, i.e.
+    ## pagination) as expanded. Collapse the rest, otherwise you have to scroll to see all the available facets.
+    #set ($facetValuesLimit = $request.getParameter("l_$facetField.name"))
+    &lt;div class="search-facet expanded" data-name="$facetField.name"&gt;
+      #displaySearchFacetHeader($facetField)
+      #displaySearchFacetBody($facetField)
+    &lt;/div&gt;
+  #end
+#end
+
+## Override displaySearchForm in order to add the class "withsearchsuggest-input" to the search input so that
+## the field provides live suggestion like on the home page, and to add a label for the input field.
+#macro (displaySearchForm)
+  ## include custom search suggest in the same way as in Main.WebHome
+  ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+  #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
+  #set($void = $services.progress.startStep('#displaySearchForm'))
+  {{html clean="false"}}
+  &lt;label for="search-input"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
+  &lt;form class="search-form row" action="$doc.getURL()" role="search"&gt;
+    &lt;div class="hidden"&gt;
+      &lt;input type="hidden" name="sort" value="$!escapetool.xml($sort)"/&gt;
+      &lt;input type="hidden" name="sortOrder" value="$!escapetool.xml($sortOrder)"/&gt;
+      &lt;input type="hidden" name="highlight" value="$highlightEnabled"/&gt;
+      &lt;input type="hidden" name="facet" value="$facetEnabled"/&gt;
+      ## The parameter used to determine if the request has been redirected with default search filters.
+      &lt;input type="hidden" name="r" value="$!escapetool.xml($request.r)"/&gt;
+      #if ("$!request.debug" != '')
+        &lt;input type="hidden" name="debug" value="$escapetool.xml($request.debug)"/&gt;
+      #end
+      ## Preserve the current facet values when submitting a new search query.
+      #foreach ($entry in $request.parameterMap.entrySet())
+        #if ($entry.key.startsWith('f_') || $entry.key.startsWith('l_'))
+          #foreach ($value in $entry.value)
+            &lt;input type="hidden" name="$escapetool.xml($entry.key)" value="$escapetool.xml($value)"/&gt;
+          #end
+        #end
+      #end
+    &lt;/div&gt;
+    &lt;div class="col-xs-12 col-sm-8 col-md-9"&gt;
+      &lt;div class="input-group"&gt;
+        &lt;input type="search" id="search-input" name="text" class="form-control withTip useTitleAsTip withsearchsuggest-input"
+          placeholder="$services.localization.render('wikidemarches.search.inputText')" value="$escapetool.xml($text)"/&gt;
+        &lt;span class="input-group-btn"&gt;
+          &lt;button type="submit" class="btn btn-primary"&gt;
+            $services.icon.renderHTML('search')
+            &lt;span class="sr-only"&gt;$services.localization.render('search.page.bar.submit')&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+  {{/html}}
+  #set($void = $services.progress.endStep())
+#end
+
+## override get search results to explicitly add url matching to the query, for the 3 url fields
+#macro (getSearchResults)
+  #set($queryString = '')
+  #prepareSolrDemarchesQuery($text, $queryString)
+  ##
+  ## Create the query and set the query string.
+  #set ($query = $services.query.createQuery($queryString, 'solr'))
+  ##
+  ## Set query parameters.
+  #set ($discard = $query.setLimit($rows))
+  #set ($discard = $query.setOffset($start))
+  #set ($discard = $query.bindValue('sort', "${sort} ${sortOrder}"))
+  #setQueryFields($query)
+  #setFacetFields($query)
+  #setFilterQuery($query)
+  #setHighlightQuery($query)
+  #if ($debug)
+    #set ($discard = $query.bindValue('debugQuery', 'on'))
+  #end
+  ##
+  ## Execute the query.
+  #set ($searchResponse = $query.execute()[0])
+#end
+
+##override displaySearchResults to not show the link to the RSS feed
+#macro (displaySearchResults)
+  #set ($results = $searchResponse.results)
+  #set ($paginationParameters = {
+    'url': $doc.getURL('view', "$!request.queryString.replaceAll('firstIndex=[0-9]*', '')"),
+    'totalItems': $results.numFound,
+    'defaultItemsPerPage': $rows,
+    'position': 'top'
+  })
+  {{html clean="false"}}#pagination($paginationParameters)
+  &lt;ul class='search-results'&gt;
+    #foreach ($searchResult in $results)
+      #set ($searchResultReference = $services.solr.resolve($searchResult))
+      ## call directly the search result document, otherwise we'll have some div elements all around the results which break the list of results
+      #displaySearchResult_document($searchResult)
+    #end
+  &lt;/ul&gt;
+  #set ($discard = $paginationParameters.put('position', 'bottom'))
+  #pagination($paginationParameters)
+  #set ($text = $!request.text)
+  &lt;div class="new-demarche"&gt;
+    &lt;div&gt;$services.localization.render('wikidemarches.demande.demarche-absente')&lt;/div&gt;
+    &lt;div class='buttonwrapper'&gt;
+      &lt;a class='button btn btn-primary' href="$xwiki.getDocument('Demarches.Code.NewDemarche').getURL()?text=$escapetool.url($text)"&gt;$services.localization.render('wikidemarches.demande.creation')&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+{{/html}}
+
+#end
+
 {{/velocity}}</content>
 </xwikidoc>
