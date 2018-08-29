@@ -50,7 +50,7 @@
 {{velocity}}
 #set ($discard = $xwiki.ssx.use('Demarches.Code.Skin'))
 #if ($request.create == 'true')
-  #set($newId = $services.uin.next)
+  #set($newId = $services.uin.getNext('demarches'))
   #set ($newReference = $services.model.createDocumentReference('', '', "$newId"))
   #set($createParams = '&amp;parent=Demarches.WebHome&amp;template=Demarches.Code.DemarchesTemplate&amp;title=')
   $response.sendRedirect($xwiki.getURL($newReference, 'edit', $createParams))
