@@ -39,7 +39,13 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>false</hidden>
-  <content>{{include document="Demarches.Code.Macros" output="false"/}}
+  <content>{{velocity}}
+#if ($xcontext.user == 'XWiki.XWikiGuest')
+  $response.sendRedirect($xwiki.getURL('TableauDeBord.WebHome'))
+#end
+{{/velocity}}
+
+{{include document="Demarches.Code.Macros" output="false"/}}
 
 {{velocity}}
 #set ($discard = $xwiki.ssx.use('Demarches.Code.Skin'))
