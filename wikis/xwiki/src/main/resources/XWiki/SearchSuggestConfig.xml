@@ -522,8 +522,10 @@
     </property>
     <property>
       <query>fq=type:DOCUMENT
+fq=wiki:xwiki
 fq=class:Demarches.Code.DemarchesClass
-qf=title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1</query>
+qf=title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1
+</query>
     </property>
     <property>
       <resultsNumber>8</resultsNumber>
