@@ -55,6 +55,7 @@
   #set ($url = $!request.get('Demarches.Code.DemarchesClass_0_urlDemarche'))
   #set ($discard = $object.set('objet', $objet))
   #set ($discard = $object.set('urlDemarche', $url))
+  #set ($discard = $object.set('statut', 'demandeUtilisateur'))
   ## We set an empty direction, otherwise the sheet will show 'direction.displayTitle'.
   #set ($discard = $object.set('direction', ''))
   ## Set 'niveauDemat' to ['formulaire'] so that the Avis form is set to 'en-ligne-entièrement'
