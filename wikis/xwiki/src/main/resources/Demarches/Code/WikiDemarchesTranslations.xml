@@ -45,6 +45,8 @@ wd.accessibilite=Accessibilité
 wd.contact=Contact
 wd.about=À propos
 wikidemarches.obligatoire=(obligatoire)
+wd.login=Identification
+wd.logout=Déconnexion
 
 #Démarches
 wikidemarches.sitename=NosDemarches.gouv.fr
@@ -69,6 +71,7 @@ wikidemarches.demande.creation=Ajouter une démarche manquante
 wikidemarches.demande.demarche-absente=Vous ne trouvez pas votre démarche ?
 wikidemarches.demande.envoyer=Envoyer
 wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également nous donner votre avis sur cette démarche ?
+wikidemarches.demande.newdemarche.warning=Référencée le {0}, cette démarche n’est pas encore vérifiée, mais vous pouvez déjà donner votre avis après l’avoir réalisée. 
 
 #Footer
 wikidemarches.footer.administrationlinks.intro=Réseau

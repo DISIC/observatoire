@@ -219,6 +219,19 @@
     &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.totalnumber', [$totalVotes])&lt;/div&gt;
   &lt;/div&gt;
 #end
+
+
+#macro(maybeDisplayStatusWarning)
+  #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
+  #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
+    ## include specific style
+    #set($discard = $xwiki.ssx.use('Demarches.Code.NewDemandeSSX'))
+    #set($demarcheDate = $datetool.format("d MMMM", $doc.creationDate))
+    (%class='newdemande-message'%)(((
+    {{warning}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/warning}}
+    )))
+  #end
+#end
 {{/velocity}}
 
 {{velocity}}
@@ -238,6 +251,7 @@
 #if ($doc.fullName != 'Demarches.0')
   #displaySubTitle()
   #displayScoreAverage()
+  #maybeDisplayStatusWarning()
 #end
 
 ############################# Tabs ################################
