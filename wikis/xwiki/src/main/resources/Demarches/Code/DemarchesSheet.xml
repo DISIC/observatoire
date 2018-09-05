@@ -54,15 +54,16 @@
 ############################# Tabs ################################
 #if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
 &lt;ul class="nav nav-tabs" id="tabs"&gt;
-  &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche"&gt;Démarche&lt;/a&gt;&lt;/li&gt;
-  &lt;li role="presentation"&gt;&lt;a href="#avis"&gt;Avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche-tab"&gt;Démarche&lt;/a&gt;&lt;/li&gt;
+    &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation"&gt;&lt;a href="#avis-tab"&gt;Formulaire de soumission d'avis&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 #end
 
 &lt;div class="tab-content"&gt;
 ############################# Demarche tab #######################################
 #if ($xcontext.user != 'XWiki.XWikiGuest')
-&lt;div class="tab-pane fade active in" role="tabpanel" id="demarche" aria-labelledby="demarche-tab"&gt;
+&lt;div class="tab-pane fade active in" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
 
 #if($xcontext.action == 'edit')
   #set($type="edit")
@@ -229,14 +230,25 @@
 #end
 ######################## Demarche tab end #########################
 
+######################## Liste avis tab ###################
+## Don't dispay the list avis tab when not in view mode
+#if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
+  ## Display the list of avis as a tab if in authentified mode
+  &lt;div class="tab-pane fade" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
+  #set ($extraParams = "demarche=$doc.fullName")
+  {{include document="Avis.WebHome" /}}
+  &lt;/div&gt;
+#end
+######################## Liste avis tab end ###################
+
 ######################## Avis tab ###################
 #maybeSetWarningBackground()
-## Don't dispay the Avis section when not in view mode
+## Don't dispay the avis tab when not in view mode
 #if ($xcontext.action == 'view')
 ## Display the avis as a tab if in authentified mode (otherwise there are issues with 
 ## the fade mode)
 #if ($xcontext.user != 'XWiki.XWikiGuest')
-&lt;div class="tab-pane fade" role="tabpanel" id="avis" aria-labelledby="avis-tab"&gt;
+&lt;div class="tab-pane fade" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
 #end
 (%class='demarche-avis-separator'%)
 ----
