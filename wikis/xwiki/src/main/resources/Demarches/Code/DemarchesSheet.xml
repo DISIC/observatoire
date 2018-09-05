@@ -252,12 +252,19 @@
   &lt;/div&gt;
 #end
 
-
-#macro(maybeDisplayStatusWarning)
+#* Set a specific background for demarches that were submitted by users and that were not
+yet validated. *#
+#macro(maybeSetWarningBackground)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
     ## include specific style
     #set($discard = $xwiki.ssx.use('Demarches.Code.NewDemandeSSX'))
+  #end
+#end
+
+#macro(maybeDisplayStatusWarning)
+  #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
+  #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
     #set($demarcheDate = $datetool.format("d MMMM", $doc.creationDate))
     (%class='newdemande-message'%)(((
     {{warning}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/warning}}
@@ -270,21 +277,11 @@
 {{html wiki="true"}}
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
-##set ($discard = $xwiki.ssx.use('Demarches.Code.Skin'))
 #set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
 
-############################# Subtitle ##########################################
-#* Don't show the subtitle nor the score average when the user has just submitted a new
-# demande and is now invited to submit an avis via a "fake" demarche. "Fake" in the sense 
-# that at this step, the demande is not yet converted into a real demarche yet, however we
-# reuse the demarche sheet for submitting an avis, via the "Demarches.0" document.
-# See also: https://github.com/DISIC/wikidemarches/issues/158
-*#
-#if ($doc.fullName != 'Demarches.0')
-  #displaySubTitle()
-  #displayScoreAverage()
-  #maybeDisplayStatusWarning()
-#end
+############################# Subtitle / Score #############################
+#displaySubTitle()
+#displayScoreAverage()
 
 ############################# Tabs ################################
 #if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
@@ -465,6 +462,7 @@
 ######################## Demarche tab end #########################
 
 ######################## Avis tab ###################
+#maybeSetWarningBackground()
 ## Don't dispay the Avis section when not in view mode
 #if ($xcontext.action == 'view')
 ## Display the avis as a tab if in authentified mode (otherwise there are issues with 
@@ -477,11 +475,12 @@
 #set ($step = $request.session.getAttribute('avis-step'))
 #set ($action = 'create-and-continue')
 #set ($avisDocId = $request.session.getAttribute('avis-id'))
-
 #if ("$!step" != '')
   ## Clean the session and display the message.
   #set ($discard = $request.session.removeAttribute('avis-step'))
   #displayMessage($step)
+#else
+  #maybeDisplayStatusWarning()
 #end
 
 #if ("$!step" != "avis.merci_2")
@@ -489,7 +488,7 @@
 #if ($demarche != $NULL)
   &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
 #if ("$!step" == '' || "$!step" == 'wikidemarches.demande.merci')
-## The user is either visiting a demarche or a fake demarche after having submitted a demande
+## The user is either visiting an existing demarche or a demarche that he just submitted.
   &lt;div class='form-preambule'&gt;
     ==$services.localization.render('avis.invite')==
 
@@ -517,16 +516,8 @@
     #displayObjectForm($avis,['vote'])
   &lt;/div&gt;
   ## If we're handling a validated demarche, the avis gets associated to it.
-  ## If not, the avis gets associated to the demande the user has just submitted.
-  #set ($demarcheOrDemandeId = $doc.fullName)
-  #if ($doc.fullName == "Demarches.0")
-    #set ($demarcheOrDemandeId = $request.session.getAttribute('demande-id'))
-    #if ("$!step" == 'avis.merci_1')
-      ## We don't need to leave the demande-id in the session since we retrieved it.
-      #set ($discard = $request.session.removeAttribute('demande-id'))
-    #end
-  #end
-  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheOrDemandeId" /&gt;
+  #set ($demarcheId = $doc.fullName)
+  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheId" /&gt;
   &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
   &lt;input type="hidden" name="avis-action" value="$action" /&gt;
   &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
