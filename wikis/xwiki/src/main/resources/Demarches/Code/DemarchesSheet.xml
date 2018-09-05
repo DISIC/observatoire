@@ -964,6 +964,15 @@ require(['jquery','xwiki-selectize'], function($) {
  margin-bottom: 1em;
 }
 
+
+/** Avoid horizontal scrollbars on demarches due to long URLs. */
+.wikigeneratedlinkcontent {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+
 .wd-form .buttonwrapper {
   padding-top: 0.75em;
   padding-bottom: 0.75em;
