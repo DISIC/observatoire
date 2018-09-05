@@ -70,18 +70,18 @@
 
 {{velocity}}
 #set ($columnsProperties = {
-  'doc.title': {"displayName":"Nom","link":"view"},
+  'doc.title': {'displayName':'Nom','link':'view'},
+  'doc.creationDate': {'sortable': true, 'type': 'date'},
   'evenements': {},
   'ministeres': {},
-  'direction': {"displayName":"Direction", "html":true},
+  'direction': {'displayName':'Direction', 'html':true},
   'groupes': {},
-  'categoriesPublics': {"displayName":"Catégories de publics"},
-  'niveauDemat': {"displayName":"Niveau démat."},
-  'nomProjet': {"displayName":"Projet"},
-  'statutProjetDemat': {"displayName":"Statut projet"},
+  'categoriesPublics': {'displayName':'Catégories de publics'},
+  'niveauDemat': {'displayName':'Niveau démat.'},
+  'nomProjet': {'displayName':'Projet'},
+  'statutProjetDemat': {'displayName':'Statut projet'},
   'statut': {'displayName': 'Statut'},
-  'doc.date': {},
-  '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
+  '_actions': {'sortable':false,'filterable':false,'html':true,'actions':['edit','delete']}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',
@@ -91,9 +91,9 @@
   'maxPages': 10,
   'selectedColumn': 'doc.title',
   'defaultOrder': 'asc',
-  'extraParams' : "direction/join_mode=or&amp;ministeres/join_mode=or&amp;publics/join_mode=or&amp;evenements/join_mode=or"
+  'extraParams' : 'direction/join_mode=or&amp;ministeres/join_mode=or&amp;publics/join_mode=or&amp;evenements/join_mode=or'
 })
-#set ($columns = ['doc.title', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
+#set ($columns = ['doc.title', 'doc.creationDate', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
 #livetable('demarches' $columns $columnsProperties $options)
 
 {{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
