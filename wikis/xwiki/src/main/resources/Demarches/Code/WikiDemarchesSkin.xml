@@ -86,20 +86,30 @@
       </path>
     </class>
     <property>
-      <content>#set($displayDocExtra = false)
-#set($displayContentFooter = false)
-#set($displayDocChanges = false)
-#set($displayContentMenu = $hasEdit)
+      <content>#set ($displayContentFooter = false)
+#set ($displayDocChanges = false)
+#set ($displayContentMenu = $hasEdit)
 ## #set($displayContentMenu = $hasAdmin &amp;&amp; $isAdvancedUser)
-#set($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
-#set($displayDrawer = !$isGuest)
-#set($displayQuickSearch = false)
-#set($discard = $xwiki.ssx.use('IconThemes.FontAwesome'))
-#set($discard = $xwiki.jsx.use('IconThemes.FontAwesome'))
+#set ($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
+#set ($displayDrawer = !$isGuest)
+#set ($displayQuickSearch = false)
+#set ($discard = $xwiki.ssx.use('IconThemes.FontAwesome'))
+#set ($discard = $xwiki.jsx.use('IconThemes.FontAwesome'))
 
 #* These will be handled from the pages *#
-#set($displayDocTitle = true)
-#set($displayTitleContentSeparator = true)</content>
+#set ($displayDocTitle = true)
+#set ($displayTitleContentSeparator = true)
+
+#* Display the comments, attachments, history tabs for logged in users viewing Demarches *#
+#set ($xobj = $doc.getObject('Demarches.Code.DemarchesClass'))
+#if ($xcontext.user != 'XWiki.XWikiGuest' &amp;&amp; $xobj)
+  #set ($displayDocExtra = true)
+  #set ($showcomments = true)
+  #set ($showattachments = true)
+#else
+  #set ($displayDocExtra = false)
+#end
+</content>
     </property>
     <property>
       <path>layoutExtraVars.vm</path>

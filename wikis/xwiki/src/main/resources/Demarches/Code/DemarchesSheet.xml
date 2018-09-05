@@ -972,6 +972,10 @@ require(['jquery','xwiki-selectize'], function($) {
   word-break: break-word;
 }
 
+/** Add margin top the docextra tabs */
+#xwikidata {
+  margin-top: 1em;
+}
 
 .wd-form .buttonwrapper {
   padding-top: 0.75em;
