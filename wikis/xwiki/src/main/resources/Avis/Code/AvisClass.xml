@@ -90,20 +90,20 @@
       <classname/>
       <customDisplay/>
       <disabled>0</disabled>
-      <displayType>select</displayType>
+      <displayType>input</displayType>
       <hint/>
       <idField/>
       <multiSelect>0</multiSelect>
       <name>demarche</name>
       <number>2</number>
-      <picker>0</picker>
+      <picker>1</picker>
       <prettyName>Démarche ou demande de démarche</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
       <size>1</size>
       <sort>value</sort>
-      <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and (obj.className='Demarches.Code.DemarchesClass' or obj.className='Demandes.Code.DemandesClass') and doc.fullName&lt;&gt;'Demarches.Code.DemarchesTemplate' order by doc.title asc</sql>
+      <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Demarches.Code.DemarchesClass' and doc.fullName&lt;&gt;'Demarches.Code.DemarchesTemplate' order by doc.title asc</sql>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
@@ -223,7 +223,7 @@
     <name>Avis.Code.AvisClass</name>
     <number>0</number>
     <className>AppWithinMinutes.MetadataClass</className>
-    <guid>04674a95-5a36-42f1-8790-9ea136b5a71a</guid>
+    <guid>5860cf0c-f709-4d5c-86ee-9c1c08702b19</guid>
     <class>
       <name>AppWithinMinutes.MetadataClass</name>
       <customClass/>
@@ -255,7 +255,7 @@
     <name>Avis.Code.AvisClass</name>
     <number>0</number>
     <className>XWiki.ClassSheetBinding</className>
-    <guid>03932335-3a88-4965-a3a8-91ad18fb8c0f</guid>
+    <guid>30a1d07a-29d4-47fd-854c-a5b49ede4201</guid>
     <class>
       <name>XWiki.ClassSheetBinding</name>
       <customClass/>
@@ -287,7 +287,7 @@
     <name>Avis.Code.AvisClass</name>
     <number>0</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>4a1fc2bc-df9f-4da4-8b35-63cf2ac16d08</guid>
+    <guid>5d4ed815-5bf2-4210-bf01-16e54ddce1e2</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>
@@ -319,7 +319,7 @@
     <name>Avis.Code.AvisClass</name>
     <number>1</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>da376769-143c-45b8-851f-008f66402a10</guid>
+    <guid>31fa1ab1-f4fb-4b76-b30a-5b381a463818</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>
