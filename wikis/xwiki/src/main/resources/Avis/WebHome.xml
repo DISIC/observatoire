@@ -41,7 +41,7 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'doc.creationDate': {},
+  'doc.creationDate': {'filterable': true, 'type': 'date'},
   'doc.name': {"displayName": 'No.', "link":"view"},
   'session': {},
   'demarche': {},
@@ -60,8 +60,7 @@
   'maxPages': 10,
   'selectedColumn': 'doc.creationDate',
   'defaultOrder': 'desc',
-  'resultPage': 'Avis.Code.LiveTableResults',
-  'extraParams': $extraParams
+  'resultPage': 'Avis.Code.LiveTableResults'
 })
 #* Two situations: 
 - default: display the full list of avis 
@@ -71,7 +70,9 @@ include all columns.
 #if (!$extraParams)
   #set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
 #else
-  #set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'demarche', 'modalite', 'score', 'vote', '_actions'])
+  #set ($discard = $options.put('extraParams', $extraParams))
+  #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
+  #set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'modalite', 'score', 'vote', '_actions'])
 #end
 #livetable('avis' $columns $columnsProperties $options)
 
