@@ -263,7 +263,7 @@ yet validated. *#
 #macro(maybeDisplayStatusWarning)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
-    #set($demarcheDate = $datetool.format("d MMMM", $doc.creationDate))
+    #set($demarcheDate = $datetool.format("d MMMM yyyy", $doc.creationDate))
     (%class='newdemande-message'%)(((
     {{warning}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/warning}}
     )))
