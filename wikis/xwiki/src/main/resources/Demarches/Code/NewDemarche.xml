@@ -60,7 +60,7 @@
   #set ($discard = $object.set('direction', ''))
   ## Set 'niveauDemat' to ['formulaire'] so that the Avis form is set to 'en-ligne-entièrement'
   ## (see DemarchesSheet).
-  #set ($discard = $object.set('niveauDemat', ['formulaire']))
+  ##set ($discard = $object.set('niveauDemat', ['formulaire']))
   ## save with programming rights as the current user will not have the right to edit the Avis document
   #set ($discard = $demarche.saveWithProgrammingRights())
   ##TODO: see how we handle an error in saving the object
