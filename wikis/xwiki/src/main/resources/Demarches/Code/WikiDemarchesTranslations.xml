@@ -67,9 +67,14 @@ Demarches.Code.DemarchesClass_direction.validation=Une direction ou un établiss
 Demarches.Code.DemarchesClass.new=Créer une démarche
 
 # Demarche submission by visitor
-wikidemarches.demande.creation=Ajouter une démarche manquante
 wikidemarches.demande.demarche-absente=Vous ne trouvez pas votre démarche ?
-wikidemarches.demande.envoyer=Envoyer
+wikidemarches.demande.creation=Ajouter une démarche manquante
+wikidemarches.demande.referencer=Référencer une démarche manquante
+wikidemarches.demande.referencer.introduction=Si vous n'avez pas trouvé la démarche que vous avez effectuée, ajoutez-la ici, afin de pouvoir donner votre avis.
+wikidemarches.demande.url=URL de la démarche
+wikidemarches.demande.nom=Nom de la démarche
+wikidemarches.demande.but=Quel est le but de cette démarche ?
+wikidemarches.demande.envoyer=Valider
 wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également nous donner votre avis sur cette démarche ?
 wikidemarches.demande.newdemarche.warning=Cette démarche a été ajoutée par un(e) internaute le {0}. Elle est en cours de vérification par l'administration mais vous pouvez déjà donner votre avis.
 

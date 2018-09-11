@@ -34,7 +34,7 @@
   <date>1534867043000</date>
   <contentUpdateDate>1534867043000</contentUpdateDate>
   <version>1.1</version>
-  <title>$services.localization.render('wikidemarches.demande.creation')</title>
+  <title>$services.localization.render('wikidemarches.demande.referencer')</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -76,6 +76,9 @@
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($demarche = $doc.newObject('Demarches.Code.DemarchesClass'))
 #set ($title = "$!request.text")
+&lt;div&gt;
+$services.localization.render('wikidemarches.demande.referencer.introduction')
+&lt;/div&gt;
 &lt;span class="info-box-mandatory small"&gt;
 $services.localization.render('avis.mandatory-info')
 &lt;/span&gt;
@@ -83,8 +86,17 @@ $services.localization.render('avis.mandatory-info')
 &lt;form action="$doc.getURL()" method="POST" class="xform wd-form demande-form"&gt;
   &lt;fieldset&gt;
     &lt;div&gt;
+      &lt;label for="Demarches.Code.DemarchesClass_0_urlDemarche" style="padding-bottom:0.5em"&gt;
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.url')&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset&gt;
+    &lt;div&gt;
       &lt;label for="title" style="padding-bottom:0.5em"&gt;
-      &lt;span&gt;Nom
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.nom')
       &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
       &lt;/span&gt;
     &lt;/div&gt;
@@ -95,7 +107,7 @@ $services.localization.render('avis.mandatory-info')
   &lt;fieldset&gt;
     &lt;div&gt;
       &lt;label for="Demarches.Code.DemarchesClass_0_objet" style="padding-bottom:0.5em"&gt;
-      &lt;span&gt;Description 
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.but')
       &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
       &lt;/span&gt;
     &lt;/div&gt;
@@ -105,18 +117,9 @@ $services.localization.render('avis.mandatory-info')
       &lt;/textarea&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
-  &lt;fieldset&gt;
-    &lt;div&gt;
-      &lt;label for="Demarches.Code.DemarchesClass_0_urlDemarche" style="padding-bottom:0.5em"&gt;
-      &lt;span&gt;$services.localization.render('Demarches.Code.DemarchesClass_urlDemarche')&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
-    &lt;/div&gt;
-  &lt;/fieldset&gt;
   &lt;div class="buttonwrapper"&gt;   
     &lt;input type="hidden" name="Demarches.Code.DemarchesClass_0_statut" value="demandeUtilisateur" /&gt;
-    &lt;input class="btn btn-primary" name="save-demarche" type="submit" value="Envoyer"&gt;
+    &lt;input class="btn btn-primary" name="save-demarche" type="submit" value="$services.localization.render('wikidemarches.demande.envoyer')"&gt;
   &lt;/div&gt;
 &lt;/form&gt;
 {{/html}}
