@@ -99,6 +99,7 @@ wikidemarches.administration.directions.home-link=Directions
 wikidemarches.administration.publics.home-link=Publics
 wikidemarches.administration.evenements.home-link=Événements
 wikidemarches.administration.avis.home-link=Avis
+wikidemarches.administration.avis.statistiques=Statistiques
 </content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>

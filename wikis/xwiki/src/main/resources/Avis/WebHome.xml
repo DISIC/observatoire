@@ -79,14 +79,15 @@ include all columns.
 #* Display the Excel export button only when no extraParams are set, that is when this
 page is not used as an include (e.g. from DemarchesSheet). *#
 #if (!$extraParams)
-{{html clean="false"}}
+{{html clean="false" wiki="true"}}
 #set ($discard = $services.localization.use('document', 'Macros.AddExcelExportToLivetableMacroTranslations'))
 #set ($discard = $xwiki.ssx.use('Macros.AddExcelExportToLivetableMacro'))
 #set ($filename = "avis_$datetool.get('ddMMyyyy-HHmmss')")
 #set ($excelExportURL = $xwiki.getURL('Avis.Code.LiveTableResults', 'get', "outputSyntax=plain&amp;transprefix=avis.livetable.&amp;classname=Avis.Code.AvisClass&amp;collist=doc.creationDate%2Cdoc.name%2CsessionId%2Cdemarche%2Cministeres%2Cdirection%2Cmodalite%2Cscore%2Cvote&amp;queryFilters=currentlanguage%2Chidden&amp;outputSyntaxType=excel&amp;limit=0&amp;reqNo=2&amp;withPageName=true&amp;withPageURL=true&amp;withAllFields=true&amp;excelFilename=$filename&amp;sort=doc.creationDate&amp;dir=desc"))
-&lt;span class="buttonwrapper xwiki-livetable-tools-excelexport"&gt;
-  &lt;a href="$escapetool.xml($excelExportURL)" class="button" title=""&gt;$escapetool.xml($services.localization.render('xwiki.macro.exportexcellivetable.title')) &lt;span class="xwiki-livetable-tools-excel"&gt;&lt;/span&gt;&lt;/a&gt;
+&lt;span class="xwiki-livetable-tools-excelexport"&gt;
+  &lt;a href="$escapetool.xml($excelExportURL)" class="button btn btn-primary" title=""&gt;$escapetool.xml($services.localization.render('xwiki.macro.exportexcellivetable.title')) &lt;span class="xwiki-livetable-tools-excel"&gt;&lt;/span&gt;&lt;/a&gt;
 &lt;/span&gt;
+[[$services.localization.render('wikidemarches.administration.avis.statistiques')&gt;&gt;Avis.Admin.Statistiques.WebHome||class='button btn btn-primary']]
 {{/html}}
 #end
 
