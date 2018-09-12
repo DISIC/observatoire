@@ -89,9 +89,11 @@
       <content>#set ($displayContentFooter = false)
 #set ($displayDocChanges = false)
 #set ($displayContentMenu = $hasEdit)
-## Do not display the content menu on the search page
+## Do not display the content menu on the search page, except for administators who are also advanced users
 #if ($doc.fullName == 'Main.Search')
-  #set ($displayContentMenu = false)
+  #if (!($hasAdmin &amp;&amp; $isAdvancedUser))
+    #set ($displayContentMenu = false)
+  #end
 #end
 #set ($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set ($displayDrawer = !$isGuest)
