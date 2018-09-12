@@ -34,36 +34,77 @@
   <date>1534867043000</date>
   <contentUpdateDate>1534867043000</contentUpdateDate>
   <version>1.1</version>
-  <title>$services.localization.render('wikidemarches.demande.creation')</title>
+  <title>$services.localization.render('wikidemarches.demande.referencer')</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity output="true"}}
+  <content>{{include reference="Demarches.Code.DemarchesMacros" /}}
+{{include reference="Avis.Code.AvisMacros" /}}
+{{velocity output="false"}}
 ## Save only if something was submitted to this page.
 #if ("$!request['save-demarche']" != '')
+  ## Retrieve the 'modalite' field value first since it will be needed to set the appropriate
+  ## value of the demarche 'niveauDemat' field.
+  #set ($modalite = "$!request.get('Avis.Code.AvisClass_0_modalite')")
+
+  ## Create a demarche object
   #set ($uin = $services.uin.getNext('demarches'))
-  ## Get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
   #set ($demarcheId = "Demarches.${uin}")
+  ## Get demarche page with programming rights, otherwise we might have trouble getting
+  ## this new page when we'll setup rights.
   #set ($demarche = $xwiki.getDocumentAsAuthor($demarcheId))
   #set ($object = $demarche.newObject('Demarches.Code.DemarchesClass'))
   #set ($title = "$!request.title")
   #set ($title = $title.substring(0, $mathtool.min($title.length(), 255)))
   #set ($discard = $demarche.setTitle($title))
   #set ($discard = $object.set('nomComplet', $title))
-  #set ($objet = $!request.get('Demarches.Code.DemarchesClass_0_objet'))
-  #set ($url = $!request.get('Demarches.Code.DemarchesClass_0_urlDemarche'))
+  #set ($organismesTraitement = "$!request.get('Demarches.Code.DemarchesClass_0_organismesTraitement')")
+  #set ($objet = "$!request.get('Demarches.Code.DemarchesClass_0_objet')")
+  #set ($url = "$!request.get('Demarches.Code.DemarchesClass_0_urlDemarche')")
+  #set ($discard = $object.set('organismesTraitement', $organismesTraitement))
   #set ($discard = $object.set('objet', $objet))
   #set ($discard = $object.set('urlDemarche', $url))
   #set ($discard = $object.set('statut', 'demandeUtilisateur'))
+  ## Set 'niveauDemat' as follows:
+  ## - If 'modalite' is 'en-ligne-entièrement' or 'en-ligne-partiellement', then 'niveauDemat' is 'teleprocedure'.
+  ## - Otherwise, then 'niveauDemat' is not set.
+  #if ($modalite == 'en-ligne-entièrement' || $modalite == 'en-ligne-partiellement')
+    #set ($discard = $object.set('niveauDemat', 'teleprocedure'))
+  #end
   ## We set an empty direction, otherwise the sheet will show 'direction.displayTitle'.
   #set ($discard = $object.set('direction', ''))
   ## Set 'niveauDemat' to ['formulaire'] so that the Avis form is set to 'en-ligne-entièrement'
   ## (see DemarchesSheet).
-  ##set ($discard = $object.set('niveauDemat', ['formulaire']))
-  ## save with programming rights as the current user will not have the right to edit the Avis document
+  ## set ($discard = $object.set('niveauDemat', ['formulaire']))
+  ## save with programming rights as the current user will not have the right to edit the demarche page
   #set ($discard = $demarche.saveWithProgrammingRights())
-  ##TODO: see how we handle an error in saving the object
+  
+  ## Create an avis object
+  #set ($uin = $services.uin.getNext('avis'))
+  #set ($avisId = "Avis.${uin}")
+  ## Get avis page with programming rights since the 'Avis' space is restricted.
+  #set ($avis = $xwiki.getDocumentAsAuthor($avisId))
+  #set ($object = $avis.newObject('Avis.Code.AvisClass'))
+  #if ($request.session &amp;&amp; $request.session.id)
+    #set ($sessionId = $request.session.id)
+    #set ($discard = $object.set("sessionId", $sessionId))
+  #end
+  #set ($discard = $object.set('demarche', $demarcheId))
+  #set ($discard = $object.set('modalite', $modalite))
+  #validateAvis($object)
+  #if ($validated)
+    ## Save with programming rights as the current user will not have the right to edit the avis page
+    #set ($discard = $avis.saveWithProgrammingRights())
+  #else
+    $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
+    $response.sendRedirect($xwiki.getURL('Main.WebHome'))
+  #end
+  
+  ## TODO: add error handling management when saving the demarche or avis page(s).
+  
+  ## Set some session attributes to reflect the current state, and redirect to the demarche
+  ## page.
   $request.session.setAttribute('avis-step', 'wikidemarches.demande.merci')
   $request.session.setAttribute('demarche-id', $demarcheId)
   #set ($url = $demarche.getURL('view') + '#tab=avis')
@@ -76,6 +117,9 @@
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($demarche = $doc.newObject('Demarches.Code.DemarchesClass'))
 #set ($title = "$!request.text")
+&lt;div&gt;
+$services.localization.render('wikidemarches.demande.referencer.introduction')
+&lt;/div&gt;
 &lt;span class="info-box-mandatory small"&gt;
 $services.localization.render('avis.mandatory-info')
 &lt;/span&gt;
@@ -83,8 +127,31 @@ $services.localization.render('avis.mandatory-info')
 &lt;form action="$doc.getURL()" method="POST" class="xform wd-form demande-form"&gt;
   &lt;fieldset&gt;
     &lt;div&gt;
+      &lt;label for="Demarches.Code.DemarchesClass_0_organismesTraitement" style="padding-bottom:0.5em"&gt;
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.organisme')&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_organismesTraitement" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+  #set ($discard = $avis.set('modalite','en-ligne-entièrement'))
+  &lt;div class="modalite"&gt;
+    #displayObjectForm($avis,['modalite'])
+  &lt;/div&gt;  
+  &lt;fieldset&gt;
+    &lt;div&gt;
+      &lt;label for="Demarches.Code.DemarchesClass_0_urlDemarche" style="padding-bottom:0.5em"&gt;
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.url')&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset&gt;
+    &lt;div&gt;
       &lt;label for="title" style="padding-bottom:0.5em"&gt;
-      &lt;span&gt;Nom
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.nom')
       &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
       &lt;/span&gt;
     &lt;/div&gt;
@@ -95,7 +162,7 @@ $services.localization.render('avis.mandatory-info')
   &lt;fieldset&gt;
     &lt;div&gt;
       &lt;label for="Demarches.Code.DemarchesClass_0_objet" style="padding-bottom:0.5em"&gt;
-      &lt;span&gt;Description 
+      &lt;span&gt;$services.localization.render('wikidemarches.demande.but')
       &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
       &lt;/span&gt;
     &lt;/div&gt;
@@ -105,18 +172,9 @@ $services.localization.render('avis.mandatory-info')
       &lt;/textarea&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
-  &lt;fieldset&gt;
-    &lt;div&gt;
-      &lt;label for="Demarches.Code.DemarchesClass_0_urlDemarche" style="padding-bottom:0.5em"&gt;
-      &lt;span&gt;$services.localization.render('Demarches.Code.DemarchesClass_urlDemarche')&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
-    &lt;/div&gt;
-  &lt;/fieldset&gt;
   &lt;div class="buttonwrapper"&gt;   
     &lt;input type="hidden" name="Demarches.Code.DemarchesClass_0_statut" value="demandeUtilisateur" /&gt;
-    &lt;input class="btn btn-primary" name="save-demarche" type="submit" value="Envoyer"&gt;
+    &lt;input class="btn btn-primary" name="save-demarche" type="submit" value="$services.localization.render('wikidemarches.demande.envoyer')"&gt;
   &lt;/div&gt;
 &lt;/form&gt;
 {{/html}}

@@ -38,7 +38,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity}}
+  <content>{{velocity output="false"}}
 #* - if prop type is StaticList, checks that value is in the static list
  * - if prop type is DBList, checks that the value is an existing document
  * - if prop type is number, checks nothing because the field cannot have a value that is not a number
@@ -64,7 +64,9 @@
     #set ($validated = $value.length() &gt; 0 &amp;&amp; $xwiki.exists($value))
   #elseif ($prop.type == 'NumberClass')
     #if ($prop.name == 'score')
-      #set ($validated = $value &gt; 0 &amp;&amp; $value &lt; 4)
+      ## Validate 'score' either through empty value (it's the case when we submit a new
+      ## demarche), or between 0 and 4
+      #set ($validated = ("$!value" == '') || ($value &gt; 0 &amp;&amp; $value &lt; 4))
     #else
       #set ($validated = true)
     #end
