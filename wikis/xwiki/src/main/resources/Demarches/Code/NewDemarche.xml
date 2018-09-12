@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content>{{include reference="Demarches.Code.DemarchesMacros" /}}
 {{include reference="Avis.Code.AvisMacros" /}}
 {{velocity output="false"}}
