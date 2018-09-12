@@ -76,7 +76,7 @@ wikidemarches.demande.nom=Nom de la démarche
 wikidemarches.demande.but=Quel est le but de cette démarche ?
 wikidemarches.demande.envoyer=Valider
 wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également nous donner votre avis sur cette démarche ?
-wikidemarches.demande.newdemarche.warning=Cette démarche a été ajoutée par un(e) internaute le {0}. Elle est en cours de vérification par l'administration mais vous pouvez déjà donner votre avis.
+wikidemarches.demande.newdemarche.warning=Cette démarche a été ajoutée par un(e) internaute le {0}. Elle est en cours de vérification par l''administration mais vous pouvez déjà donner votre avis.
 
 #Footer
 wikidemarches.footer.administrationlinks.intro=Réseau

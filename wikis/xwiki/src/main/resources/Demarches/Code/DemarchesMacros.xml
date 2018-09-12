@@ -265,7 +265,7 @@ yet validated. *#
   #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
     #set($demarcheDate = $datetool.format("d MMMM yyyy", $doc.creationDate))
     (%class='newdemande-message'%)(((
-    {{warning}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/warning}}
+    {{info}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/info}}
     )))
   #end
 #end
