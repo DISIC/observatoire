@@ -1141,6 +1141,12 @@ select[size="1"]{
   }
 }
 
+/* Correction of the display of global search - undoing a rule from the skin which is increasing padding for the search button */
+@media (min-width: @grid-float-breakpoint) {
+  #globalsearch .btn {
+    padding: 10px @navbar-padding-horizontal;
+  }
+}
 
 
 /*

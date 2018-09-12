@@ -97,7 +97,7 @@
 #end
 #set ($displayBreadcrumbs = $hasAdmin &amp;&amp; $isAdvancedUser)
 #set ($displayDrawer = !$isGuest)
-#set ($displayQuickSearch = false)
+#set ($displayQuickSearch = !$isGuest &amp;&amp; $doc.fullName != 'Main.WebHome' &amp;&amp; $doc.fullName != 'Main.Search')
 #set ($discard = $xwiki.ssx.use('IconThemes.FontAwesome'))
 #set ($discard = $xwiki.jsx.use('IconThemes.FontAwesome'))
 
