@@ -41,7 +41,8 @@
   <hidden>true</hidden>
   <content>{{include reference="Demarches.Code.DemarchesMacros" /}}
 {{include reference="Avis.Code.AvisMacros" /}}
-{{velocity output="false"}}
+
+{{velocity output="no"}}
 ## Save only if something was submitted to this page.
 #if ("$!request['save-demarche']" != '')
   ## Retrieve the 'modalite' field value first since it will be needed to set the appropriate
@@ -115,7 +116,7 @@
 {{velocity}}
 {{html wiki="true"}}
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
-#set ($demarche = $doc.newObject('Demarches.Code.DemarchesClass'))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.NewDemandeSSX'))
 #set ($title = "$!request.text")
 &lt;div&gt;
 $services.localization.render('wikidemarches.demande.referencer.introduction')
