@@ -39,56 +39,8 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity}}
-#* - if prop type is StaticList, checks that value is in the static list
- * - if prop type is DBList, checks that the value is an existing document
- * - if prop type is number, checks nothing because the field cannot have a value that is not a number
- * NB: when no checkbox is checked, value is an empty array
- *#
-#macro(validatePropertyValue $value $prop $validationMap)
-  #if (!$value)
-    #set ($value = '')
-  #end
-  #set ($validated = false)
-  #if ($prop.type == 'StaticListClass')
-    #set ($authorizedValues = $prop.listValues)
-    ## if the property is a checkbox, the value is an array so all values have to be validated
-    #if ($value.size() &amp;&amp; $value.size() &gt; 0)
-      #set ($validated = true)
-      #foreach ($val in $value)
-        #set ($validated = $validated &amp;&amp; $authorizedValues.contains($val))
-      #end
-    #else
-      #set ($validated = $authorizedValues.contains($value) || $value == '' || $value.size() == 0)
-    #end
-  #elseif ($prop.type == 'DBListClass')
-    #set ($validated = $value.length() &gt; 0 &amp;&amp; $xwiki.exists($value))
-  #elseif ($prop.type == 'NumberClass')
-    #if ($prop.name == 'score')
-      #set ($validated = $value &gt; 0 &amp;&amp; $value &lt; 4)
-    #else
-      #set ($validated = true)
-    #end
-  #else
-    #set ($validated = true)
-  #end
-  #set ($validationMap[$prop.name] = $validated)
-  ##* $prop.name $prop.type: $value - $authorizedValues $validated
-#end
-
-#macro(validateAvis $avisObject)
-  #set ($clazz = $xwiki.getClass('Avis.Code.AvisClass'))
-  #set ($validationMap = {})
-  #foreach($prop in $clazz.properties)
-    #set ($value = $avisObject.getProperty($prop.name).value)
-    #validatePropertyValue($value $prop $validationMap)
-  #end
-  #set ($validated = true)
-  #foreach ($value in $validationMap.values())
-    #set ($validated = $validated &amp;&amp; $value)
-  #end
-#end
-
+  <content>{{include reference="Avis.Code.AvisMacros" /}}
+{{velocity}}
 #set ($action = "$!request['avis-action']")
 #if ($action == 'create-and-end' || $action == 'create-and-continue')
   #set ($uin = $services.uin.getNext('avis'))
