@@ -47,7 +47,8 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set ($columnsProperties = {
   'doc.title': {"displayName":"Démarche", 'filterable' : 'false'},
   'ministeres': {'filterable' : 'false', 'sortable' : 'false'},
-  'niveauDematBoolean': {"displayName":"Peut être réalisée en ligne", 'filterable' : 'false', 'sortable' : 'false'}
+  'niveauDematBoolean': {"displayName":"Peut être réalisée en ligne", 'filterable' : 'false', 'sortable' : 'false'},
+  'statut' : {'type' : 'hidden', 'filterable': 'true'}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',
@@ -56,9 +57,10 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'rowCount': 10,
   'maxPages': 7,
   'selectedColumn': 'doc.title',
-  'defaultOrder': 'asc'
+  'defaultOrder': 'asc',
+  'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur'
 })
-#set ($columns = ['doc.title', 'ministeres', 'niveauDematBoolean'])
+#set ($columns = ['doc.title', 'ministeres', 'niveauDematBoolean', 'statut'])
 #livetable('demarches' $columns $columnsProperties $options)
 #if($hasAdmin)
   {{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches"/}}
