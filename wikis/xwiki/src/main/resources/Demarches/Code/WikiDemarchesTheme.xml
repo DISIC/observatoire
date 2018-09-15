@@ -1009,6 +1009,15 @@ select[size="1"]{
   font-size: 80%;
 }
 
+/* nav-divider mixin is computing a negative margin for dividers, overwrite all places where the mixin is used to fix this:
+  - bootstrap/dropdowns.less
+  - bootstrap/navs.less
+*/
+.dropdown-menu .divider,
+.nav .nav-divider {
+  margin: (@line-height-computed / 2) 0;
+}
+
 /***************************************************/
 /*          XWiki Corrections                      */
 /***************************************************/
