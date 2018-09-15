@@ -89,6 +89,8 @@
       <content>#set ($displayContentFooter = false)
 #set ($displayDocChanges = false)
 #set ($displayContentMenu = $hasEdit)
+## only admins can see the create menu, non-admins can only create demarches and they have a dedicated button for this
+#set ($displayCreateMenu = $hasAdmin)
 ## Do not display the content menu on the search page, except for administators who are also advanced users
 #if ($doc.fullName == 'Main.Search')
   #if (!($hasAdmin &amp;&amp; $isAdvancedUser))
