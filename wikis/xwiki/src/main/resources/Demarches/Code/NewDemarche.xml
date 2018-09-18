@@ -59,6 +59,7 @@
   #set ($title = "$!request.title")
   #set ($title = $title.substring(0, $mathtool.min($title.length(), 255)))
   #set ($discard = $demarche.setTitle($title))
+  #set ($discard = $demarche.getDocument().setDefaultLanguage('fr'))
   #set ($discard = $object.set('nomComplet', $title))
   #set ($organismesTraitement = "$!request.get('Demarches.Code.DemarchesClass_0_organismesTraitement')")
   #set ($objet = "$!request.get('Demarches.Code.DemarchesClass_0_objet')")
