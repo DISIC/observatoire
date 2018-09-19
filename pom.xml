@@ -12,7 +12,7 @@
   <name>XWiki Projects - DINSIC - Wiki Demarches - Parent POM</name>
   <version>2.1-SNAPSHOT</version>
   <properties>
-    <platform.version>9.11.3</platform.version>
+    <platform.version>9.11.2</platform.version>
     <!-- skip clirr, we don't need to check for api breakage (inherited from parent) -->
     <xwiki.clirr.skip>true</xwiki.clirr.skip>
     <xwiki.revapi.skip>true</xwiki.revapi.skip>
@@ -49,5 +49,6 @@
   </distributionManagement>
   <modules>
     <module>wikis</module>
+    <module>extensions</module>
   </modules>
 </project>

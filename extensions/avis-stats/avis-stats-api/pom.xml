@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
+        <artifactId>avis-stats</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>avis-stats-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.xwiki.commons</groupId>
+            <artifactId>xwiki-commons-component-api</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
+        <!-- Only needed if some of the component's APIs must be made visible to scripting in wiki pages -->
+        <dependency>
+            <groupId>org.xwiki.commons</groupId>
+            <artifactId>xwiki-commons-script</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
+        <!-- Testing dependencies -->
+        <dependency>
+            <groupId>org.xwiki.commons</groupId>
+            <artifactId>xwiki-commons-tool-test-component</artifactId>
+            <version>${commons.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xwiki.platform</groupId>
+            <artifactId>xwiki-platform-oldcore</artifactId>
+            <version>${platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
