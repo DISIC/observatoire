@@ -71,7 +71,7 @@ Nom complet de la démarche : &lt;input name='demarche' value='' /&gt;
 
 &lt;hr/&gt;
 
-&lt;a href="$doc.getURL()?operation=compute-stats" class='button btn btn-primary'&gt;Initialiser les statistiques pour toutes les démarches ayant reçu un avis&lt;/a&gt;
+&lt;a href="$doc.getURL()?operation=compute-stats" class='button btn btn-primary'&gt;Initialiser les statistiques pour toutes les démarches&lt;/a&gt;
 
 {{/html}}
 
