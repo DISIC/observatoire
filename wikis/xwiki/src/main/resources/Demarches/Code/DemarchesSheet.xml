@@ -276,12 +276,18 @@
   &lt;/div&gt;
   #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
   ## Display the 'modalite' question only if we're not in the case where the user
-  ## has just submitted a new demarche (aka 'demande' previously).
+  ## has just submitted a new demarche.
   #if ("$!step" != "wikidemarches.demande.merci")
     #setDefaultModalite($avis)
     &lt;div class="modalite"&gt;
       #displayObjectForm($avis,['modalite'])
     &lt;/div&gt;
+  #else
+    ## Retrieve the 'modalite' value from the session, as it is supposed to have been
+    ## set when filling in the new demarche form.
+    #set ($modalite = $request.session.getAttribute('avis-modalite'))
+    #set ($discard = $request.session.removeAttribute('avis-modalite'))
+    &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
   #end
   &lt;div class="rating-container"&gt;
     #displayObjectForm($avis,['score'])

@@ -81,32 +81,15 @@
   ## set ($discard = $object.set('niveauDemat', ['formulaire']))
   ## save with programming rights as the current user will not have the right to edit the demarche page
   #set ($discard = $demarche.saveWithProgrammingRights())
-  
-  ## Create an avis object
-  #set ($uin = $services.uin.getNext('avis'))
-  #set ($avisId = "Avis.${uin}")
-  ## Get avis page with programming rights since the 'Avis' space is restricted.
-  #set ($avis = $xwiki.getDocumentAsAuthor($avisId))
-  #set ($object = $avis.newObject('Avis.Code.AvisClass'))
-  #if ($request.session &amp;&amp; $request.session.id)
-    #set ($sessionId = $request.session.id)
-    #set ($discard = $object.set("sessionId", $sessionId))
-  #end
-  #set ($discard = $object.set('demarche', $demarcheId))
-  #set ($discard = $object.set('modalite', $modalite))
-  #validateAvis($object)
-  #if ($validated)
-    ## Save with programming rights as the current user will not have the right to edit the avis page
-    #set ($discard = $avis.saveWithProgrammingRights())
-  #else
-    $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
-    $response.sendRedirect($xwiki.getURL('Main.WebHome'))
-  #end
-  
-  ## TODO: add error handling management when saving the demarche or avis page(s).
+
+  ## TODO: add error handling management when saving the demarche
   
   ## Set some session attributes to reflect the current state, and redirect to the demarche
   ## page.
+  ## Store the 'modalite' value in the session only, not in the database,
+  ## so as to save it in an Avis object only once an Avis gets submitted with a vote,
+  ## in the next step.
+  $request.session.setAttribute('avis-modalite', $modalite)
   $request.session.setAttribute('avis-step', 'wikidemarches.demande.merci')
   $request.session.setAttribute('demarche-id', $demarcheId)
   #set ($url = $demarche.getURL('view') + '#tab=avis')
