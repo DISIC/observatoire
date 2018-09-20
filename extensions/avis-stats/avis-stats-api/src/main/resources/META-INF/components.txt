@@ -1,3 +1,3 @@
 com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats.AvisEventListener
-com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats.DefaultAvisStatsComponent
-com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats.AvisStatsComponentScriptService
+com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats.DefaultAvisStatsManager
+com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats.AvisStatsManagerScriptService

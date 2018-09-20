@@ -8,12 +8,18 @@ import javax.inject.Singleton;
 
 import org.slf4j.Logger;
 import org.xwiki.component.annotation.Component;
+import org.xwiki.model.reference.DocumentReference;
+import org.xwiki.model.reference.DocumentReferenceResolver;
 import org.xwiki.model.reference.EntityReference;
+import org.xwiki.model.reference.EntityReferenceSerializer;
 import org.xwiki.model.reference.LocalDocumentReference;
 import org.xwiki.observation.AbstractEventListener;
 import org.xwiki.observation.event.Event;
+import org.xwiki.query.QueryException;
+import org.xwiki.text.StringUtils;
 
 import com.xpn.xwiki.XWikiContext;
+import com.xpn.xwiki.XWikiException;
 import com.xpn.xwiki.doc.XWikiDocument;
 import com.xpn.xwiki.internal.event.XObjectAddedEvent;
 import com.xpn.xwiki.internal.event.XObjectDeletedEvent;
@@ -21,8 +27,9 @@ import com.xpn.xwiki.internal.event.XObjectUpdatedEvent;
 import com.xpn.xwiki.objects.BaseObject;
 
 /**
- * Listener firing the computation of AvisStats objects when Avis objects get created. AvisStats objects contain
- * statistics about existing Avis objects related to a given Demarche, such as: number of occurrences, average value.
+ * Listener firing the computation of AvisStats objects when Avis objects get created, updated or deleted. AvisStats
+ * objects contain statistics about existing Avis objects related to a given Demarche, such as: number of occurrences,
+ * average value.
  *
  * @version $Id$
  */
@@ -34,26 +41,25 @@ public class AvisEventListener extends AbstractEventListener
     /**
      * The name of the event listener.
      */
-    public static final String LISTENER_NAME = "wikidemarches.listeners.avis";
+    static final String LISTENER_NAME = "wikidemarches.listeners.avis";
 
-    protected static final EntityReference AVIS_CLASS_REFERENCE =
+    static final EntityReference AVIS_CLASS_REFERENCE =
             new LocalDocumentReference(Arrays.asList("Avis", "Code"), "AvisClass");
+
+    static final String DEMARCHE_PROPERTY_NAME = "demarche";
 
     @Inject
     protected Logger logger;
 
-    /* EntityReference scoreObjectPropertyReference =
-             new ObjectPropertyReference(
-                     documentReferenceResolver.resolve("wiki:space.page^object.prop", EntityType.OBJECT_PROPERTY));
-         reference =
-             new ObjectPropertyReference(resolver.resolve("wiki:space.page^x.wiki.class[0].prop",
-                 EntityType.OBJECT_PROPERTY));
-
-a priori pas de possibilité d'être notifié de la mise à jour spécifique d'une propriété, pas d'un objet donné, mais de tous les objets
-
- */
     @Inject
-    private AvisStatsComponent avisStatsComponent;
+    @Named("compactwiki")
+    protected EntityReferenceSerializer<String> compactWikiSerializer;
+
+    @Inject
+    protected DocumentReferenceResolver<String> documentReferenceResolver;
+
+    @Inject
+    private AvisStatsManager avisStatsComponent;
 
     /**
      * This is the default constructor.
@@ -71,20 +77,60 @@ a priori pas de possibilité d'être notifié de la mise à jour spécifique d'u
         XWikiContext context = (XWikiContext) data;
 
         XWikiDocument document = (XWikiDocument) source;
-
         BaseObject avis = document.getXObject(AVIS_CLASS_REFERENCE);
+        BaseObject originalAvis = document.getOriginalDocument().getXObject(AVIS_CLASS_REFERENCE);
+        try {
 
-        if (event instanceof XObjectAddedEvent) {
-            //Creation event
             if (avis != null) {
-                avisStatsComponent.anAvisWasAdded(avis, context);
-            }
-        } else if (event instanceof XObjectUpdatedEvent) {
-            //Update event
-            //TODO: see how to handle this case. Either the score
+                //'avis' is not null, hence the Avis object was either created or updated.
+                String demarcheId = avis.getStringValue(DEMARCHE_PROPERTY_NAME);
+                //TODO: resolving the reference probably works without prefixing with the wiki id
+//            if (demarcheId != null && demarcheId.indexOf(":") < 0) {
+//                String wikiName = avis.getDocumentReference().getWikiReference().getName();
+//                demarcheId = wikiName + ":" + demarcheId;
+//            }
+                DocumentReference demarcheReference = documentReferenceResolver.resolve(demarcheId);
 
-        } else if (event instanceof XObjectDeletedEvent) {
-            //Deletion event
+                if (event instanceof XObjectAddedEvent) {
+                    avisStatsComponent.computeAvisStats(demarcheReference, context);
+                } else if (event instanceof XObjectUpdatedEvent) {
+                    //Update event
+                    //Check if the avis was attributed to a distinct a demarche, or if it's another property
+                    //that was updated.
+                    String originalDemarcheId = originalAvis.getStringValue(DEMARCHE_PROPERTY_NAME);
+                    if (originalDemarcheId != null) {
+                        if (StringUtils.compare(originalDemarcheId, demarcheId) != 0) {
+                            //the demarche property was updated, so we need to recompute the AvisStats of both
+                            //demarches
+                            avisStatsComponent.computeAvisStats(demarcheReference, context);
+                            avisStatsComponent
+                                    .computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), context);
+                        } else {
+                            //other properties than the demarche one were updated, so we just need to recompute the AvisStats
+                            //of the demarche of the updated Avis object
+                            avisStatsComponent.computeAvisStats(demarcheReference, context);
+                        }
+                    } else {
+                        //this should not happen
+                        //TODO: throw an exception?
+                    }
+                }
+
+                //TODO: avis renaming - do we need to handle this case?
+            } else if (originalAvis != null) {
+                //'avis' is null, 'originalAvis' is not: an Avis was deleted. We double check this is the case by checking
+                // that the event is an instance of XObjectDeletedEvent
+                if (event instanceof XObjectDeletedEvent) {
+                    String originalDemarcheId = originalAvis.getStringValue(DEMARCHE_PROPERTY_NAME);
+                    avisStatsComponent.computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), context);
+                }
+            } else {
+                //Both 'avis' and 'originalAvis' are null: that should not happen
+                //TODO: throw an exception?
+            }
+        } catch (QueryException | XWikiException e) {
+            logger.error("Error while updating AvisStats following a change on [%s].",
+                    compactWikiSerializer.serialize(avis.getDocumentReference()), e);
         }
     }
 }

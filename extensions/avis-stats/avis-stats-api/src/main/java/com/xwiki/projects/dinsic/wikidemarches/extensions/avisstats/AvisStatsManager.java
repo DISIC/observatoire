@@ -16,14 +16,13 @@ import com.xpn.xwiki.objects.BaseObject;
  * Interface (aka Role) of the Component
  */
 @Role
-public interface AvisStatsComponent
+public interface AvisStatsManager
 {
     EntityReference AVIS_STATS_CLASS_REFERENCE =
             new LocalDocumentReference(Arrays.asList("Avis", "Code"), "AvisStatsClass");
-    String OCCURRENCES_FIELD = "occurrences";
-    String AVERAGE_FIELD = "moyenne";
-
-    void anAvisWasAdded(BaseObject avis, XWikiContext context);
+    String OCCURRENCES_PROPERTY_NAME = "occurrences";
+    String AVERAGE_PROPERTY_NAME = "moyenne";
+    String VOTES_PROPERTY_NAME = "votes";
 
     void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
             throws QueryException, XWikiException;

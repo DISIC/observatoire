@@ -18,10 +18,10 @@ import com.xpn.xwiki.XWikiException;
 @Component
 @Named("avisStats")
 @Singleton
-public class AvisStatsComponentScriptService implements ScriptService
+public class AvisStatsManagerScriptService implements ScriptService
 {
     @Inject
-    private AvisStatsComponent avisStatsComponent;
+    private AvisStatsManager avisStatsComponent;
 
     public void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
             throws QueryException, XWikiException
