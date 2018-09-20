@@ -20,6 +20,5 @@
     </properties>
     <modules>
         <module>avis-stats-api</module>
-        <module>avis-stats-ui</module>
     </modules>
 </project>
