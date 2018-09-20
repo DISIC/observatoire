@@ -21,6 +21,15 @@ import com.xpn.xwiki.XWikiException;
 import com.xpn.xwiki.doc.XWikiDocument;
 import com.xpn.xwiki.objects.BaseObject;
 
+//Component -> Manager
+//        script / internal
+//        requête dans tous les cas (c'est le principe d'un cache): ajout, suppression, mise à jour. Attention arfois il faut recalculer pour deux démarches (lorsque réaffectation).
+//        cas de la réaffectation : utiliser getOriginalDocument qui donne le document précédent en mémoire (par opposition au document qui est dans le cache)
+//        requête: enlever le join sur XWikiDocument car 1 document par objet count(star)
+//        vérifier ce qu'il se passe quand il n'y a pas d'avis et vérifier la cohérence entre les deux computeAvisStats
+//        déplacer "anAvisWasAdded" dans le listener, et n'exposer que deux méthodes : computeAvisStats()
+
+
 /**
  * Implementation of a <tt>AvisStatsComponent</tt> component.
  */
