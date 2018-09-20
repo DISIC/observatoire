@@ -125,8 +125,8 @@ public class AvisEventListener extends AbstractEventListener
                     avisStatsComponent.computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), context);
                 }
             } else {
-                //Both 'avis' and 'originalAvis' are null: that should not happen
-                //TODO: throw an exception?
+                //No Avis or original Avis was found -> the XObject event relates to another XWiki class: there's
+                //nothing to be done.
             }
         } catch (QueryException | XWikiException e) {
             logger.error("Error while updating AvisStats following a change on [%s].",

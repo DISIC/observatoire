@@ -24,6 +24,13 @@ public interface AvisStatsManager
     String AVERAGE_PROPERTY_NAME = "moyenne";
     String VOTES_PROPERTY_NAME = "votes";
 
+    String DEMARCHE_CLASS_NAME = "Demarches.Code.DemarchesClass";
+    String AVIS_CLASS_NAME = "Avis.Code.AvisClass";
+    String DEMARCHE_TEMPLATE_NAME = "Demarches.Code.DemarchesTemplate";
+    String AVIS_DEMARCHE_PROPERTY_NAME = "demarche";
+    String AVIS_SCORE_PROPERTY_NAME = "score";
+    String AVIS_VOTE_PROPERTY_NAME = "vote";
+
     void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
             throws QueryException, XWikiException;
 
