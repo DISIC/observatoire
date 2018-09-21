@@ -563,17 +563,42 @@ require(['jquery','xwiki-selectize'], function($) {
     });
     
     // Add an input field allowing the user to enter free text about
-    // a difficulty he may have face when the 'autre difficulté' is checked.
+    // a difficulty he may have faced when the 'autre difficulté' is checked.
     $("input[name='Avis.Code.AvisClass_0_difficultes']").change(function() {
-      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreDifficulte-0")
+      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreDifficulte-0");
     });
 
-    // Add an input field allowing the user to enter free text about
-    // some help he may have needed when the 'autre aide' is checked.
+    // Same for 'autre aide'
     $("input[name='Avis.Code.AvisClass_0_aide']").change(function() {
-      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreAide-0")
+      // Uncheck the 'Aucune aide' checkbox.
+      $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
+      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreAide-0");
     });
 
+    // Uncheck all other options when 'aucune aide' is checked
+    $("input[id='xwiki-form-aide-0-aucune']").change(function() {
+      var input = $(this);
+      var checked = input.prop("checked");
+      if (checked) {
+        // Uncheck all other options
+        $("input[name='Avis.Code.AvisClass_0_aide']").each(function() {
+           var input = $(this);
+           var value = input.val();
+           input.prop("checked", false);
+           // Hide explicitely the "autreAide" field
+           // NB: this is not done automatically despite the listener above because
+           // the input for 'aucune aide' has no name (as we don't want to store its value
+           // in the database).
+           $("#xwiki-form-autreAide-0").val("");
+           $("#xwiki-form-autreAide-0").hide();
+        });
+      }
+    });
+    
+    // The input 'Aucune aide' is checked by default, make sure this is not the case.
+    $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
+
+    
     updateEvaluationInputsVisibility();
     
     $('#tabs a').click(function (e) {

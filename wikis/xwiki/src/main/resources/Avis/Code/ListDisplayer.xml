@@ -54,6 +54,15 @@
     #end
   &lt;/legend&gt;
   &lt;ul&gt;
+  ## If prop is "Avis.Code.AvisClass^aide", add the input 'Aucune' which won't get saved
+  ## in the database, since it corresponds to an empty answer.
+  #if (${clazz.name} == 'Avis.Code.AvisClass' &amp;&amp; $name == 'aide')
+    &lt;li class='form-listclass-item'&gt;
+      #set($optionId = "xwiki-form-${name}-${object.number}-aucune")
+      &lt;label for="$optionId"&gt;&lt;input id="$optionId" type="$displayType" #if("$!value" == '')checked="checked"#end /&gt;
+      $escapetool.xml($services.localization.render("${clazz.name}_${name}_aucune"))&lt;/label&gt;
+    &lt;/li&gt;
+  #end
   #foreach($val in $field.listValues)
     &lt;li class='form-listclass-item'&gt;
       #set($optionId = "xwiki-form-${name}-${object.number}-${velocityCount}")

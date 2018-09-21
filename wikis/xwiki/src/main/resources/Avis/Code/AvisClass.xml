@@ -68,7 +68,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>aucune|proche|association|agent|internet|autre</values>
+      <values>proche|association|agent|internet|autre</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </aide>
     <autre>
