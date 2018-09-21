@@ -919,7 +919,7 @@ require(['jquery','xwiki-selectize'], function($) {
           display: inline-block;
           position: absolute;
           right: 0;
-          height: 0.6em;
+          height: 1em;
           background-color: #fff;
         }
       }
@@ -973,7 +973,7 @@ require(['jquery','xwiki-selectize'], function($) {
           display: inline-block;
           position: absolute;
           right: 0;
-          height: 1em;
+          height: 0.6em;
           background-color: #fff;
         }
       }
