@@ -39,7 +39,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity output="none"}}
+  <content>{{velocity output="false"}}
 ## This sheet is used to display two types of objects: either Demarches or Avis
 ################### Demarche view/edit form macros ########################
 #macro (displayProperty $propName $isMandatory)
@@ -226,27 +226,32 @@
   #end
   #set($totalVotes = $votesResults.get(0)[1])
   &lt;div class='avis-average-container'&gt;
-    ## average translated to a value on 100
-    #set($percentAvg = $mathtool.mul($mathtool.sub($votesAvg, 1), 50))
-    ## what type of display we do?
-    #set($avgVisualValue = 1)
-    #if ($percentAvg &gt; 33 &amp;&amp; $percentAvg &lt; 66 )
-      #set($avgVisualValue = 2)
-    #elseif ($percentAvg &gt;= 66 )
-      #set($avgVisualValue = 3)
-    #end
-    &lt;div class='avis-average-visual'&gt;
-      &lt;div class='avis-average-barcontainer avis-average-barcontainer-$!{avgVisualValue}' title='${mathtool.roundTo(2, $percentAvg)}%'&gt;
-        &lt;div class='avis-average-barouterborder'&gt;
-          &lt;div class='avis-average-bar'&gt;
-            &lt;div class='avis-average-barcolor' &gt;&lt;/div&gt;
-            &lt;div class='avis-average-barwhite' style='width: ${mathtool.sub(100, $percentAvg)}%'&gt;&lt;/div&gt;
-            ## &lt;div class='avis-average-barborder' &gt;&lt;/div&gt;
+    #if ($totalVotes &gt; 0)
+      ## average translated to a value on 100
+      #set($percentAvg = $mathtool.mul($mathtool.sub($votesAvg, 1), 50))
+      ## what type of display we do?
+      #set($avgVisualValue = 1)
+      #if ($percentAvg &gt; 33 &amp;&amp; $percentAvg &lt; 66 )
+        #set($avgVisualValue = 2)
+      #elseif ($percentAvg &gt;= 66 )
+        #set($avgVisualValue = 3)
+      #end
+      #set($percentDisplayValue = "${mathtool.round($percentAvg)}%")
+      &lt;div class='avis-average-visual'&gt;
+        &lt;div class='avis-average-barcontainer avis-average-barcontainer-$!{avgVisualValue}' title='$escapetool.xml($percentDisplayValue)'&gt;
+          &lt;div class='avis-average-barouterborder'&gt;
+            &lt;div class='avis-average-bar'&gt;
+              &lt;div class='avis-average-barcolor' &gt;&lt;/div&gt;
+              &lt;div class='avis-average-barwhite' style='width: ${mathtool.sub(100, $percentAvg)}%'&gt;&lt;/div&gt;
+              ## &lt;div class='avis-average-barborder' &gt;&lt;/div&gt;
+            &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.totalnumber', [$totalVotes])&lt;/div&gt;
+      &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.satisfactionscore', [$percentDisplayValue, $totalVotes])&lt;/div&gt;
+    #else
+      &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.0votes')&lt;/div&gt;
+    #end
   &lt;/div&gt;
 #end
 

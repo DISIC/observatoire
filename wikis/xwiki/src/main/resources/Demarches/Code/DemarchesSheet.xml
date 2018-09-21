@@ -49,7 +49,7 @@
 
 ############################# Subtitle / Score #############################
 #displaySubTitle()
-#displayScoreAverage()
+#displayScoreAverageBar()
 
 ############################# Tabs ################################
 #if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
@@ -919,7 +919,7 @@ require(['jquery','xwiki-selectize'], function($) {
           display: inline-block;
           position: absolute;
           right: 0;
-          height: 1em;
+          height: 0.6em;
           background-color: #fff;
         }
       }
@@ -929,38 +929,41 @@ require(['jquery','xwiki-selectize'], function($) {
 
 @averagebar-color : @navbar-default-bg;
 .avis-average-container {
+  font-size: 80%;
+  color: @gray-light;
   .avis-average-visual {
     .avis-average-barcontainer {
       display: inline-block;
       vertical-align: middle;
+      line-height: 0.5;
       .avis-average-bar,
       .avis-average-barcolor,
       .avis-average-barborder {
-        width: 5em;
+        width: 6em;
       }
       .avis-average-barouterborder {
         display: inline-block;
-        padding: 0.1em;
-        line-height: 0.8;
+        padding: 0;
+        line-height: 0.4;
         border-width: 1px;
         border-style: solid;
         border-color: @averagebar-color;
       }
       .avis-average-bar {
         display: inline-block;
-        height: 1em;
+        height: 0.6em;
         position: relative;
         .avis-average-barborder {
           display: inline-block;
           border-width: 1px;
           border-style: solid;
-          height: 1em;
+          height: 0.6em;
           position: absolute;
           border-color: @averagebar-color;
         }
         .avis-average-barcolor {
           display: inline-block;
-          height: 1em;
+          height: 0.6em;
           position: absolute;
           border-color: @averagebar-color;
           background-color: @averagebar-color;
