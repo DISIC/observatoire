@@ -537,6 +537,22 @@ require(['jquery','xwiki-selectize'], function($) {
     }
   }
   
+  function showHideFreeTextInputField(inputElement, propName, freeTextInputFieldId) {
+    var value = inputElement.val();
+    var checked = inputElement.prop("checked");
+    if (value == propName) {
+      if (checked) {
+        $("#"+freeTextInputFieldId).show();
+      } else {
+        // Make sure to empty the input before hiding it, so that only an empty
+        // value gets sent to the server, no value that the user may have entered
+        // before hiding the input.
+        $("#"+freeTextInputFieldId).val("");
+        $("#"+freeTextInputFieldId).hide();
+      }
+    } 
+  }
+    
   $(document).ready(function() {
     $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
       updateVoteAndSubmitButton();
@@ -549,33 +565,13 @@ require(['jquery','xwiki-selectize'], function($) {
     // Add an input field allowing the user to enter free text about
     // a difficulty he may have face when the 'autre difficulté' is checked.
     $("input[name='Avis.Code.AvisClass_0_difficultes']").change(function() {
-      var input = $(this);
-      var value = input.val();
-      var checked = input.prop("checked");
-      if (value == 'autre') {
-        if (checked) {
-          var autreDifficulte = $("&lt;input name='Avis.Code.AvisClass_0_autreDifficulte' value='' size='40' style='margin-left: 0.5em' /&gt;");
-          $("label[for='xwiki-form-difficultes-0-6']").append(autreDifficulte);
-        } else {
-          $("input[name='Avis.Code.AvisClass_0_autreDifficulte']").remove();
-        }
-      } 
+      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreDifficulte-0")
     });
 
     // Add an input field allowing the user to enter free text about
     // some help he may have needed when the 'autre aide' is checked.
     $("input[name='Avis.Code.AvisClass_0_aide']").change(function() {
-      var input = $(this);
-      var value = input.val();
-      var checked = input.prop("checked");
-      if (value == 'autre') {
-        if (checked) {
-          var autreAide = $("&lt;input name='Avis.Code.AvisClass_0_autreAide' value='' size='40' style='margin-left: 0.5em' /&gt;");
-          $("label[for='xwiki-form-aide-0-6']").append(autreAide);
-        } else {
-          $("input[name='Avis.Code.AvisClass_0_autreAide']").remove();
-        }
-      } 
+      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreAide-0")
     });
 
     updateEvaluationInputsVisibility();

@@ -120,6 +120,7 @@ Avis.Code.AvisClass_difficultes_mobile=Le site ne s'affichait pas bien sur mobil
 Avis.Code.AvisClass_difficultes_pieces-jointes=Difficulté à joindre les pièces justificatives
 Avis.Code.AvisClass_difficultes_suite=Manque d'informations sur la suite, le délai...
 Avis.Code.AvisClass_difficultes_autre=Autre
+Avis.Code.AvisClass_difficultes_autreDifficulte=Autre difficulté
 Avis.Code.AvisClass_aide=De quelle aide avez-vous eu besoin ?
 Avis.Code.AvisClass_aide_aucune=Aucune
 Avis.Code.AvisClass_aide_proche=Un(e) proche
@@ -127,6 +128,7 @@ Avis.Code.AvisClass_aide_association=Une association
 Avis.Code.AvisClass_aide_agent=Un agent administratif
 Avis.Code.AvisClass_aide_internet=Internet (site, forum…)
 Avis.Code.AvisClass_aide_autre=Autre
+Avis.Code.AvisClass_aide_autreAide=Autre aide
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
 
 
