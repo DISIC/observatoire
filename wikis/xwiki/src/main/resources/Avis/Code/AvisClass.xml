@@ -57,7 +57,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>aide</name>
-      <number>8</number>
+      <number>9</number>
       <picker>0</picker>
       <prettyName>Aide</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -68,9 +68,54 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>proche|association|agent|internet|autre</values>
+      <values>aucune|proche|association|agent|internet|autre</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </aide>
+    <autre>
+      <contenttype>---</contenttype>
+      <customDisplay>{{include reference="Avis.Code.TextAreaDisplayer" /}}</customDisplay>
+      <disabled>0</disabled>
+      <editor>---</editor>
+      <hint/>
+      <name>autre</name>
+      <number>12</number>
+      <picker>0</picker>
+      <prettyName>Autre</prettyName>
+      <rows>5</rows>
+      <size>40</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+    </autre>
+    <autreAide>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>autreAide</name>
+      <number>10</number>
+      <picker>0</picker>
+      <prettyName>Autre aide</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+    </autreAide>
+    <autreDifficulte>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>autreDifficulte</name>
+      <number>8</number>
+      <picker>0</picker>
+      <prettyName>Autre difficulté</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+    </autreDifficulte>
     <comprehensible>
       <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
@@ -129,7 +174,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>dysfonctionnement|mobile|pieces-jointes|autre</values>
+      <values>manque-d-informations|dysfonctionnement|mobile|pieces-jointes|suite|autre</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </difficultes>
     <facile>
@@ -204,7 +249,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>vote</name>
-      <number>9</number>
+      <number>11</number>
       <picker>0</picker>
       <prettyName>Vote</prettyName>
       <relationalStorage>1</relationalStorage>

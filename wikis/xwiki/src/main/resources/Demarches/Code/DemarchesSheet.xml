@@ -299,7 +299,7 @@
   #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
   #set ($action = 'update-and-end')
   &lt;div class="eval-container"&gt;
-    #displayObjectForm($avis,['facile','comprehensible','aide','difficultes'])
+    #displayObjectForm($avis,['facile','comprehensible','difficultes','aide','autre'])
   &lt;/div&gt;
 #end
   &lt;div class="vote-container"&gt;
@@ -546,6 +546,38 @@ require(['jquery','xwiki-selectize'], function($) {
       updateVoteAndSubmitButton();
     });
     
+    // Add an input field allowing the user to enter free text about
+    // a difficulty he may have face when the 'autre difficulté' is checked.
+    $("input[name='Avis.Code.AvisClass_0_difficultes']").change(function() {
+      var input = $(this);
+      var value = input.val();
+      var checked = input.prop("checked");
+      if (value == 'autre') {
+        if (checked) {
+          var autreDifficulte = $("&lt;input name='Avis.Code.AvisClass_0_autreDifficulte' value='' size='40' style='margin-left: 0.5em' /&gt;");
+          $("label[for='xwiki-form-difficultes-0-6']").append(autreDifficulte);
+        } else {
+          $("input[name='Avis.Code.AvisClass_0_autreDifficulte']").remove();
+        }
+      } 
+    });
+
+    // Add an input field allowing the user to enter free text about
+    // some help he may have needed when the 'autre aide' is checked.
+    $("input[name='Avis.Code.AvisClass_0_aide']").change(function() {
+      var input = $(this);
+      var value = input.val();
+      var checked = input.prop("checked");
+      if (value == 'autre') {
+        if (checked) {
+          var autreAide = $("&lt;input name='Avis.Code.AvisClass_0_autreAide' value='' size='40' style='margin-left: 0.5em' /&gt;");
+          $("label[for='xwiki-form-aide-0-6']").append(autreAide);
+        } else {
+          $("input[name='Avis.Code.AvisClass_0_autreAide']").remove();
+        }
+      } 
+    });
+
     updateEvaluationInputsVisibility();
     
     $('#tabs a').click(function (e) {

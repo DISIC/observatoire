@@ -83,7 +83,7 @@ avis.revenir=Revenir
 avis.envoyer=Envoyer
 avis.thanks=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
 avis.vote.button=Donner un avis
-avis.merci_1=Merci d'avoir donné votre avis.
+avis.merci_1=Votre réponse est enregistrée, merci.
 avis.continuer=Pour terminer, pouvez-vous nous en dire plus ?
 avis.merci_2=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
 
@@ -111,18 +111,21 @@ Avis.Code.AvisClass_comprehensible=Le langage employé était-il facile à compr
 Avis.Code.AvisClass_comprehensible_1=Mauvais
 Avis.Code.AvisClass_comprehensible_2=Moyen
 Avis.Code.AvisClass_comprehensible_3=Bon
-Avis.Code.AvisClass_aide=Avez-vous eu besoin d'aide ?
+Avis.Code.AvisClass_difficultes=Avez-vous rencontré des difficultés ?
+Avis.Code.AvisClass_difficultes_manque-d-informations=Manque d'informations avant de commencer la démarche
+Avis.Code.AvisClass_difficultes_dysfonctionnement=La démarche n'a pas fonctionné
+Avis.Code.AvisClass_difficultes_mobile=Le site ne s'affichait pas bien sur mobile
+Avis.Code.AvisClass_difficultes_pieces-jointes=Difficulté à joindre les pièces justificatives
+Avis.Code.AvisClass_difficultes_suite=Manque d'informations sur la suite, le délai...
+Avis.Code.AvisClass_difficultes_autre=Autre
+Avis.Code.AvisClass_aide=De quelle aide avez-vous eu besoin ?
+Avis.Code.AvisClass_aide_aucune=Aucune
 Avis.Code.AvisClass_aide_proche=Un(e) proche
 Avis.Code.AvisClass_aide_association=Une association
 Avis.Code.AvisClass_aide_agent=Un agent administratif
 Avis.Code.AvisClass_aide_internet=Internet (site, forum…)
 Avis.Code.AvisClass_aide_autre=Autre
-Avis.Code.AvisClass_difficultes=Avez-vous rencontré ces difficultés ?
-Avis.Code.AvisClass_difficultes_dysfonctionnement=La démarche n'a pas fonctionné
-Avis.Code.AvisClass_difficultes_mobile=Le site ne s'affichait pas bien sur mobile
-Avis.Code.AvisClass_difficultes_pieces-jointes=Pièces jointes
-Avis.Code.AvisClass_difficultes_autre=Autre
-Avis.Code.AvisClass_commentaire=Pouvez-vous nous préciser brièvement ce qui vous a posé problème ?
+Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
 
 
 </content>
@@ -130,7 +133,7 @@ Avis.Code.AvisClass_commentaire=Pouvez-vous nous préciser brièvement ce qui vo
     <name>Avis.Code.AvisTranslations</name>
     <number>0</number>
     <className>XWiki.TranslationDocumentClass</className>
-    <guid>3ed2f0d1-5a19-4427-b21d-0bb9463ada3e</guid>
+    <guid>1d75afbe-9ffe-4a32-94d2-d8f354255a39</guid>
     <class>
       <name>XWiki.TranslationDocumentClass</name>
       <customClass/>
