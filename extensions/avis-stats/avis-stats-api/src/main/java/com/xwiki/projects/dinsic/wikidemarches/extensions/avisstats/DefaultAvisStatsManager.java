@@ -42,23 +42,22 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     protected QueryManager queryManager;
 
     /**
-     * Computes the AvisStats values and saves the AvisStats object for the demarche passed as parameter. We assume
-     * that the demarcheReference is valid, no check is performed.
+     * Computes the AvisStats values and saves the AvisStats object for the demarche passed as parameter. We assume that
+     * the demarcheReference is valid, no check is performed. <br />
      * TODO: is synchronized enough to cover the thread safety?
      */
     public synchronized void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
-            throws QueryException, XWikiException
+        throws QueryException, XWikiException
     {
 
-        Query query = this.queryManager.createQuery(
-                "select count(*), avg(score.value), sum(case when vote.value='true' then 1 else 0 end) from "
-                        + "BaseObject as avis, IntegerProperty as score, StringProperty as vote, "
-                        + "StringProperty as demarche where avis.className = :avisClass "
-                        + "and avis.id = score.id.id and score.id.name = :scoreProperty "
-                        + "and avis.id = vote.id.id and vote.id.name = :voteProperty "
-                        + "and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = "
-                        + ":demarche and score.value > 0",
-                Query.HQL);
+        Query query = this.queryManager
+            .createQuery("select count(*), avg(score.value), sum(case when vote.value='true' then 1 else 0 end) from "
+                + "BaseObject as avis, IntegerProperty as score, StringProperty as vote, "
+                + "StringProperty as demarche where avis.className = :avisClass "
+                + "and avis.id = score.id.id and score.id.name = :scoreProperty "
+                + "and avis.id = vote.id.id and vote.id.name = :voteProperty "
+                + "and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = "
+                + ":demarche and score.value > 0", Query.HQL);
         query = query.bindValue("demarche", compactWikiSerializer.serialize(demarcheReference));
         query.bindValue("avisClass", AVIS_CLASS_NAME);
         query.bindValue("scoreProperty", AVIS_SCORE_PROPERTY_NAME);
@@ -69,7 +68,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         Object[] result = (Object[]) results.get(0);
         long occurrences = (long) result[0];
         double average = result[1] != null ? (double) result[1] : 0;
-        long votes = result[2] != null ? (long) result[2] :  0;
+        long votes = result[2] != null ? (long) result[2] : 0;
         setAvisStatsValues(demarcheReference, occurrences, average, votes, true, context);
     }
 
@@ -80,17 +79,19 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException
     {
 
-        //The query below will return values for Demarches having at least one Avis.
-        // TODO: test if the 'vote' can be null.
+        // The query below will return values for Demarches having at least one Avis.
+        // for now the 'vote' of an avis cannot be null (it's either empty value, or true or false),
+        // and thus we can compute both score average and vote count in the same request.
+        // However, in theory the vote can be null and thus should be computed in a separate query (or outer joined), so
+        // that the join with the vote value does not exclude avis from the counting of avis.
         Query query = this.queryManager.createQuery("select demarche.value, count(*), avg(score.value), "
-                + "sum(case when vote.value='true' then 1 else 0 end) from BaseObject as avis, "
-                + "IntegerProperty as score, StringProperty as vote, StringProperty as demarche where "
-                + "avis.className = :avisClass "
-                + "and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id "
-                + "and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and "
-                + "demarche.id.name = :demarcheProperty and score.value > 0 group by demarche.value order "
-                + "by demarche.value", Query.HQL
-        );
+            + "sum(case when vote.value='true' then 1 else 0 end) from BaseObject as avis, "
+            + "IntegerProperty as score, StringProperty as vote, StringProperty as demarche where "
+            + "avis.className = :avisClass "
+            + "and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id "
+            + "and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and "
+            + "demarche.id.name = :demarcheProperty and score.value > 0 group by demarche.value order "
+            + "by demarche.value", Query.HQL);
 
         query.bindValue("avisClass", AVIS_CLASS_NAME);
         query.bindValue("scoreProperty", AVIS_SCORE_PROPERTY_NAME);
@@ -108,17 +109,16 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             setAvisStatsValues(demarcheReference, occurrences, average, votes, true, context);
         }
 
-        //Handle Demarches which have not received any Avis yet.
-        //We set an average of 0 for demarches without 'Avis', we'll handle on display
+        // Handle Demarches which have not received any Avis yet.
+        // We set an average of 0 for demarches without 'Avis', we'll handle on display
 
-        query = this.queryManager.createQuery(
-                "select distinct doc.fullName as fullName from XWikiDocument as doc, BaseObject as obj "
-                        + "where obj.className = :demarcheClass and doc.fullName = obj.name and "
-                        + "doc.fullName != :demarcheTemplate and doc.fullName not in "
-                        + "(select distinct demarche.value from BaseObject as avis, StringProperty demarche "
-                        + "where avis.className = :avisClass and demarche.id.id = avis.id and "
-                        + "demarche.id.name = :avisDemarcheProperty)",
-                Query.HQL);
+        query = this.queryManager
+            .createQuery("select distinct doc.fullName as fullName from XWikiDocument as doc, BaseObject as obj "
+                + "where obj.className = :demarcheClass and doc.fullName = obj.name and "
+                + "doc.fullName != :demarcheTemplate and doc.fullName not in "
+                + "(select distinct demarche.value from BaseObject as avis, StringProperty demarche "
+                + "where avis.className = :avisClass and demarche.id.id = avis.id and "
+                + "demarche.id.name = :avisDemarcheProperty)", Query.HQL);
 
         query.bindValue("demarcheClass", DEMARCHE_CLASS_NAME);
         query.bindValue("avisClass", AVIS_CLASS_NAME);
@@ -136,7 +136,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
      * Initializes or updates AvisStats values for a given demarche.
      */
     private synchronized void setAvisStatsValues(DocumentReference demarcheReference, long occurrences, double average,
-            long votes, boolean addVersionEntry, XWikiContext context) throws XWikiException
+        long votes, boolean addVersionEntry, XWikiContext context) throws XWikiException
     {
         XWiki wiki = context.getWiki();
         XWikiDocument demarche = wiki.getDocument(demarcheReference, context).clone();
@@ -160,7 +160,3 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         }
     }
 }
-
-
-
-

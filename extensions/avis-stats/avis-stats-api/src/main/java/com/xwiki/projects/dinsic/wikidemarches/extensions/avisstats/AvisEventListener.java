@@ -16,7 +16,6 @@ import org.xwiki.model.reference.LocalDocumentReference;
 import org.xwiki.observation.AbstractEventListener;
 import org.xwiki.observation.event.Event;
 import org.xwiki.query.QueryException;
-import org.xwiki.text.StringUtils;
 
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.XWikiException;
@@ -44,7 +43,7 @@ public class AvisEventListener extends AbstractEventListener
     static final String LISTENER_NAME = "wikidemarches.listeners.avis";
 
     static final EntityReference AVIS_CLASS_REFERENCE =
-            new LocalDocumentReference(Arrays.asList("Avis", "Code"), "AvisClass");
+        new LocalDocumentReference(Arrays.asList("Avis", "Code"), "AvisClass");
 
     static final String DEMARCHE_PROPERTY_NAME = "demarche";
 
@@ -66,7 +65,8 @@ public class AvisEventListener extends AbstractEventListener
      */
     public AvisEventListener()
     {
-        // - Voir si on pourrait utiliser XObjectPropertyUpdatedEvent pour savoir directement si c'est le champ "demarche" qui
+        // - Voir si on pourrait utiliser XObjectPropertyUpdatedEvent pour savoir directement si c'est le champ
+        // "demarche" qui
         // a été mis à jour.
         // EntityReference scoreObjectPropertyReference =
         // new ObjectPropertyReference(
@@ -74,7 +74,8 @@ public class AvisEventListener extends AbstractEventListener
         // reference =
         // new ObjectPropertyReference(resolver.resolve("wiki:space.page^x.wiki.class[0].prop",
         // EntityType.OBJECT_PROPERTY));
-        // a priori pas de possibilité d'être notifié de la mise à jour spécifique d'une propriété, pas d'un objet donné, mais de tous les objets
+        // a priori pas de possibilité d'être notifié de la mise à jour spécifique d'une propriété, pas d'un objet
+        // donné, mais de tous les objets
         super(LISTENER_NAME, new XObjectAddedEvent(), new XObjectUpdatedEvent(), new XObjectDeletedEvent());
     }
 
@@ -125,19 +126,20 @@ public class AvisEventListener extends AbstractEventListener
                 }
 
             } else if (originalAvis != null) {
-                //'avis' is null, 'originalAvis' is not: an Avis was deleted. We double check this is the case by checking
+                // 'avis' is null, 'originalAvis' is not: an Avis was deleted. We double check this is the case by
+                // checking
                 // that the event is an instance of XObjectDeletedEvent
                 if (event instanceof XObjectDeletedEvent) {
                     String originalDemarcheId = originalAvis.getStringValue(DEMARCHE_PROPERTY_NAME);
                     avisStatsComponent.computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), context);
                 }
             } else {
-                //No Avis or original Avis was found -> the XObject event relates to another XWiki class: there's
-                //nothing to be done.
+                // No Avis or original Avis was found -> the XObject event relates to another XWiki class: there's
+                // nothing to be done.
             }
         } catch (QueryException | XWikiException e) {
             logger.error("Error while updating AvisStats following a change on [%s].",
-                    compactWikiSerializer.serialize(avis.getDocumentReference()), e);
+                compactWikiSerializer.serialize(avis.getDocumentReference()), e);
         }
     }
 }

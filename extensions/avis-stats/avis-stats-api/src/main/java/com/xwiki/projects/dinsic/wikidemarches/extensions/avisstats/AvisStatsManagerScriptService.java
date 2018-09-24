@@ -13,7 +13,7 @@ import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.XWikiException;
 
 /**
- * Make the AviStatsComponent API available to scripting.
+ * Make the AviStatsComponent API available to scripting. <br/>
  * TODO: add rights verification
  */
 @Component
@@ -25,17 +25,13 @@ public class AvisStatsManagerScriptService implements ScriptService
     private AvisStatsManager avisStatsComponent;
 
     public void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
-            throws QueryException, XWikiException
+        throws QueryException, XWikiException
     {
         this.avisStatsComponent.computeAvisStats(demarcheReference, context);
     }
 
-    public void computeAvisStats(XWikiContext context)
-            throws QueryException, XWikiException
+    public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException
     {
         this.avisStatsComponent.computeAvisStats(context);
     }
 }
-
-
-

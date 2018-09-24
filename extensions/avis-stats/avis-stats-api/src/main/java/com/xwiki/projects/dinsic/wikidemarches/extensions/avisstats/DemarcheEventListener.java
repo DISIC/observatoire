@@ -37,7 +37,7 @@ public class DemarcheEventListener extends AbstractEventListener
     static final String LISTENER_NAME = "wikidemarches.listeners.demarche";
 
     static final EntityReference DEMARCHE_CLASS_REFERENCE =
-            new LocalDocumentReference(Arrays.asList("Demarches", "Code"), "DemarchesClass");
+        new LocalDocumentReference(Arrays.asList("Demarches", "Code"), "DemarchesClass");
 
     @Inject
     protected Logger logger;
@@ -72,7 +72,7 @@ public class DemarcheEventListener extends AbstractEventListener
             }
         } catch (QueryException | XWikiException e) {
             logger.error("Error while adding an AvisStats object to a Demarche: [%s].",
-                    compactWikiSerializer.serialize(document.getDocumentReference()), e);
+                compactWikiSerializer.serialize(document.getDocumentReference()), e);
         }
     }
 }
