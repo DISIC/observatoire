@@ -952,6 +952,9 @@ require(['jquery','xwiki-selectize'], function($) {
 .avis-average-container {
   font-size: 80%;
   color: @gray-light;
+  a.average-help {
+    color: lighten(@gray-light, 25%);
+  }
   .avis-average-visual {
     .avis-average-barcontainer {
       display: inline-block;

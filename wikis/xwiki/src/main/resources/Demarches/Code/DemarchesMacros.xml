@@ -248,7 +248,9 @@
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.satisfactionscore', [$percentDisplayValue, $totalVotes])&lt;/div&gt;
+      #set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
+      #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
+      &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.satisfactionscore', [$percentDisplayValue, $totalVotes, $explanationLink])&lt;/div&gt;
     #else
       &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.0votes')&lt;/div&gt;
     #end

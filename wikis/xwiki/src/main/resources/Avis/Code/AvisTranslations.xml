@@ -75,7 +75,7 @@ avis.livetable.emptyvalue=-
 # Other keys
 avis.score.title=Satisfaction globale
 avis.score.totalnumber={0} avis
-avis.score.satisfactionscore=Taux de satisfaction sur {1} avis : {0}
+avis.score.satisfactionscore=Taux de satisfaction sur {1} avis : {0} {2}
 avis.score.0votes=Aucun avis
 avis.entry.name=Avis
 avis.invite=Donnez votre avis
