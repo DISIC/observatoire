@@ -21,34 +21,6 @@ import com.xpn.xwiki.XWikiException;
 import com.xpn.xwiki.doc.XWikiDocument;
 import com.xpn.xwiki.objects.BaseObject;
 
-// TODO:
-// - Ok: initialisation des démarches qui n'ont pas encore reçu d'avis : il faut leur affecter un AvisStats malgré tout,
-// pour pouvoir afficher les statistques pour toutes les démarches, pas seulement celles qui ont reçu un ou plusieurs
-// avis
-// - Créer un listener qui affecte un objet AvisStats directement à une démarche lors de sa création (pour que les
-// statistiques soient valides pour toutes les démarches, sans avoir à passer par le AvisStatsManager pour initialiser
-// les AvisStats des démarches sans avis).
-// - Voir pourquoi on reçoit null pour "avg(score.value)" quand aucun avis
-// - AvisStatsManager : cas où on soumet une démarche inexistante
-// - Ok: Scénario problématique : suppression de AvisStats d'une démarche puis suppression d'un Avis lié à cette démarche
-// "could not send event to listener"
-// - Voir si on pourrait utiliser XObjectPropertyUpdatedEvent pour savoir directement si c'est le champ "demarche" qui
-//   a été mis à jour.
-//      EntityReference scoreObjectPropertyReference =
-//        new ObjectPropertyReference(
-//        documentReferenceResolver.resolve("wiki:space.page^object.prop", EntityType.OBJECT_PROPERTY));
-//        reference =
-//        new ObjectPropertyReference(resolver.resolve("wiki:space.page^x.wiki.class[0].prop",
-//        EntityType.OBJECT_PROPERTY));
-//        a priori pas de possibilité d'être notifié de la mise à jour spécifique d'une propriété, pas d'un objet donné, mais de tous les objets
-// - Vérifier la thread safety
-//  - Vérifier si le "synchronized" est réellement nécessaire sur la méthode "setAvisStatsValues".
-// - Prise en compte de / du:
-//  - Renommage d'un avis
-// - Etudier l'annotation "@NotNull XWikiContext context" sur "setAvisStatsValues"
-// - Ecrire des scénarios de tests
-// - Ecrire des tests
-
 /**
  * Implementation of a <tt>AvisStatsManager</tt> component.
  */
@@ -72,13 +44,12 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     /**
      * Computes the AvisStats values and saves the AvisStats object for the demarche passed as parameter. We assume
      * that the demarcheReference is valid, no check is performed.
-     * TODO: see if we should check that the demarcheReference corresponds to an actual Demarche indeed.
+     * TODO: is synchronized enough to cover the thread safety?
      */
     public synchronized void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
             throws QueryException, XWikiException
     {
 
-        //TODO: we may have to update the query below if the value '0' gets authorized for scores.
         Query query = this.queryManager.createQuery(
                 "select count(*), avg(score.value), sum(case when vote.value='true' then 1 else 0 end) from "
                         + "BaseObject as avis, IntegerProperty as score, StringProperty as vote, "
@@ -94,14 +65,9 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         query.bindValue("voteProperty", AVIS_VOTE_PROPERTY_NAME);
         query.bindValue("demarcheProperty", AVIS_DEMARCHE_PROPERTY_NAME);
 
-        //TODO: in theory we should set a wiki name
-        //it works fine when computing the wiki name from the demarcheReference, not from through
-        // context.getWiki().getName()
-        //query.setWiki(wikiName);
         List results = query.execute();
         Object[] result = (Object[]) results.get(0);
         long occurrences = (long) result[0];
-        //TODO: check why these value can be null: when no Avis is attached to a Demarche
         double average = result[1] != null ? (double) result[1] : 0;
         long votes = result[2] != null ? (long) result[2] :  0;
         setAvisStatsValues(demarcheReference, occurrences, average, votes, true, context);
@@ -114,9 +80,8 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException
     {
 
-        //TODO: we will have to update the query below if the value '0' gets authorized for scores.
-        //TODO: not completely sure we need to use condition "score.value > 0"
         //The query below will return values for Demarches having at least one Avis.
+        // TODO: test if the 'vote' can be null.
         Query query = this.queryManager.createQuery("select demarche.value, count(*), avg(score.value), "
                 + "sum(case when vote.value='true' then 1 else 0 end) from BaseObject as avis, "
                 + "IntegerProperty as score, StringProperty as vote, StringProperty as demarche where "
@@ -144,7 +109,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         }
 
         //Handle Demarches which have not received any Avis yet.
-        //TODO: see if it's ok to set an 'average' to 0 for Demaches without Avis.
+        //We set an average of 0 for demarches without 'Avis', we'll handle on display
 
         query = this.queryManager.createQuery(
                 "select distinct doc.fullName as fullName from XWikiDocument as doc, BaseObject as obj "
@@ -152,7 +117,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
                         + "doc.fullName != :demarcheTemplate and doc.fullName not in "
                         + "(select distinct demarche.value from BaseObject as avis, StringProperty demarche "
                         + "where avis.className = :avisClass and demarche.id.id = avis.id and "
-                        + "demarche.id.name = :avisDemarcheProperty order by demarche.value)",
+                        + "demarche.id.name = :avisDemarcheProperty)",
                 Query.HQL);
 
         query.bindValue("demarcheClass", DEMARCHE_CLASS_NAME);
@@ -175,19 +140,23 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     {
         XWiki wiki = context.getWiki();
         XWikiDocument demarche = wiki.getDocument(demarcheReference, context).clone();
-        BaseObject avisStats = demarche.getXObject(AVIS_STATS_CLASS_REFERENCE);
-        if (avisStats == null) {
-            avisStats = demarche.newXObject(AVIS_STATS_CLASS_REFERENCE, context);
-        }
-        avisStats.setLongValue(OCCURRENCES_PROPERTY_NAME, occurrences);
-        avisStats.setDoubleValue(AVERAGE_PROPERTY_NAME, average);
-        avisStats.setLongValue(VOTES_PROPERTY_NAME, votes);
+        if (!demarche.isNew()) {
+            BaseObject avisStats = demarche.getXObject(AVIS_STATS_CLASS_REFERENCE);
+            if (avisStats == null) {
+                avisStats = demarche.newXObject(AVIS_STATS_CLASS_REFERENCE, context);
+            }
+            avisStats.setLongValue(OCCURRENCES_PROPERTY_NAME, occurrences);
+            avisStats.setDoubleValue(AVERAGE_PROPERTY_NAME, average);
+            avisStats.setLongValue(VOTES_PROPERTY_NAME, votes);
 
-        demarche.setMetaDataDirty(addVersionEntry);
-        if (!addVersionEntry) {
-            wiki.saveDocument(demarche, context);
+            demarche.setMetaDataDirty(addVersionEntry);
+            if (!addVersionEntry) {
+                wiki.saveDocument(demarche, context);
+            } else {
+                wiki.saveDocument(demarche, "Initialisation ou mise à jour de l'objet 'AvisStats'.", context);
+            }
         } else {
-            wiki.saveDocument(demarche, "Initialisation ou mise à jour de l'objet 'AvisStats'.", context);
+            logger.warn("Avis update was received for demarche " + demarcheReference + " which does not exist!");
         }
     }
 }

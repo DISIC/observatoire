@@ -14,6 +14,7 @@ import com.xpn.xwiki.XWikiException;
 
 /**
  * Make the AviStatsComponent API available to scripting.
+ * TODO: add rights verification
  */
 @Component
 @Named("avisStats")

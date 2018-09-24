@@ -66,6 +66,15 @@ public class AvisEventListener extends AbstractEventListener
      */
     public AvisEventListener()
     {
+        // - Voir si on pourrait utiliser XObjectPropertyUpdatedEvent pour savoir directement si c'est le champ "demarche" qui
+        // a été mis à jour.
+        // EntityReference scoreObjectPropertyReference =
+        // new ObjectPropertyReference(
+        // documentReferenceResolver.resolve("wiki:space.page^object.prop", EntityType.OBJECT_PROPERTY));
+        // reference =
+        // new ObjectPropertyReference(resolver.resolve("wiki:space.page^x.wiki.class[0].prop",
+        // EntityType.OBJECT_PROPERTY));
+        // a priori pas de possibilité d'être notifié de la mise à jour spécifique d'une propriété, pas d'un objet donné, mais de tous les objets
         super(LISTENER_NAME, new XObjectAddedEvent(), new XObjectUpdatedEvent(), new XObjectDeletedEvent());
     }
 
@@ -82,41 +91,39 @@ public class AvisEventListener extends AbstractEventListener
         try {
 
             if (avis != null) {
-                //'avis' is not null, hence the Avis object was either created or updated.
+                // 'avis' is not null, hence the Avis object was either created or updated.
                 String demarcheId = avis.getStringValue(DEMARCHE_PROPERTY_NAME);
-                //TODO: resolving the reference probably works without prefixing with the wiki id
-//            if (demarcheId != null && demarcheId.indexOf(":") < 0) {
-//                String wikiName = avis.getDocumentReference().getWikiReference().getName();
-//                demarcheId = wikiName + ":" + demarcheId;
-//            }
-                DocumentReference demarcheReference = documentReferenceResolver.resolve(demarcheId);
+                if (demarcheId != null) {
+                    DocumentReference demarcheReference =
+                        documentReferenceResolver.resolve(demarcheId, document.getDocumentReference());
 
-                if (event instanceof XObjectAddedEvent) {
-                    avisStatsComponent.computeAvisStats(demarcheReference, context);
-                } else if (event instanceof XObjectUpdatedEvent) {
-                    //Update event
-                    //Check if the avis was attributed to a distinct a demarche, or if it's another property
-                    //that was updated.
-                    String originalDemarcheId = originalAvis.getStringValue(DEMARCHE_PROPERTY_NAME);
-                    if (originalDemarcheId != null) {
-                        if (StringUtils.compare(originalDemarcheId, demarcheId) != 0) {
-                            //the demarche property was updated, so we need to recompute the AvisStats of both
-                            //demarches
+                    if (event instanceof XObjectAddedEvent) {
+                        avisStatsComponent.computeAvisStats(demarcheReference, context);
+                    } else if (event instanceof XObjectUpdatedEvent) {
+                        // Update event
+                        // Check if the avis was attributed to a distinct a demarche, or if it's another property
+                        // that was updated.
+                        String originalDemarcheId = originalAvis.getStringValue(DEMARCHE_PROPERTY_NAME);
+                        if (!demarcheId.equals(originalDemarcheId)) {
+                            // the demarche property was updated, so we need to recompute the AvisStats of both
+                            // demarches
                             avisStatsComponent.computeAvisStats(demarcheReference, context);
-                            avisStatsComponent
+                            // also update the other demarche's stats, if it exists
+                            if (originalDemarcheId != null) {
+                                avisStatsComponent
                                     .computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), context);
+                            }
                         } else {
-                            //other properties than the demarche one were updated, so we just need to recompute the AvisStats
-                            //of the demarche of the updated Avis object
+                            // other properties than the demarche one were updated, so we just need to recompute the
+                            // AvisStats
+                            // of the demarche of the updated Avis object
                             avisStatsComponent.computeAvisStats(demarcheReference, context);
                         }
-                    } else {
-                        //this should not happen
-                        //TODO: throw an exception?
                     }
+                } else {
+                    logger.warn("An avis with a null demarche was added, cannot update avis stats");
                 }
 
-                //TODO: avis renaming - do we need to handle this case?
             } else if (originalAvis != null) {
                 //'avis' is null, 'originalAvis' is not: an Avis was deleted. We double check this is the case by checking
                 // that the event is an instance of XObjectDeletedEvent
