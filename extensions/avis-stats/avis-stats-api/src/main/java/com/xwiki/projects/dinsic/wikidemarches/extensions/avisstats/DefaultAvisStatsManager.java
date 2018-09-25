@@ -69,7 +69,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         long occurrences = (long) result[0];
         double average = result[1] != null ? (double) result[1] : 0;
         long votes = result[2] != null ? (long) result[2] : 0;
-        setAvisStatsValues(demarcheReference, occurrences, average, votes, true, context);
+        setAvisStatsValues(demarcheReference, occurrences, average, votes, false, context);
     }
 
     /**
@@ -78,7 +78,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
      */
     public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException
     {
-
+        logger.debug("Started to compute stats for all demarches");
         // The query below will return values for Demarches having at least one Avis.
         // for now the 'vote' of an avis cannot be null (it's either empty value, or true or false),
         // and thus we can compute both score average and vote count in the same request.
@@ -98,6 +98,8 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         query.bindValue("voteProperty", AVIS_VOTE_PROPERTY_NAME);
         query.bindValue("demarcheProperty", AVIS_DEMARCHE_PROPERTY_NAME);
 
+        int handledDemarches = 0;
+
         List results = query.execute();
         for (Object result : results) {
             Object[] values = (Object[]) result;
@@ -106,7 +108,10 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             long occurrences = (long) values[1];
             double average = (double) values[2];
             long votes = (long) values[3];
-            setAvisStatsValues(demarcheReference, occurrences, average, votes, true, context);
+            logger.debug(
+                String.format("[%s] Computing stats for demarche [%s] - Occurences: [%s], Average [%s], Votes: [%s]",
+                    ++handledDemarches, demarcheId, occurrences, average, votes));
+            setAvisStatsValues(demarcheReference, occurrences, average, votes, false, context);
         }
 
         // Handle Demarches which have not received any Avis yet.
@@ -128,8 +133,10 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         for (Object result : results) {
             String demarcheId = (String) result;
             DocumentReference demarcheReference = documentReferenceResolver.resolve(demarcheId);
-            setAvisStatsValues(demarcheReference, 0, 0, 0, true, context);
+            logger.debug(String.format("[%s] Setting stats to 0 for demarche [%s]", ++handledDemarches, demarcheId));
+            setAvisStatsValues(demarcheReference, 0, 0, 0, false, context);
         }
+        logger.debug("Done computing stats for all demarches");
     }
 
     /**
