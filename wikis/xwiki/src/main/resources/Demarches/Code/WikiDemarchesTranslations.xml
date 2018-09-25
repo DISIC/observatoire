@@ -96,6 +96,17 @@ wikidemarches.dematdashboard.hometitle=Suivez l'avancée de la dématérialisati
 wikidemarches.dematdashboard.homesubtitle=
 # wikidemarches.dematdashboard.homesubtitle=« 100 % des démarches administratives accessibles en ligne au 1er janvier 2022 » est l'une des mesures phares annoncée par le gouvernement pour accélérer la transformation numérique de l’administration française, dans le cadre de la démarche « Action Publique 2022 ».
 
+# Livetable translations
+wikidemarches.dematdashboard.table.doc.title=Démarche
+wikidemarches.dematdashboard.table.ministeres=Ministères
+wikidemarches.dematdashboard.table.niveauDematBoolean=Peut être réalisée en ligne
+wikidemarches.dematdashboard.table.statut=Statut
+wikidemarches.dematdashboard.table.direction=Direction
+wikidemarches.dematdashboard.table.votes=Demandes de dématerialisation
+wikidemarches.dematdashboard.table.occurrences=Nb. avis
+wikidemarches.dematdashboard.table.moyenne=Taux de satisfaction
+wikidemarches.dematdashboard.table.emptyvalue=-
+
 # Administration
 wikidemarches.administration.home-title=Administrez les données
 wikidemarches.administration.home-subtitle=
