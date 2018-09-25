@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content>
 {{info}}
 Cette page permet d'initialiser ou de mettre à jour les statistiques d'avis (AvisStatsClass) pour une démarche ou pour l'ensemble des démarches ayant reçu au moins un avis.
