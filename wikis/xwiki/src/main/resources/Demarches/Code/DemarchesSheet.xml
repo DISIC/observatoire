@@ -905,7 +905,7 @@ require(['jquery','xwiki-selectize'], function($) {
   .avis-average-visual, .avis-average-desc {
     display: table-cell;
   }
-  .avis-average-desc {
+  .avis-average-visual + .avis-average-desc {
     padding-left: 0.8ex;
   }
   .avis-average-visual {
