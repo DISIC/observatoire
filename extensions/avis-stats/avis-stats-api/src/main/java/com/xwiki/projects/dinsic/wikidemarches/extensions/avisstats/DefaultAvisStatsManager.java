@@ -69,6 +69,8 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         long occurrences = (long) result[0];
         double average = result[1] != null ? (double) result[1] : 0;
         long votes = result[2] != null ? (long) result[2] : 0;
+        logger.debug(String.format("Caching stats for demarche [%s] - Occurences: [%s], Average [%s], Votes: [%s]",
+            demarcheReference, occurrences, average, votes));
         setAvisStatsValues(demarcheReference, occurrences, average, votes, false, context);
     }
 
