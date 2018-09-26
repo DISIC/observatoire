@@ -133,6 +133,7 @@ Avis.Code.AvisClass_aide_internet=Internet (site, forum…)
 Avis.Code.AvisClass_aide_autre=Autre
 Avis.Code.AvisClass_aide_autreAide=Autre aide
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
+Avis.Code.AvisClass_autre.hint=Ne pas inclure d’informations personnelles (identité, date de naissance, adresse, identifiant administratif, etc.)
 Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration, merci de nous indiquer votre adresse électronique :
 Avis.Code.AvisClass_source=Source
 

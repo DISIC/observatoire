@@ -46,6 +46,10 @@
   &lt;legend&gt;
     $doc.displayPrettyName($name, false, false)
   &lt;/legend&gt;
+  #if ("$!field.hint" != '')
+    #set ($key = "${object.xWikiClass.name}_$name.${field.hint}")
+    $escapetool.xml($services.localization.render($key))
+  #end
   &lt;textarea name="${prefix}${name}" value="" rows="3"&gt;$!value&lt;/textarea&gt;
   &lt;/fieldset&gt;
 #else
