@@ -76,7 +76,7 @@
 ## TODO: we should probably look into the displayers and skip pretty properties when a custom
 ## displayer is used
 #if ($xcontext.action == 'edit')
-  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide','modalite','difficultes','comprehensible','aide','vote', 'source','autre','email'])
+  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide','modalite','difficultes','autreDifficulte','comprehensible','aide','autreAide','vote', 'source','autre','email'])
 #end
 #displayObject('Avis.Code.AvisClass',$skippedPrettyProps)
 )))

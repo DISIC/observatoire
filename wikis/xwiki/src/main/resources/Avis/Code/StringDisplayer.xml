@@ -46,6 +46,9 @@
     #if ($name == 'email')
       &lt;label for="xwiki-form-email"&gt;$doc.displayPrettyName($name, false, false)&lt;/label&gt;
       &lt;input id="xwiki-form-email" name="Avis.Code.AvisClass_0_email" value="$!value" size="40" /&gt;
+    #elseif ($name == 'autreDifficulte' || $name == 'autreAide')
+     ## These fields must be absent from the form, because they're already included by the custom displayers of the "difficulte" and "aide" fields,
+     ## hence no input is generated for these, hence why we have an empty block.
     #end
   #end
 #else

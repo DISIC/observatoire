@@ -89,7 +89,7 @@
       <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
     </autre>
     <autreAide>
-      <customDisplay/>
+      <customDisplay>{{include reference="Avis.Code.StringDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>autreAide</name>
@@ -103,7 +103,7 @@
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </autreAide>
     <autreDifficulte>
-      <customDisplay/>
+      <customDisplay>{{include reference="Avis.Code.StringDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>autreDifficulte</name>
