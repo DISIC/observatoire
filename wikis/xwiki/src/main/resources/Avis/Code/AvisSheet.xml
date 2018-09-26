@@ -58,11 +58,7 @@
         #if ($textProperties.contains($prop.name))
           #set ($value = $obj.getProperty($prop.name).getValue())
           #if ("$!value" != '')
-          : (((
-            {{html}}
-              $escapetool.html($value)
-            {{/html}}
-          )))
+          : {{html}}$escapetool.html($value){{/html}}
           #end
         #else
           : $doc.display($prop.name,$obj)
