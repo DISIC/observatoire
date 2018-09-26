@@ -552,9 +552,10 @@ require(['jquery','xwiki-selectize'], function($) {
   function updateVoteAndSubmitButton() {
     var modalite = $("input[name='Avis.Code.AvisClass_0_modalite']:checked").val();
     //The "modalite" checkbox can be inexistent in case the form is displayed after a new demarche got submitted by the current user.
-    if (!modalite)
+    if (!modalite) {
       modalite = $("input[name='Avis.Code.AvisClass_0_modalite']").val();
-
+    }
+        
     var score = $("input[name='Avis.Code.AvisClass_0_score']:checked").val();
     if (score) {
       if (modalite == 'autrement') {
