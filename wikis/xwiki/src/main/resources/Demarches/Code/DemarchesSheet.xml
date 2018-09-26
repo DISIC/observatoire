@@ -318,6 +318,10 @@
         &lt;div class="vote-container"&gt;
           #displayObjectForm($avis,['vote'])
         &lt;/div&gt;
+        ## set the source of this avis, only in the first step.
+        ## TODO: We'll need to figure out how to handle this properly when implementing the API / Embed, to make sure that no avis remains without source
+        #set($avissource = "$!request.nd_source")
+        &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($avissource)" /&gt;
       #elseif ($step == 'second-form-screen')
         &lt;div class='form-preambule'&gt;
         ==$services.localization.render('avis.form.second-form-screen.introduction')==
@@ -340,8 +344,6 @@
       #if ($avisDocId)
         &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
       #end
-      #set($avissource = "$!request.nd_source")
-      &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($avissource)" /&gt;
       &lt;div class='buttonwrapper'&gt;
       #if ($step == 'initial-step')
         #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.validate')))
