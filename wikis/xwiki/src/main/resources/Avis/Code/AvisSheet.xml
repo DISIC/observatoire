@@ -57,6 +57,10 @@
         #set ($textProperties = ['autreDifficulte','autreAide','autre','email','source'])
         #if ($textProperties.contains($prop.name))
           #set ($value = $obj.getProperty($prop.name).getValue())
+          ## mask the email property to other users than admins
+          #if ("$!value" != '' &amp;&amp; $prop.name == 'email' &amp;&amp; !$hasAdmin)
+            #set($value = "******")
+          #end
           #if ("$!value" != '')
           : {{html}}$escapetool.html($value){{/html}}
           #end

@@ -178,7 +178,7 @@
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </difficultes>
     <email>
-      <customDisplay>{{include reference="Avis.Code.StringDisplayer" /}}</customDisplay>
+      <customDisplay>{{include reference="Avis.Code.EmailDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>email</name>
