@@ -50,7 +50,20 @@
     <nameField/>
     <validationScript/>
     <moyenne>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean='false'}}
+#set ($propertyClass = $object.getxWikiClass().get($name))
+#if ($type == 'edit')
+    $doc.displayEdit($propertyClass, $prefix, $object).replaceAll("value='[^']*+' size=", "value='$!{valueString}' size=")
+#else
+  ## only display something if the value is not 0, 0 means there are no avis at all
+  #if ($value &gt; 0)
+    #set($base = 1)
+    ${mathtool.round($mathtool.mul($mathtool.sub($value, 1), 50))}%
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>moyenne</name>
