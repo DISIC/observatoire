@@ -381,7 +381,7 @@
 &lt;footer id="footerglobal" role="contentinfo"&gt;
   &lt;div class='container'&gt;
   &lt;hr&gt;
-  &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.MentionsLegales')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.A propos')""&gt;$services.localization.render('wd.about')&lt;/a&gt;
+  &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;span class='separator'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.A propos')""&gt;$services.localization.render('wd.about')&lt;/a&gt;
 &lt;span class='separator'&gt; | &lt;/span&gt;
 #if ($xcontext.user == 'XWiki.XWikiGuest')
 &lt;a href="$xwiki.getURL($doc.fullName,'login')""&gt;
@@ -2028,6 +2028,88 @@ window.docgeturl = "${doc.getURL('get')}";
     </property>
     <property>
       <path>javascript.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>12</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>a68f35bf-333b-4002-b24c-1844e62d25fe</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#template('colorThemeInit.vm')
+## The default stylesheet configuration option allows to override the default style.css CSS
+#set ($defaultstyle = $xwiki.getSpacePreference('stylesheet'))
+#if ($defaultstyle == '')
+  #set ($defaultstyle = "style.css")
+#end
+#set ($urlParametersMap = {})
+## Specifying the skin to avoid some problems if the base skin is not the same as the current skin
+## (see: https://jira.xwiki.org/browse/XWIKI-11190)
+#set ($discard = $urlParametersMap.put("skin", "$!xwiki.skin"))
+#if ($themeDoc)
+  #set ($discard = $urlParametersMap.put("colorTheme", $services.model.serialize($themeDoc.getDocumentReference(), "default")))
+  #set ($discard = $urlParametersMap.put("colorTheme_version", $themeDoc.version))
+#end
+#set ($urlParameters = $escapetool.xml($escapetool.url($urlParametersMap)))
+#set ($defaultStyleURL = $xwiki.getSkinFile($defaultstyle, true))
+&lt;link href="${defaultStyleURL}?${urlParameters}" rel="stylesheet" type="text/css" media="all" /&gt;
+&lt;link href="$xwiki.getSkinFile('print.css', true)?${urlParameters}" rel="stylesheet" type="text/css" media="#if ($printss)all#{else}print#{end}" /&gt;
+#set ($a11y = "$!{request.getCookie('a11y').getValue()}")
+#if ($a11y == '')
+  #set ($a11y = "$!{xwiki.getUserPreference('accessibility')}")
+#end
+#if ($a11y == '1')
+  &lt;link href="$xwiki.getSkinFile('css/accessibility.css', true)" rel="stylesheet" type="text/css" media="all" /&gt;
+#end
+## The stylesheets configuration option allows to override the alternate stylesheets
+## style1.css, style2.css and style3.css
+#set ($stylesheets = $xwiki.getSpacePreference('stylesheets'))
+#if ($stylesheets != '')
+  #foreach ($stylesheet in $stylesheets.split(','))
+    #if (!$stylesheet.equalsIgnoreCase($defaultstyle))
+      &lt;link href="$xwiki.getSkinFile($stylesheet, true)?${urlParameters}" rel="alternate stylesheet" type="text/css" title="Alternate StyleSheet ${velocityCount}" /&gt;
+    #end
+  #end
+#end
+## IE specific stylesheets
+&lt;!--[if IE]&gt;
+  &lt;link href="$xwiki.getSkinFile('ie-all.css', true)#if (!$urlParametersMap.isEmpty())?${urlParameters}#end" rel="stylesheet" type="text/css" /&gt;
+&lt;![endif]--&gt;
+## Hook for inserting CSS skin extensions
+#styleSheetExtensionHooks</content>
+    </property>
+    <property>
+      <path>stylesheets.vm</path>
     </property>
   </object>
   <object>

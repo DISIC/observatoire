@@ -1,0 +1,82 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Main.CGU" locale="">
+  <web>Main</web>
+  <name>CGU</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1537949644000</creationDate>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1537949940000</date>
+  <contentUpdateDate>1537949940000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Conditions générales d'utilisation</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>== Conditions d’utilisation ==
+
+Lorsque vous donnez un avis détaillé sur une démarche (espace d’expression libre), nous vous prions de :
+
+* ne pas nous communiquer d’informations personnelles, permettant de vous identifier ou d’identifier une autre personne (identité, date de naissance, adresse, courriel, y compris professionnel, identifiant administratif, etc.) ;
+* ne pas inclure d’insultes ou de propos dénigrants ou diffamatoires à l’encontre d’une personne.
+
+Ce site s’adresse aux usagers des démarches administratives effectuées en ligne ou au guichet, ainsi qu’aux accompagnants chargés de les aider (administration, associations, ..). Vous ne pouvez en tant qu’usager ou accompagnant évaluer qu’une seule fois la démarche, quand vous l’avez accomplie ou que vous avez essayé de l’accompliren êtes arrivé à son terme [vu qu’on tient compte de cette possibilité]. Vous pouvez néanmoins formuler un nouvel avis à chaque fois que vous effectuez à nouveau la même démarche.
+
+== Vie privée ==
+
+=== Cookies ===
+Nous collectons des données anonymes d’audience du site, dans le respect des conditions définies par la recommandation « Cookies » de la Commission nationale informatique et libertés (CNIL).
+
+=== Vos données à caractère personnel ===
+Nous traitons des données à caractère personnel vous concernant, si vous nous avez transmis votre courriel. En effet, nous constituons un panel d’usagers acceptant de donner leur avis sur les démarches administratives. A ce titre, nous conservons votre courriel pour pouvoir vous solliciter dans le cadre de futures enquêtes en rapport direct avec la démarche administrative que vous avez effectuée. Ce traitement est fondé sur votre consentement que vous pouvez retirer à tout moment. Ont accès à ces données uniquement les personnes habilitées des administrations françaises participant à la mise en œuvre de ce site/dont les démarches figurent sur ce site. 
+
+Conformément aux dispositions de la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, vous disposez d’un droit d’accès, de modification, de rectification et de suppression des données qui vous concernent. Pour demander une modification, rectification ou suppression des données vous concernant, il vous suffit de nous écrire par voie électronique à nosdemarches@modernisation.gouv.fr ou postale à DINSIC, 20, avenue de Ségur, 75007 Paris en justifiant de votre identité. Si vous estimez, après nous avoir contactés, que vos droits Informatique et Libertés ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL.
+
+== Mentions légales ==
+
+=== Éditeur ===
+
+Direction interministérielle du numérique et du système d'information et de communication de l'État (DINSIC)
+20 Avenue de Ségur
+75007 PARIS
+
+=== Directeur de la publication ===
+
+Monsieur Henri Verdier, Directeur interministériel du numérique et du système d'information et de communication de l'État (DINSIC).
+
+=== Prestataire d'hébergement ===
+
+OVH
+RCS Roubaix – Tourcoing 424 761 419 00045
+Code APE 6202A
+N° TVA : FR 22 424 761 419
+Siège social : 2 rue Kellermann
+59100 Roubaix
+France</content>
+</xwikidoc>
