@@ -1469,7 +1469,8 @@ $doc.displayRendered($field, $prefix, $object)##
     #set ($discard = $xwiki.linkx.use($services.webjars.url('selectize.js', 'css/selectize.bootstrap3.css'),
       {'type': 'text/css', 'rel': 'stylesheet'}))
     #set ($discard = $xwiki.ssfx.use('uicomponents/suggest/xwiki.selectize.css', true))
-    #set ($discard = $xwiki.jsfx.use('uicomponents/suggest/suggestPropertyValues.js',
+    ## we replace the call to the default suggestPropertyValues.js by a JS provided by DemarchesSheet
+    #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet',
       {'forceSkinAction' : true, 'language' : $xcontext.locale}))
     &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$!escapetool.xml($column)"
       class="suggest-propertyValues" multiple="multiple" size="1"
@@ -1733,75 +1734,7 @@ function (row, i, table) {
 #macro(glyphicon $iconName)
 #if("$!iconName"!='')&lt;span class="glyphicon glyphicon-${iconName}"&gt;&lt;/span&gt;#end
 #end
-
-#macro (livetable_filter $column $columnProperties $xproperty)
-  #set ($filterType = $columnProperties.type)
-  #if ("$!filterType" == '')
-    ## Determine the filter type from the xproperty type.
-    #set ($filterTypeByXPropertyType = {
-      'Boolean': 'boolean',
-      'DBList': 'suggest',
-      'DBTreeList': 'suggest',
-      'Date': 'date',
-      'Email': 'text',
-      'Groups': 'suggest',
-      'Number': 'number',
-      'Page': 'text',
-      'StaticList': 'list',
-      'String': 'text',
-      'TextArea': 'text',
-      'Users': 'suggest'
-    })
-    #set ($filterType = $filterTypeByXPropertyType.get($xproperty.classType))
-    #if ("$!filterType" == '')
-      ## If we get here then it means the column is filterable but we could not determine the filter type. Use the text
-      ## filter in this case because it is the most generic.
-      #set ($filterType = 'text')
-    #end
-  #end
-  #if ($filterType == 'list' || $filterType == 'multilist')
-    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column"
-      #if ($filterType == 'multilist')
-        class="xwiki-livetable-multilist" multiple="multiple"&gt;
-      #else
-        &gt;&lt;option value=""&gt;$services.localization.render('platform.livetable.selectAll')&lt;/option&gt;
-        &lt;option disabled="disabled"&gt;────&lt;/option&gt;
-      #end
-    #set ($storedValues = $xproperty.listValues)
-    #set ($displayedValues = $xproperty.mapValues)
-    #foreach ($storedValue in $storedValues)
-      #set ($l10nKey = "${xproperty.className}_${column}_$storedValue")
-      #set ($displayedValue = $services.localization.render($l10nKey))
-      #if ($displayedValue == $l10nKey)
-        #set ($displayedValue = $displayedValues.get($storedValue).value)
-      #end
-      &lt;option value="$storedValue"&gt;$displayedValue&lt;/option&gt;
-    #end
-    &lt;/select&gt;
-  #elseif ($filterType == 'boolean')
-    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column"&gt;
-      &lt;option value=""&gt;$services.localization.render('platform.livetable.selectAll')&lt;/option&gt;
-      &lt;option value="0"&gt;$services.localization.render('no')&lt;/option&gt;
-      &lt;option value="1"&gt;$services.localization.render('yes')&lt;/option&gt;
-    &lt;/select&gt;
-  #elseif ($filterType == 'text' || $filterType == 'number')
-    &lt;input id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$column" type="text"
-      #if ("$!columnProperties.size" != '')size="$!escapetool.xml($columnProperties.size)"#end
-      title="$escapetool.xml($services.localization.render('platform.livetable.filtersTitle',
-        [$services.localization.render("${transprefix}$column")]))" /&gt;
-  #elseif ($filterType == 'suggest' &amp;&amp; $xproperty)
-    #set ($discard = $xwiki.linkx.use($services.webjars.url('selectize.js', 'css/selectize.css'),
-      {'type': 'text/css', 'rel': 'stylesheet'}))
-    #set ($discard = $xwiki.ssfx.use('uicomponents/suggest/xwiki.selectize.css', true))
-    ## we replace the call to the default suggestPropertyValues.js by a JS provided by DemarchesSheet
-    #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet',
-      {'forceSkinAction' : true, 'language' : $xcontext.locale}))
-    &lt;select id="xwiki-livetable-${htmlLiveTableId}-filter-$velocityCount" name="$!escapetool.xml($column)"
-      class="suggest-propertyValues" multiple="multiple" size="1"
-      data-className="$!escapetool.xml($xproperty.className)" data-propertyName="$!escapetool.xml($xproperty.name)"&gt;
-    &lt;/select&gt;
-  #end
-#end</content>
+</content>
     </property>
     <property>
       <path>macros.vm</path>
