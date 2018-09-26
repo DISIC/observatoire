@@ -42,7 +42,7 @@
   <content>{{velocity}}
 $services.localization.render('wikidemarches.dematdashboard.intro')
 
-{{warning}}$services.localization.render('wikidemarches.dematdashboard.warning'){{/warning}}
+{{info}}$services.localization.render('wikidemarches.dematdashboard.warning'){{/info}}
 
 #set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
 #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
