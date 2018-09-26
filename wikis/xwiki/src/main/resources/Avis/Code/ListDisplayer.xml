@@ -66,7 +66,12 @@
   #foreach($val in $field.listValues)
     &lt;li class='form-listclass-item'&gt;
       #set($optionId = "xwiki-form-${name}-${object.number}-${velocityCount}")
-      &lt;label for="$optionId"&gt;&lt;input name="${prefix}${name}" id="$optionId" type="$displayType" value="$val" #if($value == $val)checked="checked"#end #if ($isMandatory)required#end/&gt;
+      #if ($value == $val || $value.contains($val))
+        #set ($checked = 'checked')
+      #else
+        #set ($checked = '')
+      #end
+      &lt;label for="$optionId"&gt;&lt;input name="${prefix}${name}" id="$optionId" type="$displayType" value="$val" $checked #if($isMandatory)required#end/&gt;
       $escapetool.xml($services.localization.render("${clazz.name}_${name}_${val}"))&lt;/label&gt;
     &lt;/li&gt;
   #end
