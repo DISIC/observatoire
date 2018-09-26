@@ -147,11 +147,10 @@ $services.localization.render('avis.mandatory-info')
     &lt;div&gt;
       &lt;label for="Demarches.Code.DemarchesClass_0_objet" style="padding-bottom:0.5em"&gt;
       &lt;span&gt;$services.localization.render('wikidemarches.demande.but')
-      &lt;abbr class="asterix" title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
       &lt;/span&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;textarea required name="Demarches.Code.DemarchesClass_0_objet" style="width: 100%;" rows="3"&gt;
+      &lt;textarea name="Demarches.Code.DemarchesClass_0_objet" style="width: 100%;" rows="3"&gt;
       $title
       &lt;/textarea&gt;
     &lt;/div&gt;
