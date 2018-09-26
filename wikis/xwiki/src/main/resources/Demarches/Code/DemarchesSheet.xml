@@ -340,10 +340,8 @@
       #if ($avisDocId)
         &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
       #end
-      ## if we have a source on the request, send it to the handler, as a hidden field
-      #if ("$!request.nd_source" != '')
-        &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($request.nd_source)" /&gt;
-      #end
+      #set($avissource = "$!request.nd_source")
+      &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($avissource)" /&gt;
       &lt;div class='buttonwrapper'&gt;
       #if ($step == 'initial-step')
         #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.validate')))
