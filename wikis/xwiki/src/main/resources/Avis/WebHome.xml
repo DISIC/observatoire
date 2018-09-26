@@ -46,6 +46,7 @@
   'session': {},
   'demarche': {},
   'modalite': {},
+  'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
   'score': {'displayName' : 'Avis', "html":true},
   'ministeres': {'sortable': true, 'filterable': true},
   'direction': {'sortable': true, 'filterable': true},
@@ -68,11 +69,11 @@
 include all columns.
 *#
 #if (!$extraParams)
-  #set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'source', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
 #else
   #set ($discard = $options.put('extraParams', $extraParams))
   #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
-  #set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'modalite', 'score', 'vote', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'source', 'modalite', 'score', 'vote', '_actions'])
 #end
 #livetable('avis' $columns $columnsProperties $options)
 
