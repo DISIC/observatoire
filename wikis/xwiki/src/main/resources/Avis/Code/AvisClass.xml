@@ -177,6 +177,20 @@
       <values>manque-d-informations|dysfonctionnement|mobile|pieces-jointes|suite|autre</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </difficultes>
+    <email>
+      <customDisplay>{{include reference="Avis.Code.StringDisplayer" /}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>email</name>
+      <number>13</number>
+      <picker>0</picker>
+      <prettyName>E-mail</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp>/^(([^@\s]+)@((?:[-a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))?$/</validationRegExp>
+      <classType>com.xpn.xwiki.objects.classes.EmailClass</classType>
+    </email>
     <facile>
       <customDisplay>{{include reference="Avis.Code.RadioVoteDisplayer" /}}</customDisplay>
       <disabled>0</disabled>

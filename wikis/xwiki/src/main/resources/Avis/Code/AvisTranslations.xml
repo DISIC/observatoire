@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1528186554000</creationDate>
-  <parent>AvisClass</parent>
+  <parent>Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1531231528000</date>
@@ -80,14 +80,17 @@ avis.score.0votes=Aucun avis
 avis.entry.name=Avis
 avis.invite=Donnez votre avis
 avis.mandatory-info=Les champs marqués de &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
-avis.valider=Valider
-avis.revenir=Revenir
-avis.envoyer=Envoyer
-avis.thanks=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
 avis.vote.button=Donner un avis
-avis.merci_1=Votre réponse est enregistrée, merci.
-avis.continuer=Pour terminer, pouvez-vous nous en dire plus ?
-avis.merci_2=Votre réponse est enregistrée. Merci d'avoir donné votre avis.
+# Form messages
+avis.form.initial-step.demarche-newly-submitted-by-current-user=La démarche a bien été ajoutée.
+avis.form.second-form-screen=Votre réponse est enregistrée, merci.
+avis.form.second-form-screen.introduction=Pour terminer, pouvez-vous nous en dire plus ?
+avis.form.third-form-screen=Merci d'avoir donné votre avis ! Votre réponse nous aide à améliorer le service public.
+avis.form.final-step=Merci de votre contribution.
+avis.form.validate=Valider
+avis.revenir=Revenir
+avis.form.send=Envoyer
+avis.form.complete=Terminer
 
 # Deprecated keys
 avis.dataSpace.title=Data
@@ -130,6 +133,7 @@ Avis.Code.AvisClass_aide_internet=Internet (site, forum…)
 Avis.Code.AvisClass_aide_autre=Autre
 Avis.Code.AvisClass_aide_autreAide=Autre aide
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
+Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration, merci de nous indiquer votre adresse électronique :
 
 
 </content>

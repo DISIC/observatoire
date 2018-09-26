@@ -243,87 +243,113 @@
 
 ######################## Avis tab ###################
 #maybeSetWarningBackground()
-## Don't dispay the avis tab when not in view mode
+## Display the Avis tab only in view mode. In the other cases, we're only editing a Demarche.
 #if ($xcontext.action == 'view')
-## Display the avis as a tab if in authentified mode (otherwise there are issues with 
-## the fade mode)
-#if ($xcontext.user != 'XWiki.XWikiGuest')
-&lt;div class="tab-pane fade" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
-#end
-(%class='demarche-avis-separator'%)
-----
-#set ($step = $request.session.getAttribute('avis-step'))
-#set ($action = 'create-and-continue')
-#set ($avisDocId = $request.session.getAttribute('avis-id'))
-#if ("$!step" != '')
-  ## Clean the session and display the message.
-  #set ($discard = $request.session.removeAttribute('avis-step'))
-  #displayMessage($step)
-#else
-  #maybeDisplayStatusWarning()
-#end
-
-#if ("$!step" != "avis.merci_2")
-#set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
-#if ($demarche != $NULL)
-  &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
-#if ("$!step" == '' || "$!step" == 'wikidemarches.demande.merci')
-## The user is either visiting an existing demarche or a demarche that he just submitted.
-  &lt;div class='form-preambule'&gt;
-    ==$services.localization.render('avis.invite')==
-
-    &lt;span class="info-box-mandatory small"&gt;$services.localization.render('avis.mandatory-info')&lt;/span&gt;
-  &lt;/div&gt;
-  #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-  ## Display the 'modalite' question only if we're not in the case where the user
-  ## has just submitted a new demarche.
-  #if ("$!step" != "wikidemarches.demande.merci")
-    #setDefaultModalite($avis)
-    &lt;div class="modalite"&gt;
-      #displayObjectForm($avis,['modalite'])
-    &lt;/div&gt;
-  #else
-    ## Retrieve the 'modalite' value from the session, as it is supposed to have been
-    ## set when filling in the new demarche form.
-    #set ($modalite = $request.session.getAttribute('avis-modalite'))
-    #set ($discard = $request.session.removeAttribute('avis-modalite'))
-    &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
+  ## Display the avis as a tab only if in authentified mode (otherwise there are issues with the fade mode).
+  #if ($xcontext.user != 'XWiki.XWikiGuest')
+    &lt;div class="tab-pane fade" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
   #end
-  &lt;div class="rating-container"&gt;
-    #displayObjectForm($avis,['score'])
-  &lt;/div&gt;
-#elseif ("$!step" == "avis.merci_1")
-  &lt;div class='form-preambule'&gt;
-    ==$services.localization.render('avis.continuer')==
-  &lt;/div&gt;
-  #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-  #set ($action = 'update-and-end')
-  &lt;div class="eval-container"&gt;
-    #displayObjectForm($avis,['facile','comprehensible','difficultes','aide','autre'])
-  &lt;/div&gt;
-#end
-  &lt;div class="vote-container"&gt;
-    #displayObjectForm($avis,['vote'])
-  &lt;/div&gt;
-  ## If we're handling a validated demarche, the avis gets associated to it.
-  #set ($demarcheId = $doc.fullName)
-  &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheId" /&gt;
-  &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
-  &lt;input type="hidden" name="avis-action" value="$action" /&gt;
-  &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
-  &lt;div class='buttonwrapper'&gt;
-    #set ($submitLabel = $escapetool.xml($services.localization.render('avis.envoyer')))
-    #if ("$!step" == '' || "$!step" == 'wikidemarches.demande.merci')
-      #set ($submitLabel = $escapetool.xml($services.localization.render('avis.valider')))
+  (%class='demarche-avis-separator'%)
+  ----
+  #set ($step = "$!request.session.getAttribute('avis-form-step')")
+  
+  ## This is a multi-steps form. The following exclusive and successive steps can happen:
+  ## - Initial step (key: "initial-step") with or without the modality 'demarche-newly-submitted-by-current-user'
+  ## - Second screen (key: "second-form-screen")
+  ## - Third form screen (key: "third-form-screen")
+  ## - Final step (key: "final-step")
+  
+  #if ($step == '')
+    ## Initialize the step variable for the sake for clarity (i.e. do not leave the initial step empty).
+    #set ($step = 'initial-step')
+  #end
+  #if ($step != 'initial-step')
+    ## The step is not the initial one, hence we:
+    ## - Retrieve the avis id from the session, in case there is one (when a new demarche just got submitted, there is none, otherwise there should be one).
+    ## - Display a message corresponding to the current step, and the message gets cleaned from the session.
+    #set ($avisDocId = $request.session.getAttribute('avis-id'))
+    #set ($discard = $request.session.removeAttribute('avis-form-step'))
+    #displayMessage("avis.form.$step")
+  #else
+    #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
+    #if ($modality == "demarche-newly-submitted-by-current-user")
+      #displayMessage("avis.form.initial-step.demarche-newly-submitted-by-current-user")
     #end
-    &lt;input class="button btn btn-primary" type="submit" name="submit" value="$submitLabel" disabled/&gt;
-  &lt;/div&gt;
-  &lt;/form&gt;
-#end
-#end
-#if ($xcontext.user != 'XWiki.XWikiGuest')
-&lt;/div&gt;
-#end
+    #maybeDisplayStatusWarning()
+  #end
+
+  #if ($step != "final-step")
+    ## The step is not the last one: we display a form for submitting / completing an avis.
+    #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
+    #if ($demarche != $NULL)
+      &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
+      #if ($step == 'initial-step')
+        ## The first step of the form gets displayed, either for an existing demarche, or for a demarche that got just submitted by the current user.
+        &lt;div class='form-preambule'&gt;
+        ==$services.localization.render('avis.invite')==
+
+        &lt;span class="info-box-mandatory small"&gt;$services.localization.render('avis.mandatory-info')&lt;/span&gt;
+        &lt;/div&gt;
+        #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+        #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
+        #if ($modality != "demarche-newly-submitted-by-current-user")
+          ## We're not in the case where the user has just submitted a new demarche, hence we display the 'modalite' question.
+          #setDefaultModalite($avis)
+          &lt;div class="modalite"&gt;
+            #displayObjectForm($avis,['modalite'])
+          &lt;/div&gt;
+        #else
+          ## The user has just submitted a new demarche, hence we retrieve the 'modalite' value from the session, and we clean the session from this point of view.
+          #set ($modalite = $request.session.getAttribute('avis-modalite'))
+          #set ($discard = $request.session.removeAttribute('avis-modalite'))
+          #set ($discard = $request.session.removeAttribute('initial-step-modality'))
+          &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
+        #end
+        &lt;div class="rating-container"&gt;
+          #displayObjectForm($avis,['score'])
+        &lt;/div&gt;
+        &lt;div class="vote-container"&gt;
+          #displayObjectForm($avis,['vote'])
+        &lt;/div&gt;
+      #elseif ($step == 'second-form-screen')
+        &lt;div class='form-preambule'&gt;
+        ==$services.localization.render('avis.form.second-form-screen.introduction')==
+        &lt;/div&gt;
+        #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+        &lt;div class="eval-container"&gt;
+          #displayObjectForm($avis,['facile','comprehensible','difficultes','aide','autre'])
+        &lt;/div&gt;
+      #elseif ($step == 'third-form-screen')
+        #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+        &lt;div class="email-container"&gt;
+          #displayObjectForm($avis,['email'])
+        &lt;/div&gt;
+      #end
+      ## If we're handling a validated demarche, the avis gets associated to it.
+      #set ($demarcheId = $doc.fullName)
+      &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheId" /&gt;
+      &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
+      &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
+      #if ($avisDocId)
+        &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
+      #end
+      &lt;div class='buttonwrapper'&gt;
+      #if ($step == 'initial-step')
+        #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.validate')))
+      #elseif ($step == 'second-form-screen')
+        #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.send')))
+      #elseif ($step == 'third-form-screen')
+        #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.complete')))
+      #end
+      &lt;input class="button btn btn-primary" type="submit" name="submit" value="$submitLabel" disabled/&gt;
+      &lt;/div&gt;
+      &lt;/form&gt;
+    #end
+  #end
+  ## Close the tab created for authenticated users only.
+  #if ($xcontext.user != 'XWiki.XWikiGuest')
+    &lt;/div&gt;
+  #end
 #end
 ############################## Avis tab end ##############################
 
@@ -520,18 +546,16 @@ require(['jquery','xwiki-selectize'], function($) {
     if (score) {
       if (modalite == 'autrement') {
         $('.vote-container').show();
-        $('input[name="avis-action"]').prop('value', 'create-and-end');
       } else {
         $('.vote-container').hide();
-        $('input[name="avis-action"]').prop('value', 'create-and-continue');
       }
       $('input[type="submit"]').prop('disabled', false);
     }
   }
   
   function updateEvaluationInputsVisibility() {
-    var action = $('input[name="avis-action"]').prop('value');
-    if (action == "update-and-end") {
+    var step = $('input[name="avis-form-step"]').prop('value');
+    if (step == "second-form-screen") {
       $('.eval-container').show();
       $('input[type="submit"]').prop('disabled', false);
     }
@@ -597,9 +621,14 @@ require(['jquery','xwiki-selectize'], function($) {
     
     // The input 'Aucune aide' is checked by default, make sure this is not the case.
     $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
-
     
     updateEvaluationInputsVisibility();
+    
+    // For the third form screen, always enable the submit button
+    var step = $('input[name="avis-form-step"]').prop('value');
+    if (step == "third-form-screen") {
+      $('input[type="submit"]').prop('disabled', false);
+    }
     
     $('#tabs a').click(function (e) {
       e.preventDefault();

@@ -40,7 +40,6 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{include reference="Demarches.Code.DemarchesMacros" /}}
-{{include reference="Avis.Code.AvisMacros" /}}
 
 {{velocity output="no"}}
 ## Save only if something was submitted to this page.
@@ -82,7 +81,7 @@
   ## save with programming rights as the current user will not have the right to edit the demarche page
   #set ($discard = $demarche.saveWithProgrammingRights())
 
-  ## TODO: add error handling management when saving the demarche
+## TODO: add error handling management when saving the demarche
   
   ## Set some session attributes to reflect the current state, and redirect to the demarche
   ## page.
@@ -90,7 +89,7 @@
   ## so as to save it in an Avis object only once an Avis gets submitted with a vote,
   ## in the next step.
   $request.session.setAttribute('avis-modalite', $modalite)
-  $request.session.setAttribute('avis-step', 'wikidemarches.demande.merci')
+  $request.session.setAttribute('initial-step-modality', 'demarche-newly-submitted-by-current-user')
   $request.session.setAttribute('demarche-id', $demarcheId)
   #set ($url = $demarche.getURL('view') + '#tab=avis')
   $response.sendRedirect($url)

@@ -41,10 +41,10 @@
   <hidden>true</hidden>
   <content>{{include reference="Avis.Code.AvisMacros" /}}
 {{velocity output="false"}}
-#set ($action = "$!request['avis-action']")
-#if ($action == 'create-and-end' || $action == 'create-and-continue')
+#set ($step = "$!request['avis-form-step']")
+#if ($step == 'initial-step')
   #set ($uin = $services.uin.getNext('avis'))
-  ## get avis document with programming rights, otherwise we might have trouble getting this new document when we'll setup rights
+  ## Get avis document with programming rights, because Avis are not available to guests.
   #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
   #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
   #if ($request.session &amp;&amp; $request.session.id)
@@ -59,7 +59,7 @@
     $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
-#elseif ($action == 'update-and-end')
+#elseif ($step == 'second-form-screen' || $step == 'third-form-screen')
   #set ($id = "$!request['avis-id']")
   #if ($id != $NULL &amp;&amp; $xwiki.exists("Avis.${id}"))
     #set ($target = $xwiki.getDocumentAsAuthor("Avis.${id}"))
@@ -68,7 +68,6 @@
     #validateAvis($object)
     #if($validated)
       #set ($discard = $target.saveWithProgrammingRights())
-      $request.session.setAttribute('avis-step', 'avis.merci_2')
     #else
       $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
       $response.sendRedirect($xwiki.getURL('Main.WebHome'))
@@ -79,14 +78,24 @@
   #end
 #end
 
-#if ("$!request.xredirect" != '')
-  ##we check that the target has been created indeed (which means the request was valid)
-  #if ($action == 'create-and-end' &amp;&amp; $xwiki.exists($target.fullName))
-    $request.session.setAttribute('avis-step', 'avis.merci_2')
-  #elseif ($action == 'create-and-continue' &amp;&amp; $xwiki.exists($target.fullName))
-    $request.session.setAttribute('avis-step', 'avis.merci_1')
-    $request.session.setAttribute('avis-id', $target.name)
+## We check that the avis exists, we store its id in the session and we define the next step.
+#if ($xwiki.exists($target.fullName))
+  $request.session.setAttribute('avis-id', $target.name)
+  #if ($step == 'initial-step')
+    ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'third-form-screen'.
+    #set ($object = $target.getObject('Avis.Code.AvisClass'))
+    #if ($object.getValue('modalite') != 'autrement')
+      $request.session.setAttribute('avis-form-step', 'second-form-screen')
+    #else
+      $request.session.setAttribute('avis-form-step', 'third-form-screen')
+    #end
+  #elseif ($step == 'second-form-screen')
+    $request.session.setAttribute('avis-form-step', 'third-form-screen')
+  #elseif ($step == 'third-form-screen')
+    $request.session.setAttribute('avis-form-step', 'final-step')
   #end
+#end
+#if ("$!request.xredirect" != '')
   $response.sendRedirect($request.xredirect)
 #else
   $response.sendRedirect($xwiki.getURL('Main.WebHome'))

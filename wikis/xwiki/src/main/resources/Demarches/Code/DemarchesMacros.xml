@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1536141505000</creationDate>
-  <parent>WebHome</parent>
+  <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1536141505000</date>
@@ -40,7 +40,6 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="false"}}
-## This sheet is used to display two types of objects: either Demarches or Avis
 ################### Demarche view/edit form macros ########################
 #macro (displayProperty $propName $isMandatory)
   #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
@@ -257,8 +256,7 @@
   &lt;/div&gt;
 #end
 
-#* Set a specific background for demarches that were submitted by users and that were not
-yet validated. *#
+#* Sets a specific background for demarches that were submitted by users and that were not yet validated. *#
 #macro(maybeSetWarningBackground)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
@@ -267,15 +265,16 @@ yet validated. *#
   #end
 #end
 
+#* Displays a warning message on the first step of the avis form, for demarche newly submitted, but not by the current user (no need to inform the submitter himself). *#
 #macro(maybeDisplayStatusWarning)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
-  #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
+  #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
+  #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur' &amp;&amp; ($modality != "demarche-newly-submitted-by-current-user"))
     #set($demarcheDate = $datetool.format("d MMMM yyyy", $doc.creationDate))
     (%class='newdemande-message'%)(((
     {{info}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/info}}
     )))
   #end
 #end
-{{/velocity}}
-</content>
+{{/velocity}}</content>
 </xwikidoc>
