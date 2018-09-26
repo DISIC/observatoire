@@ -41,23 +41,37 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 #macro (displayObject $className $skipPrettyProps)
-#set ($obj = $doc.getObject($className))
-#set ($class = $obj.xWikiClass)
-#foreach($prop in $class.properties)
-  #if (!$skipPrettyProps || !$skipPrettyProps.contains($prop.name))
+  #set ($obj = $doc.getObject($className))
+  #set ($class = $obj.xWikiClass)
+  #foreach($prop in $class.properties)
+    #if (!$skipPrettyProps || !$skipPrettyProps.contains($prop.name))
     ; $doc.displayPrettyName($prop.name, false, false)
+    #end
     #if ($prop.name == 'demarche' &amp;&amp; $xcontext.action == "view")
       ## for the "demarche" property, display a link in view mode
       #set ($demarcheId = $obj.getProperty($prop.name).getValue())
     : [[$demarcheId]]
     #else
-    : $doc.display($prop.name,$obj)
+      ## In view mode, we protect the display of text properties against HTML/JavaScript injection.
+      #if ($xcontext.action == 'view')
+        #set ($textProperties = ['autreDifficulte','autreAide','autre','email','source'])
+        #if ($textProperties.contains($prop.name))
+          #set ($value = $obj.getProperty($prop.name).getValue())
+          #if ("$!value" != '')
+          : (((
+            {{html}}
+              $escapetool.html($value)
+            {{/html}}
+          )))
+          #end
+        #else
+          : $doc.display($prop.name,$obj)
+        #end
+      #else
+        : $doc.display($prop.name,$obj)
+      #end
     #end
-  #else
-    $doc.display($prop.name,$obj)
   #end
-
-#end
 #end
 (% class="xform" %)
 (((
@@ -66,7 +80,7 @@
 ## TODO: we should probably look into the displayers and skip pretty properties when a custom
 ## displayer is used
 #if ($xcontext.action == 'edit')
-  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide','modalite','difficultes','comprehensible','aide','vote', 'source'])
+  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide','modalite','difficultes','comprehensible','aide','vote', 'source','autre','email'])
 #end
 #displayObject('Avis.Code.AvisClass',$skippedPrettyProps)
 )))
