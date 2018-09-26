@@ -292,17 +292,24 @@
         &lt;/div&gt;
         #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
         #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
-        #if ($modality != "demarche-newly-submitted-by-current-user")
+        #set ($presetModalite = "$!request.nd_mode")
+        #if ($modality != "demarche-newly-submitted-by-current-user" &amp;&amp; $presetModalite == '')
           ## We're not in the case where the user has just submitted a new demarche, hence we display the 'modalite' question.
+          ## We also don't have a preset modalite received from request parameters
           #setDefaultModalite($avis)
           &lt;div class="modalite"&gt;
             #displayObjectForm($avis,['modalite'])
           &lt;/div&gt;
         #else
-          ## The user has just submitted a new demarche, hence we retrieve the 'modalite' value from the session, and we clean the session from this point of view.
-          #set ($modalite = $request.session.getAttribute('avis-modalite'))
-          #set ($discard = $request.session.removeAttribute('avis-modalite'))
-          #set ($discard = $request.session.removeAttribute('initial-step-modality'))
+          #if ($presetModalite != '')
+            ## a preset modalite was received on the request, use that modalite
+            #set ($modalite = $presetModalite)
+          #else
+            ## The user has just submitted a new demarche, hence we retrieve the 'modalite' value from the session, and we clean the session from this point of view.
+            #set ($modalite = $request.session.getAttribute('avis-modalite'))
+            #set ($discard = $request.session.removeAttribute('avis-modalite'))
+            #set ($discard = $request.session.removeAttribute('initial-step-modality'))
+          #end
           &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
         #end
         &lt;div class="rating-container"&gt;
@@ -332,6 +339,10 @@
       &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
       #if ($avisDocId)
         &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
+      #end
+      ## if we have a source on the request, send it to the handler, as a hidden field
+      #if ("$!request.nd_source" != '')
+        &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($request.nd_source)" /&gt;
       #end
       &lt;div class='buttonwrapper'&gt;
       #if ($step == 'initial-step')

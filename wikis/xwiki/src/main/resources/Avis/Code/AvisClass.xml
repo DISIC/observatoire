@@ -255,6 +255,20 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </sessionId>
+    <source>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>source</name>
+      <number>14</number>
+      <picker>0</picker>
+      <prettyName>source</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+    </source>
     <vote>
       <cache>0</cache>
       <customDisplay>{{include reference="Avis.Code.ListDisplayer" /}}</customDisplay>
