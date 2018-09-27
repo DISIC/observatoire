@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1537297564000</creationDate>
-  <parent>Main.WebHome</parent>
+  <parent>Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1537437746000</date>
@@ -77,7 +77,19 @@
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </moyenne>
     <occurrences>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean='false'}}
+#set ($propertyClass = $object.getxWikiClass().get($name))
+#if ($type == 'edit')
+    $doc.displayEdit($propertyClass, $prefix, $object).replaceAll("value='[^']*+' size=", "value='$!{valueString}' size=")
+#else
+  ## only display something if the value is not 0
+  #if ($value &gt; 0)
+    $value
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>occurrences</name>
@@ -91,7 +103,19 @@
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </occurrences>
     <votes>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean='false'}}
+#set ($propertyClass = $object.getxWikiClass().get($name))
+#if ($type == 'edit')
+    $doc.displayEdit($propertyClass, $prefix, $object).replaceAll("value='[^']*+' size=", "value='$!{valueString}' size=")
+#else
+  ## only display something if the value is not 0
+  #if ($value &gt; 0)
+    $value
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>votes</name>
