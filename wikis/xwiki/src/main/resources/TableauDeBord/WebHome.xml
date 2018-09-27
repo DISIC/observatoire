@@ -46,13 +46,12 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 
 #set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
 #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres', 'direction', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne' ,'statut'])
+#set ($columns = ['doc.title', 'ministeres', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne', 'statut'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true'},
   'ministeres': {'type' : 'suggest', 'filterable' : 'true', 'sortable' : 'false'},
   'niveauDematBoolean': {'filterable' : 'false', 'sortable' : 'false'},
-  'statut' : {'type' : 'list', 'filterable': 'false', 'sortable' : 'true'},
-  'direction' : {'type' : 'suggest', 'filterable': 'true', 'sortable' : 'false'},
+  'statut' : {'type' : 'hidden', 'filterable': 'false', 'sortable' : 'true'},
   'votes' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $explanationLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'}
