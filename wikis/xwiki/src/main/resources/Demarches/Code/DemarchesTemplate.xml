@@ -158,7 +158,7 @@
 {{html clean="false"}}
 #set ($direction = $xwiki.getDocument($value))
 #if ($xcontext.action == 'get')
-  #if ($direction.sigle) $direction.sigle #else $value #end
+  #if ($direction.sigle) $direction.sigle #else $!value #end
 #elseif ($xcontext.action == 'view' &amp;&amp; $direction.name != 'WebHome')
   $direction.displayTitle
 #else
@@ -285,18 +285,19 @@
         <classname/>
         <customDisplay>{{velocity}}
 {{html clean="false"}}
-#if ($xcontext.action == 'get')
+#if ($type == 'edit')
+  #template('displayer_dblist.vm')
+#elseif ($xcontext.action == 'get')
   #foreach ($ministere in $value)
-    #set($ministereDocument = $xwiki.getDocument($ministere))
-    #if ($velocityCount &gt; 1), #{end}#if ($ministereDocument.sigle)${ministereDocument.sigle}#{else}${ministereDocument.fullName}#end
+    #set ($ministereDocument = $xwiki.getDocument($ministere))
+    #set ($nom = $ministereDocument.get('nom'))
+    #if ($velocityCount &gt; 1), #{end}#if ($nom)$nom#{else}${ministereDocument.name}#end
   #end
 #elseif ($xcontext.action == 'view')
   #foreach ($ministere in $value)
     #set($ministereDocument = $xwiki.getDocument($ministere))
     $ministereDocument.displayTitle
   #end
-#else
-  #template('displayer_dblist.vm')
 #end
 {{/html}}
 {{/velocity}}</customDisplay>
@@ -314,7 +315,7 @@
         <separators/>
         <size>5</size>
         <sort>value</sort>
-        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Ministeres.Code.MinisteresClass' and doc.fullName&lt;&gt;'Ministeres.Code.MinisteresTemplate' order by doc.title asc</sql>
+        <sql>select doc.fullName,nom.value from XWikiDocument as doc,BaseObject as obj, StringProperty as nom where doc.fullName=obj.name and obj.className='Ministeres.Code.MinisteresClass' and doc.fullName&lt;&gt;'Ministeres.Code.MinisteresTemplate' and nom.id.id=obj.id and nom.id.name='nom' order by nom.value asc</sql>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
