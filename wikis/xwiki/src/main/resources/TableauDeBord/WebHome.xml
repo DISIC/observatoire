@@ -173,17 +173,28 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
       <cache>long</cache>
     </property>
     <property>
-      <code>#demarches .xwiki-livetable-display-header th {
+      <code>#demarches .xwiki-livetable-display-header th,
+#demarches .xwiki-livetable-display-filters td {
   vertical-align: middle;
   font-size: 90%;
 }
 
-#demarches thead.xwiki-livetable-display-header th.xwiki-livetable-display-header-text {
+#demarches .xwiki-livetable-display-header th:first-child {
+  width: 45%;
+}
+
+#demarches thead.xwiki-livetable-display-header th.xwiki-livetable-display-header-text,
+#demarches .xwiki-livetable-display-filters .xwiki-selectize-option {
   white-space: normal;
 }
 
-#demarches .xwiki-livetable-display-header th .average-help {
+#demarches .xwiki-livetable-display-header th .average-help, 
+#demarches td.ministeres {
   font-size: 90%;
+}
+
+#demarches .xwiki-livetable-filter-active {
+  font-weight: normal;
 }</code>
     </property>
     <property>
