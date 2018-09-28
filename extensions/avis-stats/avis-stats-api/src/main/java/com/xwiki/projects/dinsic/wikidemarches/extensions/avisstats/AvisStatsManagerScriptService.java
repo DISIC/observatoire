@@ -13,7 +13,7 @@ import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.XWikiException;
 
 /**
- * Make the AviStatsComponent API available to scripting. <br/>
+ * Make the AviStatsComponent API available to scripting. <br>
  * TODO: add rights verification
  */
 @Component

@@ -43,7 +43,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
 
     /**
      * Computes the AvisStats values and saves the AvisStats object for the demarche passed as parameter. We assume that
-     * the demarcheReference is valid, no check is performed. <br />
+     * the demarcheReference is valid, no check is performed. <br>
      * TODO: is synchronized enough to cover the thread safety?
      */
     public synchronized void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
