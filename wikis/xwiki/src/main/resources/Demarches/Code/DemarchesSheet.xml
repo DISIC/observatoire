@@ -495,10 +495,6 @@ require(['jquery','xwiki-selectize'], function($) {
              'view/Demarches/Code/DemarchesSuggest?outputSyntax=plain&amp;xpage=plain&amp;' + params + '&amp;property=' + encodeURIComponent(select.attr('data-propertyName'))
             ].join('/');
           }
-        } else if (select.attr('data-propertyName')=="ministeres") {
-          if (text.indexOf("Ministeres.") &lt; 0)
-            text = "Ministeres." + text;
-          $('.suggest-propertyValues').clearLoadedSearches();
         }
         
         $.getJSON(loadURL, {
