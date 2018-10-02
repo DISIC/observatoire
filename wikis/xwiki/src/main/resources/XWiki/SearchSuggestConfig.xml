@@ -521,9 +521,11 @@
       <name>Démarches</name>
     </property>
     <property>
-      <query>fq=type:DOCUMENT
-fq=wiki:xwiki
+      <query>fq=wiki:xwiki
+fq=type:DOCUMENT
+fq=-name:DemarchesTemplate
 fq=class:Demarches.Code.DemarchesClass
+fq=-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche
 qf=title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1
 </query>
     </property>

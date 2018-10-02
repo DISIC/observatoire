@@ -45,10 +45,11 @@
     'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'
   },
   'filterQuery': [
-    'type:DOCUMENT',
-    'class:Demarches.Code.DemarchesClass',
     'wiki:xwiki',
-    '-name:DemarchesTemplate'
+    'type:DOCUMENT',
+    '-name:DemarchesTemplate',
+    'class:Demarches.Code.DemarchesClass',
+    '-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche'
   ],
   'facetFields': [
     'property.Demarches.Code.DemarchesClass.categoriesPublics_string',
