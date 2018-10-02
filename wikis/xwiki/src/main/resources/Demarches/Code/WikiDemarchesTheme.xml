@@ -1170,7 +1170,19 @@ select[size="1"]{
   ul.suggestList .info {
     display: none;
   }
+  /* Override the default background from lightgray to white, in particular for displaying the area at the bottom containing a button allowing to create a new Demarche, and define a margin. */
+  div.resultContainer div.results {
+    background-color: #ffffff !important;
+    hr {
+      margin-top: 0.3em;
+      margin-bottom: 0.3em;
+    }
+    p {
+      margin-left: 10px;
+    }
+  }
 }
+
 
 /*
  * Sizes of the titles
