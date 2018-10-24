@@ -214,7 +214,9 @@ var XWiki = (function (XWiki) {
     $$('.results').each(function(object) {
       #set ($ajouterDemarche = $services.localization.render('wikidemarches.demande.ajoutez-la'))
       #set ($ajouterDemarcheHint = $services.localization.render('wikidemarches.demande.demarche-absente'))
-      object.insert('&lt;div id="add-demarche-btn"&gt;&lt;hr/&gt;&lt;p&gt;$ajouterDemarcheHint&amp;nbsp;&lt;span class="wikilink"&gt;&lt;a class="button btn btn-primary" href="/Demarches/Code/NewDemarche?text=' + query + '"&gt;$ajouterDemarche&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;');
+      #set ($xUrl = $xwiki.getURL('Demarches.Code.NewDemarche','view','text='))
+      object.insert('&lt;div id="add-demarche-btn"&gt;$ajouterDemarcheHint&amp;nbsp;&lt;span class="wikilink"&gt;&lt;a class="button btn btn-primary" href="$xUrl' + query + '"&gt;$ajouterDemarche&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;');
+      object.removeClassName('hidden');
     });
   });
 

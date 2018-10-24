@@ -55,6 +55,7 @@
         {{html clean='false'}}
         ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
         ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+        #set($discard = $xwiki.ssx.use('Main.CustomSearchSuggestSSX'))
         #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
         &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
           &lt;label for="search-input"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
@@ -283,21 +284,6 @@
     margin-top: 5px;
     .text-smaller;
   }
-}
-
-/* On the search suggest of the main page, displaying a button to hide suggestions does not make sense */
-.searchSuggest div.hide-button-wrapper {
-  display: none;
-}
-
-/* The suggest should have blue margins (same as the search band) so that we don't see the suggest list when it appears _before_ the results */
-div.suggestItems.searchSuggest {
-  border-color: @navbar-default-bg;
-}
-
-/* search suggest results should be displayed bigger */
-div.suggestItem {
-  font-size: 1em;
 }
 
 .demarches-statsrow {

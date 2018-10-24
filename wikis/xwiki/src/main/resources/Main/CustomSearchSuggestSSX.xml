@@ -20,67 +20,30 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Demarches.Code.SolrSearch" locale="">
-  <web>Demarches.Code</web>
-  <name>SolrSearch</name>
+<xwikidoc version="1.3" reference="Main.CustomSearchSuggestSSX" locale="">
+  <web>Main</web>
+  <name>CustomSearchSuggestSSX</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1527583057000</creationDate>
-  <parent>Main.WebHome</parent>
+  <creationDate>1540398302000</creationDate>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530200172000</date>
-  <contentUpdateDate>1530200172000</contentUpdateDate>
+  <date>1540399181000</date>
+  <contentUpdateDate>1540398302000</contentUpdateDate>
   <version>1.1</version>
-  <title>SolrSearch</title>
+  <title/>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity output="false"}}
-#set ($solrConfig = {
-  'queryFields': {
-    'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'
-  },
-  'filterQuery': [
-    'wiki:xwiki',
-    'type:DOCUMENT',
-    '-name:DemarchesTemplate',
-    'class:Demarches.Code.DemarchesClass',
-    '-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche'
-  ],
-  'facetFields': [
-    'property.Demarches.Code.DemarchesClass.categoriesPublics_string',
-    'property.Demarches.Code.DemarchesClass.publics_string',
-    'property.Demarches.Code.DemarchesClass.evenements_string'
-  ],
-  'facetDisplayers': {
-    'property.Demarches.Code.DemarchesClass.categoriesPublics_string' : 'Demarches.Code.ListFacet',
-    'property.Demarches.Code.DemarchesClass.publics_string' : 'Demarches.Code.ListFacet',
-    'property.Demarches.Code.DemarchesClass.evenements_string' : 'Demarches.Code.ListFacet'
-  },
-  'highlightEnabled' : false
-})
-{{/velocity}}
-
-{{include reference="Main.SolrSearchConfig" /}}
-
-{{include reference="Main.SolrSearchMacros" /}}
-
-{{include reference="Demarches.Code.SolrSearchMacros" /}}
-
-{{velocity}}
-  #set($discard = $xwiki.ssx.use('Main.CustomSearchSuggestSSX'))
-  #set($discard = $xwiki.ssx.use('Demarches.Code.SolrSearch'))
-  #handleSolrSearchRequest
-{{/velocity}}</content>
+  <content/>
   <object>
-    <name>Demarches.Code.SolrSearch</name>
+    <name>Main.CustomSearchSuggestSSX</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>6eacb3da-3e7f-41b6-b1fb-c9304b7bd419</guid>
+    <guid>03c5ac95-116b-4c0b-bbfb-399cececfa3a</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>
@@ -174,61 +137,32 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>/* Remove the little border between the search facet header and its body,
- *  as it doesn't work properly for search facets that display on 2 lines 
- */
-div.search-facet-header:after {
-  border: none;
+      <code>/* On the search suggest of the main page, displaying a button to hide suggestions does not make sense */
+.searchSuggest div.hide-button-wrapper {
+  display: none;
 }
 
-.search-facet.expanded:last-of-type div.search-facet-header:after {
-  border: none;
+/* The suggest should have blue margins (same as the search band) so that we don't see the suggest list when it appears _before_ the results */
+div.suggestItems.searchSuggest {
+  border-color: @navbar-default-bg;
 }
 
-/* Not sure why the title spacing is removed on this page, putting it back */
-div#document-title &gt; h1 {
-  margin-bottom: (@line-height-computed / 2)
+/* search suggest results should be displayed bigger */
+div.suggestItem {
+  font-size: 1em;
 }
 
-/* Custom search results lists styling */
-.search-form button.btn {
-  .btn-gradient(lighten(@navbar-default-bg, 5%));
-  .btn-border(@navbar-default-bg);
+#add-demarche-btn {
+  padding: 10px;
+  border-top: 0.5px @navbar-default-bg solid;
 }
-
-
-ul.search-results {
-  margin-left: 0;
-  padding-left: 0;
-  list-style: none;
-  margin-bottom: 0;
-}
-
-ul.search-results li.search-result-title-wd {
-  padding-bottom: 1.5em;
-}
-
-ul.search-results li.search-result-title-wd:last-of-type {
-  padding-bottom: 0;
-}
-
-.new-demarche {
-  margin-top: 0.5em;
-  text-align: center;
-}
-
-@media (min-width: @screen-sm-min) {
-  .new-demarche {
-    text-align: inherit;
-    margin-top: 0em;
-  }
-}</code>
+</code>
     </property>
     <property>
       <contentType>LESS</contentType>
     </property>
     <property>
-      <name/>
+      <name>SSX</name>
     </property>
     <property>
       <parse/>
