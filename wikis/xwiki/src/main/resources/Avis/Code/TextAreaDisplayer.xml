@@ -42,16 +42,14 @@
   <content>{{velocity}}
 {{html clean='false'}}
 #if ($type == 'edit')
-  &lt;fieldset &gt;
-  &lt;legend&gt;
+  &lt;label class="question" for="${prefix}$name"&gt;
     $doc.displayPrettyName($name, false, false)
-  &lt;/legend&gt;
+  &lt;/label&gt;
   #if ("$!field.hint" != '')
     #set ($key = "${object.xWikiClass.name}_$name.${field.hint}")
-    $escapetool.xml($services.localization.render($key))
+    &lt;span id="${prefix}${name}_hint" class="xHint"&gt;$escapetool.xml($services.localization.render($key))&lt;/span&gt;
   #end
-  &lt;textarea name="${prefix}${name}" value="" rows="3"&gt;$!value&lt;/textarea&gt;
-  &lt;/fieldset&gt;
+  &lt;textarea id="${prefix}$name" name="${prefix}${name}" value="" rows="3" aria-describedby="${prefix}${name}_hint"&gt;$!value&lt;/textarea&gt;
 #else
   $!value
 #end
