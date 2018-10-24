@@ -69,6 +69,7 @@ Demarches.Code.DemarchesClass.new=Créer une démarche
 # Demarche submission by visitor
 wikidemarches.demande.demarche-absente=Vous ne trouvez pas votre démarche ?
 wikidemarches.demande.creation=Ajouter une démarche manquante
+wikidemarches.demande.ajoutez-la=Ajoutez-la !
 wikidemarches.demande.referencer=Référencer une démarche manquante
 wikidemarches.demande.referencer.introduction=Si vous n'avez pas trouvé la démarche que vous avez effectuée, ajoutez-la ici, afin de pouvoir donner votre avis.
 wikidemarches.demande.organisme=Auprès de quel organisme avez-vous fait cette démarche ?
