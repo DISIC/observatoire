@@ -195,6 +195,10 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 
 #demarches .xwiki-livetable-filter-active {
   font-weight: normal;
+}
+
+td.doc_title:first-letter {
+  text-transform: capitalize;
 }</code>
     </property>
     <property>
