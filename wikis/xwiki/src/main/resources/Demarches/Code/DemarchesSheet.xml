@@ -866,7 +866,7 @@ require(['jquery','xwiki-selectize'], function($) {
 
 @media (min-width: @screen-md-min) {
   .wd-form .buttonwrapper {
-    text-align: inherit;
+    text-align: left;
   }
 }
 

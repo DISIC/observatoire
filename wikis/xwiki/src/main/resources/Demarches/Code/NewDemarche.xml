@@ -123,15 +123,17 @@ $services.localization.render('avis.mandatory-info')
   &lt;div class="modalite"&gt;
     #displayObjectForm($avis,['modalite'])
   &lt;/div&gt;  
+{{html wiki="false"}}
   &lt;fieldset&gt;
     &lt;div&gt;
       &lt;label for="Demarches.Code.DemarchesClass_0_urlDemarche" style="padding-bottom:0.5em"&gt;
       &lt;span&gt;$services.localization.render('wikidemarches.demande.url')&lt;/span&gt;
     &lt;/div&gt;
     &lt;div&gt;
-    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;" /&gt;
+    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;"  placeholder="http://www..."/&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
+{{/html}}
   &lt;fieldset&gt;
     &lt;div&gt;
       &lt;label for="title" style="padding-bottom:0.5em"&gt;
