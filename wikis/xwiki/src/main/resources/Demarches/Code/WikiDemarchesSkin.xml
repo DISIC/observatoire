@@ -1341,7 +1341,6 @@ window.docgeturl = "${doc.getURL('get')}";
       width: 100%;
       overflow-x: auto;
       overflow-y: auto;
-      margin-bottom: 1.5em;
     }
     table.xwiki-livetable {
       /* fix its width to the tablet width, the next one in terms of size */
