@@ -34,7 +34,7 @@
   <date>1530192216000</date>
   <contentUpdateDate>1530192216000</contentUpdateDate>
   <version>1.1</version>
-  <title>#if("$!{request.text}" == '')$services.localization.render('search.page.title.noquery')#else$services.localization.render('search.page.title.query', [$request.text])#end</title>
+  <title>#if("$!{request.text}" == '')$services.localization.render('search.page.title.noquery')#else$services.localization.render('search.page.title.query', ["«\u00A0$request.text\u00A0»"])#end</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.0</syntaxId>

@@ -40,6 +40,83 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output='false'}}
+
+#* Overrides "pagination" macro from "templates/macros.vm" in order to show a custom display
+ * when there is no result.
+ *#
+#macro(paginationCustom $parameters)
+  #if(!$parameters.noSx)
+  $xwiki.ssfx.use('uicomponents/pagination/pagination.css', true)##
+  #end
+  #if("$!{parameters.url}" == '')
+    #set($parameters.url = $doc.getURL('view'))
+  #end
+  #if(!$parameters.url.contains('?'))
+    #set($parameters.url = "${parameters.url}?")
+  #end
+  #if($parameters.position != 'bottom')
+    #set($parameters.position = 'top')
+  #end
+  #paginationPrepareParams($parameters)
+  #paginationDisplayCustom($parameters)
+#end
+
+#* Overrides "pagination" macro from "templates/macros.vm" in order to show a custom display
+ * when there is no result.
+ *#
+#macro(paginationDisplayCustom $parameters)
+  #set($parameters.pageCount = ($parameters.totalItems + $parameters.itemsPerPage - 1) / $parameters.itemsPerPage)
+  #if($parameters.firstItem &gt;= $parameters.totalItems)
+    #set($parameters.firstItem = ($parameters.pageCount - 1) * $parameters.itemsPerPage)
+  #elseif($parameters.firstItem &lt; 0)
+    #set($parameters.firstItem = 0)
+  #end
+  #set($parameters.crtPage = $parameters.firstItem / $parameters.itemsPerPage)
+  ## Make firstItem a multiple of itemsPerPage
+  #set($parameters.firstItem = $parameters.crtPage * $parameters.itemsPerPage)
+  #set($parameters.lastPage = $parameters.pageCount - 1)
+  #set ($noResultClass = '')
+  #if($parameters.position == 'top' &amp;&amp; $parameters.totalItems == 0)
+    #set ($noResultClass = ' noResult')
+  #end
+  &lt;div class="paginationFilter$noResultClass"&gt;
+    #if($parameters.position == 'top')
+      #paginationResultsRangeCustom($parameters)
+    #end
+    #if($parameters.totalItems &gt; 0)
+      #if($parameters.controlsAround == true)
+        #paginationControlLeft($parameters)
+        #paginationPages($parameters)
+        #paginationControlRight($parameters)
+      #else
+        #paginationControl($parameters)
+        #paginationPages($parameters)
+      #end
+    #end
+  &lt;/div&gt;
+#end
+
+#macro(paginationResultsRangeCustom $parameters)
+  #set($from = $parameters.firstItem + 1)
+  #set($to = $parameters.firstItem + $parameters.itemsPerPage)
+  #if ($to &gt; $parameters.totalItems)
+    #set($to = $parameters.totalItems)
+  #end
+  &lt;span class="resultsNo" style="width:100%"&gt;
+  #if($parameters.totalItems == 0)
+    &lt;div class="box warningmessage"&gt;
+    $services.localization.render('platform.livetable.paginationResultsNone')
+    &lt;/div&gt;
+  #elseif($parameters.totalItems == 1)
+    &lt;span class='currentResultsNo'&gt;$services.localization.render('platform.livetable.paginationResultsOne')&lt;/span&gt;
+  #elseif($from == $parameters.totalItems)
+    $services.localization.render('platform.livetable.paginationResultsSingle', [$from, $parameters.totalItems])
+  #else
+    $services.localization.render('platform.livetable.paginationResultsMany', [$from, $to, $parameters.totalItems])
+  #end
+  &lt;/span&gt;
+#end
+
 #*
  * Prepares a query based on the text, as follows:
  * * adds exact search in URLs, for strings bigger than 5 characters
@@ -223,7 +300,7 @@
     'defaultItemsPerPage': $rows,
     'position': 'top'
   })
-  {{html clean="false"}}#pagination($paginationParameters)
+  {{html clean="false"}}#paginationCustom($paginationParameters)
   &lt;ul class='search-results'&gt;
     #foreach ($searchResult in $results)
       #set ($searchResultReference = $services.solr.resolve($searchResult))
@@ -232,7 +309,7 @@
     #end
   &lt;/ul&gt;
   #set ($discard = $paginationParameters.put('position', 'bottom'))
-  #pagination($paginationParameters)
+  #paginationCustom($paginationParameters)
   #set ($text = $!request.text)
   &lt;div class="new-demarche"&gt;
     &lt;div&gt;$services.localization.render('wikidemarches.demande.demarche-absente')&lt;/div&gt;
