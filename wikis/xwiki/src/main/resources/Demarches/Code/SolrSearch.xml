@@ -212,6 +212,10 @@ ul.search-results li.search-result-title-wd:last-of-type {
   padding-bottom: 0;
 }
 
+.paginationFilter.noResult {
+  border-top: none !important;
+}
+
 .new-demarche {
   margin-top: 0.5em;
   text-align: center;
