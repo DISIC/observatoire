@@ -1295,6 +1295,67 @@ window.docgeturl = "${doc.getURL('get')}";
   </object>
   <object>
     <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>14</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>8c8f794a-5fcd-44f7-84ae-8f3b5b52fd1b</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>// Looks nicer with the .table-striped() mix-in of bootstrap
+.xwiki-livetable-display {
+  .table;
+  .table-striped;
+}
+
+@media only screen and (max-width: @screen-xs-max) {
+  .skin-flamingo { // Needed to override the rules from livetable.css
+    .xwiki-livetable-container {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: auto;
+      margin-bottom: 1.5em;
+    }
+    table.xwiki-livetable {
+      /* fix its width to the tablet width, the next one in terms of size */
+      min-width: @container-sm - @grid-gutter-width;
+    }
+  }
+}</content>
+    </property>
+    <property>
+      <path>less/livetable.less</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
     <number>0</number>
     <className>XWiki.XWikiSkins</className>
     <guid>f9020886-48b3-4f1a-bd54-392f886da30a</guid>
