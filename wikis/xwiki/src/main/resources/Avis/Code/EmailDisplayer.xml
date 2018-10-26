@@ -46,7 +46,7 @@
   #if ($type == 'edit')
     #if (${object.xWikiClass.name} == 'Avis.Code.AvisClass')
       &lt;label for="xwiki-form-email"&gt;$doc.displayPrettyName($name, false, false)&lt;/label&gt;
-      &lt;input id="xwiki-form-email" name="Avis.Code.AvisClass_0_email" value="$!value" size="40" /&gt;
+      &lt;input id="xwiki-form-email" name="Avis.Code.AvisClass_0_email" value="$!value" size="40" type="email" placeholder="nom@exemple.fr"/&gt;
     #end
   #else
     $!value

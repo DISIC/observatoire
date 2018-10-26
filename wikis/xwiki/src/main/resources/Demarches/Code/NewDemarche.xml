@@ -130,7 +130,7 @@ $services.localization.render('avis.mandatory-info')
       &lt;span&gt;$services.localization.render('wikidemarches.demande.url')&lt;/span&gt;
     &lt;/div&gt;
     &lt;div&gt;
-    &lt;input type="text" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;"  placeholder="http://www..."/&gt;
+    &lt;input type="url" name="Demarches.Code.DemarchesClass_0_urlDemarche" maxlength="2000" minlength="4" style="width: 100%;"  placeholder="http://www..."/&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
 {{/html}}
@@ -142,7 +142,7 @@ $services.localization.render('avis.mandatory-info')
       &lt;/span&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;input required type="text" name="title" maxlength="255" minlength="4" style="width: 100%;" value="$escapetool.xml($title)"/&gt;
+      &lt;input required type="text" name="title" maxlength="255" minlength="4" style="width: 100%;" value=""/&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
   &lt;fieldset&gt;
@@ -153,7 +153,6 @@ $services.localization.render('avis.mandatory-info')
     &lt;/div&gt;
     &lt;div&gt;
       &lt;textarea name="Demarches.Code.DemarchesClass_0_objet" style="width: 100%;" rows="3"&gt;
-      $escapetool.xml($title)
       &lt;/textarea&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
