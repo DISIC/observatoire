@@ -357,7 +357,7 @@
       <groups>XWiki.XWikiAllGroup</groups>
     </property>
     <property>
-      <levels>edit</levels>
+      <levels>edit,delete</levels>
     </property>
   </object>
   <object>
