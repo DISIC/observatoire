@@ -114,6 +114,14 @@
   #end
 #end
 
+## If the clause for joining with the Demarche table is not present, add it.
+#macro(addDemarcheJoinClause)
+  #if($whereSql.indexOf('Demarches.Code.DemarchesClass') &lt; 0)
+    #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche")
+    #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass'")
+  #end
+#end
+
 #**
  * Computes the query used to retrieve the results of a live table data call.
  * NOTE: This macro is not fully encapsulated because it defines a few Velocity variables that are used in subsequent macros.
@@ -163,6 +171,7 @@
       #set($discard = $whereParams.add($propClassName))
     #end
   #end
+  
   ## Set the order clause for a field. We first ignore the case using the lower function (so that e.g. 'aaa' equals 'AAA')
   ## but then consider it only for equal values (so that e.g. 'AAA' comes before 'aaa').
   #macro(setOrderClause $fieldName $direction $useRawValue)
@@ -183,12 +192,18 @@
       #set($orderDirection = 'desc')
     #end
     #if($order=='direction')
-      #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche, StringProperty directionProperty")
-      #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=directionProperty.id.id and directionProperty.id.name='direction'")
+      #addDemarcheJoinClause()
+      #if ($fromSql.indexOf('directionProperty') &lt; 0)
+        #set($fromSql = "${fromSql}, StringProperty directionProperty")
+      #end
+      #set($whereSql = "${whereSql} and demarche.id=directionProperty.id.id and directionProperty.id.name='direction'")
       #set($orderSql = " order by directionProperty.value ${orderDirection}")
     #elseif($order=='ministeres')
-      #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche, DBStringListProperty ministeresProperty join ministeresProperty.list list")
-      #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=ministeresProperty.id.id and ministeresProperty.id.name='ministeres'")
+      #addDemarcheJoinClause()
+      #if ($fromSql.indexOf('ministeresProperty') &lt; 0)
+       #set($fromSql = "${fromSql}, DBStringListProperty ministeresProperty join ministeresProperty.list list")
+      #end
+      #set($whereSql = "${whereSql} and demarche.id=ministeresProperty.id.id and ministeresProperty.id.name='ministeres'")
       #set($orderSql = " order by list ${orderDirection}")
     #else
       #livetable_getTableAlias($order)
@@ -297,12 +312,18 @@
     #set ($filterValue = "$!request.getParameter($colName)")
     #if ("$!filterValue" != '')
       #if ($colName == 'direction')
-        #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche, StringProperty directionProperty")
-        #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=directionProperty.id.id and directionProperty.id.name='direction' and upper(str(directionProperty.value)) like upper(?)")
-        #set ($discard = $whereParams.add("%$filterValue%"))
+        #addDemarcheJoinClause()
+        #if ($fromSql.indexOf('directionProperty') &lt; 0)
+          #set($fromSql = "${fromSql}, StringProperty directionProperty")
+        #end
+        #set($whereSql = "${whereSql} and demarche.id=directionProperty.id.id and directionProperty.id.name='direction' and directionProperty.value = ?")
+        #set ($discard = $whereParams.add("$filterValue"))
       #elseif ($colName == 'ministeres')
-        #set($fromSql = "${fromSql}, StringProperty demarcheProperty, BaseObject demarche, DBStringListProperty ministeresProperty")
-        #set($whereSql = "${whereSql} and obj.id=demarcheProperty.id.id and demarcheProperty.id.name='demarche' and demarcheProperty.value=demarche.name and demarche.className='Demarches.Code.DemarchesClass' and demarche.id=ministeresProperty.id.id and ministeresProperty.id.name='ministeres' and ? in elements (ministeresProperty.list)")
+        #addDemarcheJoinClause()
+        #if ($fromSql.indexOf('ministeresProperty') &lt; 0)
+          #set($fromSql = "${fromSql}, DBStringListProperty ministeresProperty join ministeresProperty.list list")
+        #end
+        #set($whereSql = "${whereSql} and demarche.id=ministeresProperty.id.id and ministeresProperty.id.name='ministeres' and ? in elements (list)")
         #set ($discard = $whereParams.add("$filterValue"))
       #else
         #set ($discard = $tablelist.add($colName))
