@@ -480,7 +480,7 @@ require(['jquery','xwiki-selectize'], function($) {
       'values'
     ].join('/');
   return {
-      create: true,
+      create: false,
       load: function(text, callback) {
         if (select.attr('data-propertyName')=="publics" || select.attr('data-propertyName')=="evenements") {
           //we don't want to change the request URL when we're not editing a Demarche but just browsing a Demarches livetable
