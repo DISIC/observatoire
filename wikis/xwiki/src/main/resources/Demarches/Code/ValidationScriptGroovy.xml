@@ -63,7 +63,7 @@ public class Val implements XWikiValidationInterface  {
       def direction = request.getParameter("Demarches.Code.DemarchesClass_0_direction")
       def statut = request.getParameter("Demarches.Code.DemarchesClass_0_statut")
 
-      if (statut != null &amp;&amp; !statut.equals("demandeUtilisateur") &amp;&amp; StringUtils.isBlank(direction)) {
+      if (statut != null &amp;&amp; statut.equals("active") &amp;&amp; StringUtils.isBlank(direction)) {
         XWikiValidationStatus.addErrorToContext("Demarches.Code.DemarchesClass", "direction", "direction", "", context)
         result = false
       }
