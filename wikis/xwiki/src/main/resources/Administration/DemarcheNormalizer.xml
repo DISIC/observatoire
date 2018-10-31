@@ -40,11 +40,14 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{info}}
-Cette page contient un script qui effectue les opérations suivantes sur les champs "nom" et "nom complet" des démarches:
+
+{{html wiki="true" clean="false"}}
+Cette page contient un script qui effectue les opérations suivantes sur les champs "nom" et "nom complet" des démarches&amp;nbsp;:
 * Transformation en majuscule de la première lettre lorsque celle-ci est une minuscule.
 * Remplacement des points d'interrogation par une apostrophe dans les chaînes de caractères suivantes :
 ** "d?[a,e,é,i,o,u]"
 ** "l?[a,e,é,i,o,u]"
+{{/html}}
 
 {{velocity}}
 {{html}}
