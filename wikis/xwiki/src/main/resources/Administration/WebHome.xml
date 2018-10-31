@@ -39,24 +39,21 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>
-== Mise à jour de la langue par défaut des pages
+  <content>== Mise à jour de la langue par défaut des pages ==
 
 * [[FarmTools.DefaultLanguageUpdater]]
 
-
-== Publication de TopDémarches interne vers TopDémarches externe
-
-* [[Publication des directions, ministères, événements, publics&gt;&gt;PublishDirectionsEvenementsMinisteresPublics]]
-* [[Publication des démarches&gt;&gt;Publish Demarches]]
-* [[Publication des démarches - Test&gt;&gt;PublishDemarches-Test]]
-
-== Création des groupes associés aux directions
+== Création des groupes associés aux directions ==
 
 * [[Création des groupes associés aux directions&gt;&gt;GroupManager]]
 
-== Scripts
+== Démarches ==
 
+* [[Normalisation des noms de démarches&gt;&gt;Administration.DemarcheNormalizer]]
 * [[Scripts de gestion des démarches&gt;&gt;Administration.Scripts]]
-</content>
+* [[Script pour mettre à jour les droits des utilisateurs&gt;&gt;Administration.RestrictUsersRights]]
+
+== Avis ==
+
+* [[Administration des avis&gt;&gt;Avis.Admin.WebHome]]</content>
 </xwikidoc>
