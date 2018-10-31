@@ -40,49 +40,40 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-#macro (displayObject $className $skipPrettyProps)
+#macro (displayObject $className)
   #set ($obj = $doc.getObject($className))
   #set ($class = $obj.xWikiClass)
   #foreach($prop in $class.properties)
-    #if (!$skipPrettyProps || !$skipPrettyProps.contains($prop.name))
+    #set ($value = $obj.getProperty($prop.name).getValue())
     ; $doc.displayPrettyName($prop.name, false, false)
-    #end
-    #if ($prop.name == 'demarche' &amp;&amp; $xcontext.action == "view")
-      ## for the "demarche" property, display a link in view mode
-      #set ($demarcheId = $obj.getProperty($prop.name).getValue())
-    : [[$demarcheId]]
+    #if ($prop.name == 'demarche')
+      #if ($xcontext.action == "view")
+        ## Display a link in view mode.
+        #set ($demarche = $xwiki.getDocument($value))
+        : [[$demarche.title&gt;&gt;$value]]
+      #else
+        : $doc.display($prop.name, $obj)
+      #end
     #else
       ## In view mode, we protect the display of text properties against HTML/JavaScript injection.
-      #if ($xcontext.action == 'view')
-        #set ($textProperties = ['autreDifficulte','autreAide','autre','email','source'])
-        #if ($textProperties.contains($prop.name))
-          #set ($value = $obj.getProperty($prop.name).getValue())
-          ## mask the email property to other users than admins
-          #if ("$!value" != '' &amp;&amp; $prop.name == 'email' &amp;&amp; !$hasAdmin)
-            #set($value = "******")
-          #end
-          #if ("$!value" != '')
+      #set ($textProperties = ['autreDifficulte','autreAide','autre','email','source'])
+      #if ($textProperties.contains($prop.name))
+        ## mask the email property to other users than admins
+        #if ("$!value" != '' &amp;&amp; $prop.name == 'email' &amp;&amp; !$hasAdmin)
+          #set($value = "******")
+        #end
+        #if ("$!value" != '')
           : {{html}}$escapetool.html($value){{/html}}
-          #end
-        #else
-          : $doc.display($prop.name,$obj)
         #end
       #else
-        : $doc.display($prop.name,$obj)
+        : $doc.display($prop.name, 'view', $obj)
       #end
     #end
   #end
 #end
 (% class="xform" %)
 (((
-#set($skippedPrettyProps = [])
-## In edit mode, the custom displayers already display the pretty props, hence we skip them.
-## TODO: we should probably look into the displayers and skip pretty properties when a custom
-## displayer is used
-#if ($xcontext.action == 'edit')
-  #set($skippedPrettyProps = ['score','facile','comprehensible','rapide','modalite','difficultes','autreDifficulte','comprehensible','aide','autreAide','vote','autre','email'])
-#end
-#displayObject('Avis.Code.AvisClass',$skippedPrettyProps)
+#displayObject('Avis.Code.AvisClass')
 )))
 {{/velocity}}</content>
 </xwikidoc>
