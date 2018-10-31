@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1528186554000</creationDate>
-  <parent>Avis.Code.WebHome</parent>
+  <creationDate>1534427068000</creationDate>
+  <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531231528000</date>
-  <contentUpdateDate>1531231528000</contentUpdateDate>
+  <date>1540982991000</date>
+  <contentUpdateDate>1540982991000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -124,7 +124,7 @@ Avis.Code.AvisClass_difficultes_mobile=Le site ne s'affichait pas bien sur mobil
 Avis.Code.AvisClass_difficultes_pieces-jointes=Difficulté à joindre les pièces justificatives
 Avis.Code.AvisClass_difficultes_suite=Manque d'informations sur la suite, le délai...
 Avis.Code.AvisClass_difficultes_autre=Autre
-Avis.Code.AvisClass_difficultes_autreDifficulte=Autre difficulté
+Avis.Code.AvisClass_autreDifficulte=Autre difficulté
 Avis.Code.AvisClass_aide=De quelle aide avez-vous eu besoin ?
 Avis.Code.AvisClass_aide_aucune=Aucune
 Avis.Code.AvisClass_aide_proche=Un(e) proche
@@ -132,7 +132,7 @@ Avis.Code.AvisClass_aide_association=Une association
 Avis.Code.AvisClass_aide_agent=Un agent administratif
 Avis.Code.AvisClass_aide_internet=Internet (site, forum…)
 Avis.Code.AvisClass_aide_autre=Autre
-Avis.Code.AvisClass_aide_autreAide=Autre aide
+Avis.Code.AvisClass_autreAide=Autre aide
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
 Avis.Code.AvisClass_autre.hint=Ne pas inclure d’informations personnelles (identité, date de naissance, adresse, identifiant administratif, etc.)
 Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration concernant cette démarche, merci de nous indiquer votre adresse électronique :

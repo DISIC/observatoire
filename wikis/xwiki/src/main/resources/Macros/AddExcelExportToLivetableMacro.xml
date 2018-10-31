@@ -142,10 +142,11 @@ Where "{{code}}my-livetable{{/code}}" is your livetable's name.
  * Function that add EXPORT TO EXCEL function to the livetable
  */
 function addExportToExcelFunction(){
-  XWiki.widgets.LiveTable.exportToExcel = function (withPageName, withPageURL, withAllFields, filename) {
+  XWiki.widgets.LiveTable.exportToExcel = function (withPageName, withPageURL, withAllFields, filename, resultsPage) {
     // Get the final part of the data sources URL, after the ?
     var urlParameters = this.getUrl.substr(this.getUrl.indexOf('?'));
-    var macroDataSourcesDocument = new XWiki.Document('AddExcelExportToLivetableMacroResultsPage', 'Macros');
+    var resultsPageReference = XWiki.Model.resolve(resultsPage, XWiki.EntityType.DOCUMENT);
+    var macroDataSourcesDocument = new XWiki.Document(resultsPageReference);
     // Compute the URL for the excel export action
     var url = macroDataSourcesDocument.getURL('get') + urlParameters + '&amp;outputSyntaxType=excel&amp;limit=0&amp;reqNo=' + (++this.sendReqNo);
     if(withPageName) {
@@ -498,7 +499,7 @@ function addExcelButton(){
   var excel_button = new Element('button', {'class' : 'button', 'title':"$escapetool.javascript($services.localization.render('xwiki.macro.exportexcellivetable.icontitle'))"});
   excel_button.appendChild(excel_span_title);
   excel_button.appendChild(excel_span_icon);
-  excel_button.observe('click', function() { livetable.exportToExcel($xcontext.macro.params.withPageName, $xcontext.macro.params.withPageURL, $xcontext.macro.params.withAllFields, "$escapetool.javascript("$!xcontext.macro.params.filename")"); });
+  excel_button.observe('click', function() { livetable.exportToExcel($xcontext.macro.params.withPageName, $xcontext.macro.params.withPageURL, $xcontext.macro.params.withAllFields, "$escapetool.javascript("$!xcontext.macro.params.filename")", "$escapetool.javascript("$!xcontext.macro.params.customResults")"); });
   var excel_span = new Element('span', {'class':'buttonwrapper xwiki-livetable-tools-excelexport'});
   excel_span.appendChild(excel_button);
   // add the excel span after table
@@ -868,6 +869,72 @@ document.observe("xwiki:dom:loaded", addExcelButton);
     </property>
     <property>
       <name>filename</name>
+    </property>
+  </object>
+  <object>
+    <name>Macros.AddExcelExportToLivetableMacro</name>
+    <number>5</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>d1df0b11-0141-4103-8642-86f0a5b36166</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>Macros.AddExcelExportToLivetableMacroResultsPage</defaultValue>
+    </property>
+    <property>
+      <description>Name of a custom page generating the results, if different than the default.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>customResults</name>
     </property>
   </object>
 </xwikidoc>
