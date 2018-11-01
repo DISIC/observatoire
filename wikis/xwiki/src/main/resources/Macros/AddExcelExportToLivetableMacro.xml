@@ -142,13 +142,13 @@ Where "{{code}}my-livetable{{/code}}" is your livetable's name.
  * Function that add EXPORT TO EXCEL function to the livetable
  */
 function addExportToExcelFunction(){
-  XWiki.widgets.LiveTable.exportToExcel = function (withPageName, withPageURL, withAllFields, filename, resultsPage) {
+  XWiki.widgets.LiveTable.exportToExcel = function (withPageName, withPageURL, withAllFields, filename, format, resultsPage) {
     // Get the final part of the data sources URL, after the ?
     var urlParameters = this.getUrl.substr(this.getUrl.indexOf('?'));
     var resultsPageReference = XWiki.Model.resolve(resultsPage, XWiki.EntityType.DOCUMENT);
     var macroDataSourcesDocument = new XWiki.Document(resultsPageReference);
     // Compute the URL for the excel export action
-    var url = macroDataSourcesDocument.getURL('get') + urlParameters + '&amp;outputSyntaxType=excel&amp;limit=0&amp;reqNo=' + (++this.sendReqNo);
+    var url = macroDataSourcesDocument.getURL('get') + urlParameters + '&amp;limit=0&amp;reqNo=' + (++this.sendReqNo);
     if(withPageName) {
       url += '&amp;withPageName=true';
     }
@@ -159,7 +159,10 @@ function addExportToExcelFunction(){
       url += '&amp;withAllFields=true';
     }
     if (filename != '') {
-      url += '&amp;excelFilename=' + encodeURIComponent(filename);
+      url += '&amp;filename=' + encodeURIComponent(filename);
+    }
+    if (format != '') {
+      url += '&amp;outputSyntaxType=' + encodeURIComponent(format);
     }
     if (this.filter) {
          this.filters = this.filter.serializeFilters();
@@ -499,7 +502,7 @@ function addExcelButton(){
   var excel_button = new Element('button', {'class' : 'button', 'title':"$escapetool.javascript($services.localization.render('xwiki.macro.exportexcellivetable.icontitle'))"});
   excel_button.appendChild(excel_span_title);
   excel_button.appendChild(excel_span_icon);
-  excel_button.observe('click', function() { livetable.exportToExcel($xcontext.macro.params.withPageName, $xcontext.macro.params.withPageURL, $xcontext.macro.params.withAllFields, "$escapetool.javascript("$!xcontext.macro.params.filename")", "$escapetool.javascript("$!xcontext.macro.params.customResults")"); });
+  excel_button.observe('click', function() { livetable.exportToExcel($xcontext.macro.params.withPageName, $xcontext.macro.params.withPageURL, $xcontext.macro.params.withAllFields, "$escapetool.javascript("$!xcontext.macro.params.filename")", "$escapetool.javascript("$!xcontext.macro.params.format")", "$escapetool.javascript("$!xcontext.macro.params.customResults")"); });
   var excel_span = new Element('span', {'class':'buttonwrapper xwiki-livetable-tools-excelexport'});
   excel_span.appendChild(excel_button);
   // add the excel span after table
@@ -935,6 +938,72 @@ document.observe("xwiki:dom:loaded", addExcelButton);
     </property>
     <property>
       <name>customResults</name>
+    </property>
+  </object>
+  <object>
+    <name>Macros.AddExcelExportToLivetableMacro</name>
+    <number>6</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>a817610a-835b-4394-a6ed-262fd4c73590</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>excel</defaultValue>
+    </property>
+    <property>
+      <description>Export format to be used: "excel" (default), "csv" or "json".</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>format</name>
     </property>
   </object>
 </xwikidoc>
