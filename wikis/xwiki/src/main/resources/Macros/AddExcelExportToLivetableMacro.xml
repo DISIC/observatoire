@@ -497,12 +497,23 @@ function addExcelButton(){
     return;
   }
   // add a button with the text and the icon
-  var excel_span_title = new Element('span', {'class': 'xwiki-livetable-tools-text'}).update("$services.localization.render('xwiki.macro.exportexcellivetable.title') ");
+  #set ($format = "$!xcontext.macro.params.format")
+  #set ($btnLabel = "$!xcontext.macro.params.label")
+  #if ($btnLabel == '')
+    #set ($prettyFormat = $services.localization.render("xwiki.macro.exportexcellivetable.format.$format"))
+    #set ($btnLabel = $services.localization.render('xwiki.macro.exportexcellivetable.title', $prettyFormat))
+    #set ($btnIconTitle = $services.localization.render('xwiki.macro.exportexcellivetable.icontitle', $prettyFormat))
+  #else
+    #set ($btnIconTitle = $btnLabel)
+  #end
+  var excel_span_title = new Element('span', {'class': 'xwiki-livetable-tools-text'}).update('$btnLabel');
   var excel_span_icon = new Element('span', {'class': 'xwiki-livetable-tools-excel'});
-  var excel_button = new Element('button', {'class' : 'button', 'title':"$escapetool.javascript($services.localization.render('xwiki.macro.exportexcellivetable.icontitle'))"});
+  var excel_button = new Element('button', {'class' : 'button', 'title':"$escapetool.javascript($btnIconTitle)"});
   excel_button.appendChild(excel_span_title);
-  excel_button.appendChild(excel_span_icon);
-  excel_button.observe('click', function() { livetable.exportToExcel($xcontext.macro.params.withPageName, $xcontext.macro.params.withPageURL, $xcontext.macro.params.withAllFields, "$escapetool.javascript("$!xcontext.macro.params.filename")", "$escapetool.javascript("$!xcontext.macro.params.format")", "$escapetool.javascript("$!xcontext.macro.params.customResults")"); });
+  #if ($format == 'excel')
+    excel_button.appendChild(excel_span_icon);
+  #end
+  excel_button.observe('click', function() { livetable.exportToExcel($xcontext.macro.params.withPageName, $xcontext.macro.params.withPageURL, $xcontext.macro.params.withAllFields, "$escapetool.javascript("$!xcontext.macro.params.filename")", "$escapetool.javascript($format)", "$escapetool.javascript("$!xcontext.macro.params.customResults")"); });
   var excel_span = new Element('span', {'class':'buttonwrapper xwiki-livetable-tools-excelexport'});
   excel_span.appendChild(excel_button);
   // add the excel span after table
@@ -1004,6 +1015,72 @@ document.observe("xwiki:dom:loaded", addExcelButton);
     </property>
     <property>
       <name>format</name>
+    </property>
+  </object>
+  <object>
+    <name>Macros.AddExcelExportToLivetableMacro</name>
+    <number>7</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>e97cce83-a42a-4c98-a2ba-25df26601d10</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Label of the export button.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>label</name>
     </property>
   </object>
 </xwikidoc>

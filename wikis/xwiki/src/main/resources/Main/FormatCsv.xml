@@ -20,68 +20,55 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="TableauDeBord.WebHome" locale="">
-  <web>TableauDeBord</web>
-  <name>WebHome</name>
+<xwikidoc version="1.3" reference="Main.FormatCsv" locale="">
+  <web>Main</web>
+  <name>FormatCsv</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530025162000</creationDate>
+  <creationDate>1541075819000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530200432000</date>
-  <contentUpdateDate>1530200432000</contentUpdateDate>
+  <date>1541083303000</date>
+  <contentUpdateDate>1541083232000</contentUpdateDate>
   <version>1.1</version>
-  <title>$services.localization.render('wikidemarches.dematdashboard.title')</title>
+  <title>À propos du format CSV</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity}}
-$services.localization.render('wikidemarches.dematdashboard.intro')
+  <content>== Qu'est-ce que le format CSV ?
 
-{{info}}$services.localization.render('wikidemarches.dematdashboard.warning'){{/info}}
+« //Comma-separated values//, connu sous le sigle CSV, est un format informatique ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Un fichier CSV est un fichier texte, par opposition aux formats dits « binaires ». Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau. Une ligne est une suite ordonnée de caractères terminée par un caractère de fin de ligne (line break – LF ou CRLF), la dernière ligne pouvant en être exemptée. » Source: [[Wikipédia&gt;&gt;https://fr.wikipedia.org/wiki/Comma-separated_values]]
 
-#set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
-#set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres', 'direction', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne', 'statut'])
-#set ($columnsProperties = {
-  'doc.title': {'filterable' : 'true'},
-  'ministeres': {'type' : 'suggest', 'filterable' : 'true', 'sortable' : 'false'},
-  'direction' : {'type' : 'hidden', 'filterable': 'true', 'sortable' : 'false'},
-  'niveauDematBoolean': {'filterable' : 'false', 'sortable' : 'false'},
-  'statut' : {'type' : 'hidden', 'filterable': 'false', 'sortable' : 'true'},
-  'votes' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
-  'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
-  'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $explanationLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'}
-})
-#set ($options = {
-  'className': 'Demarches.Code.DemarchesClass',
-  'translationPrefix': 'wikidemarches.dematdashboard.table.',
-  'tagCloud': true,
-  'rowCount': 10,
-  'maxPages': 7,
-  'selectedColumn': 'doc.title',
-  'defaultOrder': 'asc',
-  'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur&amp;votes_class=Avis.Code.AvisStatsClass&amp;occurrences_class=Avis.Code.AvisStatsClass&amp;moyenne_class=Avis.Code.AvisStatsClass'
-})
-#livetable('demarches' $columns $columnsProperties $options)
-{{/velocity}}
+== Comment utiliser un fichier au format CSV ?
 
-{{velocity}}
-{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
+Un fichier CSV peut être lu soit directement avec un éditeur de texte tel que Notepad, Gedit, soit à l'aide d'un éditeur de feuilles de calcul, tel que LibreOffice ou Microsoft Excel.
 
-{{html}}
-&lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;
-{{/html}}
-{{/velocity}}</content>
+=== Ouvrir un fichier CSV avec LibreOffice
+
+Pour ouvrir un fichier CSV avec LibreOffice, suivre les étapes suivantes :
+* Depuis LibreOffice, sélectionner l'action « Fichier &gt; Ouvrir »
+* Sélectionner le fichier CSV à ouvrir.
+* Une boîte de dialogue intitulée « Import de texte » apparaît.
+* Dans le champ « Encodage », s'assurer que l'option « Unicode (UTF-8) » est sélectionnée.
+* Dans la zone « Options de séparateur » :
+** Cocher l'option « Virgule ».
+** S'assurer que l'option « Délimiteur de chaîne de caractères » est bien positionnée sur la valeur '"' ([[guillemet dactylographique&gt;&gt;https://fr.wikipedia.org/wiki/Guillemet#Guillemets_dactylographiques]] double).
+* Cliquer sur « OK ».
+
+=== Ouvrir un fichier CSV avec Microsoft Excel
+
+Pour ouvrir un fichier CSV avec Microsoft Excel, nous vous invitons à vous reporter à l'un des tutoriels suivants :
+* [[Importer ou exporter des fichiers texte (.txt ou .csv) – Office.com&gt;&gt;https://support.office.com/fr-fr/article/importer-ou-exporter-des-fichiers-texte-txt-ou-csv-5250ac4c-663c-47ce-937b-339e391393ba]]
+* [[Ouvrir un fichier avec Microsoft Excel – Weezevent.com&gt;&gt;https://aide.weezevent.com/article/104-ouvrir-fichier-csv-excel]]</content>
   <object>
-    <name>TableauDeBord.WebHome</name>
+    <name>Main.FormatCsv</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>03e2951e-6d19-45c7-82d2-0ee830f79fa7</guid>
+    <guid>583b620d-ff16-4885-bafe-fdc73ff79701</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>
@@ -175,39 +162,15 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
       <cache>long</cache>
     </property>
     <property>
-      <code>#demarches .xwiki-livetable-display-header th,
-#demarches .xwiki-livetable-display-filters td {
-  vertical-align: middle;
-  font-size: 90%;
-}
-
-#demarches .xwiki-livetable-display-header th:first-child {
-  width: 45%;
-}
-
-#demarches thead.xwiki-livetable-display-header th.xwiki-livetable-display-header-text,
-#demarches .xwiki-livetable-display-filters .xwiki-selectize-option {
-  white-space: normal;
-}
-
-#demarches .xwiki-livetable-display-header th .average-help, 
-#demarches td.ministeres {
-  font-size: 90%;
-}
-
-#demarches .xwiki-livetable-filter-active {
-  font-weight: normal;
-}
-
-td.doc_title:first-letter {
-  text-transform: capitalize;
+      <code>p {
+ margin: 1.5em 0em;
 }</code>
     </property>
     <property>
       <contentType>CSS</contentType>
     </property>
     <property>
-      <name/>
+      <name>SSX</name>
     </property>
     <property>
       <parse/>
