@@ -56,7 +56,6 @@
             <exclude>**/XWiki/XWikiPreferences.xml</exclude>
             <exclude>**/XWiki/XWikiAdminGroup.xml</exclude>
             <!-- Exclude pages that we modify directly on prod -->
-            <exclude>**/TableauDeBord/WebHome.xml</exclude>
             <exclude>**/Main/A propos.xml</exclude>
           </excludes>
         </configuration>
