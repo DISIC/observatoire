@@ -37,7 +37,7 @@
   <title>AddExcelExportToLivetableMacroTranslations</title>
   <comment/>
   <minorEdit>false</minorEdit>
-  <syntaxId>xwiki/2.1</syntaxId>
+  <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
   <content>xwiki.macro.exportexcellivetable.title={0} export
 xwiki.macro.exportexcellivetable.icontitle=Export as {0} file
