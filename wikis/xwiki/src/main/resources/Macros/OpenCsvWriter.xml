@@ -41,28 +41,40 @@
   <hidden>false</hidden>
   <content>import com.opencsv.CSVWriter
 import java.io.Writer
+import java.io.StringWriter
 
 class OpenCsvWriter {
 
   def CSVWriter csvWriter
+  def StringWriter stringWriter
 
   OpenCsvWriter() {
+    super();
   }
 
   String debug()  {
     return "Writer: $csvWriter"
   }
 
-  void initialize(Writer writer) {
-    this.csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)
+  void initialize() {
+    this.stringWriter = new StringWriter()
+    this.csvWriter = new CSVWriter(stringWriter, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)
   }
 
   void writeNext(List list) {
     def array = list.toArray(new String[0])
     csvWriter.writeNext(array, true)
   }
+
+  String asString() {
+    if (csvWriter != null &amp;&amp; stringWriter != null) {
+      stringWriter.close()
+      csvWriter.close()
+      return stringWriter.toString()
+    } else {
+      return null
+    }
+  }
 }
-
-
 </content>
 </xwikidoc>

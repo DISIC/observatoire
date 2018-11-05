@@ -52,7 +52,7 @@
       #set ($workbook = $excelWriter.getWritableWorkbook())
       #set ($sheet = $workbook.createSheet("XWiki", 0))
     #elseif ($format == 'csv')
-      #set ($discard = $csvWriter.initialize($response.writer))
+      #set ($discard = $csvWriter.initialize())
     #end
   #end
   #macro(initializeRowValues)
@@ -183,10 +183,9 @@
         #if ($format == 'excel')
           #set ($bytes = $excelWriter.getWritableWorkbookAsBytes($workbook))
         #elseif ($format == 'csv')
-          #set ($flag = !$csvWriter.checkError())
-          ##set ($discard = $csvWriter.close())
+          #set ($str = $csvWriter.asString())
         #end
-        #if ($bytes || $flag)
+        #if ($bytes || $str)
           #if ($format == 'excel')
             #set ($discard = $response.setContentType('application/ms-excel'))
             #set ($filename = 'data.xls')
@@ -205,9 +204,6 @@
           #set ($contentHeader = 'inline; filename="' + $filename + '"')
           #set ($discard = $response.setHeader('Content-Disposition', $contentHeader))
           #set ($discard = $xcontext.setFinished(true))
-          #if ($format == 'excel')
-            #set ($discard = $response.getOutputStream().write($bytes))
-          #end
           ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
           ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
           #set ($discard = $response.setHeader('Cache-Control', 'private'))
@@ -216,6 +212,11 @@
           #set ($expires = $expires + 120000)
           #set ($expires = $util.getDate($expires))
           #set ($discard = $response.setDateHeader('Expires', $expires.getTime()))
+          #if ($format == 'excel')
+            #set ($discard = $response.getOutputStream().write($bytes))
+          #elseif ($format == 'csv')
+            #set ($discard = $response.writer.write($str))
+          #end
         #else
           ## TODO need nice translated error message
           The following error occurred while generating the output file:
