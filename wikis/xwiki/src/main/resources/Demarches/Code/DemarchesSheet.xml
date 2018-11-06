@@ -222,7 +222,7 @@
       &lt;input type="hidden" name='withAllFields' value='true' /&gt;
       &lt;input type="hidden" name='doc.name' value="${escapetool.xml($doc.name)}" /&gt;
       &lt;input type="hidden" name='excelFilename' value="$escapetool.xml("demarche_${doc.name}_${datetool.get('ddMMyyyyHHmmss')}")" /&gt;
-      &lt;button class='button' type='submit' name='exportexcel'&gt;&lt;span class='xwiki-livetable-tools-text'&gt;$services.localization.render('xwiki.macro.exportexcellivetable.title')&lt;/span&gt; &lt;span class='xwiki-livetable-tools-excel' /&gt;&lt;/button&gt;
+      &lt;button class='button' type='submit' name='exportexcel'&gt;&lt;span class='xwiki-livetable-tools-text'&gt;$services.localization.render('xwiki.macro.exportexcellivetable.title','Excel')&lt;/span&gt; &lt;span class='xwiki-livetable-tools-excel' /&gt;&lt;/button&gt;
     &lt;/div&gt;
   &lt;/form&gt;
 #end
@@ -553,7 +553,7 @@ require(['jquery','xwiki-selectize'], function($) {
     if (!modalite) {
       modalite = $("input[name='Avis.Code.AvisClass_0_modalite']").val();
     }
-        
+
     var score = $("input[name='Avis.Code.AvisClass_0_score']:checked").val();
     if (score) {
       if (modalite == 'autrement') {
@@ -795,7 +795,6 @@ require(['jquery','xwiki-selectize'], function($) {
 .vote-container {
   display: none;
 }
-
 
 .listclass-group ul {
   list-style-type: none;
