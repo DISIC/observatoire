@@ -74,7 +74,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 {{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
 
 {{html}}
-&lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;
+&lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" target="_blank" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;
 {{/html}}
 {{/velocity}}</content>
   <object>
