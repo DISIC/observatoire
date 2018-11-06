@@ -11,5 +11,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>avis-stats</module>
+        <module>macro-livetable-excel-export</module>
     </modules>
 </project>
