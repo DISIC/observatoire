@@ -40,6 +40,7 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="false"}}
+## This sheet is used to display two types of objects: either Demarches or Avis
 ################### Demarche view/edit form macros ########################
 #macro (displayProperty $propName $isMandatory)
   #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
@@ -218,30 +219,27 @@
 #end
 
 #macro(displayScoreAverageBar)
-  #set($votesResults = $services.query.hql("select avg(sc.value), count(doc.fullName) from XWikiDocument as doc, BaseObject as obj ,IntegerProperty as sc, StringProperty dp where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and obj.id=sc.id.id and sc.id.name='score' and dp.id.id = obj.id and dp.id.name = 'demarche' and dp.value = :dem and sc.value &gt; 0").bindValue('dem', $doc.fullName).execute())
-  #set($votesAvg = $votesResults.get(0)[0])
-  #if (!$votesAvg)
-    #set($votesAvg = 0)
-  #end
-  #set($totalVotes = $votesResults.get(0)[1])
+  ##set ($results = $services.query.hql("select count(*), sum(case when score.value=3 then 1 else 0 end) from XWikiDocument as doc, BaseObject as obj, IntegerProperty as score, StringProperty demarche where doc.fullName = obj.name and obj.className = 'Avis.Code.AvisClass' and obj.id = score.id.id and score.id.name = 'score' and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :dem").bindValue('dem', $doc.fullName).execute())
+  #set ($avisStats = $doc.getObject('Avis.Code.AvisStatsClass'))
+  #set ($totalVotes = $avisStats.getProperty('occurrences').getValue())
+  #set ($satisfactionIndex = $avisStats.getProperty('moyenne').getValue())
   &lt;div class='avis-average-container'&gt;
     #if ($totalVotes &gt; 0)
-      ## average translated to a value on 100
-      #set($percentAvg = $mathtool.mul($mathtool.sub($votesAvg, 1), 50))
-      ## what type of display we do?
+      #set($percent = $mathtool.mul($satisfactionIndex, 100))
+      ## What type of display we do?
       #set($avgVisualValue = 1)
-      #if ($percentAvg &gt; 33 &amp;&amp; $percentAvg &lt; 66 )
+      #if ($percent &gt; 33 &amp;&amp; $percent &lt; 66 )
         #set($avgVisualValue = 2)
-      #elseif ($percentAvg &gt;= 66 )
+      #elseif ($percent &gt;= 66 )
         #set($avgVisualValue = 3)
       #end
-      #set($percentDisplayValue = "${mathtool.round($percentAvg)}%")
+      #set($percentDisplayValue = "${mathtool.round($percent)}%")
       &lt;div class='avis-average-visual'&gt;
         &lt;div class='avis-average-barcontainer avis-average-barcontainer-$!{avgVisualValue}' title='$escapetool.xml($percentDisplayValue)'&gt;
           &lt;div class='avis-average-barouterborder'&gt;
             &lt;div class='avis-average-bar'&gt;
               &lt;div class='avis-average-barcolor' &gt;&lt;/div&gt;
-              &lt;div class='avis-average-barwhite' style='width: ${mathtool.sub(100, $percentAvg)}%'&gt;&lt;/div&gt;
+              &lt;div class='avis-average-barwhite' style='width: ${mathtool.sub(100, $percent)}%'&gt;&lt;/div&gt;
               ## &lt;div class='avis-average-barborder' &gt;&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -256,7 +254,7 @@
   &lt;/div&gt;
 #end
 
-#* Sets a specific background for demarches that were submitted by users and that were not yet validated. *#
+#* Set a specific background for demarches that were submitted by users and that were not yet validated. *#
 #macro(maybeSetWarningBackground)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')

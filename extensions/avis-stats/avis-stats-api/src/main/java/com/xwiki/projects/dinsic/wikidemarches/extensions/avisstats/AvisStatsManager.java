@@ -22,7 +22,7 @@ public interface AvisStatsManager
 
     String OCCURRENCES_PROPERTY_NAME = "occurrences";
 
-    String AVERAGE_PROPERTY_NAME = "moyenne";
+    String SATISFACTION_INDEX_PROPERTY_NAME = "moyenne";
 
     String VOTES_PROPERTY_NAME = "votes";
 

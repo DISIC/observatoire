@@ -34,14 +34,14 @@
   <date>1537465640000</date>
   <contentUpdateDate>1537465640000</contentUpdateDate>
   <version>1.1</version>
-  <title>Comment est calculé le taux de satisfaction d'une démarche?</title>
+  <title>Comment est calculé le taux de satisfaction d'une démarche ?</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>Le taux de satisfaction d'une démarche est calculé en fonction des réponses des internautes à la question "Comment s'est passée cette démarche, pour vous?".
+  <content>Le taux de satisfaction d'une démarche est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? ».
 
-Les réponses "Pas bien" comptent pour 0, les réponses "Moyen" pour 50%, les réponses "Très bien" comptent pour 100%.
+Le taux de satisfaction est le pourcentage de réponses ayant reçu l'avis « Très bien » par rapport au nombre total de réponses.
 
-Le taux de satisfaction est calculé en faisant la moyenne de tous les avis recueillis.</content>
+</content>
 </xwikidoc>

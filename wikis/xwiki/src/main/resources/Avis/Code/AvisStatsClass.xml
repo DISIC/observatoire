@@ -58,8 +58,7 @@
 #else
   ## only display something if the value is not 0, 0 means there are no avis at all
   #if ($value &gt; 0)
-    #set($base = 1)
-    ${mathtool.round($mathtool.mul($mathtool.sub($value, 1), 50))}%
+    ${mathtool.round($mathtool.mul($value, 100))}%
   #end
 #end
 {{/html}}
