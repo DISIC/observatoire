@@ -85,7 +85,12 @@
     &lt;input name="${prefix}${name}" value="" type="hidden" /&gt;
   &lt;/fieldset&gt;
 #else
-  $!value
+  ##set ($propertyClass = $clazz.get($name))
+  ##$doc.displayView($propertyClass, $prefix, $object) 
+  #if ($object &amp;&amp; $value)
+    #set ($clazz = $object.getxWikiClass())
+    $services.localization.render("${clazz.name}_${name}_$value")
+  #end
 #end
 {{/html}}
 {{/velocity}}</content>
@@ -93,7 +98,7 @@
     <name>Avis.Code.RadioVoteDisplayer</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>00ef37b7-0962-4688-915f-f70d40256b67</guid>
+    <guid>b9ac3c21-cd89-4e14-bc07-e722e3da25c9</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>

@@ -42,327 +42,36 @@
   <content>{{include document="Demarches.Code.DemarchesMacros" /}}
 
 {{velocity}}
-{{html wiki="true"}}
+{{html wiki="true" clean="false"}}
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
 
-############################# Subtitle / Score #############################
 #displaySubTitle()
 #displayScoreAverageBar()
 
-############################# Tabs ################################
-#if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
 &lt;ul class="nav nav-tabs" id="tabs"&gt;
-  &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche-tab"&gt;Démarche&lt;/a&gt;&lt;/li&gt;
-    &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
-  &lt;li role="presentation"&gt;&lt;a href="#avis-tab"&gt;Formulaire de soumission d'avis&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+#if (!$isGuest &amp;&amp; $xcontext.action == 'view')
+  &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche-tab"&gt;Informations&lt;/a&gt;&lt;/li&gt;
 #end
+  #if ($xcontext.action == 'view')
+    &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
+    &lt;li role="presentation"&gt;&lt;a href="#avis-tab"&gt;Donner mon avis&lt;/a&gt;&lt;/li&gt;
+    #if ($totalVotes &gt; 0)
+      &lt;li role="presentation"&gt;&lt;a href="#details-tab"&gt;Votre avis&lt;/a&gt;&lt;/li&gt;
+    #end
+  #end
+&lt;/ul&gt;
 
 &lt;div class="tab-content"&gt;
-############################# Demarche tab #######################################
-#if ($xcontext.user != 'XWiki.XWikiGuest')
-&lt;div class="tab-pane fade active in" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
 
-#if($xcontext.action == 'edit')
-  #set($type="edit")
-  &lt;input type="hidden" name="xvalidate" value="1" /&gt;
-  &lt;input type="hidden" name="async" value="false" /&gt;
-  ## Groovy script to validate empty title or empty direction
-  &lt;input type="hidden" name="xvalidation" value="Demarches.Code.ValidationScriptGroovy" /&gt;
-#end
+  {{include reference="Demarches.Code.DemarcheTab" /}}
 
-#if ($xcontext.validationStatus.errors.size() &gt; 0 || $xcontext.validationStatus.exceptions.size() &gt; 0)
+  {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
 
-  {{error}}
-  $services.localization.render('demarches.validation.error')
-  #if ($xcontext.validationStatus.exceptions.size() &gt; 0)
-    #foreach ($exception in $xcontext.validationStatus.exceptions)
-      $exception
-    #end
-  #end
-  {{/error}}
-  
-#end
-&lt;div class="row"&gt;
-&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Informations générales&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#if ($xcontext.action != 'view')
-  #displayProperty('title1', true)
-#end
-#if ($xcontext.action == 'view')
-&lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
-&lt;dd&gt;$doc.name&lt;/dd&gt;
-#end
-#foreach($propName in ['nomComplet', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
-  #set ($mandatory = ($propName == 'direction'))
-  #displayProperty($propName, $mandatory)
-#end
-&lt;/dl&gt;
-)))
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Catégorisation&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['categoriesPublics', 'publics', 'evenements'])
-  #displayProperty($propName, false)
-#end
-&lt;/dl&gt;
-)))
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Volumétrie&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
-  #displayProperty($propName, false)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Dématérialisation&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['niveauDemat', 'dematObligatoire', 'exclusionSve', 'caracteristiquesDemat'])
-  #displayProperty($propName, false)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Références&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['referenceBddForm', 'referenceServicePublic'])
-  #displayProperty($propName, false)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Adresses web&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['urlInfos', 'urlDemarche', 'urlFiche'])
-  #displayProperty($propName, false)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Remarques&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#displayProperty('remarques', false)
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="row"&gt;
-&lt;div class="col-lg-12 col-md-12 col-sm-12"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Projet de dématérialisation&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'niveauPrevu', 'caracteristiquesDematPrevues'])
-  #displayProperty($propName, false)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-##
-## Display excel export button if in view mode
-#if ($xcontext.action != 'edit')
-  #set($discard = $services.localization.use('document', 'Macros.AddExcelExportToLivetableMacroTranslations'))
-  #set($discard = $xwiki.ssx.use('Macros.AddExcelExportToLivetableMacro'))
-  &lt;form action="$xwiki.getURL('Macros.AddExcelExportToLivetableMacroResultsPage', 'get', 'outputSyntax=plain&amp;transprefix=demarches.livetable.')" method='post'&gt;
-    &lt;div class="buttonwrapper xwiki-livetable-tools-excelexport"&gt;
-      &lt;input type="hidden" name='classname' value='Demarches.Code.DemarchesClass' /&gt;
-      &lt;input type="hidden" name='collist' value='doc.name' /&gt;
-      &lt;input type="hidden" name='queryFilters' value='currentlanguage,hidden' /&gt;
-      &lt;input type="hidden" name='outputSyntaxType' value='excel' /&gt;
-      &lt;input type="hidden" name='limit' value='0' /&gt;
-      &lt;input type="hidden" name='withPageName' value='true' /&gt;
-      &lt;input type="hidden" name='withPageURL' value='true' /&gt;
-      &lt;input type="hidden" name='withAllFields' value='true' /&gt;
-      &lt;input type="hidden" name='doc.name' value="${escapetool.xml($doc.name)}" /&gt;
-      &lt;input type="hidden" name='excelFilename' value="$escapetool.xml("demarche_${doc.name}_${datetool.get('ddMMyyyyHHmmss')}")" /&gt;
-      &lt;button class='button' type='submit' name='exportexcel'&gt;&lt;span class='xwiki-livetable-tools-text'&gt;$services.localization.render('xwiki.macro.exportexcellivetable.title','Excel')&lt;/span&gt; &lt;span class='xwiki-livetable-tools-excel' /&gt;&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/form&gt;
-#end
-&lt;/div&gt;
-#end
-######################## Demarche tab end #########################
+  {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
 
-######################## Liste avis tab ###################
-## Don't dispay the list avis tab when not in view mode
-#if ($xcontext.action == 'view' &amp;&amp; $xcontext.user != 'XWiki.XWikiGuest')
-  ## Display the list of avis as a tab if in authentified mode
-  &lt;div class="tab-pane fade" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
-  #set ($extraParams = "demarche=$doc.fullName")
-  {{include document="Avis.WebHome" /}}
-  &lt;/div&gt;
-#end
-######################## Liste avis tab end ###################
-
-######################## Avis tab ###################
-#maybeSetWarningBackground()
-## Display the Avis tab only in view mode. In the other cases, we're only editing a Demarche.
-#if ($xcontext.action == 'view')
-  ## Display the avis as a tab only if in authentified mode (otherwise there are issues with the fade mode).
-  #if ($xcontext.user != 'XWiki.XWikiGuest')
-    &lt;div class="tab-pane fade" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
-  #end
-  (%class='demarche-avis-separator'%)
-  ----
-  #set ($step = "$!request.session.getAttribute('avis-form-step')")
-  
-  ## This is a multi-steps form. The following exclusive and successive steps can happen:
-  ## - Initial step (key: "initial-step") with or without the modality 'demarche-newly-submitted-by-current-user'
-  ## - Second screen (key: "second-form-screen")
-  ## - Third form screen (key: "third-form-screen")
-  ## - Final step (key: "final-step")
-  
-  #if ($step == '')
-    ## Initialize the step variable for the sake for clarity (i.e. do not leave the initial step empty).
-    #set ($step = 'initial-step')
-  #end
-  #if ($step != 'initial-step')
-    ## The step is not the initial one, hence we:
-    ## - Retrieve the avis id from the session, in case there is one (when a new demarche just got submitted, there is none, otherwise there should be one).
-    ## - Display a message corresponding to the current step, and the message gets cleaned from the session.
-    #set ($avisDocId = $request.session.getAttribute('avis-id'))
-    #set ($discard = $request.session.removeAttribute('avis-form-step'))
-    #displayMessage("avis.form.$step")
-  #else
-    #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
-    #if ($modality == "demarche-newly-submitted-by-current-user")
-      #displayMessage("avis.form.initial-step.demarche-newly-submitted-by-current-user")
-    #end
-    #maybeDisplayStatusWarning()
-  #end
-
-  #if ($step != "final-step")
-    ## The step is not the last one: we display a form for submitting / completing an avis.
-    #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
-    #if ($demarche != $NULL)
-      &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
-      #if ($step == 'initial-step')
-        ## The first step of the form gets displayed, either for an existing demarche, or for a demarche that got just submitted by the current user.
-        &lt;div class='form-preambule'&gt;
-        ==$services.localization.render('avis.invite')==
-
-        &lt;span class="info-box-mandatory small"&gt;$services.localization.render('avis.mandatory-info')&lt;/span&gt;
-        &lt;/div&gt;
-        #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-        #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
-        #set ($presetModalite = "$!request.nd_mode")
-        #if ($modality != "demarche-newly-submitted-by-current-user" &amp;&amp; $presetModalite == '')
-          ## We're not in the case where the user has just submitted a new demarche, hence we display the 'modalite' question.
-          ## We also don't have a preset modalite received from request parameters
-          #setDefaultModalite($avis)
-          &lt;div class="modalite"&gt;
-            #displayObjectForm($avis,['modalite'])
-          &lt;/div&gt;
-        #else
-          #if ($presetModalite != '')
-            ## a preset modalite was received on the request, use that modalite
-            #set ($modalite = $presetModalite)
-          #else
-            ## The user has just submitted a new demarche, hence we retrieve the 'modalite' value from the session, and we clean the session from this point of view.
-            #set ($modalite = $request.session.getAttribute('avis-modalite'))
-            #set ($discard = $request.session.removeAttribute('avis-modalite'))
-            #set ($discard = $request.session.removeAttribute('initial-step-modality'))
-          #end
-          &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
-        #end
-        &lt;div class="rating-container"&gt;
-          #displayObjectForm($avis,['score'])
-        &lt;/div&gt;
-        &lt;div class="vote-container"&gt;
-          #displayObjectForm($avis,['vote'])
-        &lt;/div&gt;
-        ## set the source of this avis, only in the first step.
-        ## TODO: We'll need to figure out how to handle this properly when implementing the API / Embed, to make sure that no avis remains without source
-        #set($avissource = "$!request.nd_source")
-        &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($avissource)" /&gt;
-      #elseif ($step == 'second-form-screen')
-        &lt;div class='form-preambule'&gt;
-        ==$services.localization.render('avis.form.second-form-screen.introduction')==
-        &lt;/div&gt;
-        #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-        &lt;div class="eval-container"&gt;
-          #displayObjectForm($avis,['facile','comprehensible','difficultes','aide','autre'])
-        &lt;/div&gt;
-      #elseif ($step == 'third-form-screen')
-        #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-        &lt;div class="email-container"&gt;
-          #displayObjectForm($avis,['email'])
-        &lt;/div&gt;
-      #end
-      ## If we're handling a validated demarche, the avis gets associated to it.
-      #set ($demarcheId = $doc.fullName)
-      &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheId" /&gt;
-      &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
-      &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
-      #if ($avisDocId)
-        &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
-      #end
-      &lt;div class='buttonwrapper'&gt;
-      #if ($step == 'initial-step')
-        #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.validate')))
-      #elseif ($step == 'second-form-screen')
-        #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.send')))
-      #elseif ($step == 'third-form-screen')
-        #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.complete')))
-      #end
-      &lt;input class="button btn btn-primary" type="submit" name="submit" value="$submitLabel" disabled/&gt;
-      &lt;/div&gt;
-      &lt;/form&gt;
-    #end
-  #end
-  ## Close the tab created for authenticated users only.
-  #if ($xcontext.user != 'XWiki.XWikiGuest')
-    &lt;/div&gt;
-  #end
-#end
-############################## Avis tab end ##############################
+  {{include reference="Demarches.Code.DemarcheAvisDetailsTab" /}}
 
 &lt;/div&gt;
 
@@ -459,9 +168,9 @@
 
 require(['jquery','xwiki-selectize'], function($) {
   'use strict';
- 
+
   /** Demarche form functions */
-  
+
   var getSelectizeOptions = function(select) {
 
    //we want the code below to get executed only when a Demarche gets edited, not when displaying a livetable
@@ -496,7 +205,7 @@ require(['jquery','xwiki-selectize'], function($) {
             ].join('/');
           }
         }
-        
+
         $.getJSON(loadURL, {
           'fp': text,
           'limit': 100
@@ -539,13 +248,13 @@ require(['jquery','xwiki-selectize'], function($) {
           if (opts.hasOwnProperty(value) &amp;&amp; selectize.items.indexOf(value) == -1) {
             selectize.removeOption(value); 
           }
-        }        
+        }
       }
     });
   };
 
   $('.suggest-propertyValues').suggestPropertyValues();
-  
+
   /** Avis functions */
   function updateVoteAndSubmitButton() {
     var modalite = $("input[name='Avis.Code.AvisClass_0_modalite']:checked").val();
@@ -564,7 +273,7 @@ require(['jquery','xwiki-selectize'], function($) {
       $('input[type="submit"]').prop('disabled', false);
     }
   }
-  
+
   function updateEvaluationInputsVisibility() {
     var step = $('input[name="avis-form-step"]').prop('value');
     if (step == "second-form-screen") {
@@ -572,7 +281,7 @@ require(['jquery','xwiki-selectize'], function($) {
       $('input[type="submit"]').prop('disabled', false);
     }
   }
-  
+
   function showHideFreeTextInputField(inputElement, propName, freeTextInputFieldId) {
     var value = inputElement.val();
     var checked = inputElement.prop("checked");
@@ -586,18 +295,18 @@ require(['jquery','xwiki-selectize'], function($) {
         $("#"+freeTextInputFieldId).val("");
         $("#"+freeTextInputFieldId).hide();
       }
-    } 
+    }
   }
-    
+
   $(document).ready(function() {
     $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
       updateVoteAndSubmitButton();
     });
-    
+
     $("input[name='Avis.Code.AvisClass_0_score']").change(function() {
       updateVoteAndSubmitButton();
     });
-    
+
     // Add an input field allowing the user to enter free text about
     // a difficulty he may have faced when the 'autre difficulté' is checked.
     $("input[name='Avis.Code.AvisClass_0_difficultes']").change(function() {
@@ -630,33 +339,31 @@ require(['jquery','xwiki-selectize'], function($) {
         });
       }
     });
-    
+
     // The input 'Aucune aide' is checked by default, make sure this is not the case.
     $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
-    
+
     updateEvaluationInputsVisibility();
-    
+
     // For the third form screen, always enable the submit button
     var step = $('input[name="avis-form-step"]').prop('value');
     if (step == "third-form-screen") {
       $('input[type="submit"]').prop('disabled', false);
     }
-    
+
     $('#tabs a').click(function (e) {
-      e.preventDefault();
+      //e.preventDefault();
       $(this).tab('show');
     })
-    
+
     if(window.location.hash) {
       var hash = window.location.hash;
-      if (hash.indexOf('tab=avis') &gt;= 0) {
-        var tab = $('#tabs a[href="#avis"]');
-        //tabs are not always present: when the user is guest they're not displayed
-        if (tab &amp;&amp; tab.tab)
-          tab.tab('show')
+      var tab = $('#tabs a[href="' + hash + '"]');
+      if (tab &amp;&amp; tab.tab) {
+        tab.tab('show') // Select tab by name
       }
-    } 
-    
+    }
+
   });
 });</code>
     </property>
@@ -1055,6 +762,11 @@ label.question {
       }
     }
   }
+}
+
+h2 {
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid #e5e5e5;
 }</code>
     </property>
     <property>

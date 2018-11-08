@@ -138,7 +138,8 @@ Avis.Code.AvisClass_autre.hint=Ne pas inclure d’informations personnelles (ide
 Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration concernant cette démarche, merci de nous indiquer votre adresse électronique :
 Avis.Code.AvisClass_source=Source
 
-
+#Vos avis
+avis.stats.recueil=Données recueillies en ligne sur ce site, depuis le {0}, auprès de {1} internautes.
 </content>
   <object>
     <name>Avis.Code.AvisTranslations</name>

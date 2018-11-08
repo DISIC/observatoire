@@ -77,16 +77,17 @@
   #end
   #if (${clazz.name} == 'Avis.Code.AvisClass')
     #if ($name == 'difficultes')
-      &lt;input id="xwiki-form-autreDifficulte-0" title="$escapetool.xml($services.localization.render("${clazz.name}_${name}_autreDifficulte"))" name='Avis.Code.AvisClass_0_autreDifficulte' value='' size='40' style='margin-left: 0.5em; display: none' /&gt;
+      &lt;input id="xwiki-form-autreDifficulte-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreDifficulte"))" name='Avis.Code.AvisClass_0_autreDifficulte' value='' size='40' style='margin-left: 0.5em; display: none' /&gt;
     #elseif ($name == 'aide')
-      &lt;input id="xwiki-form-autreAide-0" title="$escapetool.xml($services.localization.render("${clazz.name}_${name}_autreAide"))" name='Avis.Code.AvisClass_0_autreAide' value='' size='40' style='margin-left: 0.5em; display: none' /&gt;
+      &lt;input id="xwiki-form-autreAide-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreAide"))" name='Avis.Code.AvisClass_0_autreAide' value='' size='40' style='margin-left: 0.5em; display: none' /&gt;
     #end
   #end
   &lt;/ul&gt;
   &lt;input name="${prefix}${name}" value="" type="hidden" /&gt;
 &lt;/fieldset&gt;
 #else
-  $!value
+  #set ($propertyClass = $object.getxWikiClass().get($name))
+  $doc.displayView($propertyClass, $prefix, $object)
 #end
 {{/html}}
 {{/velocity}}</content>
