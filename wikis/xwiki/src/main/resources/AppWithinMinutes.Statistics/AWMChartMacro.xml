@@ -1,0 +1,2188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="AppWithinMinutes.Statistics.AWMChartMacro" locale="">
+  <web>AppWithinMinutes.Statistics</web>
+  <name>AWMChartMacro</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1514761200000</creationDate>
+  <parent>AppWithinMinutes.Statistics.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1514761200000</date>
+  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>$services.localization.render("awm.chartmacro.title")</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity}}
+$services.localization.render("awm.chartmacro.desc")
+
+{{{
+{{awmchart app="Help.Applications.Movies" category="databaseList1" type="pie" title="Chart" width="500" height="500" table="1" /}}
+}}}
+
+#macro(docline $field $defaultValue)
+|= ${field} | $services.localization.render("rendering.macro.awmchart.parameter.${field}.description") |#if($defaultValue=="")$services.localization.render("awm.chartmacro.doc.empty")#else$defaultValue#end
+
+#end
+#set($defaultColors = "backgroundColor:FFFFFF;${util.newline}legendBackgroundColor:FFFFFF;${util.newline}borderColor:FFFFFF;${util.newline}plotBackgroundColor:FFFFFF;${util.newline}plotBorderColor:FFFFFF;${util.newline}plotBorderVisible:false")
+
+|= $services.localization.render("awm.chartmacro.doc.parameter") |= $services.localization.render("awm.chartmacro.doc.desc") |= $services.localization.render("awm.chartmacro.doc.defaultValue")
+#docline("app", "")
+#docline("className", "")
+#docline("category", "status")
+#docline("type", "")
+#docline("title", "")
+#docline("width", "500px")
+#docline("height", "500px")
+#docline("table", "1")
+#docline("chart", "1")
+#docline("chartClasses", "col-md-6 col-sm-12")
+#docline("tableClasses", "col-md-6 col-sm-12")
+#docline("useRow", "1")
+#docline("colors", $defaultColors)
+#docline("addParams", "")
+#docline("fromHQL", "")
+#docline("whereHQL", "")
+#docline("function", "")
+#docline("aggregate", "")
+#docline("aggregateFunction", "sum")
+#docline("orderColumn", "")
+#docline("orderDirection", "desc")
+#docline("columnTitle", "")
+#docline("aggregateTitle", "")
+
+== $services.localization.render("awm.chartmacro.example") ==
+
+=== $services.localization.render("awm.chartmacro.example.simple") ===
+
+{{{
+{{awmchart app="Help.Applications.Movies" category="databaseList1" type="pie" title="Chart" width="500" height="500" table="1" chartClasses="col-md-6 col-sm-12" /}}
+}}}
+
+{{awmchart app="Help.Applications.Movies" category="databaseList1" type="pie" title="Chart" width="500" height="500" table="1" chartClasses="col-md-6 col-sm-12" /}}
+
+=== $services.localization.render("awm.chartmacro.example.function") ===
+
+{{{
+{{awmchart app="Help.Applications.Movies" category="date1" type="line" title="Movies by year" width="500" height="500" table="1" chartClasses="col-md-6 col-sm-12" function="year" orderColumn="date1" orderDirection="asc" aggregateTitle="Movies by year" /}}
+
+{{awmchart app="Help.Applications.Movies" category="date1" type="line" title="Movies by year" width="500" height="500" table="1" chartClasses="col-md-6 col-sm-12" function="year" orderColumn="date1" orderDirection="asc" aggregateTitle="Movies by year" nb="2" /}}
+
+{{awmchart app="Help.Applications.Movies" category="date1" type="line" title="Movies by month" width="500" height="500" table="1" function="year(prop.value)*100+month(prop.value)" chartClasses="col-md-6 col-sm-12" orderColumn="date1" orderDirection="asc" aggregateTitle="Movies by month" columnTitle="Release Month" /}}
+
+{{awmchart app="Help.Applications.Movies" category="doc.creationDate" type="Movies by creation month" title="Movies by creation month" width="500" height="500" table="1" function="year(doc.creationDate)*100+month(doc.creationDate)" chartClasses="col-md-6 col-sm-12" orderColumn="doc.creationDate" orderDirection="asc" aggregateTitle="Movies by creation month" columnTitle="Page creation month" /}}
+}}}
+
+{{awmchart app="Help.Applications.Movies" category="date1" type="line" title="Movies by year" width="500" height="500" table="1" chartClasses="col-md-6 col-sm-12" function="year" orderColumn="date1" orderDirection="asc" aggregateTitle="Movies by year" /}}
+
+{{awmchart app="Help.Applications.Movies" category="date1" type="line" title="Movies by year" width="500" height="500" table="1" chartClasses="col-md-6 col-sm-12" function="year" orderColumn="date1" orderDirection="asc" aggregateTitle="Movies by year" nb="2" /}}
+
+{{awmchart app="Help.Applications.Movies" category="date1" type="line" title="Movies by month" width="500" height="500" table="1" function="year(prop.value)*100+month(prop.value)" chartClasses="col-md-6 col-sm-12" orderColumn="date1" orderDirection="asc" aggregateTitle="Movies by month" columnTitle="Release Month" /}}
+
+{{awmchart app="Help.Applications.Movies" category="doc.creationDate" type="line" title="Movies by creation month" width="500" height="500" table="1" function="year(doc.creationDate)*100+month(doc.creationDate)" chartClasses="col-md-6 col-sm-12" orderColumn="doc.creationDate" orderDirection="asc" aggregateTitle="Movies by creation month" columnTitle="Page creation month" /}}
+
+
+{{/velocity}}</content>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>10bba0db-f4d4-4b4b-9791-f76e90708aa6</guid>
+    <class>
+      <name>XWiki.WikiMacroClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <code>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>code</name>
+        <number>9</number>
+        <prettyName>Macro code</prettyName>
+        <rows>20</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentDescription>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>contentDescription</name>
+        <number>8</number>
+        <prettyName>Content description (Not applicable for "No content" type)</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </contentDescription>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>7</number>
+        <prettyName>Macro content type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Optional|Mandatory|No content</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <defaultCategory>
+        <disabled>0</disabled>
+        <name>defaultCategory</name>
+        <number>4</number>
+        <prettyName>Default category</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultCategory>
+      <description>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>description</name>
+        <number>3</number>
+        <prettyName>Macro description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <id>
+        <disabled>0</disabled>
+        <name>id</name>
+        <number>1</number>
+        <prettyName>Macro id</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </id>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Macro name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <supportsInlineMode>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>supportsInlineMode</name>
+        <number>5</number>
+        <prettyName>Supports inline mode</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </supportsInlineMode>
+      <visibility>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>visibility</name>
+        <number>6</number>
+        <prettyName>Macro visibility</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Current User|Current Wiki|Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </visibility>
+    </class>
+    <property>
+      <code>{{velocity}}
+#**
+ * Get the name of the Property that should be used for a given column.
+ * NOTE the resulting $tableName is safe to use inside SQL queries
+ *#
+#macro(chartmacro_getTableName $propClassName $colname)
+  #chartmacro_getPropertyClassAndType($propClassName $colname)
+  #set($tableAlias = "prop")
+  #set($propAlias = "prop.value")
+  #if($propType == 'NumberClass')
+    #set($numberType = $propClass.get($colname).getProperty('numberType').getValue())
+    #if($numberType == 'integer')
+      #set($tableName = 'IntegerProperty')
+    #elseif($numberType == 'float')
+      #set($tableName = 'FloatProperty')
+    #elseif($numberType == 'double')
+      #set($tableName = 'DoubleProperty')
+    #else
+      #set($tableName = 'LongProperty')
+    #end
+  #elseif($propType == 'BooleanClass')
+    #set($tableName = 'IntegerProperty')
+  #elseif($propType == 'DateClass')
+    #set($tableName = 'DateProperty')
+  #elseif($propType == 'TextAreaClass' || $propType == 'UsersClass' || $propType == 'GroupsClass')
+    #set($tableName = 'LargeStringProperty')
+  #elseif($propType == 'StaticListClass' || $propType == 'DBListClass' || $propType == 'DBTreeListClass﻿' || $propType == 'PageClass')
+    #set($fmultiSelect = $propClass.get($propFinalSubFieldName).getProperty('multiSelect').getValue())
+    #set($frelationalStorage = $propClass.get($propFinalSubFieldName).getProperty('relationalStorage').getValue())
+    #if($fmultiSelect == 1)
+      #if($frelationalStorage == 1)
+        #set($tableName = 'DBStringListProperty')
+        #set($tableAlias = "prop join prop.list list")
+        #set($propAlias = "list")
+      #else
+        #set($tableName = 'StringListProperty')
+      #end
+    #else
+      #set($tableName = 'StringProperty')
+    #end
+  #else
+    #set($tableName = 'StringProperty')
+  #end
+#end
+
+#**
+ * Get the property class and type for a given column.
+ *#
+#macro(chartmacro_getPropertyClassAndType $propClassName $colname)
+  #set($propFinalClassName = $propClassName)
+  #set($propFinalName = $colname)
+  #set($propFinalSubFieldName = $colname)
+  #if($propClassName != '')
+    #set($propClass = $xwiki.getDocument($propClassName).getxWikiClass())
+  #else
+    #set($propClass = $class)
+  #end
+  #set($propType = '')
+  #if($propClass.getPropertyNames().contains($colname))
+    #set($propType = "$!{propClass.get($colname).type}")
+  #end
+  ## if we cannot find the field, maybe it's a linked field
+  #if($propType == '')
+   #set($propFinalName = $colname.replaceAll("(.*?)_.*",'$1'))
+   #set($propFinalSubFieldName = $colname.replaceAll(".*?_(.*)",'$1'))
+   #set($field = $propClass.get($propFinalName))
+   #set($fieldType = $field.type)
+   #if($fieldType.contains("DBListClass"))
+    #set($multiSelect = $field.getPropertyClass().get("multiSelect").getValue())
+    #if($multiSelect == 1)
+     #set($relationalStorage = $field.getPropertyClass().get("relationalStorage").getValue())
+    #end
+    #set($sql = $field.getPropertyClass().get("sql").getValue())
+    #set($propFinalClassName = $sql.replaceAll(".*[.]className.*?=.*?'(.*?)'.*",'$1'))
+    #set($propClass = $xwiki.getDocument($propFinalClassName).getxWikiClass())
+    #if($propClass.getPropertyNames().contains($propFinalSubFieldName))
+     #set($propType = "$!{propClass.get($propFinalSubFieldName).type}")
+    #end
+   #end
+  #end
+#end
+#if($xcontext.macro.params.app)
+ #set($app = $xcontext.macro.params.app)
+#else
+ #set($app = "")
+#end
+#set($className = $xcontext.macro.params.className)
+#if(!$className || $className=="")
+ #set($appDoc = $xwiki.getDocument("${app}.WebHome"))
+ #set($className = $appDoc.getValue("class"))
+#end
+#if($xcontext.macro.params.category)
+ #set($category = $xcontext.macro.params.category)
+#else
+ #set($category = "status")
+#end
+#if($xcontext.macro.params.title &amp;&amp; $xcontext.macro.params.title!="")
+#set($chartTitle = $xcontext.macro.params.title)
+#else
+#set($chartTitle = "")
+#end
+#set($aggProp = "count(distinct doc.fullName)")
+#set($aggWhere = "")
+#if($xcontext.macro.params.aggregate &amp;&amp; $xcontext.macro.params.aggregate!="")
+ #set($aggregate = $xcontext.macro.params.aggregate)
+ #if($aggregate.startsWith("doc.") || $aggregate.startsWith("distinct doc."))
+  #if($xcontext.macro.params.aggregateFunction &amp;&amp; $xcontext.macro.params.aggregateFunction!="")
+   #set($aggProp = "${xcontext.macro.params.aggregateFunction}(${aggregate})")  
+  #else
+   #set($aggProp = "count(${aggregate})")
+  #end
+ #else
+  #chartmacro_getTableName($className $aggregate)
+  #set($aggTableName = ",${tableName} as aggprop")
+  #set($aggWhere = "and obj.id=aggprop.id.id and aggprop.id.name='${aggregate}'")
+  #if($xcontext.macro.params.aggregateFunction &amp;&amp; $xcontext.macro.params.aggregateFunction!="")
+    #set($aggProp = "${xcontext.macro.params.aggregateFunction}(aggprop.value)")  
+  #else
+    #set($aggProp = "sum(aggprop.value)")
+  #end
+ #end
+#end
+#set($queryParams = [])
+#set($discard = $queryParams.add($className))
+#if($category.startsWith("doc."))
+ #set($propAlias = $category)
+ #set($tableName = "")
+ #set($colWhere = "")
+ #set($categoryPrettyName = $category)
+#else
+ #chartmacro_getTableName($className $category)
+ #if($className != $propFinalClassName)
+   ## in this case we have a linked field
+   #if($relationalStorage == 1)
+    #set($tableName = ", BaseObject as obj2, DBStringListProperty as fieldprop join fieldprop.list list2, ${tableName} as ${tableAlias}")   
+    #set($colWhere = "and obj.id=fieldprop.id.id and fieldprop.id.name=? and list2=obj2.name and obj2.className=? and obj2.id=prop.id.id and prop.id.name=?")
+   #else
+    #set($tableName = ", BaseObject as obj2, StringProperty as fieldprop, ${tableName} as ${tableAlias}")
+    #set($colWhere = "and obj.id=fieldprop.id.id and fieldprop.id.name='${propFinalName}' and fieldprop.value=obj2.name and obj2.className='${propFinalClassName}' and obj2.id=prop.id.id and prop.id.name='${propFinalSubFieldName}'")
+   #end
+   ##set($discard = $queryParams.add($propFinalName))
+   ##set($discard = $queryParams.add($propFinalClassName))
+   ##set($discard = $queryParams.add($propFinalSubFieldName))
+ #else
+   #set($tableName = ",${tableName} as ${tableAlias}")
+   #set($colWhere = "and obj.id=prop.id.id and prop.id.name=?")
+   #set($discard = $queryParams.add($category))
+ #end
+ #set($categoryPrettyName = $xwiki.getDocument($propFinalClassName).getxWikiClass().get($propFinalSubFieldName).getPrettyName())
+#end
+#if($xcontext.macro.params.columnTitle &amp;&amp; $xcontext.macro.params.columnTitle!="")
+ #set($categoryPrettyName = $xcontext.macro.params.columnTitle)
+#end
+#if($xcontext.macro.params.function &amp;&amp; $xcontext.macro.params.function!="")
+ #set($function = $xcontext.macro.params.function)
+ #if($function.contains("("))
+  #set($propAlias = $function)
+ #else
+  #set($propAlias = "${function}(${propAlias})")
+ #end
+#end
+#if($xcontext.macro.params.orderDirection &amp;&amp; $xcontext.macro.params.orderDirection=="asc")
+ #set($orderdir = "asc")
+#else
+ #set($orderdir = "desc")
+#end
+#if(!$xcontext.macro.params.orderColumn || $xcontext.macro.params.orderColumn!=$xcontext.macro.params.category)
+ #set($order = "order by 2 ${orderdir}")
+#else
+ #set($order = "order by 1 ${orderdir}")
+#end
+#set($nb = 0)
+#if($xcontext.macro.params.nb)
+ #set($nb = $util.parseInt($xcontext.macro.params.nb))
+#end
+#set($havingHQL = "")
+#if($xcontext.macro.params.havingHQL &amp;&amp; $xcontext.macro.params.havingHQL!="")
+ #set($havingHQL = "having ${xcontext.macro.params.havingHQL}")
+#end
+#set($query = "select $propAlias , ${aggProp} from XWikiDocument as doc, BaseObject as obj $!{tableName} $!{aggTableName} $!{xcontext.macro.params.fromHQL} where doc.fullName=obj.name and obj.className=? $!{colWhere} $!{aggWhere} $!{xcontext.macro.params.whereHQL} group by ${propAlias} ${havingHQL} ${order}")
+#if($request.debug)
+$services.localization.render("awm.chartmacro.query"): {{{ ${query} ${queryParams} }}}
+#end
+#set($list = [])
+#try()
+#set($list = $xwiki.search($query, $nb, 0, $queryParams))
+#end
+#if($exception)
+$services.localization.render("awm.chartmacro.exception"): {{{ $exception }}}
+#end
+#if($request.debug)
+$services.localization.render("awm.chartmacro.data"): $list
+#end
+#if($list &amp;&amp; $list.size()&gt;0)
+#if($xcontext.macro.params.aggregateTitle&amp;&amp;$xcontext.macro.params.aggregateTitle!="")
+ #set($countPrettyName = $xcontext.macro.params.aggregateTitle)
+#else
+ #set($countPrettyName = $services.localization.render("awm.chartmacro.number"))
+#end
+#set($nblines = $list.size())
+#set($nblines = $nblines + 1)
+#set($useRow = true)
+#set($showTable = true)
+#set($showChart = true)
+#if($xcontext.macro.params.table&amp;&amp;$xcontext.macro.params.table==0)
+ #set($useRow = false)
+ #set($showTable = false)
+#end
+#if($xcontext.macro.params.chart&amp;&amp;$xcontext.macro.params.chart==0)
+ #set($showChart = false)
+ #set($useRow = false)
+#end
+#if($xcontext.macro.params.useRow&amp;&amp;$xcontext.macro.params.useRow==0)
+ #set($useRow = false)
+#end
+#if($useRow)
+(% class="row" %)
+(((
+#end
+#if($showChart)
+ #if($xcontext.macro.params.colors &amp;&amp; $context.macro.params.colors!="")
+  #set($colors = "colors:${xcontext.macro.params.colors};")
+ #end
+ #set($chartString = "chart type='${xcontext.macro.params.type}' source='inline' params='range:B2-B${nblines};series:columns;$!{colors}${xcontext.macro.params.addParams}' title='${chartTitle}' width='${xcontext.macro.params.width}' height='${xcontext.macro.params.height}'")
+#if($request.debug)
+$services.localization.render("awm.chartmacro.chart"): {{{ $chartString }}} 
+#end
+(% class="${xcontext.macro.params.chartClasses}" %)
+(((
+{{${chartString}}}
+|= ${categoryPrettyName} |= ${countPrettyName}
+#foreach($item in $list)
+#set($value = $item.get(0))
+#set($number = $item.get(1))
+#if(!$number)
+ #set($number = 0)
+#end
+#if($value.contains("."))
+ #set($valueDoc = $xwiki.getDocument($value))
+ #if(!$valueDoc.isNew() &amp;&amp; $valueDoc.getTitle()!="")
+  #set($value = $valueDoc.getTitle())
+ #end
+#end
+#if(!$value || $value.trim()=="")
+ #set($value = $services.localization.render("awm.chartmacro.novalue"))
+#end
+| $!value | $number
+#end
+{{/chart}}
+)))
+#end
+#if($showTable)
+(% class="${xcontext.macro.params.tableClasses}" %)
+(((
+|= ${categoryPrettyName} |= ${countPrettyName}
+#foreach($item in $list)
+#set($value = $item.get(0))
+#set($number = $item.get(1))
+#if(!$number)
+ #set($number = 0)
+#end
+#if($value.contains("."))
+ #set($valueDoc = $xwiki.getDocument($value))
+ #if(!$valueDoc.isNew() &amp;&amp; $valueDoc.getTitle()!="")
+  #set($value = $valueDoc.getTitle())
+ #end
+#end
+#if(!$value || $value.trim()=="")
+ #set($value = $services.localization.render("awm.chartmacro.novalue"))
+#end
+| $!value | $number
+#end
+)))
+#end
+#if($useRow)
+)))
+#end
+#else
+$services.localization.render("awm.chartmacro.nodata")
+#end
+{{/velocity}}</code>
+    </property>
+    <property>
+      <contentDescription/>
+    </property>
+    <property>
+      <contentType>No content</contentType>
+    </property>
+    <property>
+      <defaultCategory>reporting</defaultCategory>
+    </property>
+    <property>
+      <description>Chart for AppWithinMinutes applications</description>
+    </property>
+    <property>
+      <id>awmchart</id>
+    </property>
+    <property>
+      <name>AWM Chart</name>
+    </property>
+    <property>
+      <supportsInlineMode>0</supportsInlineMode>
+    </property>
+    <property>
+      <visibility>Current Wiki</visibility>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>97fd4730-8d8f-4271-b16e-e7f1e554e5aa</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>AWM Application</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>app</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>1</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>67edcb77-21ae-447d-87de-41af5ff2efe1</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Alternative className instead of the Application Name</description>
+    </property>
+    <property>
+      <mandatory/>
+    </property>
+    <property>
+      <name>className</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>2</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>67ac5fc4-5bbd-40f1-aad3-bf41b975c24d</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>1</defaultValue>
+    </property>
+    <property>
+      <description>Show Table</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>table</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>3</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>3e8717d3-d077-4917-8750-33a78422fd0f</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>pie</defaultValue>
+    </property>
+    <property>
+      <description>Chart Type</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>type</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>4</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>fac4213b-e44e-47cf-8775-0b71b611a97a</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>500</defaultValue>
+    </property>
+    <property>
+      <description>Width of the Chart</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>width</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>5</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>9c2d6e51-0499-4485-a4e0-9e78cbb8270b</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>500</defaultValue>
+    </property>
+    <property>
+      <description>Height of the Chart</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>height</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>6</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>1e0756d1-5cee-461c-8f49-98b012e15648</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>backgroundColor:FFFFFF;legendBackgroundColor:FFFFFF;borderColor:FFFFFF;plotBackgroundColor:FFFFFF;plotBorderColor:FFFFFF;plotBorderVisible:false</defaultValue>
+    </property>
+    <property>
+      <description>additional Params added to the chart params</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>addParams</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>7</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>ec1a7b6d-0301-4d8a-9dcb-885436d89d2f</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Title of the Chart</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>title</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>8</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>525310f5-547f-403a-b1f8-39615ad51b15</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>HQL to add to the from part of the HQL Query</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>fromHQL</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>9</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>bd755fec-0042-4037-8aca-c24a4fceb8bd</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>HQL to add to the where part of the HQL Query</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>whereHQL</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>10</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>3f170125-2dbf-43b2-bb72-54a3f051313b</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Colors for the Chart</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>colors</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>11</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>16e6e80b-a1ad-4e19-aa4f-6c78bdb0aaa5</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>col-md-6 col-sm-12</defaultValue>
+    </property>
+    <property>
+      <description>CSS classes to add to the chart div</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>chartClasses</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>12</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>01a94016-828b-40d4-b37a-354847ffc26a</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>col-md-6 col-sm-12</defaultValue>
+    </property>
+    <property>
+      <description>CSS classes to add to the table div</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>tableClasses</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>13</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>038cf5a7-a48e-4629-b110-06f0f342044b</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>1</defaultValue>
+    </property>
+    <property>
+      <description>Add a row bootstrap element</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>useRow</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>14</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>9cbd9a4f-1e47-44f8-a7b1-fdc897bdf648</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Function to use on the category field</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>function</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>15</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>fb816620-9f7f-490f-b5c6-2393ba536107</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Aggregate Field to use</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>aggregate</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>16</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>6a177394-99db-47b6-8d6e-4317a7bab745</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Aggregate Function to use instead of count(*)</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>aggregateFunction</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>17</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>69122540-bd39-4050-84a5-ab79377213c1</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Column to sort the results on. The default is the first aggregated column</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>orderColumn</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>18</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>3864c7e4-c0f4-44a6-bd0f-fa0f1f6e7f34</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Direction to sort on (asc / desc)</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>orderDirection</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>19</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>ebdf293d-9985-4f29-b8b8-66046ba87bf7</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Title to use for the group column</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>columnTitle</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>20</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>1b35ad53-b417-45c3-a60e-18d62514f637</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Title to use for the aggregate column</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>aggregateTitle</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>21</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>72a8a34e-579d-41ae-882d-2370427e082d</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>status</defaultValue>
+    </property>
+    <property>
+      <description> Field on which the counting is made </description>
+    </property>
+    <property>
+      <mandatory>1</mandatory>
+    </property>
+    <property>
+      <name>category</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>22</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>9eb2c0ff-75b0-496e-9eea-602434e6fb85</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Maximum number of items to retrieve from query</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>nb</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>23</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>30c17808-a936-4201-bb7e-df715bcdbfb1</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue>1</defaultValue>
+    </property>
+    <property>
+      <description>Group items representing less than a certain percentage of total</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>group</name>
+    </property>
+  </object>
+  <object>
+    <name>AppWithinMinutes.Statistics.AWMChartMacro</name>
+    <number>24</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>95be59f7-2c59-42ee-92e6-b7cb895750c7</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>HQL to add to the having part of the HQL Query</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>havingHQL</name>
+    </property>
+  </object>
+</xwikidoc>

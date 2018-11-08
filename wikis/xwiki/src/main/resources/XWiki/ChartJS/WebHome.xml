@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="XWiki.ChartJS.WebHome" locale="">
+  <web>XWiki.ChartJS</web>
+  <name>WebHome</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1501507032000</creationDate>
+  <parent>xwiki:XWiki.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1501586945000</date>
+  <contentUpdateDate>1501509167000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>== Example ==
+
+{{velocity filter="none"}}
+#set ($code = '{{chartjs type="pie"}}
+{
+  "labels": [
+    "Bug",
+    "Improvement",
+    "New Feature"
+  ],
+  "datasets": [{
+    "data": [23, 17, 5]
+  }, {
+    "data": [34, 11, 6]
+  }]
+}
+{{/chartjs}}')
+{{/velocity}}
+
+{{velocity}}
+(% class="row" %)(((
+  (% class="col-xs-12 col-sm-6 col-md-7" %)(((
+    {{code language="none"}}
+    $code
+    {{/code}}
+  )))
+  (% class="col-xs-12 col-sm-6 col-md-5" %)(((
+    $code
+  )))
+)))
+{{/velocity}}</content>
+  <object>
+    <name>XWiki.ChartJS.WebHome</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>404a33b8-b5de-4d9e-86e3-749bbfa89545</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require.config({
+  paths: {
+    chart: "$services.webjars.url('org.webjars.bower:chartjs', 'dist/Chart.bundle.min.js')",
+    palette: "$services.webjars.url('org.xwiki.contrib:application-chartjs-webjar', 'palette.min.js')"
+  },
+  shim: {
+    palette: {
+      exports: 'palette'
+    }
+  }
+});
+
+require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
+  var getData = function(canvas) {
+    var deferred = $.Deferred();
+    var data;
+    try {
+      data = JSON.parse(canvas.attr('data-source') || '{}');
+    } catch (exception) {
+      deferred.reject(exception);
+    }
+    if (data) {
+      if (data.table &amp;&amp; $('table#' + data.table).length &gt; 0) {
+        data = readDataFromTable(data);
+      }
+      deferred.resolve(data);
+    }
+    return deferred.promise();
+  };
+
+  var chartTypesWithBackgroundColorPerDataSet = ['line', 'bar', 'horizontalBar', 'radar'];
+  var configureData = function(data, type) {
+    var opacity = (type === 'line' || type === 'radar') ? .5 : 1;
+    var dataSetBackgroundColor = palette('tol', data.datasets.length).map(function(hex) {
+      return convertHex(hex, opacity);
+    });
+    data.datasets.forEach(function(dataSet, index) {
+      if (chartTypesWithBackgroundColorPerDataSet.indexOf(type) &gt;= 0) {
+        // Background color per data set.
+        dataSet.backgroundColor = dataSetBackgroundColor[index];
+      } else {
+        // Background color per value.
+        dataSet.backgroundColor = palette('tol', dataSet.data.length).map(function(hex) {
+          return '#' + hex;
+        });
+      }
+    });
+    return data;
+  };
+
+  var convertHex = function(hex, opacity) {
+    r = parseInt(hex.substring(0,2), 16);
+    g = parseInt(hex.substring(2,4), 16);
+    b = parseInt(hex.substring(4,6), 16);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
+  };
+
+  var readDataFromTable = function(options) {
+    var labels = [];
+    var dataSets = [];
+    var rows = $('table#' + options.table + ' tr');
+    if (options.multipleDataSets) {
+      if (options.dataSetLabel) {
+        var dataSetsByLabel = {};
+        rows.each(function() {
+          var cells = $(this).children('td');
+          if (cells.length &lt; 3) {
+            return;
+          }
+          var label = cells.first().text().trim();
+          if (labels.indexOf(label) &lt; 0) {
+            labels.push(label);
+          }
+          var dataSetLabel = $(cells[options.dataSetLabel]).text().trim();
+          var dataSet = dataSetsByLabel[dataSetLabel];
+          if (!dataSet) {
+            dataSet = {
+              label: dataSetLabel,
+              data: []
+            }
+            dataSetsByLabel[dataSetLabel] = dataSet;
+          }
+          var values = [];
+          for (var i = 1; i &lt; cells.length; i++) {
+            var value = $(cells[i]).text().trim();
+            if ($.isNumeric(value) &amp;&amp; i != options.dataSetLabel) {
+              values.push(value);
+            }
+          }
+          if (values.length == 1) {
+            dataSet.data.push(values[0]);
+          } else {
+            dataSet.data.push(values);
+          }
+        });
+        for (var dataSetLabel in dataSetsByLabel) {
+          if (dataSetsByLabel.hasOwnProperty(dataSetLabel)) {
+            dataSets.push(dataSetsByLabel[dataSetLabel]);
+          }
+        }
+      } else {
+        rows.each(function() {
+          var cells = $(this).children('td');
+          if (cells.length &lt; 3) {
+            return;
+          }
+          var label = cells.first().text().trim();
+          labels.push(label);
+          for (var i = 1, dataSetIndex = 0; i &lt; cells.length; i++) {
+            var value = $(cells[i]).text().trim();
+            if ($.isNumeric(value)) {
+              var dataSet = dataSets[dataSetIndex];
+              if (!dataSet) {
+                dataSet = {
+                  label: $(rows.first().find('th')[i]).text().trim(),
+                  data: []
+                };
+                dataSets.push(dataSet);
+              }
+              dataSet.data.push(value);
+              dataSetIndex++;
+            }
+          }
+        });
+      }
+    } else {
+      var dataSet = {
+        label: $(rows.first().find('th')[1]).text().trim(),
+        data: []
+      };
+      rows.each(function() {
+        var cells = $(this).children('td');
+        if (cells.length &lt; 2) {
+          return;
+        }
+        var label = cells.first().text().trim();
+        var values = [];
+        for (var i = 1; i &lt; cells.length; i++) {
+          var value = $(cells[i]).text().trim();
+          if ($.isNumeric(value)) {
+            values.push(value);
+          }
+        }
+        labels.push(label);
+        if (values.length == 1) {
+          dataSet.data.push(values[0]);
+        } else {
+          dataSet.data.push(values);
+        }
+      });
+      dataSets.push(dataSet);
+    }
+    return {
+      labels: labels,
+      datasets: dataSets
+    };
+  };
+
+  $('canvas.chart').each(function() {
+    var canvas = $(this);
+    var type = canvas.attr('data-type');
+    var options = {};
+    try {
+      options = JSON.parse(canvas.attr('data-options') || '{}');
+    } catch (exception) {
+    }
+    getData(canvas).then(function(data) {
+      return configureData(data, type);
+    }).done(function(data) {
+      new Chart(canvas, {
+        type: type,
+        data: data,
+        options: options
+      });
+    });
+  });
+});</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <name>XWiki.ChartJS.WebHome</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>64147509-67e8-464e-9a3e-38aace06c39d</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.chart-container {
+  max-width: 100%;
+  position: relative;
+}</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <name>XWiki.ChartJS.WebHome</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>83b622b0-34eb-41dd-8dc1-d277d4e3cae3</guid>
+    <class>
+      <name>XWiki.WikiMacroClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <code>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>code</name>
+        <number>9</number>
+        <prettyName>Macro code</prettyName>
+        <rows>20</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentDescription>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>contentDescription</name>
+        <number>8</number>
+        <prettyName>Content description (Not applicable for "No content" type)</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </contentDescription>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>7</number>
+        <prettyName>Macro content type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Optional|Mandatory|No content</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <defaultCategory>
+        <disabled>0</disabled>
+        <name>defaultCategory</name>
+        <number>4</number>
+        <prettyName>Default category</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultCategory>
+      <description>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>description</name>
+        <number>3</number>
+        <prettyName>Macro description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <id>
+        <disabled>0</disabled>
+        <name>id</name>
+        <number>1</number>
+        <prettyName>Macro id</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </id>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Macro name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <supportsInlineMode>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>supportsInlineMode</name>
+        <number>5</number>
+        <prettyName>Supports inline mode</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </supportsInlineMode>
+      <visibility>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>visibility</name>
+        <number>6</number>
+        <prettyName>Macro visibility</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Current User|Current Wiki|Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </visibility>
+    </class>
+    <property>
+      <code>{{velocity}}
+{{html clean="false"}}
+#set ($discard = $xwiki.ssx.use($xcontext.macro.doc))
+#set ($discard = $xwiki.jsx.use($xcontext.macro.doc))
+&lt;div class="chart-container"&gt;
+  &lt;canvas class="chart" data-type="$!escapetool.xml($xcontext.macro.params.type)" 
+    data-options="$!escapetool.xml($xcontext.macro.params.options)" 
+    data-source="$!escapetool.xml($xcontext.macro.content)"&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+{{/html}}
+{{/velocity}}</code>
+    </property>
+    <property>
+      <contentDescription>The chart data.</contentDescription>
+    </property>
+    <property>
+      <contentType>Mandatory</contentType>
+    </property>
+    <property>
+      <defaultCategory>Content</defaultCategory>
+    </property>
+    <property>
+      <description>Simple HTML5 charts using the canvas element.</description>
+    </property>
+    <property>
+      <id>chartjs</id>
+    </property>
+    <property>
+      <name>ChartJS</name>
+    </property>
+    <property>
+      <supportsInlineMode>0</supportsInlineMode>
+    </property>
+    <property>
+      <visibility>Current Wiki</visibility>
+    </property>
+  </object>
+  <object>
+    <name>XWiki.ChartJS.WebHome</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>ef157fce-6efb-40ff-bb37-bd8f9ca7bafc</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The type of chart. Choose from: line, bar, (% class="hljs-string" %)radar(%%), pie,(% class="hljs-string" %) doughnut, polarArea, bubble, scatter.</description>
+    </property>
+    <property>
+      <mandatory>1</mandatory>
+    </property>
+    <property>
+      <name>type</name>
+    </property>
+  </object>
+  <object>
+    <name>XWiki.ChartJS.WebHome</name>
+    <number>1</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>3fa49957-d994-48a4-b7a9-9bc3b5fb383d</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Advanced options specified as JSON. Checkout the Chart.js documentation for the available configuration options.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>options</name>
+    </property>
+  </object>
+</xwikidoc>
