@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
+
 <!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
@@ -309,6 +310,37 @@ $services.localization.render("awm.chartmacro.desc")
    #end
   #end
 #end
+
+#macro(displayTableRow $item)
+  #set($value = $item.get(0))
+  #set($number = $item.get(1))
+  #if(!$number)
+    #set($number = 0)
+  #end
+  #set($className = $xcontext.macro.params.className)
+  #set($category = $xcontext.macro.params.category)
+  #if ($className &amp;&amp; $category)
+    #set ($systemTime = $datetool.systemTime)
+    #set ($xDoc = $xwiki.getDocument("XWiki.$systemTime"))
+    #set ($xObj = $xDoc.newObject($className))
+    #set ($discard = $xObj.set($category, $value))
+    |$doc.display($category, $xObj)|$number
+  #else
+    #if($value.contains("."))
+      #set($valueDoc = $xwiki.getDocument($value))
+      #if(!$valueDoc.isNew() &amp;&amp; $valueDoc.getTitle()!="")
+        #set($value = $valueDoc.getTitle())
+      #end
+    #else
+      #set ($value = "$value")
+    #end
+    #if(!$value || $value.trim()=="")
+     #set($value = $services.localization.render("awm.chartmacro.novalue"))
+    #end
+  | $!value | $number
+  #end
+#end
+
 #if($xcontext.macro.params.app)
  #set($app = $xcontext.macro.params.app)
 #else
@@ -409,14 +441,14 @@ $services.localization.render("awm.chartmacro.desc")
 #end
 #set($query = "select $propAlias , ${aggProp} from XWikiDocument as doc, BaseObject as obj $!{tableName} $!{aggTableName} $!{xcontext.macro.params.fromHQL} where doc.fullName=obj.name and obj.className=? $!{colWhere} $!{aggWhere} $!{xcontext.macro.params.whereHQL} group by ${propAlias} ${havingHQL} ${order}")
 #if($request.debug)
-$services.localization.render("awm.chartmacro.query"): {{{ ${query} ${queryParams} }}}
+$services.localization.render("awm.chartmacro.query"): {{{ ${query} ${queryParams} }}}
 #end
 #set($list = [])
 #try()
 #set($list = $xwiki.search($query, $nb, 0, $queryParams))
 #end
 #if($exception)
-$services.localization.render("awm.chartmacro.exception"): {{{ $exception }}}
+$services.localization.render("awm.chartmacro.exception"): {{{ $exception }}}
 #end
 #if($request.debug)
 $services.localization.render("awm.chartmacro.data"): $list
@@ -448,35 +480,24 @@ $services.localization.render("awm.chartmacro.data"): $list
 (((
 #end
 #if($showChart)
+  #set($chartId = "awmchart-${mathtool.round($mathtool.mul($mathtool.random, 1000))}")
  #if($xcontext.macro.params.colors &amp;&amp; $context.macro.params.colors!="")
   #set($colors = "colors:${xcontext.macro.params.colors};")
  #end
- #set($chartString = "chart type='${xcontext.macro.params.type}' source='inline' params='range:B2-B${nblines};series:columns;$!{colors}${xcontext.macro.params.addParams}' title='${chartTitle}' width='${xcontext.macro.params.width}' height='${xcontext.macro.params.height}'")
+#set ($chartOptions = ${xcontext.macro.params.addParams})
+#set ($chartOptions = $chartOptions.replaceAll("~","~~").replaceAll("'","~'"))
+#set($chartString = "tableToChartJS type='${xcontext.macro.params.type}' table='$chartId' params='range:B2-B${nblines};series:columns;$!{colors}' title='${chartTitle}' width='${xcontext.macro.params.width}' height='${xcontext.macro.params.height}' options='$chartOptions'")
 #if($request.debug)
 $services.localization.render("awm.chartmacro.chart"): {{{ $chartString }}} 
 #end
 (% class="${xcontext.macro.params.chartClasses}" %)
 (((
-{{${chartString}}}
+{{${chartString} /}}
+(% id="$chartId" class='hidden' %)
 |= ${categoryPrettyName} |= ${countPrettyName}
 #foreach($item in $list)
-#set($value = $item.get(0))
-#set($number = $item.get(1))
-#if(!$number)
- #set($number = 0)
+  #displayTableRow($item)
 #end
-#if($value.contains("."))
- #set($valueDoc = $xwiki.getDocument($value))
- #if(!$valueDoc.isNew() &amp;&amp; $valueDoc.getTitle()!="")
-  #set($value = $valueDoc.getTitle())
- #end
-#end
-#if(!$value || $value.trim()=="")
- #set($value = $services.localization.render("awm.chartmacro.novalue"))
-#end
-| $!value | $number
-#end
-{{/chart}}
 )))
 #end
 #if($showTable)
@@ -484,21 +505,7 @@ $services.localization.render("awm.chartmacro.chart"): {{{ $chartString }}}
 (((
 |= ${categoryPrettyName} |= ${countPrettyName}
 #foreach($item in $list)
-#set($value = $item.get(0))
-#set($number = $item.get(1))
-#if(!$number)
- #set($number = 0)
-#end
-#if($value.contains("."))
- #set($valueDoc = $xwiki.getDocument($value))
- #if(!$valueDoc.isNew() &amp;&amp; $valueDoc.getTitle()!="")
-  #set($value = $valueDoc.getTitle())
- #end
-#end
-#if(!$value || $value.trim()=="")
- #set($value = $services.localization.render("awm.chartmacro.novalue"))
-#end
-| $!value | $number
+  #displayTableRow($item)
 #end
 )))
 #end
@@ -1315,7 +1322,7 @@ $services.localization.render("awm.chartmacro.nodata")
       </name>
     </class>
     <property>
-      <defaultValue>col-md-6 col-sm-12</defaultValue>
+      <defaultValue>col-sm-6 col-xs-12</defaultValue>
     </property>
     <property>
       <description>CSS classes to add to the chart div</description>
@@ -1381,7 +1388,7 @@ $services.localization.render("awm.chartmacro.nodata")
       </name>
     </class>
     <property>
-      <defaultValue>col-md-6 col-sm-12</defaultValue>
+      <defaultValue>col-sm-6 col-xs-12</defaultValue>
     </property>
     <property>
       <description>CSS classes to add to the table div</description>
@@ -1846,7 +1853,7 @@ $services.localization.render("awm.chartmacro.nodata")
       <defaultValue/>
     </property>
     <property>
-      <description>Title to use for the group column</description>
+      <description>Title to use for the group column</description>
     </property>
     <property>
       <mandatory>0</mandatory>
