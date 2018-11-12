@@ -42,6 +42,8 @@
   <content>{{velocity}}
 {{html wiki="true" clean="false"}}
 
+#set ($discard = $xwiki.linkx.use('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', {'rel': 'stylesheet'}))
+
 #macro(displayTableRow $value $number $className $category $color)
   #set ($systemTime = $datetool.systemTime)
   #set ($xDoc = $xwiki.getDocument("XWiki.$systemTime"))
@@ -59,7 +61,7 @@
     #set ($propAlias = 'prop.value')
   #end
   #set ($className = 'Avis.Code.AvisClass')
-  #set ($query = "select $propAlias, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' group by $propAlias order by 2 desc")
+  #set ($query = "select $propAlias, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' group by $propAlias order by $propAlias desc")
   #set($list = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
   ## TODO: see SSX RadioVoteDisplayer and use the color variables
   (% id="$tableId" class="hidden" %)
@@ -89,12 +91,17 @@
         "ticks": { "beginAtZero": true}
       }],
       "yAxes": [{
-        "gridLines": {"display": false, "drawBorder": false}
+        "gridLines": {"display": false, "drawBorder": false},
+        "ticks": {"fontFamily": "FontAwesome", "fontSize": 24}
        }]
+    },
+    "tooltips": {
+      "titleFontFamily": "FontAwesome"
     }
 })
 
 #set ($colors = {1:'#e62623', 2:'#d58000', 3:'#00ac07'})
+##set ($labels = {1:'frown', 2:'meh', 3:'smile'})
 #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
 &lt;div class="tab-pane fade" role="tabpanel" id="details-tab" aria-labelledby="details-tab"&gt;
@@ -165,8 +172,22 @@
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3 style="text-align:center"&gt;Autre&lt;/h3&gt;
 
-      ##{{awmchart className="Avis.Code.AvisClass" category="modalite" type="pie" title="Par modalité" width="500" height="500" table="1" fromHQL=", StringProperty demarche" whereHQL="and demarche.id.id=obj.id and demarche.id.name='demarche' and demarche.value='$doc.fullName'" aggregate="doc.fullName" aggregateFunction="count" /}}
 
+#set ($query = $services.query.hql("select sum(case when vote.value = 'true' then 1 else 0 end), sum(case when vote.value = 'false' then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
+#set ($discard = $query.bindValue("demarche", 'Demarches.1289'))
+#set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
+#set ($discard = $query.bindValue("voteProperty", 'vote'))
+#set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
+#set ($entries = $query.execute())
+#set ($demandes = $entries[0][0])
+#set ($autre =  $entries[0][1])
+(% id="autre" class="hidden" %)
+|= Vote |= Données
+|Demandes de dématérialisation|$demandes
+|Autre|$autre
+
+  {{tableToChartJS type='pie' table='autre' options='$options' /}}
+  
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;h2&gt;Données détaillées&lt;/h2&gt;
