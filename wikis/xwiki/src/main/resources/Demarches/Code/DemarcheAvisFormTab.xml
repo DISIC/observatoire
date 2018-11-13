@@ -129,8 +129,7 @@
       &lt;/div&gt;
     #end
     ## If we're handling a validated demarche, the avis gets associated to it.
-    #set ($demarcheId = $doc.fullName)
-    &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheId" /&gt;
+    &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
     &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
     &lt;div class='buttonwrapper'&gt;

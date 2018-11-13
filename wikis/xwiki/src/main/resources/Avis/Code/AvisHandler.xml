@@ -41,18 +41,18 @@
   <hidden>true</hidden>
   <content>{{include reference="Avis.Code.AvisMacros" /}}
 {{velocity output="false"}}
+#set ($demarcheId = "$!request['Avis.Code.AvisClass_0_demarche']")
 #set ($step = "$!request['avis-form-step']")
-#set ($avisId = $request.session.getAttribute('avis-id'))
+#set ($avisId = $request.session.getAttribute("${demarcheId}-avis-id"))
 #set ($logger = $services.logging.getLogger($doc.fullName))
 #if ($step == 'initial-step')
   ## Create a new avis only if there is no avis in the session that matches the current demarche
   #if ($avisId)
     ## Get avis document with programming rights, because Avis are not available to guests.
     #set ($avisPage = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
-    #set ($demarcheId = $!avisPage.getObject('Avis.Code.AvisClass').getProperty('demarche').value)
-    #set ($formDemarcheId = $request['Avis.Code.AvisClass_0_demarche'])
-    #if ($demarcheId == $formDemarcheId)
-      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisPage.fullName}")
+    #set ($avisDemarcheId = $!avisPage.getObject('Avis.Code.AvisClass').getProperty('demarche').value)
+    #if ($avisDemarcheId == $demarcheId)
+      $logger.warn("An existing avis was found in the session for demarche ${avisDemarcheId}: ${avisPage.fullName}")
       #set ($target = $avisPage)
       #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
       #set ($object = $target.getObject('Avis.Code.AvisClass'))
@@ -96,7 +96,7 @@
 
 ## We check that the avis exists, we store its id in the session and we define the next step.
 #if ($xwiki.exists($target.fullName))
-  $request.session.setAttribute('avis-id', $target.name)
+  $request.session.setAttribute("${demarcheId}-avis-id", $target.name)
   #if ($step == 'initial-step')
     ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'third-form-screen'.
     #set ($object = $target.getObject('Avis.Code.AvisClass'))
@@ -109,7 +109,7 @@
     $request.session.setAttribute('avis-form-step', 'third-form-screen')
   #elseif ($step == 'third-form-screen')
     ## At this step only, we remove the avisId from the session: we consider that the avis has been submitted and that any attempt to submit a new form will result in a new avis
-    #set ($discard = $request.session.removeAttribute('avis-id'))
+    #set ($discard = $request.session.removeAttribute("${demarcheId}-avis-id"))
     $request.session.setAttribute('avis-form-step', 'final-step')
   #end
 #end
