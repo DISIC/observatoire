@@ -41,7 +41,7 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html wiki="true"}}
-&lt;div class="tab-pane fade active in" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
+&lt;div class="tab-pane fade #if($selectedTab == 'demarche')active in#end" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
   #if($xcontext.action == 'edit')
     #set($type="edit")
     &lt;input type="hidden" name="xvalidate" value="1" /&gt;

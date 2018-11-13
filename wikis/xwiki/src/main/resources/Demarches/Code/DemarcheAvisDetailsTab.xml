@@ -104,7 +104,7 @@
 ##set ($labels = {1:'frown', 2:'meh', 3:'smile'})
 #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-&lt;div class="tab-pane fade" role="tabpanel" id="details-tab" aria-labelledby="details-tab"&gt;
+&lt;div class="tab-pane fade #if($selectedTab == 'details')active in#end" role="tabpanel" id="details-tab" aria-labelledby="details-tab"&gt;
   &lt;h2&gt;Indice de satisfaction global&lt;/h2&gt;
   &lt;div class="xform"&gt;
     #set ($date = $datetool.toDate('ddMMyyyy', '15062018'))

@@ -50,14 +50,22 @@
 #displaySubTitle()
 #displayScoreAverageBar()
 
+#set ($selectedTab = "$!request['tab']")
+#if ($selectedTab == '')
+  #if (!$isGuest)
+    #set ($selectedTab = 'demarche')
+  #else
+    #set ($selectedTab = 'avis')
+  #end
+#end
 &lt;ul class="nav nav-tabs" id="tabs"&gt;
 #if (!$isGuest &amp;&amp; $xcontext.action == 'view')
-  &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche-tab"&gt;Informations&lt;/a&gt;&lt;/li&gt;
-  &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'demarche')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;Informations&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'liste-avis')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
 #end
-  &lt;li role="presentation"#if ($isGuest) class="active"#end&gt;&lt;a href="#avis-tab"&gt;Donner mon avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'avis')class="active"#end&gt;&lt;a href="#avis-tab"&gt;Donner mon avis&lt;/a&gt;&lt;/li&gt;
 #if ($totalVotes &gt; 0)
-  &lt;li role="presentation"&gt;&lt;a href="#details-tab"&gt;Votre avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'details')class="active"#end&gt;&lt;a href="#details-tab"&gt;Votre avis&lt;/a&gt;&lt;/li&gt;
 #end
 &lt;/ul&gt;
 

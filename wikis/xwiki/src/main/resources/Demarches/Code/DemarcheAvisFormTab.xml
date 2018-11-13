@@ -42,7 +42,7 @@
   <content>{{velocity}}
 {{html wiki="true"}}
 #maybeSetWarningBackground()
-&lt;div class="tab-pane fade #if($isGuest)active in#end" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
+&lt;div class="tab-pane fade #if($selectedTab == 'avis')active in#end" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
 (%class='demarche-avis-separator'%)
 ----
 #set ($step = "$!request.session.getAttribute('avis-form-step')")
@@ -130,7 +130,7 @@
     #end
     ## If we're handling a validated demarche, the avis gets associated to it.
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
-    &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
+    &lt;input type="hidden" name="xredirect" value="$doc.getURL()?tab=avis" /&gt;
     &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
     &lt;div class='buttonwrapper'&gt;
     #if ($step == 'initial-step')
