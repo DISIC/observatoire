@@ -59,9 +59,7 @@
 #end
 #if ($step != 'initial-step')
   ## The step is not the initial one, hence we:
-  ## - Retrieve the avis id from the session, in case there is one (when a new demarche just got submitted, there is none, otherwise there should be one).
-  ## - Display a message corresponding to the current step, and the message gets cleaned from the session.
-  #set ($avisDocId = $request.session.getAttribute('avis-id'))
+  ## - Display a message corresponding to the current step, and the step gets cleaned from the session.
   #set ($discard = $request.session.removeAttribute('avis-form-step'))
   #displayMessage("avis.form.$step")
 #else
@@ -76,7 +74,7 @@
   ## The step is not the last one: we display a form for submitting / completing an avis.
   #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($demarche != $NULL)
-    &lt;form action="$xwiki.getDocument('Avis.Code.NewAvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
+    &lt;form action="$xwiki.getDocument('Avis.Code.AvisHandler').getURL()" method="POST" class="xform wd-form avis-form"&gt;
     #if ($step == 'initial-step')
       ## The first step of the form gets displayed, either for an existing demarche, or for a demarche that got just submitted by the current user.
       &lt;div class='form-preambule'&gt;
@@ -135,9 +133,6 @@
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$demarcheId" /&gt;
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()#wd-1|tab=avis" /&gt;
     &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
-    #if ($avisDocId)
-      &lt;input type="hidden" name="avis-id" value="$avisDocId" /&gt;
-    #end
     &lt;div class='buttonwrapper'&gt;
     #if ($step == 'initial-step')
       #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.validate')))

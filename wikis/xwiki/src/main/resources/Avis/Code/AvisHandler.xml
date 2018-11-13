@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Avis.Code.NewAvisHandler" locale="">
+<xwikidoc version="1.3" reference="Avis.Code.AvisHandler" locale="">
   <web>Avis.Code</web>
-  <name>NewAvisHandler</name>
+  <name>AvisHandler</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -34,7 +34,7 @@
   <date>1530698801000</date>
   <contentUpdateDate>1530698801000</contentUpdateDate>
   <version>1.1</version>
-  <title>$services.localization.render('wikidemarches.sitename')</title>
+  <title>Avis Handler</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -42,38 +42,54 @@
   <content>{{include reference="Avis.Code.AvisMacros" /}}
 {{velocity output="false"}}
 #set ($step = "$!request['avis-form-step']")
+#set ($avisId = $request.session.getAttribute('avis-id'))
+#set ($logger = $services.logging.getLogger($doc.fullName))
 #if ($step == 'initial-step')
-  #set ($uin = $services.uin.getNext('avis'))
-  ## Get avis document with programming rights, because Avis are not available to guests.
-  #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
-  #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
-  #if ($request.session &amp;&amp; $request.session.id)
-    #set ($sessionId = $request.session.id)
-    #set ($discard = $object.set("sessionId", $sessionId))
+  ## Create a new avis only if there is no avis in the session that matches the current demarche
+  #if ($avisId)
+    ## Get avis document with programming rights, because Avis are not available to guests.
+    #set ($avisPage = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
+    #set ($demarcheId = $!avisPage.getObject('Avis.Code.AvisClass').getProperty('demarche').value)
+    #set ($formDemarcheId = $request['Avis.Code.AvisClass_0_demarche'])
+    #if ($demarcheId == $formDemarcheId)
+      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisPage.fullName}")
+      #set ($target = $avisPage)
+      #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
+      #set ($object = $target.getObject('Avis.Code.AvisClass'))
+    #end
   #end
-  ## save with programming rights as the current user will not have the right to edit the Avis document
+  ## Create new avis only if target has not been set already
+  #if (!$target)
+    #set ($uin = $services.uin.getNext('avis'))
+    #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
+    #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
+    #if ($request.session &amp;&amp; $request.session.id)
+      #set ($sessionId = $request.session.id)
+      #set ($discard = $object.set("sessionId", $sessionId))
+    #end
+  #end
   #validateAvis($object)
   #if ($validated)
+    ## Save with programming rights as the current user will not have the right to edit the Avis document
     #set ($discard = $target.saveWithProgrammingRights())
   #else
-    $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
+    $logger.warn('An attempt to store an invalid Avis was performed')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #elseif ($step == 'second-form-screen' || $step == 'third-form-screen')
-  #set ($id = "$!request['avis-id']")
-  #if ($id != $NULL &amp;&amp; $xwiki.exists("Avis.${id}"))
-    #set ($target = $xwiki.getDocumentAsAuthor("Avis.${id}"))
+  #if ($avisId != $NULL &amp;&amp; $xwiki.exists("Avis.${avisId}"))
+    #set ($target = $xwiki.getDocumentAsAuthor("Avis.${avisId}"))
     #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
     #set ($object = $target.getObject('Avis.Code.AvisClass'))
     #validateAvis($object)
     #if($validated)
       #set ($discard = $target.saveWithProgrammingRights())
     #else
-      $services.logging.getLogger($doc.fullName).warn('An attempt to store an invalid Avis was performed')
+      $logger.warn('An attempt to store an invalid Avis was performed')
       $response.sendRedirect($xwiki.getURL('Main.WebHome'))
     #end
   #else
-    $services.logging.getLogger($doc.fullName).warn('An attempt to update an invalid Avis was performed')
+    $logger.warn('An attempt to update an invalid Avis was performed')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #end
@@ -92,6 +108,8 @@
   #elseif ($step == 'second-form-screen')
     $request.session.setAttribute('avis-form-step', 'third-form-screen')
   #elseif ($step == 'third-form-screen')
+    ## At this step only, we remove the avisId from the session: we consider that the avis has been submitted and that any attempt to submit a new form will result in a new avis
+    #set ($discard = $request.session.removeAttribute('avis-id'))
     $request.session.setAttribute('avis-form-step', 'final-step')
   #end
 #end
@@ -103,7 +121,7 @@
 
 {{/velocity}}</content>
   <object>
-    <name>Avis.Code.NewAvisHandler</name>
+    <name>Avis.Code.AvisHandler</name>
     <number>0</number>
     <className>XWiki.RequiredRightClass</className>
     <guid>272297a0-c706-42ec-b87f-d30477d32439</guid>
