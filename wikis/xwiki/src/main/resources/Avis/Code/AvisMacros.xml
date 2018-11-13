@@ -53,6 +53,7 @@
   #if ($prop.type == 'StaticListClass')
     #set ($authorizedValues = $prop.listValues)
     ## if the property is a checkbox, the value is an array so all values have to be validated
+    ## Received value for prop: $prop.name $value
     #if ($value.size() &amp;&amp; $value.size() &gt; 0)
       #set ($validated = true)
       #foreach ($val in $value)
@@ -64,13 +65,9 @@
   #elseif ($prop.type == 'DBListClass')
     #set ($validated = $value.length() &gt; 0 &amp;&amp; $xwiki.exists($value))
   #elseif ($prop.type == 'NumberClass')
-    #if ($prop.name == 'score')
-      ## Validate 'score' either through empty value (it's the case when we submit a new
-      ## demarche), or between 0 and 4
-      #set ($validated = ("$!value" == '') || ($value &gt; 0 &amp;&amp; $value &lt; 4))
-    #else
-      #set ($validated = true)
-    #end
+    ## Number properties can be: 'score', 'facile', 'comprehensible'
+    ## The get validated either through empty value or between 1 and 3.
+    #set ($validated = ("$!value" == '') || ($value &gt;= 1 &amp;&amp; $value &lt;= 3))
   #else
     #set ($validated = true)
   #end
