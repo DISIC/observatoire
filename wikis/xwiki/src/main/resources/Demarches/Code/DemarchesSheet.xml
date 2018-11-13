@@ -53,25 +53,27 @@
 &lt;ul class="nav nav-tabs" id="tabs"&gt;
 #if (!$isGuest &amp;&amp; $xcontext.action == 'view')
   &lt;li role="presentation" class="active"&gt;&lt;a href="#demarche-tab"&gt;Informations&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
 #end
-  #if ($xcontext.action == 'view')
-    &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
-    &lt;li role="presentation"&gt;&lt;a href="#avis-tab"&gt;Donner mon avis&lt;/a&gt;&lt;/li&gt;
-    #if ($totalVotes &gt; 0)
-      &lt;li role="presentation"&gt;&lt;a href="#details-tab"&gt;Votre avis&lt;/a&gt;&lt;/li&gt;
-    #end
-  #end
+  &lt;li role="presentation"#if ($isGuest) class="active"#end&gt;&lt;a href="#avis-tab"&gt;Donner mon avis&lt;/a&gt;&lt;/li&gt;
+#if ($totalVotes &gt; 0)
+  &lt;li role="presentation"&gt;&lt;a href="#details-tab"&gt;Votre avis&lt;/a&gt;&lt;/li&gt;
+#end
 &lt;/ul&gt;
 
 &lt;div class="tab-content"&gt;
 
+#if (!$isGuest &amp;&amp; $xcontext.action == 'view')
   {{include reference="Demarches.Code.DemarcheTab" /}}
 
   {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
+#end
 
   {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
 
+#if ($totalVotes &gt; 0)
   {{include reference="Demarches.Code.DemarcheAvisDetailsTab" /}}
+#end
 
 &lt;/div&gt;
 
