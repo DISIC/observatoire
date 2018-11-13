@@ -61,8 +61,10 @@
     #set ($propAlias = 'prop.value')
   #end
   #set ($className = 'Avis.Code.AvisClass')
+  #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias &lt;&gt; ''")
+  #set ($total = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute().get(0))
   #set ($query = "select $propAlias, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' group by $propAlias order by $propAlias desc")
-  #set($list = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
+  #set ($list = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
   ## TODO: see SSX RadioVoteDisplayer and use the color variables
   (% id="$tableId" class="hidden" %)
   #if ($colors)
@@ -70,12 +72,14 @@
   #else
     |= $property |= Données
   #end
-  #foreach($item in $list)
-    #set($value = $item.get(0))
-    #set($number = $item.get(1))
+  #foreach ($item in $list)
+    #set ($value = $item.get(0))
+    #set ($number = $item.get(1))
     #if(!$number)
       #set($number = 0)
     #end
+    #set ($number = $mathtool.div($mathtool.mul($number,100), $total))
+    #set ($number = $mathtool.round($number))
     #if ($value)
       #displayTableRow($value $number $className $property $colors.get($value))
     #end
@@ -88,7 +92,7 @@
     },
     "scales": {
       "xAxes": [{
-        "ticks": { "beginAtZero": true}
+        "ticks": { "beginAtZero": true, "max": 100}
       }],
       "yAxes": [{
         "gridLines": {"display": false, "drawBorder": false},
@@ -172,9 +176,14 @@
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3 style="text-align:center"&gt;Autre&lt;/h3&gt;
 
-
+#set ($query = $services.query.hql("select sum(case when vote.value in ('true', 'false') then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
+#set ($discard = $query.bindValue("demarche", $doc.fullName))
+#set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
+#set ($discard = $query.bindValue("voteProperty", 'vote'))
+#set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
+#set ($total = $query.execute()[0])
 #set ($query = $services.query.hql("select sum(case when vote.value = 'true' then 1 else 0 end), sum(case when vote.value = 'false' then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
-#set ($discard = $query.bindValue("demarche", 'Demarches.1289'))
+#set ($discard = $query.bindValue("demarche", $doc.fullName))
 #set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
 #set ($discard = $query.bindValue("voteProperty", 'vote'))
 #set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
@@ -183,8 +192,8 @@
 #set ($autre =  $entries[0][1])
 (% id="autre" class="hidden" %)
 |= Vote |= Données
-|Demandes de dématérialisation|$demandes
-|Autre|$autre
+|Demandes de dématérialisation|$mathtool.round($mathtool.div($mathtool.mul($demandes,100),$total))
+|Autre|$mathtool.round($mathtool.div($mathtool.mul($autre,100),$total))
 
   {{tableToChartJS type='pie' table='autre' options='$options' /}}
   

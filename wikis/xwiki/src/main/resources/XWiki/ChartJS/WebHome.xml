@@ -200,6 +200,10 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
             return '#' + hex;
           });
         }
+      } else {
+        dataSet.backgroundColor = dataSet.backgroundColor.map(function(hex) {
+          return convertHex(hex.substring(1), 0.8);
+        });
       }
     });
     return data;
@@ -342,19 +346,58 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
     var dataSource = canvas.attr('data-source');
     var options = jsonAttributeToObject('data-options');
     var source = jsonAttributeToObject('data-source');
-
+    
     getData(canvas).then(function(data) {
       return configureData(data, type);
     }).done(function(data) {
-      new Chart(canvas, {
+      for (var i = 0; i &lt; data.labels.length; i++) {
+        var label = data.labels[i];
+        if (label == 'Très bien' || label == 'Bon') {
+          data.labels[i] = '\uf118';
+        } else if (label == 'Moyen') {
+          data.labels[i] = '\uf11a';
+        } else if (label == 'Mauvais' || label == 'Pas bien') {
+          data.labels[i] = '\uf119';
+        }
+      }
+
+      if (type != 'pie') {
+        options.tooltips = {
+          callbacks: {
+            title: function(tooltipItem, data) { return ''},
+            label: function(tooltipItem, data) {
+              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+              if (tooltipItem.xLabel) {
+                return tooltipItem.xLabel + '%';
+              } else {
+                return label;
+              }
+            }
+          }
+        }
+      } else {
+        options.tooltips = {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var index = tooltipItem.index;
+              return data.labels[index] + ': ' + data.datasets[0].data[index] + '%';
+            }
+          }
+        }
+      }
+
+      var chart = new Chart(canvas, {
         type: type,
         data: data,
         options: options
       });
+
+
       // Fallback to table data for accessibility, by moving the existing table to the canvas content
       var table = $('table#' + source.table);
       table.removeClass('hidden');
       table.appendTo(canvas);
+
     });
   });
 });</code>
