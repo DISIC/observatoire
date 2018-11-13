@@ -1,0 +1,60 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Avis.Admin.AvisSessionManager" locale="">
+  <web>Avis.Admin</web>
+  <name>AvisSessionManager</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1542120229000</creationDate>
+  <parent>xwiki:Avis.Admin.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1542120229000</date>
+  <contentUpdateDate>1542120229000</contentUpdateDate>
+  <version>1.1</version>
+  <title>SessionManager</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{info}}
+Cette page liste les sessions au cours desquelles plusieurs avis ont été soumis pour une même démarche.
+{{/info}}
+
+{{velocity}}
+#set ($hql = "select session.value, demarche.value, count(*) as total from BaseObject as obj, StringProperty as session, StringProperty as demarche where obj.className='Avis.Code.AvisClass' and session.id.name = 'sessionId' and session.id.id = obj.id and demarche.id.name = 'demarche' and demarche.id.id = obj.id group by session.value, demarche.value order by total desc")
+#set ($entries = $services.query.hql($hql).execute())
+
+|=Session|=Démarche|=Nombre d'avis
+#foreach ($entry in $entries)
+  #set ($total = $entry[2])
+  #if ($total &gt; 1)
+    #set ($url = $xwiki.getDocument('Avis.WebHome').getURL('view',"#|t=avis&amp;p=1&amp;l=100&amp;s=doc.creationDate&amp;d=desc&amp;sessionId=${entry[0]}"))
+    |[[$entry[0]&gt;&gt;Avis.WebHome||queryString="$page"]]|[[$entry[1]]]|$total
+  #end
+#end
+
+{{/velocity}}</content>
+</xwikidoc>
