@@ -149,8 +149,8 @@
           #set($ok = $response.setContentType("application/ms-excel"))
           ## prepare filename from parameters, if any is passed
           #set($filename = "livetable.xls")
-          #if ("$!request.excelFilename" != '')
-            #set($filename = "$!{request.excelFilename}.xls")
+          #if ("$!request.filename" != '')
+            #set($filename = "$!{request.filename}.xls")
           #end
           #set($contentHeader = 'inline; filename="' + $filename + '"')
           #set($ok = $response.setHeader("Content-Disposition", $contentHeader))

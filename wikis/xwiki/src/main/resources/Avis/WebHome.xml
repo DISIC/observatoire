@@ -69,7 +69,7 @@
 include all columns.
 *#
 #if (!$extraParams)
-  #set ($columns = ['doc.creationDate', 'doc.name', 'sessionId', 'source', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.date', 'doc.name', 'sessionId', 'source', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
 #else
   #set ($discard = $options.put('extraParams', $extraParams))
   #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
@@ -77,11 +77,11 @@ include all columns.
 #end
 #livetable('avis' $columns $columnsProperties $options)
 
-#* Display the Excel export button only when no extraParams are set, that is when this
+{{addExcelExportToLivetable livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.LiveTableResults" /}}
+
+#* Display the link to Avis administration only when no extraParams are set, that is when this
 page is not used as an include (e.g. from DemarchesSheet). *#
 #if (!$extraParams)
-  {{addExcelExportToLivetable livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.LiveTableResults" /}}
-
   {{html clean="false" wiki="true"}}
   [[$services.localization.render('wikidemarches.administration.avis.statistiques')&gt;&gt;Avis.Admin.Statistiques.WebHome||class='button btn btn-primary']]
   {{/html}}
