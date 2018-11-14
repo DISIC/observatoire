@@ -73,7 +73,7 @@ include all columns.
 #else
   #set ($discard = $options.put('extraParams', $extraParams))
   #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
-  #set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'source', 'modalite', 'score', 'vote', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'modalite', 'score', 'vote', '_actions'])
 #end
 #livetable('avis' $columns $columnsProperties $options)
 

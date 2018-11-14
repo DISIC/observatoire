@@ -65,6 +65,10 @@
             ## DEBUG: adding additional column $p.name
           #end
         #end
+        ## Make sure the 'email' property is kept only for admins, even if it was explicitly requested in the 'collist' parameter
+        #if (!$hasAdmin)
+          #set($discard = $excelLtCollist.remove('email'))
+        #end
         ## DEBUG: exporting: $excelLtCollist
         #set($collist = $excelLtCollist.toArray())
       #end
