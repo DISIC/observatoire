@@ -39,5 +39,5 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>* [[Liste des démarches non indexées&gt;&gt;SolrIndexChecker]]</content>
+  <content>* [[Liste des démarches non indexées ou indexées plusieurs fois&gt;&gt;SolrIndexChecker]]</content>
 </xwikidoc>
