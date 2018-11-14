@@ -42,5 +42,6 @@
   <content>* [[Effacer les avis sans score du tout&gt;&gt;doc:AvisNoScore]]
 * [[Effacer les avis invalides&gt;&gt;doc:AvisScoreInvalide]]
 * [[Effacer les avis par date de création&gt;&gt;doc:AvisMassCleanup]]
-* [[Afficher les avis ayant été édités par un utilisateur identifié&gt;&gt;doc:AvisEdited]]</content>
+* [[Afficher les avis ayant été édités par un utilisateur identifié&gt;&gt;doc:AvisEdited]]
+* [[Afficher le nombre d'avis par session et par démarche&gt;&gt;doc:AvisSessionManager]]</content>
 </xwikidoc>
