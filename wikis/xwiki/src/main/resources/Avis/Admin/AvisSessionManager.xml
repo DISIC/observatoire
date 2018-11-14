@@ -49,10 +49,11 @@ Cette page liste les sessions au cours desquelles plusieurs avis ont été soumi
 
 |=Session|=Démarche|=Nombre d'avis
 #foreach ($entry in $entries)
+  #set ($demarche = $entry[1])
   #set ($total = $entry[2])
   #if ($total &gt; 1)
-    #set ($url = $xwiki.getDocument('Avis.WebHome').getURL('view',"#|t=avis&amp;p=1&amp;l=100&amp;s=doc.creationDate&amp;d=desc&amp;sessionId=${entry[0]}"))
-    |[[$entry[0]&gt;&gt;Avis.WebHome||queryString="$page"]]|[[$entry[1]]]|$total
+    #set ($url = $xwiki.getDocument('Avis.WebHome').getURL('view',"#|t=avis&amp;p=1&amp;l=100&amp;s=doc.creationDate&amp;d=desc&amp;sessionId=${entry[0]}&amp;demarche=$demarche"))
+    |[[$entry[0]&gt;&gt;Avis.WebHome||queryString="$url"]]|[[$entry[1]]]|$total
   #end
 #end
 
