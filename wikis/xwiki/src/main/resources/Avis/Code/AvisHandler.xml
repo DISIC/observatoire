@@ -49,14 +49,10 @@
   ## Create a new avis only if there is no avis in the session that matches the current demarche
   #if ($avisId)
     ## Get avis document with programming rights, because Avis are not available to guests.
-    #set ($avisPage = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
-    #set ($avisDemarcheId = $!avisPage.getObject('Avis.Code.AvisClass').getProperty('demarche').value)
-    #if ($avisDemarcheId == $demarcheId)
-      $logger.warn("An existing avis was found in the session for demarche ${avisDemarcheId}: ${avisPage.fullName}")
-      #set ($target = $avisPage)
-      #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
-      #set ($object = $target.getObject('Avis.Code.AvisClass'))
-    #end
+    $logger.warn("An existing avis was found in the session for demarche ${avisDemarcheId}: ${avisPage.fullName}")
+    #set ($target = $avisPage)
+    #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
+    #set ($object = $target.getObject('Avis.Code.AvisClass'))
   #end
   ## Create new avis only if target has not been set already
   #if (!$target)
