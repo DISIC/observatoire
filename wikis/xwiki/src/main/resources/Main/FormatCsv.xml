@@ -41,27 +41,18 @@
   <hidden>false</hidden>
   <content>== Qu'est-ce que le format CSV ?
 
-« //Comma-separated values//, connu sous le sigle CSV, est un format informatique ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Un fichier CSV est un fichier texte, par opposition aux formats dits « binaires ». Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau. Une ligne est une suite ordonnée de caractères terminée par un caractère de fin de ligne (line break – LF ou CRLF), la dernière ligne pouvant en être exemptée. » Source: [[Wikipédia&gt;&gt;https://fr.wikipedia.org/wiki/Comma-separated_values]]
+« //Comma-separated values//, connu sous le sigle CSV, est un format informatique ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Un fichier CSV est un fichier texte, par opposition aux formats dits « binaires ». Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau. » Source: [[Wikipédia&gt;&gt;https://fr.wikipedia.org/wiki/Comma-separated_values]]
+
+== À propos des fichiers de ce site au format CSV ==
+
+Les fichiers au format CSV disponibles sur ce site sont conformes aux recommandations d'interopérabilité émises par l'État. Ils ont les caractéristiques techniques suivantes :
+* Le caractère utilisé pour séparer les colonnes est la virgule.
+* Le texte utilise la norme de codage de caractères [[UTF-8&gt;&gt;https://fr.wikipedia.org/wiki/UTF-8]].
 
 == Comment utiliser un fichier au format CSV ?
 
-Un fichier CSV peut être lu soit directement avec un éditeur de texte tel que Notepad, Gedit, soit à l'aide d'un éditeur de feuilles de calcul, tel que LibreOffice ou Microsoft Excel.
+Un fichier CSV peut être lu soit directement avec un éditeur de texte tel que Notepad, soit à l'aide d'un éditeur de feuilles de calcul, tel que LibreOffice ou Microsoft Excel. Pour savoir comment ouvrir un fichier CSV depuis un éditeur de feuilles de calcul, se reporter aux instructions d'aide du logiciel utilisé.
 
-=== Ouvrir un fichier CSV avec LibreOffice
 
-Pour ouvrir un fichier CSV avec LibreOffice, suivre les étapes suivantes :
-* Depuis LibreOffice, sélectionner l'action « Fichier &gt; Ouvrir »
-* Sélectionner le fichier CSV à ouvrir.
-* Une boîte de dialogue intitulée « Import de texte » apparaît.
-* Dans le champ « Encodage », s'assurer que l'option « Unicode (UTF-8) » est sélectionnée.
-* Dans la zone « Options de séparateur » :
-** Cocher l'option « Virgule ».
-** S'assurer que l'option « Délimiteur de chaîne de caractères » est bien positionnée sur la valeur '"' ([[guillemet dactylographique&gt;&gt;https://fr.wikipedia.org/wiki/Guillemet#Guillemets_dactylographiques]] double).
-* Cliquer sur « OK ».
-
-=== Ouvrir un fichier CSV avec Microsoft Excel
-
-Pour ouvrir un fichier CSV avec Microsoft Excel, nous vous invitons à vous reporter à l'un des tutoriels suivants :
-* [[Importer ou exporter des fichiers texte (.txt ou .csv) – Office.com&gt;&gt;https://support.office.com/fr-fr/article/importer-ou-exporter-des-fichiers-texte-txt-ou-csv-5250ac4c-663c-47ce-937b-339e391393ba]]
-* [[Ouvrir un fichier avec Microsoft Excel – Weezevent.com&gt;&gt;https://aide.weezevent.com/article/104-ouvrir-fichier-csv-excel]]</content>
+</content>
 </xwikidoc>
