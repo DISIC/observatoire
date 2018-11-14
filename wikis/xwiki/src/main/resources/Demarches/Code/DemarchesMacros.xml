@@ -225,7 +225,7 @@
   #set ($satisfactionIndex = $avisStats.getProperty('moyenne').getValue())
   &lt;div class='avis-average-container'&gt;
     #if ($totalVotes &gt; 0)
-      #set($percent = $mathtool.mul($satisfactionIndex, 100))
+      #set($satisfactionIndexPercent = $mathtool.mul($satisfactionIndex, 100))
       ## What type of display we do?
       #set($avgVisualValue = 1)
       #if ($percent &gt; 33 &amp;&amp; $percent &lt; 66 )
@@ -233,13 +233,13 @@
       #elseif ($percent &gt;= 66 )
         #set($avgVisualValue = 3)
       #end
-      #set($percentDisplayValue = "${mathtool.round($percent)}%")
+      #set ($satisfactionIndexPercentRounded = ${mathtool.round($satisfactionIndexPercent)})
       &lt;div class='avis-average-visual'&gt;
         &lt;div class='avis-average-barcontainer avis-average-barcontainer-$!{avgVisualValue}' title='$escapetool.xml($percentDisplayValue)'&gt;
           &lt;div class='avis-average-barouterborder'&gt;
             &lt;div class='avis-average-bar'&gt;
               &lt;div class='avis-average-barcolor' &gt;&lt;/div&gt;
-              &lt;div class='avis-average-barwhite' style='width: ${mathtool.sub(100, $percent)}%'&gt;&lt;/div&gt;
+              &lt;div class='avis-average-barwhite' style='width: ${mathtool.sub(100, $satisfactionIndexPercent)}%'&gt;&lt;/div&gt;
               ## &lt;div class='avis-average-barborder' &gt;&lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -247,14 +247,16 @@
       &lt;/div&gt;
       #set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
       #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-      &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.satisfactionscore', [$percentDisplayValue, $totalVotes, $explanationLink])&lt;/div&gt;
+      &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.satisfactionscore', ["$satisfactionIndexPercentRounded%", $totalVotes, $explanationLink])&lt;/div&gt;
     #else
       &lt;div class='avis-average-desc'&gt;$services.localization.render('avis.score.0votes')&lt;/div&gt;
     #end
   &lt;/div&gt;
 #end
 
-#* Set a specific background for demarches that were submitted by users and that were not yet validated. *#
+
+#* Set a specific background for demarches that were submitted by users and that were not
+yet validated. *#
 #macro(maybeSetWarningBackground)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
   #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')

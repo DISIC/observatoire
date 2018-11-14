@@ -48,7 +48,7 @@
   #set ($systemTime = $datetool.systemTime)
   #set ($xDoc = $xwiki.getDocument("XWiki.$systemTime"))
   #set ($xObj = $xDoc.newObject($className))
-  #set ($discard = $xObj.set($category, $value))
+  #set ($discard = $xObj.set($category, "$!value"))
   #if ($color)
     |$xDoc.display($category, $xObj)|$number|$color
   #else
@@ -56,15 +56,29 @@
   #end
 #end
 
-#macro(addAvisDataTable $tableId $property $propertyType $propAlias $colors)
+#macro(addAvisDataTable $tableId $property $propertyType $propAlias $colors $percent)
   #if (!$propAlias)
     #set ($propAlias = 'prop.value')
   #end
   #set ($className = 'Avis.Code.AvisClass')
-  #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias &lt;&gt; ''")
-  #set ($total = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute().get(0))
-  #set ($query = "select $propAlias, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' group by $propAlias order by $propAlias desc")
-  #set ($list = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
+  #if ($percent)
+    #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias &lt;&gt; ''")
+    #set ($total = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute().get(0))
+  #end
+  ## For 'smiley' tables, we want a not empty count for each property value, hence we execute one query per prop.value.
+  #set ($smileyProperties = ['score','facile','comprehensible'])
+  #if ($smileyProperties.contains($property))
+    #set ($list = [])
+    #foreach ($level in [0..2])
+      #set ($xLevel = $mathtool.sub(3, $level))
+      #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias = $xLevel")
+      #set ($entries = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
+      #set ($discard = $list.add([$xLevel, $entries.get(0)]))
+    #end
+  #else
+    #set ($query = "select $propAlias, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' group by $propAlias order by $propAlias desc")
+    #set ($list = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
+  #end
   ## TODO: see SSX RadioVoteDisplayer and use the color variables
   (% id="$tableId" class="hidden" %)
   #if ($colors)
@@ -78,8 +92,10 @@
     #if(!$number)
       #set($number = 0)
     #end
-    #set ($number = $mathtool.div($mathtool.mul($number,100), $total))
-    #set ($number = $mathtool.round($number))
+    #if ($percent)
+      #set ($number = $mathtool.div($mathtool.mul($number,100), $total))
+      #set ($number = $mathtool.round($number))
+    #end
     #if ($value)
       #displayTableRow($value $number $className $property $colors.get($value))
     #end
@@ -92,7 +108,7 @@
     },
     "scales": {
       "xAxes": [{
-        "ticks": { "beginAtZero": true, "max": 100}
+        "ticks": { "beginAtZero": true, "max": 100, "percent": true}
       }],
       "yAxes": [{
         "gridLines": {"display": false, "drawBorder": false},
@@ -105,7 +121,6 @@
 })
 
 #set ($colors = {1:'#e62623', 2:'#d58000', 3:'#00ac07'})
-##set ($labels = {1:'frown', 2:'meh', 3:'smile'})
 #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
 &lt;div class="tab-pane fade #if($selectedTab == 'details')active in#end" role="tabpanel" id="details-tab" aria-labelledby="details-tab"&gt;
@@ -115,89 +130,104 @@
     #set ($fDate = $datetool.format('d MMMM yyyy', $date))
     &lt;span class="xHint"&gt;$services.localization.render('avis.stats.recueil', [$fDate, $totalVotes])
   &lt;/div&gt;
-  &lt;div class="row"&gt;
+  &lt;div class="row" style="display: flex; align-items: center;"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12 xform"&gt;
 
       {{tableToChartJS type='horizontalBar' table='score' options='$options'/}}
-      #addAvisDataTable('score', 'score', 'IntegerProperty as prop', 'prop.value', $colors)
+      #addAvisDataTable('score', 'score', 'IntegerProperty as prop', 'prop.value', $colors, true)
 
     &lt;/div&gt;
-    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    &lt;div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;"&gt;
+      &lt;span style="font-size:400%"&gt;
+        ${satisfactionIndexPercentRounded}%&amp;nbsp;&lt;span class="fa fa-smile-o"&gt;&lt;/span&gt;
+      &lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;h2&gt;Détail des avis&lt;/h2&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Facilité d'usage&lt;/h3&gt;
-
+      
       {{tableToChartJS type='horizontalBar' table='facile' options='$options'/}}
-      #addAvisDataTable('facile', 'facile', 'IntegerProperty as prop', 'prop.value', $colors)
+      #addAvisDataTable('facile', 'facile', 'IntegerProperty as prop', 'prop.value', $colors, true)
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Compréhension&lt;/h3&gt;
 
       {{tableToChartJS type='horizontalBar' table='comprehensible' options='$options'/}}
-      #addAvisDataTable('comprehensible', 'comprehensible', 'IntegerProperty as prop', 'prop.value', $colors)
+      #addAvisDataTable('comprehensible', 'comprehensible', 'IntegerProperty as prop', 'prop.value', $colors, true)
 
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Difficulté&lt;/h3&gt;
+      #set ($chartOptions.scales.xAxes[0].ticks.percent = false)
+      #set ($discard = $chartOptions.scales.xAxes[0].ticks.remove('max'))
       #set ($chartOptions.scales.yAxes.get(0)["ticks"] = {"mirror": true, "padding": -10})
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
       {{tableToChartJS type='horizontalBar' table='difficultes' options='$options'/}}
-      #addAvisDataTable('difficultes', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', $NULL)
+      #addAvisDataTable('difficultes', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', $NULL, false)
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Besoin d'aide&lt;/h3&gt;
 
       {{tableToChartJS type='horizontalBar' table='aide' options='$options'/}}
-      #addAvisDataTable('aide', 'aide', 'DBStringListProperty as prop join prop.list list', 'list', $NULL)
+      #addAvisDataTable('aide', 'aide', 'DBStringListProperty as prop join prop.list list', 'list', $NULL, false)
 
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;h2&gt;Modalités&lt;/h2&gt;
+  #set ($query = $services.query.hql("select sum(case when vote.value in ('true', 'false') then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
+  #set ($discard = $query.bindValue("demarche", $doc.fullName))
+  #set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
+  #set ($discard = $query.bindValue("voteProperty", 'vote'))
+  #set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
+  #set ($votesCount = $query.execute()[0])
+  #set ($query = $services.query.hql("select sum(case when vote.value = 'true' then 1 else 0 end), sum(case when vote.value = 'false' then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
+  #set ($discard = $query.bindValue("demarche", $doc.fullName))
+  #set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
+  #set ($discard = $query.bindValue("voteProperty", 'vote'))
+  #set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
+  #set ($votes = $query.execute())
+  #if ($votes.size() &gt; 0)
+    #set ($votesOui = $votes[0][0])
+    #set ($votesNon =  $votes[0][1])
+  #end
   &lt;div class="row"&gt;
+    #if ($votesCount == 0)
+      &lt;div class="col-lg-3 col-md-3 col-sm-3"&gt;
+      &lt;/div&gt;
+    #end
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3 style="text-align:center"&gt;En ligne&lt;/h3&gt;
       #set ($discard = $chartOptions.remove('scales'))
+      #set ($chartOptions.percent = true)
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
       #set ($colors = {'en-ligne-entièrement':'#82b876', 'en-ligne-partiellement':'#f9b43e', 'autrement':'#ecebec'})
 
       {{tableToChartJS type='pie' table='modalite' options='$options' /}}
-      #addAvisDataTable('modalite', 'modalite', 'StringProperty as prop', 'prop.value', $colors)
+      #addAvisDataTable('modalite', 'modalite', 'StringProperty as prop', 'prop.value', $colors, true)
 
     &lt;/div&gt;
+    #if ($votesCount &gt; 0)
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3 style="text-align:center"&gt;Autre&lt;/h3&gt;
+      (% id="autre" class="hidden" %)
+      |= Vote |= Données
+      |Demandes de dématérialisation|$mathtool.round($mathtool.div($mathtool.mul($demandes,100),$total))
+      |Autre|$mathtool.round($mathtool.div($mathtool.mul($autre,100),$total))
 
-#set ($query = $services.query.hql("select sum(case when vote.value in ('true', 'false') then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
-#set ($discard = $query.bindValue("demarche", $doc.fullName))
-#set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
-#set ($discard = $query.bindValue("voteProperty", 'vote'))
-#set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
-#set ($total = $query.execute()[0])
-#set ($query = $services.query.hql("select sum(case when vote.value = 'true' then 1 else 0 end), sum(case when vote.value = 'false' then 1 else 0 end) from BaseObject as avis, StringProperty as vote, StringProperty as demarche where avis.className = :avisClass and avis.id = vote.id.id and vote.id.name = :voteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
-#set ($discard = $query.bindValue("demarche", $doc.fullName))
-#set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
-#set ($discard = $query.bindValue("voteProperty", 'vote'))
-#set ($discard = $query.bindValue("demarcheProperty", 'demarche'))
-#set ($entries = $query.execute())
-#set ($demandes = $entries[0][0])
-#set ($autre =  $entries[0][1])
-(% id="autre" class="hidden" %)
-|= Vote |= Données
-|Demandes de dématérialisation|$mathtool.round($mathtool.div($mathtool.mul($demandes,100),$total))
-|Autre|$mathtool.round($mathtool.div($mathtool.mul($autre,100),$total))
+      {{tableToChartJS type='pie' table='autre' options='$options' /}}
 
-  {{tableToChartJS type='pie' table='autre' options='$options' /}}
-  
     &lt;/div&gt;
+    #else
+      &lt;div class="col-lg-3 col-md-3 col-sm-3"&gt;
+      &lt;/div&gt;
+    #end
   &lt;/div&gt;
   &lt;h2&gt;Données détaillées&lt;/h2&gt;
   &lt;form action="$xwiki.getURL('Macros.AddExcelExportToLivetableMacroResultsPage')" method='post'&gt;

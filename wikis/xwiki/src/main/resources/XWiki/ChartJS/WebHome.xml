@@ -360,30 +360,47 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
           data.labels[i] = '\uf119';
         }
       }
+      var ticks;
+      if (options.scales &amp;&amp; options.scales.xAxes &amp;&amp; options.scales.xAxes.length &gt; 0) {
+        ticks = options.scales.xAxes[0].ticks;
+      }
 
-      if (type != 'pie') {
-        options.tooltips = {
-          callbacks: {
-            title: function(tooltipItem, data) { return ''},
-            label: function(tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-              if (tooltipItem.xLabel) {
-                return tooltipItem.xLabel + '%';
-              } else {
-                return label;
+      // Add a callback to display only integer values
+      if (ticks) {
+        ticks.callback = function(value, index, values) {
+          if (Math.floor(value) === value) {
+              return value;
+          }
+        }
+      }
+      if (ticks &amp;&amp; ticks.percent == true) {
+          options.tooltips = {
+            callbacks: {
+              title: function(tooltipItem, data) { return ''},
+              label: function(tooltipItem, data) {
+                var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                if (tooltipItem.xLabel) {
+                  return tooltipItem.xLabel + '%';
+                } else {
+                  return label;
+                }
               }
             }
           }
-        }
-      } else {
-        options.tooltips = {
-          callbacks: {
-            label: function(tooltipItem, data) {
-              var index = tooltipItem.index;
-              return data.labels[index] + ': ' + data.datasets[0].data[index] + '%';
+          options.scales.xAxes[0].ticks.callback = function(value, index, values) {
+            return value + '%';
+          }
+      }
+
+      if (options.percent) {
+          options.tooltips = {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                var index = tooltipItem.index;
+                return data.labels[index] + ': ' + data.datasets[0].data[index] + '%';
+              }
             }
           }
-        }
       }
 
       var chart = new Chart(canvas, {
@@ -392,7 +409,7 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
         options: options
       });
 
-
+      
       // Fallback to table data for accessibility, by moving the existing table to the canvas content
       var table = $('table#' + source.table);
       table.removeClass('hidden');
@@ -403,7 +420,7 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
 });</code>
     </property>
     <property>
-      <name/>
+      <name>JSX</name>
     </property>
     <property>
       <parse>1</parse>
@@ -519,7 +536,7 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
       <contentType>CSS</contentType>
     </property>
     <property>
-      <name/>
+      <name>SSX</name>
     </property>
     <property>
       <parse>0</parse>
