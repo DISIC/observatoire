@@ -139,8 +139,8 @@
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;"&gt;
       &lt;span style="font-size:400%"&gt;
-        ${satisfactionIndexPercentRounded}%&amp;nbsp;&lt;span class="fa fa-smile-o"&gt;&lt;/span&gt;
-      &lt;/span&gt;
+${satisfactionIndexPercentRounded}%&amp;nbsp;&lt;span class="fa fa-smile-o"&gt;&lt;/span&gt;
+&lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;h2&gt;Détail des avis&lt;/h2&gt;
@@ -195,7 +195,7 @@
   #set ($votes = $query.execute())
   #if ($votes.size() &gt; 0)
     #set ($votesOui = $votes[0][0])
-    #set ($votesNon =  $votes[0][1])
+    #set ($votesAutre =  $votes[0][1])
   #end
   &lt;div class="row"&gt;
     #if ($votesCount == 0)
@@ -218,8 +218,8 @@
       &lt;h3 style="text-align:center"&gt;Autre&lt;/h3&gt;
       (% id="autre" class="hidden" %)
       |= Vote |= Données
-      |Demandes de dématérialisation|$mathtool.round($mathtool.div($mathtool.mul($demandes,100),$total))
-      |Autre|$mathtool.round($mathtool.div($mathtool.mul($autre,100),$total))
+      |Demandes de dématérialisation|$mathtool.round($mathtool.div($mathtool.mul($votesOui,100),$votesCount))
+      |Autre|$mathtool.round($mathtool.div($mathtool.mul($votesAutre,100),$votesCount))
 
       {{tableToChartJS type='pie' table='autre' options='$options' /}}
 
