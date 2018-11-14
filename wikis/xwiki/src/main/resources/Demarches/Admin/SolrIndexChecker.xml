@@ -45,16 +45,20 @@ Cette page contient un script permettant d'identifier les démarches qui ne sera
 
 {{html}}
 &lt;form action="" method="POST"&gt;
-&lt;input type="submit" class="btn btn-primary" name="execute" value="Execute"/&gt;
+&lt;input type="submit" class="btn btn-primary" name="execute" value="Exécuter"/&gt;
 &lt;/form&gt;
 {{/html}}
 {{/info}}
 
+##set ($hql = "select doc.name from XWikiDocument as doc, BaseObject as obj where doc.fullName = obj.name and obj.className = 'Demarches.Code.DemarchesClass' and cast(doc.name as int) &gt;= 1689 and cast(doc.name as int) &lt;= 1713 order by doc.name")
+##set ($entries = $services.query.hql($hql).setLimit(0).execute())
 
+
+#set ($counter = 0)
 #if ("$!request.execute" != '')
-  #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj where doc.fullName = obj.name and obj.className = 'Demarches.Code.DemarchesClass'")
+  #set ($hql = "select doc.name from XWikiDocument as doc, BaseObject as obj where doc.fullName = obj.name and obj.className = 'Demarches.Code.DemarchesClass' order by doc.name")
   #set ($entries = $services.query.hql($hql).setLimit(0).execute())
-
+  |=#|=Démarche non trouvée dans l'index|=Tous les résultats
   #foreach ($entry in $entries)
     #set ($query = $services.query.createQuery($entry, 'solr'))
     ##set ($discard = $query.bindValue('qf', 'name^10 title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'))
@@ -64,11 +68,16 @@ Cette page contient un script permettant d'identifier les démarches qui ne sera
     #set ($pages = $entries[0])
     #set ($found = false)
     #if ($pages.results.numFound &gt; 0)
-      #set ($fullName = $pages.results.get(0).fullname)
-      #set ($found = "$fullName" == "$entry")
+      #foreach ($page in $pages.results)
+        #set ($name = $page.name)
+        #if (!$found)
+          #set ($found = "$name" == "$entry")
+        #end
+      #end
     #end
     #if (!$found)
-      * Not found: $entry
+      #set ($counter = $mathtool.add($counter, 1))
+      |$counter|[[Demarches.$entry]]|#foreach ($item in $pages.results)[[$item.fullname]] #end\\
     #end
   #end
 #end
