@@ -114,7 +114,7 @@
       <allow>1</allow>
     </property>
     <property>
-      <groups>XWiki.XWikiAllGroup</groups>
+      <groups>XWiki.XWikiAdminGroup</groups>
     </property>
     <property>
       <levels>view,edit</levels>

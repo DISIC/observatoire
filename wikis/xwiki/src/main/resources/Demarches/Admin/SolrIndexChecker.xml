@@ -41,7 +41,9 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 {{info}}
-Cette page contient un script permettant d'identifier les démarches qui ne seraient pas indexées par Solr.
+Cette page contient un script permettant d'identifier les démarches qui:
+* Ne sont pas indexées par Solr.
+* Sont retournées plusieurs fois par Solr.
 
 {{html}}
 &lt;form action="" method="POST"&gt;
@@ -58,7 +60,7 @@ Cette page contient un script permettant d'identifier les démarches qui ne sera
 #if ("$!request.execute" != '')
   #set ($hql = "select doc.name from XWikiDocument as doc, BaseObject as obj where doc.fullName = obj.name and obj.className = 'Demarches.Code.DemarchesClass' order by doc.name")
   #set ($entries = $services.query.hql($hql).setLimit(0).execute())
-  |=#|=Démarche non trouvée dans l'index|=Tous les résultats
+  |=#|=Démarche non trouvée ou trouvée plusieurs fois|=Tous les résultats
   #foreach ($entry in $entries)
     #set ($query = $services.query.createQuery($entry, 'solr'))
     ##set ($discard = $query.bindValue('qf', 'name^10 title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'))
@@ -67,15 +69,19 @@ Cette page contient un script permettant d'identifier les démarches qui ne sera
     #set ($entries = $query.execute())
     #set ($pages = $entries[0])
     #set ($found = false)
+    #set ($foundCount = 0)
     #if ($pages.results.numFound &gt; 0)
       #foreach ($page in $pages.results)
         #set ($name = $page.name)
         #if (!$found)
           #set ($found = "$name" == "$entry")
         #end
+        #if ($found)
+          #set ($discard = $mathtool.add($foundCount, 1))
+        #end
       #end
     #end
-    #if (!$found)
+    #if (!$found || $foundCount &gt; 1)
       #set ($counter = $mathtool.add($counter, 1))
       |$counter|[[Demarches.$entry]]|#foreach ($item in $pages.results)[[$item.fullname]] #end\\
     #end
