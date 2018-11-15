@@ -230,10 +230,15 @@ ${satisfactionIndexPercentRounded}%&amp;nbsp;&lt;span class="fa fa-smile-o"&gt;&
     #end
   &lt;/div&gt;
   &lt;h2&gt;Données détaillées&lt;/h2&gt;
-  &lt;form action="$xwiki.getURL('Macros.AddExcelExportToLivetableMacroResultsPage')" method='post'&gt;
+  &lt;form action="$xwiki.getURL('Avis.Code.LiveTableResults','get')" method="POST"&gt;
     &lt;div class="buttonwrapper"&gt;
-      &lt;input type="hidden" name="demarcheId" value="${escapetool.xml($doc.fullName)}" /&gt;
-      &lt;input type="hidden" name='filename' value="$escapetool.xml("demarche-${doc.name}-${datetool.get('yyyy-MM-dd-HH-mm-ss')}")" /&gt;
+      &lt;input type="hidden" name="classname" value="Avis.Code.AvisClass" /&gt;
+      &lt;input type="hidden" name="transprefix" value="avis.livetable." /&gt;
+      &lt;input type="hidden" name="demarche" value="${escapetool.xml($doc.fullName)}" /&gt;
+      &lt;input type="hidden" name="collist" value="doc.creationDate,doc.date,doc.name" /&gt;
+      &lt;input type="hidden" name="withAllFields" value="true" /&gt;
+      &lt;input type="hidden" name="outputSyntaxType" value="csv" /&gt;
+      &lt;input type="hidden" name='filename' value="$escapetool.xml("demarche-${doc.name}-${datetool.get('yyyyMMdd-HHmmss')}")" /&gt;
       &lt;button class='button' type='submit'&gt;&lt;span&gt;Export CSV&lt;/button&gt;
     &lt;/div&gt;
   &lt;/form&gt;
