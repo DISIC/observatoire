@@ -44,262 +44,158 @@
 {{include reference="Avis.Code.LiveTableResultsMacros" /}}
 
 {{velocity output="false"}}
-## Copied from Macros.AddExcelExportToLivetableMacroResultsPage and adapted.
-#macro(gridresultwithfilterexport $className $colList $filterFrom $filterWhere $filterParams $format)
-  #macro(initializeWriter)
-    #if ($format == 'excel')
-      #set ($workbook = $excelWriter.getWritableWorkbook())
-      #set ($sheet = $workbook.createSheet("XWiki", 0))
-    #elseif ($format == 'csv')
-      #set ($discard = $csvWriter.initialize())
-    #end
-  #end
-  #macro(initializeRowValues)
-    #if ($format == 'csv')
-      #set ($rowValues = [])
-    #end
-  #end
-  #macro(setColumnView $colCount $val)
-    #if ($format == 'excel')
-      #set ($discard = $sheet.setColumnView($colCount, $val))
-    #end
-  #end
-  #macro(setCell $rowCount $colCount $colPrettyName)
-    #if ($format == 'excel')
-      #set ($discard = $excelWriter.setLabelCell($sheet, $rowCount, $colCount, $colPrettyName))
-    #elseif ($format == 'csv')
-      #set ($discard = $rowValues.add($colPrettyName))
-    #end
-  #end
-  #macro(writeRow)
-    #if ($format == 'csv')
-      #set ($discard = $csvWriter.writeNext($rowValues))
-    #end
-  #end
-  #if ($xcontext.action == 'get')
-    #if ($format == 'excel')
-      #set ($excelWriter = $xwiki.calc)
-    #elseif ($format == 'csv')
-      #set ($csvWriter = $xwiki.parseGroovyFromPage("Macros.OpenCsvWriter"))
-    #end
-    #if ($excelWriter || $csvWriter)
+#**
+ * Copied from Macros.AddExcelExportToLivetableMacroResultsPage .
+ *#
+#macro(gridresultwithfilterexcel $className $collist $filterfrom $filterwhere $filterParams)
+  #if($xcontext.action == 'get' &amp;&amp; "$!{request.outputSyntaxType}" == 'excel')
+    #set($calc = $xwiki.calc)
+    #if ($calc)
       ## get the columns to export. If the all the class properties are asked for, then force add all the properties of the class in the export
-      #if ("$!{request.withAllFields}" == 'true')
-        #set ($allColumns = [])
-        #foreach ($column in $colList)
-          #set ($discard = $allColumns.add($column))
+      #if("$!{request.withAllFields}" == 'true')
+        #set($excelLtCollist = [])
+        #foreach($e in $collist)
+          #set($discard = $excelLtCollist.add($e))
         #end
-        ## DEBUG: $allColumns
+        ## DEBUG: $excelLtCollist
         ## get all the properties from the passed class to add them in the list
-        #foreach ($property in $xwiki.getDocument($className).getxWikiClass().properties)
-          #if (!$allColumns.contains($property.name))
-            #set ($discard = $allColumns.add($property.name))
-            ## DEBUG: adding additional column $property.name
+        #foreach($p in $xwiki.getDocument($className).getxWikiClass().properties)
+          #if (!$excelLtCollist.contains($p.name))
+            #set($discard = $excelLtCollist.add($p.name))
+            ## DEBUG: adding additional column $p.name
           #end
         #end
-        ## DEBUG: exporting: $allColumns
-        #set ($colList = $allColumns)
+        ## DEBUG: exporting: $excelLtCollist
+        #set($collist = $excelLtCollist)
       #end
-      ## Make sure to that the 'email' property is present only for administrators, even if it was explicitely requested in the 'colList' argument.
+      ## Make sure the 'email' property is kept only for admins, even if it was explicitly requested in the 'collist' parameter
       #if (!$hasAdmin)
-        #set($discard = $colList.remove($index))
-      #end
-      ## Make sure to include only the following properties for non-guests:
-      ## ['demarche', 'modalite', 'score', 'vote', 'facile', 'comprehensible', 'difficultes', 'aide', 'doc.date']
-      #if ($isGuest)
-        #set ($includedProperties = ['doc.creationDate', 'demarche', 'modalite', 'score', 'vote', 'facile', 'comprehensible', 'difficultes', 'aide'])
-        #set ($colListSafe = [])
-        #foreach ($col in $colList)
-          #if ($includedProperties.contains($col))
-            #set ($discard = $colListSafe.add($col))
-          #end
-        #end
-        #set ($colList = $colListSafe)
+        #set($discard = $collist.remove('email'))
       #end
       ##
       ## Prepare the excel elements (workbook, sheet, first line of the sheet with column names)
       ##
-      #initializeWriter()
-      #initializeRowValues()
-      #set ($colCount = 0)
-      #foreach ($colname in $colList)
+      #set($wb = $calc.getWritableWorkbook())
+      #set($sheet = $wb.createSheet("XWiki", 0))
+      #set($colCount = 0)
+      #foreach($colname in $collist)
         ##DEBUG: generating column $colname on position $colCount
-        #setColumnView($velocityCount, 15)
-        #if ($colname.startsWith('doc.'))
-          #set ($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
-          #setCell(0, $colCount, $colPrettyName)
-          #setColumnView($colCount, 20)
-        #elseif ($colname == '_action')
+        #set($ok = $sheet.setColumnView($velocityCount, 15))
+        #if($colname.startsWith('doc.'))
+          #set($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
+          #set($ok = $calc.setLabelCell($sheet, 0, $colCount, $colPrettyName))
+          #set($ok = $sheet.setColumnView($colCount, 20))
+        #elseif($colname == '_action')
         #else
-          #set ($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
-          #if ($colPrettyName == "$!{request.transprefix}${colname}")
+          #set($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
+          #if($colPrettyName == "$!{request.transprefix}${colname}")
             ## col pretty name was not found from translations, try to use the property's pretty name (important for user directory export, for example)
-            #set ($propNameTranslationKey = "${className}_${colname}")
-            #set ($colPrettyName = $services.localization.render($propNameTranslationKey))
+            #set($propNameTranslationKey = "${className}_${colname}")
+            #set($colPrettyName = $services.localization.render($propNameTranslationKey))
           #end
-          #setCell(0, $colCount, $colPrettyName)
-          #setColumnView($colCount, 20)
+          #set($ok = $calc.setLabelCell($sheet, 0, $colCount, $colPrettyName))
+          #set($ok = $sheet.setColumnView($colCount, 20))
         #end
-        #set ($colCount = $colCount + 1)
+        #set($colCount = $colCount + 1)
       #end
-      #if ("$!{request.withPageName}" == 'true')
-        #setCell(0, $colCount, "Reference")
-        #setColumnView($colCount, 20)
-        #set ($colCount = $colCount + 1)
+      #if("$!{request.withPageName}" == 'true')
+        #set($ok = $calc.setLabelCell($sheet, 0, $colCount, "Reference"))
+        #set($ok = $sheet.setColumnView($colCount, 20))
+        #set($colCount = $colCount + 1)
       #end
-      #if ("$!{request.withPageURL}" == 'true')
-        #setCell(0, $colCount, "URL")
-        #setColumnView($colCount, 80)
+      #if("$!{request.withPageURL}" == 'true')
+        #set($ok = $calc.setLabelCell($sheet, 0, $colCount, "URL"))
+        #set($ok = $sheet.setColumnView($colCount, 80))
       #end
-      #writeRow()
       ##
       ## Build the JSON in memory (using basic Java data types) so that it can be adjusted before serialization, using the same functions as the livetable results
       ##
-      #set ($map = {})
-      #gridresultwithfilter_buildJSON($className $colList $filterFrom $filterWhere $filterParams $map)
-      ## marshall all data from the $map.rows to the Excel/CSV
-      #set ($rowCount = 1)
-      #foreach ($curRow in $map.rows)
-        #initializeRowValues()
-        #set ($colCount = 0)
+      #set($map = {})
+      #gridresultwithfilter_buildJSON($className $collist $filterfrom $filterwhere $filterParams $map)
+      ## marshall all data from the $map.rows to the excel
+      #set($rowCount = 1)
+      #foreach($curRow in $map.rows)
+        #set($colCount = 0)
         ## DEBUG: exporting $curRow
-        #foreach ($colname in $colList)
+        #foreach($colname in $collist)
           ## get the value of the column from the current row and put it in the excel
           #if ($colname.startsWith('doc.'))
-            #set ($colVal = "$!curRow.get($colname.replace('doc.', 'doc_'))")
+            #set($colVal = "$!curRow.get($colname.replace('doc.', 'doc_'))")
           #else
-            #set ($colVal = "$!curRow.get($colname)")
+            #set($colVal = "$!curRow.get($colname)")
             ## hack when the cell contains html, to use the cell_value instead
             #if ($colVal.indexOf('&lt;') &gt;= 0)
-              #set ($colVal_Value = $curRow.get("${colname}_value"))
-              #if ("$!colVal_Value" != '')
-                #set ($colVal = $colVal_Value)
+              #set($colVal_Value = $curRow.get("${colname}_value"))
+              #if("$!colVal_Value" != '')
+                #set($colVal = $colVal_Value)
               #end
             #end
           #end
-          #setCell($rowCount, $colCount, $colVal)
-          #set ($colCount = $colCount + 1)
+          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, $colVal))
+          #set($colCount = $colCount + 1)
         #end
-        #if (!$isGuest &amp;&amp; "$!{request.withPageName}" == 'true')
-          #setCell($rowCount, $colCount, "$!curRow.get('doc_fullName')")
-          #set ($colCount = $colCount + 1)
+        #if("$!{request.withPageName}" == 'true')
+          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, "$!curRow.get('doc_fullName')"))
+          #set($colCount = $colCount + 1)
         #end
-        #if (!$isGuest &amp;&amp; "$!{request.withPageURL}" == 'true')
-          #setCell($rowCount, $colCount, "$!curRow.get('doc_url')")
-          #set ($colCount = $colCount + 1)
+        #if("$!{request.withPageURL}" == 'true')
+          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, "$!curRow.get('doc_url')"))
+          #set($colCount = $colCount + 1)
         #end
-        #set ($rowCount = $rowCount + 1)
-        #writeRow()
+        #set($rowCount = $rowCount + 1)
       #end
       ## ==============================================
-      ## Data generation ended, now output.
+      ## excel ended, now output
       ## ==============================================
-      #if (!$request.debug)
-        #if ($format == 'excel')
-          #set ($bytes = $excelWriter.getWritableWorkbookAsBytes($workbook))
-        #elseif ($format == 'csv')
-          #set ($str = $csvWriter.asString())
-        #end
-        #if ($bytes || $str)
-          #if ($format == 'excel')
-            #set ($discard = $response.setContentType('application/ms-excel'))
-            #set ($filename = 'data.xls')
-          #elseif ($format == 'csv')
-            #set ($discard = $response.setContentType('text/csv'))
-            #set ($filename = 'data.csv')
-          #end
+      #if(!$request.debug)
+        #set($bytes = $calc.getWritableWorkbookAsBytes($wb))
+        #if($bytes)
+          #set($ok = $response.setContentType("application/ms-excel"))
           ## prepare filename from parameters, if any is passed
+          #set($filename = "livetable.xls")
           #if ("$!request.filename" != '')
-            #if ($format == 'excel')
-              #set ($filename = "$!{request.filename}.xls")
-            #elseif ($format == 'csv')
-              #set ($filename = "$!{request.filename}.csv")
-            #end
+            #set($filename = "$!{request.filename}.xls")
           #end
-          #set ($contentHeader = 'inline; filename="' + $filename + '"')
-          #set ($discard = $response.setHeader('Content-Disposition', $contentHeader))
-          #set ($discard = $xcontext.setFinished(true))
+          #set($contentHeader = 'inline; filename="' + $filename + '"')
+          #set($ok = $response.setHeader("Content-Disposition", $contentHeader))
+          #set($ok = $xcontext.setFinished(true))
+          #set($ok = $response.getOutputStream().write($bytes))
           ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
           ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
-          #set ($discard = $response.setHeader('Cache-Control', 'private'))
-          #set ($discard = $response.setHeader('Pragma', 'cache'))
-          #set ($expires = $util.getDate().getTime())
-          #set ($expires = $expires + 120000)
-          #set ($expires = $util.getDate($expires))
-          #set ($discard = $response.setDateHeader('Expires', $expires.getTime()))
-          #if ($format == 'excel')
-            #set ($discard = $response.getOutputStream().write($bytes))
-          #elseif ($format == 'csv')
-            #set ($discard = $response.writer.write($str))
-          #end
+          #set($ok = $response.setHeader("Cache-Control", 'private'))
+          #set($ok = $response.setHeader("Pragma", 'cache'))
+          #set($expires = $util.getDate().getTime())
+          #set($expires = $expires+120000)
+          #set($expires =$util.getDate($expires))
+          #set($ok = $response.setDateHeader("Expires",$expires.getTime()))
         #else
           ## TODO need nice translated error message
-          The following error occurred while generating the output file:
+          Failed to generate Excel file:
 
           $!context.exception
         #end
       #else
-        Done
+        DONE
       #end
     #else
       ## TODO need nice translated error message
-      #if ($format == 'excel')
-        #set ($key = 'Excel')
-      #elseif ($format == 'csv')
-        #set ($key = 'CSV')
-      #end
-      An error occurred while initializing the $key exporter.
+      Excel plugin is not installed
     #end
   #end
 #end
 {{/velocity}}
 
 {{velocity wiki="false"}}
-##########################
-## The following code is copied form the standard XWiki.LiveTableResults, with only the replacement of gridresultswithfilter with gridresultswithfilterexport at the end, if an export is asked for.
-## We should try to avoid copying as much as possible, but for safety we need to export.
-##########################
 #set ($extra = '')
 #set ($params = [])
 #if ("$!request.space" != '')
   #set ($extra = "${extra} and doc.space = ?")
   #set ($discard = $params.add($request.space))
 #end
-#if ("$!request.location" != '')
-  #set ($extra = "${extra} and lower(doc.fullName) like lower(?) escape '!'")
-  #set ($locationFilterValue = $request.location)
-  ## Note: the "_", "[", and the "%" characters have special meanings in standard SQL servers (they behave as wildcards).
-  ## However, it is not what the user expects (e.g. http://jira.xwiki.org/browse/XWIKI-12608).
-  ## As a consequence, we must escape these characters.
-  ## See http://www.jguru.com/faq/view.jsp?EID=8881 to understand why we use the special clause 'escape' above.
-  ## Since we use '!' for the escaping, we also double existing ones.
-  #set ($locationFilterValue = $locationFilterValue.replaceAll('([\[%_!])', '!$1'))
-  ## Because the user might filter with "/" as separator we replace that by "%", because it could be "."
-  ## (the space separator) or "/" (as it is in the document name).
-  ## In addition, using "%" (any sequence of character) instead of "_" (any single character) gives the ability
-  ## to filter on different levels:
-  ##   e.g. filtering on "Blog/Intro" will return "Blog.BlogIntroduction".
-  ##        On the other hand, it will also returns: "BlogForIntrospection", which might be unexpected.
-  #set ($locationFilterValue = $locationFilterValue.replaceAll('/', '%'))
-  #set ($discard = $params.add("%${locationFilterValue}%"))
-#end
-#if ("$!request.parent" != '')
-  #set ($extra = "${extra} and doc.parent = ?")
-  #set ($discard = $params.add($request.parent))
-#end
-#if ("$!request.orphaned" == '1')
-  #set ($homepage = $services.wiki.getById($services.wiki.currentWikiId).mainPageReference)
-  #set ($homepageFullName = $services.model.serialize($homepage, 'local'))
-  ## On Oracle the empty parent is actually null.
-  #set ($extra = "${extra} and (doc.parent = '' or doc.parent is null) and doc.fullName &lt;&gt; ?")
-  #set ($discard = $params.add($homepageFullName))
-#end
-#if ($request.outputSyntaxType == 'excel' || $request.outputSyntaxType == 'csv')
-  #gridresultwithfilterexport("$!request.classname" $request.collist.split(',') '' "${extra}" $params $request.outputSyntaxType)
+#if ($request.outputSyntaxType == 'excel')
+  #gridresultwithfilterexcel("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
 #else
   #gridresultwithfilter("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
 #end
-{{/velocity}}
-
-</content>
+{{/velocity}}</content>
 </xwikidoc>

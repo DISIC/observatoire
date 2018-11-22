@@ -1,0 +1,234 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Avis.Code.CsvExport" locale="">
+  <web>Avis.Code</web>
+  <name>CsvExport</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1542904683000</creationDate>
+  <parent>xwiki:Avis.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1542906805000</date>
+  <contentUpdateDate>1542906805000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Avis CSV Export</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{include reference="XWiki.LiveTableResultsMacros" /}}
+
+{{velocity output="false"}}
+
+## Copied from XWiki.LiveTableResultsMacros. Gives access to specific fields of the AvisClass using getDocumentAsAuthor.
+#macro(gridresult_buildRowJSON $item $rows)
+  ## Handle both the case where the "language" filter is used and thus languages are returned too and the case where
+  ## only the document name is returned. When more than the document name is returned the $item variable is a list.
+  #if($item.size())
+    ## Extract doc name and doc language from $item
+    #set($docName = $item[0])
+    #set($docLanguage = $item[1])
+  #else
+    #set($docName = $item)
+    #set($docLanguage = '')
+  #end
+  #set ($docReference = $services.model.resolveDocument($docName))
+  #set ($row = {
+    'doc_viewable': $services.security.authorization.hasAccess('view', $docReference),
+    'doc_fullName': $services.model.serialize($docReference, 'local'),
+    'doc_space': $services.model.serialize($docReference.parent, 'local'),
+    'doc_location': "#hierarchy($docReference, {'limit': 5, 'plain': false, 'local': true, 'displayTitle': false})",
+    'doc_url': $xwiki.getURL($docReference),
+    'doc_space_url': $xwiki.getURL($docReference.parent),
+    'doc_wiki': $docReference.wikiReference.name,
+    'doc_wiki_url': $xwiki.getURL($docReference.wikiReference),
+    'doc_hasadmin': $xwiki.hasAdminRights(),
+    'doc_hasedit': $services.security.authorization.hasAccess('edit', $docReference),
+    'doc_hasdelete': $services.security.authorization.hasAccess('delete', $docReference),
+    'doc_edit_url': $xwiki.getURL($docReference, 'edit'),
+    'doc_copy_url': $xwiki.getURL($docReference, 'view', 'xpage=copy'),
+    'doc_delete_url': $xwiki.getURL($docReference, 'delete'),
+    'doc_rename_url': $xwiki.getURL($docReference, 'view', 'xpage=rename&amp;step=1')
+  })
+  #set ($isTranslation = "$!docLanguage" != '' &amp;&amp; $xwiki.getLanguagePreference() != $docLanguage)
+  ## Display the language after the document name so that not all translated documents have the same name displayed.
+  #set ($row.doc_name = "$docReference.name#if ($isTranslation) ($docLanguage)#end")
+  #set ($row.doc_hascopy = $row.doc_viewable)
+  #set ($row.doc_hasrename = $row.doc_hasdelete)
+  #set ($row.doc_hasrights = $row.doc_hasedit &amp;&amp; $isAdvancedUser)
+  #if ($docReference.name == 'WebHome')
+    ## For nested pages, use the page administration.
+    #set ($webPreferencesReference = $services.model.createDocumentReference('WebPreferences', $docReference.lastSpaceReference))
+    #set ($row.doc_rights_url = $xwiki.getURL($webPreferencesReference, 'admin', 'editor=spaceadmin&amp;section=PageRights'))
+  #else
+    ## For terminal pages, use the old rights editor.
+    ## TODO: We should create a page administration for terminal pages too.
+    #set ($row.doc_rights_url = $xwiki.getURL($docReference, 'edit', 'editor=rights'))
+  #end
+  #set ($itemDoc = $xwiki.getDocumentAsAuthor($docReference))
+  ## Handle translations. We need to make sure we display the data associated to the correct document if the returned
+  ## result is a translation.
+  #if ($isTranslation)
+    #set ($translatedDoc = $itemDoc.getTranslatedDocument($docLanguage))
+  #else
+    #set ($translatedDoc = $itemDoc.translatedDocument)
+  #end
+  #set($discard = $itemDoc.use('Avis.Code.AvisClass'))
+  #set($discard = $row.put('doc_edit_url', $itemDoc.getURL($itemDoc.defaultEditMode)))
+  #set($discard = $row.put('doc_author_url', $xwiki.getURL($translatedDoc.author)))
+  #set($discard = $row.put('doc_date', $xwiki.formatDate($translatedDoc.date)))
+  #set($discard = $row.put('doc_title', $translatedDoc.plainTitle))
+  #set($discard = $row.put('doc_author', $xwiki.getPlainUserName($translatedDoc.authorReference)))
+  #set($discard = $row.put('doc_creationDate', $xwiki.formatDate($translatedDoc.creationDate)))
+  #set($discard = $row.put('doc_creator', $xwiki.getPlainUserName($translatedDoc.creatorReference)))
+  #foreach($colname in $collist)
+    #gridresult_buildColumnJSON($colname $row)
+  #end
+  #set($discard = $rows.add($row))
+#end
+
+#**
+ * Copied from Macros.AddExcelExportToLivetableMacroResultsPage with the following changes:
+ * - Exports CSV only
+ * - ColList is not a parameter but is set internally.
+ *#
+#macro(gridresultwithfilterexport)
+  #set ($logger = $services.logging.getLogger($doc.fullName))
+  #macro(initializeWriter)
+    #set ($discard = $csvWriter.initialize($response.writer))
+  #end
+  #macro(initializeRowValues)
+    #set ($rowValues = [])
+  #end
+  #macro(setCell $rowCount $colCount $text)
+    #set ($discard = $rowValues.add($text))
+  #end
+  #macro(writeRow)
+    #set ($discard = $csvWriter.writeNext($rowValues))
+  #end
+  #if ($xcontext.action == 'get')
+    #set ($csvWriter = $xwiki.parseGroovyFromPage("Macros.OpenCsvWriter"))
+    #if ($csvWriter)
+      #set ($discard = $response.setContentType('text/csv'))
+      ## prepare filename from parameters, if any is passed
+      #if ("$!request.filename" != '')
+        #set ($filename = "$!{request.filename}.csv")
+      #else
+        #set ($filename = 'data.csv')
+      #end
+      #set ($contentHeader = 'inline; filename="' + $filename + '"')
+      #set ($discard = $response.setHeader('Content-Disposition', $contentHeader))
+      ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
+      ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
+      #set ($discard = $response.setHeader('Cache-Control', 'private'))
+      #set ($discard = $response.setHeader('Pragma', 'cache'))
+      #set ($expires = $util.getDate().getTime())
+      #set ($expires = $expires + 120000)
+      #set ($expires = $util.getDate($expires))
+      #set ($discard = $response.setDateHeader('Expires', $expires.getTime()))
+
+      ## Make sure to include only the following properties:
+      #set ($includedProperties = ['doc.creationDate', 'demarche', 'modalite', 'score', 'vote', 'facile', 'comprehensible', 'difficultes', 'aide'])
+      #set ($colList = [])
+      #foreach ($col in $includedProperties)
+        #set ($discard = $colList.add($col))
+      #end
+      ##
+      ## Prepare the excel elements (workbook, sheet, first line of the sheet with column names)
+      ##
+      #initializeWriter()
+      #initializeRowValues()
+      #set ($colCount = 0)
+      #foreach ($colname in $colList)
+        ##DEBUG: generating column $colname on position $colCount
+        #if ($colname.startsWith('doc.'))
+          #set ($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
+          #setCell(0, $colCount, $colPrettyName)
+        #elseif ($colname == '_action')
+        #else
+          #set ($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
+          #if ($colPrettyName == "$!{request.transprefix}${colname}")
+            ## col pretty name was not found from translations, try to use the property's pretty name (important for user directory export, for example)
+            #set ($propNameTranslationKey = "Avis.Code.AvisClass_${colname}")
+            #set ($colPrettyName = $services.localization.render($propNameTranslationKey))
+          #end
+          #setCell(0, $colCount, $colPrettyName)
+        #end
+        #set ($colCount = $colCount + 1)
+      #end
+      #writeRow()
+      ##
+      ## Build the JSON in memory (using basic Java data types) so that it can be adjusted before serialization, using the same functions as the livetable results
+      ##
+      #set ($map = {})
+      #gridresultwithfilter_buildJSON('Avis.Code.AvisClass' $colList '' '' '' $map)
+      ## marshall all data from the $map.rows to the Excel/CSV
+      #set ($rowCount = 1)
+      #foreach($curRow in $map.rows)
+        #initializeRowValues()
+        #set($colCount = 0)
+        ## DEBUG: exporting $curRow
+        #foreach($colname in $colList)
+          ## get the value of the column from the current row and put it in the excel
+          #if ($colname.startsWith('doc.'))
+            #set($colVal = "$!curRow.get($colname.replace('doc.', 'doc_'))")
+          #else
+            #set($colVal = "$!curRow.get($colname)")
+            ## hack when the cell contains html, to use the cell_value instead
+            #if ($colVal.indexOf('&lt;') &gt;= 0)
+              #set($colVal_Value = $curRow.get("${colname}_value"))
+              #if("$!colVal_Value" != '')
+                #set($colVal = $colVal_Value)
+              #end
+            #end
+          #end
+          #setCell($rowCount, $colCount, $colVal))
+          #set($colCount = $colCount + 1)
+        #end
+        #writeRow()
+      #end
+      ## ==============================================
+      ## Data generation ended, now output.
+      ## ==============================================
+      #if (!$request.debug)
+        #set ($discard = $csvWriter.close())
+        #set ($discard = $xcontext.setFinished(true))
+      #else
+        Done
+      #end
+    #else
+      ## TODO need nice translated error message
+      An error occurred while initializing the CSV exporter.
+    #end
+  #end
+#end
+{{/velocity}}
+
+{{velocity wiki="false"}}
+#gridresultwithfilterexport()
+{{/velocity}}
+</content>
+</xwikidoc>
