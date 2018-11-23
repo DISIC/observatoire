@@ -63,13 +63,13 @@
   #set ($xObj = $xDoc.newObject($className))
   #set ($discard = $xObj.set($category, "$!value"))
   #if ($label)
-    |$label|$number
+    &lt;tr&gt;&lt;td&gt;$label&lt;/td&gt;&lt;td&gt;$number&lt;/td&gt;&lt;/tr&gt;
   #else
-    |$xDoc.display($category, $xObj)|$number
+    &lt;tr&gt;&lt;td&gt;$xDoc.display($category, $xObj)&lt;/td&gt;&lt;td&gt;$number&lt;/td&gt;&lt;/tr&gt;
   #end
 #end
 
-#macro(addAvisDataTable $tableId $property $propertyType $propAlias $percent $labels)
+#macro(addAvisDataTable $tableId $tableCaption $propertyLabel $property $propertyType $propAlias $percent $labels)
   #if (!$propAlias)
     #set ($propAlias = 'prop.value')
   #end
@@ -99,8 +99,16 @@
       #set ($discard = $list.add([$value, $entries.get(0)]))
     #end
   #end
-  (% id="$tableId" class="hidden" %)
-  |= $property |= Données
+  
+  &lt;table id="$tableId" class="hidden"&gt;
+  &lt;caption&gt;$tableCaption&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;$propertyLabel&lt;/th&gt;
+      &lt;th&gt;Réponses&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
   #foreach ($item in $list)
     #set ($value = $item.get(0))
     #set ($number = $item.get(1))
@@ -119,6 +127,8 @@
       #displayTableRow($value $number $className $property $label)
     #end
   #end
+  &lt;/tbody&gt;
+  &lt;/table&gt;
 #end
 
 #computeAvisStats()
@@ -166,7 +176,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
       {{tableToChartJS type='pie' table='score' options='$options'/}}
-      #addAvisDataTable('score', 'score', 'IntegerProperty as prop', 'prop.value', true, {1: 'avis  négatifs', 2:'avis  moyens', 3:'avis  positifs'})
+      #addAvisDataTable('score', 'Répartition des avis', 'Satisfaction', 'score', 'IntegerProperty as prop', 'prop.value', true, {1: 'avis  négatifs', 2:'avis  moyens', 3:'avis  positifs'})
 
       &lt;div class="lighter"&gt;Répartition des avis&lt;/div&gt;
 
@@ -210,14 +220,14 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
       {{tableToChartJS type='horizontalBar' table='facile' options='$options'/}}
-      #addAvisDataTable('facile', 'facile', 'IntegerProperty as prop', 'prop.value', false, {1:'&amp;#xf119;', 2:'&amp;#xf11a;', 3:'&amp;#xf118;'})
+      #addAvisDataTable('facile', 'Répartition des réponses sur la facilité d''usage', 'Facilité', 'facile', 'IntegerProperty as prop', 'prop.value', false, {1:'&amp;#xf119;', 2:'&amp;#xf11a;', 3:'&amp;#xf118;'})
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Compréhension&lt;/h3&gt;
 
       {{tableToChartJS type='horizontalBar' table='comprehensible' options='$options'/}}
-      #addAvisDataTable('comprehensible', 'comprehensible', 'IntegerProperty as prop', 'prop.value', false, {1:'&amp;#xf119;',2:'&amp;#xf11a;',3:'&amp;#xf118;'})
+      #addAvisDataTable('comprehensible', 'Répartition des réponse sur la compréhension', 'Facilité de compréhension', 'comprehensible', 'IntegerProperty as prop', 'prop.value', false, {1:'&amp;#xf119;',2:'&amp;#xf11a;',3:'&amp;#xf118;'})
 
     &lt;/div&gt;
   &lt;/div&gt;
@@ -258,14 +268,14 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
       {{tableToChartJS type='horizontalBar' table='difficultes' options='$options'/}}
-      #addAvisDataTable('difficultes', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
+      #addAvisDataTable('difficultes',  'Difficultés rencontrées', 'Difficulté', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Aides sollicitées&lt;/h3&gt;
 
       {{tableToChartJS type='horizontalBar' table='aide' options='$options'/}}
-      #addAvisDataTable('aide', 'aide', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
+      #addAvisDataTable('aide', 'Besoins d''aide', 'Aide', 'aide', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
 
     &lt;/div&gt;
   &lt;/div&gt;
@@ -303,7 +313,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
     &lt;div class="row"&gt;
       &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
         &lt;h3&gt;Parcours dématérialisés&lt;/h3&gt;
-        #addAvisDataTable('modalite', 'modalite', 'StringProperty as prop', 'prop.value', true, {'en-ligne-entièrement':'Démarches  réalisées en ligne','en-ligne-partiellement':'En ligne  mais pas jusqu''au bout','autrement':'Autre  (papier, guichet&amp;hellip;)'})
+        #addAvisDataTable('modalite', 'Parcours dématérialisés', 'Modalité', 'modalite', 'StringProperty as prop', 'prop.value', true, {'en-ligne-entièrement':'Démarches  réalisées en ligne','en-ligne-partiellement':'En ligne  mais pas jusqu''au bout','autrement':'Autre  (papier, guichet&amp;hellip;)'})
 
         #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, StringProperty as prop, StringProperty demarche where doc.fullName = obj.name and obj.className = 'Avis.Code.AvisClass' and obj.id = prop.id.id and prop.id.name = 'modalite' and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and prop.value='en-ligne-entièrement'")
         #set ($results = $services.query.hql($query).execute())
@@ -355,10 +365,16 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
         &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
           &lt;h3&gt;Souhaits de dématérialisation&lt;/h3&gt;
           &lt;span&gt;$services.localization.render('wikidemarches.demarche.avis.stats.demat-requests', $dematRequestedPercent)&lt;/span&gt;
-          (% id="autre" class="hidden" %)
-          |= Vote |= Données
-          |Dématérialisation  souhaitée|$dematRequestedPercent
-          |Dématérialisation  non demandée|$noDematRequestPercent
+          &lt;table id="autre" class="hidden"&gt;
+            &lt;caption&gt;Souhaits de dématérialisation&lt;/caption&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;&lt;th&gt;Souhait&lt;/th&gt;&lt;th&gt;Réponses&lt;/th&gt;&lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;&lt;td&gt;Dématérialisation  souhaitée&lt;/td&gt;&lt;td&gt;$dematRequestedPercent&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Dématérialisation  non demandée&lt;/td&gt;&lt;td&gt;$noDematRequestPercent&lt;/td&gt;&lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
 
           #set($chartOptions = {
             "backgroundColors": ["#a89ecc","#bcbcbc"],
