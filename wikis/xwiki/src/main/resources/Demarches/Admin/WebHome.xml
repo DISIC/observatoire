@@ -39,5 +39,9 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>* [[Liste des démarches non indexées ou indexées plusieurs fois&gt;&gt;SolrIndexChecker]]</content>
+  <content>{{velocity}}
+#set ($url = $xwiki.getDocument('FarmTools.DefaultLanguageUpdater').getURL('view','xaction=prepare&amp;wikis=xwiki&amp;spacesList=Demarches'))
+* [[Liste des démarches non indexées&gt;&gt;SolrIndexChecker]]
+* [[Liste des démarches n'ayant pas de champ « langue »&gt;&gt;path:$url]]
+{{/velocity}}</content>
 </xwikidoc>
