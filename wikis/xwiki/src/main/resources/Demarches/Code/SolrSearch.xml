@@ -42,7 +42,7 @@
   <content>{{velocity output="false"}}
 #set ($solrConfig = {
   'queryFields': {
-    'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'
+    'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 property.Demarches.Code.DemarchesClass.urlDemarche^8 object.Demarches.Code.DemarchesClass^1'
   },
   'filterQuery': [
     'wiki:xwiki',
