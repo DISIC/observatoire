@@ -57,27 +57,31 @@
     #set ($selectedTab = 'avis-tab')
   #end
 #end
-&lt;ul class="nav nav-tabs" id="tabs"&gt;
-#if (!$isGuest &amp;&amp; $xcontext.action == 'view')
-  &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
-  &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
+
+## Display tabs only in view mode.
+#if ($xcontext.action == 'view')
+  &lt;ul class="nav nav-tabs" id="tabs"&gt;
+    #if (!$isGuest)
+      &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
+      &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
+    #end
+    &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
+    &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
 #end
-  &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
-  &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;div class="tab-content"&gt;
+  #if (!$isGuest)
+    {{include reference="Demarches.Code.DemarcheTab" /}}
+    #if ($xcontext.action == 'view')
+      {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
+    #end
+  #end
+  #if ($xcontext.action == 'view')
+    {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
 
-#if (!$isGuest &amp;&amp; $xcontext.action == 'view')
-  {{include reference="Demarches.Code.DemarcheTab" /}}
-
-  {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
-#end
-
-  {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
-
-  {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
-
+    {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+  #end
 &lt;/div&gt;
 
 {{/html}}
