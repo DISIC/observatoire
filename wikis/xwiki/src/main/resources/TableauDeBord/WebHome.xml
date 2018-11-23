@@ -160,14 +160,15 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
     </property>
     <property>
       <code>var XWiki = (function (XWiki) {
-  document.observe("xwiki:livetable:receivedEntries", function(event) {
-     var data = event.memo.data;
-     if (data &amp;&amp; data.rows &amp;&amp; Array.isArray(data.rows)) {
-       data.rows.forEach(function(element, index) {
-         element['doc_url'] = element['doc_url'] + '?tab=statistics-tab';
-       });
-     }
-  });
+  require(['jquery', 'xwiki-events-bridge'], function($) {
+    $(document).on('xwiki:livetable:receivedEntries', function(event, data) {
+       if (data &amp;&amp; data.data &amp;&amp; data.data.rows &amp;&amp; Array.isArray(data.data.rows)) {
+         data.data.rows.forEach(function(element, index) {
+           element['doc_url'] = element['doc_url'] + '?tab=statistics-tab';
+         });
+       }
+    });
+   });
   return XWiki;
 
 })(XWiki);
