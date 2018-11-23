@@ -154,8 +154,15 @@
     <property>
       <code>require.config({
   paths: {
-    chart: "$services.webjars.url('org.webjars.bower:chartjs', 'dist/Chart.bundle.min.js')",
+    //chart: "$services.webjars.url('org.webjars.bower:chartjs', 'dist/Chart.bundle.min.js')",
+    chart: "//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min",
+    datalabels: "//cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min",
     palette: "$services.webjars.url('org.xwiki.contrib:application-chartjs-webjar', 'palette.min.js')"
+  },
+  map: {
+    datalabels: {
+      "chart.js": "chart"
+    }
   },
   shim: {
     palette: {
@@ -164,8 +171,8 @@
   }
 });
 
-require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
-  
+require(['jquery', 'chart', 'datalabels', 'palette'], function($, Chart, datalabels, palette) {
+
   var getData = function(canvas) {
     var deferred = $.Deferred();
     var data;
@@ -176,36 +183,94 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
     }
     if (data) {
       if (data.table &amp;&amp; $('table#' + data.table).length &gt; 0) {
+        var table = data.table;
         data = readDataFromTable(data);
+        // The table id is kept because it is used for creating an accessible fallback.
+        data.table = table;
       }
       deferred.resolve(data);
     }
     return deferred.promise();
   };
 
-  var chartTypesWithBackgroundColorPerDataSet = ['line', 'bar', 'horizontalBar', 'radar'];
-  var configureData = function(data, type) {
-    var opacity = (type === 'line' || type === 'radar') ? .5 : .3;
-    var dataSetBackgroundColor = palette('tol', data.datasets.length).map(function(hex) {
+  var configureColors = function(data, options, type) {
+
+    var opacity = options.opacity ? options.opacity : 0.8;
+    var chartTypesWithBackgroundColorPerDataSet = ['line', 'bar', 'horizontalBar', 'radar'];
+    var dataSetBackgroundColors = palette('tol', data.datasets.length).map(function(hex) {
       return convertHex(hex, opacity);
     });
+
+    if (options.removeZeros &amp;&amp; data.datasets.length == 1) {
+      var newLabels = [];
+      // Remove 0 values from the datasets, from the corresponding colors and from the labels
+      data.datasets.forEach(function(dataSet, index) {
+        var newData = [];
+        var newBackgroundColors = [];
+
+        dataSet.data.forEach(function(value, valueIndex) {
+          if (value != 0) {
+            newData.push(value);
+            newLabels.push(data.labels[valueIndex]);
+            if (chartTypesWithBackgroundColorPerDataSet.indexOf(type) &gt;= 0) {
+              if (options.backgroundColors) {
+                if (data.datasets.length == options.backgroundColors.length) {
+                  newBackgroundColors = options.backgroundColors;
+                } else {
+                  newBackgroundColors.push(options.backgroundColors[valueIndex]);
+                }
+              }
+            } else if (options.backgroundColors) {
+              newBackgroundColors.push(options.backgroundColors[valueIndex]);
+            }
+          }
+        });
+        dataSet.data = newData;
+        options.backgroundColors = newBackgroundColors;
+      });
+      data.labels = newLabels;
+    }
+
     data.datasets.forEach(function(dataSet, index) {
       if ((!dataSet.backgroundColor || dataSet.backgroundColor.length == 0)) {
         if (chartTypesWithBackgroundColorPerDataSet.indexOf(type) &gt;= 0) {
-          // Background color per data set.
-          dataSet.backgroundColor = dataSetBackgroundColor[index];
+          if (options.backgroundColors) {
+            // Either one color per dataset or, if there is only one dataset, one color for each value
+            if (data.datasets.length == options.backgroundColors.length) {
+              // One color per dataset, from the options.
+              dataSet.backgroundColor = options.backgroundColors[index];
+            } else {
+              // One color per value of the first dataset, from the options.
+              dataSet.backgroundColor = options.backgroundColors.map(function(hex) {
+                return convertHex(hex.substring(1), opacity);
+              });
+            }
+          } else {
+            // One color per data set, generated with tol.
+            dataSet.backgroundColor = dataSetBackgroundColors[index];
+          }
+
         } else {
-          // Background color per value.
-          dataSet.backgroundColor = palette('tol', dataSet.data.length).map(function(hex) {
-            return '#' + hex;
-          });
+          if (options.backgroundColors) {
+            // One background color per value, from the options.
+            dataSet.backgroundColor = options.backgroundColors.map(function(hex) {
+              return convertHex(hex.substring(1), opacity);
+            });
+          } else {
+            // One background color per value, generated with tol.
+            dataSet.backgroundColor = palette('tol', dataSet.data.length).map(function(hex) {
+                return convertHex(hex, opacity);
+              }
+            );
+          }
         }
       } else {
         dataSet.backgroundColor = dataSet.backgroundColor.map(function(hex) {
-          return convertHex(hex.substring(1), 0.8);
+          return convertHex(hex, opacity);
         });
       }
     });
+
     return data;
   };
 
@@ -237,8 +302,7 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
           if (!dataSet) {
             dataSet = {
               label: dataSetLabel,
-              data: [],
-              backgroundColor: []
+              data: []
             }
             dataSetsByLabel[dataSetLabel] = dataSet;
           }
@@ -275,8 +339,7 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
               if (!dataSet) {
                 dataSet = {
                   label: $(rows.first().find('th')[i]).text().trim(),
-                  data: [],
-                  backgroundColor: []
+                  data: []
                 };
                 dataSets.push(dataSet);
               }
@@ -289,8 +352,7 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
     } else {
       var dataSet = {
         label: $(rows.first().find('th')[1]).text().trim(),
-        data: [],
-        backgroundColor: []
+        data: []
       };
       rows.each(function() {
         var cells = $(this).children('td');
@@ -299,24 +361,18 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
         }
         var label = cells.first().text().trim();
         var values = [];
-        var backgroundColors = [];
         for (var i = 1; i &lt; cells.length; i++) {
           var value = $(cells[i]).text().trim();
+          //TODO: check
           if ($.isNumeric(value)) {
             values.push(value);
-          } else {
-            backgroundColors.push(value);
           }
         }
         labels.push(label);
         if (values.length == 1) {
           dataSet.data.push(values[0]);
-          if (backgroundColors.length == 1) {
-            dataSet.backgroundColor.push(backgroundColors[0]);
-          }
         } else {
           dataSet.data.push(values);
-          dataSet.backgroundColor.push(backgroundColors);
         }
       });
       dataSets.push(dataSet);
@@ -343,36 +399,26 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
     }
 
     var type = canvas.attr('data-type');
-    var dataSource = canvas.attr('data-source');
     var options = jsonAttributeToObject('data-options');
-    var source = jsonAttributeToObject('data-source');
-    
+
+    //TODO: check why a promise is used to get 'data-source' but not for 'data-options' and 'data-type'
     getData(canvas).then(function(data) {
-      return configureData(data, type);
+      return configureColors(data, options, type);
     }).done(function(data) {
-      for (var i = 0; i &lt; data.labels.length; i++) {
-        var label = data.labels[i];
-        if (label == 'Très bien' || label == 'Bon') {
-          data.labels[i] = '\uf118';
-        } else if (label == 'Moyen') {
-          data.labels[i] = '\uf11a';
-        } else if (label == 'Mauvais' || label == 'Pas bien') {
-          data.labels[i] = '\uf119';
-        }
-      }
-      var ticks;
+      /*var ticks;
       if (options.scales &amp;&amp; options.scales.xAxes &amp;&amp; options.scales.xAxes.length &gt; 0) {
         ticks = options.scales.xAxes[0].ticks;
-      }
+      }*/
 
       // Add a callback to display only integer values
-      if (ticks) {
+      /*if (ticks) {
         ticks.callback = function(value, index, values) {
           if (Math.floor(value) === value) {
               return value;
           }
         }
       }
+
       if (ticks &amp;&amp; ticks.percent == true) {
           options.tooltips = {
             callbacks: {
@@ -390,17 +436,58 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
           options.scales.xAxes[0].ticks.callback = function(value, index, values) {
             return value + '%';
           }
-      }
+      }*/
 
-      if (options.percent) {
-          options.tooltips = {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                var index = tooltipItem.index;
-                return data.labels[index] + ': ' + data.datasets[0].data[index] + '%';
-              }
+      /*if (options.percent) {
+        options.tooltips = {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var index = tooltipItem.index;
+              return data.labels[index] + ': ' + data.datasets[0].data[index] + '%';
             }
           }
+        }
+      }*/
+      /*options.tooltips = {
+        callbacks: {
+          title: function(tooltipItem, data) { return ''},
+          label: function(tooltipItem, data) {
+            var datasetIndex = tooltipItem.datasetIndex;
+            var index = tooltipItem.index;
+            var value = data.datasets[datasetIndex].data[index];
+            var label = data.labels[index];
+            label = label.replace('  ', ' ');
+            return label + ' : '+ value;
+          }
+        }
+      }*/
+
+      if (options.plugins &amp;&amp; options.plugins.datalabels &amp;&amp; options.percent) {
+        Chart.defaults.global.plugins.datalabels.display = true;
+        options.plugins.datalabels.formatter = function(value, context) {
+          var text = context.chart.legend.legendItems[context.dataIndex].text;
+          text = text.replace('  ','\n');
+          if (options.displayPercentFirst == 0) {
+            return text + '\n' + value + ' %';
+          } else {
+            return value + ' %\n' + text;
+          }
+        }
+        options.tooltips = {
+          callbacks: {
+            title: function(tooltipItem, data) { return ''},
+            label: function(tooltipItem, data) {
+              var datasetIndex = tooltipItem.datasetIndex;
+              var index = tooltipItem.index;
+              var value = data.datasets[datasetIndex].data[index];
+              var label = data.labels[index];
+              label = label.replace('  ', ' ');
+              return label + ' : '+ value + ' %';
+            }
+          }
+        }
+      } else if (!options.plugins) {
+        Chart.defaults.global.plugins.datalabels.display = false;
       }
 
       var chart = new Chart(canvas, {
@@ -409,9 +496,9 @@ require(['jquery', 'chart', 'palette'], function($, Chart, palette) {
         options: options
       });
 
-      
-      // Fallback to table data for accessibility, by moving the existing table to the canvas content
-      var table = $('table#' + source.table);
+      // Fallback to table data for accessibility, by moving the existing table to the canvas content.
+      // See http://pauljadam.com/demos/canvas.html
+      var table = $('table#' + data.table);
       table.removeClass('hidden');
       table.appendTo(canvas);
 

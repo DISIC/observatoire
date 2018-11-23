@@ -41,7 +41,7 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html wiki="true"}}
-&lt;div class="tab-pane fade #if($selectedTab == 'liste-avis')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
+&lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
   #set ($extraParams = "demarche=$doc.fullName")
   {{include document="Avis.WebHome" /}}
 &lt;/div&gt;

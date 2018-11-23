@@ -41,7 +41,7 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html wiki="true"}}
-&lt;div class="tab-pane fade #if($selectedTab == 'demarche')active in#end" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
+&lt;div class="tab-pane fade #if($selectedTab == 'demarche-tab')active in#end" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
   #if($xcontext.action == 'edit')
     #set($type="edit")
     &lt;input type="hidden" name="xvalidate" value="1" /&gt;
@@ -50,7 +50,7 @@
     &lt;input type="hidden" name="xvalidation" value="Demarches.Code.ValidationScriptGroovy" /&gt;
   #end
 
-  #if ($xcontext.validationStatus.errors.size() &gt; 0 || $xcontext.validationStatus.exceptions.size() &gt; 0)
+  #if ($xcontext.validationStatus &amp;&amp; ($xcontext.validationStatus.errors.size() &gt; 0 || $xcontext.validationStatus.exceptions.size() &gt; 0))
 
     {{error}}
     $services.localization.render('demarches.validation.error')
@@ -107,7 +107,7 @@
 (((
 &lt;dl&gt;
 #foreach($propName in ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
-  #displayProperty($propName, false)
+ #displayProperty($propName, false)
 #end
 &lt;/dl&gt;
 )))

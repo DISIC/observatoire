@@ -39,7 +39,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{include document="Demarches.Code.DemarchesMacros" /}}
+  <content>{{include reference="Demarches.Code.DemarchesMacros" /}}
 
 {{velocity}}
 {{html wiki="true" clean="false"}}
@@ -48,25 +48,22 @@
 #set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
 
 #displaySubTitle()
-#displayScoreAverageBar()
 
 #set ($selectedTab = "$!request['tab']")
 #if ($selectedTab == '')
   #if (!$isGuest)
-    #set ($selectedTab = 'demarche')
+    #set ($selectedTab = 'demarche-tab')
   #else
-    #set ($selectedTab = 'avis')
+    #set ($selectedTab = 'avis-tab')
   #end
 #end
 &lt;ul class="nav nav-tabs" id="tabs"&gt;
 #if (!$isGuest &amp;&amp; $xcontext.action == 'view')
-  &lt;li role="presentation" #if($selectedTab == 'demarche')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;Informations&lt;/a&gt;&lt;/li&gt;
-  &lt;li role="presentation" #if($selectedTab == 'liste-avis')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
 #end
-  &lt;li role="presentation" #if($selectedTab == 'avis')class="active"#end&gt;&lt;a href="#avis-tab"&gt;Donner mon avis&lt;/a&gt;&lt;/li&gt;
-#if ($totalVotes &gt; 0)
-  &lt;li role="presentation" #if($selectedTab == 'details')class="active"#end&gt;&lt;a href="#details-tab"&gt;Votre avis&lt;/a&gt;&lt;/li&gt;
-#end
+  &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class="tab-content"&gt;
@@ -79,9 +76,7 @@
 
   {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
 
-#if ($totalVotes &gt; 0)
-  {{include reference="Demarches.Code.DemarcheAvisDetailsTab" /}}
-#end
+  {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
 
 &lt;/div&gt;
 
@@ -544,15 +539,9 @@ require(['jquery','xwiki-selectize'], function($) {
   margin-bottom: 1.5em;
 }
 
-.demarche-avis-separator {
-  margin-bottom: 1.5em;
-  margin-top: 1.5em;
-  /* same as the legend border */
-  border-top: 1px solid #e5e5e5;
-}
-
 .nav-tabs {
- margin-bottom: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 
 
@@ -777,7 +766,40 @@ label.question {
 h2 {
   padding-bottom: 0.2em;
   border-bottom: 1px solid #e5e5e5;
-}</code>
+}
+
+/** Used by the avis statistics tab */
+#statistics-tab {
+  font-size: 0.9em;
+
+  .lighter {
+    color: #777;
+  }
+
+  h3 {
+    color: #555;
+  }
+
+  a.average-help {
+    color: lighten(@gray-light, 25%);
+    position: relative;
+    font-size: 0.5em;
+    top: -0.7em;
+  }
+
+  .vertical-align {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .row.vertical-align {
+      display: block;
+    }
+  }
+}
+
+</code>
     </property>
     <property>
       <contentType>LESS</contentType>

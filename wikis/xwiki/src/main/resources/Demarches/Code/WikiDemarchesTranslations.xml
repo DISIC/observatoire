@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1527450166000</creationDate>
+  <creationDate>1534414167000</creationDate>
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530628326000</date>
-  <contentUpdateDate>1530628326000</contentUpdateDate>
+  <date>1542921091000</date>
+  <contentUpdateDate>1542921091000</contentUpdateDate>
   <version>1.1</version>
   <title>WikiDemarchesTranslations</title>
   <comment/>
@@ -58,6 +58,14 @@ wikidemarches.search.label=Démarche recherchée
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
+
+# Démarche tabs
+wikidemarches.demarche.tabs.demarche=Informations
+wikidemarches.demarche.tabs.avisList=Liste des avis
+wikidemarches.demarche.tabs.avisForm=Donnez votre avis
+wikidemarches.demarche.tabs.avisStatistics=Tous les avis
+wikidemarches.demarche.noAvisYet=Aucun avis pour l'instant.
+
 
 # Demarche edition
 demarches.validation.error=Le formulaire n'a pas pu être validé en raison d'une ou plusieurs erreur(s) ci-dessous.
@@ -107,6 +115,11 @@ wikidemarches.dematdashboard.table.occurrences=Nb. avis
 wikidemarches.dematdashboard.table.moyenne=Taux de satisfaction
 wikidemarches.dematdashboard.table.emptyvalue=-
 
+# Demarche avis stats
+wikidemarches.demarche.avis.stats.recueil=Données recueillies en ligne sur ce site, depuis le {0}, auprès de {1} internautes.
+wikidemarches.demarche.avis.stats.online={0}&amp;nbsp;% des répondant(es) ont effectué cette démarche en ligne.&lt;br/&gt;&lt;br/&gt;
+wikidemarches.demarche.avis.stats.demat-requests={0}&amp;nbsp;% de celles et ceux qui ont effectué cette démarche autrement (papier, guichet&amp;hellip;) auraient préféré la faire en ligne.
+
 # Administration
 wikidemarches.administration.home-title=Administrez les données
 wikidemarches.administration.home-subtitle=
@@ -117,8 +130,7 @@ wikidemarches.administration.directions.home-link=Directions
 wikidemarches.administration.publics.home-link=Publics
 wikidemarches.administration.evenements.home-link=Événements
 wikidemarches.administration.avis.home-link=Avis
-wikidemarches.administration.avis.statistiques=Statistiques
-</content>
+wikidemarches.administration.avis.statistiques=Statistiques</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>
