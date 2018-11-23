@@ -57,7 +57,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>aide</name>
-      <number>10</number>
+      <number>11</number>
       <picker>0</picker>
       <prettyName>Aide</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -76,9 +76,9 @@
       <customDisplay>{{include reference="Avis.Code.TextAreaDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
       <editor>---</editor>
-      <hint>hint</hint>
+      <hint/>
       <name>autre</name>
-      <number>12</number>
+      <number>13</number>
       <picker>0</picker>
       <prettyName>Autre</prettyName>
       <rows>5</rows>
@@ -93,7 +93,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>autreAide</name>
-      <number>11</number>
+      <number>12</number>
       <picker>0</picker>
       <prettyName>Autre aide</prettyName>
       <size>30</size>
@@ -107,7 +107,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>autreDifficulte</name>
-      <number>9</number>
+      <number>10</number>
       <picker>0</picker>
       <prettyName>Autre difficulté</prettyName>
       <size>30</size>
@@ -121,7 +121,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>comprehensible</name>
-      <number>7</number>
+      <number>8</number>
       <numberType>integer</numberType>
       <prettyName>Compréhensible</prettyName>
       <size>30</size>
@@ -163,7 +163,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>difficultes</name>
-      <number>8</number>
+      <number>9</number>
       <picker>0</picker>
       <prettyName>Difficultés</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -182,7 +182,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>email</name>
-      <number>13</number>
+      <number>14</number>
       <picker>0</picker>
       <prettyName>E-mail</prettyName>
       <size>30</size>
@@ -196,7 +196,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>facile</name>
-      <number>6</number>
+      <number>7</number>
       <numberType>integer</numberType>
       <prettyName>Facile</prettyName>
       <size>30</size>
@@ -234,7 +234,7 @@
       <name>score</name>
       <number>4</number>
       <numberType>integer</numberType>
-      <prettyName>Score</prettyName>
+      <prettyName>Satisfaction</prettyName>
       <size>30</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -260,9 +260,9 @@
       <disabled>0</disabled>
       <hint/>
       <name>source</name>
-      <number>14</number>
+      <number>15</number>
       <picker>0</picker>
-      <prettyName>source</prettyName>
+      <prettyName>Source</prettyName>
       <size>30</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -291,6 +291,23 @@
       <values>true|false</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </vote>
+    <voteInput>
+      <contenttype>---</contenttype>
+      <customDisplay>{{include reference="Avis.Code.TextAreaDisplayer" /}}</customDisplay>
+      <disabled>0</disabled>
+      <editor>---</editor>
+      <hint/>
+      <name>voteInput</name>
+      <number>6</number>
+      <picker>0</picker>
+      <prettyName>Pourquoi en ligne</prettyName>
+      <rows>5</rows>
+      <size>40</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+    </voteInput>
   </class>
   <object>
     <name>Avis.Code.AvisClass</name>

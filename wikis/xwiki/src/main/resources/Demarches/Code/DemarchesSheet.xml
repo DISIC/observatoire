@@ -277,6 +277,13 @@ require(['jquery','xwiki-selectize'], function($) {
       }
       $('input[type="submit"]').prop('disabled', false);
     }
+
+    var vote = $("input[name='Avis.Code.AvisClass_0_vote']:checked").val();
+    if (vote &amp;&amp; vote == 'true' &amp;&amp; modalite == 'autrement') {
+      $('.vote-input-container').show();
+    } else {
+      $('.vote-input-container').hide();
+    }
   }
 
   function updateEvaluationInputsVisibility() {
@@ -309,6 +316,10 @@ require(['jquery','xwiki-selectize'], function($) {
     });
 
     $("input[name='Avis.Code.AvisClass_0_score']").change(function() {
+      updateVoteAndSubmitButton();
+    });
+
+    $("input[name='Avis.Code.AvisClass_0_vote']").change(function() {
       updateVoteAndSubmitButton();
     });
 
@@ -505,6 +516,10 @@ require(['jquery','xwiki-selectize'], function($) {
 }
 
 .vote-container {
+  display: none;
+}
+
+.vote-input-container {
   display: none;
 }
 

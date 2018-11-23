@@ -108,6 +108,9 @@
       &lt;div class="vote-container"&gt;
         #displayObjectForm($avis,['vote'])
       &lt;/div&gt;
+      &lt;div class="vote-input-container"&gt;
+        #displayObjectForm($avis,['voteInput'])
+      &lt;/div&gt;
       ## set the source of this avis, only in the first step.
       ## TODO: We'll need to figure out how to handle this properly when implementing the API / Embed, to make sure that no avis remains without source
       #set($avissource = "$!request.nd_source")
@@ -128,7 +131,7 @@
     #end
     ## If we're handling a validated demarche, the avis gets associated to it.
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
-    &lt;input type="hidden" name="xredirect" value="$doc.getURL()?tab=avis" /&gt;
+    &lt;input type="hidden" name="xredirect" value="$doc.getURL()?tab=avis-tab" /&gt;
     &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
     &lt;div class='buttonwrapper'&gt;
     #if ($step == 'initial-step')

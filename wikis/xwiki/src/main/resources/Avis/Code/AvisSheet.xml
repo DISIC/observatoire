@@ -56,7 +56,7 @@
       #end
     #else
       ## In view mode, we protect the display of text properties against HTML/JavaScript injection.
-      #set ($textProperties = ['autreDifficulte','autreAide','autre','email','source'])
+      #set ($textProperties = ['voteInput','autreDifficulte','autreAide','autre','email','source'])
       #if ($textProperties.contains($prop.name))
         ## mask the email property to other users than admins
         #if ("$!value" != '' &amp;&amp; $prop.name == 'email' &amp;&amp; !$hasAdmin)
