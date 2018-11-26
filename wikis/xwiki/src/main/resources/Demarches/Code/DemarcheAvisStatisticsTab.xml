@@ -83,7 +83,6 @@
   #if ($smileyProperties.contains($property))
     #set ($list = [])
     #foreach ($level in [0..2])
-      ##set ($xLevel = $mathtool.sub(3, $level))
       #set ($xLevel = $mathtool.add($level, 1))
       #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias = $xLevel")
       #set ($entries = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
@@ -189,6 +188,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #set($chartOptions = {
         "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
         "opacity": 0.8,
+        "labelsMap": {"Mauvais": "\uf119", "Moyen": "\uf11a", "Bon":"\uf118"},
         "scales": {
           "xAxes": [{
             "gridLines": {"display": false, "drawBorder": false},
@@ -220,14 +220,14 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
       {{tableToChartJS type='horizontalBar' table='facile' options='$options'/}}
-      #addAvisDataTable('facile', 'Répartition des réponses sur la facilité d''usage', 'Facilité', 'facile', 'IntegerProperty as prop', 'prop.value', false, {1:'&amp;#xf119;', 2:'&amp;#xf11a;', 3:'&amp;#xf118;'})
+      #addAvisDataTable('facile', 'Répartition des réponses sur la facilité d''usage', 'Facilité', 'facile', 'IntegerProperty as prop', 'prop.value', false, $NULL)
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Compréhension&lt;/h3&gt;
 
       {{tableToChartJS type='horizontalBar' table='comprehensible' options='$options'/}}
-      #addAvisDataTable('comprehensible', 'Répartition des réponse sur la compréhension', 'Facilité de compréhension', 'comprehensible', 'IntegerProperty as prop', 'prop.value', false, {1:'&amp;#xf119;',2:'&amp;#xf11a;',3:'&amp;#xf118;'})
+      #addAvisDataTable('comprehensible', 'Répartition des réponse sur la compréhension', 'Facilité de compréhension', 'comprehensible', 'IntegerProperty as prop', 'prop.value', false, $NULL)
 
     &lt;/div&gt;
   &lt;/div&gt;

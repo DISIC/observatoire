@@ -461,6 +461,14 @@ require(['jquery', 'chart', 'datalabels', 'palette'], function($, Chart, datalab
           }
         }
       }*/
+      if (options.labelsMap) {
+        for (var i = 0; i &lt; data.labels.length; i++) {
+          console.log(data.labels[i]);
+          if (options.labelsMap.hasOwnProperty(data.labels[i])) {
+            data.labels[i] = options.labelsMap[data.labels[i]]
+          }
+        }
+      }
 
       if (options.plugins &amp;&amp; options.plugins.datalabels &amp;&amp; options.percent) {
         Chart.defaults.global.plugins.datalabels.display = true;
