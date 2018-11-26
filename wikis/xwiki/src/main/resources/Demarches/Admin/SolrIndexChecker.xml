@@ -77,7 +77,7 @@ Cette page contient un script permettant d'identifier les démarches qui:
           #set ($found = "$name" == "$entry")
         #end
         #if ($found)
-          #set ($discard = $mathtool.add($foundCount, 1))
+          #set ($foundCount = $mathtool.add($foundCount, 1))
         #end
       #end
     #end
