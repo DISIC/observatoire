@@ -811,7 +811,7 @@ h2 {
     align-items: center;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     .row.vertical-align {
       display: block;
     }
