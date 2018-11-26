@@ -63,8 +63,8 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'tagCloud': true,
   'rowCount': 10,
   'maxPages': 7,
-  'selectedColumn': 'doc.title',
-  'defaultOrder': 'asc',
+  'selectedColumn': 'occurrences',
+  'defaultOrder': 'desc',
   'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur&amp;votes_class=Avis.Code.AvisStatsClass&amp;occurrences_class=Avis.Code.AvisStatsClass&amp;moyenne_class=Avis.Code.AvisStatsClass'
 })
 #livetable('demarches' $columns $columnsProperties $options)

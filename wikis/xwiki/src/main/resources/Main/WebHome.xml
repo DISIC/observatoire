@@ -100,9 +100,7 @@
         (%class='demarches-dashboardsubtitle'%)
         $services.localization.render('wikidemarches.dematdashboard.homesubtitle')
 
-        #set ($tableauDeBord = $xwiki.getDocument('TableauDeBord.WebHome'))
-        #set ($tableauDeBordUrl = $tableauDeBord.getURL('view','#|t=demarches&amp;p=1&amp;l=10&amp;s=occurrences&amp;d=desc'))
-        [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;path:$tableauDeBordUrl||class='button btn btn-primary']]
+        [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button btn btn-primary']]
       )))
     )))
   )))
