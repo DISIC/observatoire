@@ -416,11 +416,12 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       &lt;input type="hidden" name="demarche" value="${escapetool.xml($doc.fullName)}" /&gt;
       &lt;input type="hidden" name="outputSyntaxType" value="csv" /&gt;
       &lt;input type="hidden" name='filename' value="$escapetool.xml("demarche-${doc.name}-${datetool.get('yyyyMMdd-HHmmss')}")" /&gt;
-      &lt;button class='button' type='submit'&gt;&lt;span&gt;Export CSV&lt;/button&gt;
+      &lt;button class='button' type='submit'&gt;&lt;span&gt;$services.localization.render('wikidemarches.demarche.avis.stats.telecharger')&lt;/button&gt;
     &lt;/div&gt;
+    &lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" target="_blank" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;
   &lt;/form&gt;
 #else
- #set ($noAvisYet = $services.localization.render('wikidemarches.demarche.noAvisYet'))
+ #set ($noAvisYet = $services.localization.render('wikidemarches.demarche.avis.stats.noAvisYet'))
  &lt;div class="lighter" style="font-size: 1.3em; text-align: center; margin: 5em 0;"&gt;$noAvisYet&lt;/div&gt;
 #end
 &lt;/div&gt;

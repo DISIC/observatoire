@@ -64,8 +64,6 @@ wikidemarches.demarche.tabs.demarche=Informations
 wikidemarches.demarche.tabs.avisList=Liste des avis
 wikidemarches.demarche.tabs.avisForm=Donnez votre avis
 wikidemarches.demarche.tabs.avisStatistics=Tous les avis
-wikidemarches.demarche.noAvisYet=Aucun avis pour l'instant.
-
 
 # Demarche edition
 demarches.validation.error=Le formulaire n'a pas pu être validé en raison d'une ou plusieurs erreur(s) ci-dessous.
@@ -116,9 +114,11 @@ wikidemarches.dematdashboard.table.moyenne=Taux de satisfaction
 wikidemarches.dematdashboard.table.emptyvalue=-
 
 # Demarche avis stats
+wikidemarches.demarche.avis.stats.noAvisYet=Aucun avis pour l'instant.
 wikidemarches.demarche.avis.stats.recueil=Données recueillies en ligne sur ce site, depuis le {0}, auprès de {1} internautes.
 wikidemarches.demarche.avis.stats.online={0}&amp;nbsp;% des répondant(es) ont effectué cette démarche en ligne.&lt;br/&gt;&lt;br/&gt;
 wikidemarches.demarche.avis.stats.demat-requests={0}&amp;nbsp;% de celles et ceux qui ont effectué cette démarche autrement (papier, guichet&amp;hellip;) auraient préféré la faire en ligne.
+wikidemarches.demarche.avis.stats.telecharger=Télécharger le fichier CSV
 
 # Administration
 wikidemarches.administration.home-title=Administrez les données
