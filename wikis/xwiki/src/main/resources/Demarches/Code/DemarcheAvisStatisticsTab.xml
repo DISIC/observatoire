@@ -136,7 +136,11 @@
 #if ($avisCount &gt; 0)
     #set ($date = $datetool.toDate('ddMMyyyy', '15062018'))
     #set ($fDate = $datetool.format('d MMMM yyyy', $date))
-    &lt;span class="lighter"&gt;$services.localization.render('wikidemarches.demarche.avis.stats.recueil', [$fDate, $avisCount])&lt;/span&gt;
+    #set ($label = $services.localization.render('wikidemarches.demarche.avis.stats.recueil', [$fDate, $avisCount]))
+    #if ($avisCount == 1)
+      #set ($label = $services.localization.render('wikidemarches.demarche.avis.stats.recueil.singulier', [$fDate, $avisCount]))
+    #end
+    &lt;span class="lighter"&gt;$label&lt;/span&gt;
   &lt;div class="row vertical-align"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; padding: 2em 0;"&gt;
     &lt;div class="lighter"&gt;Indice de satisfaction global&lt;/div&gt;
@@ -184,7 +188,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
   &lt;h2&gt;Détail des avis&lt;/h2&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
-      &lt;h3 style="color: #666"&gt;Facilité d'usage&lt;/h3&gt;
+      &lt;h3&gt;Facilité d'usage&lt;/h3&gt;
       #set($chartOptions = {
         "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
         "opacity": 0.8,
