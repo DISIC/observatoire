@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
         <artifactId>wikidemarches-extensions</artifactId>
-        <version>2.3</version>
+        <version>2.4-SNAPSHOT</version>
     </parent>
     <artifactId>avis-stats</artifactId>
     <name>Avis Stats Extension - Parent POM</name>
