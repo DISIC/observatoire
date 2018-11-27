@@ -228,7 +228,10 @@
 {{/velocity}}
 
 {{velocity wiki="false"}}
-#gridresultwithfilterexport()
+#set ($demarcheId = "$request.demarche")
+#if ($demarcheId != '' &amp;&amp; $xwiki.exists($demarcheId))
+  #gridresultwithfilterexport()
+#end
 {{/velocity}}
 </content>
 </xwikidoc>

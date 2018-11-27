@@ -46,7 +46,6 @@ import java.io.StringWriter
 class OpenCsvWriter {
 
   def CSVWriter csvWriter
-  def StringWriter stringWriter
 
   OpenCsvWriter() {
     super();
@@ -56,9 +55,8 @@ class OpenCsvWriter {
     return "Writer: $csvWriter"
   }
 
-  void initialize() {
-    this.stringWriter = new StringWriter()
-    this.csvWriter = new CSVWriter(stringWriter, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)
+  void initialize(Writer writer) {
+    this.csvWriter = new CSVWriter(writer, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.DEFAULT_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)
   }
 
   void writeNext(List list) {
@@ -66,13 +64,9 @@ class OpenCsvWriter {
     csvWriter.writeNext(array, true)
   }
 
-  String asString() {
-    if (csvWriter != null &amp;&amp; stringWriter != null) {
-      stringWriter.close()
+  void close() {
+    if (csvWriter != null) {
       csvWriter.close()
-      return stringWriter.toString()
-    } else {
-      return null
     }
   }
 }
