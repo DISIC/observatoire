@@ -298,7 +298,7 @@
 {{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <displayType>input</displayType>
-      <hint>Ministère auquel est rattachée la démarche</hint>
+      <hint>Ministère(s) au(x)quel(s) est rattachée la démarche</hint>
       <idField/>
       <multiSelect>1</multiSelect>
       <name>ministeres</name>
@@ -514,7 +514,7 @@
 #set ($volumetrieDemat = $object.getProperty("volumetrieDemat").getValue())
 #set ($volumetrie = $object.getProperty("volumetrie").getValue())
 #set ($volumetrieDemat = $volumetrieDemat*100)
-#if ($volumetrie &gt; 0 &amp;&amp; $volumetrieDemat)
+#if ($volumetrie &amp;&amp; $volumetrie &gt; 0 &amp;&amp; $volumetrieDemat)
   #set ($percent = $mathtool.div($volumetrieDemat,$volumetrie))
   #set ($percent = $mathtool.roundTo(1,$percent))
   ${percent}%

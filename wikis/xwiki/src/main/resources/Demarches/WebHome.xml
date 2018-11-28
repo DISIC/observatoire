@@ -45,6 +45,8 @@
 #end
 {{/velocity}}
 
+{{include document="Demarches.Code.DemarchesLivetableMacros" /}}
+
 {{include document="Demarches.Code.Macros" output="false"/}}
 
 {{velocity}}
@@ -76,9 +78,8 @@
   'ministeres': {},
   'direction': {'displayName':'Direction', 'html':true},
   'groupes': {},
-  'categoriesPublics': {'displayName':'Catégories de publics'},
+  'categoriesPublics': {},
   'niveauDemat': {'displayName':'Niveau démat.'},
-  'nomProjet': {'displayName':'Projet'},
   'statutProjetDemat': {'displayName':'Statut projet'},
   'statut': {'displayName': 'Statut'},
   '_actions': {'sortable':false,'filterable':false,'html':true,'actions':['edit','delete']}
@@ -96,7 +97,7 @@
 #set ($columns = ['doc.title', 'doc.creationDate', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
 #livetable('demarches' $columns $columnsProperties $options)
 
-{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
+{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')" format="excel"/}}
 {{/velocity}}</content>
   <object>
     <name>Demarches.WebHome</name>
