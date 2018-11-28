@@ -76,56 +76,60 @@
     #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias &lt;&gt; ''")
     #set ($total = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute().get(0))
   #end
-  ## For 'smiley' tables, we want a not empty count for each property value, hence we execute one query per prop.value.
+  #set ($showData = false)
+  ## For 'smiley' tables, we iterate over the possible values: 0, 1, 2
   #set ($smileyProperties = ['score','facile','comprehensible'])
   #if ($smileyProperties.contains($property))
-    #set ($list = [])
-    #foreach ($level in [0..2])
-      #set ($xLevel = $mathtool.add($level, 1))
-      #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias = $xLevel")
-      #set ($entries = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute())
-      #set ($discard = $list.add([$xLevel, $entries.get(0)]))
-    #end
+    #set ($possibleValues = [1..3])
   #else
     ## All other properties are StaticLists
     #set ($possibleValues = $xwiki.getClass($className).get($property).getListValues())
+  #end
     #set ($list = [])
     #foreach ($value in $possibleValues)
       #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias = :propValue")
       #set ($entries = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).bindValue('propValue',$value).execute())
-      #set ($discard = $list.add([$value, $entries.get(0)]))
-    #end
-  #end
-  
-  &lt;table id="$tableId" class="hidden"&gt;
-  &lt;caption&gt;$tableCaption&lt;/caption&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;$propertyLabel&lt;/th&gt;
-      &lt;th&gt;Réponses&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-  #foreach ($item in $list)
-    #set ($value = $item.get(0))
-    #set ($number = $item.get(1))
-    #if(!$number)
-      #set($number = 0)
-    #end
-    #if ($percent)
-      #set ($number = $mathtool.div($mathtool.mul($number,100), $total))
-      #set ($number = $mathtool.round($number))
-    #end
-    #if ($value)
-      #set ($label = $NULL)
-      #if ($labels)
-        #set ($label = $labels.get($value))
+      #set ($entry = $entries.get(0))
+      #if ($entry != 0)
+        #set ($showData = true)
       #end
-      #displayTableRow($value $number $className $property $label)
+      #set ($discard = $list.add([$value, $entry]))
     #end
+  #if ($showData)
+
+    &lt;table id="$tableId" class="hidden"&gt;
+    &lt;caption&gt;$tableCaption&lt;/caption&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;$propertyLabel&lt;/th&gt;
+        &lt;th&gt;Réponses&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+    #foreach ($item in $list)
+      #set ($value = $item.get(0))
+      #set ($number = $item.get(1))
+      #if(!$number)
+        #set($number = 0)
+      #end
+      #if ($percent)
+        #set ($number = $mathtool.div($mathtool.mul($number,100), $total))
+        #set ($number = $mathtool.round($number))
+      #end
+      #if ($value)
+        #set ($label = $NULL)
+        #if ($labels)
+          #set ($label = $labels.get($value))
+        #end
+        #displayTableRow($value $number $className $property $label)
+      #end
+    #end
+    &lt;/tbody&gt;
+    &lt;/table&gt;
+  #else
+
+    &lt;span style="text-align:center"&gt;Aucune réponse.&lt;/span&gt;
   #end
-  &lt;/tbody&gt;
-  &lt;/table&gt;
 #end
 
 #computeAvisStats()
@@ -148,36 +152,38 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
 &lt;div&gt;($avisCount avis)&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;"&gt;
-      #set($chartOptions = {
-        "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
-        "opacity": 0.8,
-        "percent": true,
-        "removeZeros": true,
-        "tooltips": {
-          "titleFontFamily": "FontAwesome"
-        },
-        "legend": {
-          "display": false
-        },
-        "layout": {
-          "padding": {
-            "left": 50,
-            "right": 50,
-            "top": 50,
-            "bottom": 50
-          }
-        },
-        "plugins": {
-          "datalabels": {
-            "anchor": "end",
-            "align": "end"
-          }
-        }
-      })
-      #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
-
-      {{tableToChartJS type='pie' table='score' options='$options'/}}
       #addAvisDataTable('score', 'Répartition des avis', 'Satisfaction', 'score', 'IntegerProperty as prop', 'prop.value', true, {1: 'avis  négatifs', 2:'avis  moyens', 3:'avis  positifs'})
+      
+      #if ($showData)
+        #set($chartOptions = {
+          "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
+          "opacity": 0.8,
+          "percent": true,
+          "removeZeros": true,
+          "tooltips": {
+            "titleFontFamily": "FontAwesome"
+          },
+          "legend": {
+            "display": false
+          },
+          "layout": {
+            "padding": {
+              "left": 50,
+              "right": 50,
+              "top": 50,
+              "bottom": 50
+            }
+          },
+          "plugins": {
+            "datalabels": {
+              "anchor": "end",
+              "align": "end"
+            }
+          }
+        })
+        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+        {{tableToChartJS type='pie' table='score' options='$options'/}}
+      #end
 
       &lt;div class="lighter"&gt;Répartition des avis&lt;/div&gt;
 
@@ -187,97 +193,105 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Facilité d'usage&lt;/h3&gt;
-      #set($chartOptions = {
-        "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
-        "opacity": 0.8,
-        "labelsMap": {"Mauvais": "\uf119", "Moyen": "\uf11a", "Bon":"\uf118"},
-        "scales": {
-          "xAxes": [{
-            "gridLines": {"display": false, "drawBorder": false},
-            "ticks": { "beginAtZero": true, "display": false}
-          }],
-          "yAxes": [{
-            "gridLines": {"display": false, "drawBorder": true},
-            "ticks": {"fontFamily": "FontAwesome", "fontSize": 24}
-          }]
-        },
-        "tooltips": {
-          "titleFontFamily": "FontAwesome"
-        },
-        "legend": {
-          "display": false
-        },
-        "layout": {
-          "padding": {
-            "right": 50
-          }
-        },
-        "plugins": {
-          "datalabels": {
-            "anchor": "end",
-            "align": "end"
-          }
-        }
-      })
-      #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
-
-      {{tableToChartJS type='horizontalBar' table='facile' options='$options'/}}
       #addAvisDataTable('facile', 'Répartition des réponses sur la facilité d''usage', 'Facilité', 'facile', 'IntegerProperty as prop', 'prop.value', false, $NULL)
+      #if ($showData)
+        #set($chartOptions = {
+          "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
+          "opacity": 0.8,
+          "labelsMap": {"Mauvais": "\uf119", "Moyen": "\uf11a", "Bon":"\uf118"},
+          "scales": {
+            "xAxes": [{
+              "gridLines": {"display": false, "drawBorder": false},
+              "ticks": { "beginAtZero": true, "display": false}
+            }],
+            "yAxes": [{
+              "gridLines": {"display": false, "drawBorder": true},
+              "ticks": {"fontFamily": "FontAwesome", "fontSize": 24}
+            }]
+          },
+          "tooltips": {
+            "titleFontFamily": "FontAwesome"
+          },
+          "legend": {
+            "display": false
+          },
+          "layout": {
+            "padding": {
+              "right": 50
+            }
+          },
+          "plugins": {
+            "datalabels": {
+              "anchor": "end",
+              "align": "end"
+            }
+          }
+        })
+        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+
+        {{tableToChartJS type='horizontalBar' table='facile' options='$options'/}}
+      #end
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Compréhension&lt;/h3&gt;
-
-      {{tableToChartJS type='horizontalBar' table='comprehensible' options='$options'/}}
       #addAvisDataTable('comprehensible', 'Répartition des réponse sur la compréhension', 'Facilité de compréhension', 'comprehensible', 'IntegerProperty as prop', 'prop.value', false, $NULL)
+      #if ($showData)
+
+        {{tableToChartJS type='horizontalBar' table='comprehensible' options='$options'/}}
+      #end
 
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Difficultés rencontrées&lt;/h3&gt;
-      #set($chartOptions = {
-        "backgroundColors": ["#bcbcbc"],
-        "opacity": 0.8,
-        "removeZeros": true,
-        "scales": {
-          "xAxes": [{
-            "gridLines": {"display": false, "drawBorder": false},
-            "ticks": { "beginAtZero": true, "display": false}
-          }],
-          "yAxes": [{
-            "gridLines": {"display": false, "drawBorder": true},
-            "ticks": { "display": true, "mirror": true, "padding": -5, "labelOffset": -15},
-            "barThickness": 15,
-            "maxBarThickness": 15
-          }]
-        },
-        "legend": {
-          "display": false
-        },
-        "layout": {
-          "padding": {
-            "right": 50
-          }
-        },
-        "plugins": {
-          "datalabels": {
-            "anchor": "end",
-            "align": "end"
-          }
-        }
-      })
-      #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
-
-      {{tableToChartJS type='horizontalBar' table='difficultes' options='$options'/}}
       #addAvisDataTable('difficultes',  'Difficultés rencontrées', 'Difficulté', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
+      #if ($showData)
+        #set($chartOptions = {
+          "backgroundColors": ["#bcbcbc"],
+          "opacity": 0.8,
+          "removeZeros": true,
+          "scales": {
+            "xAxes": [{
+              "gridLines": {"display": false, "drawBorder": false},
+              "ticks": { "beginAtZero": true, "display": false}
+            }],
+            "yAxes": [{
+              "gridLines": {"display": false, "drawBorder": true},
+              "ticks": { "display": true, "mirror": true, "padding": -5, "labelOffset": -15},
+              "barThickness": 15,
+              "maxBarThickness": 15
+            }]
+          },
+          "legend": {
+            "display": false
+          },
+          "layout": {
+            "padding": {
+              "right": 50
+            }
+          },
+          "plugins": {
+            "datalabels": {
+              "anchor": "end",
+              "align": "end"
+            }
+          }
+        })
+        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+
+        {{tableToChartJS type='horizontalBar' table='difficultes' options='$options'/}}
+      #end
 
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Aides sollicitées&lt;/h3&gt;
-
-      {{tableToChartJS type='horizontalBar' table='aide' options='$options'/}}
       #addAvisDataTable('aide', 'Besoins d''aide', 'Aide', 'aide', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
+      #if ($showData)
+
+        {{tableToChartJS type='horizontalBar' table='aide' options='$options'/}}
+      #end
 
     &lt;/div&gt;
   &lt;/div&gt;
@@ -324,36 +338,35 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
         #set ($modaliteOnlinePercent = $mathtool.round($modaliteOnlinePercent))
 
         &lt;span&gt;$services.localization.render('wikidemarches.demarche.avis.stats.online', $modaliteOnlinePercent)&lt;/span&gt;
-        #set ($discard = $chartOptions.remove('scales'))
-        #set ($chartOptions.percent = true)
-        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
-        #set($chartOptions = {
-          "backgroundColors": ["#82b876", "#f9b43e", "#bcbcbc"],
-          "opacity": 1,
-          "percent": true,
-          "displayPercentFirst": 0,
-          "removeZeros": true,
-          "legend": {
-            "display": false
-          },
-          "layout": {
-            "padding": {
-              "left": 50,
-              "right": 50,
-              "top": 50,
-              "bottom": 50
+        #if ($showData)
+          #set($chartOptions = {
+            "backgroundColors": ["#82b876", "#f9b43e", "#bcbcbc"],
+            "opacity": 1,
+            "percent": true,
+            "displayPercentFirst": 0,
+            "removeZeros": true,
+            "legend": {
+              "display": false
+            },
+            "layout": {
+              "padding": {
+                "left": 50,
+                "right": 50,
+                "top": 50,
+                "bottom": 50
+              }
+            },
+            "plugins": {
+              "datalabels": {
+                "anchor": "end",
+                "align": "end"
+              }
             }
-          },
-          "plugins": {
-            "datalabels": {
-              "anchor": "end",
-              "align": "end"
-            }
-          }
-        })
-        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+          })
+          #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-        {{tableToChartJS type='pie' table='modalite' options='$options' /}}
+          {{tableToChartJS type='pie' table='modalite' options='$options' /}}
+        #end
 
       &lt;/div&gt;
       #if ($modaliteAutre &gt; 0)
