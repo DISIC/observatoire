@@ -47,7 +47,59 @@
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
 #set ($discard = $doc.use('Demarches.Code.DemarchesClass'))
 
-#displaySubTitle()
+#macro(displayArray $propName $propLabel)
+  #set ($values = $demarche.getProperty($propName).value)
+  #set ($str = '')
+  #if ($values &amp;&amp; $values.size() &gt; 0)
+    #set ($map = $demarche.getProperty($propName).propertyClass.mapValues)
+    #foreach ($value in $values)
+      #if ($map[$value])
+        #set ($str = "${str}$map[$value].value, ")
+      #end
+    #end
+    #if ($str.length() &gt; 2)
+      #set ($str = $str.substring(0, $mathtool.sub($str.length(),2)))
+      &lt;dt&gt;$propLabel&lt;/dt&gt;
+      &lt;dd&gt;$str&lt;/dd&gt;
+    #end
+  #end
+#end
+
+#set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
+#if ($demarche)
+  &lt;div class="demarche-details-action"&gt;
+    &lt;a href="#"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;Voir le détail de la démarche&lt;/span&gt;&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;dl class="demarche-details"&gt;
+    #set ($nomComplet = $demarche.getProperty('nomComplet').value)
+    #if ($nomComplet != $doc.title)
+      &lt;dt&gt;Nom complet de la démarche&lt;/dt&gt;
+      &lt;dd&gt;$nomComplet&lt;/dd&gt;
+    #end
+    #displayArray('evenements', 'Événément(s) de vie')
+    #displayArray('categoriesPublics', 'Public(s)')
+    #set ($ministereStr = '')
+    #set ($ministeres = $demarche.getProperty('ministeres').value)
+    #if ($ministeres &amp;&amp; $ministeres.size() &gt; 0)
+      #foreach ($ministere in $ministeres)
+        #set ($ministereDoc = $xwiki.getDocument($ministere))
+        #set ($ministereObj = $ministereDoc.getObject('Ministeres.Code.MinisteresClass'))
+        #set ($nom = $ministereObj.getProperty('nom').value)
+        #set ($ministereStr = "$ministereStr$!nom - ")
+      #end
+    #end
+    #if ($ministereStr.length() &gt; 3)
+      #set ($ministereStr = $ministereStr.substring(0, $mathtool.sub($ministereStr.length(),3)))
+      &lt;dt&gt;Champ ministériel&lt;/dt&gt;
+      &lt;dd&gt;$ministereStr&lt;/dd&gt;
+    #end
+    &lt;dt&gt;Objet&lt;/dt&gt;
+    &lt;dd&gt;$escapetool.html($demarche.getProperty('objet').value)&lt;/dd&gt;
+    &lt;dt&gt;Pour en savoir plus&lt;/dt&gt;
+    &lt;dd&gt;$demarche.getProperty('urlInfos').value&lt;/dd&gt;
+  &lt;/dl&gt;
+#end
+
 
 #set ($selectedTab = "$!request['tab']")
 #if ($selectedTab == '')
@@ -315,6 +367,19 @@ require(['jquery','xwiki-selectize'], function($) {
   }
 
   $(document).ready(function() {
+    $(".demarche-details-action a").click(function() {
+      var href = $(this);
+      href.parent().toggleClass("expanded");
+      $(".demarche-details").toggle("slow");
+      href.find(".fa").toggleClass("fa-chevron-right").toggleClass("fa-chevron-down");
+      var label = href.find(".demarche-details-action-label");
+      if (href.parent().hasClass("expanded")) {
+        label.text("Masquer le détail");
+      } else {
+        label.text("Afficher le détail de la démarche")
+      }
+    });
+
     $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
       updateVoteAndSubmitButton();
     });
@@ -512,6 +577,26 @@ require(['jquery','xwiki-selectize'], function($) {
 @media (min-width: @screen-md-min) {
   .document-header {
     padding-top: 25px;
+  }
+}
+
+.demarche-details-action {
+  margin: 0.7em 0;
+  a {
+    color: #666666;
+    text-decoration: none;
+  }
+}
+.demarche-details {
+  display: none;
+  dt {
+    color: #7e8089;
+    font-weight: normal;
+    margin-top: 0.5em;
+    line-height: 1.3;
+  }
+  dd {
+    line-height: 1.3;
   }
 }
 
@@ -834,3 +919,4 @@ h2 {
     </property>
   </object>
 </xwikidoc>
+dif
