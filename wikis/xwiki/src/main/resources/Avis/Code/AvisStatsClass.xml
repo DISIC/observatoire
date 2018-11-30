@@ -53,12 +53,13 @@
       <customDisplay>{{velocity}}
 {{html clean='false'}}
 #set ($propertyClass = $object.getxWikiClass().get($name))
+#set ($occurrences = $object.getProperty('occurrences').value)
 #if ($type == 'edit')
     $doc.displayEdit($propertyClass, $prefix, $object).replaceAll("value='[^']*+' size=", "value='$!{valueString}' size=")
 #else
-  ## only display something if the value is not 0, 0 means there are no avis at all
-  #if ($value &gt; 0)
-    ${mathtool.round($mathtool.mul($value, 100))}%
+  ## only display something if there is at least one occurrence
+  #if ($occurrences &gt; 0)
+    ${mathtool.round($mathtool.mul($value, 100))} %
   #end
 #end
 {{/html}}
