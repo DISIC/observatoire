@@ -42,6 +42,7 @@
   <content>{{include reference="XWiki.LiveTableResultsMacros" /}}
 
 {{velocity output="false"}}
+
 #**
  * This macro exports the data from a livetable to an Excel or CSV file. It does the same as the livetable ajax call, but it returns the results in the requested format.
  * It calls the standard macro 'gridresultswithfilter_buildJSON' and serializes the result in XLS/CSV instead of JSON.
@@ -52,7 +53,7 @@
       #set ($workbook = $excelWriter.getWritableWorkbook())
       #set ($sheet = $workbook.createSheet("XWiki", 0))
     #elseif ($format == 'csv')
-      #set ($discard = $csvWriter.initialize())
+      #set ($discard = $csvWriter.initialize($response.writer))
     #end
   #end
   #macro(initializeRowValues)
@@ -65,11 +66,11 @@
       #set ($discard = $sheet.setColumnView($colCount, $val))
     #end
   #end
-  #macro(setCell $rowCount $colCount $colPrettyName)
+  #macro(setCell $rowCount $colCount $text)
     #if ($format == 'excel')
-      #set ($discard = $excelWriter.setLabelCell($sheet, $rowCount, $colCount, $colPrettyName))
+      #set ($discard = $excelWriter.setLabelCell($sheet, $rowCount, $colCount, $text))
     #elseif ($format == 'csv')
-      #set ($discard = $rowValues.add($colPrettyName))
+      #set ($discard = $rowValues.add($text))
     #end
   #end
   #macro(writeRow)
@@ -84,6 +85,35 @@
       #set ($csvWriter = $xwiki.parseGroovyFromPage("Macros.OpenCsvWriter"))
     #end
     #if ($excelWriter || $csvWriter)
+      #if ($format == 'excel')
+        #set ($discard = $response.setContentType('application/ms-excel'))
+      #elseif ($format == 'csv')
+        #set ($discard = $response.setContentType('text/csv'))
+      #end
+      ## prepare filename from parameters, if any is passed
+      #if ("$!request.filename" != '')
+        #if ($format == 'excel')
+          #set ($filename = "$!{request.filename}.xls")
+        #elseif ($format == 'csv')
+          #set ($filename = "$!{request.filename}.csv")
+        #end
+      #else
+        #if ($format == 'excel')
+          #set ($filename = 'data.xls')
+        #elseif ($format == 'csv')
+          #set ($filename = 'data.csv')
+        #end
+      #end
+      #set ($contentHeader = 'inline; filename="' + $filename + '"')
+      #set ($discard = $response.setHeader('Content-Disposition', $contentHeader))
+      ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
+      ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
+      #set ($discard = $response.setHeader('Cache-Control', 'private'))
+      #set ($discard = $response.setHeader('Pragma', 'cache'))
+      #set ($expires = $util.getDate().getTime())
+      #set ($expires = $expires + 120000)
+      #set ($expires = $util.getDate($expires))
+      #set ($discard = $response.setDateHeader('Expires', $expires.getTime()))
       ## get the columns to export. If the all the class properties are asked for, then force add all the properties of the class in the export
       #if ("$!{request.withAllFields}" == 'true')
         #set ($allColumns = [])
@@ -154,7 +184,7 @@
             #set ($colVal = "$!curRow.get($colname.replace('doc.', 'doc_'))")
           #else
             #set ($colVal = "$!curRow.get($colname)")
-            ## hack when the cell contains html, to use the cell_value instead
+          ## hack when the cell contains html, to use the cell_value instead
             #if ($colVal.indexOf('&lt;') &gt;= 0)
               #set ($colVal_Value = $curRow.get("${colname}_value"))
               #if ("$!colVal_Value" != '')
@@ -182,47 +212,12 @@
       #if (!$request.debug)
         #if ($format == 'excel')
           #set ($bytes = $excelWriter.getWritableWorkbookAsBytes($workbook))
+          #set ($discard = $response.getOutputStream().write($bytes))
+          ##set ($discard = $workbook.close())
         #elseif ($format == 'csv')
-          #set ($str = $csvWriter.asString())
+          #set ($discard = $csvWriter.close())
         #end
-        #if ($bytes || $str)
-          #if ($format == 'excel')
-            #set ($discard = $response.setContentType('application/ms-excel'))
-            #set ($filename = 'data.xls')
-          #elseif ($format == 'csv')
-            #set ($discard = $response.setContentType('text/csv'))
-            #set ($filename = 'data.csv')
-          #end
-          ## prepare filename from parameters, if any is passed
-          #if ("$!request.filename" != '')
-            #if ($format == 'excel')
-              #set ($filename = "$!{request.filename}.xls")
-            #elseif ($format == 'csv')
-              #set ($filename = "$!{request.filename}.csv")
-            #end
-          #end
-          #set ($contentHeader = 'inline; filename="' + $filename + '"')
-          #set ($discard = $response.setHeader('Content-Disposition', $contentHeader))
-          #set ($discard = $xcontext.setFinished(true))
-          ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
-          ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
-          #set ($discard = $response.setHeader('Cache-Control', 'private'))
-          #set ($discard = $response.setHeader('Pragma', 'cache'))
-          #set ($expires = $util.getDate().getTime())
-          #set ($expires = $expires + 120000)
-          #set ($expires = $util.getDate($expires))
-          #set ($discard = $response.setDateHeader('Expires', $expires.getTime()))
-          #if ($format == 'excel')
-            #set ($discard = $response.getOutputStream().write($bytes))
-          #elseif ($format == 'csv')
-            #set ($discard = $response.writer.write($str))
-          #end
-        #else
-          ## TODO need nice translated error message
-          The following error occurred while generating the output file:
-
-          $!context.exception
-        #end
+        #set ($discard = $xcontext.setFinished(true))
       #else
         Done
       #end
