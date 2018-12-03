@@ -51,6 +51,8 @@
 ## - Third form screen (key: "third-form-screen")
 ## - Final step (key: "final-step")
 
+#set ($franceConnectDemarcheId = 'Demarches.1781')
+
 #if ($step == '')
   ## Initialize the step variable for the sake for clarity (i.e. do not leave the initial step empty).
   #set ($step = 'initial-step')
@@ -86,6 +88,9 @@
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
       #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
       #set ($presetModalite = "$!request.nd_mode")
+      #if ($doc.fullName == $franceConnectDemarcheId)
+        #set ($presetModalite = "en-ligne-entièrement")
+      #end
       #if ($modality != "demarche-newly-submitted-by-current-user" &amp;&amp; $presetModalite == '')
         ## We're not in the case where the user has just submitted a new demarche, hence we display the 'modalite' question.
         ## We also don't have a preset modalite received from request parameters

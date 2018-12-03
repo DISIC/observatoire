@@ -43,10 +43,12 @@
 {{velocity output="false"}}
 #set ($demarcheId = "$!request['Avis.Code.AvisClass_0_demarche']")
 #set ($step = "$!request['avis-form-step']")
-#set ($avisId = $request.session.getAttribute("${demarcheId}-avis-id"))
+#set ($avisIdAttributeKey = "${demarcheId}-avis-id")
+#set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
 #set ($logger = $services.logging.getLogger($doc.fullName))
 #if ($step == 'initial-step')
-  ## Create a new avis only if there is no avis in the session that matches the current demarche
+  ## Create a new avis only if there is no avis in the session that matches the current demarche:
+  ## in case there is, the existing avis will get updated.
   #if ($avisId &amp;&amp; $xwiki.exists("Avis.$avisId"))
     ## Get avis document with programming rights, because Avis are not available to guests.
     $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId}")
@@ -69,7 +71,7 @@
     ## Save with programming rights as the current user will not have the right to edit the Avis document
     #set ($discard = $target.saveWithProgrammingRights())
   #else
-    $logger.warn('An attempt to store an invalid Avis was performed')
+    $logger.warn('An attempt to store an invalid avis was performed.')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #elseif ($step == 'second-form-screen' || $step == 'third-form-screen')
@@ -81,31 +83,40 @@
     #if($validated)
       #set ($discard = $target.saveWithProgrammingRights())
     #else
-      $logger.warn('An attempt to store an invalid Avis was performed')
+      $logger.warn('An attempt to store an invalid avis was performed.')
       $response.sendRedirect($xwiki.getURL('Main.WebHome'))
     #end
   #else
-    $logger.warn('An attempt to update an invalid Avis was performed')
+    $logger.warn('An attempt to update an invalid avis was performed.')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #end
 
 ## We check that the avis exists, we store its id in the session and we define the next step.
 #if ($xwiki.exists($target.fullName))
-  $request.session.setAttribute("${demarcheId}-avis-id", $target.name)
+  $request.session.setAttribute($avisIdAttributeKey, $target.name)
   #if ($step == 'initial-step')
-    ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'third-form-screen'.
-    #set ($object = $target.getObject('Avis.Code.AvisClass'))
-    #if ($object.getValue('modalite') != 'autrement')
-      $request.session.setAttribute('avis-form-step', 'second-form-screen')
+    ## If the current demarche is France Connect (Demarches.1781), then the next step is the final step, hence we consider
+    ## that the avis has been submitted and that any new form submission will result in a new avis (just as below in the
+    ## third-form-screen step).
+    #if ($demarcheId == 'Demarches.1781')
+      #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
+      $request.session.setAttribute('avis-form-step', 'final-step')
     #else
-      $request.session.setAttribute('avis-form-step', 'third-form-screen')
+      ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'third-form-screen'.
+      #set ($object = $target.getObject('Avis.Code.AvisClass'))
+      #if ($object.getValue('modalite') != 'autrement')
+        $request.session.setAttribute('avis-form-step', 'second-form-screen')
+      #else
+        $request.session.setAttribute('avis-form-step', 'third-form-screen')
+      #end
     #end
   #elseif ($step == 'second-form-screen')
     $request.session.setAttribute('avis-form-step', 'third-form-screen')
   #elseif ($step == 'third-form-screen')
-    ## At this step only, we remove the avisId from the session: we consider that the avis has been submitted and that any attempt to submit a new form will result in a new avis
-    #set ($discard = $request.session.removeAttribute("${demarcheId}-avis-id"))
+    ## At this step only, we remove the avis identifier from the session: we consider that the avis has been submitted and
+    ## that any new form submission will result in a new avis.
+    #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
     $request.session.setAttribute('avis-form-step', 'final-step')
   #end
 #end
@@ -120,7 +131,7 @@
     <name>Avis.Code.AvisHandler</name>
     <number>0</number>
     <className>XWiki.RequiredRightClass</className>
-    <guid>272297a0-c706-42ec-b87f-d30477d32439</guid>
+    <guid>bdad7635-ce88-4f9c-a592-d61f0b648f36</guid>
     <class>
       <name>XWiki.RequiredRightClass</name>
       <customClass/>
