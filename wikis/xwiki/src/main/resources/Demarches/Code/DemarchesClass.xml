@@ -57,7 +57,7 @@
       <hint>Élement qualitatif permettant de caractériser la dématérialisation</hint>
       <multiSelect>1</multiSelect>
       <name>caracteristiquesDemat</name>
-      <number>27</number>
+      <number>28</number>
       <picker>0</picker>
       <prettyName>Caractéristiques de la dématérialisation</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -79,7 +79,7 @@
       <hint>Element qualitatif permettant de caractériser la dématérialisation prévue</hint>
       <multiSelect>1</multiSelect>
       <name>caracteristiquesDematPrevues</name>
-      <number>28</number>
+      <number>29</number>
       <picker>0</picker>
       <prettyName>Caractéristiques prévues de la dématérialisation</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -101,7 +101,7 @@
       <hint>Catégorie(s) de public(s) concerné(s) par la démarche</hint>
       <multiSelect>1</multiSelect>
       <name>categoriesPublics</name>
-      <number>13</number>
+      <number>14</number>
       <picker>0</picker>
       <prettyName>Catégories de publics concernés</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -115,6 +115,31 @@
       <values>particuliers=Particuliers|professionnels=Professionnels|associations=Associations|collectivites=Collectivités locales</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </categoriesPublics>
+    <champsMinisteriels>
+      <cache>0</cache>
+      <classname/>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>input</displayType>
+      <hint>Champ(s) ministériel(s) au(x)quel(s) est rattachée la démarche</hint>
+      <idField/>
+      <multiSelect>1</multiSelect>
+      <name>champsMinisteriels</name>
+      <number>7</number>
+      <picker>1</picker>
+      <prettyName>Champ(s) ministériel(s)</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators/>
+      <size>5</size>
+      <sort>value</sort>
+      <sql>select doc.fullName, doc.title from XWikiDocument as doc, BaseObject as obj where doc.fullName = obj.name and obj.className = 'CM.Code.CMClass' and doc.fullName &lt;&gt; 'CM.Code.CMTemplate' order by doc.title asc</sql>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <valueField/>
+      <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+    </champsMinisteriels>
     <dateMiseEnLigne>
       <customDisplay/>
       <dateFormat>MM/yyyy</dateFormat>
@@ -122,7 +147,7 @@
       <emptyIsToday>0</emptyIsToday>
       <hint>Date de mise en ligne, prévisionnelle ou réalisée</hint>
       <name>dateMiseEnLigne</name>
-      <number>32</number>
+      <number>33</number>
       <picker>1</picker>
       <prettyName>Date de mise en ligne</prettyName>
       <size>20</size>
@@ -139,7 +164,7 @@
       <displayType/>
       <hint>Ce champ indique si les usagers sont obligés de remplir la démarche en dématérialisation.</hint>
       <name>dematObligatoire</name>
-      <number>25</number>
+      <number>26</number>
       <prettyName>Dématérialisation obligatoire</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -167,7 +192,7 @@
       <idField/>
       <multiSelect>0</multiSelect>
       <name>direction</name>
-      <number>8</number>
+      <number>9</number>
       <picker>1</picker>
       <prettyName>Direction ou établissement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -192,7 +217,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>evenements</name>
-      <number>15</number>
+      <number>16</number>
       <picker>1</picker>
       <prettyName>Événements de vie</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -215,7 +240,7 @@
       <displayType/>
       <hint>Démarche exclue du SVE par décret</hint>
       <name>exclusionSve</name>
-      <number>26</number>
+      <number>27</number>
       <prettyName>Démarche exclue du SVE</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -246,7 +271,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>groupes</name>
-      <number>9</number>
+      <number>10</number>
       <picker>1</picker>
       <prettyName>Groupes</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -266,7 +291,7 @@
       <disabled>0</disabled>
       <hint>Identifiants de textes dans le journal officiel, séparés par des virgules</hint>
       <name>identifiantsEli</name>
-      <number>12</number>
+      <number>13</number>
       <picker>0</picker>
       <prettyName>Identifiants ELI</prettyName>
       <size>30</size>
@@ -302,7 +327,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>ministeres</name>
-      <number>7</number>
+      <number>8</number>
       <picker>1</picker>
       <prettyName>Ministère</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -325,7 +350,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>niveauDemat</name>
-      <number>23</number>
+      <number>24</number>
       <picker>0</picker>
       <prettyName>Niveau de dématérialisation actuel</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -359,7 +384,7 @@
       <disabled>0</disabled>
       <hint/>
       <name>niveauDematBoolean</name>
-      <number>34</number>
+      <number>35</number>
       <prettyName>niveauDematBoolean</prettyName>
       <script/>
       <unmodifiable>0</unmodifiable>
@@ -375,7 +400,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>niveauPrevu</name>
-      <number>24</number>
+      <number>25</number>
       <picker>0</picker>
       <prettyName>Niveau de dématérialisation prévu</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -394,7 +419,7 @@
       <disabled>0</disabled>
       <hint>Intervalle dans lequel se situe la volumétrie</hint>
       <name>niveauVolumetrie</name>
-      <number>22</number>
+      <number>23</number>
       <prettyName>Niveau de la volumétrie</prettyName>
       <script>{{velocity}}
 {{html clean="false"}}
@@ -451,7 +476,7 @@
       <disabled>0</disabled>
       <hint>Nom du projet de dématérialisation auquel est rattachée la démarche</hint>
       <name>nomProjet</name>
-      <number>30</number>
+      <number>31</number>
       <picker>0</picker>
       <prettyName>Nom du projet de dématérialisation</prettyName>
       <size>30</size>
@@ -487,7 +512,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>organismesTraitement</name>
-      <number>10</number>
+      <number>11</number>
       <picker>1</picker>
       <prettyName>Organismes de traitement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -507,7 +532,7 @@
       <disabled>0</disabled>
       <hint>Estimation du pourcentage de démarches réalisées sur une téléprocédure ou un EDI par an</hint>
       <name>pourcentageDemat</name>
-      <number>21</number>
+      <number>22</number>
       <prettyName>Pourcentage de dématérialisation</prettyName>
       <script>{{velocity}}
 {{html clean="false"}}
@@ -536,7 +561,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>publics</name>
-      <number>14</number>
+      <number>15</number>
       <picker>1</picker>
       <prettyName>Publics</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -586,7 +611,7 @@
       <editor>Text</editor>
       <hint/>
       <name>remarques</name>
-      <number>33</number>
+      <number>34</number>
       <picker>0</picker>
       <prettyName>Remarques</prettyName>
       <rows>5</rows>
@@ -604,7 +629,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>statut</name>
-      <number>29</number>
+      <number>30</number>
       <picker>0</picker>
       <prettyName>Statut de la démarche</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -626,7 +651,7 @@
       <hint>Statut du projet de dématérialisation incluant la planification de celle-ci</hint>
       <multiSelect>0</multiSelect>
       <name>statutProjetDemat</name>
-      <number>31</number>
+      <number>32</number>
       <picker>0</picker>
       <prettyName>Statut du projet de dématérialisation</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -647,7 +672,7 @@
       <editor>Text</editor>
       <hint>Textes de lois associés à la démarche</hint>
       <name>textes</name>
-      <number>11</number>
+      <number>12</number>
       <picker>0</picker>
       <prettyName>Textes de référence</prettyName>
       <rows>5</rows>
@@ -697,7 +722,7 @@
       <disabled>0</disabled>
       <hint>Adresse web permettant d'effectuer la démarche</hint>
       <name>urlDemarche</name>
-      <number>17</number>
+      <number>18</number>
       <picker>0</picker>
       <prettyName>Adresse web de la démarche</prettyName>
       <size>30</size>
@@ -711,7 +736,7 @@
       <disabled>0</disabled>
       <hint>Adresse web de documentation de la démarche ou du CERFA</hint>
       <name>urlFiche</name>
-      <number>18</number>
+      <number>19</number>
       <picker>0</picker>
       <prettyName>Adresse web de documentation de la démarche</prettyName>
       <size>30</size>
@@ -725,7 +750,7 @@
       <disabled>0</disabled>
       <hint>Adresse web des informations concernant la démarche</hint>
       <name>urlInfos</name>
-      <number>16</number>
+      <number>17</number>
       <picker>0</picker>
       <prettyName>Adresse web informations</prettyName>
       <size>30</size>
@@ -739,7 +764,7 @@
       <disabled>0</disabled>
       <hint>Nombre total de démarches reçues par an (estimation)</hint>
       <name>volumetrie</name>
-      <number>19</number>
+      <number>20</number>
       <numberType>long</numberType>
       <prettyName>Volumétrie de la démarche</prettyName>
       <size>30</size>
@@ -753,7 +778,7 @@
       <disabled>0</disabled>
       <hint>Nombre de démarches reçues par la voie d'une téléprocédure ou d'un EDI par an.</hint>
       <name>volumetrieDemat</name>
-      <number>20</number>
+      <number>21</number>
       <numberType>long</numberType>
       <prettyName>Volumétrie de la dématérialisation</prettyName>
       <size>30</size>
@@ -767,7 +792,7 @@
     <name>Demarches.Code.DemarchesClass</name>
     <number>0</number>
     <className>AppWithinMinutes.MetadataClass</className>
-    <guid>1e305ba7-8bd7-4164-b085-fd02eb9c8986</guid>
+    <guid>7ec77c11-5040-47b3-99c4-e9859f3754c3</guid>
     <class>
       <name>AppWithinMinutes.MetadataClass</name>
       <customClass/>
@@ -799,7 +824,7 @@
     <name>Demarches.Code.DemarchesClass</name>
     <number>0</number>
     <className>XWiki.ClassSheetBinding</className>
-    <guid>0e675a15-36e2-4abf-84b2-e6d07e5391b6</guid>
+    <guid>5da7be97-e2c4-4485-8192-7621de4bca0a</guid>
     <class>
       <name>XWiki.ClassSheetBinding</name>
       <customClass/>
@@ -831,7 +856,7 @@
     <name>Demarches.Code.DemarchesClass</name>
     <number>0</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>31964032-39f7-4ef3-aeb7-bb179c2bcda8</guid>
+    <guid>f9c8b650-f998-435d-996c-845d0ea58f50</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>
@@ -863,7 +888,7 @@
     <name>Demarches.Code.DemarchesClass</name>
     <number>1</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>03728450-ab4b-45fe-ad4b-87a1c36654d9</guid>
+    <guid>e82e72dc-f852-4f96-9f0e-7e4d22e447aa</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>
