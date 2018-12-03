@@ -60,6 +60,10 @@ wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
 
 # Démarche tabs
+wikidemarches.demarche.details-on=Afficher le détail de la démarche
+wikidemarches.demarche.details-off=Masquer le détail
+wikidemarches.demarche.details.nomComplet=Nom complet de la démarche
+wikidemarches.demarche.details.plus=Pour en savoir plus
 wikidemarches.demarche.tabs.demarche=Informations
 wikidemarches.demarche.tabs.avisList=Liste des avis
 wikidemarches.demarche.tabs.avisForm=Donnez votre avis

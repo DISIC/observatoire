@@ -51,10 +51,16 @@
   #set ($values = $demarche.getProperty($propName).value)
   #set ($str = '')
   #if ($values &amp;&amp; $values.size() &gt; 0)
-    #set ($map = $demarche.getProperty($propName).propertyClass.mapValues)
     #foreach ($value in $values)
-      #if ($map[$value])
-        #set ($str = "${str}$map[$value].value, ")
+      #if ($propName == 'categoriesPublics')
+        #set ($map = $demarche.getProperty($propName).propertyClass.mapValues)
+        #set ($title = $map[$value].value)
+      #else
+        #set ($page = $xwiki.getDocument($value))
+        #set ($title = $page.displayTitle)
+      #end
+      #if ($title)
+        #set ($str = "$str$title, ")
       #end
     #end
     #if ($str.length() &gt; 2)
@@ -65,19 +71,19 @@
   #end
 #end
 
-#set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
-#if ($demarche)
+#if ($xcontext.action == 'view')
+  #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
   &lt;div class="demarche-details-action"&gt;
-    &lt;a href="#"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;Voir le détail de la démarche&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="#"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/a&gt;
   &lt;/div&gt;
   &lt;dl class="demarche-details"&gt;
     #set ($nomComplet = $demarche.getProperty('nomComplet').value)
     #if ($nomComplet != $doc.title)
-      &lt;dt&gt;Nom complet de la démarche&lt;/dt&gt;
+      &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.nomComplet')&lt;/dt&gt;
       &lt;dd&gt;$nomComplet&lt;/dd&gt;
     #end
-    #displayArray('evenements', 'Événément(s) de vie')
-    #displayArray('categoriesPublics', 'Public(s)')
+    #displayArray('evenements', $services.localization.render('Demarches.Code.DemarchesClass_evenements'))
+    #displayArray('categoriesPublics', $services.localization.render('Demarches.Code.DemarchesClass_publics'))
     #set ($ministereStr = '')
     #set ($ministeres = $demarche.getProperty('ministeres').value)
     #if ($ministeres &amp;&amp; $ministeres.size() &gt; 0)
@@ -90,13 +96,19 @@
     #end
     #if ($ministereStr.length() &gt; 3)
       #set ($ministereStr = $ministereStr.substring(0, $mathtool.sub($ministereStr.length(),3)))
-      &lt;dt&gt;Champ ministériel&lt;/dt&gt;
+      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_champsMinisteriels')&lt;/dt&gt;
       &lt;dd&gt;$ministereStr&lt;/dd&gt;
     #end
-    &lt;dt&gt;Objet&lt;/dt&gt;
-    &lt;dd&gt;$escapetool.html($demarche.getProperty('objet').value)&lt;/dd&gt;
-    &lt;dt&gt;Pour en savoir plus&lt;/dt&gt;
-    &lt;dd&gt;$demarche.getProperty('urlInfos').value&lt;/dd&gt;
+    #set ($objet = $!escapetool.html($demarche.getProperty('objet').value))
+    #if ("$objet" != '')
+      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_champsMinisteriels')&lt;/dt&gt;
+      &lt;dd&gt;$objet&lt;/dd&gt;
+    #end
+    #set ($urlInfos = $demarche.getProperty('urlInfos').value)
+    #if ("$urlInfos" != '')
+      &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.plus')&lt;/dt&gt;
+      &lt;dd&gt;$urlInfos&lt;/dd&gt;
+    #end
   &lt;/dl&gt;
 #end
 
@@ -374,9 +386,9 @@ require(['jquery','xwiki-selectize'], function($) {
       href.find(".fa").toggleClass("fa-chevron-right").toggleClass("fa-chevron-down");
       var label = href.find(".demarche-details-action-label");
       if (href.parent().hasClass("expanded")) {
-        label.text("Masquer le détail");
+        label.text("$services.localization.render('wikidemarches.demarche.details-off')");
       } else {
-        label.text("Afficher le détail de la démarche")
+        label.text("$services.localization.render('wikidemarches.demarche.details-on')")
       }
     });
 
@@ -894,6 +906,10 @@ h2 {
   .vertical-align {
     display: flex;
     align-items: center;
+  }
+
+  .histo {
+    height: 300px;
   }
 
   @media (max-width: 992px) {
