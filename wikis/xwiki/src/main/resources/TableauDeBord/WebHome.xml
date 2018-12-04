@@ -44,8 +44,10 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 
 {{info}}$services.localization.render('wikidemarches.dematdashboard.warning'){{/info}}
 
-#set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
-#set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
+#set($satisfactionLevelInfo = $xwiki.getDocument('Main.Satisfaction'))
+#set($satisfactionLevelInfoLink = "&lt;a href='$escapetool.xml($satisfactionLevelInfo.getURL())' title='$escapetool.xml($satisfactionLevelInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
+#set($dematInfo = $xwiki.getDocument('Main.Dematerialisation'))
+#set($dematInfoLink = "&lt;a href='$escapetool.xml($dematInfo.getURL())' title='$escapetool.xml($dematInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
 #set ($columns = ['doc.title', 'ministeres', 'direction', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne', 'statut'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
@@ -53,9 +55,9 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'direction' : {'type' : 'hidden', 'filterable': 'true', 'sortable' : 'false'},
   'niveauDematBoolean': {'filterable' : 'false', 'sortable' : 'false'},
   'statut' : {'type' : 'hidden', 'filterable': 'false', 'sortable' : 'true'},
-  'votes' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
+  'votes' : {'displayName': "$services.localization.render('wikidemarches.dematdashboard.table.votes') $dematInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
-  'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $explanationLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'}
+  'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $satisfactionLevelInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',
