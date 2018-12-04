@@ -142,7 +142,7 @@ $services.localization.render('avis.mandatory-info')
       &lt;/span&gt;
     &lt;/div&gt;
     &lt;div&gt;
-      &lt;input required type="text" name="title" maxlength="255" minlength="4" style="width: 100%;" value=""/&gt;
+      &lt;input required type="text" name="title" maxlength="255" minlength="4" style="width: 100%;" value="$!escapetool.xml($request.text)"/&gt;
     &lt;/div&gt;
   &lt;/fieldset&gt;
   &lt;fieldset&gt;
