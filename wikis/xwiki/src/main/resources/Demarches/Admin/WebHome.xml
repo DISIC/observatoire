@@ -48,6 +48,7 @@
 #set ($url = $xwiki.getDocument('FarmTools.DefaultLanguageUpdater').getURL('view','xaction=prepare&amp;wikis=xwiki&amp;spacesList=Demarches'))
 * [[Liste des démarches non indexées ou indexées plusieurs fois&gt;&gt;SolrIndexChecker]]
 * [[Liste des démarches n'ayant pas de champ « langue »&gt;&gt;path:$url]]
+* [[Appariement avec les identifiants de démarches service-public&gt;&gt;Demarches.Code.DemarchesMatcher]]
 
 == Avis
 

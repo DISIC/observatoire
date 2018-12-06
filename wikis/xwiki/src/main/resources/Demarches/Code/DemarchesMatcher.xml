@@ -1,0 +1,154 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Code.DemarchesMatcher" locale="">
+  <web>Demarches.Code</web>
+  <name>DemarchesMatcher</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544087715000</creationDate>
+  <parent>xwiki:Demarches.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544087716000</date>
+  <contentUpdateDate>1544087715000</contentUpdateDate>
+  <version>1.1</version>
+  <title>DemarchesMatcher</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{velocity}}
+#set ($csvExport = $doc.getURL('view','format=csv&amp;xpage=plain&amp;execute=1'))
+{{info}}
+Cette page contient un script permettant d'identifier démarches Coperia qui correspondent à des démarches présentes 
+sur le site NosDémarches.
+
+{{html}}
+&lt;form action="" method="POST"&gt;
+&lt;input type="submit" class="btn btn-primary" name="execute" value="Exécuter"/&gt;
+&lt;a href="$csvExport" class="btn btn-primary"&gt;Export CSV&lt;/a&gt;
+&lt;/form&gt;
+{{/html}}
+{{/info}}
+
+{{/velocity}}
+
+{{groovy}}
+void createCoperiaPages() {
+  def coperia = xwiki.getDocument('Demarches.Coperia').content
+  def entries = coperia.split('\n')
+  entries.each {
+    def entry = it.trim()
+    def idx = entry.indexOf(',')
+    def id = entry.substring(0,idx)
+    def title = entry.substring(idx + 1)
+    title = title.replaceAll('""', '##')
+    title = title.replaceAll('"', '')
+    title = title.replaceAll('##', '"')
+    def coperiaPage = xwiki.getDocument("Demarches.Coperia.$id")
+    coperiaPage.setTitle(title)
+    coperiaPage.save()
+    println "|$id|$title|[[$coperiaPage.fullName]]"
+  }
+}
+
+MAX = 20000
+
+void searchCoperiaIdentifiers() {
+  def demarches = xwiki.getDocument('Demarches.MatchingCoperiaDemarches').content
+  def entries = demarches.split('\n')
+  def counter = 0
+  def resultsByDemarche = [:]
+  def scoreByDemarche = [:]
+  entries.eachWithIndex { it, index -&gt;
+    def entry = it.trim()
+    def idx = it.indexOf(',')
+    def demarcheId = entry.substring(0,idx)
+    def coperiaId = entry.substring(idx + 1)
+    if (counter &lt; MAX &amp;&amp; coperiaId.substring(0,1) == 'R') {
+      def demarcheTitle = xwiki.getDocument(demarcheId).title
+      def query = services.query.createQuery(demarcheTitle, 'solr')
+      //set ($discard = $query.bindValue('qf', 'name^10 title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 object.Demarches.Code.DemarchesClass^1'))
+      query.bindValue('qf', 'title^10')
+      query.bindValue('fq', '{!q.op=AND} wiki:xwiki type:DOCUMENT space_exact:Demarches.Coperia')
+      def results = query.execute()
+      def pages = results[0]
+      if (pages.results.numFound &gt; 0) {
+        counter++
+        pages.results.each {
+          def coperiaPage = xwiki.getDocument(it.fullname)
+          def matchingCoperias = resultsByDemarche[demarcheId]
+          if (matchingCoperias == null) {
+            matchingCoperias = []
+            scoreByDemarche[demarcheId] = it.score
+          }
+          if (it.score &gt;= 100) {
+            matchingCoperias.add([id:coperiaPage.fullName, title: coperiaPage.title, score: it.score])
+          }
+          resultsByDemarche[demarcheId] = matchingCoperias
+        }
+      }
+    }
+  }
+  def scoreByDemarcheSorted = scoreByDemarche.sort { a, b -&gt; b.value &lt;=&gt; a.value }
+  def toCsv = request.format == 'csv' &amp;&amp; request.xpage == 'plain'
+  if (toCsv) {
+    println "\"Identifiant Nos Démarches\",\"Nom Nos Démarches\",\"Nom SP\",\"Identifiant SP\""
+  } else {
+    println "|=#|=Demarche|=Premières démarches Coperia trouvées"
+  }
+  scoreByDemarcheSorted.eachWithIndex { it, index -&gt;
+    def demarchePage = xwiki.getDocument(it.key)
+    def demarcheTitle = demarchePage.title
+    counter = index + 1
+    def url = "https://nosdemarches.gouv.fr/Demarches/"
+    if (!toCsv) {
+      println "|$counter|[[$demarcheTitle&gt;&gt;path:$url${demarchePage.name}]]|((("
+    }
+    resultsByDemarche[it.key].each { result -&gt;
+      def idx = result.id.lastIndexOf('.')
+      def coperiaId = result.id.substring(idx + 1)
+      if (toCsv) {
+        demarcheTitle = demarcheTitle.replaceAll("\"", "\"\"")
+        def coperiaTitle = result.title
+        coperiaTitle = coperiaTitle.replaceAll("\"", "\"\"")
+        demarcheTitle = demarcheTitle.replaceAll("\"", "\"\"")
+        println "\"${demarchePage.name}\",\"$demarcheTitle\",\"$coperiaTitle\",\"$coperiaId\""
+      } else {
+        println "|[[$result.title&gt;&gt;$result.id]] (score: $result.score)|$coperiaId"
+      }
+    }
+    if (!toCsv) {
+      println ")))"
+    }
+  }
+}
+
+if (request.execute) {
+  searchCoperiaIdentifiers()
+}
+
+{{/groovy}}</content>
+</xwikidoc>
