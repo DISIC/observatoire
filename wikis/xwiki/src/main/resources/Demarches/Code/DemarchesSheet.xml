@@ -454,7 +454,11 @@ require(['jquery','xwiki-selectize'], function($) {
     })
 
     if(window.location.hash) {
-      var hash = window.location.hash;
+      var hash = decodeURIComponent(window.location.hash);
+      var idx = hash.indexOf('|');
+      if (idx &gt; 0) {
+        hash = hash.substring(0, idx);
+      }
       var tab = $('#tabs a[href="' + hash + '"]');
       if (tab &amp;&amp; tab.tab) {
         tab.tab('show') // Select tab by name
