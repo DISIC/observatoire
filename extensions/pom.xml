@@ -12,6 +12,5 @@
     <modules>
         <module>avis-stats</module>
         <module>macro-livetable-excel-export</module>
-        <module>import</module>
     </modules>
 </project>
