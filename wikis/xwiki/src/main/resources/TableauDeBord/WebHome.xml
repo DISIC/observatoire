@@ -70,10 +70,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur&amp;votes_class=Avis.Code.AvisStatsClass&amp;occurrences_class=Avis.Code.AvisStatsClass&amp;moyenne_class=Avis.Code.AvisStatsClass'
 })
 #livetable('demarches' $columns $columnsProperties $options)
-{{/velocity}}
-
-{{velocity}}
-{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
+{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches" format="excel" label="$services.localization.render('wikidemarches.dematdashboard.download.xls')" /}}{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
 
 {{html}}
 &lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" target="_blank" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;

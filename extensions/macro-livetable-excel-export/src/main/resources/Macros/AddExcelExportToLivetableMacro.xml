@@ -485,10 +485,12 @@ addExportToExcelFunction();</code>
 
 &lt;script language="javascript"&gt;
 
+#set ($format = "$!xcontext.macro.params.format")
+#set ($functionName = "addButton$format")
 /**
 * Function that add the excel export button to the livetable
 */
-function addExcelButton(){
+function $functionName(){
   var livetableName = "livetable_$escapetool.javascript($xcontext.macro.params.livetable)";
   var livetable = window[livetableName];
   livetable.exportToExcel = XWiki.widgets.LiveTable.exportToExcel;
@@ -498,7 +500,6 @@ function addExcelButton(){
     return;
   }
   // add a button with the text and the icon
-  #set ($format = "$!xcontext.macro.params.format")
   #set ($btnLabel = "$!xcontext.macro.params.label")
   #if ($btnLabel == '')
     #set ($prettyFormat = $services.localization.render("xwiki.macro.exportexcellivetable.format.$format"))
@@ -519,9 +520,10 @@ function addExcelButton(){
   excel_span.appendChild(excel_button);
   // add the excel span after table
   livetableElt.insert({'after' : excel_span});
+  livetableElt.insert({'after' : '&amp;nbsp;'});
 }
 
-document.observe("xwiki:dom:loaded", addExcelButton);
+document.observe("xwiki:dom:loaded", $functionName);
 
 &lt;/script&gt;
 
