@@ -71,6 +71,15 @@
   #end
 #end
 
+#macro(checkDigitization)
+  #set ($niveauDemat = $demarche.getProperty('niveauDemat').value)
+  #if ($niveauDemat &amp;&amp; ($niveauDemat.contains('teleprocedure') || $niveauDemat.contains('formulaire')))
+    #set ($isDemat = true)
+  #else
+    #set ($isDemat = false)
+  #end
+#end
+
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche &amp;&amp; $xcontext.action == 'view')
   &lt;div class="demarche-details-action"&gt;
@@ -131,6 +140,10 @@
     #end
     &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
     &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+    #checkDigitization()
+    #if ($isDemat)
+      &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
+    #end
   &lt;/ul&gt;
 #end
 
@@ -145,6 +158,10 @@
     {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
 
     {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+
+    #if ($isDemat)
+      {{include reference="Demarches.Code.CerfaNumeriqueTab" /}}
+    #end
   #end
 &lt;/div&gt;
 
