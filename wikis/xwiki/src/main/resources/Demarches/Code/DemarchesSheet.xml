@@ -940,6 +940,12 @@ h2 {
   }
 }
 
+#cerfa-numerique-tab {
+  img.cerfa-numerique {
+    float: right;
+    width: 150px;
+  }
+}
 </code>
     </property>
     <property>

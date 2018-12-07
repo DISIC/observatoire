@@ -41,10 +41,12 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 {{html wiki="true"}}
+#set ($imgUrl = $xwiki.getDocument('Demarches.Code.WikiDemarchesSkin').getAttachmentURL('cerfa.jpg'))
 &lt;div class="tab-pane fade #if($selectedTab == 'cerfa-numerique-tab')active in#end" role="tabpanel" id="cerfa-numerique-tab" aria-labelledby="cerfa-numerique-tab"&gt;
 #set ($cerfaNumeriqueWiki = 'cerfanum')
 #set ($cerfaPageReference = "$cerfaNumeriqueWiki:CerfaNumerique.${doc.name}")
 #if ($xwiki.exists($cerfaPageReference))
+  &lt;img src="$imgUrl" class="cerfa-numerique" /&gt;
   {{display reference="$cerfaPageReference" /}}
 #else
   $services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique.absent')

@@ -7,7 +7,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.slf4j.Logger;
+import org.suigeneris.jrcs.rcs.Version;
 import org.xwiki.bridge.event.DocumentCreatedEvent;
+import org.xwiki.bridge.event.DocumentUpdatedEvent;
 import org.xwiki.component.annotation.Component;
 import org.xwiki.model.reference.EntityReference;
 import org.xwiki.model.reference.EntityReferenceSerializer;
@@ -19,6 +21,7 @@ import org.xwiki.query.QueryException;
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.XWikiException;
 import com.xpn.xwiki.doc.XWikiDocument;
+import com.xpn.xwiki.internal.event.XObjectPropertyUpdatedEvent;
 import com.xpn.xwiki.objects.BaseObject;
 
 /**
@@ -54,7 +57,7 @@ public class DemarcheEventListener extends AbstractEventListener
      */
     public DemarcheEventListener()
     {
-        super(LISTENER_NAME, new DocumentCreatedEvent());
+        super(LISTENER_NAME, new DocumentCreatedEvent(), new XObjectPropertyUpdatedEvent());
     }
 
     @Override
@@ -66,13 +69,29 @@ public class DemarcheEventListener extends AbstractEventListener
 
         XWikiDocument document = (XWikiDocument) source;
         BaseObject demarche = document.getXObject(DEMARCHE_CLASS_REFERENCE);
-        try {
-            if (demarche != null) {
-                avisStatsComponent.computeAvisStats(document.getDocumentReference(), context);
+        if (event instanceof  DocumentCreatedEvent) {
+            // Initialize the cache for the Demarche, and cache the digitization date in case the Demarche
+            // is already digitized.
+            try {
+                if (demarche != null) {
+                    avisStatsComponent.computeAvisStats(document.getDocumentReference(), context);
+                }
+            } catch (QueryException | XWikiException e) {
+                logger.error("Error while adding an AvisStats object to a Demarche: [%s].",
+                        compactWikiSerializer.serialize(document.getDocumentReference()), e);
             }
-        } catch (QueryException | XWikiException e) {
-            logger.error("Error while adding an AvisStats object to a Demarche: [%s].",
-                compactWikiSerializer.serialize(document.getDocumentReference()), e);
+        } else if (event instanceof XObjectPropertyUpdatedEvent) {
+            // In case the Demarche property "niveauDemat" was updated to a value representing digitization,
+            // update the digitization date value in the cache.
+            Version currentVersion = null;
+            try {
+                currentVersion = document.getDocumentArchive(context).getLatestVersion();
+                Version previousVersion = document.getDocumentArchive(context).getPrevVersion(currentVersion);
+            } catch (XWikiException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
 }
