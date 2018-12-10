@@ -152,17 +152,14 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
 &lt;div&gt;($avisCount avis)&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;"&gt;
-      #addAvisDataTable('score', 'Répartition des avis', 'Satisfaction', 'score', 'IntegerProperty as prop', 'prop.value', true, {1: 'avis  négatifs', 2:'avis  moyens', 3:'avis  positifs'})
+      #addAvisDataTable('score', 'Répartition des avis', 'Satisfaction', 'score', 'IntegerProperty as prop', 'prop.value', true, {1: 'avis&amp;#10;négatifs', 2:'avis&amp;#10;moyens', 3:'avis&amp;#10;positifs'})
       
       #if ($showData)
         #set($chartOptions = {
           "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
           "opacity": 0.8,
           "percent": true,
-          "removeZeros": true,
-          "tooltips": {
-            "titleFontFamily": "FontAwesome"
-          },
+          "skipZeros": true,
           "legend": {
             "display": false
           },
@@ -177,7 +174,8 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
           "plugins": {
             "datalabels": {
               "anchor": "end",
-              "align": "end"
+              "align": "end",
+              "includeLegend": true
             }
           }
         })
@@ -249,9 +247,10 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #addAvisDataTable('difficultes',  'Difficultés rencontrées', 'Difficulté', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
       #if ($showData)
         #set($chartOptions = {
-          "backgroundColors": ["#bcbcbc"],
+          "maintainAspectRatio": false,
+          "backgroundColors": ["#a89ecc"],
           "opacity": 0.8,
-          "removeZeros": true,
+          "skipZeros": true,
           "scales": {
             "xAxes": [{
               "gridLines": {"display": false, "drawBorder": false},
@@ -259,9 +258,9 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             }],
             "yAxes": [{
               "gridLines": {"display": false, "drawBorder": true},
-              "ticks": { "display": true, "mirror": true, "padding": -5, "labelOffset": -15},
-              "barThickness": 15,
-              "maxBarThickness": 15
+              "ticks": { "display": true, "mirror": true, "padding": -5, "labelOffset": -20},
+              "barThickness": 25,
+              "maxBarThickness": 25
             }]
           },
           "legend": {
@@ -281,7 +280,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
         })
         #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-        {{tableToChartJS type='horizontalBar' table='difficultes' options='$options'/}}
+        {{tableToChartJS type='horizontalBar' table='difficultes' options='$options' cssClass='histo'/}}
       #end
 
     &lt;/div&gt;
@@ -290,7 +289,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #addAvisDataTable('aide', 'Besoins d''aide', 'Aide', 'aide', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
       #if ($showData)
 
-        {{tableToChartJS type='horizontalBar' table='aide' options='$options'/}}
+        {{tableToChartJS type='horizontalBar' table='aide' options='$options' cssClass='histo'/}}
       #end
 
     &lt;/div&gt;
@@ -329,7 +328,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
     &lt;div class="row"&gt;
       &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
         &lt;h3&gt;Parcours dématérialisés&lt;/h3&gt;
-        #addAvisDataTable('modalite', 'Parcours dématérialisés', 'Modalité', 'modalite', 'StringProperty as prop', 'prop.value', true, {'en-ligne-entièrement':'Démarches  réalisées en ligne','en-ligne-partiellement':'En ligne  mais pas jusqu''au bout','autrement':'Autre  (papier, guichet&amp;hellip;)'})
+        #addAvisDataTable('modalite', 'Parcours dématérialisés', 'Modalité', 'modalite', 'StringProperty as prop', 'prop.value', true, {'en-ligne-entièrement':'Démarches&amp;#10;réalisées en ligne','en-ligne-partiellement':'En ligne&amp;#10;mais pas jusqu''au bout','autrement':'Autre&amp;#10;(papier, guichet&amp;hellip;)'})
 
         #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, StringProperty as prop, StringProperty demarche where doc.fullName = obj.name and obj.className = 'Avis.Code.AvisClass' and obj.id = prop.id.id and prop.id.name = 'modalite' and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and prop.value='en-ligne-entièrement'")
         #set ($results = $services.query.hql($query).execute())
@@ -344,7 +343,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             "opacity": 1,
             "percent": true,
             "displayPercentFirst": 0,
-            "removeZeros": true,
+            "skipZeros": true,
             "legend": {
               "display": false
             },
@@ -359,7 +358,8 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             "plugins": {
               "datalabels": {
                 "anchor": "end",
-                "align": "end"
+                "align": "end",
+                "includeLegend": true
               }
             }
           })
@@ -386,8 +386,8 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
               &lt;tr&gt;&lt;th&gt;Souhait&lt;/th&gt;&lt;th&gt;Réponses&lt;/th&gt;&lt;/tr&gt;
             &lt;/thead&gt;
             &lt;tbody&gt;
-              &lt;tr&gt;&lt;td&gt;Dématérialisation  souhaitée&lt;/td&gt;&lt;td&gt;$dematRequestedPercent&lt;/td&gt;&lt;/tr&gt;
-              &lt;tr&gt;&lt;td&gt;Dématérialisation  non demandée&lt;/td&gt;&lt;td&gt;$noDematRequestPercent&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Dématérialisation&amp;#10;souhaitée&lt;/td&gt;&lt;td&gt;$dematRequestedPercent&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Dématérialisation&amp;#10;non demandée&lt;/td&gt;&lt;td&gt;$noDematRequestPercent&lt;/td&gt;&lt;/tr&gt;
             &lt;/tbody&gt;
           &lt;/table&gt;
 
@@ -396,7 +396,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             "opacity": 0.8,
             "percent": true,
             "displayPercentFirst": 0,
-            "removeZeros": true,
+            "skipZeros": true,
             "legend": {
               "display": false
             },
@@ -411,7 +411,8 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             "plugins": {
               "datalabels": {
                 "anchor": "end",
-                "align": "end"
+                "align": "end",
+                "includeLegend": true
               }
             }
           })
