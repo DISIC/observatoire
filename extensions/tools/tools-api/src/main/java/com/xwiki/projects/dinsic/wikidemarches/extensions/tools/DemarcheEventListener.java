@@ -1,4 +1,4 @@
-package com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats;
+package com.xwiki.projects.dinsic.wikidemarches.extensions.tools;
 
 import java.util.Arrays;
 
@@ -9,7 +9,6 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.suigeneris.jrcs.rcs.Version;
 import org.xwiki.bridge.event.DocumentCreatedEvent;
-import org.xwiki.bridge.event.DocumentUpdatedEvent;
 import org.xwiki.component.annotation.Component;
 import org.xwiki.model.reference.EntityReference;
 import org.xwiki.model.reference.EntityReferenceSerializer;

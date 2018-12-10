@@ -18,6 +18,6 @@
         <xwiki.issueManagement.system>jira</xwiki.issueManagement.system>
     </properties>
     <modules>
-        <module>avis-stats-api</module>
+        <module>tools-api</module>
     </modules>
 </project>

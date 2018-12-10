@@ -1,4 +1,4 @@
-package com.xwiki.projects.dinsic.wikidemarches.extensions.avisstats;
+package com.xwiki.projects.dinsic.wikidemarches.extensions.tools;
 
 import javax.inject.Inject;
 import javax.inject.Named;
