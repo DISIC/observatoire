@@ -74,6 +74,7 @@ Demarches.Code.DemarchesClass_niveauDemat_pdfnonremplissable=PDF non remplissabl
 Demarches.Code.DemarchesClass_niveauDemat_pdfremplissable=PDF remplissable
 Demarches.Code.DemarchesClass_niveauDemat_edi=EDI
 Demarches.Code.DemarchesClass_niveauDemat_teleservice=Téléprocédure
+Demarches.Code.DemarchesClass_dateDemat=Date de dématérialisation
 Demarches.Code.DemarchesClass_niveauPrevu=Niveau de dématérialisation prévu
 Demarches.Code.DemarchesClass_niveauPrevu_aucun=Aucun
 Demarches.Code.DemarchesClass_niveauPrevu_teleservice=Téléprocédure

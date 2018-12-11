@@ -38,7 +38,7 @@ public interface AvisStatsManager
 
     String AVIS_VOTE_PROPERTY_NAME = "vote";
 
-    void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
+    void computeAvisStats(DocumentReference demarcheReference, boolean save, XWikiContext context)
         throws QueryException, XWikiException;
 
     void computeAvisStats(XWikiContext context) throws QueryException, XWikiException;

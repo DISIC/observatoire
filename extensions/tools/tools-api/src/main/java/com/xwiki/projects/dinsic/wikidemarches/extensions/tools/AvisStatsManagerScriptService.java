@@ -27,7 +27,7 @@ public class AvisStatsManagerScriptService implements ScriptService
     public void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
         throws QueryException, XWikiException
     {
-        this.avisStatsComponent.computeAvisStats(demarcheReference, context);
+        this.avisStatsComponent.computeAvisStats(demarcheReference, true, context);
     }
 
     public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException

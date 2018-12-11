@@ -46,7 +46,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
      * the demarcheReference is valid, no check is performed. <br>
      * TODO: is synchronized enough to cover the thread safety?
      */
-    public synchronized void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
+    public synchronized void computeAvisStats(DocumentReference demarcheReference, boolean save, XWikiContext context)
         throws QueryException, XWikiException
     {
 
@@ -74,7 +74,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         long votes = result[2] != null ? (long) result[2] : 0;
         logger.debug(String.format("Caching stats for demarche [%s] - Occurences: [%s], Satisfaction index [%s], Votes: [%s]",
             demarcheReference, occurrences, satisfactionIndex, votes));
-        setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, false, context);
+        setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, save,false, context);
     }
 
     /**
@@ -119,7 +119,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             logger.debug(
                 String.format("[%s] Computing stats for demarche [%s] - Occurences: [%s], Satisfaction index [%s], Votes: [%s]",
                     ++handledDemarches, demarcheId, occurrences, satisfactionIndex, votes));
-            setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, false, context);
+            setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, true, false, context);
         }
 
         // Handle Demarches which have not received any Avis yet.
@@ -142,7 +142,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             String demarcheId = (String) result;
             DocumentReference demarcheReference = documentReferenceResolver.resolve(demarcheId);
             logger.debug(String.format("[%s] Setting stats to 0 for demarche [%s]", ++handledDemarches, demarcheId));
-            setAvisStatsValues(demarcheReference, 0, 0, 0, false, context);
+            setAvisStatsValues(demarcheReference, 0, 0, 0, true,false, context);
         }
         logger.debug("Done computing stats for all demarches");
     }
@@ -151,7 +151,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
      * Initializes or updates AvisStats values for a given demarche.
      */
     private synchronized void setAvisStatsValues(DocumentReference demarcheReference, long occurrences, double satisfactionIndex,
-        long votes, boolean addVersionEntry, XWikiContext context) throws XWikiException
+        long votes, boolean save, boolean addVersionEntry, XWikiContext context) throws XWikiException
     {
         XWiki wiki = context.getWiki();
         XWikiDocument demarche = wiki.getDocument(demarcheReference, context).clone();
@@ -165,10 +165,12 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             avisStats.setLongValue(VOTES_PROPERTY_NAME, votes);
 
             demarche.setMetaDataDirty(addVersionEntry);
-            if (!addVersionEntry) {
-                wiki.saveDocument(demarche, context);
-            } else {
-                wiki.saveDocument(demarche, "Initialisation ou mise à jour de l'objet 'AvisStats'.", context);
+            if (save) {
+                if (!addVersionEntry) {
+                    wiki.saveDocument(demarche, context);
+                } else {
+                    wiki.saveDocument(demarche, "Initialisation ou mise à jour de l'objet 'AvisStats'.", context);
+                }
             }
         } else {
             logger.warn("Avis update was received for demarche " + demarcheReference + " which does not exist!");
