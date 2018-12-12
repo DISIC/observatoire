@@ -941,9 +941,32 @@ h2 {
 }
 
 #cerfa-numerique-tab {
-  img.cerfa-numerique {
-    float: right;
-    width: 150px;
+  @media (min-width: 321px) {
+    img.cerfa-numerique {
+      float: right;
+      width: 120px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    img.cerfa-numerique {
+      float: right;
+      width: 60px;
+      margin-left: 1em;
+    }
+  }
+
+  .metadata {
+    padding: 0.3em 0;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .grid {
+    width: 85%;
+    margin-top: 1em;
   }
 }
 </code>
