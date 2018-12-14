@@ -46,7 +46,7 @@
 #set ($cerfaNumeriqueWiki = 'cerfanum')
 #set ($cerfaPageReference = "$cerfaNumeriqueWiki:CerfaNumerique.${doc.name}")
 #if ($xwiki.exists($cerfaPageReference))
-  &lt;img src="$imgUrl" class="cerfa-numerique" /&gt;
+  &lt;img src="$imgUrl" class="cerfa-numerique" alt="Logo Cerfa numérique"/&gt;
   {{display reference="$cerfaPageReference" /}}
 #else
   $services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique.absent')
