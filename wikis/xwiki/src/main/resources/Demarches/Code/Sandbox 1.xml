@@ -20,15 +20,15 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Demarches.Code.Macros" locale="">
+<xwikidoc version="1.3" reference="Demarches.Code.Sandbox 1" locale="">
   <web>Demarches.Code</web>
-  <name>Macros</name>
+  <name>Sandbox 1</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
-  <parent>demat:Demarches.Code.WebHome</parent>
+  <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1544396400000</date>
@@ -39,29 +39,14 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity output="false"}}
-#macro(fillUserDirections)
-  #set ($user = $!xcontext.user)
-  ##FIXME: there should be a way to avoid this hack
-  #if ($user.indexOf(':')&gt;0)
-    #set ($idx = $user.indexOf(':') + 1)
-    #set ($user = $user.substring($idx))
-  #end
-  #set ($xwql = "from doc.object(XWiki.XWikiGroups) obj where obj.member = :user and doc.fullName like '%Directions%' order by doc.name")
-  #set($userDirections = $services.query.xwql($xwql).bindValue("user", $user).setWiki("xwiki").execute())
-#end
-#macro(createDirectionFilterQueryString)
-  #fillUserDirections()
-  #set ($directionFilter = '')
-  #foreach($item in $userDirections)
-    ## we check that the direction exists
-    #set ($directionKey = $xwiki.getDocument("xwiki:$item").name)
-    #set ($directionKey = "Directions.$directionKey")
-    #if ($xwiki.exists($directionKey))
-      #set ($directionFilter = "$directionFilter&amp;direction=$escapetool.url($directionKey)")
-    #end
-  #end
-#end
-#createDirectionFilterQueryString()
-{{/velocity}}</content>
+  <content>
+
+(% class="nav nav-tabs" id="tabs" %)
+* (% role="presentation" class="active" %) Démarche
+
+
+  &lt;li role="presentation"&gt;&lt;a href="#liste-avis-tab"&gt;Liste des avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation" #if ($xcontext.user == 'XWiki.XWikiGuest')class="active"#end&gt;&lt;a href="#avis-tab"&gt;Donnez votre avis&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="presentation"&gt;&lt;a href="#details-tab"&gt;Plus de détails&lt;/a&gt;&lt;/li&gt;
+</content>
 </xwikidoc>

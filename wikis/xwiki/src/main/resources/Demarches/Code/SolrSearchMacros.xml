@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1529141437000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Demarches.Code.SolrSearch</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529144068000</date>
-  <contentUpdateDate>1529144068000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>SolrSearchMacros</title>
   <comment/>
@@ -41,7 +41,7 @@
   <hidden>true</hidden>
   <content>{{velocity output='false'}}
 
-#* Overrides "pagination" macro from "templates/macros.vm" in order to show a custom display
+#* Override "pagination" macro in "templates/macros.vm" in order to show a custom display
  * when there is no result.
  *#
 #macro(paginationCustom $parameters)
@@ -61,7 +61,7 @@
   #paginationDisplayCustom($parameters)
 #end
 
-#* Overrides "pagination" macro from "templates/macros.vm" in order to show a custom display
+#* Override "pagination" macro in "templates/macros.vm" in order to show a custom display
  * when there is no result.
  *#
 #macro(paginationDisplayCustom $parameters)

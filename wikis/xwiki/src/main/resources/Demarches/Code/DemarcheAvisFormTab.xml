@@ -24,15 +24,15 @@
   <web>Demarches.Code</web>
   <name>DemarcheAvisFormTab</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1541670657000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>xwiki:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1541670657000</date>
-  <contentUpdateDate>1541670657000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>DemarcheAvisFormTab</title>
   <comment/>

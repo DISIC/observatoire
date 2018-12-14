@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1526657567000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>DemarchesClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528041239000</date>
-  <contentUpdateDate>1528041239000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -169,7 +169,7 @@ demarches.dataSpace.title=Data
     <name>Demarches.Code.DemarchesTranslations</name>
     <number>0</number>
     <className>XWiki.TranslationDocumentClass</className>
-    <guid>bf703948-5b06-45f2-9633-27ab12e0b798</guid>
+    <guid>42256c14-675e-4352-8dca-b2b2a7a4d4a2</guid>
     <class>
       <name>XWiki.TranslationDocumentClass</name>
       <customClass/>

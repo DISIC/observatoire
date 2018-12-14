@@ -20,11 +20,11 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Demarches.Code.SolrSearch" locale="">
+<xwikidoc version="1.3" reference="Demarches.Code.SandboxChartJsLabelsPlugin" locale="">
   <web>Demarches.Code</web>
-  <name>SolrSearch</name>
+  <name>SandboxChartJsLabelsPlugin</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -34,55 +34,23 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>SolrSearch</title>
+  <title>SandboxChartJsLabelsPlugin</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity output="false"}}
-#set ($solrConfig = {
-  'queryFields': {
-    'DOCUMENT' : 'title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 property.Demarches.Code.DemarchesClass.urlDemarche^8 object.Demarches.Code.DemarchesClass^1'
-  },
-  'filterQuery': [
-    'wiki:xwiki',
-    'type:DOCUMENT',
-    '-name:DemarchesTemplate',
-    'class:Demarches.Code.DemarchesClass',
-    '-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche'
-  ],
-  'facetFields': [
-    'property.Demarches.Code.DemarchesClass.categoriesPublics_string',
-    'property.Demarches.Code.DemarchesClass.publics_string',
-    'property.Demarches.Code.DemarchesClass.evenements_string'
-  ],
-  'facetDisplayers': {
-    'property.Demarches.Code.DemarchesClass.categoriesPublics_string' : 'Demarches.Code.ListFacet',
-    'property.Demarches.Code.DemarchesClass.publics_string' : 'Demarches.Code.ListFacet',
-    'property.Demarches.Code.DemarchesClass.evenements_string' : 'Demarches.Code.ListFacet'
-  },
-  'highlightEnabled' : false
-})
-{{/velocity}}
+  <content>{{html clean="false"}}
 
-{{include reference="Main.SolrSearchConfig" /}}
+&lt;canvas id="chart" width="400" height="400"&gt;&lt;/canvas&gt;
 
-{{include reference="Main.SolrSearchMacros" /}}
-
-{{include reference="Demarches.Code.SolrSearchMacros" /}}
-
-{{velocity}}
-  #set($discard = $xwiki.ssx.use('Main.CustomSearchSuggestSSX'))
-  #set($discard = $xwiki.ssx.use('Demarches.Code.SolrSearch'))
-  #handleSolrSearchRequest
-{{/velocity}}</content>
+{{/html}}</content>
   <object>
-    <name>Demarches.Code.SolrSearch</name>
+    <name>Demarches.Code.SandboxChartJsLabelsPlugin</name>
     <number>0</number>
-    <className>XWiki.StyleSheetExtension</className>
-    <guid>6eacb3da-3e7f-41b6-b1fb-c9304b7bd419</guid>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>d5690868-0363-4376-bdcd-8aed8aca6ece</guid>
     <class>
-      <name>XWiki.StyleSheetExtension</name>
+      <name>XWiki.JavaScriptExtension</name>
       <customClass/>
       <customMapping/>
       <defaultViewSheet/>
@@ -118,22 +86,6 @@
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
       </code>
-      <contentType>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>contentType</name>
-        <number>6</number>
-        <prettyName>Content Type</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>CSS|LESS</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </contentType>
       <name>
         <disabled>0</disabled>
         <name>name</name>
@@ -174,68 +126,47 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>/* Remove the little border between the search facet header and its body,
- *  as it doesn't work properly for search facets that display on 2 lines 
- */
-div.search-facet-header:after {
-  border: none;
-}
-
-.search-facet.expanded:last-of-type div.search-facet-header:after {
-  border: none;
-}
-
-/* Not sure why the title spacing is removed on this page, putting it back */
-div#document-title &gt; h1 {
-  margin-bottom: (@line-height-computed / 2)
-}
-
-/* Custom search results lists styling */
-.search-form button.btn {
-  .btn-gradient(lighten(@navbar-default-bg, 5%));
-  .btn-border(@navbar-default-bg);
-}
-
-
-ul.search-results {
-  margin-left: 0;
-  padding-left: 0;
-  list-style: none;
-  margin-bottom: 0;
-}
-
-ul.search-results li.search-result-title-wd {
-  padding-bottom: 1.5em;
-}
-
-ul.search-results li.search-result-title-wd:last-of-type {
-  padding-bottom: 0;
-}
-
-.paginationFilter.noResult {
-  border-top: none !important;
-}
-
-.new-demarche {
-  margin-top: 0.5em;
-  text-align: center;
-}
-
-@media (min-width: @screen-sm-min) {
-  .new-demarche {
-    text-align: inherit;
-    margin-top: 0em;
+      <code>require.config({
+  paths: {
+    chart: "//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min",
+    datalabels: "//cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.3.0/dist/chartjs-plugin-datalabels.min"
+  },
+  map: {
+    datalabels: {
+      "chart.js": "chart"
+    }
   }
-}</code>
+});
+
+require(["jquery", "chart", "datalabels"], function($, chart) {
+  var ctx = document.getElementById("chart").getContext('2d');
+  var chrt = new chart.Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ['a', 'b', 'c'],
+      datasets: [{
+        data: [1, 2, 3]
+      }, {
+        data: [-1, 0, 1]
+      }],
+    },
+    options: {
+      plugins: {
+        datalabels: {
+          backgroundColor: "white",
+          color: "blue",
+        }
+      }
+    }
+  });
+});
+</code>
     </property>
     <property>
-      <contentType>LESS</contentType>
+      <name>JSX</name>
     </property>
     <property>
-      <name/>
-    </property>
-    <property>
-      <parse/>
+      <parse>1</parse>
     </property>
     <property>
       <use>currentPage</use>
