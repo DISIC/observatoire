@@ -51,7 +51,7 @@
 ## - Third form screen (key: "third-form-screen")
 ## - Final step (key: "final-step")
 
-#set ($franceConnectDemarcheId = 'Demarches.1781')
+#set ($FRANCE_CONNECT_ID = "Demarches.1650")
 
 #if ($step == '')
   ## Initialize the step variable for the sake for clarity (i.e. do not leave the initial step empty).
@@ -88,7 +88,7 @@
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
       #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
       #set ($presetModalite = "$!request.nd_mode")
-      #if ($doc.fullName == $franceConnectDemarcheId)
+      #if ($doc.fullName == $FRANCE_CONNECT_ID)
         #set ($presetModalite = "en-ligne-entièrement")
       #end
       #if ($modality != "demarche-newly-submitted-by-current-user" &amp;&amp; $presetModalite == '')

@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1528199577000</creationDate>
-  <parent>Main.WebHome</parent>
+  <creationDate>1544396400000</creationDate>
+  <parent>xwiki:Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530698801000</date>
-  <contentUpdateDate>1530698801000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Handler</title>
   <comment/>
@@ -41,6 +41,7 @@
   <hidden>true</hidden>
   <content>{{include reference="Avis.Code.AvisMacros" /}}
 {{velocity output="false"}}
+#set ($FRANCE_CONNECT_ID = "Demarches.1650")
 #set ($demarcheId = "$!request['Avis.Code.AvisClass_0_demarche']")
 #set ($step = "$!request['avis-form-step']")
 #set ($avisIdAttributeKey = "${demarcheId}-avis-id")
@@ -96,10 +97,10 @@
 #if ($xwiki.exists($target.fullName))
   $request.session.setAttribute($avisIdAttributeKey, $target.name)
   #if ($step == 'initial-step')
-    ## If the current demarche is France Connect (Demarches.1781), then the next step is the final step, hence we consider
+    ## If the current demarche is FranceConnect, then the next step is the final step, hence we consider
     ## that the avis has been submitted and that any new form submission will result in a new avis (just as below in the
     ## third-form-screen step).
-    #if ($demarcheId == 'Demarches.1781')
+    #if ($demarcheId == $FRANCE_CONNECT_ID)
       #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
       $request.session.setAttribute('avis-form-step', 'final-step')
     #else
