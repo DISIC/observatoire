@@ -93,28 +93,27 @@
     #end
     #displayArray('evenements', $services.localization.render('Demarches.Code.DemarchesClass_evenements'))
     #displayArray('categoriesPublics', $services.localization.render('Demarches.Code.DemarchesClass_publics'))
-    #set ($ministereStr = '')
-    #set ($ministeres = $demarche.getProperty('ministeres').value)
-    #if ($ministeres &amp;&amp; $ministeres.size() &gt; 0)
-      #foreach ($ministere in $ministeres)
-        #set ($ministereDoc = $xwiki.getDocument($ministere))
-        #set ($ministereObj = $ministereDoc.getObject('Ministeres.Code.MinisteresClass'))
-        #set ($nom = $ministereObj.getProperty('nom').value)
-        #set ($ministereStr = "$ministereStr$!nom - ")
+    #set ($champsStr = '')
+    #set ($champs = $demarche.getProperty('champsMinisteriels').value)
+    #if ($champs &amp;&amp; $champs.size() &gt; 0)
+      #foreach ($champ in $champs)
+        #set ($champPage = $xwiki.getDocument($champ))
+        #set ($nom = $champPage.title)
+        #set ($champsStr = "$champsStr$!nom - ")
       #end
     #end
-    #if ($ministereStr.length() &gt; 3)
-      #set ($ministereStr = $ministereStr.substring(0, $mathtool.sub($ministereStr.length(),3)))
+    #if ($champsStr.length() &gt; 3)
+      #set ($champsStr = $champsStr.substring(0, $mathtool.sub($champsStr.length(),3)))
       &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_champsMinisteriels')&lt;/dt&gt;
-      &lt;dd&gt;$ministereStr&lt;/dd&gt;
+      &lt;dd&gt;$champsStr&lt;/dd&gt;
     #end
     #set ($objet = $!escapetool.html($demarche.getProperty('objet').value))
-    #if ("$objet" != '')
-      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_champsMinisteriels')&lt;/dt&gt;
+    #if ("$!objet" != '')
+      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_objet')&lt;/dt&gt;
       &lt;dd&gt;$objet&lt;/dd&gt;
     #end
     #set ($urlInfos = $demarche.getProperty('urlInfos').value)
-    #if ("$urlInfos" != '')
+    #if ("$!urlInfos" != '')
       &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.plus')&lt;/dt&gt;
       &lt;dd&gt;$urlInfos&lt;/dd&gt;
     #end
