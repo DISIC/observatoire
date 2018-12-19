@@ -130,6 +130,9 @@
   #end
 #end
 
+#set ($cerfaNumeriqueWiki = 'cerfanum')
+#set ($cerfaPageReference = "$cerfaNumeriqueWiki:CerfaNumerique.${doc.name}")
+
 ## Display tabs only in view mode.
 #if ($xcontext.action == 'view')
   &lt;ul class="nav nav-tabs" id="tabs"&gt;
@@ -139,31 +142,27 @@
     #end
     &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
     &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
-    #checkDigitization()
-    #if ($isDemat)
+    #if ($xwiki.exists($cerfaPageReference))
       &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
     #end
   &lt;/ul&gt;
 #end
 
+#if ($xcontext.action == 'view')
 &lt;div class="tab-content"&gt;
   #if (!$isGuest)
     {{include reference="Demarches.Code.DemarcheTab" /}}
-    #if ($xcontext.action == 'view')
-      {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
-    #end
+    {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
   #end
-  #if ($xcontext.action == 'view')
-    {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
-
-    {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
-
-    #if ($isDemat)
-      {{include reference="Demarches.Code.CerfaNumeriqueTab" /}}
-    #end
+  {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
+  {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+  #if ($xwiki.exists($cerfaPageReference))
+    {{include reference="Demarches.Code.CerfaNumeriqueTab" /}}
   #end
 &lt;/div&gt;
-
+#elseif ($xcontext.action == 'edit')
+  {{include reference="Demarches.Code.DemarcheTab" /}}
+#end
 {{/html}}
 {{/velocity}}</content>
   <object>
