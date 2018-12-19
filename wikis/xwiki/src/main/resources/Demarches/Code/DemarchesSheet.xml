@@ -94,17 +94,17 @@
     #displayArray('evenements', $services.localization.render('Demarches.Code.DemarchesClass_evenements'))
     #displayArray('categoriesPublics', $services.localization.render('Demarches.Code.DemarchesClass_publics'))
     #set ($champsStr = '')
-    #set ($champs = $demarche.getProperty('champsMinisteriels').value)
+    #set ($champs = $demarche.getProperty('ministeres').value)
     #if ($champs &amp;&amp; $champs.size() &gt; 0)
       #foreach ($champ in $champs)
-        #set ($champPage = $xwiki.getDocument($champ))
-        #set ($nom = $champPage.title)
+        #set ($nom = $xwiki.getDocument($champ).get('nom'))
+        ##set ($nom = $champPage.title)
         #set ($champsStr = "$champsStr$!nom - ")
       #end
     #end
     #if ($champsStr.length() &gt; 3)
       #set ($champsStr = $champsStr.substring(0, $mathtool.sub($champsStr.length(),3)))
-      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_champsMinisteriels')&lt;/dt&gt;
+      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_ministeres')&lt;/dt&gt;
       &lt;dd&gt;$champsStr&lt;/dd&gt;
     #end
     #set ($objet = $!escapetool.html($demarche.getProperty('objet').value))
