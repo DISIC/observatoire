@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530025162000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530200432000</date>
-  <contentUpdateDate>1530200432000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.dematdashboard.title')</title>
   <comment/>
@@ -48,7 +48,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set($satisfactionLevelInfoLink = "&lt;a href='$escapetool.xml($satisfactionLevelInfo.getURL())' title='$escapetool.xml($satisfactionLevelInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
 #set($dematInfo = $xwiki.getDocument('Main.Dematerialisation'))
 #set($dematInfoLink = "&lt;a href='$escapetool.xml($dematInfo.getURL())' title='$escapetool.xml($dematInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres', 'direction', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne', 'statut'])
+#set ($columns = ['doc.title', 'ministeres', 'direction', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
   'ministeres': {'type' : 'suggest', 'filterable' : 'true', 'sortable' : 'false'},
@@ -57,7 +57,11 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'statut' : {'type' : 'hidden', 'filterable': 'false', 'sortable' : 'true'},
   'votes' : {'displayName': "$services.localization.render('wikidemarches.dematdashboard.table.votes') $dematInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
-  'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $satisfactionLevelInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'}
+  'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $satisfactionLevelInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
+  'volumetrie': {'type' : 'hidden', 'displayName': 'Volumétrie'},
+  'volumetrieDemat': {'type' : 'hidden', 'displayName': 'Volumétrie démat.'},
+  'pourcentageDemat': {'type' : 'hidden', 'displayName': '% démat.'},
+  'niveauVolumetrie': {'type' : 'hidden', 'displayName': 'Niveau vol.'}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',

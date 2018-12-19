@@ -456,11 +456,11 @@
     #set ($idx1 = $boundaries.indexOf($top))
     #set ($idx2 = $mathtool.sub($idx1,1))
     #set ($bottom = $boundaries.get($idx2))
-    #set ($bottom = $numbertool.format('integer', $bottom))
-    #set ($top = $numbertool.format('integer', $top))
-    [${bottom} - ${top}]
+    ##set ($bottom = $numbertool.format('integer', $bottom))
+    ##set ($top = $numbertool.format('integer', $top))
+    ${bottom} - ${top}
   #else
-    5 000 000 et plus
+    5000000 et plus
   #end
 #end
 {{/html}}
@@ -558,7 +558,7 @@
 #if ($volumetrie &amp;&amp; $volumetrie &gt; 0 &amp;&amp; $volumetrieDemat)
   #set ($percent = $mathtool.div($volumetrieDemat,$volumetrie))
   #set ($percent = $mathtool.roundTo(1,$percent))
-  ${percent}%
+  ${percent} %
 #end
 {{/html}}
 {{/velocity}}</script>
