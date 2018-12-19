@@ -71,15 +71,6 @@
   #end
 #end
 
-#macro(checkDigitization)
-  #set ($niveauDemat = $demarche.getProperty('niveauDemat').value)
-  #if ($niveauDemat &amp;&amp; ($niveauDemat.contains('teleprocedure') || $niveauDemat.contains('formulaire')))
-    #set ($isDemat = true)
-  #else
-    #set ($isDemat = false)
-  #end
-#end
-
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche &amp;&amp; $xcontext.action == 'view')
   &lt;div class="demarche-details-action"&gt;
