@@ -192,8 +192,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Facilité d'usage&lt;/h3&gt;
       #addAvisDataTable('facile', 'Répartition des réponses sur la facilité d''usage', 'Facilité', 'facile', 'IntegerProperty as prop', 'prop.value', false, $NULL)
-      #if ($showData)
-        #set($chartOptions = {
+      #set($chartOptions = {
           "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
           "opacity": 0.8,
           "labelsMap": {"Mauvais": "\uf119", "Moyen": "\uf11a", "Bon":"\uf118"},
@@ -225,7 +224,9 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             }
           }
         })
-        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+      #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+
+      #if ($showData)
 
         {{tableToChartJS type='horizontalBar' table='facile' options='$options'/}}
       #end
@@ -245,8 +246,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Difficultés rencontrées&lt;/h3&gt;
       #addAvisDataTable('difficultes',  'Difficultés rencontrées', 'Difficulté', 'difficultes', 'DBStringListProperty as prop join prop.list list', 'list', false, $NULL)
-      #if ($showData)
-        #set($chartOptions = {
+      #set($chartOptions = {
           "maintainAspectRatio": false,
           "backgroundColors": ["#a89ecc"],
           "opacity": 0.8,
@@ -278,7 +278,9 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
             }
           }
         })
-        #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+      #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+        
+      #if ($showData)
 
         {{tableToChartJS type='horizontalBar' table='difficultes' options='$options' cssClass='histo'/}}
       #end
