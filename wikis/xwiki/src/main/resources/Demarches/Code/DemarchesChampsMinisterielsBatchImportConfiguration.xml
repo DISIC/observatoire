@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarchesChampsMinisterielsBatchImportConfiguration</name>
   <language/>
-  <defaultLanguage>en</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
