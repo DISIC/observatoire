@@ -53,6 +53,7 @@
 == Avis
 
 * [[Liste des avis&gt;&gt;Avis.WebHome]]
+* [[Initialisation du cache d'avis&gt;&gt;Avis.Code.AvisStatsManager]]
 * [[Statistiques&gt;&gt;Avis.Admin.Statistiques]]
 * [[Avis ayant été édités par un utilisateur identifié&gt;&gt;doc:Avis.Admin.AvisEdited]]
 * [[Avis regroupés par session et par démarche&gt;&gt;doc:Avis.Admin.AvisSessionManager]]
