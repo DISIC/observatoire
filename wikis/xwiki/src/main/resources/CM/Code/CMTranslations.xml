@@ -24,15 +24,15 @@
   <web>CM.Code</web>
   <name>CMTranslations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1543845564000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>CMClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1543846613000</date>
-  <contentUpdateDate>1543846613000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -41,6 +41,7 @@
   <hidden>true</hidden>
   <content># Class fields
 CM.Code.CMClass_nom=Nom
+CM.Code.CMClass_sigle=Sigle
 CM.Code.CMClass_description=Description
 
 # Live table generic keys
@@ -63,6 +64,7 @@ cm.livetable.emptyvalue=-
 
 # Live table specific keys
 cm.livetable.nom=Nom
+cm.livetable.sigle=Sigle
 cm.livetable.description=Description
 
 # Other keys

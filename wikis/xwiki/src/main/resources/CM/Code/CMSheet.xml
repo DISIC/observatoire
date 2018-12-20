@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1543845564000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>CMClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1543846688000</date>
-  <contentUpdateDate>1543846688000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -46,6 +46,8 @@
 (((
   ; &lt;label#if ($xcontext.action == 'edit') for="CM.Code.CMClass_0_nom"#end&gt;$escapetool.xml($doc.displayPrettyName('nom', false, false))&lt;/label&gt;
   : $doc.display('nom')
+  ; &lt;label#if ($xcontext.action == 'edit') for="CM.Code.CMClass_0_sigle"#end&gt;$escapetool.xml($doc.displayPrettyName('sigle', false, false))&lt;/label&gt;
+  : $doc.display('sigle')
   ; &lt;label#if ($xcontext.action == 'edit') for="CM.Code.CMClass_0_description"#end&gt;$escapetool.xml($doc.displayPrettyName('description', false, false))&lt;/label&gt;
   : $doc.display('description')
 )))
