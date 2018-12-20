@@ -24,17 +24,17 @@
   <web>CM.Code</web>
   <name>CmBatchImportConfiguration</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1543850196000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>xwiki:CM.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1543850197000</date>
-  <contentUpdateDate>1543850196000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>CmBatchImportConfiguration</title>
+  <title>Champs ministériels – BatchImport configuration</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -246,8 +246,9 @@
       <listseparator>,</listseparator>
     </property>
     <property>
-      <mapping>ID=doc.name
-Name=doc.title</mapping>
+      <mapping>Name=doc.title
+ID=doc.name
+Sigle=sigle</mapping>
     </property>
     <property>
       <metadatafilename>champs-ministeriels.csv</metadatafilename>
