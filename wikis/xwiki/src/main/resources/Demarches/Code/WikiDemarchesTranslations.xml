@@ -110,6 +110,7 @@ wikidemarches.dematdashboard.homesubtitle=
 
 # Livetable translations
 wikidemarches.dematdashboard.table.doc.title=Démarche
+wikidemarches.dematdashboard.table.doc.name=Identifiant
 wikidemarches.dematdashboard.table.ministeres=Ministère(s)
 wikidemarches.dematdashboard.table.niveauDematBoolean=Peut être réalisée en ligne
 wikidemarches.dematdashboard.table.statut=Statut

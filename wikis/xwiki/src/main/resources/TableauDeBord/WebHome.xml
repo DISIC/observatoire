@@ -52,7 +52,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set($satisfactionLevelInfoLink = "&lt;a href='$escapetool.xml($satisfactionLevelInfo.getURL())' title='$escapetool.xml($satisfactionLevelInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
 #set($dematInfo = $xwiki.getDocument('Main.Dematerialisation'))
 #set($dematInfoLink = "&lt;a href='$escapetool.xml($dematInfo.getURL())' title='$escapetool.xml($dematInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres', 'champsMinisteriels', 'direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'urlFiche', 'niveauDemat', 'niveauDematBoolean', 'dematObligatoire', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
+#set ($columns = ['doc.title', 'ministeres', 'champsMinisteriels', 'direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'urlFiche', 'niveauDemat', 'niveauDematBoolean', 'dematObligatoire', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie', 'doc.name'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
   'ministeres': {'type' : 'list', 'filterable' : 'true', 'sortable' : 'false'},
@@ -75,7 +75,8 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'volumetrie': {'type' : 'hidden', 'displayName': 'Volumétrie'},
   'volumetrieDemat': {'type' : 'hidden', 'displayName': 'Volumétrie démat.'},
   'pourcentageDemat': {'type' : 'hidden', 'displayName': '% démat.'},
-  'niveauVolumetrie': {'type' : 'hidden', 'displayName': 'Niveau vol.'}
+  'niveauVolumetrie': {'type' : 'hidden', 'displayName': 'Niveau vol.'},
+  'doc.name': {'type' : 'hidden', 'displayName': 'Identifiant'}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',
@@ -85,10 +86,10 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'maxPages': 7,
   'selectedColumn': 'occurrences',
   'defaultOrder': 'desc',
-  'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur&amp;votes_class=Avis.Code.AvisStatsClass&amp;occurrences_class=Avis.Code.AvisStatsClass&amp;moyenne_class=Avis.Code.AvisStatsClass'
+  'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur'
 })
 #livetable('demarches' $columns $columnsProperties $options)
-{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="excel" label="$services.localization.render('wikidemarches.dematdashboard.download.xls')" /}}{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
+{{addExcelExportToLivetable livetable="demarches" withPageName="false" withPageURL="true" filename="demarches" format="excel" label="$services.localization.render('wikidemarches.dematdashboard.download.xls')" /}}{{addExcelExportToLivetable livetable="demarches" withPageName="false" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
 
 {{html}}
 &lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" target="_blank" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;
