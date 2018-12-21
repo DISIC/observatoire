@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
         <artifactId>avis-stats</artifactId>
-        <version>2.4</version>
+        <version>2.5-SNAPSHOT</version>
     </parent>
     <artifactId>tools-api</artifactId>
     <packaging>jar</packaging>

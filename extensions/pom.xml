@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
         <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
-        <version>2.4</version>
+        <version>2.5-SNAPSHOT</version>
     </parent>
     <artifactId>wikidemarches-extensions</artifactId>
     <name>Wikidemarches - Extensions</name>
