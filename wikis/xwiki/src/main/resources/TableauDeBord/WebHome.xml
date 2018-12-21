@@ -52,12 +52,22 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set($satisfactionLevelInfoLink = "&lt;a href='$escapetool.xml($satisfactionLevelInfo.getURL())' title='$escapetool.xml($satisfactionLevelInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
 #set($dematInfo = $xwiki.getDocument('Main.Dematerialisation'))
 #set($dematInfoLink = "&lt;a href='$escapetool.xml($dematInfo.getURL())' title='$escapetool.xml($dematInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres', 'direction', 'niveauDematBoolean', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
+#set ($columns = ['doc.title', 'ministeres', 'champsMinisteriels', 'direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'urlFiche', 'niveauDemat', 'niveauDematBoolean', 'dematObligatoire', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
   'ministeres': {'type' : 'list', 'filterable' : 'true', 'sortable' : 'false'},
+  'champsMinisteriels': {'type' : 'hidden'},
   'direction' : {'type' : 'hidden', 'filterable': 'true', 'sortable' : 'false'},
+  'objet': {'type' : 'hidden'},
+  'categoriesPublics': {'type' : 'hidden'},
+  'publics': {'type' : 'hidden'},
+  'evenements': {'type' : 'hidden'},
+  'urlInfos': {'type' : 'hidden'},
+  'urlDemarche': {'type' : 'hidden'},
+  'urlFiche': {'type' : 'hidden'},
+  'niveauDemat': {'type' : 'hidden'},
   'niveauDematBoolean': {'filterable' : 'false', 'sortable' : 'false'},
+  'dematObligatoire': {'type' : 'hidden'},
   'statut' : {'type' : 'hidden', 'filterable': 'false', 'sortable' : 'true'},
   'votes' : {'displayName': "$services.localization.render('wikidemarches.dematdashboard.table.votes') $dematInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
@@ -78,7 +88,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur&amp;votes_class=Avis.Code.AvisStatsClass&amp;occurrences_class=Avis.Code.AvisStatsClass&amp;moyenne_class=Avis.Code.AvisStatsClass'
 })
 #livetable('demarches' $columns $columnsProperties $options)
-{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches" format="excel" label="$services.localization.render('wikidemarches.dematdashboard.download.xls')" /}}{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
+{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="excel" label="$services.localization.render('wikidemarches.dematdashboard.download.xls')" /}}{{addExcelExportToLivetable livetable="demarches" withPageName="true" withPageURL="true" filename="demarches" format="csv" label="$services.localization.render('wikidemarches.dematdashboard.download')"/}}
 
 {{html}}
 &lt;a href="$xwiki.getURL('Main.FormatCsv')" class="small" target="_blank" style="padding-left: 12px;"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt; À propos du format CSV&lt;/a&gt;
@@ -198,7 +208,6 @@ var XWiki = (function (XWiki) {
         'properties', properties,
         'values'
       ].join('/');
-      console.log(loadURL);
     return {
         create: false,
         load: function(text, callback) {
@@ -228,7 +237,6 @@ var XWiki = (function (XWiki) {
 
     $.fn.suggestPropertyValues = function() {
       return this.each(function() {
-        console.log(this)
         $(this).xwikiSelectize(getSelectizeOptions($(this)));
       });
     };
