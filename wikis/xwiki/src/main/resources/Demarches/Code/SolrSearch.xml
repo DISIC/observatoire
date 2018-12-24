@@ -49,7 +49,8 @@
     'type:DOCUMENT',
     '-name:DemarchesTemplate',
     'class:Demarches.Code.DemarchesClass',
-    '-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche'
+    '-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche',
+    '-property.Demarches.Code.DemarchesClass.statut_string:inactive'
   ],
   'facetFields': [
     'property.Demarches.Code.DemarchesClass.categoriesPublics_string',

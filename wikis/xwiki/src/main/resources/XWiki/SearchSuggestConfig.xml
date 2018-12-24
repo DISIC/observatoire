@@ -526,6 +526,7 @@ fq=type:DOCUMENT
 fq=-name:DemarchesTemplate
 fq=class:Demarches.Code.DemarchesClass
 fq=-property.Demarches.Code.DemarchesClass.statut_string:nouvelleDemarche
+fq=-property.Demarches.Code.DemarchesClass.statut_string:inactive
 qf=title^10 property.Demarches.Code.DemarchesClass.nomComplet^8 property.Demarches.Code.DemarchesClass.formulaires^8 property.Demarches.Code.DemarchesClass.objet^8 property.Demarches.Code.DemarchesClass.urlDemarche^8 object.Demarches.Code.DemarchesClass^1
 </query>
     </property>
