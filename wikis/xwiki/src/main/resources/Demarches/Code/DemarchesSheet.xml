@@ -121,8 +121,7 @@
   #end
 #end
 
-#set ($cerfaNumeriqueWiki = 'cerfanum')
-#set ($cerfaPageReference = "$cerfaNumeriqueWiki:CerfaNumerique.${doc.name}")
+#set ($cerfaPageReference = "CerfaNumerique.${doc.name}")
 
 ## Display tabs only in view mode.
 #if ($xcontext.action == 'view')
@@ -148,7 +147,7 @@
   {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
   {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
   #if ($xwiki.exists($cerfaPageReference))
-    {{include reference="Demarches.Code.CerfaNumeriqueTab" /}}
+    {{include reference="CerfaNumerique.Code.DemarcheCerfaNumeriqueTab" /}}
   #end
 &lt;/div&gt;
 #elseif ($xcontext.action == 'edit')
