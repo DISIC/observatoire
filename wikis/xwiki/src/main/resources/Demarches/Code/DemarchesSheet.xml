@@ -121,7 +121,7 @@
   #end
 #end
 
-#set ($cerfaPageReference = "CerfaNumerique.${doc.name}")
+#set ($cerfaNumerique = $doc.getObject('CerfaNumerique.Code.CerfaNumeriqueClass'))
 
 ## Display tabs only in view mode.
 #if ($xcontext.action == 'view')
@@ -132,7 +132,7 @@
     #end
     &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
     &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
-    #if ($xwiki.exists($cerfaPageReference))
+    #if ($cerfaNumerique != $NULL)
       &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
     #end
   &lt;/ul&gt;
@@ -146,7 +146,7 @@
   #end
   {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
   {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
-  #if ($xwiki.exists($cerfaPageReference))
+  #if ($cerfaNumerique != $NULL)
     {{include reference="CerfaNumerique.Code.DemarcheCerfaNumeriqueTab" /}}
   #end
 &lt;/div&gt;
