@@ -114,7 +114,7 @@
 
 #set ($selectedTab = "$!request['tab']")
 #if ($selectedTab == '')
-  #if (!$isGuest)
+  #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
     #set ($selectedTab = 'demarche-tab')
   #else
     #set ($selectedTab = 'avis-tab')
@@ -126,7 +126,7 @@
 ## Display tabs only in view mode.
 #if ($xcontext.action == 'view')
   &lt;ul class="nav nav-tabs" id="tabs"&gt;
-    #if (!$isGuest)
+    #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
       &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
       &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
     #end
@@ -140,7 +140,7 @@
 
 #if ($xcontext.action == 'view')
 &lt;div class="tab-content"&gt;
-  #if (!$isGuest)
+  #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
     {{include reference="Demarches.Code.DemarcheTab" /}}
     {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
   #end

@@ -55,6 +55,7 @@
             <!-- Exclude preferences because we do this by default. However, on this particular project there is no reason to modify preferences directly in prod. -->
             <exclude>**/XWiki/XWikiPreferences.xml</exclude>
             <exclude>**/XWiki/XWikiAdminGroup.xml</exclude>
+            <exclude>**/XWiki/Ministeres.xml</exclude>
             <!-- Exclude pages that we modify directly on prod -->
             <exclude>**/Main/A propos.xml</exclude>
           </excludes>

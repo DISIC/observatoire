@@ -104,7 +104,7 @@
       )))
     )))
   )))
-  #if ($xcontext.user != 'XWiki.XWikiGuest')
+  #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
   #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
   (%class='row demarches-administration-row'%)(((
     (%class='container' %)(((

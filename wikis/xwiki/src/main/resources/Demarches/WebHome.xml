@@ -40,7 +40,7 @@
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-#if ($xcontext.user == 'XWiki.XWikiGuest')
+#if ($isGuest)
   $response.sendRedirect($xwiki.getURL('TableauDeBord.WebHome'))
 #end
 {{/velocity}}
