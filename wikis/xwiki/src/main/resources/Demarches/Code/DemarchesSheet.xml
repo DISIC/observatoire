@@ -121,7 +121,7 @@
   #end
 #end
 
-#set ($cerfaNumerique = $doc.getObject('CerfaNumerique.Code.CerfaNumeriqueClass'))
+#set ($cerfaNumerique = $doc.getObject('cerfa-numerique.Code.CerfaNumeriqueClass'))
 
 ## Display tabs only in view mode.
 #if ($xcontext.action == 'view')
@@ -147,7 +147,7 @@
   {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
   {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
   #if ($cerfaNumerique != $NULL)
-    {{include reference="CerfaNumerique.Code.DemarcheCerfaNumeriqueTab" /}}
+    {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
   #end
 &lt;/div&gt;
 #elseif ($xcontext.action == 'edit')
