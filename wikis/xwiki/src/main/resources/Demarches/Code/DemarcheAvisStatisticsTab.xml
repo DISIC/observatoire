@@ -158,7 +158,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
         #set($chartOptions = {
           "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
           "opacity": 0.8,
-          "percent": true,
+          "afterValue": "%",
           "skipZeros": true,
           "legend": {
             "display": false
@@ -343,7 +343,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
           #set($chartOptions = {
             "backgroundColors": ["#82b876", "#f9b43e", "#bcbcbc"],
             "opacity": 1,
-            "percent": true,
+            "afterValue": "%",
             "displayPercentFirst": 0,
             "skipZeros": true,
             "legend": {
@@ -396,7 +396,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
           #set($chartOptions = {
             "backgroundColors": ["#a89ecc","#bcbcbc"],
             "opacity": 0.8,
-            "percent": true,
+            "afterValue": "%",
             "displayPercentFirst": 0,
             "skipZeros": true,
             "legend": {
