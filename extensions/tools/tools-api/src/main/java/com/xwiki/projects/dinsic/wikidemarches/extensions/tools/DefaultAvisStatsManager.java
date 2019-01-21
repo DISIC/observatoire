@@ -51,7 +51,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     {
 
         Query query = this.queryManager
-            .createQuery("select count(*), sum(case when score.value = 3 then 1 else 0 end), sum(case when vote.value='true' then 1 else 0 end) from "
+            .createQuery("select count(*), avg(score.value), sum(case when vote.value='true' then 1 else 0 end) from "
                 + "BaseObject as avis, IntegerProperty as score, StringProperty as vote, "
                 + "StringProperty as demarche where avis.className = :avisClass "
                 + "and avis.id = score.id.id and score.id.name = :scoreProperty "
@@ -67,10 +67,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         List results = query.execute();
         Object[] result = (Object[]) results.get(0);
         long occurrences = (long) result[0];
-        long totalSatisfied = result[1] != null ? (long) result[1] : 0;
-        double satisfactionIndex = 0;
-        if (occurrences > 0)
-            satisfactionIndex = (double) totalSatisfied / occurrences;
+        double satisfactionIndex = result[1] != null ? (double) result[1] : 0;
         long votes = result[2] != null ? (long) result[2] : 0;
         logger.debug(String.format("Caching stats for demarche [%s] - Occurences: [%s], Satisfaction index [%s], Votes: [%s]",
             demarcheReference, occurrences, satisfactionIndex, votes));
@@ -89,7 +86,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         // and thus we can compute both score average and vote count in the same request.
         // However, in theory the vote can be null and thus should be computed in a separate query (or outer joined), so
         // that the join with the vote value does not exclude avis from the counting of avis.
-        Query query = this.queryManager.createQuery("select demarche.value, count(*), sum(case when score.value = 3 then 1 else 0 end), "
+        Query query = this.queryManager.createQuery("select demarche.value, count(*), avg(score.value), "
             + "sum(case when vote.value='true' then 1 else 0 end) from BaseObject as avis, "
             + "IntegerProperty as score, StringProperty as vote, StringProperty as demarche where "
             + "avis.className = :avisClass "
@@ -111,10 +108,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             String demarcheId = (String) values[0];
             DocumentReference demarcheReference = documentReferenceResolver.resolve(demarcheId);
             long occurrences = (long) values[1];
-            long totalSatisfied = (long)values[2];
-            double satisfactionIndex = 0;
-            if (occurrences > 0)
-                satisfactionIndex = (double) totalSatisfied / occurrences;
+            double satisfactionIndex = values[2] != null ? (double) values[2] : 0;
             long votes = (long) values[3];
             logger.debug(
                 String.format("[%s] Computing stats for demarche [%s] - Occurences: [%s], Satisfaction index [%s], Votes: [%s]",

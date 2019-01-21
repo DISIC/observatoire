@@ -48,7 +48,7 @@
   #set ($avisCount = $avisStats.getProperty('occurrences').getValue())
   #if ($avisCount &amp;&amp; $avisCount &gt; 0)
     #set ($satisfactionIndex = $avisStats.getProperty('moyenne').getValue())
-    #set($satisfactionIndexPercent = $mathtool.mul($satisfactionIndex, 100))
+    #set($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
     #set ($satisfactionIndexPercentRounded = ${mathtool.round($satisfactionIndexPercent)})
     #set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
     #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")

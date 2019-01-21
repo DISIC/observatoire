@@ -59,7 +59,7 @@
 #else
   ## only display something if there is at least one occurrence
   #if ($occurrences &gt; 0)
-    ${mathtool.round($mathtool.mul($value, 100))} %
+    ${mathtool.round($mathtool.mul($mathtool.sub($value, 1), 50))} %
   #end
 #end
 {{/html}}
