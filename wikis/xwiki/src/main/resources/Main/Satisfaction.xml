@@ -41,7 +41,8 @@
   <hidden>false</hidden>
   <content>Le taux de satisfaction d'une démarche est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? ».
 
-Le taux de satisfaction est le pourcentage de réponses ayant reçu l'avis « Très bien » par rapport au nombre total de réponses.
+Les réponses ayant reçu l'avis « Pas bien » comptent pour 0, les réponses ayant reçu l'avis « Moyen » comptent pour 1, les réponses ayant reçu l'avis « Très bien » comptent pour 2.
 
+Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100%.
 </content>
 </xwikidoc>
