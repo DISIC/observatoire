@@ -185,9 +185,9 @@
 ##
 ## Display excel export button if in view mode
 #if ($xcontext.action != 'edit')
-  #set($discard = $services.localization.use('document', 'Macros.AddExcelExportToLivetableMacroTranslations'))
-  #set($discard = $xwiki.ssx.use('Macros.AddExcelExportToLivetableMacro'))
-  &lt;form action="$xwiki.getURL('Macros.AddExcelExportToLivetableMacroResultsPage', 'get', 'outputSyntax=plain&amp;transprefix=demarches.livetable.')" method='post'&gt;
+  #set($discard = $services.localization.use('document', 'Macros.LivetableExporterMacroLabels'))
+  #set($discard = $xwiki.ssx.use('Macros.LivetableExporterMacro'))
+  &lt;form action="$xwiki.getURL('Macros.LivetableExporterMacroResults', 'get', 'outputSyntax=plain&amp;transprefix=demarches.livetable.')" method='post'&gt;
     &lt;div class="buttonwrapper xwiki-livetable-tools-excelexport"&gt;
       &lt;input type="hidden" name='classname' value='Demarches.Code.DemarchesClass' /&gt;
       &lt;input type="hidden" name='collist' value='doc.name' /&gt;
@@ -199,7 +199,7 @@
       &lt;input type="hidden" name='withAllFields' value='true' /&gt;
       &lt;input type="hidden" name='doc.name' value="${escapetool.xml($doc.name)}" /&gt;
       &lt;input type="hidden" name='excelFilename' value="$escapetool.xml("demarche_${doc.name}_${datetool.get('ddMMyyyyHHmmss')}")" /&gt;
-      &lt;button class='button' type='submit' name='exportexcel'&gt;&lt;span class='xwiki-livetable-tools-text'&gt;$services.localization.render('xwiki.macro.exportexcellivetable.title','Excel')&lt;/span&gt; &lt;span class='xwiki-livetable-tools-excel' /&gt;&lt;/button&gt;
+      &lt;button class='button' type='submit' name='exportexcel'&gt;&lt;span class='xwiki-livetable-tools-text'&gt;$services.localization.render('xwiki.macro.livetableExporter.title','Excel')&lt;/span&gt; &lt;span class='xwiki-livetable-tools-exporter-excel' /&gt;&lt;/button&gt;
     &lt;/div&gt;
   &lt;/form&gt;
 #end

@@ -84,7 +84,7 @@
 #set ($columns = ['doc.title', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
 #livetable('demarches' $columns $columnsProperties $options)
 
-{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
+{{livetableExporter livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
 #end
 {{/velocity}}</content>
 </xwikidoc>

@@ -97,7 +97,7 @@
 #set ($columns = ['doc.title', 'doc.creationDate', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
 #livetable('demarches' $columns $columnsProperties $options)
 
-{{addExcelExportToLivetable livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')" format="excel"/}}
+{{livetableExporter livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
 {{/velocity}}</content>
   <object>
     <name>Demarches.WebHome</name>
