@@ -119,11 +119,12 @@
 ## Set variables indicating what should be displayed when accessing a demarche page
 #set ($viewMode = "$!request['view-mode']")
 ## Set avis form display to true if either the request contains an api key and the view mode
-## is set to 'formulaire-avis', or the avis submission form has started.
+## is set to 'formulaire-avis', or the parameters 'nd_source' and 'nd_mode' are not empty,
+## or the avis submission form has started.
 #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
 #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
 #set ($apiKey = "$!request.key")
-#set ($displayAvisFormOnly = ($apiKey != '' &amp;&amp; $viewMode == 'formulaire-avis' ) || "$!avisId" != '')
+#set ($displayAvisFormOnly = ($apiKey != '' &amp;&amp; $viewMode == 'formulaire-avis' ) || ("$!request.nd_source" != '' &amp;&amp; "$!request.nd_mode" != '') || "$!avisId" != '')
 ## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
 #set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
 </content>
