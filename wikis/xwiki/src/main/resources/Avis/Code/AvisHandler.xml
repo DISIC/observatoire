@@ -104,17 +104,15 @@
       #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
       $request.session.setAttribute('avis-form-step', 'final-step')
     #else
-      ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'third-form-screen'.
+      ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'final-step'.
       #set ($object = $target.getObject('Avis.Code.AvisClass'))
       #if ($object.getValue('modalite') != 'autrement')
         $request.session.setAttribute('avis-form-step', 'second-form-screen')
       #else
-        $request.session.setAttribute('avis-form-step', 'third-form-screen')
+        $request.session.setAttribute('avis-form-step', 'final-step')
       #end
     #end
   #elseif ($step == 'second-form-screen')
-    $request.session.setAttribute('avis-form-step', 'third-form-screen')
-  #elseif ($step == 'third-form-screen')
     $request.session.setAttribute('avis-form-step', 'final-step')
   #end
 #end
