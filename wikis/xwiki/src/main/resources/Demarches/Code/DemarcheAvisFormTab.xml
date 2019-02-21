@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarcheAvisFormTab</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -63,6 +63,9 @@
   #set ($discard = $request.session.removeAttribute('avis-form-step'))
   #displayMessage("avis.form.$step")
   #if ($step == 'final-step')
+    ## At this step only, we remove the avis identifier from the session: we consider that the avis has been submitted and
+    ## that any new form submission will result in a new avis.
+    #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
     [[__$services.localization.render('avis.form.final-step.homelink')__&gt;&gt;Main.WebHome]]
   #end
 #else

@@ -115,12 +115,10 @@
   #elseif ($step == 'second-form-screen')
     $request.session.setAttribute('avis-form-step', 'third-form-screen')
   #elseif ($step == 'third-form-screen')
-    ## At this step only, we remove the avis identifier from the session: we consider that the avis has been submitted and
-    ## that any new form submission will result in a new avis.
-    #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
     $request.session.setAttribute('avis-form-step', 'final-step')
   #end
 #end
+
 #if ("$!request.xredirect" != '')
   $response.sendRedirect($request.xredirect)
 #else
