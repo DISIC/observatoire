@@ -129,9 +129,9 @@
     #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
       &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
       &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
+      &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
     #end
     &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
-    &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
     #if ($cerfaNumerique != $NULL)
       &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
     #end
@@ -143,9 +143,9 @@
   #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
     {{include reference="Demarches.Code.DemarcheTab" /}}
     {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
+    {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
   #end
   {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
-  {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
   #if ($cerfaNumerique != $NULL)
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
   #end
