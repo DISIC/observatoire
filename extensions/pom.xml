@@ -11,6 +11,5 @@
     <packaging>pom</packaging>
     <modules>
         <module>tools</module>
-        <module>macro-livetable-excel-export</module>
     </modules>
 </project>
