@@ -88,7 +88,11 @@
 
 ## Avis form macros
 #macro (checkIfTheAvisFormShouldBeDisplayed)
-  #set ($avisFormShouldBeDisplayed = $isGuest &amp;&amp; "$!request.key" != '')
+  ## The avis form should be displayed either if a key is present in the URL
+  ## or if the avis form submission process has started.
+  #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
+  #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
+  #set ($avisFormShouldBeDisplayed = $isGuest &amp;&amp; ("$!avisId" != '' || "$!request.key" != ''))
 #end
 
 #macro (displaySubTitle)
