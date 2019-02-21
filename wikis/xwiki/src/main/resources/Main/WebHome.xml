@@ -27,11 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1252454400000</creationDate>
+  <creationDate>1544396400000</creationDate>
+  <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530179061000</date>
-  <contentUpdateDate>1530179010000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('wikidemarches.sitename')</title>
   <comment/>
@@ -92,6 +93,7 @@
       )))
     )))
   )))
+  #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
   (%class='row demarches-dashboardrow'%)(((
     (%class='container' %)(((
       (%class='demarches-dashboardlink'%) (((
@@ -104,7 +106,6 @@
       )))
     )))
   )))
-  #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
   #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
   (%class='row demarches-administration-row'%)(((
     (%class='container' %)(((
