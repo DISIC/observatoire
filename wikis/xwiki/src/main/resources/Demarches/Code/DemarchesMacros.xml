@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarchesMacros</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -40,8 +40,9 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="false"}}
-## This sheet is used to display two types of objects: either Demarches or Avis
-################### Demarche view/edit form macros ########################
+## These macros are used to display two types of objects: either Demarches or Avis
+
+## Demarche view/edit form macros
 #macro (displayProperty $propName $isMandatory)
   #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
   #set ($hint = $NULL)
@@ -85,7 +86,11 @@
   &lt;/dd&gt;
 #end
 
-##Avis form macros
+## Avis form macros
+#macro (checkIfTheAvisFormShouldBeDisplayed)
+  #set ($avisFormShouldBeDisplayed = $isGuest &amp;&amp; "$!request.key" != '')
+#end
+
 #macro (displaySubTitle)
 #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($obj)
