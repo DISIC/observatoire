@@ -141,6 +141,13 @@
     #end
     ## If we're handling a validated demarche, the avis gets associated to it.
     &lt;input type="hidden" name="Avis.Code.AvisClass_0_demarche" value="$doc.fullName" /&gt;
+    ## In the first step, an API key is supposed to be present and valid. We pass it to the avis handler
+    ## so that it gets stored into the avis object. In the subsequent steps, the API key
+    ## is not present anymore in the request, hence we don't add the apiKey input, otherwier
+    ## it would override the existing property with an empty value.
+    #if ($apiKey != '')
+      &lt;input type="hidden" name="Avis.Code.AvisClass_0_apiKey" value="$apiKey" /&gt;
+    #end
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()?tab=avis-tab" /&gt;
     &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
     &lt;div class='buttonwrapper'&gt;

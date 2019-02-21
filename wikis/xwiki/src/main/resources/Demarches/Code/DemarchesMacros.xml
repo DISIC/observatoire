@@ -92,7 +92,8 @@
   ## or if the avis form submission process has started.
   #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
   #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
-  #set ($avisFormShouldBeDisplayed = $isGuest &amp;&amp; ("$!avisId" != '' || "$!request.key" != ''))
+  #set ($apiKey = "$!request.key")
+  #set ($avisFormShouldBeDisplayed = $isGuest &amp;&amp; ("$!avisId" != '' || $apiKey != ''))
 #end
 
 #macro (displaySubTitle)
