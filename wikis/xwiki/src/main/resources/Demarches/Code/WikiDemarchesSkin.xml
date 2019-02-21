@@ -115,6 +115,17 @@
 #else
   #set ($displayDocExtra = false)
 #end
+
+## Set variables indicating what should be displayed when accessing a demarche page
+#set ($viewMode = "$!request['view-mode']")
+## Set avis form display to true if either the request contains an api key and the view mode
+## is set to 'formulaire-avis', or the avis submission form has started.
+#set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
+#set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
+#set ($apiKey = "$!request.key")
+#set ($displayAvisFormOnly = ($apiKey != '' &amp;&amp; $viewMode == 'formulaire-avis' ) || "$!avisId" != '')
+## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
+#set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
 </content>
     </property>
     <property>
@@ -380,15 +391,19 @@
 &lt;footer id="footerglobal" role="contentinfo"&gt;
   &lt;div class='container'&gt;
   &lt;hr aria-hidden="true"&gt;
-  &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
-#if ($isGuest)
-&lt;a href="$xwiki.getURL($doc.fullName,'login')""&gt;
-$services.localization.render('wd.login')
-&lt;/a&gt;
-#else
-&lt;a href="$xwiki.getURL($doc.fullName,'logout')""&gt;
-$services.localization.render('wd.logout')
-&lt;/a&gt;
+  &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;
+#if (!$displayAvisFormOnly &amp;&amp; !$displayCerfaNumeriqueOnly)
+  &lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
+  &lt;a href="$xwiki.getURL('Main.A propos')""&gt;$services.localization.render('wd.about')&lt;/a&gt;&lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
+  #if ($isGuest)
+    &lt;a href="$xwiki.getURL($doc.fullName,'login')""&gt;
+    $services.localization.render('wd.login')
+    &lt;/a&gt;
+  #else
+    &lt;a href="$xwiki.getURL($doc.fullName,'logout')""&gt;
+    $services.localization.render('wd.logout')
+    &lt;/a&gt;
+  #end
 #end
 &lt;/div&gt;
   &lt;div id='wd-customfooterinfo'&gt;
@@ -882,7 +897,12 @@ $services.localization.render('wd.logout')
   #end
 #end
 &lt;div id="companylogo"&gt;
-  &lt;a href="$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)" title="Home" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
+  #if (!$displayAvisForm &amp;&amp; !$displayCerfaNumerique)
+    #set ($url = "$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)")
+  #else
+    #set ($url = "#")
+  #end
+  &lt;a href="$url" title="Home" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
     &lt;img src="$!logourl" alt="Wiki Logo"/&gt;
     ## Site title next to the logo
     #set($eltname = 'span')

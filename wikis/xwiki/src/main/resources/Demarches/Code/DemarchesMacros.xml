@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarchesMacros</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -87,14 +87,6 @@
 #end
 
 ## Avis form macros
-#macro (checkIfTheAvisFormShouldBeDisplayed)
-  ## The avis form should be displayed either if a key is present in the URL
-  ## or if the avis form submission process has started.
-  #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
-  #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
-  #set ($apiKey = "$!request.key")
-  #set ($avisFormShouldBeDisplayed = $isGuest &amp;&amp; ("$!avisId" != '' || $apiKey != ''))
-#end
 
 #macro (displaySubTitle)
 #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
