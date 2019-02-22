@@ -93,7 +93,7 @@
       )))
     )))
   )))
-  #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
+  #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
   (%class='row demarches-dashboardrow'%)(((
     (%class='container' %)(((
       (%class='demarches-dashboardlink'%) (((

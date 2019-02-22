@@ -122,7 +122,7 @@
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
-  #elseif ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres') || $isDemarcheOwner)
+  #elseif ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
     #set ($selectedTab = "$!request['tab']")
     #if ($selectedTab == '')
       #set ($selectedTab = 'demarche-tab')

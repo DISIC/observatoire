@@ -24,7 +24,7 @@
   <web>TableauDeBord</web>
   <name>WebPreferences</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -44,7 +44,7 @@
     <name>TableauDeBord.WebPreferences</name>
     <number>0</number>
     <className>XWiki.XWikiGlobalRights</className>
-    <guid>d4511502-8356-486a-a338-ea349c624b00</guid>
+    <guid>1fcd8c81-b1f8-487c-a236-630592dc734d</guid>
     <class>
       <name>XWiki.XWikiGlobalRights</name>
       <customClass/>
@@ -114,7 +114,7 @@
       <allow>1</allow>
     </property>
     <property>
-      <groups>XWiki.Ministeres</groups>
+      <groups>XWiki.AdministrateursMinisteriels</groups>
     </property>
     <property>
       <levels>view</levels>

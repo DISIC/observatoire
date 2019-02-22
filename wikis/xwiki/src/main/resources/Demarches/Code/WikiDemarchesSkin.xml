@@ -85,7 +85,8 @@
       </path>
     </class>
     <property>
-      <content>#set ($displayContentFooter = false)
+      <content>#set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
+#set ($displayContentFooter = false)
 #set ($displayDocChanges = false)
 #set ($displayContentMenu = $hasEdit)
 ## only admins can see the create menu, non-admins can only create demarches and they have a dedicated button for this
@@ -108,7 +109,7 @@
 
 #* Display the comments, attachments, history tabs for members of the Ministeres group and for administrators. *#
 #set ($xobj = $doc.getObject('Demarches.Code.DemarchesClass'))
-#if (($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres')) &amp;&amp; $xobj)
+#if (($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP)) &amp;&amp; $xobj)
   #set ($displayDocExtra = true)
   #set ($showcomments = true)
   #set ($showattachments = true)
