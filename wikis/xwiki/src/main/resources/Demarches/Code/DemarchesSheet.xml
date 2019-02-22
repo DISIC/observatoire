@@ -147,7 +147,11 @@
       #end
     &lt;/div&gt;
   #else
-    $response.sendRedirect($xwiki.getURL('Main.WebHome'))
+    (% style="margin-top: 1em" %)(((
+    {{info}}
+    $services.localization.render('wd.login-notice') Cliquez [[ici&gt;&gt;path:$xwiki.getURL('XWiki.XWikiLogin', 'login', 'notice=false')]] pour vous identifier.
+    {{/info}}
+    )))
   #end
 #elseif ($xcontext.action == 'edit')
   {{include reference="Demarches.Code.DemarcheTab" /}}
