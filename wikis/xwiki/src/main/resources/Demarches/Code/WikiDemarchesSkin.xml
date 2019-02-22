@@ -398,6 +398,10 @@
   &lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
   &lt;a href="$xwiki.getURL('Main.A propos')""&gt;$services.localization.render('wd.about')&lt;/a&gt;&lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
   #if ($isGuest)
+    &lt;a href="$xwiki.getURL($doc.fullName,'register')""&gt;
+    $services.localization.render('core.register.title')
+    &lt;/a&gt;
+    &lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
     &lt;a href="$xwiki.getURL($doc.fullName,'login')""&gt;
     $services.localization.render('wd.login')
     &lt;/a&gt;

@@ -1540,7 +1540,7 @@
       <allow>1</allow>
     </property>
     <property>
-      <levels>view</levels>
+      <levels>view,register</levels>
     </property>
     <property>
       <users>XWiki.XWikiGuest</users>
@@ -2754,6 +2754,9 @@
       <admin_email/>
     </property>
     <property>
+      <auth_active_check>1</auth_active_check>
+    </property>
+    <property>
       <authenticate_edit>1</authenticate_edit>
     </property>
     <property>
@@ -2773,11 +2776,13 @@
 #set ($host = ${request.getRequestURL()})
 #set ($host = ${host.substring(0, ${host.indexOf('/', ${mathtool.add(${host.indexOf('//')}, 2)})})})
 Content-Type: text/plain; charset=utf-8
-Subject: Your account on ${wikiname} has been activated
+Subject: Votre compte sur le site ${wikiname} a été activé
 
-Hello ${xwiki.getUserName("$xwikiname", false)},
+Bonjour ${xwiki.getUserName("$xwikiname", false)},
 
-Your account on ${wikiname} has been successfully activated. You can now login at ${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')} using your username (${xwiki.getDocument($xwikiname).getName()}).</confirmation_email_content>
+Votre compte sur le site ${wikiname} a été activé avec succès. Vous pouvez à présenter vous identifier à l'adresse ci-dessous en utilisant comme identifiant "${xwiki.getDocument($xwikiname).name}" :
+
+${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')}</confirmation_email_content>
     </property>
     <property>
       <core.defaultDocumentSyntax/>
@@ -2910,18 +2915,24 @@ Your account on ${wikiname} has been successfully activated. You can now login a
       <upload_maxsize>33554432</upload_maxsize>
     </property>
     <property>
+      <use_email_verification>1</use_email_verification>
+    </property>
+    <property>
       <validation_email_content>#set ($wikiname = $request.serverName)
 #set ($host = ${request.getRequestURL()})
 #set ($host = ${host.substring(0, ${host.indexOf('/', ${mathtool.add(${host.indexOf('//')}, 2)})})})
 Content-Type: text/plain; charset=utf-8
-Subject: Validate your account on ${wikiname}
+Subject: Validation de votre compte sur le site ${wikiname}
 
-Hello ${xwiki.getUserName("XWiki.$xwikiname", false)},
+Blnjour ${xwiki.getUserName("XWiki.$xwikiname", false)},
 
-This email address was used to register a new account on ${wikiname}. If you did not make the request, please ignore this message.
+Cette adresse e-mail a été utilisée pour enregistrer un nouveau compte sur le site ${wikiname}. Merci d'ignorer ce message si vous n'êtes pas à l'origine de la demande.
 
-In order to activate your account, please follow this link:
-${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&amp;xwikiname=${xwikiname}")}</validation_email_content>
+Afin de valider votre compte, cliquez sur le lient suivant :
+${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&amp;xwikiname=${xwikiname}")}
+
+
+</validation_email_content>
     </property>
     <property>
       <version>&lt;span&gt;&lt;/span&gt;</version>
