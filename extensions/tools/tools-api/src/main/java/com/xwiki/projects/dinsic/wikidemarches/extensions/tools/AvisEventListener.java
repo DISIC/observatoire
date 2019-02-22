@@ -82,7 +82,7 @@ public class AvisEventListener extends AbstractEventListener
     @Override
     public void onEvent(Event event, Object source, Object data)
     {
-        logger.debug("[%s] - Event: [%s] - Source: [%s] - Data: [%s]", LISTENER_NAME, event, source, data);
+        logger.debug("Event: [{}] - Source: [{}] - Data: [{}]", LISTENER_NAME, event, source, data);
 
         XWikiContext context = (XWikiContext) data;
 
@@ -138,7 +138,7 @@ public class AvisEventListener extends AbstractEventListener
                 // nothing to be done.
             }
         } catch (QueryException | XWikiException e) {
-            logger.error("Error while updating AvisStats following a change on [%s].",
+            logger.error("Error while updating AvisStats following a change on [{}].",
                 compactWikiSerializer.serialize(avis.getDocumentReference()), e);
         }
     }
