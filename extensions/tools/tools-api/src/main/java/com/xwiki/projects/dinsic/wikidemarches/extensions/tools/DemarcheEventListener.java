@@ -47,7 +47,7 @@ public class DemarcheEventListener extends AbstractEventListener {
     static final EntityReference RIGHT_CLASS_REFERENCE = new EntityReference("XWikiRights", EntityType.DOCUMENT,
             new EntityReference("XWiki", EntityType.SPACE));
 
-    static final String ADMINISTRATEURS_MINISTERIELS_GROUP = "XWiki.AdministrateursMinisterielsGroup";
+    static final String ADMINISTRATEURS_MINISTERIELS_GROUP = "XWiki.AdministrateursMinisteriels";
 
     static final List<String> DIGITIZATION_LEVELS = Arrays.asList("teleprocedure", "formulaire");
 
@@ -95,7 +95,7 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     @Override
     public void onEvent(Event event, Object source, Object data) {
-        logger.debug("[%s] - Event: [%s] - Source: [%s] - Data: [%s]", LISTENER_NAME, event, source, data);
+        logger.debug("Event: [{}] - Source: [{}] - Data: [{}]", LISTENER_NAME, event, source, data);
 
         XWikiContext context = (XWikiContext) data;
         XWikiDocument pageV2 = (XWikiDocument) source, pageV1 = null;
@@ -118,7 +118,7 @@ public class DemarcheEventListener extends AbstractEventListener {
                 }
 
             } catch (XWikiException | MessagingException e) {
-                logger.error("Error while updating rights on: [%s].",
+                logger.error("Error while updating rights on: [{}].",
                         compactWikiSerializer.serialize(pageV2.getDocumentReference()), e);
             }
             if (event instanceof DocumentCreatingEvent) {
@@ -126,7 +126,7 @@ public class DemarcheEventListener extends AbstractEventListener {
                     // In case of a DocumentCreatingEvent, initialize the AvisStats
                     avisStatsComponent.computeAvisStats(pageV2.getDocumentReference(), false, context);
                 } catch (QueryException | XWikiException e) {
-                    logger.error("Error while adding an AvisStats object to a Demarche: [%s].",
+                    logger.error("Error while adding an AvisStats object to a Demarche: [{}].",
                             compactWikiSerializer.serialize(pageV2.getDocumentReference()), e);
                 }
             }
@@ -250,10 +250,15 @@ public class DemarcheEventListener extends AbstractEventListener {
             XWiki wiki = context.getWiki();
             String groupId = "XWiki.Groups." + directionId;
             Collection<String> directionUserIds = wiki.getGroupService(context).getAllMembersNamesForGroup(groupId, 0, 0, context);
+            Collection<String> administrateursMinisterielsUserIds = wiki.getGroupService(context).getAllMembersNamesForGroup(ADMINISTRATEURS_MINISTERIELS_GROUP, 0, 0, context);
+            logger.debug("Direction: [{}]. Group: [{}]. Administrateurs ministériels: [{}].", directionId, groupId, administrateursMinisterielsUserIds);
+            directionUserIds.retainAll(administrateursMinisterielsUserIds);
+            logger.debug("Direction: [{}]. Group: [{}]. Administrateurs ministériels: [{}].", directionId, groupId, directionUserIds);
             List<User> directionMembers = getUsers(StringUtils.join(directionUserIds, ","), context);
-            logger.debug("Direction: [%s]. Group: [%s]. Members: [%s].", directionId, groupId, directionMembers);
+            logger.debug("Direction: [{}]. Group: [{}]. Administrateurs ministériels: [{}].", directionId, groupId, directionMembers);
+
             MimeMessage message = createMimeMessage(session, subject, demarcheV2Reference.getName(), ownersV1, ownersV2, directionMembers);
-            logger.debug("Sending notification about changes regarding owners of [%s].", demarcheV2Reference.getName());
+            logger.debug("Sending notification about changes regarding owners of [{}].", demarcheV2Reference.getName());
             MailResult result = mailSender.sendAsynchronously(Arrays.asList(message), session, mailListener);
         }
 
