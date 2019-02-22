@@ -122,7 +122,7 @@
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
-  #elseif ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+  #elseif (!$isGuest)
     #set ($selectedTab = "$!request['tab']")
     #if ($selectedTab == '')
       #set ($selectedTab = 'demarche-tab')
@@ -130,8 +130,12 @@
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
         &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
         &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
-        &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
-        &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+        #if ($xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+          &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
+        #end
+        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+          &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+        #end
         #if ($cerfaNumerique != $NULL)
           &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
         #end
@@ -139,8 +143,12 @@
     &lt;div class="tab-content"&gt;
         {{include reference="Demarches.Code.DemarcheTab" /}}
         {{include reference="Demarches.Code.EmbedTab" /}}
-        {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
-        {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+        #if ($xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+          {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
+        #end
+        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+          {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+        #end
       #if ($cerfaNumerique != $NULL)
         {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
       #end
