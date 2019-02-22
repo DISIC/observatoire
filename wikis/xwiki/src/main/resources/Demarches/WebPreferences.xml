@@ -114,7 +114,7 @@
       <allow>1</allow>
     </property>
     <property>
-      <groups>XWiki.Ministeres</groups>
+      <groups>XWiki.AdministrateursMinisteriels</groups>
     </property>
     <property>
       <levels>comment,edit,delete</levels>

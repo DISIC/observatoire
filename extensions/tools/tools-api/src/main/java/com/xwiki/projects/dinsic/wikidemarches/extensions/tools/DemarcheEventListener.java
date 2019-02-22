@@ -41,6 +41,8 @@ public class DemarcheEventListener extends AbstractEventListener {
     static final EntityReference RIGHT_CLASS_REFERENCE = new EntityReference("XWikiRights", EntityType.DOCUMENT,
             new EntityReference("XWiki", EntityType.SPACE));
 
+    static final String ADMINISTRATEURS_MINISTERIELS_GROUP = "XWiki.AdministrateursMinisterielsGroup";
+
     static final List<String> DIGITIZATION_LEVELS = Arrays.asList("teleprocedure", "formulaire");
 
     /**
@@ -188,7 +190,7 @@ public class DemarcheEventListener extends AbstractEventListener {
             String ownerString = demarcheV2.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
             if (StringUtils.isNotEmpty(ownerString)) {
                 BaseObject right = demarchePageV2.newXObject(RIGHT_CLASS_REFERENCE, context);
-                right.setLargeStringValue("groups", "XWiki.Ministeres");
+                right.setLargeStringValue("groups", ADMINISTRATEURS_MINISTERIELS_GROUP);
                 right.setLargeStringValue("users", ownerString);
                 right.setStringValue("levels", "edit");
                 right.setIntValue("allow", 1);
