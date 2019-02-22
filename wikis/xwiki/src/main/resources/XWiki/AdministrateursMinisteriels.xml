@@ -43,62 +43,6 @@
   <object>
     <name>XWiki.AdministrateursMinisteriels</name>
     <number>0</number>
-    <className>XWiki.XWikiGroups</className>
-    <guid>a5425c38-f07f-40fb-9840-94778251d5a8</guid>
-    <class>
-      <name>XWiki.XWikiGroups</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <member>
-        <disabled>0</disabled>
-        <name>member</name>
-        <number>1</number>
-        <prettyName>Member</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </member>
-    </class>
-    <property>
-      <member>XWiki.SheldonCooper</member>
-    </property>
-  </object>
-  <object>
-    <name>XWiki.AdministrateursMinisteriels</name>
-    <number>1</number>
-    <className>XWiki.XWikiGroups</className>
-    <guid>901204be-eae3-4d1c-a67e-436b02f66af2</guid>
-    <class>
-      <name>XWiki.XWikiGroups</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <member>
-        <disabled>0</disabled>
-        <name>member</name>
-        <number>1</number>
-        <prettyName>Member</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </member>
-    </class>
-    <property>
-      <member>XWiki.AdministrateurMinisteriel</member>
-    </property>
-  </object>
-  <object>
-    <name>XWiki.AdministrateursMinisteriels</name>
-    <number>0</number>
     <className>XWiki.XWikiRights</className>
     <guid>9726915d-6f0d-4907-88b9-c6077c2db59a</guid>
     <class>
