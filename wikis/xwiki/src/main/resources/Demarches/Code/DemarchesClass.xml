@@ -577,7 +577,7 @@
       <name>proprietaires</name>
       <number>3</number>
       <picker>1</picker>
-      <prettyName>Propriétaires</prettyName>
+      <prettyName>Porteurs de la démarche</prettyName>
       <relationalStorage>0</relationalStorage>
       <separator> </separator>
       <separators/>
