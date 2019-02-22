@@ -2924,7 +2924,7 @@ ${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')}</confirmation_email_content>
 Content-Type: text/plain; charset=utf-8
 Subject: Validation de votre compte sur le site ${wikiname}
 
-Blnjour ${xwiki.getUserName("XWiki.$xwikiname", false)},
+Bonjour ${xwiki.getUserName("XWiki.$xwikiname", false)},
 
 Cette adresse e-mail a été utilisée pour enregistrer un nouveau compte sur le site ${wikiname}. Merci d'ignorer ce message si vous n'êtes pas à l'origine de la demande.
 
