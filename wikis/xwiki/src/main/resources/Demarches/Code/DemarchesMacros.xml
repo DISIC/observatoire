@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarchesMacros</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -43,6 +43,17 @@
 ## These macros are used to display two types of objects: either Demarches or Avis
 
 ## Demarche view/edit form macros
+#macro (isDemarcheOwner)
+  #set ($user = $xcontext.user)
+  #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
+  #set ($owners = $demarche.getProperty('proprietaires').getValue())
+  #if ($owners.indexOf($context.user) &gt;= 0)
+    #set ($isDemarcheOwner = true)
+  #else
+    #set ($isDemarcheOwner = false)
+  #end
+#end
+
 #macro (displayProperty $propName $isMandatory)
   #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
   #set ($hint = $NULL)

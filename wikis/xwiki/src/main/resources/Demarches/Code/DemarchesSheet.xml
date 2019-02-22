@@ -114,12 +114,7 @@
 #set ($cerfaNumerique = $doc.getObject('cerfa-numerique.Code.CerfaNumeriqueClass'))
 
 #if ($xcontext.action == 'view')
-  #set ($selectedTab = "$!request['tab']")
-  #if ($selectedTab == '')
-    #if ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres'))
-      #set ($selectedTab = 'demarche-tab')
-    #end
-  #end
+  #isDemarcheOwner()
   #if ($displayAvisFormOnly)
     #set ($selectedTab = 'avis-tab')
     {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
@@ -127,7 +122,11 @@
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
-  #elseif ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres') || $xwiki.user.isUserInGroup("XWiki.Groups.ProprietairesDeDemarche.${doc.name}"))
+  #elseif ($hasAdmin || $xwiki.user.isUserInGroup('XWiki.Ministeres') || $isDemarcheOwner)
+    #set ($selectedTab = "$!request['tab']")
+    #if ($selectedTab == '')
+      #set ($selectedTab = 'demarche-tab')
+    #end
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
         &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
         &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
@@ -149,11 +148,13 @@
   #else
     (% style="margin-top: 1em" %)(((
     {{info}}
-    $services.localization.render('wd.login-notice') Cliquez [[ici&gt;&gt;path:$xwiki.getURL('XWiki.XWikiLogin', 'login', 'notice=false')]] pour vous identifier.
+    $services.localization.render('wd.login-notice') Cliquez [[ici&gt;&gt;path:$xwiki.getURL('XWiki.XWikiLogin', 'login', "notice=false&amp;xredirect=$escapetool.url($doc.getURL())")]] pour vous identifier.
     {{/info}}
     )))
   #end
 #elseif ($xcontext.action == 'edit')
+  ## There's just one tab, but we need to make it visible.
+  #set ($selectedTab = 'demarche-tab')
   {{include reference="Demarches.Code.DemarcheTab" /}}
 #end
 {{/html}}

@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarcheTab</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -77,7 +77,7 @@
 &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
 &lt;dd&gt;$doc.name&lt;/dd&gt;
 #end
-#foreach($propName in ['nomComplet', 'statut', 'formulaires', 'objet', 'champsMinisteriels', 'ministeres', 'direction', 'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
+#foreach($propName in ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'champsMinisteriels', 'ministeres', 'direction', 'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
   #set ($mandatory = ($propName == 'direction'))
   #displayProperty($propName, $mandatory)
 #end
