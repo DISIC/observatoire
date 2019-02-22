@@ -177,7 +177,7 @@ public class DemarcheEventListener extends AbstractEventListener {
             if (rights != null) {
                 List<BaseObject> toBeRemovedRights = new ArrayList<>();
                 for (BaseObject right : rights) {
-                    if (StringUtils.isNotEmpty(right.getLargeStringValue("users"))) {
+                    if (right != null && StringUtils.isNotEmpty(right.getLargeStringValue("users"))) {
                         toBeRemovedRights.add(right);
                     }
                 }
@@ -206,7 +206,7 @@ public class DemarcheEventListener extends AbstractEventListener {
     protected boolean ownersWereUpdated(BaseObject demarcheV1, BaseObject demarcheV2) {
         String ownersV1 = demarcheV1.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
         String ownersV2 = demarcheV2.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
-        if ((ownersV2 != null && !ownersV2.equals(ownersV1)) || (ownersV2 == null && ownersV2 != null)) {
+        if ((ownersV2 != null && !ownersV2.equals(ownersV1)) || (ownersV2 == null && ownersV1 != null)) {
             return true;
         }
         return false;
