@@ -135,7 +135,7 @@
         #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
           &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
         #end
-        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+        #if ($xwiki.hasAccessLevel('edit', $xcontext.user, $doc.fullName))
           &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
         #end
         #if ($cerfaNumerique != $NULL)
@@ -150,7 +150,7 @@
         #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
           {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
         #end
-        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+        #if ($xwiki.hasAccessLevel('edit', $xcontext.user, $doc.fullName))
           {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
         #end
       #if ($cerfaNumerique != $NULL)
