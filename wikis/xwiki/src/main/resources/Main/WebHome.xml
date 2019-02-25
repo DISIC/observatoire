@@ -116,12 +116,21 @@
         $services.localization.render('wikidemarches.administration.home-subtitle')
 
 [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.demandes.home-link')&gt;&gt;Demarches.DemandesUtilisateurs||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='button btn btn-primary']]
+      )))
+    )))
+  )))
+  #end
+  #if (!$isGuest)
+  (%class='row demarches-administration-row'%)(((
+    (%class='container' %)(((
+      (%class='demarches-administration-link'%) (((
+        == Référentiels ==
 [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='button btn btn-primary']]
       )))
     )))
   )))
   #end
-  
+
 {{/velocity}}</content>
   <object>
     <name>Main.WebHome</name>
