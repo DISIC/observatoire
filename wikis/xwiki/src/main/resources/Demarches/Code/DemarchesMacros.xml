@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarchesMacros</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -89,6 +89,15 @@
         #end
       #else
         $doc.display($propName)
+        #if ($propName == "proprietaires" &amp;&amp; !isGuest &amp;&amp; !$isDemarcheOwner &amp;&amp; $xcontext.action != 'edit')
+          &lt;form action="$xwiki.getURL('Demarches.Code.Handler')" method="get"&gt;
+            &lt;input type="submit" class="btn btn-primary" value="Devenir porteur" /&gt;
+            &lt;input type="hidden" name="action" value="add-porteur" /&gt;
+            &lt;input type="hidden" name="userId" value="$escapetool.url($xcontext.user)" /&gt;
+            &lt;input type="hidden" name="demarcheId" value="$escapetool.url($doc.fullName)" /&gt;
+            &lt;input type="hidden" name="csrf" value="$!{services.csrf.token}" /&gt;
+          &lt;/form&gt;
+        #end
       #end
     #end
     #if($fieldIsInvalid)
