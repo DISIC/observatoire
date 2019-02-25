@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>EmbedTab</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -38,16 +38,167 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content>{{velocity}}
-{{html wiki="true"}}
+#set($discard = $xwiki.ssx.use('Demarches.Code.EmbedTab'))
+{{html}}
 &lt;div class="tab-pane fade #if($selectedTab == 'embed-tab')active in#end" role="tabpanel" id="embed-tab" aria-labelledby="embed-tab"&gt;
   &lt;div class="row"&gt;
-    &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
-    Embed tab content
+    &lt;div class="col-xs-12"&gt;
+      ## check current user, just in case a guest slides here
+      #if ($xcontext.userReference != $NULL)
+        #set ($userProfileDoc = $xwiki.getDocument($xcontext.userReference))
+        ## check if current user has a key and this key is in the generated codes for this demarche
+        #set($currentApiKey = "$!userProfileDoc.getObject('API.Code.APIKeyClass').getProperty('key').value")
+        #set($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $doc.documentReference.name))
+        #set($demarcheAPIDoc = $xwiki.getDocumentAsAuthor($demarcheAPIDocRef))
+        #if ("$!currentApiKey" != '' &amp;&amp; $demarcheAPIDoc.getObject('API.Code.EmbedClass', 'key', $currentApiKey) != $NULL)
+          &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
+          &lt;h2&gt;$services.localization.render('wikidemarches.demarche.embed.button.title')&lt;/h2&gt;
+          &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
+          #set ($defaultVoteMode = 'en-ligne-entièrement')
+          #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_mode=$escapetool.url($defaultVoteMode)&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
+          &lt;code&gt;
+            $escapetool.xml("&lt;a href='$voteURL'&gt;")Donner mon avis$escapetool.xml("&lt;/a&gt;")
+          &lt;/code&gt;
+          &lt;h2&gt;$services.localization.render('wikidemarches.demarche.embed.embed.title')&lt;/h2&gt;
+          &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.embed.details')&lt;/p&gt;
+        #else
+          ## generate the form to generate the button
+          &lt;form class='xform' method='post' action="$escapetool.xml($xwiki.getURL("API.Code.GenerateDemarcheCode"))"&gt;
+            &lt;input type='hidden' name='demarche' value="$escapetool.xml($doc.fullName)" /&gt;
+            &lt;input type='hidden' name='xredirect' value="$escapetool.xml($doc.getURL('view', 'tab=embed-tab'))" /&gt;
+            &lt;div class='buttonwrapper'&gt;
+              &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.generate.details')&lt;/p&gt;
+              &lt;input type='submit' class='button primary' name='dogenerate' value="$escapetool.xml($services.localization.render('wikidemarches.demarche.embed.generate.button'))" /&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        #end
+      #else
+        {{error}}$services.localization.render('notallowed'){{/error}}
+      #end
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 {{/html}}
 {{/velocity}}</content>
+  <object>
+    <name>Demarches.Code.EmbedTab</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>74d992e2-c12b-44b0-9063-d496f1c7178f</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>code {
+  display: block;
+  background-color: @well-bg;
+  color: @text-color;
+  border: 1px dotted @text-color;
+  padding: floor((@grid-gutter-width / 2));
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
 </xwikidoc>

@@ -72,6 +72,15 @@ wikidemarches.demarche.tabs.avisList=Liste des avis
 wikidemarches.demarche.tabs.avisForm=Donnez votre avis
 wikidemarches.demarche.tabs.avisStatistics=Tous les avis
 
+# Embed demarche tab
+wikidemarches.demarche.embed.details=Voici le code à intégrer dans la page de votre démarche, pour permettre à vos utilisateurs de donner leurs avis sur la démarche sur monavis.numerique.gouv.fr. Ce code a deux formes: &lt;ul&gt;&lt;li&gt;un bouton cliquable, qui dirige les utilisateurs vers un formulaire sur monavis.numerique.gouv.fr. Par sa simplicité, il convient particulièrement à une intégration dans un courriel.&lt;/li&gt;&lt;li&gt;un widget, permettant à vos utilisateurs de donner leurs avis directement sur la page de la démarche&lt;/li&gt;&lt;/ul&gt; Une clé d'API est associé à votre compte et à tous les avis utilisateurs provenant de ce code.
+wikidemarches.demarche.embed.button.title=Bouton à afficher en fin de démarche
+wikidemarches.demarche.embed.button.details=Copiez le code ci-dessous dans la page de votre démarche, à l'endroit où le bouton doit s'afficher.
+wikidemarches.demarche.embed.embed.title=Widget de vote
+wikidemarches.demarche.embed.embed.details=Copiez le code ci-dessous dans la page de votre démarche, à l'endroit où le widget doit s'afficher. TODO: ajouter une note sur les paramètres d'affichage (taille, etc).
+wikidemarches.demarche.embed.generate.details=Cet outil vous permet d'obtenir un code à intégrer dans la page de votre démarche, pour permettre à vos utilisateurs de donner leurs avis sur la démarche sur monavis.numerique.gouv.fr. Ce code a deux formes: &lt;ul&gt;&lt;li&gt;un bouton cliquable, qui dirige les utilisateurs vers un formulaire sur monavis.numerique.gouv.fr. Par sa simplicité, il convient particulièrement à une intégration dans un courriel.&lt;/li&gt;&lt;li&gt;un widget, permettant à vos utilisateurs de donner leurs avis directement sur la page de la démarche&lt;/li&gt;&lt;/ul&gt; Lors de la génération de ce code, une clé d'API sera associé à votre compte et à tous les avis utilisateurs provenant de ce code.
+wikidemarches.demarche.embed.generate.button=Générer le code
+
 # Demarche edition
 demarches.validation.error=Le formulaire n'a pas pu être validé en raison d'une ou plusieurs erreur(s) ci-dessous.
 Demarches.Code.DemarchesClass_title1.validation=Le champ « nom » ne doit pas être vide.
