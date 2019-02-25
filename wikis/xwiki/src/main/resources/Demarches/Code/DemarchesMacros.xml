@@ -89,7 +89,7 @@
         #end
       #else
         $doc.display($propName)
-        #if ($propName == "proprietaires" &amp;&amp; !isGuest &amp;&amp; !$isDemarcheOwner &amp;&amp; $xcontext.action != 'edit')
+        #if ($propName == "proprietaires" &amp;&amp; !$isGuest &amp;&amp; !$isDemarcheOwner &amp;&amp; $xcontext.action != 'edit')
           &lt;form action="$xwiki.getURL('Demarches.Code.Handler')" method="get"&gt;
             &lt;input type="submit" class="btn btn-primary" value="Devenir porteur" /&gt;
             &lt;input type="hidden" name="action" value="add-porteur" /&gt;
