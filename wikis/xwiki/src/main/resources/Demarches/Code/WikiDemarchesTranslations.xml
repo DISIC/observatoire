@@ -152,7 +152,8 @@ wikidemarches.administration.directions.home-link=Directions
 wikidemarches.administration.publics.home-link=Publics
 wikidemarches.administration.evenements.home-link=Événements
 wikidemarches.administration.avis.home-link=Avis
-wikidemarches.administration.avis.statistiques=Statistiques</content>
+wikidemarches.administration.avis.statistiques=Statistiques
+wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée. Vous pourrez vous authentifier sur ce site dés qu'un administrateur DINSIC aura activé votre compte.</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>

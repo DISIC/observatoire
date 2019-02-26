@@ -40,15 +40,89 @@
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-#if("$!{request.validkey}" != '' &amp;&amp; "$!{request.xwikiname}" != '')
-  #if($xwiki.validateUser(true) == 0)
-    #set($loginURL = $xwiki.getURL('XWiki.XWikiLogin', 'login'))
-    {{info}}{{html clean="false"}}$services.localization.render('xe.admin.accountvalidation.success', [${loginURL}]){{/html}}{{/info}}
+#set ($BYPASS_DOMAIN = 'gouv.fr')
+#set ($validationKey = "$!{request.validkey}")
+#if($validationKey != '' &amp;&amp; "$!{request.xwikiname}" != '')
+  ## Retrieve user page as script author because user pages are protected.
+  #set ($userPage = $xwiki.getDocumentAsAuthor($xcontext.user))
+  #set ($userObject = $userPage.getObject('XWiki.XWikiUsers'))
+  #set ($userEmail = $userObject.getProperty('email').value)
+  #set ($idx = $userEmail.indexOf('@'))
+  #set ($domain = $userEmail.substring($idx))
+  #if ($domain.indexOf($BYPASS_DOMAIN) &gt;= 0)
+    #if($xwiki.validateUser(true) == 0)
+      #set($loginURL = $xwiki.getURL('XWiki.XWikiLogin', 'login'))
+      {{info}}{{html clean="false"}}$services.localization.render('xe.admin.accountvalidation.success', [${loginURL}]){{/html}}{{/info}}
+    #else
+      {{warning}}{{translation key="xe.admin.accountvalidation.failure"/}}{{/warning}}
+    #end
   #else
-    {{warning}}{{translation key="xe.admin.accountvalidation.failure"/}}{{/warning}}
+    ## Validate key manually, because we don't want to make the user active yet: it needs further validation by an administrator
+    #set ($storedKey = $userObject.getProperty('validkey').value)
+    #set ($validationKeyClass = $xwiki.xWiki.getClass("XWiki.XWikiUsers", $xcontext.context).get("validkey"))
+    #set ($validationKey = $validationKeyClass.getEquivalentPassword($storedKey, $validationKey))
+    #if ($storedKey.equals($validationKey))
+      ## Send mail to administrators to let them activate the newly validated user
+      ## Code reused from XWiki.ResetPassword
+      #set ($mailTemplateReference = $services.model.createDocumentReference('', ['Demarches', 'Code'], 'NewUserAccountEmailTemplate'))
+      #set ($from = $services.mailsender.configuration.fromAddress)
+      ## The recipients are all the members of the administrator group
+      #set ($administratorGroup = $xwiki.getDocument('XWiki.XWikiAdminGroup'))
+      #set ($administratorGroupMembers = $administratorGroup.getObjects('XWiki.XWikiGroups'))
+      #set ($to = '')
+      #foreach ($member in $administratorGroupMembers)
+        #set ($memberId = $member.getProperty('member').value)
+        #if ($memberId == 'XWiki.slauriere' || $memberId == 'XWiki.lucaa')
+          #set ($memberPage = $xwiki.getDocument($memberId))
+          #set ($email = $memberPage.getObject('XWiki.XWikiUsers').getProperty('email').value)
+          #set ($to = "$to$email,")
+        #end
+      #end
+      #set ($activationUrl = $xwiki.getDocumentAsAuthor("Demarches.Admin.ActivationDeComptes").externalURL)
+      #set ($userPageUrl = $userPage.externalURL)
+      #set ($userName = $xwiki.getLocalUserName($xcontext.user, false))
+      #set ($message = $services.mailsender.createMessage('template', $mailTemplateReference, {'from' : $from, 'to' : $to, 'language' : $xcontext.locale}))
+      #set ($mailResult = $services.mailsender.send([$message], 'database'))
+      #if ($services.mailsender.lastError)
+        #displayError($exceptiontool.getStackTrace($services.mailsender.lastError))
+      #else
+        ## Send the message and wait for it to be sent or for any error to be raised.
+        #set ($mailResult = $services.mailsender.send([$message], 'database'))
+        ## Check for errors during the send
+        #if ($services.mailsender.lastError)
+          #displayError($exceptiontool.getStackTrace($services.mailsender.lastError))
+        #else
+          #set ($failedMailStatuses = $mailResult.statusResult.getAllErrors())
+          #if ($failedMailStatuses.hasNext())
+            #set ($mailStatus = $failedMailStatuses.next())
+            #displayError($mailStatus.errorDescription)
+          #else
+            {{info}}
+            $services.localization.render('wikidemarches.administration.accounts.should-be-activated-notice')
+            {{/info}}
+          #end
+        #end
+      #end
+    #else
+      {{warning}}{{translation key="xe.admin.accountvalidation.failure"/}}{{/warning}}
+    #end
   #end
 #else
   $response.sendRedirect($xwiki.getURL($services.model.resolveDocument('', 'default', $doc.documentReference.extractReference('WIKI'))))
 #end
+
+#macro (displayError $text)
+
+{{html}}
+&lt;div class="xwikirenderingerror" title="Click to get more details about the error" style="cursor: pointer;"&gt;
+Un problème est survenu. Merci de contacter l'administrateur du site.
+&lt;/div&gt;
+&lt;div class="xwikirenderingerrordescription hidden"&gt;
+&lt;pre&gt;${text}&lt;/pre&gt;
+&lt;/div&gt;
+{{/html}}
+
+#end
+
 {{/velocity}}</content>
 </xwikidoc>
