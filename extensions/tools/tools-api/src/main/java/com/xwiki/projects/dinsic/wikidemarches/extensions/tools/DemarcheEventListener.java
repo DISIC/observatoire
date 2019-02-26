@@ -238,7 +238,10 @@ public class DemarcheEventListener extends AbstractEventListener {
     }
 
     protected boolean ownersWereUpdated(BaseObject demarcheV1, BaseObject demarcheV2) {
-        String ownersV1 = demarcheV1.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
+        String ownersV1 = null;
+        if (demarcheV1 != null) {
+            ownersV1 = demarcheV1.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
+        }
         String ownersV2 = demarcheV2.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
         if ((ownersV2 != null && !ownersV2.equals(ownersV1)) || (ownersV2 == null && ownersV1 != null)) {
             return true;
