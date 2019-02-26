@@ -251,7 +251,9 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     protected void sendNotification(BaseObject demarcheV1, BaseObject demarcheV2, XWikiContext context) throws MessagingException, XWikiException, XWikiVelocityException {
         String ownerStringV1 = null, ownerStringV2 = null;
-        ownerStringV1 = demarcheV1.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
+        if (demarcheV1 != null) {
+            ownerStringV1 = demarcheV1.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
+        }
         ownerStringV2 = demarcheV2.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);
 
         if (ownerStringV1 != null || ownerStringV2 != null) {
