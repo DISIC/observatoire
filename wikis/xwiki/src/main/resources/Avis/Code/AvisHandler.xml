@@ -40,7 +40,7 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{include reference="Avis.Code.AvisMacros" /}}
-{{velocity output="false"}}
+{{velocity output="false²"}}
 #set ($FRANCE_CONNECT_ID = "Demarches.1650")
 #set ($demarcheId = "$!request['Avis.Code.AvisClass_0_demarche']")
 #set ($step = "$!request['avis-form-step']")
@@ -48,31 +48,38 @@
 #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
 #set ($logger = $services.logging.getLogger($doc.fullName))
 #if ($step == 'initial-step')
-  ## Create a new avis only if there is no avis in the session that matches the current demarche:
-  ## in case there is, the existing avis will get updated.
-  #if ($avisId &amp;&amp; $xwiki.exists("Avis.$avisId"))
-    ## Get avis document with programming rights, because Avis are not available to guests.
-    $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId}")
-    #set ($target = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
-    #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
-    #set ($object = $target.getObject('Avis.Code.AvisClass'))
-  #end
-  ## Create new avis only if target has not been set already
-  #if (!$target)
-    #set ($uin = $services.uin.getNext('avis'))
-    #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
-    #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
-    #if ($request.session &amp;&amp; $request.session.id)
-      #set ($sessionId = $request.session.id)
-      #set ($discard = $object.set("sessionId", $sessionId))
+  ## First we check that the provided API key is valid. If it's not the case, redirect to home page.
+  #checkDemarcheEmbedApiKey("$!request.get('Avis.Code.AvisClass_0_apiKey')", $demarcheId)
+  #if ($providedDemarcheEmbedApiKeyIsValid)
+    ## Create an avis only if there is no avis in the session that matches the current demarche
+    ## in case there is, the existing avis will get updated.
+    #if ($avisId &amp;&amp; $xwiki.exists("Avis.$avisId"))
+      ## Get avis document with programming rights, because Avis are not available to guests.
+      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId}")
+      #set ($target = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
+      #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
+      #set ($object = $target.getObject('Avis.Code.AvisClass'))
     #end
-  #end
-  #validateAvis($object)
-  #if ($validated)
-    ## Save with programming rights as the current user will not have the right to edit the Avis document
-    #set ($discard = $target.saveWithProgrammingRights())
+    ## Create new avis only if target has not been set already
+    #if (!$target)
+      #set ($uin = $services.uin.getNext('avis'))
+      #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
+      #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
+      #if ($request.session &amp;&amp; $request.session.id)
+        #set ($sessionId = $request.session.id)
+        #set ($discard = $object.set("sessionId", $sessionId))
+      #end
+    #end
+    #validateAvis($object)
+    #if ($validated)
+      ## Save with programming rights as the current user will not have the right to edit the Avis document
+      #set ($discard = $target.saveWithProgrammingRights())
+    #else
+      $logger.warn('An attempt to store an invalid avis was performed.')
+      $response.sendRedirect($xwiki.getURL('Main.WebHome'))
+    #end
   #else
-    $logger.warn('An attempt to store an invalid avis was performed.')
+    $logger.warn('An attempt to store an avis with an invalid API key was attempted.')
     $response.sendRedirect($xwiki.getURL('Main.WebHome'))
   #end
 #elseif ($step == 'second-form-screen' || $step == 'third-form-screen')
@@ -94,7 +101,7 @@
 #end
 
 ## We check that the avis exists, we store its id in the session and we define the next step.
-#if ($xwiki.exists($target.fullName))
+#if ($target &amp;&amp; $xwiki.exists($target.fullName))
   $request.session.setAttribute($avisIdAttributeKey, $target.name)
   #if ($step == 'initial-step')
     ## If the current demarche is FranceConnect, then the next step is the final step, hence we consider
@@ -122,7 +129,6 @@
 #else
   $response.sendRedirect($xwiki.getURL('Main.WebHome'))
 #end
-
 {{/velocity}}</content>
   <object>
     <name>Avis.Code.AvisHandler</name>

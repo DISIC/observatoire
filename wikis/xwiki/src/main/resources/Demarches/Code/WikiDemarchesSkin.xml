@@ -85,7 +85,8 @@
       </path>
     </class>
     <property>
-      <content>#set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
+      <content>#set ($EMBED_CLASS = "API.Code.EmbedClass")
+#set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
 #set ($displayContentFooter = false)
 #set ($displayDocChanges = false)
 #set ($displayContentMenu = $hasEdit)
@@ -117,17 +118,23 @@
   #set ($displayDocExtra = false)
 #end
 
-## Set variables indicating what should be displayed when accessing a demarche page
+## Set variables indicating what should be displayed when accessing a demarche page.
+## Set avis form display to true if:
+## - The requested page corresponds to a demarche page and:
+##   - the view mode is set to 'formulaire-avis' and the request matches with the demarche embed API key,
+##   - or the avis submission form has started.
+## Set cerfa numerique display to true if:
+## - the requested page corresponds to a demarche page and the view mode is set to 'cerfa-numerique'.
 #set ($viewMode = "$!request['view-mode']")
-## Set avis form display to true if either the request contains an api key and the view mode
-## is set to 'formulaire-avis', or the parameters 'nd_source' and 'nd_mode' are not empty,
-## or the avis submission form has started.
-#set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
-#set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
-#set ($apiKey = "$!request.key")
-#set ($displayAvisFormOnly = ($apiKey != '' &amp;&amp; $viewMode == 'formulaire-avis' ) || ("$!request.nd_source" != '' &amp;&amp; "$!request.nd_mode" != '') || "$!avisId" != '')
-## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
-#set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
+#set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
+#if ($demarche) 
+  #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
+  #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
+  #checkDemarcheEmbedApiKey("$!request.key", $doc.fullName)
+  #set ($displayAvisFormOnly = ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsValid) || "$!avisId" != '')
+  ## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
+  #set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
+#end
 </content>
     </property>
     <property>
@@ -1497,6 +1504,57 @@ window.docgeturl = "${doc.getURL('get')}";
     </property>
     <property>
       <path>login.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>16</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>82cabfcf-8523-4adf-873b-994df43a35e9</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>## Sets parameter "providedDemarcheEmbedApiKeyIsValid" to true if the provided key matches the expected one,
+## or if some legacy parameters by passing API check are provided.
+#macro (checkDemarcheEmbedApiKey $providedApiKey $demarcheFullName)
+  #set ($demarchePage = $xwiki.getDocument($demarcheFullName))
+  #set ($embedPage = $xwiki.getDocumentAsAuthor("Demarches.Embed.${demarchePage.name}"))
+  #set ($embedObject = $embedPage.getObject($EMBED_CLASS))
+  #set ($embedObjectKey = $embedObject.getProperty('key').value)
+  #set ($providedDemarcheEmbedApiKeyIsValid = $providedApiKey == $embedObjectKey)
+#end
+</content>
+    </property>
+    <property>
+      <path>macros.vm</path>
     </property>
   </object>
   <object>
