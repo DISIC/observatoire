@@ -53,14 +53,36 @@
         #set($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $doc.documentReference.name))
         #set($demarcheAPIDoc = $xwiki.getDocumentAsAuthor($demarcheAPIDocRef))
         #if ("$!currentApiKey" != '' &amp;&amp; $demarcheAPIDoc.getObject('API.Code.EmbedClass', 'key', $currentApiKey) != $NULL)
+          ## don't display the URL / button for démarches with too high volumetrie
+          ## too high = 250000 = 10 000 avec un taux de conversion de 4%.
+          #set($LIMIT_VOL = 250000)
+          #set($volumetrieDemat = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrieDemat').value)
+          #set($volumetrie = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrie').value)
+          #set ($displayURL = true)
+          #set ($volumetrieMsg = '')
+          #if ($volumetrieDemat)
+            #if ($volumetrieDemat &gt; $LIMIT_VOL)
+              #set ($displayURL = false)
+              #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrieDemat', [$volumetrieDemat]))
+            #end
+          #elseif ($volumetrie)
+            #if ($volumetrie &gt; $LIMIT_VOL)
+              #set ($displayURL = false)
+              #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrie', [$volumetrie]))
+            #end
+          #end
           &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
           &lt;h2&gt;$services.localization.render('wikidemarches.demarche.embed.button.title')&lt;/h2&gt;
-          &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
-          #set ($defaultVoteMode = 'en-ligne-entièrement')
-          #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_mode=$escapetool.url($defaultVoteMode)&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
-          &lt;code&gt;
-            $escapetool.xml("&lt;a href='$voteURL'&gt;")Donner mon avis$escapetool.xml("&lt;/a&gt;")
-          &lt;/code&gt;
+          #if ($displayURL)
+            &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
+            #set ($defaultVoteMode = 'en-ligne-entièrement')
+            #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_mode=$escapetool.url($defaultVoteMode)&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
+            &lt;code&gt;
+              $escapetool.xml("&lt;a href='$voteURL'&gt;")Donner mon avis$escapetool.xml("&lt;/a&gt;")
+            &lt;/code&gt;
+          #else
+            &lt;div class='box warningmessage'&gt;$volumetrieMsg&lt;/div&gt;
+          #end
           &lt;h2&gt;$services.localization.render('wikidemarches.demarche.embed.embed.title')&lt;/h2&gt;
           &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.embed.details')&lt;/p&gt;
         #else
