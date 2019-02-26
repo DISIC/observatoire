@@ -187,7 +187,7 @@
       </username>
     </class>
     <property>
-      <from/>
+      <from>info@nosdemarches.gouv.fr</from>
     </property>
     <property>
       <host>127.0.0.1</host>
