@@ -77,8 +77,11 @@
             &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
             #set ($defaultVoteMode = 'en-ligne-entièrement')
             #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_mode=$escapetool.url($defaultVoteMode)&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
+            #set ($buttonURL = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/monavis-static/bouton-bleu.png")
+            #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
+            #set ($buttonTitle = $services.localization.render('wikidemarches.demarche.embed.button.code.title'))
             &lt;code&gt;
-              $escapetool.xml("&lt;a href='$voteURL'&gt;")Donner mon avis$escapetool.xml("&lt;/a&gt;")
+              $escapetool.xml("&lt;a href='$voteURL'&gt;")$escapetool.xml("&lt;img style='height: 3.8em' src='$buttonURL' alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} title=${escapetool.quote}$escapetool.xml($buttonTitle)${escapetool.quote} /&gt;")$escapetool.xml("&lt;/a&gt;")
             &lt;/code&gt;
           #else
             &lt;div class='box warningmessage'&gt;$volumetrieMsg&lt;/div&gt;
