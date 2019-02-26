@@ -54,12 +54,14 @@
   #end
 #end
 
-#macro (displayProperty $propName $isMandatory)
+#macro (displayProperty $object $propName $isMandatory $action)
   #set ($clazz = $xwiki.getDocument('Demarches.Code.DemarchesClass').xWikiClass)
   #set ($hint = $NULL)
   #set ($isBoolean = false)
+  #set ($propertyObject = $NULL)
   #foreach ($prop in $clazz.properties)
     #if ($prop.name == $propName)
+      #set ($propertyObject = $prop)
       #set ($hint = $prop.hint)
       #set ($isBoolean = ($prop.type == 'BooleanClass'))
       #set ($isNumber = ($prop.type == 'NumberClass'))
@@ -69,27 +71,27 @@
   #if ($xcontext.validationStatus.propertyErrors.contains($propName))
     #set($fieldIsInvalid = true)
   #end
-  #if ($isBoolean &amp;&amp; $xcontext.action == 'edit')
-    &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.display($propName)$doc.displayPrettyName($propName, $isMandatory)&lt;/label&gt;
-      #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end  
+  #if ($isBoolean &amp;&amp; $action == 'edit')
+    &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$object.display($propName, $action)#if($isMandatory)(*) #end$propertyObject.prettyName &lt;/label&gt;
+      #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
     &lt;/dt&gt;
   #else
-    &lt;dt&gt;&lt;label#if ($xcontext.action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$doc.displayPrettyName($propName, $isMandatory)&lt;/label&gt;
+    &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;#if($isMandatory)(*) #end $propertyObject.prettyName&lt;/label&gt;
     #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
   
   #end
   &lt;/dt&gt;
   &lt;dd #if ($fieldIsInvalid)class="validation-failure"#end&gt;
-    #if(!$isBoolean || $xcontext.action != 'edit')
-      #if ($isNumber &amp;&amp; $doc.getValue($propName))
-        #if ($xcontext.action == 'view')
-          $numbertool.format('integer', $doc.getValue($propName))
+    #if(!$isBoolean || $action != 'edit')
+      #if ($isNumber &amp;&amp; $object.getProperty($propName).value)
+        #if ($action == 'view')
+          $numbertool.format('integer', $object.getProperty($propName).value)
         #else
-          $doc.display($propName)
+          $object.display($propName, $action)
         #end
       #else
-        $doc.display($propName)
-        #if ($propName == "proprietaires" &amp;&amp; !$isGuest &amp;&amp; !$isDemarcheOwner &amp;&amp; $xcontext.action != 'edit')
+        $object.display($propName, $action)
+        #if ($propName == "proprietaires" &amp;&amp; !$isGuest &amp;&amp; !$isDemarcheOwner &amp;&amp; $action != 'edit')
           &lt;form action="$xwiki.getURL('Demarches.Code.Handler')" method="get"&gt;
             &lt;input type="submit" class="btn btn-primary" value="Devenir porteur" /&gt;
             &lt;input type="hidden" name="action" value="add-porteur" /&gt;

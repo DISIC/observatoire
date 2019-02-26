@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DemarcheTab</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -42,8 +42,13 @@
   <content>{{velocity}}
 {{html wiki="true"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'demarche-tab')active in#end" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
-  #if($xcontext.action == 'edit')
-    #set($type="edit")
+  ## "object" and "action" can be set already if the page is included from NewDemarche
+  #if (!$object)
+    #set ($object = $doc.getObject('Demarches.Code.DemarchesClass'))
+    #set ($action = $xcontext.action)
+  #end
+  #if ($action == 'edit')
+    #set ($type = 'edit')
     &lt;input type="hidden" name="xvalidate" value="1" /&gt;
     &lt;input type="hidden" name="async" value="false" /&gt;
     ## Groovy script to validate empty title or empty direction
@@ -70,16 +75,20 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#if ($xcontext.action != 'view')
-  #displayProperty('title1', true)
+#if ($action != 'view')
+  #displayProperty($object, 'title1', true, $action)
 #end
-#if ($xcontext.action == 'view')
+#if ($action == 'view')
 &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
 &lt;dd&gt;$doc.name&lt;/dd&gt;
 #end
-#foreach($propName in ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'champsMinisteriels', 'ministeres', 'direction', 'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
+#set ($propList = ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'champsMinisteriels', 'ministeres', 'direction', 'champ',  'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
+#if ($isSimplifiedForm)
+  #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
+#end
+#foreach($propName in $propList)
   #set ($mandatory = ($propName == 'direction'))
-  #displayProperty($propName, $mandatory)
+  #displayProperty($object, $propName, $mandatory, $action)
 #end
 &lt;/dl&gt;
 )))
@@ -91,8 +100,12 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#foreach($propName in ['categoriesPublics', 'publics', 'evenements'])
-  #displayProperty($propName, false)
+#set ($propList = ['categoriesPublics', 'publics', 'evenements'])
+#if ($isSimplifiedForm)
+  #set ($propList = ['categoriesPublics'])
+#end
+#foreach($propName in $propList)
+  #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
 )))
@@ -106,13 +119,18 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#foreach($propName in ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
- #displayProperty($propName, false)
+#set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
+#if ($isSimplifiedForm)
+  #set ($propList = ['volumetrie'])
+#end
+#foreach($propName in $propList)
+ #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
+#if (!$isSimplifiedForm)
 &lt;div class="panel panel-default"&gt;
   &lt;div class="panel-heading"&gt;Dématérialisation&lt;/div&gt;
   &lt;div class="panel-body"&gt;
@@ -120,12 +138,13 @@
 (((
 &lt;dl&gt;
 #foreach($propName in ['niveauDemat', 'dematObligatoire', 'exclusionSve', 'caracteristiquesDemat'])
-  #displayProperty($propName, false)
+  #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
+#end
 &lt;div class="panel panel-default"&gt;
   &lt;div class="panel-heading"&gt;Références&lt;/div&gt;
   &lt;div class="panel-body"&gt;
@@ -133,7 +152,7 @@
 (((
 &lt;dl&gt;
 #foreach($propName in ['referenceBddForm', 'referenceServicePublic'])
-  #displayProperty($propName, false)
+  #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
 )))
@@ -145,8 +164,12 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#foreach($propName in ['urlInfos', 'urlDemarche', 'urlFiche'])
-  #displayProperty($propName, false)
+#set ($propList = ['urlInfos', 'urlDemarche', 'urlFiche'])
+#if ($isSimplifiedForm)
+  #set ($propList = ['urlDemarche', 'urlFiche'])
+#end
+#foreach($propName in $propList)
+  #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
 )))
@@ -158,13 +181,14 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#displayProperty('remarques', false)
+#displayProperty($object, 'remarques', false, $action)
 &lt;/dl&gt;
 )))
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+#if (!$isSimplifiedForm)
 &lt;div class="row"&gt;
 &lt;div class="col-lg-12 col-md-12 col-sm-12"&gt;
 &lt;div class="panel panel-default"&gt;
@@ -174,7 +198,7 @@
 (((
 &lt;dl&gt;
 #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'niveauPrevu', 'caracteristiquesDematPrevues'])
-  #displayProperty($propName, false)
+  #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
 )))
@@ -182,9 +206,10 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+#end
 ##
-## Display excel export button if in view mode
-#if ($xcontext.action != 'edit')
+## Display excel export button if in view mode and doc is not "NewDemarche"
+#if ($action != 'edit' &amp;&amp; $doc.name != 'NewDemarche')
   #set($discard = $services.localization.use('document', 'Macros.LivetableExporterMacroLabels'))
   #set($discard = $xwiki.ssx.use('Macros.LivetableExporterMacro'))
   &lt;form action="$xwiki.getURL('Macros.LivetableExporterMacroResults', 'get', 'outputSyntax=plain&amp;transprefix=demarches.livetable.')" method='post'&gt;
