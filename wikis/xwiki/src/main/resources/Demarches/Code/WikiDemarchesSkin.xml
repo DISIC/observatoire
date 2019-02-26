@@ -1547,9 +1547,8 @@ window.docgeturl = "${doc.getURL('get')}";
 #macro (checkDemarcheEmbedApiKey $providedApiKey $demarcheFullName)
   #set ($demarchePage = $xwiki.getDocument($demarcheFullName))
   #set ($embedPage = $xwiki.getDocumentAsAuthor("Demarches.Embed.${demarchePage.name}"))
-  #set ($embedObject = $embedPage.getObject($EMBED_CLASS))
-  #set ($embedObjectKey = $embedObject.getProperty('key').value)
-  #set ($providedDemarcheEmbedApiKeyIsValid = $providedApiKey == $embedObjectKey)
+  #set ($embedObject = $embedPage.getObject($EMBED_CLASS, 'key', $providedApiKey))
+  #set ($providedDemarcheEmbedApiKeyIsValid = $embedObject &amp;&amp; $embedObject != $NULL)
 #end
 </content>
     </property>
