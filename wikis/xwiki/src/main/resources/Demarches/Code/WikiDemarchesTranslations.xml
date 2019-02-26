@@ -59,6 +59,7 @@ wikidemarches.search.label=Démarche recherchée
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
+wikidemarches.owned-demarches=Mes démarches
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche

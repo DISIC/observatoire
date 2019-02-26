@@ -24,7 +24,7 @@
   <web>Main</web>
   <name>WebHome</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -75,16 +75,18 @@
       )))
     )))
   )))
-  #set ($demarchesIds = [1289,1290,1220,1291,1265,1292,829,1293,1294,823])
+  #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and owners.value like '%$xcontext.user%'")
+  #set ($ownedDemarches = $services.query.hql($hql).execute())
+  #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
   (%class='row demarches-statsrow'%)(((
     (%class='container' %)(((
       (%class='row demarches-statsblock'%) (((
         (%class='col-xs-12'%)(((
-          ==$services.localization.render('wikidemarches.mostwanted.title')==
+          ==$services.localization.render('wikidemarches.owned-demarches')==
         )))
-        #foreach ($id in $demarchesIds)
-          #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
-          * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
+        #foreach ($entry in $ownedDemarches)
+          #set ($demarchePage = $xwiki.getDocument($entry))
+          * [[$demarchePage.title&gt;&gt;$entry]]
           ## new list after the first 5 items
           #if ($velocityCount == 5)
 
@@ -93,6 +95,7 @@
       )))
     )))
   )))
+  #end
   #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
   (%class='row demarches-dashboardrow'%)(((
     (%class='container' %)(((
