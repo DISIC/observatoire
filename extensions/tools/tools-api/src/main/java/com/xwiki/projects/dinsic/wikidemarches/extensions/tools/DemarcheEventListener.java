@@ -285,6 +285,8 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     protected List<User> getUsers(String concatenatedUserIdentifiers, XWikiContext context) {
         List<User> users = new ArrayList<User>();
+        if (concatenatedUserIdentifiers == null)
+            return users;
         XWiki wiki = context.getWiki();
         for (String userName : StringUtils.split(concatenatedUserIdentifiers, ",")) {
             if (userName != null) {
