@@ -46,6 +46,8 @@
 #if ("$!request.action" == 'save' &amp;&amp; $services.csrf.isTokenValid("$!request.csrf"))
   #set ($uin = $services.uin.getNext('demarches'))
   #set ($target = $xwiki.getDocumentAsAuthor("Demarches.${uin}"))
+  #set ($title = "$!request.title")
+  #set ($discard = $target.setTitle($title))
   #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
   #set ($discard = $object.set('statut', 'demandeUtilisateur'))
   #set ($discard = $object.set('proprietaires', $xcontext.user))
