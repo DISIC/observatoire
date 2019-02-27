@@ -78,7 +78,7 @@
   &lt;/div&gt;
   &lt;dl class="demarche-details"&gt;
     #set ($nomComplet = $demarche.getProperty('nomComplet').value)
-    #if ($nomComplet != $doc.title)
+    #if ($nomComplet &amp;&amp; $nomComplet != $doc.title)
       &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.nomComplet')&lt;/dt&gt;
       &lt;dd&gt;$nomComplet&lt;/dd&gt;
     #end
