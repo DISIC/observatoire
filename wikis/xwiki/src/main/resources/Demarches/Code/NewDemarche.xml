@@ -49,7 +49,10 @@
   #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
   #set ($discard = $object.set('statut', 'demandeUtilisateur'))
   #set ($discard = $object.set('proprietaires', $xcontext.user))
+  ## Save as script author so that the current user cannot delete the created page (a creator gets a delete right that is not deniable))
   #set ($discard = $target.saveAsAuthor())
+  ## Save "normally" to mark the fact that the current user as a "co-author"
+  #set ($discard = $target.save())
   {{info}}
   La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
   {{/info}}
