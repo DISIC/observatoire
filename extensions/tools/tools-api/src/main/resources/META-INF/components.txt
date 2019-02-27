@@ -2,3 +2,4 @@ com.xwiki.projects.dinsic.wikidemarches.extensions.tools.AvisEventListener
 com.xwiki.projects.dinsic.wikidemarches.extensions.tools.DefaultAvisStatsManager
 com.xwiki.projects.dinsic.wikidemarches.extensions.tools.AvisStatsManagerScriptService
 com.xwiki.projects.dinsic.wikidemarches.extensions.tools.DemarcheEventListener
+com.xwiki.projects.dinsic.wikidemarches.extensions.tools.UserAndGroupEventListener
