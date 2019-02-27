@@ -49,7 +49,7 @@
   #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
   #set ($discard = $object.set('statut', 'demandeUtilisateur'))
   #set ($discard = $object.set('proprietaires', $xcontext.user))
-  #set ($discard = $target.saveWithProgrammingRights())
+  #set ($discard = $target.saveAsAuthor())
   {{info}}
   La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
   {{/info}}
