@@ -130,7 +130,11 @@
 #if ($demarche) 
   #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
   #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
-  #checkDemarcheEmbedApiKey("$!request.key", $doc.fullName)
+  ## Check that the API key is valid
+  #set ($demarchePage = $xwiki.getDocument($doc.fullName))
+  #set ($embedPage = $xwiki.getDocumentAsAuthor("Demarches.Embed.${demarchePage.name}"))
+  #set ($embedObject = $embedPage.getObject($EMBED_CLASS, 'key', "$!request.key"))
+  #set ($providedDemarcheEmbedApiKeyIsValid = $embedObject &amp;&amp; $embedObject != $NULL)
   #set ($displayAvisFormOnly = ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsValid) || "$!avisId" != '')
   ## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
   #set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
@@ -1504,56 +1508,6 @@ window.docgeturl = "${doc.getURL('get')}";
     </property>
     <property>
       <path>login.vm</path>
-    </property>
-  </object>
-  <object>
-    <name>Demarches.Code.WikiDemarchesSkin</name>
-    <number>16</number>
-    <className>XWiki.XWikiSkinFileOverrideClass</className>
-    <guid>82cabfcf-8523-4adf-873b-994df43a35e9</guid>
-    <class>
-      <name>XWiki.XWikiSkinFileOverrideClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <content>
-        <disabled>0</disabled>
-        <editor>PureText</editor>
-        <name>content</name>
-        <number>2</number>
-        <prettyName>Content</prettyName>
-        <rows>15</rows>
-        <size>80</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </content>
-      <path>
-        <disabled>0</disabled>
-        <name>path</name>
-        <number>1</number>
-        <prettyName>Path</prettyName>
-        <size>255</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </path>
-    </class>
-    <property>
-      <content>## Sets parameter "providedDemarcheEmbedApiKeyIsValid" to true if the provided key matches the expected one,
-## or if some legacy parameters by passing API check are provided.
-#macro (checkDemarcheEmbedApiKey $providedApiKey $demarcheFullName)
-  #set ($demarchePage = $xwiki.getDocument($demarcheFullName))
-  #set ($embedPage = $xwiki.getDocumentAsAuthor("Demarches.Embed.${demarchePage.name}"))
-  #set ($embedObject = $embedPage.getObject($EMBED_CLASS, 'key', $providedApiKey))
-  #set ($providedDemarcheEmbedApiKeyIsValid = $embedObject &amp;&amp; $embedObject != $NULL)
-#end
-</content>
-    </property>
-    <property>
-      <path>macros.vm</path>
     </property>
   </object>
   <object>
