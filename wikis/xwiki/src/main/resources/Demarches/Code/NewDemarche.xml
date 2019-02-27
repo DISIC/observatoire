@@ -47,26 +47,32 @@
   #set ($uin = $services.uin.getNext('demarches'))
   #set ($target = $xwiki.getDocumentAsAuthor("Demarches.${uin}"))
   #set ($title = "$!request.title")
-  #set ($discard = $target.setTitle($title))
-  #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
-  #set ($discard = $object.set('statut', 'demandeUtilisateur'))
-  #set ($discard = $object.set('proprietaires', $xcontext.user))
-  ## Save as script author so that the current user cannot delete the created page (a creator gets a delete right that is not deniable))
-  #set ($discard = $target.saveAsAuthor())
-  ## Save "normally" to mark the fact that the current user as a "co-author"
-  #set ($discard = $target.save())
-  {{info}}
-  La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
-  {{/info}}
-#else
+  #set ($direction = "$!request.get('Demarches.Code.DemarchesClass_0_direction')")
+  #if ($title == '' || $direction == '')
+    {{warning}}
+    Certains champs obligatoires (marqués par une étoile) n'ont pas été remplis.
+    {{/warning}}
+  #else
+    #set ($discard = $target.setTitle($title))
+    #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
+    #set ($discard = $object.set('statut', 'demandeUtilisateur'))
+    #set ($discard = $object.set('proprietaires', $xcontext.user))
+    ## Save as script author so that the current user cannot delete the created page (a creator gets a delete right that is not deniable))
+    #set ($discard = $target.saveAsAuthor())
+    ## Save "normally" to mark the fact that the current user as a "co-author"
+    #set ($discard = $target.save())
+    #set ($showForm = false)
+    {{info}}
+    La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
+    {{/info}}
+  #end
+#end
 
-  #*
-  Les démarches ajoutées seront toujours en état "demande d'ajout utilisateur"
-  Aussi, l'utilisateur ayant ajouté la démarche sera automatiquement marqué comme porteur de cette démarche.
-  *#
+#if ($showForm)
 
   #set ($selectedTab = 'demarche-tab')
-  #set ($object = $doc.newObject('Demarches.Code.DemarchesClass'))
+  #set ($object = $doc.addObjectFromRequest('Demarches.Code.DemarchesClass'))
+  ##set ($object = $doc.newObject('Demarches.Code.DemarchesClass'))
   #set ($action = 'edit')
   #set ($isSimplifiedForm = true)
 
