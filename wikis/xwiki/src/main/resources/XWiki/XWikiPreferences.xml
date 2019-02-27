@@ -2776,11 +2776,11 @@
 #set ($host = ${request.getRequestURL()})
 #set ($host = ${host.substring(0, ${host.indexOf('/', ${mathtool.add(${host.indexOf('//')}, 2)})})})
 Content-Type: text/plain; charset=utf-8
-Subject: Votre compte sur le site ${wikiname} a été activé
+Subject: Activation de votre compte sur le site ${wikiname}
 
 Bonjour ${xwiki.getUserName("$xwikiname", false)},
 
-Votre compte sur le site ${wikiname} a été activé avec succès. Vous pouvez à présenter vous identifier à l'adresse ci-dessous en utilisant comme identifiant "${xwiki.getDocument($xwikiname).name}" :
+Votre compte sur le site ${wikiname} a été activé avec succès. Vous pouvez à présenter vous identifier à l'adresse ci-dessous en utilisant comme identifiant "${xwiki.getDocumentAsAuthor($xwikiname).name}" :
 
 ${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')}</confirmation_email_content>
     </property>

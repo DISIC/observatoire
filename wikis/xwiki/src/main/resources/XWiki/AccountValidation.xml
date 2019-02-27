@@ -42,9 +42,10 @@
   <content>{{velocity}}
 #set ($BYPASS_DOMAIN = 'gouv.fr')
 #set ($validationKey = "$!{request.validkey}")
-#if($validationKey != '' &amp;&amp; "$!{request.xwikiname}" != '')
+#set ($userId = "$!{request.xwikiname}")
+#if($validationKey != '' &amp;&amp; $userId != '')
   ## Retrieve user page as script author because user pages are protected.
-  #set ($userPage = $xwiki.getDocumentAsAuthor($xcontext.user))
+  #set ($userPage = $xwiki.getDocumentAsAuthor($userId))
   #set ($userObject = $userPage.getObject('XWiki.XWikiUsers'))
   #set ($userEmail = $userObject.getProperty('email').value)
   #set ($idx = $userEmail.indexOf('@'))
@@ -67,20 +68,20 @@
       #set ($mailTemplateReference = $services.model.createDocumentReference('', ['Demarches', 'Code'], 'NewUserAccountEmailTemplate'))
       #set ($from = $services.mailsender.configuration.fromAddress)
       ## The recipients are all the members of the administrator group
-      #set ($administratorGroup = $xwiki.getDocument('XWiki.XWikiAdminGroup'))
+      #set ($administratorGroup = $xwiki.getDocumentAsAuthor('XWiki.XWikiAdminGroup'))
       #set ($administratorGroupMembers = $administratorGroup.getObjects('XWiki.XWikiGroups'))
       #set ($to = '')
       #foreach ($member in $administratorGroupMembers)
         #set ($memberId = $member.getProperty('member').value)
         #if ($memberId == 'XWiki.slauriere' || $memberId == 'XWiki.lucaa')
-          #set ($memberPage = $xwiki.getDocument($memberId))
+          #set ($memberPage = $xwiki.getDocumentAsAuthor($memberId))
           #set ($email = $memberPage.getObject('XWiki.XWikiUsers').getProperty('email').value)
           #set ($to = "$to$email,")
         #end
       #end
       #set ($activationUrl = $xwiki.getDocumentAsAuthor("Demarches.Admin.ActivationDeComptes").externalURL)
       #set ($userPageUrl = $userPage.externalURL)
-      #set ($userName = $xwiki.getLocalUserName($xcontext.user, false))
+      #set ($userName = $xwiki.getLocalUserName($userId, false))
       #set ($message = $services.mailsender.createMessage('template', $mailTemplateReference, {'from' : $from, 'to' : $to, 'language' : $xcontext.locale}))
       #set ($mailResult = $services.mailsender.send([$message], 'database'))
       #if ($services.mailsender.lastError)
