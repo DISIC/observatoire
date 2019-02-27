@@ -118,6 +118,10 @@
   #if ($displayAvisFormOnly)
     #set ($selectedTab = 'avis-tab')
     {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
+  #elseif ($displayInvalidKeyMessage)
+    {{info}}
+    $services.localization.render('wikidemarches.administration.avis.invalid-key')
+    {{/info}}
   #elseif ($displayCerfaNumeriqueOnly &amp;&amp; $cerfaNumerique != $NULL)
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
