@@ -47,7 +47,7 @@
   #set ($user = $xcontext.user)
   #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
   #set ($owners = $demarche.getProperty('proprietaires').getValue())
-  #if ($owners.indexOf($context.user) &gt;= 0)
+  #if ($owners.indexOf($xcontext.user) &gt;= 0)
     #set ($isDemarcheOwner = true)
   #else
     #set ($isDemarcheOwner = false)
