@@ -164,7 +164,9 @@
   #else
     (% style="margin-top: 1em" %)(((
     {{info}}
-    $services.localization.render('wd.login-notice') Cliquez [[ici&gt;&gt;path:$xwiki.getURL('XWiki.XWikiLogin', 'login', "notice=false&amp;xredirect=$escapetool.url($doc.getURL())")]] pour vous identifier.
+    #set($loginURL = $xwiki.getURL('XWiki.XWikiLogin', 'login', "xredirect=$escapetool.url($doc.getURL())"))
+    $services.localization.render('wd.login-notice')
+    [[$services.localization.render('wd.login-button')&gt;&gt;path:$loginURL||class="button"]]
     {{/info}}
     )))
   #end

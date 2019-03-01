@@ -47,7 +47,8 @@ wd.about=À propos
 wikidemarches.obligatoire=(obligatoire)
 wd.login=Identification
 wd.logout=Déconnexion
-wd.login-notice=Ce site est un référentiel des démarches administratives de l'État et un service de recueil d'avis sur ces démarches. Une authentification est requise pour accéder à davantage d'informations.
+wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
+wd.login-button=Authentification 
 
 #Démarches
 wikidemarches.sitename=NosDemarches.gouv.fr
