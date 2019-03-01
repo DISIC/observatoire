@@ -81,7 +81,7 @@
             #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
             #set ($buttonTitle = $services.localization.render('wikidemarches.demarche.embed.button.code.title'))
             &lt;code&gt;
-              $escapetool.xml("&lt;a href='$voteURL'&gt;")$escapetool.xml("&lt;img style='height: 3.8em' src='$buttonURL' alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} title=${escapetool.quote}$escapetool.xml($buttonTitle)${escapetool.quote} /&gt;")$escapetool.xml("&lt;/a&gt;")
+              $escapetool.xml("&lt;a href='$voteURL'&gt;")$escapetool.xml("&lt;img src='$buttonURL' alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} title=${escapetool.quote}$escapetool.xml($buttonTitle)${escapetool.quote} /&gt;")$escapetool.xml("&lt;/a&gt;")
             &lt;/code&gt;
           #else
             &lt;div class='box warningmessage'&gt;$volumetrieMsg&lt;/div&gt;
