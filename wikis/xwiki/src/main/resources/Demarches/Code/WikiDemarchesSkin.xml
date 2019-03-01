@@ -1500,6 +1500,81 @@ window.docgeturl = "${doc.getURL('get')}";
   </object>
   <object>
     <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>16</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>e698bb41-e988-425b-af43-ed1a543c245b</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>###
+### User inactive message
+###
+###
+#template("startpage.vm")
+&lt;div class="main layoutsubsection"&gt;
+&lt;div id="mainContentArea"&gt;
+#if($xwiki.exists("XWiki.UserInactive"))
+    $xwiki.includeForm("XWiki.UserInactive", false)
+#else
+#if ($cause == 'disabled')
+  #xwikimessageboxstart($services.localization.render('notice') $services.localization.render('accountdisabled'))
+#else
+#xwikimessageboxstart($services.localization.render('notice') $services.localization.render('accountnotactive'))
+#set($confirmdoc = $xwiki.getDocument("XWiki.AccountValidation"))
+#if(!$confirmdoc.isNew())
+$services.localization.render('accountnotactive_email')
+&lt;form action="${confirmdoc.getURL()}" method="post" class="xformInline"&gt;
+&lt;div&gt;
+## CSRF prevention
+&lt;input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" /&gt;
+&lt;input type="hidden" name="xwikiname" value="${escapetool.xml($xcontext.user)}" /&gt;
+&lt;label for="validKey"&gt;$services.localization.render('core.users.activation.validationKey.label') &lt;input type="text" name="validkey" size="16" id="validKey"/&gt;&lt;/label&gt;
+&lt;span class="buttonwrapper"&gt;&lt;input type="submit" value="$services.localization.render('confirmaccount')" class="button"/&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;/form&gt;
+#end
+#end
+#xwikimessageboxend()
+#end
+&lt;div class="clearfloats"&gt;&lt;/div&gt;
+&lt;/div&gt;## mainContentArea
+&lt;/div&gt;## main
+#template("endpage.vm")</content>
+    </property>
+    <property>
+      <path>userinactive.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
     <number>0</number>
     <className>XWiki.XWikiSkins</className>
     <guid>f9020886-48b3-4f1a-bd54-392f886da30a</guid>
