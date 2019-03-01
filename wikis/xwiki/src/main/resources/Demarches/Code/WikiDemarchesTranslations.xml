@@ -50,6 +50,10 @@ wd.logout=Déconnexion
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
 wd.login-button=Authentification 
 
+# Invalid account screen
+wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription. 
+wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
+
 #Démarches
 wikidemarches.sitename=NosDemarches.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
@@ -157,7 +161,7 @@ wikidemarches.administration.evenements.home-link=Événements
 wikidemarches.administration.avis.home-link=Avis
 wikidemarches.administration.avis.statistiques=Statistiques
 wikidemarches.administration.avis.invalid-key=La clef d'API est inexistante ou invalide, merci de contacter un administrateur de ce site.
-wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée. Vous pourrez vous authentifier sur ce site dés qu'un administrateur DINSIC aura activé votre compte.</content>
+wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée.\\\\Par contre, comme l'adresse utilisée n'est pas une adresse .gouv.fr, une **validation supplémentaire** par les administrateurs du site est nécessaire avant de pouvoir vous authentifier avec ce compte. Un e-mail de notification vous sera envoyé lors de cette validation.</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>

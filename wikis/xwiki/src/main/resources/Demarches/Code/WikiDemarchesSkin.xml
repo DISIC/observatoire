@@ -1547,9 +1547,19 @@ window.docgeturl = "${doc.getURL('get')}";
 #if ($cause == 'disabled')
   #xwikimessageboxstart($services.localization.render('notice') $services.localization.render('accountdisabled'))
 #else
-#xwikimessageboxstart($services.localization.render('notice') $services.localization.render('accountnotactive'))
+## compute the cause of the user account being disabled 
+#set($userEmail = "$!xwiki.user.email")
+#set ($BYPASS_DOMAIN = 'gouv.fr')
+## custom validation message, that needs to talk about the account being not yet validated (by admin or email)
+#set($userInactiveMessageKey = 'wikidemarches.accountmailnotvalidated')
+#if ($userEmail.endsWith(".${BYPASS_DOMAIN}") || $userEmail.endsWith("@${BYPASS_DOMAIN}"))
+  ## if it's a bypassed domain, show the almost default message
+  #set($userInactiveMessageKey = 'wikidemarches.accountnotactive')
+#end
+#xwikimessageboxstart($services.localization.render('notice') $services.localization.render($userInactiveMessageKey))
 #set($confirmdoc = $xwiki.getDocument("XWiki.AccountValidation"))
 #if(!$confirmdoc.isNew())
+#*
 $services.localization.render('accountnotactive_email')
 &lt;form action="${confirmdoc.getURL()}" method="post" class="xformInline"&gt;
 &lt;div&gt;
@@ -1560,6 +1570,7 @@ $services.localization.render('accountnotactive_email')
 &lt;span class="buttonwrapper"&gt;&lt;input type="submit" value="$services.localization.render('confirmaccount')" class="button"/&gt;&lt;/span&gt;
 &lt;/div&gt;
 &lt;/form&gt;
+*#
 #end
 #end
 #xwikimessageboxend()

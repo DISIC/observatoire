@@ -1252,16 +1252,15 @@ abbr.asterix {
       font-size: 0.9em;
     }
   }
-  /* Get rid of the border of the login form panel, as it's slightly ugly */
-  .panel {
-    border: none;
-  }
-  .panel-heading {
+}
+
+/* Get rid of the border of the login form panel &amp; all messages, as it's slightly ugly */
+.xwikimessage.panel-default {
+  border: none;
+  &amp; &gt; .panel-heading {
     background-color: @body-bg;
   }
 }
-
-
 
 /***************************************************/
 /* Layout                                          */
@@ -1377,6 +1376,7 @@ Visually, there's the title row and then all the rows from the document content,
   padding-left: 0;
   padding-right: 0;
 }
+
 </lessCode>
     </property>
     <property>
