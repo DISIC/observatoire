@@ -75,65 +75,71 @@
       )))
     )))
   )))
-  #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and owners.value like '%$xcontext.user%'")
-  #set ($ownedDemarches = $services.query.hql($hql).execute())
-  #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
-  (%class='row demarches-statsrow'%)(((
-    (%class='container' %)(((
-      (%class='row demarches-statsblock'%) (((
-        (%class='col-xs-12'%)(((
-          ==$services.localization.render('wikidemarches.owned-demarches')==
+  ##
+  ## 
+  ## Check what's the role of the current user
+  #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+  #if ($isAdminMin)
+    ##
+    ## admins see the full administration section and the tableau de bord
+    ##
+    #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
+    (%class='row demarches-administration-row'%)(((
+      (%class='container' %)(((
+        (%class='demarches-administration-link'%) (((
+          ==$services.localization.render('wikidemarches.administration.home-title')==
+
+          (%class='demarches-administration-subtitle'%)
+          $services.localization.render('wikidemarches.administration.home-subtitle')
+
+          [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.demandes.home-link')&gt;&gt;Demarches.DemandesUtilisateurs||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='button btn btn-primary']]
+
+          == Référentiels ==
+          [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='button btn btn-primary']]
         )))
-        #foreach ($entry in $ownedDemarches)
-          #set ($demarchePage = $xwiki.getDocument($entry))
-          * [[$demarchePage.title&gt;&gt;$entry]]
-          ## new list after the first 5 items
-          #if ($velocityCount == 5)
+      )))
+    )))
+    (%class='row demarches-dashboardrow'%)(((
+      (%class='container' %)(((
+        (%class='demarches-dashboardlink'%) (((
+          ==$services.localization.render('wikidemarches.dematdashboard.hometitle')==
 
+          (%class='demarches-dashboardsubtitle'%)
+          $services.localization.render('wikidemarches.dematdashboard.homesubtitle')
+
+          [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button btn btn-primary']]
+        )))
+      )))
+    )))
+  #else
+    ##
+    ## regular logged in users see the demarches they're porteurs of
+    ##
+    ## slightly fix this query to avoid prefix usernames to match too much.
+    #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and owners.value like '%$xcontext.user%'")
+    #set ($ownedDemarches = $services.query.hql($hql).execute())
+    (%class='row demarches-statsrow'%)(((
+      (%class='container' %)(((
+        (%class='row demarches-statsblock'%) (((
+          (%class='col-xs-12'%)(((
+            ==$services.localization.render('wikidemarches.owned-demarches')==
+          )))
+          #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
+            #foreach ($entry in $ownedDemarches)
+              #set ($demarchePage = $xwiki.getDocument($entry))
+              * [[$demarchePage.title&gt;&gt;$entry]]
+              ## new list after the first 5 items
+              #if ($velocityCount == 5)
+
+              #end
+            #end
+          #else
+            (%class='col-xs-12'%)((($services.localization.render('wikidemarches.owned-demarches.none'))))
           #end
-        #end
+        )))
       )))
     )))
-  )))
   #end
-  #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
-  (%class='row demarches-dashboardrow'%)(((
-    (%class='container' %)(((
-      (%class='demarches-dashboardlink'%) (((
-        ==$services.localization.render('wikidemarches.dematdashboard.hometitle')==
-
-        (%class='demarches-dashboardsubtitle'%)
-        $services.localization.render('wikidemarches.dematdashboard.homesubtitle')
-
-        [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button btn btn-primary']]
-      )))
-    )))
-  )))
-  #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
-  (%class='row demarches-administration-row'%)(((
-    (%class='container' %)(((
-      (%class='demarches-administration-link'%) (((
-        ==$services.localization.render('wikidemarches.administration.home-title')==
-
-        (%class='demarches-administration-subtitle'%)
-        $services.localization.render('wikidemarches.administration.home-subtitle')
-
-[[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.demandes.home-link')&gt;&gt;Demarches.DemandesUtilisateurs||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='button btn btn-primary']]
-      )))
-    )))
-  )))
-  #end
-  #if (!$isGuest)
-  (%class='row demarches-administration-row'%)(((
-    (%class='container' %)(((
-      (%class='demarches-administration-link'%) (((
-        == Référentiels ==
-[[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='button btn btn-primary']]
-      )))
-    )))
-  )))
-  #end
-
 {{/velocity}}</content>
   <object>
     <name>Main.WebHome</name>
