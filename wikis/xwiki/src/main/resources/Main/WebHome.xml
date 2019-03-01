@@ -46,9 +46,9 @@
   #set($displayTitleContentSeparator = false)
   (%class='row demarches-searchrow'%)(((
     (%class='container'%)(((
-      (%class='demarches-headline'%)
-      == $services.localization.render('wikidemarches.home.title') ==
-
+      ## (%class='demarches-headline'%)
+      ## == $services.localization.render('wikidemarches.home.title') ==
+      ##
       (%class='demarches-subtitle%)
       $services.localization.render('wikidemarches.home.subtitle')
       (%class='demarches-searchbox'%)(((
@@ -69,14 +69,13 @@
               &lt;/button&gt;
             &lt;/span&gt;
           &lt;/div&gt;
-          &lt;div class='demarches-subform'&gt;$services.localization.render('wikidemarches.home.subsearchhint')&lt;/div&gt;
         &lt;/form&gt;
         {{/html}}
       )))
     )))
   )))
   ##
-  ## 
+  ##
   ## Check what's the role of the current user
   #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
   #if ($isAdminMin)

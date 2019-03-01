@@ -55,7 +55,7 @@ wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-
 wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
 
 #Démarches
-wikidemarches.sitename=NosDemarches.gouv.fr
+wikidemarches.sitename=MonAvis.numerique.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
 wikidemarches.home.title=Évaluez votre démarche en ligne
 wikidemarches.home.subtitle=
