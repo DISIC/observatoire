@@ -55,8 +55,14 @@
         #set ($userProfileDoc = $xwiki.getDocument($xcontext.userReference))
         #set($currentApiKey = "$!userProfileDoc.getObject('API.Code.APIKeyClass').getProperty('key').value")
         #set($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $doc.documentReference.name))
-        #set($demarcheAPIDoc = $xwiki.getDocumentAsAuthor($demarcheAPIDocRef))
-        #set($hasEmbedCode = "$!currentApiKey" != '' &amp;&amp; $demarcheAPIDoc.getObject('API.Code.EmbedClass', 'key', $currentApiKey) != $NULL)
+        ## avoid getDocumentAsAuthor() because it doesn't work
+        #set($hasEmbedCode = false)
+        #if ("$!currentApiKey" != '')
+          #set($demarcheAPIDoc = $xwiki.getXWiki().getDocument($demarcheAPIDocRef, $xcontext.context))
+          #set($EMBED_CLASS_REFERENCE = $services.model.resolveDocument('API.Code.EmbedClass'))
+          #set($demarcheAPIObject = $demarcheAPIDoc.getXObject($EMBED_CLASS_REFERENCE, 'key', $currentApiKey))
+          #set($hasEmbedCode = $demarcheAPIObject != $NULL)
+        #end
         ## check if, in case we need to display the code, we can (because of volumétrie)
         #if ($hasEmbedCode)
           ## don't display the URL / button for démarches with too high volumetrie
