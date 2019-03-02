@@ -67,6 +67,23 @@
     {{/error}}
 
   #end
+  ## display the owner information for all users that are logged in but cannot edit the démarche yet (they're nor owners nor adm. ministeriels)
+  #if (!$isGuest &amp;&amp; !$hasEdit &amp;&amp; $action != 'edit')
+
+    {{info}}$services.localization.render('Demarches.Code.DemarchesClass_proprietaires_infobox')
+
+    {{html clean='false'}}
+    &lt;form action="$xwiki.getURL('Demarches.Code.Handler')" method="post"&gt;
+      &lt;input type="submit" class="btn btn-primary" value="$escapetool.xml($services.localization.render('Demarches.Code.DemarchesClass_proprietaires_button'))" /&gt;
+      &lt;input type="hidden" name="action" value="add-porteur" /&gt;
+      &lt;input type="hidden" name="userId" value="$escapetool.url($xcontext.user)" /&gt;
+      &lt;input type="hidden" name="demarcheId" value="$escapetool.url($doc.fullName)" /&gt;
+      &lt;input type="hidden" name="csrf" value="$!{services.csrf.token}" /&gt;
+    &lt;/form&gt;
+    {{/html}}{{/info}}
+
+  #end
+  ## display the demarche
 &lt;div class="row"&gt;
 &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
 &lt;div class="panel panel-default"&gt;
