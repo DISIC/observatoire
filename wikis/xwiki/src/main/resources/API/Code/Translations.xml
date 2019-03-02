@@ -39,7 +39,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content>api.generatecode.demarchepagecomment=Nouveau embed enregistré pour l''utilisateur {}
+  <content>api.generatecode.demarchepagecomment=Nouveau embed enregistré pour l''utilisateur {0}
 api.generatecode.userpagecomment=Nouvelle clé API générée
 api.generatecode.success.withoutdemarche=La clé d'API a été générée pour l'utilisateur courant.
 api.generatecode.success.withdemarche=La clé d''API et le code pour la démarche {0} ont été générés.
