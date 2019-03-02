@@ -135,7 +135,7 @@
   #set ($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $demarchePage.name))
   ## avoid getDocumentAsAuthor() because it doesn't work
   #set ($demarcheAPIDoc = $xwiki.getXWiki().getDocument($demarcheAPIDocRef, $xcontext.context))
-  #set ($demarcheAPIObject = $demarcheAPIDoc.getXObject($services.model.resolveDocument('API.Code.EmbedClass'), 'key', "$!request.key"))
+  #set ($demarcheAPIObject = $demarcheAPIDoc.getXObject($services.model.resolveDocument($EMBED_CLASS), 'key', "$!request.key"))
   #set ($hasEmbedCode = $demarcheAPIObject != $NULL)
   #set ($providedDemarcheEmbedApiKeyIsValid = $demarcheAPIObject != $NULL)
   #set ($displayAvisFormOnly = ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsValid) || "$!avisId" != '')
@@ -146,7 +146,7 @@
   ## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
   #set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
 #end
-</content>
+  </content>
     </property>
     <property>
       <path>layoutExtraVars.vm</path>
