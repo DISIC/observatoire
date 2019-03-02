@@ -338,7 +338,7 @@ public class DemarcheEventListener extends AbstractEventListener {
         String mailContent = mailObject.getLargeStringValue("text");
 
         VelocityContext vcontext = (VelocityContext) context.get("vcontext");
-        vcontext.put("demarcheId", compactWikiSerializer.serialize(demarcheReference));
+        vcontext.put("demarcheRef", demarcheReference);
         vcontext.put("ownersV1", ownersV1);
         vcontext.put("ownersV2", ownersV2);
 
