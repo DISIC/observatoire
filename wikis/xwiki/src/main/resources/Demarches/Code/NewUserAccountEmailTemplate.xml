@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content/>
   <object>
     <name>Demarches.Code.NewUserAccountEmailTemplate</name>
@@ -109,17 +109,23 @@ Un nouveau compte utilisateur a été créé. Vous pouvez l'activer en vous rend
 
 &lt;p&gt;
 &lt;hr/&gt;
-&lt;a href="https://monavis.numerique.gouv.fr"&gt;MonAvis.numerique.gouv.fr&lt;/a&gt;
+$services.localization.render('wikidemarches.sitename')
 &lt;/p&gt;</html>
     </property>
     <property>
       <language>fr</language>
     </property>
     <property>
-      <subject>Activation d'un nouveau compte utilisateur sur MonAvis.numerique.gouv.fr</subject>
+      <subject>Activation d'un nouveau compte utilisateur sur $services.localization.render('wikidemarches.sitename')</subject>
     </property>
     <property>
-      <text/>
+      <text>Un nouveau compte utilisateur a été créé. Vous pouvez l'activer en vous rendant à l'adresse ci-dessous.
+
+- Page du nouvel utilisateur : $userName - $userPageUrl
+- Gestion des comptes en attente d'activation : $activationUrl
+
+--
+$services.localization.render('wikidemarches.sitename')</text>
     </property>
   </object>
 </xwikidoc>

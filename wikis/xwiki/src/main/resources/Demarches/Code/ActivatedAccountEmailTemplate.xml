@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content/>
   <object>
     <name>Demarches.Code.ActivatedAccountEmailTemplate</name>
@@ -99,23 +99,36 @@
     </class>
     <property>
       <html>&lt;p&gt;
+Madame, Monsieur,
+&lt;/p&gt;
+&lt;p&gt;
 Votre compte MonAvis.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.&lt;/p&gt;
 
 &lt;a href="$homeUrl"&gt;$homeUrl&lt;/a&gt;
 
 &lt;p&gt;
 &lt;hr/&gt;
-&lt;a href="https://monavis.numerique.gouv.fr"&gt;MonAvis.numerique.gouv.fr&lt;/a&gt;
+$services.localization.render('wikidemarches.sitename')
 &lt;/p&gt;</html>
     </property>
     <property>
       <language>fr</language>
     </property>
     <property>
-      <subject>Votre compte MonAvis.numerique.gouv.fr est actif</subject>
+      <subject>Votre compte $services.localization.render('wikidemarches.sitename') est actif</subject>
     </property>
     <property>
-      <text/>
+      <text>Madame, Monsieur,
+
+
+Votre compte MonAvis.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.
+
+$homeUrl
+
+--
+$services.localization.render('wikidemarches.sitename')
+
+</text>
     </property>
   </object>
 </xwikidoc>

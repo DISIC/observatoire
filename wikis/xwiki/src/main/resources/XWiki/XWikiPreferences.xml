@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1527079581000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>XWiki.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530199367000</date>
-  <contentUpdateDate>1527079612000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>XWiki Preferences</title>
   <comment/>
@@ -1240,7 +1240,7 @@
     <name>XWiki.XWikiPreferences</name>
     <number>0</number>
     <className>XWiki.ClassSheetBinding</className>
-    <guid>8ca6eb54-4c88-4224-82fe-07411cd7c541</guid>
+    <guid>d9f52fe6-3818-4675-bfe3-e14918a33146</guid>
     <class>
       <name>XWiki.ClassSheetBinding</name>
       <customClass/>
@@ -1272,7 +1272,7 @@
     <name>XWiki.XWikiPreferences</name>
     <number>1</number>
     <className>XWiki.ClassSheetBinding</className>
-    <guid>6ce15947-bda6-4d63-848f-0a47930a41d7</guid>
+    <guid>fde3c67b-92b4-4cb3-a263-5709082705c7</guid>
     <class>
       <name>XWiki.ClassSheetBinding</name>
       <customClass/>
@@ -2782,7 +2782,10 @@ Bonjour ${xwiki.getUserName("$xwikiname", false)},
 
 Votre compte sur le site ${wikiname} a été activé avec succès. Vous pouvez à présenter vous identifier à l'adresse ci-dessous en utilisant comme identifiant "${xwiki.getDocumentAsAuthor($xwikiname).name}" :
 
-${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')}</confirmation_email_content>
+${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')}
+
+--
+$services.localization.render('wikidemarches.sitename')</confirmation_email_content>
     </property>
     <property>
       <core.defaultDocumentSyntax/>
@@ -2930,6 +2933,9 @@ Cette adresse e-mail a été utilisée pour enregistrer un nouveau compte sur le
 
 Afin de valider votre compte, cliquez sur le lient suivant :
 ${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&amp;xwikiname=${xwikiname}")}
+
+--
+$services.localization.render('wikidemarches.sitename')
 
 
 </validation_email_content>

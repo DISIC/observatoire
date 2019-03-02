@@ -98,13 +98,48 @@
       </text>
     </class>
     <property>
-      <html/>
+      <html>#macro (printUsers $users $label)
+#if ($users &amp;&amp; $users.size() &gt; 0)
+  &lt;li&gt;$label : 
+  &lt;ul&gt;
+#foreach ($user in $users)
+#set ($userId = $user.user.user)
+    &lt;li&gt;$xwiki.getLocalUserName($userId, false) - $xwiki.getDocument($userId).externalURL&lt;/li&gt;
+#end
+  &lt;/ul&gt;
+#else
+  &lt;li&gt;$label : aucun&lt;/li&gt;
+#end
+#end
+&lt;p&gt;
+Madame, Monsieur,
+&lt;/p&gt;
+&lt;p&gt;
+La liste des porteurs de la démarche ci-dessous a été mise à jour.
+&lt;/p&gt;
+
+&lt;ul&gt;
+#set ($demarchePage = $xwiki.getDocument($demarcheRef))
+  &lt;li&gt; Démarche : $demarchePage.displayTitle
+    $demarchePage.externalURL
+  &lt;/li&gt;
+
+#printUsers($ownersV1, "Ancien(s) porteur(s)")
+
+#printUsers($ownersV2, "Nouveau(x) porteur(s)")
+&lt;/ul&gt;
+
+&lt;p&gt;
+&lt;hr /&gt;
+$services.localization.render('wikidemarches.sitename')
+&lt;/p&gt;
+</html>
     </property>
     <property>
       <language>fr</language>
     </property>
     <property>
-      <subject>MonAvis.numerique.gouv.fr – Mise à jour des porteurs de la démarche $demarcheId</subject>
+      <subject>Mise à jour des porteurs de la démarche $demarcheRef.name</subject>
     </property>
     <property>
       <text>#macro (printUsers $users $label)
@@ -122,7 +157,7 @@ Madame, Monsieur,
 
 La liste des porteurs de la démarche ci-dessous a été mise à jour.
 
-#set ($demarchePage = $xwiki.getDocument($demarcheId))
+#set ($demarchePage = $xwiki.getDocument($demarcheRef))
   - Démarche : $demarchePage.displayTitle
     $demarchePage.externalURL
 
@@ -132,7 +167,7 @@ La liste des porteurs de la démarche ci-dessous a été mise à jour.
 
 
 --
-MonAvis.numerique.gouv.fr
+$services.localization.render('wikidemarches.sitename')
 </text>
     </property>
   </object>
