@@ -146,7 +146,7 @@
   ## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
   #set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
 #end
-  </content>
+</content>
     </property>
     <property>
       <path>layoutExtraVars.vm</path>
