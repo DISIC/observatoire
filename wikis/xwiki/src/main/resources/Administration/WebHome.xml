@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1527084797000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531227815000</date>
-  <contentUpdateDate>1531227815000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Administration</title>
   <comment/>
@@ -47,7 +47,7 @@
 
 * [[Création des groupes associés aux directions&gt;&gt;GroupManager]]
 * [[Restriction des droits d'accès aux profils utilisateurs&gt;&gt;RestrictUsersRights]]
-* [[Ajout de tous les membres de 'XWikiAllGroup' au groupe 'Ministeres'&gt;&gt;PopulateMinisteresGroup]]
+* [[Ajout de tous les membres de 'XWikiAllGroup' au groupe 'AdministrateursMinisteriels'&gt;&gt;GroupFiller]]
 
 == Démarches ==
 
