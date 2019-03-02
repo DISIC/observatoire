@@ -314,7 +314,7 @@
   &lt;div class="new-demarche"&gt;
     &lt;div&gt;$services.localization.render('wikidemarches.demande.demarche-absente')&lt;/div&gt;
     &lt;div class='buttonwrapper'&gt;
-      &lt;a class='button btn btn-primary' href="$xwiki.getDocument('Demarches.Code.NewDemarche').getURL()?text=$escapetool.url($text)"&gt;$services.localization.render('wikidemarches.demande.creation')&lt;/a&gt;
+      &lt;a class='button btn btn-primary' href="$xwiki.getURL('Demarches.Code.NewDemarche')?text=$escapetool.url($text)"&gt;$services.localization.render('wikidemarches.demande.creation')&lt;/a&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 {{/html}}
