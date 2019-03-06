@@ -74,11 +74,9 @@
       #set ($to = '')
       #foreach ($member in $administratorGroupMembers)
         #set ($memberId = $member.getProperty('member').value)
-        #if ($memberId == 'XWiki.slauriere' || $memberId == 'XWiki.lucaa')
-          #set ($memberPage = $xwiki.getDocumentAsAuthor($memberId))
-          #set ($email = $memberPage.getObject('XWiki.XWikiUsers').getProperty('email').value)
-          #set ($to = "$to$email,")
-        #end
+        #set ($memberPage = $xwiki.getDocumentAsAuthor($memberId))
+        #set ($email = "$!memberPage.getObject('XWiki.XWikiUsers').getProperty('email').value")
+        #set ($to = "$to$email,")
       #end
       #set ($activationUrl = $xwiki.getDocumentAsAuthor("Demarches.Admin.ActivationDeComptes").externalURL)
       #set ($userPageUrl = $userPage.externalURL)
