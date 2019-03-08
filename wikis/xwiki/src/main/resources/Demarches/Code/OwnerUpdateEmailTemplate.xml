@@ -139,7 +139,7 @@ $services.localization.render('wikidemarches.sitename')
       <language>fr</language>
     </property>
     <property>
-      <subject>Mise à jour des porteurs de la démarche $demarcheRef.name</subject>
+      <subject>Mise à jour des porteurs de la démarche «$!xwiki.getDocument($demarcheRef).displayTitle»</subject>
     </property>
     <property>
       <text>#macro (printUsers $users $label)
