@@ -66,7 +66,7 @@ wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
 wikidemarches.owned-demarches=Mes démarches
-wikidemarches.owned-demarches.none=Vous n'êtes porteur d'aucune démarche. Cherchez votre démarche et utilisez le bouton sur la page de la démarche pour devenir porteur d'une démarche.
+wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche

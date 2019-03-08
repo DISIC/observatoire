@@ -133,7 +133,7 @@
               #end
             #end
           #else
-            (%class='col-xs-12'%)((($services.localization.render('wikidemarches.owned-demarches.none'))))
+            (%class='col-xs-12'%)((($services.localization.render('wikidemarches.owned-demarches.none', [$services.localization.render('Demarches.Code.DemarchesClass_proprietaires_button')]))))
           #end
         )))
       )))
