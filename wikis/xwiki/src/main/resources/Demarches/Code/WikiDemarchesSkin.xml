@@ -903,13 +903,15 @@
   #end
 #end
 &lt;div id="companylogo"&gt;
-  #if (!$displayAvisForm &amp;&amp; !$displayCerfaNumerique)
-    #set ($url = "$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)")
-  #else
-    #set ($url = "#")
+  #set($logoElt = 'a')
+  #set($url = "$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)")
+  #set($logoAttr = "href='$escapetool.xml($url)'")
+  #if ($displayAvisFormOnly || $displayCerfaNumeriqueOnly)
+    #set($logoElt = 'span')
+    #set($logoAttr = '')
   #end
   #set ($siteName = $services.localization.render('wikidemarches.sitename'))
-  &lt;a href="$url" title="$siteName" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
+  &lt;$logoElt $logoAttr title="$siteName" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
     &lt;img src="$!logourl" alt="Logo $siteName"/&gt;
     ## Site title next to the logo
     #set($eltname = 'span')
@@ -922,7 +924,7 @@
       &lt;/span&gt;
       &lt;span class='demarches-titlebar-headline'&gt;$services.localization.render('wikidemarches.siteheadline')&lt;/span&gt;
     &lt;/span&gt;
-  &lt;/a&gt;
+  &lt;/$logoElt&gt;
 &lt;/div&gt;
 </content>
     </property>
