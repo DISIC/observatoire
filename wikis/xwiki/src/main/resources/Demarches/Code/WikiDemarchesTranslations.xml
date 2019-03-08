@@ -48,6 +48,7 @@ wikidemarches.obligatoire=(obligatoire)
 wd.login=Identification
 wd.logout=Déconnexion
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
+wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les démarches administratives. Il permet également de piloter le chantier de la dématérialisation des services publics en recensant les démarches administratives et en les présentant sous la forme de tableau de bord.
 wd.login-button=Authentification 
 
 # Invalid account screen
@@ -162,7 +163,11 @@ wikidemarches.administration.evenements.home-link=Événements
 wikidemarches.administration.avis.home-link=Avis
 wikidemarches.administration.avis.statistiques=Statistiques
 wikidemarches.administration.avis.invalid-key=URL invalide.
-wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée.\\\\Par contre, comme l'adresse utilisée n'est pas une adresse .gouv.fr, une **validation supplémentaire** par les administrateurs du site est nécessaire avant de pouvoir vous authentifier avec ce compte. Un e-mail de notification vous sera envoyé lors de cette validation.</content>
+wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée.\\\\Par contre, comme l'adresse utilisée n'est pas une adresse .gouv.fr, une **validation supplémentaire** par les administrateurs du site est nécessaire avant de pouvoir vous authentifier avec ce compte. Un e-mail de notification vous sera envoyé lors de cette validation.
+
+# Standard translations overwritten.
+core.register.successful={0} ({1}) \: l''inscription a r\u00E9ussi. Un e-mail vous a été envoyé pour confirmer votre inscription.
+</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>

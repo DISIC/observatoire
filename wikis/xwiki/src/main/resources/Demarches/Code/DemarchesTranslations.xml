@@ -105,7 +105,7 @@ Demarches.Code.DemarchesClass_statutProjetDemat_encours=En cours
 Demarches.Code.DemarchesClass_statutProjetDemat_termine=Terminé
 Demarches.Code.DemarchesClass_dateMiseEnLigne=Date de mise en ligne
 Demarches.Code.DemarchesClass_remarques=Remarques
-Demarches.Code.DemarchesClass_proprietaires_infobox=Pour avoir accès aux fonctionnalités supplémentaires (code d'intégration du formulaire d'avis, résultats des avis, modification des informations sur la démarche, etc) il faut être porteur de cette démarche.
+Demarches.Code.DemarchesClass_proprietaires_infobox=Pour avoir accès aux fonctionnalités supplémentaires (code d'intégration du formulaire d'avis, résultats des avis, modification des informations sur la démarche, etc), il faut être porteur de cette démarche.
 Demarches.Code.DemarchesClass_proprietaires_button=Je suis porteur de cette démarche
 
 # Live table generic keys
