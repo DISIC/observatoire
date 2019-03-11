@@ -448,6 +448,28 @@
     $welcomeMessage
 
     {{html wiki=false}}
+      ## Customized username generation. The script is added inline rather than as a JavaScript extension, because the page "XWiki.Registration" is typically
+      ## included from the Velocity file "registerinline.vm" and using a JavaScript extension would require to modify that Velocity file to activate it from there.
+      &lt;script type="text/javascript"&gt;
+        function prepareName(form) {
+          var fname = form.register_first_name.value.trim();
+          var lname = form.register_last_name.value.trim();
+          var cxwikiname = form.xwikiname;
+          if (fname != "") {
+              fname = fname.substring(0,1).toLowerCase();
+          }
+          if (lname != "") {
+              lname = lname.toLowerCase();
+              // Replace spaces with custom sequence of characters, otherwise they get removed by the 'noaccent' function.
+              lname = lname.replace(/\s/g,"__");
+          }
+          if (cxwikiname.value == "") {
+            // Replace each custom sequence introduced above by a dash.
+            cxwikiname.value = noaccent(fname + lname).replace(/__/g,"-");
+          }
+        }
+      &lt;/script&gt;
+
       &lt;form id="register" action="$xwiki.relativeRequestURL" method="post" class="xform half"&gt;
       &lt;div&gt;
       &lt;input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" /&gt;
