@@ -42,6 +42,34 @@
   <content/>
   <object>
     <name>XWiki.AdministrateursMinisteriels</name>
+    <number>3</number>
+    <className>XWiki.XWikiGroups</className>
+    <guid>7d42bbc1-dffb-4beb-9341-a5a57b5de6aa</guid>
+    <class>
+      <name>XWiki.XWikiGroups</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <member>
+        <disabled>0</disabled>
+        <name>member</name>
+        <number>1</number>
+        <prettyName>Member</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </member>
+    </class>
+    <property>
+      <member/>
+    </property>
+  </object>
+  <object>
+    <name>XWiki.AdministrateursMinisteriels</name>
     <number>0</number>
     <className>XWiki.XWikiRights</className>
     <guid>9726915d-6f0d-4907-88b9-c6077c2db59a</guid>
