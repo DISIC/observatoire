@@ -460,8 +460,9 @@
           }
           if (lname != "") {
               lname = lname.toLowerCase();
-              // Replace spaces with custom sequence of characters, otherwise they get removed by the 'noaccent' function.
+              // Replace spaces and dashes with custom sequence of characters, otherwise they get removed by the 'noaccent' function.
               lname = lname.replace(/\s/g,"__");
+              lname = lname.replace(/-/g,"__");
           }
           if (cxwikiname.value == "") {
             // Replace each custom sequence introduced above by a dash.
