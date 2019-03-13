@@ -104,7 +104,7 @@
   &lt;ul&gt;
 #foreach ($user in $users)
 #set ($userId = $user.user.user)
-    &lt;li&gt;$xwiki.getLocalUserName($userId, false) - $xwiki.getDocument($userId).externalURL&lt;/li&gt;
+    &lt;li&gt;&lt;a href="$xwiki.getDocument($userId).externalURL"&gt;$xwiki.getLocalUserName($userId, false)&lt;/a&gt;&lt;/li&gt;
 #end
   &lt;/ul&gt;
 #else
@@ -120,8 +120,7 @@ La liste des porteurs de la démarche ci-dessous a été mise à jour.
 
 &lt;ul&gt;
 #set ($demarchePage = $xwiki.getDocument($demarcheRef))
-  &lt;li&gt; Démarche : $demarchePage.displayTitle
-    $demarchePage.externalURL
+  &lt;li&gt; Démarche : &lt;a href="$demarchePage.externalURL"&gt;$demarchePage.displayTitle&lt;/a&gt;
   &lt;/li&gt;
 
 #printUsers($ownersV1, "Ancien(s) porteur(s)")
