@@ -8,15 +8,11 @@ import com.xpn.xwiki.doc.XWikiDocument;
 import com.xpn.xwiki.internal.velocity.VelocityEvaluator;
 import com.xpn.xwiki.objects.BaseObject;
 import org.apache.commons.lang.StringUtils;
-import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
 import org.xwiki.bridge.event.DocumentCreatingEvent;
 import org.xwiki.bridge.event.DocumentUpdatingEvent;
 import org.xwiki.component.annotation.Component;
-import org.xwiki.mail.MailListener;
-import org.xwiki.mail.MailResult;
-import org.xwiki.mail.MailSender;
-import org.xwiki.mail.MailSenderConfiguration;
+import org.xwiki.mail.*;
 import org.xwiki.model.EntityType;
 import org.xwiki.model.reference.*;
 import org.xwiki.observation.AbstractEventListener;
@@ -29,12 +25,9 @@ import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import java.util.*;
 
 /**
@@ -52,9 +45,6 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     static final EntityReference RIGHT_CLASS_REFERENCE = new EntityReference("XWikiRights", EntityType.DOCUMENT,
             new EntityReference("XWiki", EntityType.SPACE));
-
-    static final EntityReference OWNER_UPDATE_EMAIL_TEMPLATE_REFERENCE =
-            new LocalDocumentReference(Arrays.asList("Demarches", "Code"), "OwnerUpdateEmailTemplate");
 
     static final EntityReference MAIL_CLASS_REFERENCE =
             new LocalDocumentReference(Arrays.asList("XWiki"), "Mail");
@@ -101,6 +91,10 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     @Inject
     private VelocityEvaluator velocityEvaluator;
+
+    @Inject
+    @Named("template")
+    private MimeMessageFactory<MimeMessage> templateMessageFactory;
 
     /**
      * This is the default constructor.
@@ -276,8 +270,25 @@ public class DemarcheEventListener extends AbstractEventListener {
             List<User> directionMembers = getUsers(StringUtils.join(directionUserIds, ","), context);
             logger.debug("Direction: [{}]. Group: [{}]. Administrateurs ministériels: [{}].", directionId, groupId, directionMembers);
             Collection<User> recipients = computeRecipients(ownersV1, ownersV2, directionMembers);
-            MimeMessage message = createMimeMessage(session, demarcheV2Reference, recipients, ownersV1, ownersV2, context);
-            logger.debug("Sending notification about changes regarding owners of [{}].", demarcheV2Reference.getName());
+
+            //MimeMessage message = createMimeMessage(session, demarcheV2Reference, recipients, ownersV1, ownersV2, context);
+
+            Map parameters = new HashMap<>();
+            Map velocityVariables = new HashMap<>();
+            velocityVariables.put("demarcheRef", demarcheV2Reference);
+            velocityVariables.put("ownersV1", ownersV1);
+            velocityVariables.put("ownersV2", ownersV2);
+            parameters.put("velocityVariables", velocityVariables);
+
+            DocumentReference templateReference = referenceResolver.resolve("Demarches.Code.OwnerUpdateEmailTemplate");
+            MimeMessage message = templateMessageFactory.createMessage(templateReference, parameters);
+            for (User user : recipients) {
+                String email = user.getEmail();
+                if (StringUtils.isNotEmpty(email)) {
+                    message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email));
+                }
+            }
+
             MailResult result = mailSender.sendAsynchronously(Arrays.asList(message), session, mailListener);
         }
 
@@ -314,48 +325,6 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     }
 
-    protected MimeMessage createMimeMessage(Session session, DocumentReference demarcheReference, Collection<User> recipients, Collection<User> ownersV1, Collection<User> ownersV2, XWikiContext context) throws MessagingException, XWikiException, XWikiVelocityException {
-
-        MimeMessage message = new MimeMessage(session);
-        // TODO: set from correctly
-        String fromAddress = configuration.getFromAddress();
-        if (fromAddress == null) {
-            fromAddress = "info@nosdemarches.gouv.fr";
-        }
-        message.setFrom(new InternetAddress(fromAddress));
-
-        for (User user : recipients) {
-            String email = user.getEmail();
-            if (StringUtils.isNotEmpty(email)) {
-                message.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email));
-            }
-        }
-
-        XWiki wiki = context.getWiki();
-        XWikiDocument templatePage = wiki.getDocument(OWNER_UPDATE_EMAIL_TEMPLATE_REFERENCE, context);
-        BaseObject mailObject = templatePage.getXObject(MAIL_CLASS_REFERENCE);
-        String mailSubject = mailObject.getStringValue("subject");
-        String mailContent = mailObject.getLargeStringValue("text");
-
-        VelocityContext vcontext = (VelocityContext) context.get("vcontext");
-        vcontext.put("demarcheRef", demarcheReference);
-        vcontext.put("ownersV1", ownersV1);
-        vcontext.put("ownersV2", ownersV2);
-
-        // TODO: check which namespace should be used
-        String subject = velocityEvaluator.evaluateVelocity(mailSubject, "mon-avis-notification", vcontext);
-        String content = velocityEvaluator.evaluateVelocity(mailContent, "mon-avis-notification", vcontext);
-
-        MimeBodyPart bodyPart = new MimeBodyPart();
-        message.setSubject(subject);
-        bodyPart.setText(content);
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(bodyPart);
-        message.setContent(multipart);
-        return message;
-
-    }
-
     private Collection<User> computeRecipients(List<User> ownersV1, List<User> ownersV2, List<User> directionMembers) {
         Map<DocumentReference, User> recipients = new HashMap<>();
         for (User user : ownersV1) {
@@ -377,33 +346,5 @@ public class DemarcheEventListener extends AbstractEventListener {
         }
         return recipients.values();
     }
-
-    // See also XWiki::sendValidationEmail
-//    public String generateEmailContent(XWikiContext context) throws XWikiException {
-//            if (org.apache.commons.lang3.StringUtils.isBlank(sender)) {
-//                String server = context.getRequest().getServerName();
-//                if (server.matches("\\[.*\\]|(\\d{1,3}+\\.){3}+\\d{1,3}+")) {
-//                    sender = "noreply@domain.net";
-//                } else {
-//                    sender = "noreply@" + server;
-//                }
-//            }
-//            //content = getXWikiPreference(contentfield, context);
-
-//            InputStream is = new ByteArrayInputStream(content.getBytes());
-//            MimeMessage message = new MimeMessage(session, is);
-//            message.setFrom(new InternetAddress(sender));
-//            message.setRecipients(Message.RecipientType.TO, email);
-//            message.setHeader("X-MailType", "Account Validation");
-//            MailSender mailSender = Utils.getComponent(MailSender.class);
-//            MailListener mailListener = Utils.getComponent(MailListener.class, "database");
-//            mailSender.sendAsynchronously(Arrays.asList(message), session, mailListener);
-//            mailListener.getMailStatusResult().waitTillProcessed(Long.MAX_VALUE);
-//            String errorMessage = MailStatusResultSerializer.serializeErrors(mailListener.getMailStatusResult());
-//            if (errorMessage != null) {
-//                throw new XWikiException(XWikiException.MODULE_XWIKI_EMAIL,
-//                        XWikiException.ERROR_XWIKI_EMAIL_ERROR_SENDING_EMAIL,
-//                        String.format("Error while sending the validation email. %s", errorMessage));
-//            }
 
 }
