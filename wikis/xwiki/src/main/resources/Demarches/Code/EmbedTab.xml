@@ -66,8 +66,8 @@
         ## check if, in case we need to display the code, we can (because of volumétrie)
         #if ($hasEmbedCode)
           ## don't display the URL / button for démarches with too high volumetrie
-          ## too high = 250000 = 10 000 avec un taux de conversion de 4%.
-          #set($LIMIT_VOL = 250000)
+          ## too high = 5000000
+          #set($LIMIT_VOL = 5000000)
           #set($volumetrieDemat = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrieDemat').value)
           #set($volumetrie = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrie').value)
           #set ($displayURL = true)
