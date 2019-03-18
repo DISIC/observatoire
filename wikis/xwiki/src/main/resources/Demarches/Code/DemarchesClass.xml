@@ -120,7 +120,7 @@
       <customDisplay/>
       <disabled>0</disabled>
       <displayType>select</displayType>
-      <hint>Champ national ou local</hint>
+      <hint>Champ national ou territorial</hint>
       <multiSelect>0</multiSelect>
       <name>champ</name>
       <number>12</number>
@@ -134,7 +134,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>national=Démarche nationale|local=Démarche locale</values>
+      <values>national=Démarche nationale|local=Démarche territoriale</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </champ>
     <champsMinisteriels>
