@@ -48,7 +48,7 @@ wikidemarches.obligatoire=(obligatoire)
 wd.login=Identification
 wd.logout=Déconnexion
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
-wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les démarches administratives. Il permet également de piloter le chantier de la dématérialisation des services publics en recensant les démarches administratives et en les présentant sous la forme de tableau de bord.
+wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne. Il permet également de piloter le chantier de la dématérialisation en recensant les démarches administratives et en les restituant sous la forme de tableaux de bord.
 wd.login-button=Authentification 
 
 # Invalid account screen
@@ -66,7 +66,7 @@ wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
 wikidemarches.owned-demarches=Mes démarches
-wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche
+wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche
