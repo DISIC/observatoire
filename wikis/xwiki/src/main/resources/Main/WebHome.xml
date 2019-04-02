@@ -46,9 +46,9 @@
   #set($displayTitleContentSeparator = false)
   (%class='row demarches-searchrow'%)(((
     (%class='container'%)(((
-      ## (%class='demarches-headline'%)
-      ## == $services.localization.render('wikidemarches.home.title') ==
-      ##
+      (%class='demarches-headline'%)
+      == $services.localization.render('wikidemarches.home.title') ==
+
       (%class='demarches-subtitle%)
       $services.localization.render('wikidemarches.home.subtitle')
       (%class='demarches-searchbox'%)(((
@@ -69,6 +69,7 @@
               &lt;/button&gt;
             &lt;/span&gt;
           &lt;/div&gt;
+          &lt;div class='demarches-subform'&gt;$services.localization.render('wikidemarches.home.subsearchhint')&lt;/div&gt;
         &lt;/form&gt;
         {{/html}}
       )))
@@ -76,41 +77,7 @@
   )))
   ##
   ##
-  ## Check what's the role of the current user
-  #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
-  #if ($isAdminMin)
-    ##
-    ## admins see the full administration section and the tableau de bord
-    ##
-    #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
-    (%class='row demarches-administration-row'%)(((
-      (%class='container' %)(((
-        (%class='demarches-administration-link'%) (((
-          ==$services.localization.render('wikidemarches.administration.home-title')==
-
-          (%class='demarches-administration-subtitle'%)
-          $services.localization.render('wikidemarches.administration.home-subtitle')
-
-          [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.demandes.home-link')&gt;&gt;Demarches.DemandesUtilisateurs||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='button btn btn-primary']]
-
-          == Référentiels ==
-          [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='button btn btn-primary']]
-        )))
-      )))
-    )))
-    (%class='row demarches-dashboardrow'%)(((
-      (%class='container' %)(((
-        (%class='demarches-dashboardlink'%) (((
-          ==$services.localization.render('wikidemarches.dematdashboard.hometitle')==
-
-          (%class='demarches-dashboardsubtitle'%)
-          $services.localization.render('wikidemarches.dematdashboard.homesubtitle')
-
-          [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button btn btn-primary']]
-        )))
-      )))
-    )))
-  #else
+  #if (!$isGuest)
     ##
     ## regular logged in users see the demarches they're porteurs of
     ##
@@ -139,6 +106,56 @@
       )))
     )))
   #end
+  #set ($demarchesIds = [1289,1290,1220,1291,1265,1292,829,1293,1294,823])
+  (%class='row demarches-statsrow'%)(((
+    (%class='container' %)(((
+      (%class='row demarches-statsblock'%) (((
+        (%class='col-xs-12'%)(((
+          ==$services.localization.render('wikidemarches.mostwanted.title')==
+        )))
+        #foreach ($id in $demarchesIds)
+          #set ($ddoc = $xwiki.getDocument("Demarches.$id"))
+          * [[$ddoc.title&gt;&gt;$ddoc.fullName]]
+          ## new list after the first 5 items
+          #if ($velocityCount == 5)
+
+          #end
+        #end
+      )))
+    )))
+  )))
+  ##
+  ##
+  #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+  #if ($isAdminMin)
+  (%class='row demarches-dashboardrow'%)(((
+    (%class='container' %)(((
+      (%class='demarches-dashboardlink'%) (((
+        ==$services.localization.render('wikidemarches.dematdashboard.hometitle')==
+
+        (%class='demarches-dashboardsubtitle'%)
+        $services.localization.render('wikidemarches.dematdashboard.homesubtitle')
+
+        [[$services.localization.render('wikidemarches.dematdashboard.homelink')&gt;&gt;TableauDeBord.WebHome||class='button btn btn-primary']]
+      )))
+    )))
+  )))
+  #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
+  (%class='row demarches-administration-row'%)(((
+    (%class='container' %)(((
+      (%class='demarches-administration-link'%) (((
+        ==$services.localization.render('wikidemarches.administration.home-title')==
+
+        (%class='demarches-administration-subtitle'%)
+        $services.localization.render('wikidemarches.administration.home-subtitle')
+
+[[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.demandes.home-link')&gt;&gt;Demarches.DemandesUtilisateurs||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='button btn btn-primary']]
+[[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='button btn btn-primary']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='button btn btn-primary']]
+      )))
+    )))
+  )))
+  #end
+  
 {{/velocity}}</content>
   <object>
     <name>Main.WebHome</name>
@@ -370,86 +387,6 @@
     </property>
     <property>
       <use>currentPage</use>
-    </property>
-  </object>
-  <object>
-    <name>Main.WebHome</name>
-    <number>0</number>
-    <className>XWiki.XWikiRights</className>
-    <guid>49eafd08-a1b1-4183-bdbd-4b476aa00038</guid>
-    <class>
-      <name>XWiki.XWikiRights</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <allow>
-        <defaultValue>1</defaultValue>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType>allow</displayType>
-        <name>allow</name>
-        <number>4</number>
-        <prettyName>Allow/Deny</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </allow>
-      <groups>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>input</displayType>
-        <multiSelect>1</multiSelect>
-        <name>groups</name>
-        <number>1</number>
-        <picker>1</picker>
-        <prettyName>Groups</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <size>5</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.GroupsClass</classType>
-      </groups>
-      <levels>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>1</multiSelect>
-        <name>levels</name>
-        <number>2</number>
-        <prettyName>Levels</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <size>3</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.LevelsClass</classType>
-      </levels>
-      <users>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>input</displayType>
-        <multiSelect>1</multiSelect>
-        <name>users</name>
-        <number>3</number>
-        <picker>1</picker>
-        <prettyName>Users</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <size>5</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
-      </users>
-    </class>
-    <property>
-      <allow>1</allow>
-    </property>
-    <property>
-      <groups>XWiki.XWikiAllGroup</groups>
-    </property>
-    <property>
-      <levels>view</levels>
     </property>
   </object>
 </xwikidoc>
