@@ -413,8 +413,8 @@
   &lt;div class='container'&gt;
   &lt;hr aria-hidden="true"&gt;
   &lt;div id="xwikilicence"&gt;&amp;copy; 2018 $services.localization.render('wikidemarches.sitename')&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;span class='separator' aria-hidden='true'&gt; | &lt;/span&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;
+  &lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
   #if ($isGuest)
-    &lt;span class='separator'aria-hidden='true'&gt; | &lt;/span&gt;
     &lt;a href="$xwiki.getURL($doc.fullName,'login')""&gt;
     $services.localization.render('wd.login')
     &lt;/a&gt;
