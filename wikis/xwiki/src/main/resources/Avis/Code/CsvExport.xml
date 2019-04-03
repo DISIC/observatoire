@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
+  <creationDate>1542904683000</creationDate>
   <parent>xwiki:Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1542906805000</date>
+  <contentUpdateDate>1542906805000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis CSV Export</title>
   <comment/>
@@ -230,12 +230,7 @@
 {{velocity wiki="false"}}
 #set ($demarcheId = "$request.demarche")
 #if ($demarcheId != '' &amp;&amp; $xwiki.exists($demarcheId))
-  ## only provide the data to users that have edit right on demarche (porteurs or administrators)
-  #if ($xwiki.hasAccessLevel('edit', $xcontext.user, $demarcheId))
-    #gridresultwithfilterexport()
-  #else
-    #set($discard = $response.setStatus(403))
-  #end
+  #gridresultwithfilterexport()
 #end
 {{/velocity}}
 </content>
