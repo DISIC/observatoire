@@ -124,10 +124,6 @@
       )))
     )))
   )))
-  ##
-  ##
-  #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
-  #if ($isAdminMin)
   (%class='row demarches-dashboardrow'%)(((
     (%class='container' %)(((
       (%class='demarches-dashboardlink'%) (((
@@ -140,6 +136,10 @@
       )))
     )))
   )))
+  ##
+  ##
+  #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+  #if ($isAdminMin)
   #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
   (%class='row demarches-administration-row'%)(((
     (%class='container' %)(((
