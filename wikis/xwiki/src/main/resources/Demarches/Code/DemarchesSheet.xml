@@ -115,6 +115,7 @@
 
 #if ($xcontext.action == 'view')
   #isDemarcheOwner()
+  #set ($host = $request.serverName)
   #if ($displayAvisFormOnly)
     #set ($selectedTab = 'avis-tab')
     {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
@@ -122,14 +123,18 @@
     {{info}}
     $services.localization.render('wikidemarches.administration.avis.invalid-key')
     {{/info}}
-  #elseif ($displayCerfaNumeriqueOnly &amp;&amp; $cerfaNumerique != $NULL)
+  #elseif ("$!viewMode" == 'cerfa-numerique' &amp;&amp; $cerfaNumerique != $NULL)
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
   #elseif (!$isGuest)
     #set ($selectedTab = "$!request['tab']")
     #if ($selectedTab == '')
-      #set ($selectedTab = 'demarche-tab')
+      #if ("$!viewMode" == 'cerfa-numerique'))
+        #set ($selectedTab = 'cerfa-numerique-tab')
+      #else
+        #set ($selectedTab = 'demarche-tab')
+      #end
     #end
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
         &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;

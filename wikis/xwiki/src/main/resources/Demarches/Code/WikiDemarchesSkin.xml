@@ -42,7 +42,6 @@
   <content/>
   <attachment>
     <filename>favicon.ico</filename>
-    <mimetype>image/vnd.microsoft.icon</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -144,8 +143,6 @@
   #if ($viewMode == 'formulaire-avis' &amp;&amp; !$providedDemarcheEmbedApiKeyIsValid)
     #set ($displayInvalidKeyMessage = true)
   #end
-  ## Set Cerfa numérique display to true if view mode is set to 'cerfa-numerique'.
-  #set ($displayCerfaNumeriqueOnly = $viewMode == 'cerfa-numerique')
 #end
 </content>
     </property>
