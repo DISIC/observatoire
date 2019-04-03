@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1537949644000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1537949940000</date>
-  <contentUpdateDate>1537949940000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Conditions générales d'utilisation</title>
   <comment/>
@@ -46,10 +46,11 @@ Ce site permet aux administrations publiques de mettre en place des outils de me
 Il permet également aux usagers de l’administration de donner leurs avis sur les démarches administratives qu’ils ont effectuées en ligne. Un bouton/lien situé à la fin de la démarche permet d’accéder à ce service.
 
 Lorsque vous donnez un avis détaillé sur une démarche (espace d’expression libre), nous vous prions de :
+
 * ne pas nous communiquer d’informations personnelles, permettant de vous identifier ou d’identifier une autre personne (identité, date de naissance, adresse, courriel, y compris professionnel, identifiant administratif, etc.) ;
 * ne pas inclure d’insultes ou de propos dénigrants ou diffamatoires à l’encontre d’une personne.
 
-Vous ne pouvez en tant qu’usager ou accompagnant évaluer qu’une seule fois la démarche, quand vous l’avez accomplie ou que vous avez essayé de l’accomplir éventuellement sans en êtes arrivé à son terme. Vous pouvez néanmoins formuler un nouvel avis à chaque fois que vous effectuez à nouveau la même démarche.
+Vous ne pouvez en tant qu’usager ou accompagnant évaluer qu’une seule fois la démarche. Vous pouvez néanmoins formuler un nouvel avis à chaque fois que vous effectuez à nouveau la même démarche.
 
 == Vie privée ==
 
