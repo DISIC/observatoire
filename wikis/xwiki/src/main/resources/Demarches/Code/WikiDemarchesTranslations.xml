@@ -47,9 +47,7 @@ wd.about=À propos
 wikidemarches.obligatoire=(obligatoire)
 wd.login=Identification
 wd.logout=Déconnexion
-wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
 wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne. Il permet également de piloter le chantier de la dématérialisation en recensant les démarches administratives et en les restituant sous la forme de tableaux de bord.
-wd.login-button=Authentification 
 
 # Invalid account screen
 wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription. 
