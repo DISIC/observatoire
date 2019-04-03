@@ -50,11 +50,18 @@
 #if ($step == 'initial-step')
   ## First we check that the provided API key is valid. If it's not the case, redirect to home page.
   #set ($apiKeyOK = false)
-  #set ($demarchePage = $xwiki.getDocument($demarcheId))
-  #set ($embedPage = $xwiki.getDocumentAsAuthor("Demarches.Embed.${demarchePage.name}"))
-  #set ($embedObject = $embedPage.getObject($EMBED_CLASS, 'key', "$!request.get('Avis.Code.AvisClass_0_apiKey')"))
-  #if ($embedObject &amp;&amp; $embedObject != $NULL)
+  #set ($receivedKey = "$!request.get('Avis.Code.AvisClass_0_apiKey')")
+  #if ($receivedKey == '')
+    ## No key received, accept avis anyway.
+    ## Temporary implementation allowing to still accept avis coming directly from the site and also to preserve legacy URLs without api key at all
     #set ($apiKeyOK = true)
+  #else
+    #set ($demarchePage = $xwiki.getDocument($demarcheId))
+    #set ($embedPage = $xwiki.getDocumentAsAuthor("Demarches.Embed.${demarchePage.name}"))
+    #set ($embedObject = $embedPage.getObject($EMBED_CLASS, 'key', $receivedKey))
+    #if ($embedObject &amp;&amp; $embedObject != $NULL)
+      #set ($apiKeyOK = true)
+    #end
   #end
   #if ($apiKeyOK)
     ## Create an avis only if there is no avis in the session that matches the current demarche

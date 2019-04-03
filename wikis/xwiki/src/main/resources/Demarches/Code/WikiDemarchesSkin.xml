@@ -130,17 +130,22 @@
 #if ($demarche) 
   #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
   #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
-  ## Check that the API key is valid
-  #set ($demarchePage = $xwiki.getDocument($doc.fullName))
-  #set ($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $demarchePage.name))
-  ## avoid getDocumentAsAuthor() because it doesn't work
-  #set ($demarcheAPIDoc = $xwiki.getXWiki().getDocument($demarcheAPIDocRef, $xcontext.context))
-  #set ($demarcheAPIObject = $demarcheAPIDoc.getXObject($services.model.resolveDocument($EMBED_CLASS), 'key', "$!request.key"))
-  #set ($hasEmbedCode = $demarcheAPIObject != $NULL)
-  #set ($providedDemarcheEmbedApiKeyIsValid = $demarcheAPIObject != $NULL)
+  #set ($providedDemarcheEmbedApiKeyIsPresent = false)
+  #if ($request.key)
+    #set ($providedDemarcheEmbedApiKeyIsPresent = true)
+    ## Check that the API key is valid
+    #set ($demarchePage = $xwiki.getDocument($doc.fullName))
+    #set ($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $demarchePage.name))
+    ## avoid getDocumentAsAuthor() because it doesn't work
+    #set ($demarcheAPIDoc = $xwiki.getXWiki().getDocument($demarcheAPIDocRef, $xcontext.context))
+    #set ($demarcheAPIObject = $demarcheAPIDoc.getXObject($services.model.resolveDocument($EMBED_CLASS), 'key', "$!request.key"))
+    #set ($hasEmbedCode = $demarcheAPIObject != $NULL)
+    #set ($providedDemarcheEmbedApiKeyIsValid = $demarcheAPIObject != $NULL)
+  #end
   #set ($displayAvisFormOnly = ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsValid) || "$!avisId" != '')
   ## Set variable in order to display a message if the provided key is invalid
-  #if ($viewMode == 'formulaire-avis' &amp;&amp; !$providedDemarcheEmbedApiKeyIsValid)
+  ## Temporary implementation allowing to still accept avis coming directly from the site and also to preserve legacy URLs without api key at all: If key is not present assume it's all ok.
+  #if ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsPresent &amp;&amp; !$providedDemarcheEmbedApiKeyIsValid)
     #set ($displayInvalidKeyMessage = true)
   #end
 #end
