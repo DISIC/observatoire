@@ -104,7 +104,7 @@
   #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
 #end
 #foreach($propName in $propList)
-  #set ($mandatory = ($propName == 'direction'))
+  #set ($mandatory = (!$isGuest &amp;&amp; $propName == 'direction'))
   #displayProperty($object, $propName, $mandatory, $action)
 #end
 &lt;/dl&gt;
