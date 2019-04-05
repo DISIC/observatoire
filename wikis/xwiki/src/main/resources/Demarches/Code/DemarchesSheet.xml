@@ -72,7 +72,7 @@
 #end
 
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
-#if ($demarche &amp;&amp; $xcontext.action == 'view' &amp;&amp; $isGuest)
+#if ($demarche &amp;&amp; $xcontext.action == 'view' &amp;&amp; $isGuest &amp;&amp; !$displayAvisFormOnly)
   &lt;div class="demarche-details-action"&gt;
     &lt;a href="#"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/a&gt;
   &lt;/div&gt;
