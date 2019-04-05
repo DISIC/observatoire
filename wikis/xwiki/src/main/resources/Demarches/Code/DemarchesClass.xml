@@ -700,7 +700,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>active=Active|inactive=Inactive|demandeUtilisateur=Demande utilisateur|nouvelleDemarche=Brouillon</values>
+      <values>active=Active|inactive=Inactive|demandeUtilisateur=Demande utilisateur|demandePorteur=Demande porteur|nouvelleDemarche=Brouillon</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statut>
     <statutProjetDemat>

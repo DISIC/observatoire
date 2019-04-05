@@ -47,20 +47,32 @@
   #set ($uin = $services.uin.getNext('demarches'))
   #set ($target = $xwiki.getDocumentAsAuthor("Demarches.${uin}"))
   #set ($title = "$!request.title")
-  #set ($direction = "$!request.get('Demarches.Code.DemarchesClass_0_direction')")
-  #if ($title == '' || $direction == '')
+  #set ($isInvalidDemarche = ($title == ''))
+  ## for logged in users, the direction is also mandatory for a valid demarche
+  #if (!$isGuest)
+      #set ($direction = "$!request.get('Demarches.Code.DemarchesClass_0_direction')")
+      #set ($isInvalidDemarche = ($isInvalidDemarche || $direction == ''))
+  #end
+  #if ($isInvalidDemarche)
     {{warning}}
     Certains champs obligatoires (marqués par une étoile) n'ont pas été remplis.
     {{/warning}}
   #else
     #set ($discard = $target.setTitle($title))
     #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
-    #set ($discard = $object.set('statut', 'demandeUtilisateur'))
-    #set ($discard = $object.set('proprietaires', $xcontext.user))
-    ## Save as script author so that the current user cannot delete the created page (a creator gets a delete right that is not deniable))
+    #if ($isGuest)
+      #set ($discard = $object.set('statut', 'demandeUtilisateur'))
+    #else
+      ## if there is a user logged in, set the owner to the logged in user and the status as demandePorteur
+      #set ($discard = $object.set('proprietaires', $xcontext.user))
+      #set ($discard = $object.set('statut', 'demandePorteur'))
+    #end
+    ## Create the document as script author so that the current user cannot delete the created page (a creator gets a delete right that is not deniable))
     #set ($discard = $target.saveAsAuthor())
-    ## Save "normally" to mark the fact that the current user as a "co-author"
-    #set ($discard = $target.save())
+    #if (!$isGuest)
+      ## If the current user is an authenticated user, also save "normally" to mark the fact that the current user as a "co-author"
+      #set ($discard = $target.save())
+    #end
     #set ($showForm = false)
     {{info}}
     La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
