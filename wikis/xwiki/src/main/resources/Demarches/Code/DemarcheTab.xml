@@ -99,7 +99,7 @@
 &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
 &lt;dd&gt;$doc.name&lt;/dd&gt;
 #end
-#set ($propList = ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'champsMinisteriels', 'ministeres', 'direction', 'champ',  'groupes', 'organismesTraitement', 'textes', 'identifiantsEli'])
+#set ($propList = ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'champ',  'groupes', 'organismesTraitement', 'textes'])
 #if ($isSimplifiedForm)
   #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
 #end
@@ -136,7 +136,7 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie'])
+#set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageDemat'])
 #if ($isSimplifiedForm)
   #set ($propList = ['volumetrie', 'volumetrieDemat'])
 #end
@@ -168,7 +168,7 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#set ($propList = ['referenceBddForm', 'referenceServicePublic'])
+#set ($propList = ['referenceServicePublic'])
 #if ($isSimplifiedForm)
   #set ($propList = ['referenceServicePublic'])
 #end
@@ -185,9 +185,9 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#set ($propList = ['urlInfos', 'urlDemarche', 'urlFiche'])
+#set ($propList = ['urlInfos', 'urlDemarche'])
 #if ($isSimplifiedForm)
-  #set ($propList = ['urlDemarche', 'urlFiche'])
+  #set ($propList = ['urlDemarche'])
 #end
 #foreach($propName in $propList)
   #displayProperty($object, $propName, false, $action)
@@ -218,7 +218,7 @@
 (% class="xform" %)
 (((
 &lt;dl&gt;
-#foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'niveauPrevu', 'caracteristiquesDematPrevues'])
+#foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne'])
   #displayProperty($object, $propName, false, $action)
 #end
 &lt;/dl&gt;
