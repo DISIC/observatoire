@@ -71,28 +71,6 @@
       <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect|mobile=Adapté mobile</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </caracteristiquesDemat>
-    <caracteristiquesDematPrevues>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>checkbox</displayType>
-      <hint>Element qualitatif permettant de caractériser la dématérialisation prévue</hint>
-      <multiSelect>1</multiSelect>
-      <name>caracteristiquesDematPrevues</name>
-      <number>33</number>
-      <picker>0</picker>
-      <prettyName>Caractéristiques prévues de la dématérialisation</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect|mobile=Adapté mobile</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </caracteristiquesDematPrevues>
     <categoriesPublics>
       <cache>0</cache>
       <customDisplay/>
@@ -137,31 +115,6 @@
       <values>national=Démarche nationale|local=Démarche territoriale</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </champ>
-    <champsMinisteriels>
-      <cache>0</cache>
-      <classname/>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>input</displayType>
-      <hint>Champ(s) ministériel(s) au(x)quel(s) est rattachée la démarche</hint>
-      <idField/>
-      <multiSelect>1</multiSelect>
-      <name>champsMinisteriels</name>
-      <number>8</number>
-      <picker>1</picker>
-      <prettyName>Champ(s) ministériel(s)</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators/>
-      <size>5</size>
-      <sort>value</sort>
-      <sql>select doc.fullName, doc.title from XWikiDocument as doc, BaseObject as obj where doc.fullName = obj.name and obj.className = 'CM.Code.CMClass' and doc.fullName &lt;&gt; 'CM.Code.CMTemplate' order by doc.title asc</sql>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <valueField/>
-      <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
-    </champsMinisteriels>
     <dateDemat>
       <customDisplay/>
       <dateFormat>dd/MM/yyyy</dateFormat>
@@ -324,20 +277,6 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </groupes>
-    <identifiantsEli>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <hint>Identifiants de textes dans le journal officiel, séparés par des virgules</hint>
-      <name>identifiantsEli</name>
-      <number>15</number>
-      <picker>0</picker>
-      <prettyName>Identifiants ELI</prettyName>
-      <size>30</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-    </identifiantsEli>
     <ministeres>
       <cache>0</cache>
       <classname/>
@@ -430,68 +369,6 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
     </niveauDematBoolean>
-    <niveauPrevu>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>checkbox</displayType>
-      <hint/>
-      <multiSelect>1</multiSelect>
-      <name>niveauPrevu</name>
-      <number>29</number>
-      <picker>0</picker>
-      <prettyName>Niveau de dématérialisation prévu</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>aucun=Aucun|teleservice=Téléprocédure|edi=EDI</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </niveauPrevu>
-    <niveauVolumetrie>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <hint>Intervalle dans lequel se situe la volumétrie</hint>
-      <name>niveauVolumetrie</name>
-      <number>25</number>
-      <prettyName>Niveau de la volumétrie</prettyName>
-      <script>{{velocity}}
-{{html clean="false"}}
-#set ($boundaries = [0,100,1000,10000,100000,500000,1000000,5000000])
-#set ($volumetrie = $!{object.getProperty("volumetrie").value})
-#if ($volumetrie)
-  #set ($top = $NULL)
-  #foreach($elt in $boundaries)
-    #if ($volumetrie &lt;= $elt)
-      #set ($top = $elt)
-      #break
-    #end
-  #end
-  #if ($top)
-    #if ($top == 0)
-      #set ($top =  $boundaries.get(1))
-    #end
-    #set ($idx1 = $boundaries.indexOf($top))
-    #set ($idx2 = $mathtool.sub($idx1,1))
-    #set ($bottom = $boundaries.get($idx2))
-    ##set ($bottom = $numbertool.format('integer', $bottom))
-    ##set ($top = $numbertool.format('integer', $top))
-    ${bottom} - ${top}
-  #else
-    5000000 et plus
-  #end
-#end
-{{/html}}
-{{/velocity}}</script>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-    </niveauVolumetrie>
     <nomComplet>
       <contenttype>---</contenttype>
       <customDisplay/>
@@ -636,20 +513,6 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </publics>
-    <referenceBddForm>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <hint>Référence de la démarche dans la base BDDForm (numéro de CERFA)</hint>
-      <name>referenceBddForm</name>
-      <number>5</number>
-      <picker>0</picker>
-      <prettyName>Référence BDDFORM</prettyName>
-      <size>30</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-    </referenceBddForm>
     <referenceServicePublic>
       <customDisplay/>
       <disabled>0</disabled>
@@ -795,20 +658,6 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </urlDemarche>
-    <urlFiche>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <hint>Adresse web de documentation de la démarche ou du CERFA</hint>
-      <name>urlFiche</name>
-      <number>21</number>
-      <picker>0</picker>
-      <prettyName>Adresse web de documentation de la démarche</prettyName>
-      <size>30</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-    </urlFiche>
     <urlInfos>
       <customDisplay/>
       <disabled>0</disabled>
