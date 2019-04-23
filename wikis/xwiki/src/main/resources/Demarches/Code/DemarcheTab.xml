@@ -153,7 +153,10 @@
         (% class="xform" %)
         (((
         &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'top250'])
+        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top250'])
+        #if ($action == 'edit')
+          #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
+        #end
         #if ($isSimplifiedForm)
           #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
         #end
