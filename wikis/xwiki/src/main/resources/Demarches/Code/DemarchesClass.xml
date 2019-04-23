@@ -68,7 +68,7 @@
       <cache>0</cache>
       <customDisplay/>
       <disabled>0</disabled>
-      <displayType>select</displayType>
+      <displayType>radio</displayType>
       <hint/>
       <multiSelect>0</multiSelect>
       <name>adapteMobile</name>
@@ -90,9 +90,9 @@
       <cache>0</cache>
       <customDisplay/>
       <disabled>0</disabled>
-      <displayType>select</displayType>
+      <displayType>checkbox</displayType>
       <hint/>
-      <multiSelect>0</multiSelect>
+      <multiSelect>1</multiSelect>
       <name>api</name>
       <number>37</number>
       <picker>0</picker>
@@ -375,7 +375,7 @@
       <cache>0</cache>
       <customDisplay/>
       <disabled>0</disabled>
-      <displayType>select</displayType>
+      <displayType>radio</displayType>
       <hint/>
       <multiSelect>0</multiSelect>
       <name>franceConnect</name>
