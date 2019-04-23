@@ -285,7 +285,8 @@ require(['jquery','xwiki-selectize'], function($) {
       'properties', encodeURIComponent(select.attr('data-propertyName')),
       'values'
     ].join('/');
-  return {
+    
+    return {
       create: false,
       load: function(text, callback) {
         if (select.attr('data-propertyName')=="publics" || select.attr('data-propertyName')=="evenements") {
@@ -385,7 +386,7 @@ require(['jquery','xwiki-selectize'], function($) {
       $('input[type="submit"]').prop('disabled', false);
     }
   }
-
+  
   function showHideFreeTextInputField(inputElement, propName, freeTextInputFieldId) {
     var value = inputElement.val();
     var checked = inputElement.prop("checked");
@@ -399,6 +400,30 @@ require(['jquery','xwiki-selectize'], function($) {
         $("#"+freeTextInputFieldId).val("");
         $("#"+freeTextInputFieldId).hide();
       }
+    }
+  }
+
+  /**
+   * Synchronizes the state of the form inputs of the following properties: enLigneEntierement, experimentation, deploiementPartiel
+   * using the following rule:
+   * - experimentation: disable if enLigneEntierement or deploiementPartiel are checked
+   * - deploiementPartiel: disable if enLigneEntierement or experimentation are checked
+   */
+  function updateCaracteristiquesFields() {
+    var enLigneEntierementField = $("input[id='Demarches.Code.DemarchesClass_0_enLigneEntierement']");
+    var experimentationField = $("input[id='Demarches.Code.DemarchesClass_0_experimentation']");
+    var deploiementPartielField = $("input[id='Demarches.Code.DemarchesClass_0_deploiementPartiel']");
+    if (enLigneEntierementField.prop('checked') || deploiementPartielField.prop('checked')) {
+      experimentationField.prop('disabled', true);
+      experimentationField.prop('checked', false);
+    } else {
+      experimentationField.prop('disabled', false);
+    }
+    if (enLigneEntierementField.prop('checked') || experimentationField.prop('checked')) {
+      deploiementPartielField.prop('disabled', true);
+      deploiementPartielField.prop('checked', false);
+    } else {
+      deploiementPartielField.prop('disabled', false);
     }
   }
 
@@ -488,6 +513,13 @@ require(['jquery','xwiki-selectize'], function($) {
         tab.tab('show') // Select tab by name
       }
     }
+
+    // NB: several functions in this script make sense only in edit mode, the code could possibly get refactored accordingly
+
+    $("input[id='Demarches.Code.DemarchesClass_0_enLigneEntierement'], input[id='Demarches.Code.DemarchesClass_0_experimentation'], input[id='Demarches.Code.DemarchesClass_0_deploiementPartiel']").change(function() {
+      updateCaracteristiquesFields();
+    });
+    updateCaracteristiquesFields();
 
   });
 });</code>
