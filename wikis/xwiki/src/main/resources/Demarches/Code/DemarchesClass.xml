@@ -49,6 +49,65 @@
     <defaultWeb/>
     <nameField/>
     <validationScript/>
+    <accompagnement>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>accompagnement</name>
+      <number>35</number>
+      <prettyName>Accompagnement humain personnalisé</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </accompagnement>
+    <adapteMobile>
+      <cache>0</cache>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <hint/>
+      <multiSelect>0</multiSelect>
+      <name>adapteMobile</name>
+      <number>33</number>
+      <picker>0</picker>
+      <prettyName>Adapté mobile</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <values>oui=Oui|non=Non|na=Sans objet</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </adapteMobile>
+    <api>
+      <cache>0</cache>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <hint/>
+      <multiSelect>0</multiSelect>
+      <name>api</name>
+      <number>37</number>
+      <picker>0</picker>
+      <prettyName>API</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <values>apiparticuliers=API particuliers|apientreprises=API entreprises</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </api>
     <caracteristiquesDemat>
       <cache>0</cache>
       <customDisplay/>
@@ -147,6 +206,21 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
     </dateMiseEnLigne>
+    <demarcheSimplifiee>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>demarcheSimplifiee</name>
+      <number>38</number>
+      <prettyName>Démarche simplifiée</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </demarcheSimplifiee>
     <dematObligatoire>
       <customDisplay/>
       <defaultValue/>
@@ -162,6 +236,21 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
     </dematObligatoire>
+    <deploiementPartiel>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>deploiementPartiel</name>
+      <number>42</number>
+      <prettyName>Déploiement partiel</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </deploiementPartiel>
     <direction>
       <cache>0</cache>
       <classname/>
@@ -198,6 +287,21 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </direction>
+    <enLigneEntierement>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>enLigneEntierement</name>
+      <number>40</number>
+      <prettyName>Peut être réalisée en ligne complètement</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </enLigneEntierement>
     <evenements>
       <cache>0</cache>
       <classname/>
@@ -238,6 +342,21 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
     </exclusionSve>
+    <experimentation>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>experimentation</name>
+      <number>41</number>
+      <prettyName>Expérimentation</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </experimentation>
     <formulaires>
       <customDisplay/>
       <disabled>0</disabled>
@@ -252,6 +371,28 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </formulaires>
+    <franceConnect>
+      <cache>0</cache>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <hint/>
+      <multiSelect>0</multiSelect>
+      <name>franceConnect</name>
+      <number>32</number>
+      <picker>0</picker>
+      <prettyName>FranceConnect</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <values>oui=Oui|non=Non|na=Sans objet</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </franceConnect>
     <groupes>
       <cache>0</cache>
       <classname/>
@@ -306,7 +447,7 @@
       <name>ministeres</name>
       <number>9</number>
       <picker>1</picker>
-      <prettyName>Ministère</prettyName>
+      <prettyName>Ministère(s)</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
@@ -319,6 +460,21 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </ministeres>
+    <moyensDeContact>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>moyensDeContact</name>
+      <number>34</number>
+      <prettyName>Au moins deux moyens de contact différents, dont un formulaire de contact</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </moyensDeContact>
     <niveauDemat>
       <cache>0</cache>
       <customDisplay/>
@@ -442,30 +598,35 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </organismesTraitement>
-    <pourcentageDemat>
+    <pourcentageDematerialisation>
       <customDisplay/>
       <disabled>0</disabled>
-      <hint>Estimation du pourcentage de démarches réalisées sur une téléprocédure ou un EDI par an</hint>
-      <name>pourcentageDemat</name>
-      <number>24</number>
+      <hint/>
+      <name>pourcentageDematerialisation</name>
+      <number>43</number>
       <prettyName>Pourcentage de dématérialisation</prettyName>
       <script>{{velocity}}
-{{html clean="false"}}
-#set ($volumetrieDemat = $object.getProperty("volumetrieDemat").getValue())
-#set ($volumetrie = $object.getProperty("volumetrie").getValue())
-#set ($volumetrieDemat = $volumetrieDemat*100)
-#if ($volumetrie &amp;&amp; $volumetrie &gt; 0 &amp;&amp; $volumetrieDemat)
-  #set ($percent = $mathtool.div($volumetrieDemat,$volumetrie))
-  #set ($percent = $mathtool.roundTo(1,$percent))
-  ${percent} %
+#set ($enLigneEntierement = $object.getValue("enLigneEntierement"))
+#set ($percent = 0)
+#if ("$!enLigneEntierement" == '1')
+  #set ($percent =  100)
+#else
+  #set ($experimentation = $object.getValue("experimentation"))
+  #if ("$!experimentation" == '1')
+    #set ($percent = 10)
+  #end
+  #set ($deploiementPartiel = $object.getValue("deploiementPartiel"))
+  #if ("$!deploiementPartiel" == '1')
+    #set ($percent = 50)
+  #end
 #end
-{{/html}}
+${percent}%
 {{/velocity}}</script>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-    </pourcentageDemat>
+    </pourcentageDematerialisation>
     <proprietaires>
       <cache>0</cache>
       <customDisplay/>
@@ -513,6 +674,39 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </publics>
+    <qualiteSupport>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($accompagnement = $object.getValue('accompagnement'))
+#set ($moyensDeContact = $object.getValue('moyensDeContact'))
+## Set default values in case the properties are empty
+#if ("$!accompagnement" == '')
+  #set ($accompagnement = 0)
+#end
+#if ("$!moyensDeContact" == '')
+  #set ($moyensDeContact = 0)
+#end
+#set ($result = 'Partiel')
+## FIXME
+#if ($accompagnement == 1 &amp;&amp; $moyensDeContact == 1)
+  #set ($result = 'Oui')
+#elseif ($accompagnement == 0 &amp;&amp; $moyensDeContact == 0)
+  #set ($result = 'Non')
+#end
+$result
+{{/html}}
+{{/velocity}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>qualiteSupport</name>
+      <number>36</number>
+      <prettyName>Support de qualité</prettyName>
+      <script/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+    </qualiteSupport>
     <referenceServicePublic>
       <customDisplay/>
       <disabled>0</disabled>
@@ -644,6 +838,21 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
     </title1>
+    <top250>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>radio</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>top250</name>
+      <number>39</number>
+      <prettyName>Top 250</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </top250>
     <urlDemarche>
       <customDisplay/>
       <disabled>0</disabled>

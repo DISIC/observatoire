@@ -85,148 +85,157 @@
   #end
   ## display the demarche
 &lt;div class="row"&gt;
-&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Informations générales&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#if ($action != 'view')
-  #displayProperty($object, 'title1', true, $action)
-#end
-#if ($action == 'view')
-&lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
-&lt;dd&gt;$doc.name&lt;/dd&gt;
-#end
-#set ($propList = ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'champ',  'groupes', 'organismesTraitement', 'textes'])
-#if ($isSimplifiedForm)
-  #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
-#end
-#foreach($propName in $propList)
-  #set ($mandatory = (!$isGuest &amp;&amp; $propName == 'direction'))
-  #displayProperty($object, $propName, $mandatory, $action)
-#end
-&lt;/dl&gt;
-)))
+  &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+    &lt;div class="panel panel-default"&gt;
+      &lt;div class="panel-heading"&gt;Informations générales&lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+        (% class="xform" %)
+        (((
+        &lt;dl&gt;
+        #if ($action != 'view')
+          #displayProperty($object, 'title1', true, $action)
+        #end
+        #if ($action == 'view')
+        &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
+        &lt;dd&gt;$doc.name&lt;/dd&gt;
+        #end
+        #set ($propList = ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'champ',  'groupes', 'organismesTraitement'])
+        #if ($isSimplifiedForm)
+          #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
+        #end
+        #foreach($propName in $propList)
+          #set ($mandatory = (!$isGuest &amp;&amp; $propName == 'direction'))
+          #displayProperty($object, $propName, $mandatory, $action)
+        #end
+        &lt;/dl&gt;
+        )))
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="panel panel-default"&gt;
+      &lt;div class="panel-heading"&gt;Références&lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+        (% class="xform" %)
+        (((
+        &lt;dl&gt;
+        #set ($propList = ['referenceServicePublic', 'formulaires', 'textes'])
+        #if ($isSimplifiedForm)
+          #set ($propList = ['referenceServicePublic'])
+        #end
+        #foreach($propName in $propList)
+          #displayProperty($object, $propName, false, $action)
+        #end
+        &lt;/dl&gt;
+        )))
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="panel panel-default"&gt;
+      &lt;div class="panel-heading"&gt;Adresses web&lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+        (% class="xform" %)
+        (((
+        &lt;dl&gt;
+        #set ($propList = ['urlInfos', 'urlDemarche'])
+        #if ($isSimplifiedForm)
+          #set ($propList = ['urlDemarche'])
+        #end
+        #foreach($propName in $propList)
+          #displayProperty($object, $propName, false, $action)
+        #end
+        &lt;/dl&gt;
+        )))
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+    &lt;div class="panel panel-default"&gt;
+      &lt;div class="panel-heading"&gt;Catégorisation&lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+        (% class="xform" %)
+        (((
+        &lt;dl&gt;
+        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat'])
+        #if ($isSimplifiedForm)
+          #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
+        #end
+        #foreach($propName in $propList)
+          #displayProperty($object, $propName, false, $action)
+        #end
+        &lt;/dl&gt;
+        )))
+      &lt;/div&gt;
+    &lt;/div&gt;
+    #if (!$isSimplifiedForm)
+      &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;Caractéristiques de la dématérialisation&lt;/div&gt;
+          &lt;div class="panel-body"&gt;
+          (% class="xform" %)
+          (((
+          &lt;dl&gt;
+          #foreach($propName in ['niveauDemat', 'enLigneEntierement', 'experimentation', 'deploiementPartiel', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve', 'dateDemat'])
+            #displayProperty($object, $propName, false, $action)
+          #end
+          &lt;/dl&gt;
+          )))
+      &lt;/div&gt;
+    &lt;/div&gt;
+    #end
+    &lt;div class="panel panel-default"&gt;
+      &lt;div class="panel-heading"&gt;Qualités de la dématérialisation&lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+        (% class="xform" %)
+          (((
+            &lt;dl&gt;
+              ## Some properties can be edited only by administrators
+              #if ($action == 'edit')
+                #if ($hasAdmin)
+                  #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
+                    #displayProperty($object, $propName, false, $action)
+                  #end
+                #else
+                  #foreach($propName in ['api', 'demarcheSimplifiee'])
+                    #displayProperty($object, $propName, false, $action)
+                  #end
+                #end
+              #else
+                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'api', 'demarcheSimplifiee'])
+                  #displayProperty($object, $propName, false, $action)
+                #end
+              #end
+            &lt;/dl&gt;
+          )))
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="panel panel-default"&gt;
+      &lt;div class="panel-heading"&gt;Remarques&lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+        (% class="xform" %)
+        (((
+        &lt;dl&gt;
+        #displayProperty($object, 'remarques', false, $action)
+        &lt;/dl&gt;
+        )))
+      &lt;/div&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Catégorisation&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#set ($propList = ['categoriesPublics', 'publics', 'evenements'])
-#if ($isSimplifiedForm)
-  #set ($propList = ['categoriesPublics'])
-#end
-#foreach($propName in $propList)
-  #displayProperty($object, $propName, false, $action)
-#end
-&lt;/dl&gt;
-)))
+#if (!$isSimplifiedForm)
+  &lt;div class="row"&gt;
+    &lt;div class="col-lg-12 col-md-12 col-sm-12"&gt;
+      &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading"&gt;Projet de dématérialisation&lt;/div&gt;
+        &lt;div class="panel-body"&gt;
+          (% class="xform" %)
+          (((
+          &lt;dl&gt;
+          #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne'])
+            #displayProperty($object, $propName, false, $action)
+          #end
+          &lt;/dl&gt;
+          )))
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Volumétrie&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageDemat'])
-#if ($isSimplifiedForm)
-  #set ($propList = ['volumetrie', 'volumetrieDemat'])
-#end
-#foreach($propName in $propList)
- #displayProperty($object, $propName, false, $action)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-#if (!$isSimplifiedForm)
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Dématérialisation&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['niveauDemat', 'dematObligatoire', 'exclusionSve', 'caracteristiquesDemat'])
-  #displayProperty($object, $propName, false, $action)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-#end
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Références&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#set ($propList = ['referenceServicePublic'])
-#if ($isSimplifiedForm)
-  #set ($propList = ['referenceServicePublic'])
-#end
-#foreach($propName in $propList)
-  #displayProperty($object, $propName, false, $action)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Adresses web&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#set ($propList = ['urlInfos', 'urlDemarche'])
-#if ($isSimplifiedForm)
-  #set ($propList = ['urlDemarche'])
-#end
-#foreach($propName in $propList)
-  #displayProperty($object, $propName, false, $action)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Remarques&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#displayProperty($object, 'remarques', false, $action)
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-#if (!$isSimplifiedForm)
-&lt;div class="row"&gt;
-&lt;div class="col-lg-12 col-md-12 col-sm-12"&gt;
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-heading"&gt;Projet de dématérialisation&lt;/div&gt;
-  &lt;div class="panel-body"&gt;
-(% class="xform" %)
-(((
-&lt;dl&gt;
-#foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne'])
-  #displayProperty($object, $propName, false, $action)
-#end
-&lt;/dl&gt;
-)))
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 #end
 ##
 ## Display excel export button if in view mode and doc is not "NewDemarche"
