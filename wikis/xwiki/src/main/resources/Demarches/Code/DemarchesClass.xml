@@ -620,13 +620,38 @@
     #set ($percent = 50)
   #end
 #end
-${percent}%
+${percent} %
 {{/velocity}}</script>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
     </pourcentageDematerialisation>
+    <pourcentageRecoursVoieDematerialisee>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint>Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée</hint>
+      <name>pourcentageRecoursVoieDematerialisee</name>
+      <number>43</number>
+      <prettyName>Pourcentage de recours à la voie dématérialisée</prettyName>
+      <script>{{velocity}}
+{{html clean="false"}}
+#set ($volumetrieDemat = $object.getValue("volumetrieDemat"))
+#set ($volumetrie = $object.getValue("volumetrie"))
+#set ($volumetrieDemat = $volumetrieDemat * 100)
+#if ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
+  #set ($percent = $mathtool.div($volumetrieDemat, $volumetrie))
+  #set ($percent = $mathtool.roundTo(1, $percent))
+  ${percent} %
+#end
+{{/html}}
+{{/velocity}}
+</script>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+    </pourcentageRecoursVoieDematerialisee>
     <proprietaires>
       <cache>0</cache>
       <customDisplay/>
