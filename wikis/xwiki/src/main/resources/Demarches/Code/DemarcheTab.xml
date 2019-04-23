@@ -99,7 +99,7 @@
         &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
         &lt;dd&gt;$doc.name&lt;/dd&gt;
         #end
-        #set ($propList = ['nomComplet', 'proprietaires', 'statut', 'formulaires', 'objet', 'ministeres', 'direction', 'champ',  'groupes', 'organismesTraitement'])
+        #set ($propList = ['nomComplet', 'proprietaires', 'objet', 'statut', 'champ', 'direction', 'ministeres', 'groupes', 'organismesTraitement'])
         #if ($isSimplifiedForm)
           #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
         #end
@@ -153,7 +153,7 @@
         (% class="xform" %)
         (((
         &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat'])
+        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'top250'])
         #if ($isSimplifiedForm)
           #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
         #end
@@ -171,7 +171,12 @@
           (% class="xform" %)
           (((
           &lt;dl&gt;
-          #foreach($propName in ['niveauDemat', 'enLigneEntierement', 'experimentation', 'deploiementPartiel', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve', 'dateDemat'])
+          #set ($caracteristiquesPropList = ['niveauDemat', 'enLigneEntierement', 'experimentation', 'deploiementPartiel', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve', 'dateDemat'])
+          ## Don't display computed properties in edit mode
+          #if ($action == 'edit')
+            #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
+          #end
+          #foreach($propName in $caracteristiquesPropList)
             #displayProperty($object, $propName, false, $action)
           #end
           &lt;/dl&gt;

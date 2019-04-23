@@ -79,9 +79,8 @@
   #else
     &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;#if($isMandatory)(*) #end $propertyObject.prettyName&lt;/label&gt;
     #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
-  
+    &lt;/dt&gt;
   #end
-  &lt;/dt&gt;
   &lt;dd #if ($fieldIsInvalid)class="validation-failure"#end&gt;
     #if(!$isBoolean || $action != 'edit')
       #if ($isNumber &amp;&amp; $object.getProperty($propName).value)
