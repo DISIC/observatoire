@@ -195,11 +195,11 @@
       <dateFormat>MM/yyyy</dateFormat>
       <disabled>0</disabled>
       <emptyIsToday>0</emptyIsToday>
-      <hint>Date de mise en ligne, prévisionnelle ou réalisée</hint>
+      <hint/>
       <name>dateMiseEnLigne</name>
       <number>37</number>
       <picker>1</picker>
-      <prettyName>Date de mise en ligne</prettyName>
+      <prettyName>Date de mise en ligne prévue ou réalisée</prettyName>
       <size>20</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -842,7 +842,7 @@ $result
       <customDisplay/>
       <defaultValue/>
       <disabled>0</disabled>
-      <displayFormType>radio</displayFormType>
+      <displayFormType>checkbox</displayFormType>
       <displayType/>
       <hint/>
       <name>top250</name>
