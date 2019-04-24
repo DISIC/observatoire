@@ -59,7 +59,7 @@ This page contains a script aimed at migrating data in the frame of [[issue #551
 &lt;button type="submit" class="btn btn-default" name="action" value="updateChamp" title="Property 'champ': update all demarches to 'national'"&gt;
   Update property "Démarche nationale / territoriale"&lt;/button&gt;
 &lt;button type="submit" class="btn btn-default" name="action" value="updateMinisteres" title="Property 'ministeres': merge values 'MCT' and 'MTES'"&gt;
-  Merge MCT/MTES&lt;/button&gt;
+  Reaffect MCT/MTES to MECT&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="updateEnLigneEntierement"
   title="Property 'enLigneEntierement': compute value from existing values of property 'niveauDemat': set to true if niveauDemat contains 'formulaire' or 'teleprocedure'"&gt;
   Compute property "Peut-être réalisée en ligne complètement"&lt;/button&gt;
@@ -153,7 +153,18 @@ class Service {
     query.bindValue('ministeresPropertyName', "ministeres")
     def entries = query.execute()
     for (entry in entries) {
-      println "* [[$entry]]"
+      def doc = xwiki.getDocument(entry, context).clone()
+      def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
+      def ministeres = demarche.getListValue("ministeres")
+      println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+      if (actOnDatabase) {
+        logger.warn("Update ministeres for {}", doc)
+        ministeres.remove("Ministeres.MCT")
+        ministeres.remove("Ministeres.MTES")
+        ministeres.add("Ministeres.MECT")
+        demarche.set("ministeres", ministeres, context)
+        xwiki.saveDocument(doc, "Réaffectation des ministères MCT et MTES au ministère MECT", context)
+      }
     }
   }
 
