@@ -64,7 +64,6 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     static final String DEMARCHE_PROPERTY_OWNERS = "proprietaires";
     static final String DEMARCHE_PROPERTY_DIRECTION = "direction";
-    static final String DEMARCHE_PROPERTY_DIGITALIZATION_DATE = "dateDemat";
     static final String DEMARCHE_PROPERTY_DIGITALIZATION_LEVEL = "niveauDemat";
 
     @Inject
@@ -120,7 +119,6 @@ public class DemarcheEventListener extends AbstractEventListener {
         }
 
         if (demarcheV2 != null) {
-            maybeUpdateDigitizationDate(demarcheV1, demarcheV2);
             try {
                 boolean ownerChanged = maybeUpdateAccessRights(demarcheV1, demarcheV2, context);
                 if (ownerChanged) {
@@ -165,28 +163,6 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     protected boolean demarcheWasUndigitized(BaseObject demarcheV1, BaseObject demarcheV2) {
         return isDigitized(demarcheV1) && !isDigitized(demarcheV2);
-    }
-
-    /**
-     * Computes the digitization date and returns true if it has changed.
-     */
-    public boolean maybeUpdateDigitizationDate(BaseObject demarcheV1, BaseObject demarcheV2) {
-        if (demarcheV2 == null) {
-            return false;
-        }
-
-        if (demarcheWasDigitized(demarcheV1, demarcheV2)) {
-            //Update the date only in case it was not set already
-            Date dateDemat = demarcheV2.getDateValue(DEMARCHE_PROPERTY_DIGITALIZATION_DATE);
-            if (dateDemat == null) {
-                demarcheV2.setDateValue(DEMARCHE_PROPERTY_DIGITALIZATION_DATE, new Date());
-            }
-            return true;
-        } else if (demarcheWasUndigitized(demarcheV1, demarcheV2)) {
-            demarcheV2.setDateValue(DEMARCHE_PROPERTY_DIGITALIZATION_DATE, null);
-            return true;
-        }
-        return false;
     }
 
     /**
