@@ -75,6 +75,10 @@ This page contains a script aimed at migrating data in the frame of [[issue #551
 &lt;button class="btn btn-default" name="action" value="updateDemarcheSimplifiee"
   title="Property 'demarcheSimplifiee': compute values from existing values of property 'caracteristiquesDemat'"&gt;
   Compute property "Démarche simplifiée"&lt;/button&gt;
+&lt;button class="btn btn-default" name="action" value="listDemarchesWithDateDemat"
+  title="Property 'dateDemat': list demarches with not empty value"&gt;
+  List demarches having a value for 'dateDemat'&lt;/button&gt;
+
 &lt;/form&gt;
 
 {{/html}}
@@ -237,6 +241,18 @@ class Service {
   void updateDemarcheSimplifiee() {
     propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee", true)
   }
+
+  void listDemarchesWithDateDemat() {
+    def query = computeQuery(", DateProperty as prop", "and prop.id.id = obj.id and prop.id.name = :propertyName")
+    query.bindValue("propertyName", "dateDemat")
+    printHeader("== Property 'dateDemat' ==", query)
+    def entries = query.execute()
+    for (entry in entries) {
+      def doc = xwiki.getDocument(entry, context).clone()
+      def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
+      println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+    }
+  }
 }
 
 def action = request.action
@@ -250,7 +266,7 @@ if (action != null) {
 {{velocity}}
 #set ($action = "$!request.action")
 #set ($actOnDatabase = "$!request.actOnDatabase")
-#if ($action != '' &amp;&amp; $actOnDatabase == '')
+#if ($action != '' &amp;&amp; $actOnDatabase == '' &amp;&amp; $action != 'listDemarchesWithDateDemat')
   {{info}}
 
   {{html clean="false"}}
