@@ -195,11 +195,11 @@
       <dateFormat>MM/yyyy</dateFormat>
       <disabled>0</disabled>
       <emptyIsToday>0</emptyIsToday>
-      <hint/>
+      <hint>Date de mise en ligne prévue ou réalisée</hint>
       <name>dateMiseEnLigne</name>
       <number>37</number>
       <picker>1</picker>
-      <prettyName>Date de mise en ligne prévue ou réalisée</prettyName>
+      <prettyName>Date de mise en ligne</prettyName>
       <size>20</size>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
