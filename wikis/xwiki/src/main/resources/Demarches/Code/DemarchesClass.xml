@@ -108,28 +108,6 @@
       <values>apiparticuliers=API particuliers|apientreprises=API entreprises</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </api>
-    <caracteristiquesDemat>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>checkbox</displayType>
-      <hint>Élement qualitatif permettant de caractériser la dématérialisation</hint>
-      <multiSelect>1</multiSelect>
-      <name>caracteristiquesDemat</name>
-      <number>32</number>
-      <picker>0</picker>
-      <prettyName>Caractéristiques de la dématérialisation</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>apiparticuliers=API particuliers|apientreprises=API entreprises|demarchesimplifiee=Démarche simplifiée|franceconnect=FranceConnect|mobile=Adapté mobile</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </caracteristiquesDemat>
     <categoriesPublics>
       <cache>0</cache>
       <customDisplay/>
@@ -174,22 +152,6 @@
       <values>national=Démarche nationale|local=Démarche territoriale</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </champ>
-    <dateDemat>
-      <customDisplay/>
-      <dateFormat>dd/MM/yyyy</dateFormat>
-      <disabled>0</disabled>
-      <emptyIsToday>1</emptyIsToday>
-      <hint/>
-      <name>dateDemat</name>
-      <number>28</number>
-      <picker>1</picker>
-      <prettyName>Date de dématérialisation</prettyName>
-      <size>20</size>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
-    </dateDemat>
     <dateMiseEnLigne>
       <customDisplay/>
       <dateFormat>MM/yyyy</dateFormat>
@@ -293,7 +255,7 @@
       <disabled>0</disabled>
       <displayFormType>checkbox</displayFormType>
       <displayType/>
-      <hint>Une démarche est considérée comme pouvant être réalisée en ligne complètement si elle est disponible sous la forme d'un formulaire web ou d'un téléservice.</hint>
+      <hint>Une démarche est considérée comme pouvant être réalisée en ligne complètement si l'utilisateur peut effectuer la démarche complètement en ligne, jusqu'au dépôt de la demande.</hint>
       <name>enLigneEntierement</name>
       <number>40</number>
       <prettyName>Peut être réalisée en ligne complètement</prettyName>

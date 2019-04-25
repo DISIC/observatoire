@@ -174,7 +174,7 @@
           (% class="xform" %)
           (((
           &lt;dl&gt;
-          #set ($caracteristiquesPropList = ['niveauDemat', 'enLigneEntierement', 'experimentation', 'deploiementPartiel', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve', 'dateDemat'])
+          #set ($caracteristiquesPropList = ['niveauDemat', 'enLigneEntierement', 'experimentation', 'deploiementPartiel', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
           ## Don't display computed properties in edit mode
           #if ($action == 'edit')
             #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
