@@ -45,14 +45,18 @@
 
 == Gestion des utilisateurs et des groupes ==
 
-* [[Création des groupes associés aux directions&gt;&gt;GroupManager]]
-* [[Restriction des droits d'accès aux profils utilisateurs&gt;&gt;RestrictUsersRights]]
+* [[Création des groupes associés aux directions&gt;&gt;Administration.GroupManager]]
+* [[Restriction des droits d'accès aux profils utilisateurs&gt;&gt;Administration.RestrictUsersRights]]
 * [[Ajout de tous les membres de 'XWikiAllGroup' au groupe 'AdministrateursMinisteriels'&gt;&gt;GroupFiller]]
+
+== Gestion des directions et ministères ==
+
+* [[Création de direction&gt;&gt;Administration.DirectionsManager]]
 
 == Démarches ==
 
-* [[Normalisation des noms de démarches&gt;&gt;DemarcheNormalizer]]
-* [[Scripts de gestion des démarches&gt;&gt;Scripts]]
+* [[Normalisation des noms de démarches&gt;&gt;Administration.DemarcheNormalizer]]
+* [[Scripts de gestion des démarches&gt;&gt;Administration.Scripts]]
 * [[Administration des démarches&gt;&gt;Demarches.Admin.WebHome]]
 
 == Avis ==
