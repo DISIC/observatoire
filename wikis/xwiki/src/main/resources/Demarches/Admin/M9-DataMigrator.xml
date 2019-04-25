@@ -75,9 +75,9 @@ This page contains a script aimed at migrating data in the frame of [[issue #551
 &lt;button class="btn btn-default" name="action" value="updateDemarcheSimplifiee"
   title="Property 'demarcheSimplifiee': compute values from existing values of property 'caracteristiquesDemat'"&gt;
   Compute property "Démarche simplifiée"&lt;/button&gt;
-&lt;button class="btn btn-default" name="action" value="listDemarchesWithDateDemat"
-  title="Property 'dateDemat': list demarches with not empty value"&gt;
-  List demarches having a value for 'dateDemat'&lt;/button&gt;
+&lt;button class="btn btn-default" name="action" value="updateDateMiseEnLigne"
+  title="Property 'dateMiseEnLigne': if empty, update value from 'dateDemat'"&gt;
+  Compute value for 'dateMiseEnLigne'&lt;/button&gt;
 
 &lt;/form&gt;
 
@@ -242,7 +242,7 @@ class Service {
     propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee", true)
   }
 
-  void listDemarchesWithDateDemat() {
+  void updateDateMiseEnLigne() {
     def query = computeQuery(", DateProperty as prop", "and prop.id.id = obj.id and prop.id.name = :propertyName")
     query.bindValue("propertyName", "dateDemat")
     printHeader("== Property 'dateDemat' ==", query)
@@ -250,7 +250,16 @@ class Service {
     for (entry in entries) {
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
-      println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+      def dateDemat = demarche.getDateValue("dateDemat")
+      def dateMiseEnLigne = demarche.getDateValue("dateMiseEnLigne")
+      if (dateMiseEnLigne == null || dateMiseEnLigne.toString() == "") {
+        println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+        if (actOnDatabase) {
+          logger.warn("Update dateMiseEnLigne for {}", doc)
+          demarche.set("dateMiseEnLigne", dateDemat, context)
+          xwiki.saveDocument(doc, "Mise à jour de la propriété 'Date de mise en ligne'", context)
+        }
+      }
     }
   }
 }
