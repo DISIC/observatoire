@@ -77,7 +77,7 @@
     &lt;a href="#"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/a&gt;
   &lt;/div&gt;
   &lt;dl class="demarche-details"&gt;
-    #set ($nomComplet = $demarche.getProperty('nomComplet').value)
+    #set ($nomComplet = $demarche.getValue('nomComplet'))
     #if ($nomComplet &amp;&amp; $nomComplet != $doc.title)
       &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.nomComplet')&lt;/dt&gt;
       &lt;dd&gt;$nomComplet&lt;/dd&gt;
@@ -85,7 +85,7 @@
     #displayArray('evenements', $services.localization.render('Demarches.Code.DemarchesClass_evenements'))
     #displayArray('categoriesPublics', $services.localization.render('Demarches.Code.DemarchesClass_publics'))
     #set ($champsStr = '')
-    #set ($champs = $demarche.getProperty('ministeres').value)
+    #set ($champs = $demarche.getValue('ministeres'))
     #if ($champs &amp;&amp; $champs.size() &gt; 0)
       #foreach ($champ in $champs)
         #set ($nom = $xwiki.getDocument($champ).get('nom'))
@@ -98,12 +98,12 @@
       &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_ministeres')&lt;/dt&gt;
       &lt;dd&gt;$champsStr&lt;/dd&gt;
     #end
-    #set ($objet = $!escapetool.html($demarche.getProperty('objet').value))
+    #set ($objet = $!escapetool.html($demarche.getValue('objet')))
     #if ("$!objet" != '')
       &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_objet')&lt;/dt&gt;
       &lt;dd&gt;$objet&lt;/dd&gt;
     #end
-    #set ($urlInfos = $demarche.getProperty('urlInfos').value)
+    #set ($urlInfos = $demarche.getValue('urlInfos'))
     #if ("$!urlInfos" != '')
       &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.plus')&lt;/dt&gt;
       &lt;dd&gt;$urlInfos&lt;/dd&gt;
