@@ -83,6 +83,8 @@ This page contains a script aimed at migrating data in the frame of [[issue #551
 
 {{groovy}}
 
+import org.xwiki.query.Query
+
 class Service {
 
   def out, xwiki, context, services, actOnDatabase
@@ -107,7 +109,7 @@ class Service {
     out.println(message)
   }
 
-  org.xwiki.query.Query computeQuery(fromClause, whereClause) {
+  Query computeQuery(fromClause, whereClause) {
     def hql = BASE_HQL.replace("FROM_CLAUSE", fromClause)
     hql = hql.replace("WHERE_CLAUSE", whereClause)
     def query = services.query.hql(hql)
@@ -117,8 +119,14 @@ class Service {
     return query
   }
 
-  void printHeader(title) {
+  void printHeader(title, query) {
     println title
+    println "=== Query ==="
+    println "* Statement: {{{$query.statement}}}"
+    for (parameter in query.getNamedParameters()) {
+      println "* Parameter '$parameter.key': $parameter.value"
+    }
+    println "=== Results ==="
     if (actOnDatabase) {
       println "List of demarches that were updated:"
     } else {
@@ -128,13 +136,14 @@ class Service {
 
   // Property "champ": update all values to "national"
   void updateChamp() {
-    printHeader "== Update value of property 'champ' to 'national' =="
     def query = computeQuery("", "")
+    printHeader("== Property 'champ' value update to 'national' ==", query)
     def entries = query.execute()
     for (entry in entries) {
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
       def value = demarche.getStringValue("champ")
+      // Don't update the property value if it's already set to "national"
       if ("national" != value) {
         println "|[[$doc.title&gt;&gt;$doc.fullName]]"
         if (actOnDatabase) {
@@ -148,8 +157,8 @@ class Service {
 
   // Ministeres: merge MCT and MTES
   void updateMinisteres() {
-    printHeader "== Merge values 'MCT' and 'MTES' of property 'ministeres' =="
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", "and prop.id.id = obj.id and prop.id.name = :ministeresPropertyName and (list = 'Ministeres.MCT' or list = 'Ministeres.MTES')")
+    printHeader("== Property 'ministeres': merging MCT and MTES into MECT ==", query)
     query.bindValue('ministeresPropertyName', "ministeres")
     def entries = query.execute()
     for (entry in entries) {
@@ -168,9 +177,10 @@ class Service {
     }
   }
 
-  void propagateDbListPropertyToTrue(whereClause, dbListPropertyName, booleanPropertyName) {
+  void propagateDbListPropertyToTrue(whereClause, dbListPropertyName, booleanPropertyName, isRealBoolean) {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", whereClause)
     query.bindValue("propertyName", dbListPropertyName)
+    printHeader("== Property '$booleanPropertyName' value update ==", query)
     def entries = query.execute()
     for (entry in entries) {
       def doc = xwiki.getDocument(entry, context).clone()
@@ -178,7 +188,7 @@ class Service {
       println "|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
         logger.warn("Update property $booleanPropertyName for {}", doc)
-        if (booleanPropertyName == "enLignEntierement") {
+        if (isRealBoolean) {
           demarche.set(booleanPropertyName, 1, context)
         } else {
           demarche.set(booleanPropertyName, "oui", context)
@@ -191,34 +201,30 @@ class Service {
   // En ligne entièrement : niveauDemat = formulaire or teleprocedure -&gt; true
   // (check that "teleservice" in the specification document means "teleprocedure")
   void updateEnLigneEntierement() {
-    printHeader "== Update value of property 'enLigneEntierement' =="
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and (list = 'formulaire' or list = 'teleprocedure')", "niveauDemat", "enLigneEntierement")
+    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and (list = 'formulaire' or list = 'teleprocedure')", "niveauDemat", "enLigneEntierement", true)
   }
-  
+
   // caracteristiquesDemat:
   // - if franceconnect -&gt; propagate to "franceConnect"
   // - if mobile -&gt; propagate to "adapteMobile"
   // - apientreprises -&gt; propagate to "api" (but not apiparticuliers, see specification)
-  // - demarchesimplifiee -&gt; propagate to demarcheSimplifiee (check)
+  // - demarchesimplifiee -&gt; propagate to demarcheSimplifiee
   void updateFranceConnect() {
-    printHeader "== Update value of property 'franceConnect' =="
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'franceconnect'", "caracteristiquesDemat", "franceConnect")
+    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'franceconnect'", "caracteristiquesDemat", "franceConnect", false)
   }
 
   void updateAdapteMobile() {
-    printHeader "== Update value of property 'adapteMobile' =="
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'mobile'", "caracteristiquesDemat", "adapteMobile")
+    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'mobile'", "caracteristiquesDemat", "adapteMobile", false)
   }
 
   void updateApi() {
-    printHeader "== Update value of property 'api' =="
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", "and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'apientreprises'")
     query.bindValue("propertyName", "caracteristiquesDemat")
+    printHeader("== Property 'api' value update ==", query)
     def entries = query.execute()
     for (entry in entries) {
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
-      def value = demarche.getStringValue("champ")
       println "|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
         logger.warn("Update api for {}", doc)
@@ -229,7 +235,7 @@ class Service {
   }
 
   void updateDemarcheSimplifiee() {
-    printHeader "== Update value of property 'demarcheSimplifiee' =="
+    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee", true)
   }
 }
 
