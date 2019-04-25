@@ -409,7 +409,7 @@
       <name>ministeres</name>
       <number>9</number>
       <picker>1</picker>
-      <prettyName>Ministère(s)</prettyName>
+      <prettyName>Champ ministériel</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
