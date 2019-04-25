@@ -293,7 +293,7 @@
       <disabled>0</disabled>
       <displayFormType>checkbox</displayFormType>
       <displayType/>
-      <hint/>
+      <hint>Une démarche est considérée comme pouvant être réalisée en ligne complètement si elle est disponible sous la forme d'un formulaire web ou d'un téléservice.</hint>
       <name>enLigneEntierement</name>
       <number>40</number>
       <prettyName>Peut être réalisée en ligne complètement</prettyName>
