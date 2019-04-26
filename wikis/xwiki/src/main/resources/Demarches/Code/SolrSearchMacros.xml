@@ -129,7 +129,7 @@
   #if ($text.length() &gt; 5)
     ## TODO: use a dismax query escape function here, don't do it manually, but for now it's ok
     #set($userFilledText = $text.replaceAll(':', '\\:').replaceAll('/', '\\/').replaceAll('"', ''))
-    #set($extraQueryURL = "property.Demarches.Code.DemarchesClass.urlDemarche:(*$!{userFilledText}*) property.Demarches.Code.DemarchesClass.urlInfos:(*$!{userFilledText}*) property.Demarches.Code.DemarchesClass.urlFiche:(*$!{userFilledText}*)")
+    #set($extraQueryURL = "property.Demarches.Code.DemarchesClass.urlDemarche:(*$!{userFilledText}*) property.Demarches.Code.DemarchesClass.urlInfos:(*$!{userFilledText}*)")
   #end
   ## 2. do some cleanup of special characters in the user searched text, for some special cases: replace :// in the url address. 
   ## TODO: I think &amp; and ? should also be escaped if the query string is an URL
