@@ -24,11 +24,11 @@
   <web>CM.Code</web>
   <name>CMTranslations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
-  <parent>CMClass</parent>
+  <parent>CM.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1544396400000</date>
@@ -37,75 +37,7 @@
   <title/>
   <comment/>
   <minorEdit>false</minorEdit>
-  <syntaxId>plain/1.0</syntaxId>
-  <hidden>true</hidden>
-  <content># Class fields
-CM.Code.CMClass_nom=Nom
-CM.Code.CMClass_sigle=Sigle
-CM.Code.CMClass_description=Description
-
-# Live table generic keys
-cm.livetable.doc.title=Titre de la page
-cm.livetable.doc.name=Nom de la page
-cm.livetable.doc.space=Espace
-cm.livetable.doc.fullname=Nom complet de la page
-cm.livetable.doc.location=Emplacement
-cm.livetable.doc.author=Dernier auteur
-cm.livetable.doc.creator=Créateur
-cm.livetable.doc.date=Date de dernière mise à jour
-cm.livetable.doc.creationDate=Date de création
-cm.livetable._avatar=Avatar
-cm.livetable._images=Images
-cm.livetable._attachments=Pièces jointes
-cm.livetable._actions=Actions
-cm.livetable._actions.edit=Modifier
-cm.livetable._actions.delete=Supprimer
-cm.livetable.emptyvalue=-
-
-# Live table specific keys
-cm.livetable.nom=Nom
-cm.livetable.sigle=Sigle
-cm.livetable.description=Description
-
-# Other keys
-cm.entry.name=CM
-
-# Deprecated keys
-cm.dataSpace.title=Data
-</content>
-  <object>
-    <name>CM.Code.CMTranslations</name>
-    <number>0</number>
-    <className>XWiki.TranslationDocumentClass</className>
-    <guid>120ab9a0-584e-4ba3-a12f-6628499e6122</guid>
-    <class>
-      <name>XWiki.TranslationDocumentClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <scope>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>scope</name>
-        <number>1</number>
-        <prettyName>Scope</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>ON_DEMAND|WIKI|USER|GLOBAL</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </scope>
-    </class>
-    <property>
-      <scope>WIKI</scope>
-    </property>
-  </object>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content/>
 </xwikidoc>

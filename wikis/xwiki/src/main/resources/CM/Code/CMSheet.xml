@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
-  <parent>CMClass</parent>
+  <parent>CM.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1544396400000</date>
@@ -38,19 +38,6 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>true</hidden>
-  <content>{{velocity}}
-{{html wiki="true"}}
-#set ($discard = $doc.use('CM.Code.CMClass'))
-(% class="xform" %)
-(((
-  ; &lt;label#if ($xcontext.action == 'edit') for="CM.Code.CMClass_0_nom"#end&gt;$escapetool.xml($doc.displayPrettyName('nom', false, false))&lt;/label&gt;
-  : $doc.display('nom')
-  ; &lt;label#if ($xcontext.action == 'edit') for="CM.Code.CMClass_0_sigle"#end&gt;$escapetool.xml($doc.displayPrettyName('sigle', false, false))&lt;/label&gt;
-  : $doc.display('sigle')
-  ; &lt;label#if ($xcontext.action == 'edit') for="CM.Code.CMClass_0_description"#end&gt;$escapetool.xml($doc.displayPrettyName('description', false, false))&lt;/label&gt;
-  : $doc.display('description')
-)))
-{{/html}}
-{{/velocity}}</content>
+  <hidden>false</hidden>
+  <content/>
 </xwikidoc>

@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
-  <parent>CMClass</parent>
+  <parent>CM.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1544396400000</date>
@@ -38,65 +38,6 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>true</hidden>
+  <hidden>false</hidden>
   <content/>
-  <object>
-    <name>CM.Code.CMTemplate</name>
-    <number>0</number>
-    <className>CM.Code.CMClass</className>
-    <guid>b3990688-e1b4-4cf5-9a95-0233b40fdb8e</guid>
-    <class>
-      <name>CM.Code.CMClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <description>
-        <customDisplay>{{include reference="AppWithinMinutes.Content"/}}</customDisplay>
-        <disabled>0</disabled>
-        <hint/>
-        <name>description</name>
-        <number>3</number>
-        <prettyName>Description</prettyName>
-        <script/>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-      </description>
-      <nom>
-        <customDisplay>{{include reference="AppWithinMinutes.Title"/}}</customDisplay>
-        <disabled>0</disabled>
-        <hint/>
-        <name>nom</name>
-        <number>1</number>
-        <prettyName>Nom</prettyName>
-        <script/>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-      </nom>
-      <sigle>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>sigle</name>
-        <number>2</number>
-        <picker>0</picker>
-        <prettyName>Sigle</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </sigle>
-    </class>
-    <property>
-      <sigle/>
-    </property>
-  </object>
 </xwikidoc>
