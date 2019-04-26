@@ -42,13 +42,13 @@
   <content>{{velocity}}
 {{info}}
 
-This page contains a script aimed at migrating data in the frame of [[issue #551&gt;&gt;https://github.com/DISIC/wikidemarches/issues/551]].
+This page contains a script aimed at migrating data in the frame of issus [[#551&gt;&gt;https://github.com/DISIC/wikidemarches/issues/551]] and [[#556&gt;&gt;https://github.com/DISIC/wikidemarches/issues/556]].
 
 {{html clean="false"}}
 
 #set ($limit = "$!request.limit")
 #if ($limit == '')
-  #set ($limit = 0)
+  #set ($limit = 10)
 #end
 &lt;form action="" method="post"&gt;
 &lt;dl&gt;
@@ -79,6 +79,10 @@ This page contains a script aimed at migrating data in the frame of [[issue #551
   title="Property 'dateMiseEnLigne': if empty, update value from 'dateDemat'"&gt;
   Compute value for 'dateMiseEnLigne'&lt;/button&gt;
 
+&lt;button class="btn btn-default" name="action" value="removeDemarchesDeprecatedProperties"
+  title="Remove demarches deprecated properties"&gt;
+  Remove deprecated properties (to be executed last)&lt;/button&gt;
+  
 &lt;/form&gt;
 
 {{/html}}
@@ -258,6 +262,30 @@ class Service {
           logger.warn("Update dateMiseEnLigne for {}", doc)
           demarche.set("dateMiseEnLigne", dateDemat, context)
           xwiki.saveDocument(doc, "Mise à jour de la propriété 'Date de mise en ligne'", context)
+        }
+      }
+    }
+  }
+
+  void removeDemarchesDeprecatedProperties() {
+    def query = computeQuery("", "")
+    def demarcheClass = xwiki.getClass(DEMARCHE_CLASS_NAME, context)
+    printHeader("== Remove deprecated properties from démarches pages ==", query)
+    def entries = query.execute()
+    for (entry in entries) {
+      def doc = xwiki.getDocument(entry, context).clone()
+      def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
+      def deprecatedProperties = demarcheClass.getDeprecatedObjectProperties(demarche)
+      if (deprecatedProperties != null &amp;&amp; deprecatedProperties.size() &gt; 0) {
+        println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+      }
+      if (actOnDatabase) {
+        if (deprecatedProperties != null &amp;&amp; deprecatedProperties.size() &gt; 0) {
+          for (deprecatedProperty in deprecatedProperties) {
+            demarche.removeField(deprecatedProperty.name)
+          }
+          logger.warn("Remove deprecated properties for {}", doc)
+          xwiki.saveDocument(doc, "Suppression des propriétés dépréciées", context)
         }
       }
     }
