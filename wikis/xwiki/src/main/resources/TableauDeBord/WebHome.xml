@@ -52,11 +52,10 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set($satisfactionLevelInfoLink = "&lt;a href='$escapetool.xml($satisfactionLevelInfo.getURL())' title='$escapetool.xml($satisfactionLevelInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
 #set($dematInfo = $xwiki.getDocument('Main.Dematerialisation'))
 #set($dematInfoLink = "&lt;a href='$escapetool.xml($dematInfo.getURL())' title='$escapetool.xml($dematInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres', 'champsMinisteriels', 'direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'urlFiche', 'niveauDemat', 'niveauDematBoolean', 'dematObligatoire', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie', 'doc.name'])
+#set ($columns = ['doc.title', 'ministeres','direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'niveauDemat', 'niveauDematBoolean', 'dematObligatoire', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie', 'doc.name'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
   'ministeres': {'type' : 'text', 'filterable' : 'true', 'sortable' : 'false'},
-  'champsMinisteriels': {'type' : 'hidden'},
   'direction' : {'type' : 'hidden', 'filterable': 'true', 'sortable' : 'false'},
   'objet': {'type' : 'hidden'},
   'categoriesPublics': {'type' : 'hidden'},
@@ -64,7 +63,6 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'evenements': {'type' : 'hidden'},
   'urlInfos': {'type' : 'hidden'},
   'urlDemarche': {'type' : 'hidden'},
-  'urlFiche': {'type' : 'hidden'},
   'niveauDemat': {'type' : 'hidden'},
   'niveauDematBoolean': {'filterable' : 'false', 'sortable' : 'false'},
   'dematObligatoire': {'type' : 'hidden'},
