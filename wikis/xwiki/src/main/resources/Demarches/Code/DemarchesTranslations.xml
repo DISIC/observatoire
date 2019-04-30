@@ -90,6 +90,22 @@ Demarches.Code.DemarchesClass_dateMiseEnLigne=Date de mise en ligne
 Demarches.Code.DemarchesClass_remarques=Remarques
 Demarches.Code.DemarchesClass_proprietaires_infobox=Pour avoir accès aux fonctionnalités supplémentaires (code d'intégration du formulaire d'avis, résultats des avis, modification des informations sur la démarche, etc), il faut être porteur de cette démarche.
 Demarches.Code.DemarchesClass_proprietaires_button=Je suis porteur de cette démarche
+Demarches.Code.DemarchesClass_proprietaires=Porteurs de la démarche
+Demarches.Code.DemarchesClass_champ=Champ local / national
+Demarches.Code.DemarchesClass_niveauDematBoolean=Niveau de dématérialisation
+Demarches.Code.DemarchesClass_franceConnect=FranceConnect
+Demarches.Code.DemarchesClass_adapteMobile=Adapté mobile
+Demarches.Code.DemarchesClass_moyensDeContact=Moyens de contact
+Demarches.Code.DemarchesClass_accompagnement=Accompagnement
+Demarches.Code.DemarchesClass_qualiteSupport=Support de qualité
+Demarches.Code.DemarchesClass_api=API
+Demarches.Code.DemarchesClass_demarcheSimplifiee=Démarche simplifiée
+Demarches.Code.DemarchesClass_top250=Top 250
+Demarches.Code.DemarchesClass_enLigneEntierement=Peut être réalisée en ligne entièrement
+Demarches.Code.DemarchesClass_experimentation=Expérimentation
+Demarches.Code.DemarchesClass_deploiementPartiel=Déploiement partiel
+Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee=Pourcentage du recours à la voie dématérialisée
+Demarches.Code.DemarchesClass_pourcentageDematerialisation=Pourcentage de dématérialisation
 
 # Live table generic keys
 demarches.livetable.doc.title=Titre de la page
