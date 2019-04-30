@@ -100,7 +100,7 @@ class Service {
   def DEMARCHE_CLASS_NAME = "Demarches.Code.DemarchesClass"
   def DEMARCHE_TEMPLATE_NAME = "Demarches.Code.DemarchesTemplate"
   def DEMARCHE_CLASS_REFERENCE = services.model.resolveDocument(DEMARCHE_CLASS_NAME, 'current')
-  def BASE_HQL = "select doc.fullName from XWikiDocument as doc, BaseObject as obj FROM_CLAUSE where obj.name = doc.fullName and obj.className = :demarcheClassName and doc.fullName &lt;&gt; :demarcheTemplateName WHERE_CLAUSE"
+  def BASE_HQL = "select distinct doc.fullName from XWikiDocument as doc, BaseObject as obj FROM_CLAUSE where obj.name = doc.fullName and obj.className = :demarcheClassName and doc.fullName &lt;&gt; :demarcheTemplateName WHERE_CLAUSE"
   def limit = 0
 
   Service(out, services, xwiki, context, limit, actOnDatabase) {
@@ -112,7 +112,7 @@ class Service {
     this.actOnDatabase = actOnDatabase
     this.logger = services.logging.getLogger("monavis.M9-MigrationScripts")
   }
-  
+
   void println(message) {
     out.println(message)
   }
@@ -147,15 +147,17 @@ class Service {
     def query = computeQuery("", "")
     printHeader("== Property 'champ' value update to 'national' ==", query)
     def entries = query.execute()
+    def counter = 0
     for (entry in entries) {
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
       def value = demarche.getStringValue("champ")
       // Don't update the property value if it's already set to "national"
       if ("national" != value) {
-        println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+        counter++
+        println "|#${counter}|[[$doc.title&gt;&gt;$doc.fullName]]"
         if (actOnDatabase) {
-          logger.warn("updateChamp for {}", doc)
+          logger.warn("#{}: updateChamp for {}", counter, doc)
           demarche.set("champ", "national", context)
           xwiki.saveDocument(doc, "Mise à jour de la propriété 'Démarche nationale / territoriale' à 'national'", context)
         }
@@ -168,17 +170,19 @@ class Service {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", "and prop.id.id = obj.id and prop.id.name = :ministeresPropertyName and (list = 'Ministeres.MCT' or list = 'Ministeres.MTES')")
     printHeader("== Property 'ministeres': merging MCT and MTES into MECT ==", query)
     query.bindValue('ministeresPropertyName', "ministeres")
+    def counter = 0
     def entries = query.execute()
     for (entry in entries) {
+      counter++
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
       def ministeres = demarche.getListValue("ministeres")
-      println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+      println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
-        logger.warn("Update ministeres for {}", doc)
         ministeres.remove("Ministeres.MCT")
         ministeres.remove("Ministeres.MTES")
         ministeres.add("Ministeres.MECT")
+        logger.warn("#{}: Update ministeres for {}", counter, doc)
         demarche.set("ministeres", ministeres, context)
         xwiki.saveDocument(doc, "Réaffectation des ministères MCT et MTES au ministère MECT", context)
       }
@@ -189,13 +193,15 @@ class Service {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", whereClause)
     query.bindValue("propertyName", dbListPropertyName)
     printHeader("== Property '$booleanPropertyName' value update ==", query)
+    def counter = 0
     def entries = query.execute()
     for (entry in entries) {
+      counter++
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
-      println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+      println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
-        logger.warn("Update property $booleanPropertyName for {}", doc)
+        logger.warn("#{}: Update property $booleanPropertyName for {}", counter, doc)
         if (isRealBoolean) {
           demarche.set(booleanPropertyName, 1, context)
         } else {
@@ -229,13 +235,15 @@ class Service {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", "and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'apientreprises'")
     query.bindValue("propertyName", "caracteristiquesDemat")
     printHeader("== Property 'api' value update ==", query)
+    def counter = 0
     def entries = query.execute()
     for (entry in entries) {
+      counter++
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
-      println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+      println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
-        logger.warn("Update api for {}", doc)
+        logger.warn("#{}: Update api for {}", counter, doc)
         demarche.set("api", "apientreprises", context)
         xwiki.saveDocument(doc, "Mise à jour de la propriété 'API' à 'API entreprises'", context)
       }
@@ -251,15 +259,17 @@ class Service {
     query.bindValue("propertyName", "dateDemat")
     printHeader("== Property 'dateDemat' ==", query)
     def entries = query.execute()
+    def counter = 0
     for (entry in entries) {
+      counter++
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
       def dateDemat = demarche.getDateValue("dateDemat")
       def dateMiseEnLigne = demarche.getDateValue("dateMiseEnLigne")
       if (dateMiseEnLigne == null || dateMiseEnLigne.toString() == "") {
-        println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+        println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
         if (actOnDatabase) {
-          logger.warn("Update dateMiseEnLigne for {}", doc)
+          logger.warn("#{}: Update dateMiseEnLigne for {}", counter, doc)
           demarche.set("dateMiseEnLigne", dateDemat, context)
           xwiki.saveDocument(doc, "Mise à jour de la propriété 'Date de mise en ligne'", context)
         }
@@ -272,19 +282,21 @@ class Service {
     def demarcheClass = xwiki.getClass(DEMARCHE_CLASS_NAME, context)
     printHeader("== Remove deprecated properties from démarches pages ==", query)
     def entries = query.execute()
+    def counter = 0
     for (entry in entries) {
+      counter++
       def doc = xwiki.getDocument(entry, context).clone()
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
       def deprecatedProperties = demarcheClass.getDeprecatedObjectProperties(demarche)
       if (deprecatedProperties != null &amp;&amp; deprecatedProperties.size() &gt; 0) {
-        println "|[[$doc.title&gt;&gt;$doc.fullName]]"
+        println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
       }
       if (actOnDatabase) {
         if (deprecatedProperties != null &amp;&amp; deprecatedProperties.size() &gt; 0) {
           for (deprecatedProperty in deprecatedProperties) {
             demarche.removeField(deprecatedProperty.name)
           }
-          logger.warn("Remove deprecated properties for {}", doc)
+          logger.warn("#{}}: Remove deprecated properties for {}", counter, doc)
           xwiki.saveDocument(doc, "Suppression des propriétés dépréciées", context)
         }
       }
