@@ -55,19 +55,26 @@
       <nameField/>
       <validationScript/>
       <accompagnement>
+        <cache>0</cache>
         <customDisplay/>
-        <defaultValue/>
         <disabled>0</disabled>
-        <displayFormType>checkbox</displayFormType>
-        <displayType/>
+        <displayType>radio</displayType>
         <hint/>
+        <multiSelect>0</multiSelect>
         <name>accompagnement</name>
-        <number>35</number>
+        <number>41</number>
+        <picker>0</picker>
         <prettyName>Accompagnement humain personnalisé</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </accompagnement>
       <adapteMobile>
         <cache>0</cache>
@@ -88,7 +95,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>oui=Oui|non=Non|na=Sans objet</values>
+        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </adapteMobile>
       <api>
@@ -173,6 +180,20 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
       </dateMiseEnLigne>
+      <dateMiseEnLigneTexte>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint>Ce champ indique une date d'ouverture approximative par opposition au champ « Date de mise en ligne » qui indique un mois et une année précis.</hint>
+        <name>dateMiseEnLigneTexte</name>
+        <number>41</number>
+        <picker>0</picker>
+        <prettyName>Date approximative d'ouverture du service dématérialisé</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </dateMiseEnLigneTexte>
       <demarcheSimplifiee>
         <customDisplay/>
         <defaultValue/>
@@ -203,21 +224,6 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </dematObligatoire>
-      <deploiementPartiel>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>checkbox</displayFormType>
-        <displayType/>
-        <hint/>
-        <name>deploiementPartiel</name>
-        <number>42</number>
-        <prettyName>Déploiement partiel</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </deploiementPartiel>
       <direction>
         <cache>0</cache>
         <classname/>
@@ -254,21 +260,6 @@
         <valueField/>
         <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
       </direction>
-      <enLigneEntierement>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>checkbox</displayFormType>
-        <displayType/>
-        <hint>Une démarche est considérée comme pouvant être réalisée en ligne complètement si l'utilisateur peut effectuer la démarche complètement en ligne, jusqu'au dépôt de la demande.</hint>
-        <name>enLigneEntierement</name>
-        <number>40</number>
-        <prettyName>Peut être réalisée en ligne complètement</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </enLigneEntierement>
       <evenements>
         <cache>0</cache>
         <classname/>
@@ -309,21 +300,6 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </exclusionSve>
-      <experimentation>
-        <customDisplay/>
-        <defaultValue/>
-        <disabled>0</disabled>
-        <displayFormType>checkbox</displayFormType>
-        <displayType/>
-        <hint/>
-        <name>experimentation</name>
-        <number>41</number>
-        <prettyName>Expérimentation</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </experimentation>
       <formulaires>
         <customDisplay/>
         <disabled>0</disabled>
@@ -357,7 +333,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>oui=Oui|non=Non|na=Sans objet</values>
+        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </franceConnect>
       <groupes>
@@ -428,19 +404,26 @@
         <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
       </ministeres>
       <moyensDeContact>
+        <cache>0</cache>
         <customDisplay/>
-        <defaultValue/>
         <disabled>0</disabled>
-        <displayFormType>checkbox</displayFormType>
-        <displayType/>
+        <displayType>radio</displayType>
         <hint/>
+        <multiSelect>0</multiSelect>
         <name>moyensDeContact</name>
-        <number>34</number>
+        <number>40</number>
+        <picker>0</picker>
         <prettyName>Au moins deux moyens de contact différents, dont un formulaire de contact</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </moyensDeContact>
       <niveauDemat>
         <cache>0</cache>
@@ -568,7 +551,7 @@
       <pourcentageDematerialisation>
         <customDisplay/>
         <disabled>0</disabled>
-        <hint/>
+        <hint>100 % si la démarche peut être réalisée en ligne complètement, 50% si la démarche est en phase de déploiement, et 10% si elle est en phase d’expérimentation</hint>
         <name>pourcentageDematerialisation</name>
         <number>43</number>
         <prettyName>Pourcentage de dématérialisation</prettyName>
@@ -673,16 +656,18 @@ ${percent} %
 #set ($moyensDeContact = $object.getValue('moyensDeContact'))
 ## Set default values in case the properties are empty
 #if ("$!accompagnement" == '')
-  #set ($accompagnement = 0)
+  #set ($accompagnement = 'inconnu')
 #end
 #if ("$!moyensDeContact" == '')
-  #set ($moyensDeContact = 0)
+  #set ($moyensDeContact = 'inconnu')
 #end
+#set ($notAvailableOrUnknown = ['na', 'inconnu'])
 #set ($result = 'Partiel')
-## FIXME
-#if ($accompagnement == 1 &amp;&amp; $moyensDeContact == 1)
+#if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
   #set ($result = 'Oui')
-#elseif ($accompagnement == 0 &amp;&amp; $moyensDeContact == 0)
+#elseif ($accompagnement == 'non' &amp;&amp; $moyensDeContact == 'non')
+  #set ($result = 'Non')
+#elseif (($accompagnement == 'non' &amp;&amp; $notAvailableOrUnknown.contains($moyensDeContact)) || ($moyensDeContact == 'non' &amp;&amp; $notAvailableOrUnknown.contains($accompagnement)))
   #set ($result = 'Non')
 #end
 $result
@@ -752,6 +737,50 @@ $result
         <values>active=Active|inactive=Inactive|demandeUtilisateur=Demande utilisateur|demandePorteur=Demande porteur|nouvelleDemarche=Brouillon</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </statut>
+      <statutDemat>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>radio</displayType>
+        <hint>Une démarche peut être réalisée en ligne complètement si l'utilisateur peut effectuer la démarche complètement via internet, jusqu'au dépôt de la demande, et ce sur l’ensemble du territoire (déploiement achevé). Elle est en expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier. Elle est en déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
+        <multiSelect>0</multiSelect>
+        <name>statutDemat</name>
+        <number>42</number>
+        <picker>0</picker>
+        <prettyName>Peut être réalisée en ligne complètement</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|non=Non|inconnu=Non renseigné</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </statutDemat>
+      <statutIntegration>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>radio</displayType>
+        <hint/>
+        <multiSelect>0</multiSelect>
+        <name>statutIntegration</name>
+        <number>40</number>
+        <picker>0</picker>
+        <prettyName>Avis Nos Démarches intégré ?</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </statutIntegration>
       <statutProjetDemat>
         <cache>0</cache>
         <customDisplay/>
@@ -830,21 +859,21 @@ $result
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
       </title1>
-      <top250>
+      <top>
         <customDisplay/>
         <defaultValue/>
         <disabled>0</disabled>
         <displayFormType>checkbox</displayFormType>
         <displayType/>
         <hint/>
-        <name>top250</name>
+        <name>top</name>
         <number>39</number>
         <prettyName>Top 250</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </top250>
+      </top>
       <urlDemarche>
         <customDisplay/>
         <disabled>0</disabled>
@@ -996,7 +1025,7 @@ $result
       <textes/>
     </property>
     <property>
-      <top250>0</top250>
+      <top>0</top>
     </property>
     <property>
       <urlDemarche/>

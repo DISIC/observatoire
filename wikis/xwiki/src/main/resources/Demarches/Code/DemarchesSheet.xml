@@ -492,22 +492,6 @@ require(['jquery','xwiki-selectize'], function($) {
 
     // NB: several functions in this script make sense only in edit mode, the code could possibly get refactored accordingly
 
-    /**
-     * Synchronizes the state of the form inputs of the following properties: enLigneEntierement, experimentation, deploiementPartiel: only one of the properties can be checked at once.
-     */
-    var enLigneLevelInputs = $("input[id='Demarches.Code.DemarchesClass_0_enLigneEntierement'], input[id='Demarches.Code.DemarchesClass_0_experimentation'], input[id='Demarches.Code.DemarchesClass_0_deploiementPartiel']");
-    enLigneLevelInputs.change(function() {
-      var that = this;
-      // if one of the inputs was checked, uncheck the others
-      if ($(this).prop('checked')) {
-        enLigneLevelInputs.each(function(index, input) {
-          if (input != that) {
-            $(input).prop('checked', false);
-          }
-        });
-      }
-    });
-
   });
 });</code>
     </property>
