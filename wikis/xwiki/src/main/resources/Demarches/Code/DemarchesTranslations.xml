@@ -100,12 +100,11 @@ Demarches.Code.DemarchesClass_accompagnement=Accompagnement
 Demarches.Code.DemarchesClass_qualiteSupport=Support de qualité
 Demarches.Code.DemarchesClass_api=API
 Demarches.Code.DemarchesClass_demarcheSimplifiee=Démarche simplifiée
-Demarches.Code.DemarchesClass_top250=Top 250
-Demarches.Code.DemarchesClass_enLigneEntierement=Peut être réalisée en ligne entièrement
-Demarches.Code.DemarchesClass_experimentation=Expérimentation
-Demarches.Code.DemarchesClass_deploiementPartiel=Déploiement partiel
+Demarches.Code.DemarchesClass_top=Top 250
 Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee=Pourcentage du recours à la voie dématérialisée
-Demarches.Code.DemarchesClass_pourcentageDematerialisation=Pourcentage de dématérialisation
+Demarches.Code.DemarchesClass_statutDemat=Peut être réalisée ligne complètement
+Demarches.Code.DemarchesClass_statutIntegration=Avis Nos Démarches intégré ?
+Demarches.Code.DemarchesClass_dateMiseEnLigneTexte=Date de mise en ligne approximative
 
 # Live table generic keys
 demarches.livetable.doc.title=Titre de la page
@@ -152,13 +151,19 @@ demarches.livetable.niveauDemat=Niveau de dématérialisation actuel
 demarches.livetable.niveauPrevu=Niveau de dématérialisation prévu
 demarches.livetable.dematObligatoire=Dématérialisation obligatoire
 demarches.livetable.exclusionSve=Démarche exclue du SVE
-demarches.livetable.caracteristiquesDemat=Caractéristiques de la dématérialisation
-demarches.livetable.caracteristiquesDematPrevues=Caractéristiques prévues de la dématérialisation
 demarches.livetable.statut=Statut de la démarche
 demarches.livetable.nomProjet=Nom du projet de dématérialisation
 demarches.livetable.statutProjetDemat=Statut du projet de dématérialisation
 demarches.livetable.dateMiseEnLigne=Date de mise en ligne
 demarches.livetable.remarques=Remarques
+demarches.livetable.top=Top 250
+demarches.livetable.statutDemat=Peut être réalisée en ligne complètement
+demarches.livetable.pourcentageRecoursVoieDematerialisee=Pourcentage du recours à la voie dématérialisée
+demarches.livetable.statutIntegration=Démarche intégrée avec MonAvis
+demarches.livetable.franceConnect=FranceConnect
+demarches.livetable.adapteMobile=Adapté mobile
+demarches.livetable.qualiteSupport=Support de qualité
+demarches.livetable.dateMiseEnLigneTexte=Date de mise en ligne approximative
 
 # Other keys
 demarches.entry.name=Demarches
