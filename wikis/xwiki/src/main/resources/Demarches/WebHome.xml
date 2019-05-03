@@ -74,15 +74,26 @@
 #set ($columnsProperties = {
   'doc.title': {'displayName':'Nom','link':'view'},
   'doc.creationDate': {'sortable': true, 'type': 'date'},
-  'evenements': {},
-  'ministeres': {},
-  'direction': {'displayName':'Direction', 'html':true},
-  'groupes': {},
-  'categoriesPublics': {},
-  'niveauDemat': {'displayName':'Niveau démat.'},
-  'statutProjetDemat': {'displayName':'Statut projet'},
   'statut': {'displayName': 'Statut'},
-  '_actions': {'sortable':false,'filterable':false,'html':true,'actions':['edit','delete']}
+  'direction': {'displayName':'Direction', 'html':true},
+  'ministeres': {},
+  'groupes': {},
+  'urlDemarche': {'type': 'hidden'},
+  'categoriesPublics': {'displayName':'Catégories de publics'},
+  'niveauDemat': {'displayName':'Niveau démat.'},
+  'volumetrie': {'type': 'hidden'},
+  'volumetrieDemat': {'type': 'hidden'},
+  'pourcentageRecoursVoieDematerialisee': {'type': 'hidden'},
+  'top': {},
+  'statutDemat': {'displayName': 'Peut être réalisée&lt;br/&gt;en ligne complètement'},
+  'pourcentageDemat': {'type': 'hidden'},
+  'statutIntegration': {'type': 'hidden'},
+  'franceConnect': {'type': 'hidden'},
+  'adapteMobile': {'type': 'hidden'},
+  'qualiteSupport': {'type': 'hidden'},
+  'dateMiseEnLigne': {'type': 'hidden'},
+  'dateMiseEnLigneTexte': {'type': 'hidden'},
+  'remarques': {'type': 'hidden'}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',
@@ -92,12 +103,15 @@
   'maxPages': 10,
   'selectedColumn': 'doc.title',
   'defaultOrder': 'asc',
-  'extraParams' : 'direction/join_mode=or&amp;ministeres/join_mode=or&amp;publics/join_mode=or&amp;evenements/join_mode=or'
+  'extraParams' : 'direction/join_mode=or&amp;ministeres/join_mode=or'
 })
-#set ($columns = ['doc.title', 'doc.creationDate', 'evenements', 'ministeres', 'direction', 'groupes', 'categoriesPublics', 'niveauDemat', 'statut', 'statutProjetDemat' ])
+#set ($columns = [])
+#foreach ($entry in $columnsProperties.keySet())
+  #set ($discard = $columns.add($entry))
+#end
 #livetable('demarches' $columns $columnsProperties $options)
 
-{{livetableExporter livetable="demarches" withAllFields="true" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
+{{livetableExporter livetable="demarches" withPageName="false" filename="demarches_$datetool.get('ddMMyyyyHHmmss')"/}}
 {{/velocity}}</content>
   <object>
     <name>Demarches.WebHome</name>
@@ -202,6 +216,13 @@
 #contentcontainerinner {
   font-size: 14px;
   width: 100%;
+}
+
+/* Align the table header vertically (instead of bottom by default): this is needed because
+ * some multi-line headers such as "statutDemat" create some free space in other cells.
+ */
+th.xwiki-livetable-display-header-text {
+  vertical-align: middle !important;
 }</code>
     </property>
     <property>
