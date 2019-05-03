@@ -449,34 +449,6 @@
       <values>aucun=Aucun|formulaire=Formulaire en ligne|pdfnonremplissable=PDF non remplissable|pdfremplissable=PDF remplissable|edi=EDI|teleprocedure=Téléprocédure</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </niveauDemat>
-    <niveauDematBoolean>
-      <customDisplay>{{velocity}}
-{{html clean='false' wiki='false'}}
-#set ($dematCriteres = ['teleprocedure', 'formulaire'])
-#set ($niveauDemat = $object.getProperty('niveauDemat').value)
-#set ($isDemat = 0)
-#if ($niveauDemat &amp;&amp; $niveauDemat.size() &gt; 0)
-  #foreach ($niveau in $niveauDemat)
-    #if ($dematCriteres.contains($niveau))
-      #set ($isDemat = 1)
-      #break
-    #end
-  #end
-  $services.localization.render("yesno_${isDemat}")
-#end
-{{/html}}
-{{/velocity}}</customDisplay>
-      <disabled>0</disabled>
-      <hint/>
-      <name>niveauDematBoolean</name>
-      <number>27</number>
-      <prettyName>Démarche dématérialisée (oui / non)</prettyName>
-      <script/>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-    </niveauDematBoolean>
     <nomComplet>
       <contenttype>---</contenttype>
       <customDisplay/>
