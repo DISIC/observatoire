@@ -60,14 +60,14 @@ This page contains a script aimed at migrating data in the frame of issus [[#551
   Update property "Démarche nationale / territoriale"&lt;/button&gt;
 &lt;button type="submit" class="btn btn-default" name="action" value="updateMinisteres" title="Property 'ministeres': merge values 'MCT' and 'MTES'"&gt;
   Reaffect MCT/MTES to MECT&lt;/button&gt;
-&lt;button class="btn btn-default" name="action" value="updateEnLigneEntierement"
-  title="Property 'enLigneEntierement': compute value from existing values of property 'niveauDemat': set to true if niveauDemat contains 'formulaire' or 'teleprocedure'"&gt;
+&lt;button class="btn btn-default" name="action" value="updateStatutDemat"
+  title="Property 'statutDemat': compute value from existing values of property 'niveauDemat': set to 'oui' if niveauDemat contains 'formulaire' or 'teleprocedure'"&gt;
   Compute property "Peut-être réalisée en ligne complètement"&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="updateFranceConnect"
-  title="Property 'franceConnect': compute value from existing values of property 'caracteristiquesDemat': set to true if caracteristiquesDemat contains 'franceconnect'"&gt;
+  title="Property 'franceConnect': compute value from existing values of property 'caracteristiquesDemat': set to 'oui' if caracteristiquesDemat contains 'franceconnect'"&gt;
   Compute property "FranceConnect"&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="updateAdapteMobile"
-  title="Property 'adapteMobile': compute value from existing values of property 'caracteristiquesDemat': set to true if caracteristiquesDemat contains 'mobile'"&gt;
+  title="Property 'adapteMobile': compute value from existing values of property 'caracteristiquesDemat': set to 'oui' if caracteristiquesDemat contains 'mobile'"&gt;
   Compute property "Adapté mobile"&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="updateApi"
   title="Property 'api': compute values from existing values of property 'caracteristiquesDemat'"&gt;
@@ -78,7 +78,9 @@ This page contains a script aimed at migrating data in the frame of issus [[#551
 &lt;button class="btn btn-default" name="action" value="updateDateMiseEnLigne"
   title="Property 'dateMiseEnLigne': if empty, update value from 'dateDemat'"&gt;
   Compute value for 'dateMiseEnLigne'&lt;/button&gt;
-
+&lt;button class="btn btn-default" name="action" value="updateEmptyOrInexistentStaticListValueToUnknown"
+  title="Initialize unknown values"&gt;
+  Initialize 'unknown' values&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="removeDemarchesDeprecatedProperties"
   title="Remove demarches deprecated properties"&gt;
   Remove deprecated properties (to be executed last)&lt;/button&gt;
@@ -100,6 +102,7 @@ class Service {
   def DEMARCHE_CLASS_NAME = "Demarches.Code.DemarchesClass"
   def DEMARCHE_TEMPLATE_NAME = "Demarches.Code.DemarchesTemplate"
   def DEMARCHE_CLASS_REFERENCE = services.model.resolveDocument(DEMARCHE_CLASS_NAME, 'current')
+  def STATIC_LIST_UNKNOWN_VALUE = "inconnu"
   def BASE_HQL = "select distinct doc.fullName from XWikiDocument as doc, BaseObject as obj FROM_CLAUSE where obj.name = doc.fullName and obj.className = :demarcheClassName and doc.fullName &lt;&gt; :demarcheTemplateName WHERE_CLAUSE"
   def limit = 0
 
@@ -189,10 +192,10 @@ class Service {
     }
   }
 
-  void propagateDbListPropertyToTrue(whereClause, dbListPropertyName, booleanPropertyName, isRealBoolean) {
+  void propagateDbListPropertyToYes(whereClause, dbListPropertyName, targetPropertyName) {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", whereClause)
     query.bindValue("propertyName", dbListPropertyName)
-    printHeader("== Property '$booleanPropertyName' value update ==", query)
+    printHeader("== Property '$targetPropertyName' value update ==", query)
     def counter = 0
     def entries = query.execute()
     for (entry in entries) {
@@ -201,34 +204,30 @@ class Service {
       def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
       println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
-        logger.warn("#{}: Update property $booleanPropertyName for {}", counter, doc)
-        if (isRealBoolean) {
-          demarche.set(booleanPropertyName, 1, context)
-        } else {
-          demarche.set(booleanPropertyName, "oui", context)
-        }
-        xwiki.saveDocument(doc, "Mise à jour de la propriété '$booleanPropertyName' à 'oui'", context)
+        logger.warn("#{}: Update property $targetPropertyName for {}", counter, doc)
+        demarche.set(targetPropertyName, "oui", context)
+        xwiki.saveDocument(doc, "Mise à jour de la propriété '$targetPropertyName' à 'oui'", context)
       }
     }
   }
 
   // En ligne entièrement : niveauDemat = formulaire or teleprocedure -&gt; true
   // (check that "teleservice" in the specification document means "teleprocedure")
-  void updateEnLigneEntierement() {
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and (list = 'formulaire' or list = 'teleprocedure')", "niveauDemat", "enLigneEntierement", true)
+  void updateStatutDemat() {
+    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and (list = 'formulaire' or list = 'teleprocedure')", "niveauDemat", "statutDemat")
   }
 
   // caracteristiquesDemat:
-  // - if franceconnect -&gt; propagate to "franceConnect"
-  // - if mobile -&gt; propagate to "adapteMobile"
+  // - if franceconnect -&gt; propagate to "franceConnect" = "oui"
+  // - if mobile -&gt; propagate to "adapteMobile" = "oui"
   // - apientreprises -&gt; propagate to "api" (but not apiparticuliers, see specification)
   // - demarchesimplifiee -&gt; propagate to demarcheSimplifiee
   void updateFranceConnect() {
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'franceconnect'", "caracteristiquesDemat", "franceConnect", false)
+    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'franceconnect'", "caracteristiquesDemat", "franceConnect")
   }
 
   void updateAdapteMobile() {
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'mobile'", "caracteristiquesDemat", "adapteMobile", false)
+    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'mobile'", "caracteristiquesDemat", "adapteMobile")
   }
 
   void updateApi() {
@@ -251,7 +250,7 @@ class Service {
   }
 
   void updateDemarcheSimplifiee() {
-    propagateDbListPropertyToTrue("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee", true)
+    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee")
   }
 
   void updateDateMiseEnLigne() {
@@ -273,6 +272,45 @@ class Service {
           demarche.set("dateMiseEnLigne", dateDemat, context)
           xwiki.saveDocument(doc, "Mise à jour de la propriété 'Date de mise en ligne'", context)
         }
+      }
+    }
+  }
+
+  // Initialize the following static lists to 'inconnu' if value is empty or inexistent
+  void updateEmptyOrInexistentStaticListValueToUnknown() {
+    def query = computeQuery("", "")
+    printHeader("== Initialization to value 'inconnu' ==", query)
+    def demarcheClass = xwiki.getClass(DEMARCHE_CLASS_NAME, context)
+    def propertiesWithUnknownValueOption = []
+    for (propertyName in demarcheClass.getPropertyNames()) {
+      def property = demarcheClass.getField(propertyName)
+      if (property instanceof com.xpn.xwiki.objects.classes.StaticListClass) {
+        def keySet = property.getMap(context).keySet()
+        if (keySet.contains('inconnu')) {
+          propertiesWithUnknownValueOption.add(property)
+        }
+      }
+    }
+    def entries = query.execute()
+    def counter = 0
+    for (entry in entries) {
+      def doc = xwiki.getDocument(entry, context).clone()
+      def demarche = doc.getXObject(DEMARCHE_CLASS_REFERENCE)
+      counter++
+      boolean saveIsNeeded = false
+      println "|#${counter}|[[$doc.title&gt;&gt;$doc.fullName]]|((("
+      for (property in propertiesWithUnknownValueOption) {
+        def value = demarche.getStringValue(property.name)
+        if (value == null || value.trim().length() == 0) {
+          println "* ${property.name} $value"
+          demarche.set(property.name, STATIC_LIST_UNKNOWN_VALUE, context)
+          saveIsNeeded = true
+        }
+      }
+      println ")))"
+      if (saveIsNeeded &amp;&amp; actOnDatabase) {
+        logger.warn("#{}: Initialize values for {}", counter, doc)
+        xwiki.saveDocument(doc, "Initialization de champs à la valeur 'non renseigné'", context)
       }
     }
   }
