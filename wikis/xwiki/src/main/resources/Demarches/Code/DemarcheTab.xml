@@ -153,7 +153,7 @@
         (% class="xform" %)
         (((
         &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top250'])
+        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
         #if ($action == 'edit')
           #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
         #end
@@ -174,7 +174,7 @@
           (% class="xform" %)
           (((
           &lt;dl&gt;
-          #set ($caracteristiquesPropList = ['niveauDemat', 'enLigneEntierement', 'experimentation', 'deploiementPartiel', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
+          #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve', 'statutIntegration'])
           ## Don't display computed properties in edit mode
           #if ($action == 'edit')
             #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
@@ -188,7 +188,7 @@
     &lt;/div&gt;
     #end
     &lt;div class="panel panel-default"&gt;
-      &lt;div class="panel-heading"&gt;Qualités de la dématérialisation&lt;/div&gt;
+      &lt;div class="panel-heading"&gt;Qualité de la dématérialisation&lt;/div&gt;
       &lt;div class="panel-body"&gt;
         (% class="xform" %)
           (((
@@ -235,7 +235,7 @@
           (% class="xform" %)
           (((
           &lt;dl&gt;
-          #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne'])
+          #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'dateMiseEnLigneTexte'])
             #displayProperty($object, $propName, false, $action)
           #end
           &lt;/dl&gt;
