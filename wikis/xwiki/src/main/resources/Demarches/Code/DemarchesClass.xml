@@ -68,7 +68,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+      <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </accompagnement>
     <adapteMobile>
@@ -90,7 +90,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values> oui=Oui|non=Non|partiel=Partiel|na=Sans objet|inconnu=Non renseigné</values>
+      <values>oui=Oui|non=Non|partiel=Partiel|na=Sans objet|inconnu=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </adapteMobile>
     <api>
@@ -335,7 +335,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+      <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </franceConnect>
     <groupes>
@@ -424,7 +424,7 @@
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+      <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </moyensDeContact>
     <niveauDemat>
