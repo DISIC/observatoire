@@ -190,19 +190,26 @@
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </dateMiseEnLigneTexte>
     <demarcheSimplifiee>
+      <cache>0</cache>
       <customDisplay/>
-      <defaultValue/>
       <disabled>0</disabled>
-      <displayFormType>checkbox</displayFormType>
-      <displayType/>
+      <displayType>radio</displayType>
       <hint/>
+      <multiSelect>0</multiSelect>
       <name>demarcheSimplifiee</name>
-      <number>38</number>
+      <number>41</number>
+      <picker>0</picker>
       <prettyName>Démarche simplifiée</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      <values>oui=Oui|non=Non|inconnu=Non renseigné</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </demarcheSimplifiee>
     <dematObligatoire>
       <customDisplay/>
