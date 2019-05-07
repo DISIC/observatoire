@@ -42,7 +42,7 @@
   <content>{{velocity}}
 {{info}}
 
-This page contains a script aimed at migrating data in the frame of issus [[#551&gt;&gt;https://github.com/DISIC/wikidemarches/issues/551]] and [[#556&gt;&gt;https://github.com/DISIC/wikidemarches/issues/556]].
+This page contains a script aimed at migrating data in the frame of issues [[#551&gt;&gt;https://github.com/DISIC/wikidemarches/issues/551]] and [[#556&gt;&gt;https://github.com/DISIC/wikidemarches/issues/556]].
 
 {{html clean="false"}}
 
@@ -192,7 +192,7 @@ class Service {
     }
   }
 
-  void propagateDbListPropertyToYes(whereClause, dbListPropertyName, targetPropertyName) {
+  void propagateDbListProperty(whereClause, dbListPropertyName, targetPropertyName, propertyValue) {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", whereClause)
     query.bindValue("propertyName", dbListPropertyName)
     printHeader("== Property '$targetPropertyName' value update ==", query)
@@ -205,8 +205,8 @@ class Service {
       println "|#$counter|[[$doc.title&gt;&gt;$doc.fullName]]"
       if (actOnDatabase) {
         logger.warn("#{}: Update property $targetPropertyName for {}", counter, doc)
-        demarche.set(targetPropertyName, "oui", context)
-        xwiki.saveDocument(doc, "Mise à jour de la propriété '$targetPropertyName' à 'oui'", context)
+        demarche.set(targetPropertyName, propertyValue, context)
+        xwiki.saveDocument(doc, "Mise à jour de la propriété '$targetPropertyName'", context)
       }
     }
   }
@@ -214,7 +214,7 @@ class Service {
   // En ligne entièrement : niveauDemat = formulaire or teleprocedure -&gt; true
   // (check that "teleservice" in the specification document means "teleprocedure")
   void updateStatutDemat() {
-    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and (list = 'formulaire' or list = 'teleprocedure')", "niveauDemat", "statutDemat")
+    propagateDbListProperty("and prop.id.id = obj.id and prop.id.name = :propertyName and (list = 'formulaire' or list = 'teleprocedure')", "niveauDemat", "statutDemat", "enLigneEntierement")
   }
 
   // caracteristiquesDemat:
@@ -223,11 +223,11 @@ class Service {
   // - apientreprises -&gt; propagate to "api" (but not apiparticuliers, see specification)
   // - demarchesimplifiee -&gt; propagate to demarcheSimplifiee
   void updateFranceConnect() {
-    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'franceconnect'", "caracteristiquesDemat", "franceConnect")
+    propagateDbListProperty("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'franceconnect'", "caracteristiquesDemat", "franceConnect", "oui")
   }
 
   void updateAdapteMobile() {
-    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'mobile'", "caracteristiquesDemat", "adapteMobile")
+    propagateDbListProperty("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'mobile'", "caracteristiquesDemat", "adapteMobile", "oui")
   }
 
   void updateApi() {
@@ -244,13 +244,13 @@ class Service {
       if (actOnDatabase) {
         logger.warn("#{}: Update api for {}", counter, doc)
         demarche.set("api", "apientreprises", context)
-        xwiki.saveDocument(doc, "Mise à jour de la propriété 'API' à 'API entreprises'", context)
+        xwiki.saveDocument(doc, "Mise à jour de la propriété 'API'", context)
       }
     }
   }
 
   void updateDemarcheSimplifiee() {
-    propagateDbListPropertyToYes("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee")
+    propagateDbListProperty("and prop.id.id = obj.id and prop.id.name = :propertyName and list = 'demarchesimplifiee'", "caracteristiquesDemat", "demarcheSimplifiee", "oui")
   }
 
   void updateDateMiseEnLigne() {
