@@ -73,7 +73,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </accompagnement>
       <adapteMobile>
@@ -95,7 +95,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <values>oui=Oui|non=Non|partiel=Partiel|na=Sans objet|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </adapteMobile>
       <api>
@@ -195,19 +195,26 @@
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </dateMiseEnLigneTexte>
       <demarcheSimplifiee>
+        <cache>0</cache>
         <customDisplay/>
-        <defaultValue/>
         <disabled>0</disabled>
-        <displayFormType>checkbox</displayFormType>
-        <displayType/>
+        <displayType>radio</displayType>
         <hint/>
+        <multiSelect>0</multiSelect>
         <name>demarcheSimplifiee</name>
-        <number>38</number>
+        <number>41</number>
+        <picker>0</picker>
         <prettyName>Démarche simplifiée</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+        <values>oui=Oui|non=Non|inconnu=Non renseigné</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </demarcheSimplifiee>
       <dematObligatoire>
         <customDisplay/>
@@ -333,7 +340,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </franceConnect>
       <groupes>
@@ -422,7 +429,7 @@
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values> oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
+        <values>oui=Oui|non=Non|na=Sans objet|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </moyensDeContact>
       <niveauDemat>
@@ -447,34 +454,6 @@
         <values>aucun=Aucun|formulaire=Formulaire en ligne|pdfnonremplissable=PDF non remplissable|pdfremplissable=PDF remplissable|edi=EDI|teleprocedure=Téléprocédure</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </niveauDemat>
-      <niveauDematBoolean>
-        <customDisplay>{{velocity}}
-{{html clean='false' wiki='false'}}
-#set ($dematCriteres = ['teleprocedure', 'formulaire'])
-#set ($niveauDemat = $object.getProperty('niveauDemat').value)
-#set ($isDemat = 0)
-#if ($niveauDemat &amp;&amp; $niveauDemat.size() &gt; 0)
-  #foreach ($niveau in $niveauDemat)
-    #if ($dematCriteres.contains($niveau))
-      #set ($isDemat = 1)
-      #break
-    #end
-  #end
-  $services.localization.render("yesno_${isDemat}")
-#end
-{{/html}}
-{{/velocity}}</customDisplay>
-        <disabled>0</disabled>
-        <hint/>
-        <name>niveauDematBoolean</name>
-        <number>27</number>
-        <prettyName>Démarche dématérialisée (oui / non)</prettyName>
-        <script/>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
-      </niveauDematBoolean>
       <nomComplet>
         <contenttype>---</contenttype>
         <customDisplay/>
@@ -742,7 +721,7 @@ $result
         <customDisplay/>
         <disabled>0</disabled>
         <displayType>radio</displayType>
-        <hint>Une démarche peut être réalisée en ligne complètement si l'utilisateur peut effectuer la démarche complètement via internet, jusqu'au dépôt de la demande, et ce sur l’ensemble du territoire (déploiement achevé). Elle est en expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier. Elle est en déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
+        <hint>Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; Non dans le cas contraire ; Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
         <multiSelect>0</multiSelect>
         <name>statutDemat</name>
         <number>42</number>
@@ -932,10 +911,10 @@ $result
       </volumetrieDemat>
     </class>
     <property>
-      <accompagnement>0</accompagnement>
+      <accompagnement>inconnu</accompagnement>
     </property>
     <property>
-      <adapteMobile/>
+      <adapteMobile>inconnu</adapteMobile>
     </property>
     <property>
       <api/>
@@ -950,19 +929,16 @@ $result
       <dateMiseEnLigne/>
     </property>
     <property>
-      <demarcheSimplifiee>0</demarcheSimplifiee>
+      <dateMiseEnLigneTexte/>
+    </property>
+    <property>
+      <demarcheSimplifiee>inconnu</demarcheSimplifiee>
     </property>
     <property>
       <dematObligatoire>0</dematObligatoire>
     </property>
     <property>
-      <deploiementPartiel>0</deploiementPartiel>
-    </property>
-    <property>
       <direction/>
-    </property>
-    <property>
-      <enLigneEntierement>0</enLigneEntierement>
     </property>
     <property>
       <evenements/>
@@ -971,13 +947,10 @@ $result
       <exclusionSve>0</exclusionSve>
     </property>
     <property>
-      <experimentation>0</experimentation>
-    </property>
-    <property>
       <formulaires/>
     </property>
     <property>
-      <franceConnect/>
+      <franceConnect>inconnu</franceConnect>
     </property>
     <property>
       <groupes/>
@@ -986,7 +959,7 @@ $result
       <ministeres/>
     </property>
     <property>
-      <moyensDeContact>0</moyensDeContact>
+      <moyensDeContact>inconnu</moyensDeContact>
     </property>
     <property>
       <niveauDemat/>
@@ -1017,6 +990,12 @@ $result
     </property>
     <property>
       <statut>nouvelleDemarche</statut>
+    </property>
+    <property>
+      <statutDemat>inconnu</statutDemat>
+    </property>
+    <property>
+      <statutIntegration>inconnu</statutIntegration>
     </property>
     <property>
       <statutProjetDemat>encours</statutProjetDemat>
