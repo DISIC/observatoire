@@ -716,7 +716,7 @@ $result
       <customDisplay/>
       <disabled>0</disabled>
       <displayType>radio</displayType>
-      <hint>Une démarche peut être réalisée en ligne complètement si l'utilisateur peut effectuer la démarche complètement via internet, jusqu'au dépôt de la demande, et ce sur l’ensemble du territoire (déploiement achevé). Elle est en expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier. Elle est en déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
+      <hint>Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; Non dans le cas contraire ; Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
       <multiSelect>0</multiSelect>
       <name>statutDemat</name>
       <number>42</number>
@@ -730,7 +730,7 @@ $result
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|non=Non|inconnu=Non renseigné</values>
+      <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|nonDemat=Non|inconnu=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutDemat>
     <statutIntegration>
