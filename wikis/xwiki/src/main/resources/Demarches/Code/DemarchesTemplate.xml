@@ -735,7 +735,7 @@ $result
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|non=Non|inconnu=Non renseigné</values>
+        <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|nonDemat=Non|inconnu=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </statutDemat>
       <statutIntegration>
