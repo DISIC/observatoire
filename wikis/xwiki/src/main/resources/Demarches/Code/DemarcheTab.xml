@@ -153,7 +153,7 @@
         (% class="xform" %)
         (((
         &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
+        #set ($propList = ['statutIntegration', 'categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
         #if ($action == 'edit')
           #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
         #end
@@ -174,7 +174,7 @@
           (% class="xform" %)
           (((
           &lt;dl&gt;
-          #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve', 'statutIntegration'])
+          #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
           ## Don't display computed properties in edit mode
           #if ($action == 'edit')
             #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
