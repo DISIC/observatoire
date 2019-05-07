@@ -187,6 +187,7 @@
       &lt;/div&gt;
     &lt;/div&gt;
     #end
+    #if (!$isSimplifiedForm)
     &lt;div class="panel panel-default"&gt;
       &lt;div class="panel-heading"&gt;Qualité de la dématérialisation&lt;/div&gt;
       &lt;div class="panel-body"&gt;
@@ -214,6 +215,7 @@
           )))
       &lt;/div&gt;
     &lt;/div&gt;
+    #end
     &lt;div class="panel panel-default"&gt;
       &lt;div class="panel-heading"&gt;Remarques&lt;/div&gt;
       &lt;div class="panel-body"&gt;
