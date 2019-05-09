@@ -21,14 +21,14 @@
 -->
 
 <xwikidoc version="1.3" reference="Ministeres.Code.MinisteresImport" locale="">
-  <web>Ministeres.Code</web>
+  <web>Administration</web>
   <name>MinisteresImport</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1527500194000</creationDate>
-  <parent>wikidemat:Ministeres.Code.WebHome</parent>
+  <parent>Administration.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1528901433000</date>
