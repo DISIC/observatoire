@@ -72,28 +72,32 @@
 
 {{velocity}}
 #set ($columnsProperties = {
-  'doc.title': {'displayName':'Nom','link':'view'},
-  'doc.creationDate': {'sortable': true, 'type': 'date'},
-  'statut': {'displayName': 'Statut'},
-  'direction': {'displayName':'Direction', 'html':true},
   'ministeres': {},
   'groupes': {},
-  'urlDemarche': {'type': 'hidden'},
+  'doc.title': {'displayName':'Nom','link':'view'},
   'categoriesPublics': {'displayName':'Catégories de publics'},
+  'direction': {'displayName':'Direction', 'html':true},
+  'statutDemat': {'displayName': 'Peut être réalisée&lt;br/&gt;en ligne complètement'},
   'niveauDemat': {'displayName':'Niveau démat.'},
+  'pourcentageDemat': {'type': 'hidden'},
+  'dateMiseEnLigne': {'type': 'hidden'},
+  'dateMiseEnLigneTexte': {'type': 'hidden'},
+  'moyenne' : {'class' : 'Avis.Code.AvisStatsClass', 'type': 'hidden'},
+  'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'type': 'hidden'},
   'volumetrie': {'type': 'hidden'},
   'volumetrieDemat': {'type': 'hidden'},
   'pourcentageRecoursVoieDematerialisee': {'type': 'hidden'},
-  'top': {},
-  'statutDemat': {'displayName': 'Peut être réalisée&lt;br/&gt;en ligne complètement'},
-  'pourcentageDemat': {'type': 'hidden'},
   'statutIntegration': {'type': 'hidden'},
   'franceConnect': {'type': 'hidden'},
   'adapteMobile': {'type': 'hidden'},
   'qualiteSupport': {'type': 'hidden'},
-  'dateMiseEnLigne': {'type': 'hidden'},
-  'dateMiseEnLigneTexte': {'type': 'hidden'},
-  'remarques': {'type': 'hidden'}
+  'moyensDeContact': {'type': 'hidden'},
+  'accompagnement': {'type': 'hidden'},
+  'urlDemarche': {'type': 'hidden'},
+  'remarques': {'type': 'hidden'},
+  'top': {},
+  'doc.creationDate': {'sortable': true, 'type': 'date'},
+  'statut': {'displayName': 'Statut'}
 })
 #set ($options = {
   'className': 'Demarches.Code.DemarchesClass',

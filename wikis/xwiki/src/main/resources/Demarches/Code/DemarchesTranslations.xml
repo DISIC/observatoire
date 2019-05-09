@@ -121,6 +121,7 @@ demarches.livetable._actions.delete=Supprimer
 demarches.livetable.emptyvalue=-
 
 # Live table specific keys
+demarches.livetable.doc.title=Nom
 demarches.livetable.title1=Nom
 demarches.livetable.nomComplet=Nom complet
 demarches.livetable.formulaires=Formulaires CERFA
@@ -150,11 +151,13 @@ demarches.livetable.remarques=Remarques
 demarches.livetable.top=Top 250
 demarches.livetable.statutDemat=Peut être réalisée en ligne complètement
 demarches.livetable.pourcentageRecoursVoieDematerialisee=Pourcentage du recours à la voie dématérialisée
-demarches.livetable.statutIntegration=Démarche intégrée avec MonAvis
+demarches.livetable.statutIntegration=Avis Nos Démarches intégré ?
 demarches.livetable.franceConnect=FranceConnect
 demarches.livetable.adapteMobile=Adapté mobile
 demarches.livetable.qualiteSupport=Support de qualité
 demarches.livetable.dateMiseEnLigneTexte=Date de mise en ligne approximative
+demarches.livetable.moyenne=Indice de satisfaction usagers
+demarches.livetable.occurrences=Nombre d'avis usagers
 
 # Other keys
 demarches.entry.name=Demarches
