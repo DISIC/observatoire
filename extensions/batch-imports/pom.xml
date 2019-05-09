@@ -12,6 +12,6 @@
     <packaging>pom</packaging>
     <description>BatchImport configurations</description>
     <modules>
-        <module>batch-import-ui</module>
+        <module>batch-imports-ui</module>
     </modules>
 </project>

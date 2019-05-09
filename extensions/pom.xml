@@ -11,5 +11,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>tools</module>
+        <module>batch-imports</module>
     </modules>
 </project>
