@@ -78,9 +78,9 @@ This page contains a script aimed at migrating data in the frame of issues [[#55
 &lt;button class="btn btn-default" name="action" value="updateDateMiseEnLigne"
   title="Property 'dateMiseEnLigne': if empty, update value from 'dateDemat'"&gt;
   Compute value for 'dateMiseEnLigne'&lt;/button&gt;
-&lt;button class="btn btn-default" name="action" value="updateEmptyOrInexistentStaticListValueToUnknown"
-  title="Initialize unknown values"&gt;
-  Initialize 'unknown' values&lt;/button&gt;
+&lt;button class="btn btn-default" name="action" value="updateEmptyOrInexistentStaticListValueToNoInformation"
+  title="Initialize 'no information' values"&gt;
+  Initialize 'no information' values&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="removeDemarchesDeprecatedProperties"
   title="Remove demarches deprecated properties"&gt;
   Remove deprecated properties (to be executed last)&lt;/button&gt;
@@ -102,7 +102,7 @@ class Service {
   def DEMARCHE_CLASS_NAME = "Demarches.Code.DemarchesClass"
   def DEMARCHE_TEMPLATE_NAME = "Demarches.Code.DemarchesTemplate"
   def DEMARCHE_CLASS_REFERENCE = services.model.resolveDocument(DEMARCHE_CLASS_NAME, 'current')
-  def STATIC_LIST_UNKNOWN_VALUE = "inconnu"
+  def STATIC_LIST_NO_INFORMATION_VALUE = "nr"
   def BASE_HQL = "select distinct doc.fullName from XWikiDocument as doc, BaseObject as obj FROM_CLAUSE where obj.name = doc.fullName and obj.className = :demarcheClassName and doc.fullName &lt;&gt; :demarcheTemplateName WHERE_CLAUSE"
   def limit = 0
 
@@ -276,18 +276,18 @@ class Service {
     }
   }
 
-  // Initialize the following static lists to 'inconnu' if value is empty or inexistent
-  void updateEmptyOrInexistentStaticListValueToUnknown() {
+  // Initialize the following static lists to 'nr' (non renseigné) if value is empty or inexistent
+  void updateEmptyOrInexistentStaticListValueToNoInformation() {
     def query = computeQuery("", "")
-    printHeader("== Initialization to value 'inconnu' ==", query)
+    printHeader("== Initialization to value 'nr' (non renseigné) ==", query)
     def demarcheClass = xwiki.getClass(DEMARCHE_CLASS_NAME, context)
-    def propertiesWithUnknownValueOption = []
+    def propertiesWithNoInformationValueOption = []
     for (propertyName in demarcheClass.getPropertyNames()) {
       def property = demarcheClass.getField(propertyName)
       if (property instanceof com.xpn.xwiki.objects.classes.StaticListClass) {
         def keySet = property.getMap(context).keySet()
-        if (keySet.contains('inconnu')) {
-          propertiesWithUnknownValueOption.add(property)
+        if (keySet.contains('nr')) {
+          propertiesWithNoInformationValueOption.add(property)
         }
       }
     }
@@ -299,11 +299,11 @@ class Service {
       counter++
       boolean saveIsNeeded = false
       println "|#${counter}|[[$doc.title&gt;&gt;$doc.fullName]]|((("
-      for (property in propertiesWithUnknownValueOption) {
+      for (property in propertiesWithNoInformationValueOption) {
         def value = demarche.getStringValue(property.name)
         if (value == null || value.trim().length() == 0) {
           println "* ${property.name} $value"
-          demarche.set(property.name, STATIC_LIST_UNKNOWN_VALUE, context)
+          demarche.set(property.name, STATIC_LIST_NO_INFORMATION_VALUE, context)
           saveIsNeeded = true
         }
       }
