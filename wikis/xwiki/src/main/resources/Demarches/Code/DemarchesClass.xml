@@ -160,7 +160,20 @@
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </champ>
     <dateMiseEnLigne>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($statutDemat = "$!object.getValue('statutDemat')")
+#if ($type == 'edit')
+  #template('displayer_date.vm')
+#else
+  #if ("$!value" != '')
+    #template('displayer_date.vm')
+  #else
+    Non renseigné
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <dateFormat>MM/yyyy</dateFormat>
       <disabled>0</disabled>
       <emptyIsToday>0</emptyIsToday>
@@ -893,7 +906,22 @@ $result
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </volumetrie>
     <volumetrieDemat>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($statutDemat = "$!object.getValue('statutDemat')")
+#if ($type == 'edit')
+&lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="30" type="text" value="$!value"&gt;
+#else
+  #if ($statutDemat == '' || $statutDemat == 'nonDemat' || $statutDemat == 'nr')
+    Sans objet
+  #elseif ("$!value" != '')
+    $value
+  #else
+    Non renseigné
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint>Nombre de démarches reçues par la voie d'une téléprocédure ou d'un EDI par an.</hint>
       <name>volumetrieDemat</name>
