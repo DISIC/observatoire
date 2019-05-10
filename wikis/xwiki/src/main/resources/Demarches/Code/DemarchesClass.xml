@@ -630,19 +630,21 @@ ${percent} %
 #set ($moyensDeContact = $object.getValue('moyensDeContact'))
 ## Set default values in case the properties are empty
 #if ("$!accompagnement" == '')
-  #set ($accompagnement = 'inconnu')
+  #set ($accompagnement = 'nr')
 #end
 #if ("$!moyensDeContact" == '')
-  #set ($moyensDeContact = 'inconnu')
+  #set ($moyensDeContact = 'nr')
 #end
-#set ($notAvailableOrUnknown = ['na', 'inconnu'])
+#set ($notApplicableOrNoInformation = ['na', 'nr'])
 #set ($result = 'Partiel')
 #if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
   #set ($result = 'Oui')
 #elseif ($accompagnement == 'non' &amp;&amp; $moyensDeContact == 'non')
   #set ($result = 'Non')
-#elseif (($accompagnement == 'non' &amp;&amp; $notAvailableOrUnknown.contains($moyensDeContact)) || ($moyensDeContact == 'non' &amp;&amp; $notAvailableOrUnknown.contains($accompagnement)))
+#elseif (($accompagnement == 'non' &amp;&amp; $notApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'non' &amp;&amp; $notApplicableOrNoInformation.contains($accompagnement)))
   #set ($result = 'Non')
+#elseif ($accompagnement == 'nr' &amp;&amp; $moyensDeContact == 'nr')
+  #set ($result = 'Non renseigné')
 #end
 $result
 {{/html}}
