@@ -92,6 +92,11 @@
 
   &lt;form action="" method="post"&gt;
   #includeForm("Demarches.Code.DemarcheTab")
+  ## Initialize all fields to value 'nr' (non renseigné)
+  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'statutIntegration', 'moyensDeContact', 'accompagnement', 'statutDemat', 'demarcheSimplifiee'])
+  #foreach ($propertyName in $propertyNames)
+    &lt;input type="hidden" id="Demarches.Code.DemarchesClass_0_$propertyName" name="Demarches.Code.DemarchesClass_0_$propertyName" value="nr"&gt;
+  #end
   &lt;input type="hidden" name="csrf" value="$services.csrf.token"/&gt;
   &lt;input type="hidden" name="language" value="fr"/&gt;
   &lt;input type="hidden" name="xredirect" value=""/&gt;
