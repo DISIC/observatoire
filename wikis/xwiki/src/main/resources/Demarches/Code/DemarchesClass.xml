@@ -892,7 +892,19 @@ $result
       <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
     </urlInfos>
     <volumetrie>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+&lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="30" type="text" value="$!value"&gt;
+#else
+  #if ("$!value" != '')
+    $value
+  #else
+    Non renseigné
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint>Nombre total de démarches reçues par an (estimation)</hint>
       <name>volumetrie</name>
