@@ -54,6 +54,11 @@ Vous ne pouvez en tant qu’usager ou accompagnant évaluer qu’une seule fois 
 
 == Vie privée ==
 
+=== Informations de connexion et d'appareil ===
+
+Lorsque vous donnez votre avis sur une démarche administrative sur le site, nous recevons des informations relatives à votre ordinateur, téléphone ou autre outil que vous utilisez pour accéder à MonAvis. Nous pouvons par exemple avoir accès à votre adresse IP, ou aux URLs d'entrée ou de sortie. Le volume d'information recueillie dépend de la configuration de votre appareil et de votre navigateur.
+Nous stockons votre adresse IP de façon temporaire pour des raisons d'analyse technique, et nous ne la partageons avec aucun partenaire autre que les prestataires techniques ayant des engagements de confidentialité.
+
 === Cookies ===
 
 Nous collectons des données anonymes d’audience du site, dans le respect des conditions définies par la recommandation « Cookies » de la Commission nationale informatique et libertés (CNIL).
@@ -74,7 +79,7 @@ Direction interministérielle du numérique et du système d'information et de c
 
 Monsieur Nadi Bou Hanna, Directeur interministériel du numérique et du système d'information et de communication de l'État (DINSIC).
 
-=== Prestataire d'hébergement ===
+=== Prestataires d'hébergement ===
 
 XWiki SAS
 
@@ -92,6 +97,5 @@ Code APE 6202A
 N° TVA : FR 22 424 761 419
 Siège social : 2 rue Kellermann
 59100 Roubaix
-France
-</content>
+France</content>
 </xwikidoc>
