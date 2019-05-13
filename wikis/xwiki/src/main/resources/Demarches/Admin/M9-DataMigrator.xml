@@ -50,16 +50,24 @@ This page contains a script aimed at migrating data in the frame of issues [[#55
 #if ($limit == '')
   #set ($limit = 10)
 #end
+#set ($targetMinistry = "$!request.targetMinistry")
+#if ($targetMinistry == '')
+  #set ($targetMinistry = "MECT")
+#end
 &lt;form action="" method="post"&gt;
 &lt;dl&gt;
   &lt;dt&gt;Query limit:&lt;/dt&gt;
   &lt;dd&gt;&lt;input type="text" name="limit" value="$limit"/&gt;
+  &lt;dt&gt;New identifier for MCT / MTES&lt;/dt&gt;
+  &lt;dd&gt;&lt;input type="text" name="targetMinistry" value="$targetMinistry"/&gt;
  &lt;/dl&gt;
+
+
 
 &lt;button type="submit" class="btn btn-default" name="action" value="updateChamp" title="Property 'champ': update all demarches to 'national'"&gt;
   Update property "Démarche nationale / territoriale"&lt;/button&gt;
 &lt;button type="submit" class="btn btn-default" name="action" value="updateMinisteres" title="Property 'ministeres': merge values 'MCT' and 'MTES'"&gt;
-  Reaffect MCT/MTES to MECT&lt;/button&gt;
+  Reaffect MCT/MTES&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="updateStatutDemat"
   title="Property 'statutDemat': compute value from existing values of property 'niveauDemat': set to 'oui' if niveauDemat contains 'formulaire' or 'teleprocedure'"&gt;
   Compute property "Peut-être réalisée en ligne complètement"&lt;/button&gt;
@@ -105,12 +113,14 @@ class Service {
   def STATIC_LIST_NO_INFORMATION_VALUE = "nr"
   def BASE_HQL = "select distinct doc.fullName from XWikiDocument as doc, BaseObject as obj FROM_CLAUSE where obj.name = doc.fullName and obj.className = :demarcheClassName and doc.fullName &lt;&gt; :demarcheTemplateName WHERE_CLAUSE"
   def limit = 0
+  def targetMinistry = ""
 
-  Service(out, services, xwiki, context, limit, actOnDatabase) {
+  Service(out, services, xwiki, context, targetMinistry, limit, actOnDatabase) {
     this.out = out
     this.services = services
     this.xwiki = xwiki
     this.context = context
+    this.targetMinistry = targetMinistry
     this.limit = limit
     this.actOnDatabase = actOnDatabase
     this.logger = services.logging.getLogger("monavis.M9-MigrationScripts")
@@ -171,7 +181,7 @@ class Service {
   // Ministeres: merge MCT and MTES
   void updateMinisteres() {
     def query = computeQuery(", DBStringListProperty as prop join prop.list list", "and prop.id.id = obj.id and prop.id.name = :ministeresPropertyName and (list = 'Ministeres.MCT' or list = 'Ministeres.MTES')")
-    printHeader("== Property 'ministeres': merging MCT and MTES into MECT ==", query)
+    printHeader("== Property 'ministeres': merging MCT and MTES into $targetMinistry ==", query)
     query.bindValue('ministeresPropertyName', "ministeres")
     def counter = 0
     def entries = query.execute()
@@ -184,10 +194,10 @@ class Service {
       if (actOnDatabase) {
         ministeres.remove("Ministeres.MCT")
         ministeres.remove("Ministeres.MTES")
-        ministeres.add("Ministeres.MECT")
+        ministeres.add("Ministeres." + targetMinistry.toString())
         logger.warn("#{}: Update ministeres for {}", counter, doc)
         demarche.set("ministeres", ministeres, context)
-        xwiki.saveDocument(doc, "Réaffectation des ministères MCT et MTES au ministère MECT", context)
+        xwiki.saveDocument(doc, "Réaffectation des ministères MCT et MTES au ministère $targetMinistry", context)
       }
     }
   }
@@ -344,7 +354,7 @@ class Service {
 
 def action = request.action
 if (action != null) {
-  def service =  new Service(out, services, xwiki.XWiki, xcontext.context, new Integer(request.limit), new Boolean(request.actOnDatabase))
+  def service =  new Service(out, services, xwiki.XWiki, xcontext.context, request.targetMinistry, new Integer(request.limit), new Boolean(request.actOnDatabase))
   service."$action"()
 }
 {{/groovy}}
@@ -360,6 +370,7 @@ if (action != null) {
   &lt;form action="" method="post"&gt;
   &lt;input type="hidden" name="actOnDatabase" value="true"/&gt;
   &lt;input type="hidden" name="limit" value="$!request.limit"/&gt;
+  &lt;input type="hidden" name="targetMinistry" value="$!request.targetMinistry"/&gt;
   &lt;button class="btn btn-default" name="action" value="$action"&gt;Confirm&lt;/button&gt;
 
   {{/html}}
