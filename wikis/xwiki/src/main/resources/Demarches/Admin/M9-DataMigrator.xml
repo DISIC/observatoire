@@ -48,11 +48,11 @@ This page contains a script aimed at migrating data in the frame of issues [[#55
 
 #set ($limit = "$!request.limit")
 #if ($limit == '')
-  #set ($limit = 10)
+  #set ($limit = 0)
 #end
 #set ($targetMinistry = "$!request.targetMinistry")
 #if ($targetMinistry == '')
-  #set ($targetMinistry = "MECT")
+  #set ($targetMinistry = "MTES-MCT")
 #end
 &lt;form action="" method="post"&gt;
 &lt;dl&gt;
@@ -91,7 +91,7 @@ This page contains a script aimed at migrating data in the frame of issues [[#55
   Initialize 'no information' values&lt;/button&gt;
 &lt;button class="btn btn-default" name="action" value="removeDemarchesDeprecatedProperties"
   title="Remove demarches deprecated properties"&gt;
-  Remove deprecated properties (to be executed last)&lt;/button&gt;
+  Remove deprecated properties&lt;/button&gt;
   
 &lt;/form&gt;
 
