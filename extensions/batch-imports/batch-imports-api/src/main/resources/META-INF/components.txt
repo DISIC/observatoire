@@ -1,0 +1,1 @@
+com.xwiki.projects.dinsic.wikidemarches.extensions.batchimports.DemarcheRowDataPostprocessor

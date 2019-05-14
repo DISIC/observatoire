@@ -155,6 +155,36 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </fileupload>
+      <filterstyles>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType/>
+        <hint/>
+        <name>filterstyles</name>
+        <number>14</number>
+        <prettyName>filterstyles</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </filterstyles>
+      <honoremptyvalues>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType/>
+        <hint/>
+        <name>honoremptyvalues</name>
+        <number>15</number>
+        <prettyName>Honor empty values</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </honoremptyvalues>
       <listseparator>
         <disabled>0</disabled>
         <name>listseparator</name>
@@ -231,7 +261,7 @@
       <datafileprefix/>
     </property>
     <property>
-      <defaultdateformat>MM/yyyy</defaultdateformat>
+      <defaultdateformat></defaultdateformat>
     </property>
     <property>
       <fieldsfortags/>
@@ -247,25 +277,26 @@
     </property>
     <property>
       <mapping>Avis Nos-Démarches intégré ?=statutIntegration
+Commentaires administration + annonce CITP=remarques
 Ministère=ministeres
 Date d'ouverture du service dématérialisé=dateMiseEnLigne
-FranceConnect=franceConnect
+FranceConnect particulier ?=franceConnect
 Groupe=groupes
 Volumétrie de la démarche=volumetrie
-Date d’ouverture approximative du service dématérialisé=dateMiseEnLigneTexte
-Accessible sur  smartphone=adapteMobile
-Top=top
-Référence Nos Démarches=doc.name
+Date d'ouverture du service dématérialisé=dateMiseEnLigneTexte
+Accessible sur  smartphone ?=adapteMobile
+Constant:1=top
+Référence NosDémarches (à ne pas supprimer)=doc.name
 Volumétrie du recours à la voie dématérialisée=volumetrieDemat
-URL de la démarche=urlDemarche
-Nom=doc.title
-Moyens de contact=moyensDeContact
-Accompagnement=accompagnement
+URL de la démarches=urlDemarche
+Démarches Iconiques=doc.title
+Support de qualité ?=moyensDeContact
+Support de qualité ?=accompagnement
 Peut-être réalisée en ligne complètement ?=statutDemat
-Direction=direction</mapping>
+Administration concernée=direction</mapping>
     </property>
     <property>
-      <metadatafilename>190509-top-demarches-import.csv</metadatafilename>
+      <metadatafilename></metadatafilename>
     </property>
     <property>
       <pageprefix/>
