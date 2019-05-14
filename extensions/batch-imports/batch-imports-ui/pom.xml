@@ -32,4 +32,11 @@
   <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports-ui</artifactId>
   <name>DINSIC Wiki Demarches - Batch Imports UI</name>
   <packaging>xar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
+      <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>
