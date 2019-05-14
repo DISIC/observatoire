@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>MinisteresClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -42,6 +42,7 @@
   <content># Class fields
 Ministeres.Code.MinisteresClass_title1=Nom
 Ministeres.Code.MinisteresClass_sigle=Sigle
+Ministeres.Code.MinisteresClass_nom=Nom du ministère
 
 # Live table generic keys
 ministeres.livetable.doc.title=Titre de la page
@@ -64,6 +65,7 @@ ministeres.livetable.emptyvalue=-
 # Live table specific keys
 ministeres.livetable.title1=Nom
 ministeres.livetable.sigle=Sigle
+ministeres.livetable.nom=Nom
 
 # Other keys
 ministeres.entry.name=Ministeres
@@ -75,7 +77,7 @@ ministeres.dataSpace.title=Data
     <name>Ministeres.Code.MinisteresTranslations</name>
     <number>0</number>
     <className>XWiki.TranslationDocumentClass</className>
-    <guid>b46a38fe-f3f8-4f10-9c52-db94e55a05e7</guid>
+    <guid>fc58c07d-305c-4a65-9886-227d3cb3841d</guid>
     <class>
       <name>XWiki.TranslationDocumentClass</name>
       <customClass/>

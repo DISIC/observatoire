@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1526657566000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1527605248000</date>
-  <contentUpdateDate>1526657566000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Ministères</title>
   <comment/>
@@ -41,7 +41,8 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'doc.title': {"link":"view"},
+  'sigle': {},
+  'nom': {},
   'doc.date': {},
   'doc.author': {"link":"author"},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
@@ -50,19 +51,19 @@
   'className': 'Ministeres.Code.MinisteresClass',
   'translationPrefix': 'ministeres.livetable.',
   'tagCloud': true,
-  'rowCount': 100,
+  'rowCount': 15,
   'maxPages': 10,
-  'selectedColumn': 'doc.title',
+  'selectedColumn': 'sigle',
   'defaultOrder': 'asc'
 })
-#set ($columns = ['doc.title', 'doc.date', 'doc.author', '_actions'])
+#set ($columns = ['sigle', 'nom', 'doc.date', 'doc.author', '_actions'])
 #livetable('ministeres' $columns $columnsProperties $options)
 {{/velocity}}</content>
   <attachment>
     <filename>ministeres.csv</filename>
     <mimetype>text/csv</mimetype>
     <author>xwiki:XWiki.Admin</author>
-    <date>1526659628000</date>
+    <date>1544396400000</date>
     <version>1.1</version>
     <comment/>
     <content>SUQsU2lnbGUsTm9tDQpBQyxBQyxBdXRvcml0w6kgZGUgbGEgY29uY3VycmVuY2UNCkNOSUwsQ05JTCxDTklMDQpJREYsSURGLElERg0KTUEsTUEsTUENCk1BQUYsTUFBRixNQUFGDQpNQUVFLE1BRUUsTUFFRQ0KTUFTUyxNQVNTLE1BU1MNCk1DQyxNQ0MsTUNDDQpNRSxNRSxNRQ0KTUVTUixNRVNSLE1FU1INCk1JLE1JLE1JDQpNSU5FRixNSU5FRixNSU5FRg0KTUosTUosTUoNCk1TQ1MsTVNDUyxNU0NTDQpNVEVGUCxNVEVGUCxNVEVGUA0KTVRFUyxNVEVTLE1URVMNClBNLFBNLFBN</content>
@@ -72,7 +73,7 @@
     <name>Ministeres.WebHome</name>
     <number>0</number>
     <className>AppWithinMinutes.LiveTableClass</className>
-    <guid>272f4b68-a0df-4239-9656-1c26b8a59b9f</guid>
+    <guid>9f7e2824-4ef9-40d3-84f7-700ee895917d</guid>
     <class>
       <name>AppWithinMinutes.LiveTableClass</name>
       <customClass/>
@@ -147,14 +148,19 @@
       <dataSpace/>
     </property>
     <property>
-      <description/>
+      <description>{{velocity}}
+#if ($hasAdmin)
+  {{livetableExporter livetable="ministeres" withPageURL="false" filename="ministeres"/}}
+#end
+{{/velocity}}
+</description>
     </property>
   </object>
   <object>
     <name>Ministeres.WebHome</name>
     <number>0</number>
     <className>XWiki.UIExtensionClass</className>
-    <guid>43fa2403-274a-4e89-b16c-d7e55384da15</guid>
+    <guid>91c2a5d4-b4e6-4d12-b271-a91aa4087618</guid>
     <class>
       <name>XWiki.UIExtensionClass</name>
       <customClass/>
