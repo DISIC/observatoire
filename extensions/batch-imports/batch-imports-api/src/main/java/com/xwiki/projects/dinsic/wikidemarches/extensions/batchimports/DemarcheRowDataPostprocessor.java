@@ -81,6 +81,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String HEADER_COMMENT_3 = "Commentaires UX/ test";
 
+    public static String HEADER_URL = "URL de la démarches";
+
     public static String DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION = "statutDemat";
 
     public static String DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE = "dateMiseEnLigne";
@@ -101,10 +103,12 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String DEMARCHE_PROPERTY_MOYENS_DE_CONTACT = "moyensDeContact";
 
+    public static String DEMARCHE_PROPERTY_URL = "urlDemarche";
+
     public static String DEMARCHE_PROPERTY_REMARQUES = "remarques";
 
-
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
+
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
 
     /**
@@ -125,6 +129,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
         processSupportDeQualite(data, row, headers);
         processComments(data, row, rowIndex, headers, config);
+        processUrl(data, row, headers);
     }
 
     // Trim all values, since some input files sometimes contain values with surrounding spaces (e.g. directions)
@@ -165,7 +170,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                     // importing wrong data
                     throw new RuntimeException("Invalid date input");
                 }
-
             } else {
 
                 dateMiseEnLigneAsString = value.replaceAll("^\\?$", "");
@@ -302,9 +306,17 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         data.put(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT, moyensDeContact);
     }
 
+    protected void processUrl(Map<String, String> data, List<String> row, List<String> headers)
+    {
+        String value = getRowDataByHeader(row, HEADER_URL, headers);
+        if ("?".equals(value) || "-".equals(value)) {
+            data.put(DEMARCHE_PROPERTY_URL, "");
+        }
+    }
+
     /**
-     * Set higher priority than the listidentifier postprocessor in particular so that values get trimmed
-     * and preprocessed (hence lower value).
+     * Set higher priority than the listidentifier postprocessor in particular so that values get trimmed and
+     * preprocessed (hence lower value).
      *
      * @see RowDataPostprocessor#getPriority()
      */
