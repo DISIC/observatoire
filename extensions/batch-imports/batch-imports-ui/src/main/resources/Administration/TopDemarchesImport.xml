@@ -273,6 +273,9 @@
       <fileupload/>
     </property>
     <property>
+      <honoremptyvalues>1</honoremptyvalues>
+    </property>
+    <property>
       <listseparator>,</listseparator>
     </property>
     <property>
