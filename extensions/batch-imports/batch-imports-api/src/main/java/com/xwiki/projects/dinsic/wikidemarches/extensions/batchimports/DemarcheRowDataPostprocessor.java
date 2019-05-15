@@ -192,31 +192,33 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             BatchImportConfiguration config)
     {
         // Concatenate all comments to the possibly existing "remarques" property value
-        try {
-            DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
-            DocumentReference reference =
-                    defaultBatchImport.getPageName(data, rowIndex, config, null);
-            XWikiContext xcontext = this.xwikiContextProvider.get();
-            XWiki xwiki = xcontext.getWiki();
-            XWikiDocument document = xwiki.getDocument(reference, xcontext);
-            String classReference = config.getMappingClassName();
-            BaseObject baseObject = document.getXObject(resolver.resolve(classReference));
-            String remarques = "";
-            if (baseObject != null) {
-                remarques = baseObject.getLargeStringValue(DEMARCHE_PROPERTY_REMARQUES);
-            }
-            String comment1 =
-                    maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
-            String comment2 = maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
-            String comment3 = maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
+        DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
+        DocumentReference reference =
+                defaultBatchImport.getPageName(data, rowIndex, config, null);
+        if (reference != null) {
+            try {
+                XWikiContext xcontext = this.xwikiContextProvider.get();
+                XWiki xwiki = xcontext.getWiki();
+                XWikiDocument document = xwiki.getDocument(reference, xcontext);
+                String classReference = config.getMappingClassName();
+                BaseObject baseObject = document.getXObject(resolver.resolve(classReference));
+                String remarques = "";
+                if (baseObject != null) {
+                    remarques = baseObject.getLargeStringValue(DEMARCHE_PROPERTY_REMARQUES);
+                }
+                String comment1 =
+                        maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
+                String comment2 = maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
+                String comment3 = maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
 
-            String joined =
-                    Stream.of(remarques, comment1, comment2, comment3)
-                            .filter(s -> StringUtils.isNotEmpty(s))
-                            .collect(Collectors.joining("\n\n")).trim();
-            data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
-        } catch (XWikiException e) {
-            logger.warn("Exception while concatenating data for row " + rowIndex, e);
+                String joined =
+                        Stream.of(remarques, comment1, comment2, comment3)
+                                .filter(s -> StringUtils.isNotEmpty(s))
+                                .collect(Collectors.joining("\n\n")).trim();
+                data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
+            } catch (XWikiException e) {
+                logger.warn("Exception while concatenating data for row " + rowIndex, e);
+            }
         }
     }
 
