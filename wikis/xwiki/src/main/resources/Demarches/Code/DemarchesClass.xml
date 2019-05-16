@@ -648,16 +648,16 @@ ${percent} %
 #if ("$!moyensDeContact" == '')
   #set ($moyensDeContact = 'nr')
 #end
-#set ($notApplicableOrNoInformation = ['na', 'nr'])
-#set ($result = 'Partiel')
+#set ($noOrnotApplicableOrNoInformation = ['non', 'na', 'nr'])
+#set ($result = 'Non')
 #if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
   #set ($result = 'Oui')
-#elseif ($accompagnement == 'non' &amp;&amp; $moyensDeContact == 'non')
-  #set ($result = 'Non')
-#elseif (($accompagnement == 'non' &amp;&amp; $notApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'non' &amp;&amp; $notApplicableOrNoInformation.contains($accompagnement)))
-  #set ($result = 'Non')
-#elseif ($accompagnement == 'nr' &amp;&amp; $moyensDeContact == 'nr')
+#elseif (($accompagnement == 'nr' &amp;&amp; ($moyensDeContact == 'nr' || $moyensDeContact == 'na')) || ($moyensDeContact == 'nr' &amp;&amp; ($accompagnement == 'nr' || $accompagnement == 'na')))
   #set ($result = 'Non renseigné')
+#elseif ($accompagnement == 'na' &amp;&amp; $moyensDeContact == 'na')
+  #set ($result = 'Sans objet')
+#elseif (($accompagnement == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($accompagnement)))
+  #set ($result = 'Partiel')
 #end
 $result
 {{/html}}
