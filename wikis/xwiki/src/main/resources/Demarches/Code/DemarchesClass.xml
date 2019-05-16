@@ -767,7 +767,7 @@ $result
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>oui=Oui|non=Non|na=Sans objet|nr=Non renseigné</values>
+      <values>oui=Oui|non=Non|na=Sans objet|nr=À venir</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutIntegration>
     <statutProjetDemat>
