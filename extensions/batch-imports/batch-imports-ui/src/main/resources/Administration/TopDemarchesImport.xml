@@ -34,7 +34,7 @@
   <date>1557430511000</date>
   <contentUpdateDate>1557412503000</contentUpdateDate>
   <version>1.1</version>
-  <title>TopDemarchesImport</title>
+  <title>Top Démarches Import</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -261,7 +261,7 @@
       <datafileprefix/>
     </property>
     <property>
-      <defaultdateformat></defaultdateformat>
+      <defaultdateformat/>
     </property>
     <property>
       <fieldsfortags/>
