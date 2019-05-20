@@ -118,7 +118,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      */
     @Override
     public void postProcessRow(Map<String, String> data, List<String> row, int rowIndex, Map<String, String> mapping,
-            List<String> headers, BatchImportConfiguration config)
+        List<String> headers, BatchImportConfiguration config)
     {
         trimAllValues(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
@@ -145,12 +145,12 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     // Process column "Date d'ouverture du service dématérialisé" and convert its values to 2 property values:
     // dateMiseEnLigne and dateMiseEnLigneTexte, according to the following conversion rules:
-    // - "?"          -> "", ""
-    // - "n/a"        -> "", ""
-    // - "2022"       -> "01/12/2022", "2022"
-    // - "Sep-2019"   -> "01/09/2019", ""
-    // - "2020-2021"  -> "01/12/2020", "2020-2021"
-    // - "2020?"      -> "01/12/2020", "2020"
+    // - "?" -> "", ""
+    // - "n/a" -> "", ""
+    // - "2022" -> "01/12/2022", "2022"
+    // - "Sep-2019" -> "01/09/2019", ""
+    // - "2020-2021" -> "01/12/2020", "2020-2021"
+    // - "2020?" -> "01/12/2020", "2020"
 
     protected void processDateOuverture(Map<String, String> data)
     {
@@ -189,12 +189,11 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     protected void processComments(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
-            BatchImportConfiguration config)
+        BatchImportConfiguration config)
     {
         // Concatenate all comments to the possibly existing "remarques" property value
         DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
-        DocumentReference reference =
-                defaultBatchImport.getPageName(data, rowIndex, config, null);
+        DocumentReference reference = defaultBatchImport.getPageName(data, rowIndex, config, null);
         if (reference != null) {
             try {
                 XWikiContext xcontext = this.xwikiContextProvider.get();
@@ -206,15 +205,12 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                 if (baseObject != null) {
                     remarques = baseObject.getLargeStringValue(DEMARCHE_PROPERTY_REMARQUES);
                 }
-                String comment1 =
-                        maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
+                String comment1 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
                 String comment2 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
                 String comment3 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
 
-                String joined =
-                        Stream.of(remarques, comment1, comment2, comment3)
-                                .filter(s -> StringUtils.isNotEmpty(s))
-                                .collect(Collectors.joining("\n\n")).trim();
+                String joined = Stream.of(remarques, comment1, comment2, comment3)
+                    .filter(s -> StringUtils.isNotEmpty(s)).collect(Collectors.joining("\n\n")).trim();
                 data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
             } catch (XWikiException e) {
                 logger.warn("Exception while concatenating data for row " + rowIndex, e);
@@ -243,7 +239,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     protected void processNumbers(Map<String, String> data)
     {
         String[] propertyNames =
-                new String[]{ DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION };
+            new String[] {DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION};
         for (String propertyName : propertyNames) {
             String value = data.get(propertyName);
             if ("?".equals(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
@@ -278,16 +274,15 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     // Infers the values of "accompagnement" and "moyens de contact" using the following rule:
-    // - support de qualité = oui     -> accompagnement = oui and moyens de contact = oui
+    // - support de qualité = oui -> accompagnement = oui and moyens de contact = oui
     // - support de qualité = partiel -> accompagnement = oui and moyens de contact = non
-    // - support de qualité = non     -> accompagnement = non and moyens de contact = non
-    // - support de qualité = na      -> accompagnement = na and moyens de contact = na
-    // - support de qualité = nr      -> accompagnement = nr and moyens de contact = nr
+    // - support de qualité = non -> accompagnement = non and moyens de contact = non
+    // - support de qualité = na -> accompagnement = na and moyens de contact = na
+    // - support de qualité = nr -> accompagnement = nr and moyens de contact = nr
     // - summary: "accompagnement" and "moyens de contact" have the same value as "support de qualité" except
     // when value is "partiel"
 
-    protected void processSupportDeQualite
-            (Map<String, String> data, List<String> row, List<String> headers)
+    protected void processSupportDeQualite(Map<String, String> data, List<String> row, List<String> headers)
     {
         String value = getRowDataByHeader(row, HEADER_SUPPORT_DE_QUALITE, headers);
         value = normalizeStaticListValue(value);
