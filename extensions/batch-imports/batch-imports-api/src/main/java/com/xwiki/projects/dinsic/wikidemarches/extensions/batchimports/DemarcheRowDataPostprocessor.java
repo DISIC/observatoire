@@ -207,9 +207,9 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                     remarques = baseObject.getLargeStringValue(DEMARCHE_PROPERTY_REMARQUES);
                 }
                 String comment1 =
-                        maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
-                String comment2 = maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
-                String comment3 = maybeAddHeading(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
+                        maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
+                String comment2 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
+                String comment3 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
 
                 String joined =
                         Stream.of(remarques, comment1, comment2, comment3)
@@ -232,10 +232,10 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         }
     }
 
-    protected String maybeAddHeading(String value, String heading)
+    protected String maybeAddLabel(String value, String label)
     {
         if (StringUtils.isNotEmpty(value)) {
-            return "== " + heading + " ==\n\n" + value;
+            return label.trim() + " : " + value;
         }
         return value;
     }
