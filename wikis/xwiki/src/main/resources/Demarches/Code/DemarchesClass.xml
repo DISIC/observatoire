@@ -577,13 +577,13 @@ ${percent} %
 #set ($volumetrieDemat = $object.getValue("volumetrieDemat"))
 #set ($volumetrie = $object.getValue("volumetrie"))
 #set ($volumetrieDemat = $volumetrieDemat * 100)
-#if ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
+#if ($statutDemat == 'nonDemat')
+  {{translation key="Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_na" /}}
+#elseif ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
   #set ($percent = $mathtool.div($volumetrieDemat, $volumetrie))
   $numbertool.format("${escapetool.hash}${escapetool.hash}.${escapetool.hash}", $percent) %
-#elseif ($statutDemat == 'nonDemat')
-  Sans objet
 #else
-  Non renseigné
+  {{translation key="Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_nr" /}}
 #end
 {{/html}}
 {{/velocity}}</script>
@@ -903,7 +903,7 @@ $result
   #if ("$!value" != '')
     $value
   #else
-    Non renseigné
+    {{translation key="Demarches.Code.DemarchesClass_volumetrie_nr" /}}
   #end
 #end
 {{/html}}
@@ -928,11 +928,11 @@ $result
 &lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="30" type="text" value="$!value"&gt;
 #else
   #if ($statutDemat == 'nonDemat')
-    Sans objet
+    {{translation key="Demarches.Code.DemarchesClass_volumetrieDemat_na" /}}
   #elseif ("$!value" != '')
     $value
   #else
-    Non renseigné
+    {{translation key="Demarches.Code.DemarchesClass_volumetrieDemat_nr" /}}
   #end
 #end
 {{/html}}
