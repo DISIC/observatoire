@@ -44,7 +44,7 @@ Demarches.Code.DemarchesClass_title1=Nom
 Demarches.Code.DemarchesClass_nomComplet=Nom complet
 Demarches.Code.DemarchesClass_formulaires=Formulaires CERFA
 Demarches.Code.DemarchesClass_objet=Objet
-Demarches.Code.DemarchesClass_ministeres=Champ ministériel
+Demarches.Code.DemarchesClass_ministeres=Ministère(s)
 Demarches.Code.DemarchesClass_direction=Direction ou établissement
 Demarches.Code.DemarchesClass_groupes=Groupes
 Demarches.Code.DemarchesClass_organismesTraitement=Organismes de traitement
@@ -99,7 +99,7 @@ Demarches.Code.DemarchesClass_demarcheSimplifiee=Démarche simplifiée
 Demarches.Code.DemarchesClass_top=Top 250
 Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee=Pourcentage du recours à la voie dématérialisée
 Demarches.Code.DemarchesClass_statutDemat=Peut être réalisée ligne complètement
-Demarches.Code.DemarchesClass_statutIntegration=Avis Nos Démarches intégré ?
+Demarches.Code.DemarchesClass_statutIntegration=Avis MonAvis intégré ?
 Demarches.Code.DemarchesClass_dateMiseEnLigneTexte=Date de mise en ligne approximative
 
 # Live table generic keys
@@ -151,7 +151,7 @@ demarches.livetable.remarques=Remarques
 demarches.livetable.top=Top 250
 demarches.livetable.statutDemat=Peut être réalisée en ligne complètement
 demarches.livetable.pourcentageRecoursVoieDematerialisee=Pourcentage du recours à la voie dématérialisée
-demarches.livetable.statutIntegration=Avis Nos Démarches intégré ?
+demarches.livetable.statutIntegration=Avis MonAvis intégré ?
 demarches.livetable.franceConnect=FranceConnect
 demarches.livetable.adapteMobile=Adapté mobile
 demarches.livetable.qualiteSupport=Support de qualité

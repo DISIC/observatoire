@@ -405,7 +405,7 @@
       <name>ministeres</name>
       <number>9</number>
       <picker>1</picker>
-      <prettyName>Champ ministériel</prettyName>
+      <prettyName>Ministère(s)</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
@@ -762,7 +762,7 @@ $result
       <name>statutIntegration</name>
       <number>40</number>
       <picker>0</picker>
-      <prettyName>Avis Nos Démarches intégré ?</prettyName>
+      <prettyName>Avis MonAvis  intégré ?</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators>|, </separators>
