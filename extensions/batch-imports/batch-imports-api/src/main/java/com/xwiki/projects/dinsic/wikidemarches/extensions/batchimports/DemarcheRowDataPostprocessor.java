@@ -134,6 +134,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         processSupportDeQualite(data, row, headers);
         processComments(data, row, rowIndex, headers, config);
         processUrl(data, row, headers);
+        processGroupes(data, row, rowIndex, headers, config);
+        logger.debug("New data after processing: ", data);
     }
 
     // Trim all values, since some input files sometimes contain values with surrounding spaces (e.g. directions)
@@ -332,12 +334,15 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                 if (baseObject != null) {
                     existingGroups = baseObject.getListValue(DEMARCHE_PROPERTY_GROUPES);
                     if (existingGroups.size() > 0) {
+                        logger.debug("Found existing groups for row " + rowIndex + ":" + existingGroups);
                         List<String> finalGroups = new ArrayList<>();
                         finalGroups.addAll(existingGroups);
                         String readGroupsString = data.get(DEMARCHE_PROPERTY_GROUPES);
                         if (StringUtils.isNotEmpty(readGroupsString)) {
+                            logger.debug("Found new groups for row " + rowIndex + ":" + readGroupsString);
                             finalGroups
                                 .addAll(Arrays.asList(StringUtils.split(readGroupsString, config.getListSeparator())));
+                            logger.debug("Preparing to store groups for row " + rowIndex + ":" + finalGroups);
                         }
                         data.put(DEMARCHE_PROPERTY_GROUPES, StringUtils.join(finalGroups, config.getListSeparator()));
                     }
