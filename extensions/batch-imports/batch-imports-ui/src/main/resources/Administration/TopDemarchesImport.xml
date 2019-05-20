@@ -279,7 +279,7 @@
       <listseparator>,</listseparator>
     </property>
     <property>
-      <mapping>Avis Nos-Démarches intégré ?=statutIntegration
+      <mapping>Avis MonAvis intégré ?=statutIntegration
 Commentaires administration + annonce CITP=remarques
 Ministère=ministeres
 Date d'ouverture du service dématérialisé=dateMiseEnLigne
