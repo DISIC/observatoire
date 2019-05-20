@@ -579,8 +579,7 @@ ${percent} %
 #set ($volumetrieDemat = $volumetrieDemat * 100)
 #if ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
   #set ($percent = $mathtool.div($volumetrieDemat, $volumetrie))
-  #set ($percent = $mathtool.roundTo(1, $percent))
-  ${percent} %
+  $numbertool.format("${escapetool.hash}${escapetool.hash}.${escapetool.hash}", $percent) %
 #elseif ($statutDemat == 'nonDemat')
   Sans objet
 #else
