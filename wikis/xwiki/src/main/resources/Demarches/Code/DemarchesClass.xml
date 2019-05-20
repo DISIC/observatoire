@@ -57,7 +57,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>accompagnement</name>
-      <number>41</number>
+      <number>32</number>
       <picker>0</picker>
       <prettyName>Accompagnement humain personnalisé</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -79,7 +79,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>adapteMobile</name>
-      <number>33</number>
+      <number>30</number>
       <picker>0</picker>
       <prettyName>Adapté mobile</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -101,7 +101,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>api</name>
-      <number>37</number>
+      <number>34</number>
       <picker>0</picker>
       <prettyName>API</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -145,7 +145,7 @@
       <hint>Champ national ou territorial</hint>
       <multiSelect>0</multiSelect>
       <name>champ</name>
-      <number>12</number>
+      <number>6</number>
       <picker>0</picker>
       <prettyName>Champ de la démarche</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -179,7 +179,7 @@
       <emptyIsToday>0</emptyIsToday>
       <hint>Date de mise en ligne prévue ou réalisée</hint>
       <name>dateMiseEnLigne</name>
-      <number>37</number>
+      <number>39</number>
       <picker>1</picker>
       <prettyName>Date de mise en ligne</prettyName>
       <size>20</size>
@@ -193,7 +193,7 @@
       <disabled>0</disabled>
       <hint>Ce champ indique une date d'ouverture approximative par opposition au champ « Date de mise en ligne » qui indique un mois et une année précis.</hint>
       <name>dateMiseEnLigneTexte</name>
-      <number>41</number>
+      <number>40</number>
       <picker>0</picker>
       <prettyName>Date approximative d'ouverture du service dématérialisé</prettyName>
       <size>30</size>
@@ -210,7 +210,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>demarcheSimplifiee</name>
-      <number>41</number>
+      <number>35</number>
       <picker>0</picker>
       <prettyName>Démarche simplifiée</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -232,7 +232,7 @@
       <displayType/>
       <hint>Ce champ indique si les usagers sont obligés de remplir la démarche en dématérialisation.</hint>
       <name>dematObligatoire</name>
-      <number>30</number>
+      <number>26</number>
       <prettyName>Dématérialisation obligatoire</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -260,7 +260,7 @@
       <idField/>
       <multiSelect>0</multiSelect>
       <name>direction</name>
-      <number>10</number>
+      <number>7</number>
       <picker>1</picker>
       <prettyName>Direction ou établissement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -308,7 +308,7 @@
       <displayType/>
       <hint>Démarche exclue du SVE par décret</hint>
       <name>exclusionSve</name>
-      <number>31</number>
+      <number>27</number>
       <prettyName>Démarche exclue du SVE</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -320,7 +320,7 @@
       <disabled>0</disabled>
       <hint>Référence(s) d'un ou plusieurs CERFA séparé(e)s par des virgules</hint>
       <name>formulaires</name>
-      <number>4</number>
+      <number>12</number>
       <picker>0</picker>
       <prettyName>Formulaires CERFA</prettyName>
       <size>30</size>
@@ -337,7 +337,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>franceConnect</name>
-      <number>32</number>
+      <number>29</number>
       <picker>0</picker>
       <prettyName>FranceConnect</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -361,7 +361,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>groupes</name>
-      <number>11</number>
+      <number>9</number>
       <picker>1</picker>
       <prettyName>Groupes</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -403,7 +403,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>ministeres</name>
-      <number>9</number>
+      <number>8</number>
       <picker>1</picker>
       <prettyName>Ministère(s)</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -426,7 +426,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>moyensDeContact</name>
-      <number>40</number>
+      <number>31</number>
       <picker>0</picker>
       <prettyName>Au moins deux moyens de contact différents, dont un formulaire de contact</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -448,7 +448,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>niveauDemat</name>
-      <number>26</number>
+      <number>23</number>
       <picker>0</picker>
       <prettyName>Niveau de dématérialisation actuel</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -484,7 +484,7 @@
       <disabled>0</disabled>
       <hint>Nom du projet de dématérialisation auquel est rattachée la démarche</hint>
       <name>nomProjet</name>
-      <number>35</number>
+      <number>37</number>
       <picker>0</picker>
       <prettyName>Nom du projet de dématérialisation</prettyName>
       <size>30</size>
@@ -500,7 +500,7 @@
       <editor>Text</editor>
       <hint>Objet de la démarche</hint>
       <name>objet</name>
-      <number>7</number>
+      <number>4</number>
       <picker>0</picker>
       <prettyName>Objet</prettyName>
       <rows>5</rows>
@@ -520,7 +520,7 @@
       <idField/>
       <multiSelect>1</multiSelect>
       <name>organismesTraitement</name>
-      <number>13</number>
+      <number>10</number>
       <picker>1</picker>
       <prettyName>Organismes de traitement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -540,7 +540,7 @@
       <disabled>0</disabled>
       <hint>100 % si la démarche peut être réalisée en ligne complètement, 50% si la démarche est en phase de déploiement, et 10% si elle est en phase d’expérimentation</hint>
       <name>pourcentageDematerialisation</name>
-      <number>43</number>
+      <number>25</number>
       <prettyName>Pourcentage de dématérialisation</prettyName>
       <script>{{velocity}}
 #set ($enLigneEntierement = $object.getValue("enLigneEntierement"))
@@ -569,7 +569,7 @@ ${percent} %
       <disabled>0</disabled>
       <hint>Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée</hint>
       <name>pourcentageRecoursVoieDematerialisee</name>
-      <number>43</number>
+      <number>21</number>
       <prettyName>Pourcentage de recours à la voie dématérialisée</prettyName>
       <script>{{velocity}}
 {{html clean="false"}}
@@ -668,7 +668,7 @@ $result
       <disabled>0</disabled>
       <hint/>
       <name>qualiteSupport</name>
-      <number>36</number>
+      <number>33</number>
       <prettyName>Support de qualité</prettyName>
       <script/>
       <unmodifiable>0</unmodifiable>
@@ -681,7 +681,7 @@ $result
       <disabled>0</disabled>
       <hint>Référence de la démarche dans la base Service Public</hint>
       <name>referenceServicePublic</name>
-      <number>6</number>
+      <number>11</number>
       <picker>0</picker>
       <prettyName>Référence Service Public</prettyName>
       <size>30</size>
@@ -697,7 +697,7 @@ $result
       <editor>Text</editor>
       <hint/>
       <name>remarques</name>
-      <number>38</number>
+      <number>36</number>
       <picker>0</picker>
       <prettyName>Remarques</prettyName>
       <rows>5</rows>
@@ -715,7 +715,7 @@ $result
       <hint/>
       <multiSelect>0</multiSelect>
       <name>statut</name>
-      <number>34</number>
+      <number>5</number>
       <picker>0</picker>
       <prettyName>Statut de la démarche</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -737,7 +737,7 @@ $result
       <hint>Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; Non dans le cas contraire ; Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
       <multiSelect>0</multiSelect>
       <name>statutDemat</name>
-      <number>42</number>
+      <number>24</number>
       <picker>0</picker>
       <prettyName>Peut être réalisée en ligne complètement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -759,7 +759,7 @@ $result
       <hint/>
       <multiSelect>0</multiSelect>
       <name>statutIntegration</name>
-      <number>40</number>
+      <number>28</number>
       <picker>0</picker>
       <prettyName>Avis MonAvis  intégré ?</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -781,7 +781,7 @@ $result
       <hint>Statut du projet de dématérialisation incluant la planification de celle-ci</hint>
       <multiSelect>0</multiSelect>
       <name>statutProjetDemat</name>
-      <number>36</number>
+      <number>38</number>
       <picker>0</picker>
       <prettyName>Statut du projet de dématérialisation</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -802,7 +802,7 @@ $result
       <editor>Text</editor>
       <hint>Textes de lois associés à la démarche</hint>
       <name>textes</name>
-      <number>14</number>
+      <number>13</number>
       <picker>0</picker>
       <prettyName>Textes de référence</prettyName>
       <rows>5</rows>
@@ -859,7 +859,7 @@ $result
       <displayType/>
       <hint/>
       <name>top</name>
-      <number>39</number>
+      <number>22</number>
       <prettyName>Top 250</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -871,7 +871,7 @@ $result
       <disabled>0</disabled>
       <hint>Adresse web permettant d'effectuer la démarche</hint>
       <name>urlDemarche</name>
-      <number>20</number>
+      <number>15</number>
       <picker>0</picker>
       <prettyName>Adresse web de la démarche</prettyName>
       <size>30</size>
@@ -885,7 +885,7 @@ $result
       <disabled>0</disabled>
       <hint>Adresse web des informations concernant la démarche</hint>
       <name>urlInfos</name>
-      <number>19</number>
+      <number>14</number>
       <picker>0</picker>
       <prettyName>Adresse web informations</prettyName>
       <size>30</size>
@@ -911,7 +911,7 @@ $result
       <disabled>0</disabled>
       <hint>Nombre total de démarches reçues par an (estimation)</hint>
       <name>volumetrie</name>
-      <number>22</number>
+      <number>19</number>
       <numberType>long</numberType>
       <prettyName>Volumétrie de la démarche</prettyName>
       <size>30</size>
@@ -940,7 +940,7 @@ $result
       <disabled>0</disabled>
       <hint>Nombre de démarches reçues par la voie d'une téléprocédure ou d'un EDI par an.</hint>
       <name>volumetrieDemat</name>
-      <number>23</number>
+      <number>20</number>
       <numberType>long</numberType>
       <prettyName>Volumétrie de la dématérialisation</prettyName>
       <size>30</size>
