@@ -20,6 +20,8 @@
 package com.xwiki.projects.dinsic.wikidemarches.extensions.batchimports;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +108,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     public static String DEMARCHE_PROPERTY_URL = "urlDemarche";
 
     public static String DEMARCHE_PROPERTY_REMARQUES = "remarques";
+
+    public static String DEMARCHE_PROPERTY_GROUPES = "groupes";
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
 
@@ -308,6 +312,40 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         String value = getRowDataByHeader(row, HEADER_URL, headers);
         if ("?".equals(value) || "-".equals(value)) {
             data.put(DEMARCHE_PROPERTY_URL, "");
+        }
+    }
+
+    protected void processGroupes(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
+        BatchImportConfiguration config)
+    {
+        // Concatenate existing groupes with the value from the file
+        DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
+        DocumentReference reference = defaultBatchImport.getPageName(data, rowIndex, config, null);
+        if (reference != null) {
+            try {
+                XWikiContext xcontext = this.xwikiContextProvider.get();
+                XWiki xwiki = xcontext.getWiki();
+                XWikiDocument document = xwiki.getDocument(reference, xcontext);
+                String classReference = config.getMappingClassName();
+                BaseObject baseObject = document.getXObject(resolver.resolve(classReference));
+                List<String> existingGroups = new ArrayList<String>();
+                if (baseObject != null) {
+                    existingGroups = baseObject.getListValue(DEMARCHE_PROPERTY_GROUPES);
+                    if (existingGroups.size() > 0) {
+                        List<String> finalGroups = new ArrayList<>();
+                        finalGroups.addAll(existingGroups);
+                        String readGroupsString = data.get(DEMARCHE_PROPERTY_GROUPES);
+                        if (StringUtils.isNotEmpty(readGroupsString)) {
+                            finalGroups
+                                .addAll(Arrays.asList(StringUtils.split(readGroupsString, config.getListSeparator())));
+                        }
+                        data.put(DEMARCHE_PROPERTY_GROUPES, StringUtils.join(finalGroups, config.getListSeparator()));
+                    }
+                }
+
+            } catch (XWikiException e) {
+                logger.warn("Exception while concatenating groups data for row " + rowIndex, e);
+            }
         }
     }
 
