@@ -169,7 +169,7 @@
   #if ("$!value" != '')
     #template('displayer_date.vm')
   #else
-    Non renseigné
+$services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr")
   #end
 #end
 {{/html}}
@@ -578,12 +578,12 @@ ${percent} %
 #set ($volumetrie = $object.getValue("volumetrie"))
 #set ($volumetrieDemat = $volumetrieDemat * 100)
 #if ($statutDemat == 'nonDemat')
-  {{translation key="Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_na" /}}
+$services.localization.render("Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_na")
 #elseif ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
   #set ($percent = $mathtool.div($volumetrieDemat, $volumetrie))
   $numbertool.format("${escapetool.hash}${escapetool.hash}.${escapetool.hash}", $percent) %
 #else
-  {{translation key="Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_nr" /}}
+$services.localization.render("Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_nr")
 #end
 {{/html}}
 {{/velocity}}</script>
@@ -652,17 +652,17 @@ ${percent} %
   #set ($moyensDeContact = 'nr')
 #end
 #set ($noOrnotApplicableOrNoInformation = ['non', 'na', 'nr'])
-#set ($result = 'Non')
+#set ($result = 'non')
 #if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
-  #set ($result = 'Oui')
+  #set ($result = 'oui')
 #elseif (($accompagnement == 'nr' &amp;&amp; ($moyensDeContact == 'nr' || $moyensDeContact == 'na')) || ($moyensDeContact == 'nr' &amp;&amp; ($accompagnement == 'nr' || $accompagnement == 'na')))
-  #set ($result = 'Non renseigné')
+  #set ($result = 'nr')
 #elseif ($accompagnement == 'na' &amp;&amp; $moyensDeContact == 'na')
-  #set ($result = 'Sans objet')
+  #set ($result = 'na')
 #elseif (($accompagnement == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($accompagnement)))
-  #set ($result = 'Partiel')
+  #set ($result = 'partiel')
 #end
-$result
+$services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$result")
 {{/html}}
 {{/velocity}}</customDisplay>
       <disabled>0</disabled>
@@ -903,7 +903,7 @@ $result
   #if ("$!value" != '')
     $value
   #else
-    {{translation key="Demarches.Code.DemarchesClass_volumetrie_nr" /}}
+    $services.localization.render("Demarches.Code.DemarchesClass_volumetrie_nr")
   #end
 #end
 {{/html}}
@@ -928,11 +928,11 @@ $result
 &lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="30" type="text" value="$!value"&gt;
 #else
   #if ($statutDemat == 'nonDemat')
-    {{translation key="Demarches.Code.DemarchesClass_volumetrieDemat_na" /}}
+$services.localization.render("Demarches.Code.DemarchesClass_volumetrieDemat_na")
   #elseif ("$!value" != '')
     $value
   #else
-    {{translation key="Demarches.Code.DemarchesClass_volumetrieDemat_nr" /}}
+$services.localization.render("Demarches.Code.DemarchesClass_volumetrieDemat_nr")
   #end
 #end
 {{/html}}
