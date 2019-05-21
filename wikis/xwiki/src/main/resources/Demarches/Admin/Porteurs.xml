@@ -1,0 +1,119 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Admin.Porteurs" locale="">
+  <web>Demarches.Admin</web>
+  <name>Porteurs</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Porteurs de démarches</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>
+
+== Porteurs de démarches et démarches associées
+
+{{groovy}}
+
+def hql = "select prop.value, doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as prop where obj.name = doc.fullName and obj.className = 'Demarches.Code.DemarchesClass' and doc.name &lt;&gt; 'DemarchesTemplate' and prop.id.id = obj.id and prop.id.name = 'proprietaires' and prop.value &lt;&gt; ''"
+def entries = services.query.hql(hql).execute()
+def demarchesIdsByOwner =  new HashMap()
+
+for (entry in entries) {
+  def owners = entry[0].split(",")
+  def demarcheId = entry[1]
+  for (owner in owners) {
+    def demarchesIds = demarchesIdsByOwner.get(owner)
+    if (demarchesIds == null) {
+      demarchesIds = []
+    }
+    demarchesIds.add(demarcheId)
+    demarchesIdsByOwner[owner] = demarchesIds
+  }
+}
+
+println "|=Porteur|=Démarches"
+for (entry in demarchesIdsByOwner.entrySet()) {
+  def userId = entry.key
+  def userName = xwiki.getUserName(userId, false)
+  println "|[[$userName&gt;&gt;$userId]]|((("
+    for (demarcheId in entry.value) {
+      def title = xwiki.getDocument(demarcheId).displayTitle
+      println "* [[$title&gt;&gt;$demarcheId]]"
+    }
+  println ")))"
+}
+
+
+println "== Porteurs potentiels =="
+
+println "La liste ci-dessous présente les utilisateurs disposant d'un compte sur la plateforme, mais qui ne sont pas administrateurs ni administrateurs ministériels, et qui n'ont encore aucune démarche dont ils sont porteurs : ce sont des porteurs de démarches potentiels."
+
+
+def getGroupMembersIds(groupId) {
+  def groupPage = xwiki.getDocument(groupId)
+  def members = groupPage.getObjects("XWiki.XWikiGroups")
+  def membersIds = []
+  for (member in members) {
+    if (member != null) {
+      def id = member.getValue('member')
+      if (id != null &amp;&amp; id.trim().length() &gt; 0) {
+        membersIds.add(id)
+      }
+    }
+  }
+  return membersIds
+}
+
+def administratorsIds = getGroupMembersIds("XWiki.XWikiAdminGroup")
+def administrateursMinisterielsIds = getGroupMembersIds("XWiki.AdministrateursMinisteriels")
+hql = "select distinct obj.name from BaseObject as obj where obj.className = 'XWiki.XWikiUsers' order by obj.name"
+def allUsersIds = services.query.hql(hql).execute()
+
+
+def potentialOwnersIds = allUsersIds
+potentialOwnersIds.removeAll(administratorsIds)
+potentialOwnersIds.removeAll(administrateursMinisterielsIds)
+potentialOwnersIds.removeAll(demarchesIdsByOwner.keySet())
+  
+for (potentialOwnerId in potentialOwnersIds) {
+  def userName = xwiki.getUserName(potentialOwnerId, false)
+  println "* [[$userName&gt;&gt;$potentialOwnerId]]"
+}
+
+
+
+{{/groovy}}
+
+</content>
+</xwikidoc>
