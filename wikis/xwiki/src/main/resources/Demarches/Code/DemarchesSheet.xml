@@ -285,9 +285,16 @@ require(['jquery','xwiki-selectize'], function($) {
       'properties', encodeURIComponent(select.attr('data-propertyName')),
       'values'
     ].join('/');
-    
+
+    // Creating new values via a selectized widget is allowed only for properties "groupes" and "organismes de traitement"
+    var allowCreate = false;
+    var propertyName = select.attr('data-propertyName');
+    if (propertyName == 'groupes' || propertyName == 'organismesTraitement') {
+      allowCreate = true;
+    }
+
     return {
-      create: false,
+      create: allowCreate,
       load: function(text, callback) {
         if (select.attr('data-propertyName')=="publics" || select.attr('data-propertyName')=="evenements") {
           //we don't want to change the request URL when we're not editing a Demarche but just browsing a Demarches livetable
