@@ -53,20 +53,27 @@ for (entry in entries) {
   def owners = entry[0].split(",")
   def demarcheId = entry[1]
   for (owner in owners) {
-    def demarchesIds = demarchesIdsByOwner.get(owner)
-    if (demarchesIds == null) {
-      demarchesIds = []
+    if ("$owner" != "") {
+      def demarchesIds = demarchesIdsByOwner.get(owner)
+      if (demarchesIds == null) {
+        demarchesIds = []
+      }
+      demarchesIds.add(demarcheId)
+      demarchesIdsByOwner[owner] = demarchesIds
     }
-    demarchesIds.add(demarcheId)
-    demarchesIdsByOwner[owner] = demarchesIds
   }
 }
-
-println "|=Porteur|=Démarches"
+println "|=Porteur|=Adresse e-mail|=Démarche(s)"
 for (entry in demarchesIdsByOwner.entrySet()) {
   def userId = entry.key
-  def userName = xwiki.getUserName(userId, false)
-  println "|[[$userName&gt;&gt;$userId]]|((("
+  def userName = xwiki.getDocument(userId).name
+  def userEmailAddress = ""
+  if (xwiki.exists(userId)) {
+    userName = xwiki.getUserName(userId, false)
+    userName = "[[$userName&gt;&gt;$userId]]"
+    userEmailAddress = xwiki.getDocument(userId).getObject("XWiki.XWikiUsers").getValue("email")
+  }
+  println "|$userName|$userEmailAddress|((("
     for (demarcheId in entry.value) {
       def title = xwiki.getDocument(demarcheId).displayTitle
       println "* [[$title&gt;&gt;$demarcheId]]"
@@ -100,15 +107,16 @@ def administrateursMinisterielsIds = getGroupMembersIds("XWiki.AdministrateursMi
 hql = "select distinct obj.name from BaseObject as obj where obj.className = 'XWiki.XWikiUsers' order by obj.name"
 def allUsersIds = services.query.hql(hql).execute()
 
-
 def potentialOwnersIds = allUsersIds
 potentialOwnersIds.removeAll(administratorsIds)
 potentialOwnersIds.removeAll(administrateursMinisterielsIds)
 potentialOwnersIds.removeAll(demarchesIdsByOwner.keySet())
-  
+
+println "|=Utilisateur|=Adresse e-mail"
 for (potentialOwnerId in potentialOwnersIds) {
   def userName = xwiki.getUserName(potentialOwnerId, false)
-  println "* [[$userName&gt;&gt;$potentialOwnerId]]"
+  def userEmailAddress = xwiki.getDocument(potentialOwnerId).getObject("XWiki.XWikiUsers").getValue("email")
+  println "|[[$userName&gt;&gt;$potentialOwnerId]]|$userEmailAddress"
 }
 
 
