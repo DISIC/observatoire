@@ -1,0 +1,184 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Description du modèle de données" locale="">
+  <web>Demarches</web>
+  <name>Description du modèle de données</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1558515485000</creationDate>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1558517779000</date>
+  <contentUpdateDate>1558515486000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Description du modèle de données</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>Le tableau ci-dessous décrit le modèle de données d'une démarche.
+
+|=Rubrique|=Champ|=Description|=Valeurs possibles|=Exemple
+|= |=Identifiant|Identifiant unique de la démarche.|Champ unique fixé par l'application (compteur)|872
+|=(% rowspan="11" %)Informations générales
+|=Nom|Nom de la démarche. Ce champ est obligatoire.|Texte libre de moins de 255 caractères|Élimination des déchets d'amalgames dentaires - bordereau de prise en charge
+|=Nom complet|Nom complet de la démarche dans le cas où celui-ci excède 255 caractères|Texte libre facultatif| 
+|=Porteurs de la démarche|Personnes en charge de la gestion des avis associés à la démarche|Comptes utilisateur de la plateforme| 
+|=Objet|Objet de la démarche|Texte libre| 
+|=Statut de la démarche|Statut|Active, inactive, demande utilisateur, demande porteur, brouillon (une seule option possible)|Active
+|=Champ de la démarche|Champ national ou territorial|National, territorial (une seule option possible)|National
+|=Direction ou établissement|Direction ou établissement à laquelle / auquel est rattachée la démarche. Ce champ est obligatoire.|Direction référencée dans la plateforme.|DGS
+|=Ministère(s)|Ministère(s) {{html}}au(x)quel(s){{/html}} est rattachée la démarche|Ministère(s) référencé(s) dans la plateforme|MASS
+|=Groupes|Groupe(s) {{html}}au(x)quel(s){{/html}} est rattachée la démarche (exemple : Portail des signalements)|Groupe référencé sur la plateforme ou nouveau groupe| 
+|=Organismes de traitement|Organisme(s) ou type(s) d'organisme recevant la démarche et la gérant|Texte libre|Professionnels :
+collecteurs de déchets
+|=(% rowspan="4" %)Références
+|=Référence Service Public|Référence de la démarche dans la base Service Public|Texte libre de moins de 255 caractères| 
+|=Formulaires CERFA|Référence(s) d'un ou plusieurs CERFA séparé(e)s par des virgules|Texte libre de moins de 255 caractères|10786
+|=Textes de référence|Textes de lois associés à la démarche|Texte libre de moins de 255 caractères|Arrêté du 30 mars 1998 relatif à l'élimination des déchets d'amalgame issus des cabinets dentaires
+|=(% rowspan="3" %)Adresses web
+|=Adresse web informations|Adresse web des informations concernant la démarche|Texte libre de moins de 255 caractères|[[https:~~/~~/www.service-public.fr/particuliers/vosdroits/R49830&gt;&gt;url:https://www.service-public.fr/particuliers/vosdroits/R49830]]
+|=Adresse web de la démarche|Adresse web permettant d'effectuer la démarche|Texte libre de moins de 255 caractères|[[https:~~/~~/www.impots.gouv.fr/portail/&gt;&gt;url:https://www.impots.gouv.fr/portail/]]
+|=(% rowspan="8" %)Catégorisation
+|=Catégories de publics concernés|Catégorie(s) de public(s) concerné(s) par la démarche|Particuliers, professionnels, associations, collectivité locales (plusieurs options possibles)|Professionnels
+|=Publics|Public(s) concerné(s) par la démarche|Public(s) référencé(s) sur la plateforme. La liste présentée dans l'interface est filtrée dynamiquement en fonction de la ou des catégorie(s) de publics concernés.|Établissements de santé
+|=Événements de vie|Événement(s )de vie associé(s) à la démarche|Événement(s) de vie référencés sur la plateforme. La liste présentée dans l'interface est filtrée dynamiquement en fonction de la ou des catégorie(s) de publics concernés.|Éliminiation déchets
+|=Volumétrie de la démarche|Nombre total de démarches reçues par an (estimation)|Nombre entier|1000000
+|=Volumétrie de la dématérialisation|Nombre de démarches reçues par la voie d'une téléprocédure ou d'un EDI par an.|Nombre entier|100000
+|=Pourcentage de recours à la voie dématérialisée|Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée|Champ calculé à partir des deux précédents|10%
+|=Top 250|Indique si la démarche fait ou non partie des démarches phares|Oui, non|Oui
+|=(% rowspan="6" %)Caractéristiques de la dématérialisation
+|=Niveau de dématérialisation actuel| |Formulaire en ligne, PDF non remplissable, PDF remplissable, EDI, téléprocédure (plusieurs options possibles)|Formulaire, PDF remplissable
+|=Peut être réalisée en ligne complètement| |(((
+* Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ;
+* Non dans le cas contraire ;
+* Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ;
+* Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).
+)))|Déploiement partiel
+|=Pourcentage de dématérialisation|Champ calculé|100 % si la démarche peut être réalisée en ligne complètement, 50% si la démarche est en phase de déploiement, et 10% si elle est en phase d’expérimentation|50%
+|=Dématérialisation obligatoire|Indique si les usagers sont obligés de remplir la démarche en dématérialisation.|Oui, non|Non
+|=Démarche exclue du SVE|Démarche exclue du SVE par décret|Oui, non|Non
+|=(% rowspan="9" %)Qualité de la dématérialisation
+|=Avis MonAvis  intégré ?|Indique si la démarche est intégrée au site MonAvis.numerique.gouv.fr|Oui, non|Oui
+|=FranceConnect|Indique si la démarche est intégrée à FranceConnect|Oui, non, sans objet, non renseigné|Oui
+|=Adapté mobile|Indique si la démarche dématérialisée est fonctionnelle sur écrans mobiles|Oui, non, sans objet, non renseigné|Oui
+|=Au moins deux moyens de contact différents, dont un formulaire de contact| |Oui, non, sans objet, non renseigné|Oui
+|=Accompagnement humain personnalisé| |Oui, non, sans objet, non renseigné| 
+|=Support de qualité|Champ calculé à partir des deux champs précédents|La règle de calcul est la suivante :(((
+* 2 oui = oui
+* 2 non = non
+* 1 oui 1 non ou sans objet ou non renseigné = partiel
+* 1 non 1 sans objet ou non renseigné = non
+)))|Oui
+|=API| |API particuliers, API entreprises (plusieurs choix possibles)|API particuliers
+|=Démarche simplifiée|Indique si la démarche est présente sur Demarches-Simplifiees.fr|Oui, non, non renseigné|Oui
+|=(% rowspan="2" %)Remarques
+|=Remarques|Remarques au sujet de la démarche|Texte libre| 
+|=(% rowspan="5" %)Projet de dématérialisation
+|=Nom du projet de dématérialisation|Nom du projet de dématérialisation auquel est rattachée la démarche|Texte libre de moins de 255 caractères| 
+|=Statut du projet de dématérialisation|Statut du projet de dématérialisation incluant la planification de celle-ci|Prévu, En cours, Terminé|En cours
+|=Date de mise en ligne|Date de mise en ligne prévue ou réalisée|Date au format mois / année|03/2019
+|=Date approximative d'ouverture du service dématérialisé|Ce champ indique une date d'ouverture approximative par opposition au champ précédent qui indique un mois et une année précis.|Texte libre de moins de 255 caractères|2020-2021</content>
+  <object>
+    <name>Demarches.Description du modèle de données</name>
+    <number>0</number>
+    <className>XWiki.XWikiRights</className>
+    <guid>49d7135d-957f-4c7c-b27d-1841ec5fc34e</guid>
+    <class>
+      <name>XWiki.XWikiRights</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <allow>
+        <defaultValue>1</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>allow</displayType>
+        <name>allow</name>
+        <number>4</number>
+        <prettyName>Allow/Deny</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </allow>
+      <groups>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <multiSelect>1</multiSelect>
+        <name>groups</name>
+        <number>1</number>
+        <picker>1</picker>
+        <prettyName>Groups</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <size>5</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.GroupsClass</classType>
+      </groups>
+      <levels>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>1</multiSelect>
+        <name>levels</name>
+        <number>2</number>
+        <prettyName>Levels</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <size>3</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.LevelsClass</classType>
+      </levels>
+      <users>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <multiSelect>1</multiSelect>
+        <name>users</name>
+        <number>3</number>
+        <picker>1</picker>
+        <prettyName>Users</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <size>5</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </users>
+    </class>
+    <property>
+      <allow>1</allow>
+    </property>
+    <property>
+      <groups>XWiki.XWikiAllGroup</groups>
+    </property>
+    <property>
+      <levels>view</levels>
+    </property>
+  </object>
+</xwikidoc>
