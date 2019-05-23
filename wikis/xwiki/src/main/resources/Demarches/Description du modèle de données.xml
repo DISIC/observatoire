@@ -26,6 +26,7 @@
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
+  <parent>Demarches.WebHome</parent>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1558515485000</creationDate>
   <author>xwiki:XWiki.Admin</author>
