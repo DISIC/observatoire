@@ -39,11 +39,8 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>
-
-== Porteurs de démarches et démarches associées
-
-{{groovy}}
+  <content>{{groovy}}
+println "== Porteurs de démarches et démarches associées"
 
 def hql = "select prop.value, doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as prop where obj.name = doc.fullName and obj.className = 'Demarches.Code.DemarchesClass' and doc.name &lt;&gt; 'DemarchesTemplate' and prop.id.id = obj.id and prop.id.name = 'proprietaires' and prop.value &lt;&gt; ''"
 def entries = services.query.hql(hql).execute()
