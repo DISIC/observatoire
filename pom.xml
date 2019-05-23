@@ -53,4 +53,18 @@
     <module>wikis</module>
     <module>extensions</module>
   </modules>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>fr.inria.gforge.spoon</groupId>
+          <artifactId>spoon-maven-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
