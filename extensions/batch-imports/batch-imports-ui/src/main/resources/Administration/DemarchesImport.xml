@@ -34,7 +34,7 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Démarches Import</title>
+  <title>Demarches Import</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.0</syntaxId>
@@ -282,13 +282,12 @@
     <property>
       <mapping>Remarques=remarques
 Sigle ministères=ministeres
-Fiche signalétique=urlFiche
-Identifiants ELI=identifiantsEli
 Référence Service Public=referenceServicePublic
+Constant:nr=franceConnect
 Groupe=groupes
 Dématérialisation obligatoire=dematObligatoire
-Référence BDD Form=referenceBddForm
 Publics=publics
+Constant:0=top
 Statut du projet de dématérialisation=statutProjetDemat
 Niveau de dématérialisation=niveauDemat
 Démarche exclue du SVE=exclusionSve
@@ -296,21 +295,24 @@ Adresse web démarche=urlDemarche
 Nom raccourci de la démarche=doc.title
 Organismes de traitement=organismesTraitement
 Catégories de publics concernés=categoriesPublics
-Direction ou établissement=direction
+Constant:nr=statutDemat
+Constant:nr=accompagnement
+Entité/Tutelle=direction
 Formulaires (CERFA)=formulaires
+Constant:nr=statutIntegration
 Textes de référence=textes
-Niveau de dématérialisation prévu=niveauPrevu
-Caractéristiques=caracteristiquesDemat
 Adresse web infos=urlInfos
 Date de mise en ligne=dateMiseEnLigne
 Objet=objet
+Constant:nr=demarcheSimplifiee
 Volumétrie de la démarche=volumetrie
+Constant:nr=adapteMobile
 Identifiant de la démarche=doc.name
 Volumétrie de la dématérialisation=volumetrieDemat
 Nom de projet=nomProjet
 Événements de vie=evenements
-Caractéristiques prévues=caracteristiquesDematPrevues
 Nom complet de la démarche=nomComplet
+Constant:nr=moyensDeContact
 Statut de la démarche=statut</mapping>
     </property>
     <property>
