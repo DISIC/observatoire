@@ -1,0 +1,460 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="TableauDeBord.Top250" locale="">
+  <web>TableauDeBord</web>
+  <name>Top250</name>
+  <language/>
+  <defaultLanguage>fr</defaultLanguage>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Top 250</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>
+{{html clean="false" wiki="false"}}
+&lt;table id="top-demarches" class="hover" style="width:100%"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Démarche&lt;/th&gt;
+      &lt;th&gt;Ministère&lt;/th&gt;
+      &lt;th&gt;Groupe&lt;/th&gt;
+      &lt;th&gt;Volumétrie&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+&lt;/table&gt;
+{{/html}}
+</content>
+  <object>
+    <name>TableauDeBord.Top250</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>71a848a2-8aae-4a4b-a076-5218bc89cda6</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require.config({
+    paths: {
+       'css': '$services.webjars.url('require-css/0.1.7/css.js')',
+       'domReady': '$services.webjars.url('requirejs-domready/2.0.1/domReady.js')',
+       'datatables': '$services.webjars.url('datatables/1.10.19/js/jquery.dataTables.js')',
+       'datatables-css': '$services.webjars.url('datatables/1.10.19/css/jquery.dataTables.min')'
+    }
+});
+
+
+require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
+
+    function computeBadgeKey(value) {
+      value = value.toLowerCase();
+      switch (value) {
+        case 'oui':
+          return "success";
+        case 'non':
+          return "danger";
+        case 'partiel':
+          return "warning";
+        default:
+          return "default";
+      }
+    }
+
+    function addBadgeSpan(value) {
+      var badgeKey = computeBadgeKey(value);
+      return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeKey + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+    }
+  
+    function format ( data ) {
+        var output = '&lt;div class="row"&gt;' +
+              '&lt;div class="col-md-12"&gt;&lt;ul&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Réalisable en ligne : &lt;/span&gt;' + addBadgeSpan(data.statutDemat) + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé : &lt;/span&gt;' + data.dateMiseEnLigne + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée : &lt;/span&gt;' + data.pourcentageRecoursVoieDematerialisee + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;' + data.direction + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Avis MonAvis intégré ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;FranceConnect particuliers ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Support de qualité ? &lt;/span&gt;' + addBadgeSpan(data.qualiteSupport) + '&lt;/li&gt;';
+              if (data.avisCount &gt;= 100) {
+                output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.statisfactionIndex + ' %, calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
+              }
+              output = output +
+                '&lt;/ul&gt;&lt;/div&gt;'
+            '&lt;/div&gt;';
+      return output;
+    }
+
+    // TODO: the language labels could be loaded directly from the datatables-plugin
+    var table = $('#top-demarches').DataTable({
+      "ajax": "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
+      //"ajax": "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1')",
+      "paging": false,
+      "pageLength": 100,
+      "columns": [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            { "data": "title" },
+            { "data": "ministere" },
+            { "data": "groupes" },
+            {
+              "data": "volumetrie",
+              type: "num",
+              render: {
+                _: 'display',
+                sort: 'value'
+              }
+            }
+      ],
+      "order": [[1, 'asc']],
+      language: {
+          "info":           "Total : _TOTAL_ démarches",
+          "infoEmpty":      "Aucune démarche trouvée",
+          "infoFiltered":   "(filtrage appliqué sur _MAX_ total entrées)",
+          "loadingRecords": "Chargement...",
+          "processing":     "Traitement...",
+          "search":         "Recherche :",
+          "zeroRecords":    "Aucune entrée trouvée"
+        }
+      }
+    );
+
+    $('#top-demarches tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        if ( row.child.isShown() ) {
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+});
+
+
+</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <object>
+    <name>TableauDeBord.Top250</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>7c15fac7-c869-4715-878b-4c7deb9da4d2</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>td.details-control {
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+td.details-control::before {
+  content: "+";
+  background-color: #337ab7;
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+  width: 1.2em;
+  vertical-align: top;
+  border-radius: 0.1em;
+}
+tr.shown td.details-control::before {
+  content: "-";
+}
+
+
+#top-demarches {
+  tr.shown {
+    background-color: #f6f6f6;
+  }
+
+  td.details-control {
+    width: 4%;
+  }
+
+  /* Styles for the détails panel */
+  tr.shown + tr {
+    background-color: #f6f6f6;
+    font-size: 90%;
+    td {
+      border-top: 0px;
+      padding-top: 0px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0;
+      display: table;
+      width: 96%;
+      margin-left: 4%;
+      border-top: 0.5px dotted #555;
+      padding-top: 8px;
+      li {
+        display: table-row;
+        .row-details-key, .row-details-value {
+          display: table-cell;
+          padding-top: 0.2em;
+          padding-bottom: 0.2em;
+        }
+        .row-details-key {
+          width: 46.4%;
+        }
+      }
+    }
+  }
+
+  tr.odd td:last-child, tr.even td:last-child {
+    text-align: right;
+  }
+}
+
+#top-demarches_wrapper .dataTables_filter {
+  float: none;
+  text-align: center;
+  margin-bottom: 1em;
+  label {
+    font-weight: normal;
+    width: 100%;
+  }
+  input {
+    border: 1px solid #E8E8E8;
+    padding: 6px 12px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    width: 50%;
+  }
+}
+#top-demarches_wrapper {
+  .dataTables_info {
+    font-size: 90%;
+    color: #888;
+  }
+}
+
+table#top-demarches.no-footer {
+  border-bottom: 0px;
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+</xwikidoc>
