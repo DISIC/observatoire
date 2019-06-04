@@ -48,7 +48,10 @@
       &lt;th&gt;Démarche&lt;/th&gt;
       &lt;th&gt;Ministère&lt;/th&gt;
       &lt;th&gt;Groupe&lt;/th&gt;
+      &lt;th&gt;Peut être réalisée en ligne&lt;/th&gt;
+      &lt;th&gt;Date d'ouverture du service dématérialisé&lt;/th&gt;
       &lt;th&gt;Volumétrie&lt;/th&gt;
+      &lt;th&gt;Pourcentage du recours à la voie dematerialisée&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
 &lt;/table&gt;
@@ -166,80 +169,97 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       var badgeKey = computeBadgeKey(value);
       return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeKey + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
     }
-  
-    function format ( data ) {
-        var output = '&lt;div class="row"&gt;' +
-              '&lt;div class="col-md-12"&gt;&lt;ul&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Réalisable en ligne : &lt;/span&gt;' + addBadgeSpan(data.statutDemat) + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.dateMiseEnLigne + '&lt;/span&gt;&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.pourcentageRecoursVoieDematerialisee + '&lt;/span&gt;&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Avis MonAvis intégré ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;FranceConnect particuliers ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Support de qualité ? &lt;/span&gt;' + addBadgeSpan(data.qualiteSupport) + '&lt;/li&gt;';
-              if (data.avisCount &gt;= 100) {
-                output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.statisfactionIndex + ' %, calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
-              }
-              output = output +
-                '&lt;/ul&gt;&lt;/div&gt;'
-            '&lt;/div&gt;';
+
+    function format (data) {
+      var output = '&lt;div class="row"&gt;' +
+        '&lt;div class="col-md-12"&gt;&lt;ul&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Avis MonAvis intégré ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;FranceConnect particuliers ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Support de qualité ? &lt;/span&gt;' + addBadgeSpan(data.qualiteSupport) + '&lt;/li&gt;';
+        if (data.avisCount &gt;= 100) {
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.statisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
+        }
+        output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
     }
 
     // TODO: the language labels could be loaded directly from the datatables-plugin
     var table = $('#top-demarches').DataTable({
-      "ajax": "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
-      //"ajax": "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1')",
-      "paging": false,
-      "pageLength": 100,
-      "columns": [
+      ajax: "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
+      //ajax: "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1')",
+      paging: false,
+      columns: [
             {
-                "className":      'details-control',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ''
+              className:      'details-control',
+              orderable:      false,
+              data:           null,
+              defaultContent: ''
             },
             {
-              "data": "title", 
-              "className": 'column-title'
+              data: "title",
+              className: 'column-title'
             },
-            { "data": "ministere" },
-            { "data": "groupes" },
+            { data: "ministere" },
+            { data: "groupes" },
+            { data: "statutDemat",
+              render: function ( data, type, row ) {
+                return addBadgeSpan(data);
+              }
+            },
             {
-              "data": "volumetrie",
+              data: "dateMiseEnLigne",
               type: "num",
               render: {
                 _: 'display',
                 sort: 'value'
               }
+            },
+            {
+              data: "volumetrie",
+              type: "num",
+              render: {
+                _: 'display',
+                sort: 'value'
+              },
+              className: 'column-volumetrie'
+            },
+            {
+              data: "pourcentageRecoursVoieDematerialisee",
+              type: "num",
+              render: {
+                _: 'display',
+                sort: 'value'
+              },
+              className: 'column-pourcentageRecoursVoieDematerialisee'
             }
       ],
       "order": [[2, 'asc']],
       language: {
-          "info":           "Total : _TOTAL_ démarches",
-          "infoEmpty":      "Aucune démarche trouvée",
-          "infoFiltered":   "(filtrage appliqué sur _MAX_ total entrées)",
-          "loadingRecords": "Chargement...",
-          "processing":     "Traitement...",
-          "search":         "Recherche :",
-          "zeroRecords":    "Aucune entrée trouvée"
+          info: "Total : _TOTAL_ démarches",
+          infoEmpty: "Aucune démarche trouvée",
+          infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
+          loadingRecords: "Chargement...",
+          processing: "Traitement...",
+          search: "Recherche :",
+          zeroRecords: "Aucune entrée trouvée"
         }
       }
     );
 
     $('#top-demarches tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
-        if ( row.child.isShown() ) {
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    } );
+      var tr = $(this).closest('tr');
+      var row = table.row( tr );
+      if ( row.child.isShown() ) {
+        row.child.hide();
+        tr.removeClass('shown');
+      }
+      else {
+        row.child( format(row.data()) ).show();
+        tr.addClass('shown');
+      }
+    });
 });
 
 
@@ -353,7 +373,11 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       <cache>long</cache>
     </property>
     <property>
-      <code>td.details-control {
+      <code>#contentcontainerinner {
+  width: 100%;
+}
+
+td.details-control {
   text-align: center;
   cursor: pointer;
   vertical-align: middle;
@@ -376,37 +400,46 @@ tr.shown td.details-control::before {
 
 
 #top-demarches {
+  thead th {
+    vertical-align: middle;
+  }
+  
   tr.shown {
     background-color: #f6f6f6;
+    td {
+      border-bottom: 0.5px dotted #555;
+    }
+    td.details-control {
+      border-bottom: none;
+    }
   }
 
   td.details-control {
-    width: 4%;
+    padding-left: 0;
+    padding-right: 0;
+    width: 38px;
   }
 
   td.column-title {
-    width: 46%;
+    width: 38%;
   }
 
   /* Styles for the détails panel */
   tr.shown + tr {
     background-color: #f6f6f6;
-    font-size: 90%;
     td {
       border-top: 0px;
       padding-top: 0px;
-      padding-left: 0px;
+      padding-left: 38px;
       padding-right: 0px;
     }
 
     ul {
+      font-size: 90%;
       list-style-type: none;
       margin-left: 0;
       padding-left: 0;
       display: table;
-      width: 96%;
-      margin-left: 4%;
-      border-top: 0.5px dotted #555;
       padding-top: 8px;
       li {
         display: table-row;
@@ -419,13 +452,13 @@ tr.shown td.details-control::before {
           padding-right: 10px;
         }
         .row-details-key {
-          width: 48%;
+
         }
       }
     }
   }
 
-  tr.odd td:last-child, tr.even td:last-child {
+  td.column-volumetrie, td.column-pourcentageRecoursVoieDematerialisee {
     text-align: right;
   }
 }
