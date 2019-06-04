@@ -51,7 +51,7 @@
       &lt;th&gt;Peut être réalisée en ligne&lt;/th&gt;
       &lt;th&gt;Date d'ouverture du service dématérialisé&lt;/th&gt;
       &lt;th&gt;Volumétrie&lt;/th&gt;
-      &lt;th&gt;Pourcentage du recours à la voie dematerialisée&lt;/th&gt;
+      &lt;th&gt;Pourcentage du recours à la voie dématérialisée&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
 &lt;/table&gt;
@@ -160,6 +160,10 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
           return "danger";
         case 'partiel':
           return "warning";
+        case 'expérimentation':
+          return 'info';
+        case 'déploiement partiel':
+          return 'warning';
         default:
           return "default";
       }
@@ -172,16 +176,20 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
 
     function format (data) {
       var output = '&lt;div class="row"&gt;' +
-        '&lt;div class="col-md-12"&gt;&lt;ul&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Avis MonAvis intégré ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;FranceConnect particuliers ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Support de qualité ? &lt;/span&gt;' + addBadgeSpan(data.qualiteSupport) + '&lt;/li&gt;';
+        '&lt;div class="col-md-12"&gt;' +
+        '&lt;div class="row-details"&gt;' +
+        '&lt;p class="row-details-title"&gt;Qualité de la démarche&lt;/p&gt;' +
+        '&lt;p class="row-details-subtitle"&gt;Le service en ligne&amp;hellip;&lt;/p&gt;' +
+        '&lt;ul&gt;' +
+        // '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; permet-il de s\'identifier avec FranceConnect ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; est-il accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; propose-t-il un support de qualité ? &lt;/span&gt;' + addBadgeSpan(data.qualiteSupport) + '&lt;/li&gt;';
         if (data.avisCount &gt;= 100) {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.statisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
         }
-        output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;';
+        output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
     }
 
@@ -403,7 +411,7 @@ tr.shown td.details-control::before {
   thead th {
     vertical-align: middle;
   }
-  
+
   tr.shown {
     background-color: #f6f6f6;
     td {
@@ -434,25 +442,34 @@ tr.shown td.details-control::before {
       padding-right: 0px;
     }
 
-    ul {
+    .row-details {
       font-size: 90%;
-      list-style-type: none;
-      margin-left: 0;
-      padding-left: 0;
-      display: table;
-      padding-top: 8px;
-      li {
-        display: table-row;
-        .row-details-key, .row-details-value {
-          display: table-cell;
-          padding-top: 0.2em;
-          padding-bottom: 0.2em;
-          /* Padding copied from the table cell of datatables */
-          padding-left: 10px;
-          padding-right: 10px;
-        }
-        .row-details-key {
+      padding-left: 10px;
+      margin: 8px 0 0 0;
+      .row-details-title {
+        margin: 0;
+        font-weight: bold;
+      }
+      .row-details-subtitle {
+        margin: 0;
+      }
+      ul {
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+        display: table;
+        li {
+          display: table-row;
+          .row-details-key, .row-details-value {
+            display: table-cell;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+            /* padding-right copied from the table cell of datatables */
+            padding-right: 10px;
+          }
+          .row-details-key {
 
+          }
         }
       }
     }
