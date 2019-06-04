@@ -227,7 +227,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     protected String getRowDataByHeader(List<String> row, String header, List<String> headers)
     {
         int index = headers.indexOf(header);
-        if (index < row.size()) {
+        if (index >= 0 && index < row.size()) {
             return row.get(index);
         } else {
             return null;
