@@ -367,7 +367,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
-      <size>1</size>
+      <size>5</size>
       <sort>none</sort>
       <sql/>
       <unmodifiable>0</unmodifiable>
@@ -376,6 +376,20 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </groupes>
+    <lwscore>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>lwscore</name>
+      <number>41</number>
+      <numberType>integer</numberType>
+      <prettyName>Pingdom lwscore</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+    </lwscore>
     <ministeres>
       <cache>0</cache>
       <classname/>
