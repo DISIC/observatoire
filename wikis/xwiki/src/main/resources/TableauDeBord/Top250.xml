@@ -34,7 +34,7 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Top 250</title>
+  <title>Tableau de bord des démarches phares</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -171,9 +171,9 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         var output = '&lt;div class="row"&gt;' +
               '&lt;div class="col-md-12"&gt;&lt;ul&gt;' +
               '&lt;li&gt;&lt;span class="row-details-key"&gt;Réalisable en ligne : &lt;/span&gt;' + addBadgeSpan(data.statutDemat) + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé : &lt;/span&gt;' + data.dateMiseEnLigne + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée : &lt;/span&gt;' + data.pourcentageRecoursVoieDematerialisee + '&lt;/li&gt;' +
-              '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;' + data.direction + '&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.dateMiseEnLigne + '&lt;/span&gt;&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.pourcentageRecoursVoieDematerialisee + '&lt;/span&gt;&lt;/li&gt;' +
+              '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
               '&lt;li&gt;&lt;span class="row-details-key"&gt;Avis MonAvis intégré ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
               '&lt;li&gt;&lt;span class="row-details-key"&gt;FranceConnect particuliers ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
               '&lt;li&gt;&lt;span class="row-details-key"&gt;Accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
@@ -200,7 +200,10 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
                 "data":           null,
                 "defaultContent": ''
             },
-            { "data": "title" },
+            {
+              "data": "title", 
+              "className": 'column-title'
+            },
             { "data": "ministere" },
             { "data": "groupes" },
             {
@@ -212,7 +215,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               }
             }
       ],
-      "order": [[1, 'asc']],
+      "order": [[2, 'asc']],
       language: {
           "info":           "Total : _TOTAL_ démarches",
           "infoEmpty":      "Aucune démarche trouvée",
@@ -358,7 +361,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
 
 td.details-control::before {
   content: "+";
-  background-color: #337ab7;
+  background-color: @brand-primary;
   color: #fff;
   font-weight: bold;
   display: inline-block;
@@ -381,6 +384,10 @@ tr.shown td.details-control::before {
     width: 4%;
   }
 
+  td.column-title {
+    width: 46%;
+  }
+
   /* Styles for the détails panel */
   tr.shown + tr {
     background-color: #f6f6f6;
@@ -388,6 +395,8 @@ tr.shown td.details-control::before {
     td {
       border-top: 0px;
       padding-top: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
     }
 
     ul {
@@ -405,9 +414,12 @@ tr.shown td.details-control::before {
           display: table-cell;
           padding-top: 0.2em;
           padding-bottom: 0.2em;
+          /* Padding copied from the table cell of datatables */
+          padding-left: 10px;
+          padding-right: 10px;
         }
         .row-details-key {
-          width: 46.4%;
+          width: 48%;
         }
       }
     }
