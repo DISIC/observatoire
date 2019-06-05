@@ -20,13 +20,13 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Demarches.Description du modèle de données" locale="">
-  <web>Demarches</web>
+<xwikidoc version="1.3" reference="Aide.Description du modèle de données" locale="">
+  <web>Aide</web>
   <name>Description du modèle de données</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
-  <parent>Demarches.WebHome</parent>
+  <parent>Aide.WebHome</parent>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1558515485000</creationDate>
   <author>xwiki:XWiki.Admin</author>
@@ -127,10 +127,10 @@ collecteurs de déchets
 |=Date approximative d'ouverture du service dématérialisé|Ce champ indique une date d'ouverture approximative par opposition au champ précédent qui indique un mois et une année précis.|Texte libre de moins de 255 caractères|2020-2021
 </content>
   <object>
-    <name>Demarches.Description du modèle de données</name>
+    <name>Aide.Description du modèle de données</name>
     <number>0</number>
     <className>XWiki.XWikiRights</className>
-    <guid>49d7135d-957f-4c7c-b27d-1841ec5fc34e</guid>
+    <guid>15a5a57f-cc67-421e-920a-0b4b4ae46ea8</guid>
     <class>
       <name>XWiki.XWikiRights</name>
       <customClass/>
