@@ -112,6 +112,9 @@ Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_nr=Non rensei
 Demarches.Code.DemarchesClass_statutDemat=Peut être réalisée ligne complètement
 Demarches.Code.DemarchesClass_statutIntegration=Avis MonAvis intégré ?
 Demarches.Code.DemarchesClass_dateMiseEnLigneTexte=Date de mise en ligne approximative
+Demarches.Code.DemarchesClass_urlResponseTime=Temps de réponse
+Demarches.Code.DemarchesClass_urlAvailability=Disponibilité
+Demarches.Code.DemarchesClass_urlScore=Disponibilité / temps de réponse
 
 # Live table generic keys
 demarches.livetable.doc.title=Titre de la page
@@ -167,6 +170,9 @@ demarches.livetable.franceConnect=FranceConnect
 demarches.livetable.adapteMobile=Adapté mobile
 demarches.livetable.qualiteSupport=Support de qualité
 demarches.livetable.dateMiseEnLigneTexte=Date de mise en ligne approximative
+demarches.livetable.urlResponseTime=Temps de réponse
+demarches.livetable.urlAvailability=Disponibilité
+demarches.livetable.urlScore=Disponibilité / temps de réponse
 demarches.livetable.moyenne=Indice de satisfaction usagers
 demarches.livetable.occurrences=Nombre d'avis usagers
 

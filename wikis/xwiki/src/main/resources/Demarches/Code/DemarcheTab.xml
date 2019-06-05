@@ -214,7 +214,7 @@
                 #end
               #else
                 ## Display all properties, including the computed one
-                #foreach($propName in ['statutIntegration', 'franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'api', 'demarcheSimplifiee'])
+                #foreach($propName in ['statutIntegration', 'franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'api', 'demarcheSimplifiee', 'urlScore'])
                   #displayProperty($object, $propName, false, $action)
                 #end
               #end
