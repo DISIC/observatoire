@@ -72,8 +72,8 @@
 
 {{velocity}}
 #set ($columnsProperties = {
-  'ministeres': {},
-  'groupes': {},
+  'ministeres': {'sortable': false},
+  'groupes': {'sortable': false},
   'doc.title': {'displayName':'Nom','link':'view'},
   'categoriesPublics': {'displayName':'Catégories de publics'},
   'direction': {'displayName':'Direction', 'html':true},
