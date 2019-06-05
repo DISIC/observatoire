@@ -149,15 +149,15 @@
   #end
   #set ($map = { "data": $data})
   #set ($json = $jsontool.serialize($map))
-  #set ($discard = $response.setContentType('application/json'))
-  #set ($characterEncoding = 'utf-8')
-  #set ($discard = $response.setCharacterEncoding($characterEncoding))
-  #set ($discard = $response.writer.write($json))
-  #set ($discard = $response.setContentLength($json.getBytes($characterEncoding).size()))
-  #set ($discard = $response.flushBuffer())
-  #set ($discard = $xcontext.setFinished(true))
+  #set ($discard = $doc.addAttachment("data.json", $json.getBytes()))
+  #set ($discard = $doc.save("Generate and attach file 'data.json'"))
+  A new json has been generated and attached to this page: [[attach:data.json]].
 #else
-  Add parameter "execute=1" to the URL to generate a JSON.
+  {{info}}
+  This page allows to generate a json representation of the demarches and to attach it to this page, in a format that is suitable for getting consumed by page [[TableauDeBord.Top250]]. In order to generate and attach the json, press the button below.
+
+  [[Generate json data and attach it to this page&gt;&gt;path:$doc.getURL('view', 'execute=1')||class="btn btn-default]]
+  {{/info}}
 #end
 {{/velocity}}</content>
 </xwikidoc>
