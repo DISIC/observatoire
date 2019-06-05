@@ -34,21 +34,21 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Tableau de bord des démarches phares</title>
+  <title>Observatoire de la dématérialisation</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>
-{{html clean="false" wiki="false"}}
+  <content>{{html clean="false" wiki="false"}}
+&lt;h2&gt;Tableau de bord des démarches phares de l’Etat – Situation à juin 2019&lt;/h2&gt;
 &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;&lt;/th&gt;
       &lt;th&gt;Démarche&lt;/th&gt;
       &lt;th&gt;Ministère&lt;/th&gt;
-      &lt;th&gt;Groupe&lt;/th&gt;
-      &lt;th&gt;Peut être réalisée en ligne&lt;/th&gt;
+      &lt;th&gt;Thème&lt;/th&gt;
+      &lt;th&gt;Peut être réalisée complètement en ligne&lt;/th&gt;
       &lt;th&gt;Date d'ouverture du service dématérialisé&lt;/th&gt;
       &lt;th&gt;Volumétrie&lt;/th&gt;
       &lt;th&gt;Pourcentage du recours à la voie dématérialisée&lt;/th&gt;
@@ -151,7 +151,7 @@
 
 require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
 
-    function computeBadgeKey(value) {
+    function computeBadgeStyle(value) {
       value = value.toLowerCase();
       switch (value) {
         case 'oui':
@@ -169,9 +169,19 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       }
     }
 
-    function addBadgeSpan(value) {
-      var badgeKey = computeBadgeKey(value);
-      return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeKey + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+    function computeUrlScoreBadgeStyle(value) {
+      if (isNaN(value))
+        return "default";
+      if (value &gt;= 7)
+        return "success";
+      if (value &gt;= 4 &amp;&amp; value &lt; 7)
+        return "warning";
+      return "danger";
+    }
+
+    function addBadge(value, badgeStyleFunction) {
+      var badgeStyle = badgeStyleFunction.apply(this, [value]);
+      return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
     }
 
     function format (data) {
@@ -182,12 +192,15 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         '&lt;p class="row-details-subtitle"&gt;Le service en ligne&amp;hellip;&lt;/p&gt;' +
         '&lt;ul&gt;' +
         // '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; permet-il de s\'identifier avec FranceConnect ? &lt;/span&gt;' + addBadgeSpan(data.franceConnect) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; est-il accessible sur smartphone ? &lt;/span&gt;' + addBadgeSpan(data.adapteMobile) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; propose-t-il un support de qualité ? &lt;/span&gt;' + addBadgeSpan(data.qualiteSupport) + '&lt;/li&gt;';
+        //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; permet-il de s\'identifier avec FranceConnect ? &lt;/span&gt;' + addBadge(data.franceConnect, computeBadgeStyle) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; est-il accessible sur smartphone ? &lt;/span&gt;' + addBadge(data.adapteMobile, computeBadgeStyle) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; propose-t-il un support de qualité ? &lt;/span&gt;' + addBadge(data.qualiteSupport, computeBadgeStyle) + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
         if (data.avisCount &gt;= 100) {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.statisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
+        } else {
+           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Bouton de vote MonAvis à intégrer&lt;/span&gt;&lt;/li&gt;';
         }
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
@@ -213,7 +226,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             { data: "groupes" },
             { data: "statutDemat",
               render: function ( data, type, row ) {
-                return addBadgeSpan(data);
+                return addBadge(data, computeBadgeStyle);
               }
             },
             {
