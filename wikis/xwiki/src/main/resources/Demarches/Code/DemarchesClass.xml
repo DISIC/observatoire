@@ -918,6 +918,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
     </urlResponseTime>
     <urlScore>
       <customDisplay>{{velocity}}
+{{html clean="false"}}
 #set ($availability = $object.getValue('urlAvailability'))
 #set ($responseTime = $object.getValue('urlResponseTime'))
 #set ($statutDemat = $object.getValue('statutDemat'))
@@ -967,6 +968,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
     $services.localization.render('Demarches.Code.DemarchesClass_urlScore_nr')
   #end
 #end
+{{/html}}
 {{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
