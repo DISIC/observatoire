@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content/>
   <object>
     <name>Administration.TopDemarchesPingdomScoreImport</name>
@@ -271,17 +271,21 @@
       <fileupload/>
     </property>
     <property>
+      <filterstyles/>
+    </property>
+    <property>
       <honoremptyvalues>0</honoremptyvalues>
     </property>
     <property>
       <listseparator>,</listseparator>
     </property>
     <property>
-      <mapping>Référence NosDémarches (à ne pas supprimer)=doc.name
-Disponibilité/temps de réponse=lwscore</mapping>
+      <mapping>lwrptime=urlResponseTime
+name=doc.name
+lwdispo=urlAvailability</mapping>
     </property>
     <property>
-      <metadatafilename>190604-pingdom-scores.xls</metadatafilename>
+      <metadatafilename/>
     </property>
     <property>
       <pageprefix/>
