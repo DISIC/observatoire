@@ -115,6 +115,8 @@ Demarches.Code.DemarchesClass_dateMiseEnLigneTexte=Date de mise en ligne approxi
 Demarches.Code.DemarchesClass_urlResponseTime=Temps de réponse
 Demarches.Code.DemarchesClass_urlAvailability=Disponibilité
 Demarches.Code.DemarchesClass_urlScore=Disponibilité / temps de réponse
+Demarches.Code.DemarchesClass_urlScore_nr=Non renseigné
+Demarches.Code.DemarchesClass_urlScore_na=Sans objet
 
 # Live table generic keys
 demarches.livetable.doc.title=Titre de la page
