@@ -382,16 +382,11 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
 {{html clean="false"}}
 #if ($type == 'edit')
   #template('displayer_dblist.vm')
-#elseif ($xcontext.action == 'get')
+#else
   #foreach ($ministere in $value)
     #set ($ministereDocument = $xwiki.getDocument($ministere))
     #set ($nom = $ministereDocument.get('nom'))
     #if ($velocityCount &gt; 1), #{end}#if ($nom)$nom#{else}${ministereDocument.name}#end
-  #end
-#elseif ($xcontext.action == 'view')
-  #foreach ($ministere in $value)
-    #set($ministereDocument = $xwiki.getDocument($ministere))
-    $ministereDocument.displayTitle
   #end
 #end
 {{/html}}
