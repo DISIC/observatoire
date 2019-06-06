@@ -39,8 +39,11 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{html clean="false" wiki="false"}}
-&lt;h2&gt;Tableau de bord des démarches phares de l’Etat – Situation à juin 2019&lt;/h2&gt;
+  <content>{{velocity}}
+{{html clean="false" wiki="false"}}
+&lt;h2&gt;Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 &lt;a href="$xwiki.getURL("Aide.Observatoire de la dématérialisation")"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
+
+
 &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -56,6 +59,7 @@
   &lt;/thead&gt;
 &lt;/table&gt;
 {{/html}}
+{{/velocity}}
 </content>
   <object>
     <name>TableauDeBord.Top250</name>
@@ -209,7 +213,6 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
     // TODO: the language labels could be loaded directly from the datatables-plugin
     var table = $('#top-demarches').DataTable({
       ajax: "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
-      //ajax: "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1')",
       paging: false,
       columns: [
             {

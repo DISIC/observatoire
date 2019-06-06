@@ -58,7 +58,7 @@
             <exclude>**/XWiki/AdministrateursMinisteriels.xml</exclude>
             <!-- Exclude pages that we modify directly on prod -->
             <exclude>**/Main/A propos.xml</exclude>
-            <exclude>**/Aide/Description du modèle de données.xml</exclude>
+            <exclude>**/Aide/**</exclude>
           </excludes>
         </configuration>
       </plugin>
