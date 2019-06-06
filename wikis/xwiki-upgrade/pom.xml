@@ -59,6 +59,7 @@
             <!-- Exclude pages that we modify directly on prod -->
             <exclude>**/Main/A propos.xml</exclude>
             <exclude>**/Aide/**</exclude>
+            <exclude>**/Administration/Domaines autorisés</exclude>
           </excludes>
         </configuration>
       </plugin>

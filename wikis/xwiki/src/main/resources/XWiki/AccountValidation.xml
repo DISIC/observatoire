@@ -40,7 +40,6 @@
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-#set ($BYPASS_DOMAIN = 'gouv.fr')
 #set ($validationKey = "$!{request.validkey}")
 #set ($userId = "$!{request.xwikiname}")
 #if($validationKey != '' &amp;&amp; $userId != '')
@@ -49,9 +48,11 @@
   #set ($userObject = $userPage.getObject('XWiki.XWikiUsers'))
   #set ($userEmail = $userObject.getProperty('email').value)
   #set ($idx = $userEmail.indexOf('@'))
-  #set ($domain = $userEmail.substring($idx))
-  ## it's either exactly @gouv.fr or @something.gouv.fr
-  #if ($domain.endsWith(".${BYPASS_DOMAIN}") || $domain.equals("@${BYPASS_DOMAIN}"))
+  #set ($idx = $idx + 1)
+  #set ($domain = $userEmail.substring($idx).toLowerCase())
+  #set ($whiteList = $xwiki.getDocumentAsAuthor('Administration.Domaines autorisés').getContent().split('\r\n'))
+  ## The domain must match exactly one domain present in the white list.
+  #if ($whiteList.contains($domain))
     #if($xwiki.validateUser(true) == 0)
       #set($loginURL = $xwiki.getURL('XWiki.XWikiLogin', 'login'))
       {{info}}{{html clean="false"}}$services.localization.render('xe.admin.accountvalidation.success', [${loginURL}]){{/html}}{{/info}}
