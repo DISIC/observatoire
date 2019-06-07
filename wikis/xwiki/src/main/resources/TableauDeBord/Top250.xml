@@ -50,7 +50,6 @@
       &lt;th&gt;&lt;/th&gt;
       &lt;th&gt;Démarche&lt;/th&gt;
       &lt;th&gt;Ministère&lt;/th&gt;
-      &lt;th&gt;Thème&lt;/th&gt;
       &lt;th&gt;Peut être réalisée complètement en ligne&lt;/th&gt;
       &lt;th&gt;Date d'ouverture du service dématérialisé&lt;/th&gt;
       &lt;th&gt;Volumétrie&lt;/th&gt;
@@ -226,7 +225,6 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               className: 'column-title'
             },
             { data: "ministere" },
-            { data: "groupes" },
             { data: "statutDemat",
               render: function ( data, type, row ) {
                 return addBadge(data, computeBadgeStyle);
