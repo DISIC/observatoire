@@ -156,12 +156,10 @@
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </fileupload>
       <filterstyles>
-        <customDisplay/>
         <defaultValue/>
         <disabled>0</disabled>
         <displayFormType>select</displayFormType>
         <displayType/>
-        <hint/>
         <name>filterstyles</name>
         <number>14</number>
         <prettyName>filterstyles</prettyName>
@@ -280,11 +278,9 @@
     </property>
     <property>
       <mapping>Avis MonAvis intégré ?=statutIntegration
-Commentaires administration + annonce CITP=remarques
 Ministère=ministeres
 Date d'ouverture du service dématérialisé=dateMiseEnLigne
-FranceConnect particulier ?=franceConnect
-Groupe=groupes
+Identification via FranceConnect ?=franceConnect
 Volumétrie de la démarche=volumetrie
 Date d'ouverture du service dématérialisé=dateMiseEnLigneTexte
 Accessible sur  smartphone ?=adapteMobile
@@ -292,14 +288,13 @@ Constant:1=top
 Référence NosDémarches (à ne pas supprimer)=doc.name
 Volumétrie du recours à la voie dématérialisée=volumetrieDemat
 URL de la démarches=urlDemarche
-Démarches Iconiques=doc.title
 Support de qualité ?=moyensDeContact
+Peut être réalisée en ligne complètement ?=statutDemat
 Support de qualité ?=accompagnement
-Peut-être réalisée en ligne complètement ?=statutDemat
 Administration concernée=direction</mapping>
     </property>
     <property>
-      <metadatafilename></metadatafilename>
+      <metadatafilename/>
     </property>
     <property>
       <pageprefix/>

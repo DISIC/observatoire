@@ -126,15 +126,15 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     {
         trimAllValues(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
-        processDateOuverture(data);
+        processOpeningDate(data);
         processNumbers(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_INTEGRATION, data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_FRANCE_CONNECT, data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
         processSupportDeQualite(data, row, headers);
-        processComments(data, row, rowIndex, headers, config);
+        //processComments(data, row, rowIndex, headers, config);
         processUrl(data, row, headers);
-        processGroupes(data, row, rowIndex, headers, config);
+        //processGroups(data, row, rowIndex, headers, config);
         logger.debug("New data after processing: ", data);
     }
 
@@ -151,14 +151,14 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     // Process column "Date d'ouverture du service dématérialisé" and convert its values to 2 property values:
     // dateMiseEnLigne and dateMiseEnLigneTexte, according to the following conversion rules:
-    // - "?" -> "", ""
-    // - "n/a" -> "", ""
+    // - "n/c" -> "", ""
+    // - "Ouvert" -> "", "Ouvert"
     // - "2022" -> "01/12/2022", "2022"
     // - "Sep-2019" -> "01/09/2019", ""
     // - "2020-2021" -> "01/12/2020", "2020-2021"
     // - "2020?" -> "01/12/2020", "2020"
 
-    protected void processDateOuverture(Map<String, String> data)
+    protected void processOpeningDate(Map<String, String> data)
     {
         String value = data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE);
         if (StringUtils.isNotEmpty(value)) {
@@ -167,6 +167,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             String dateMiseEnLigneTexte = "";
 
             if (value.matches("[^-]*-\\d{2}")) {
+                // The value is a real date
                 try {
                     Date date = FORMATTER_DATE_MISE_EN_LIGNE_INPUT.parse(value);
                     dateMiseEnLigneAsString = FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT.format(date);
@@ -178,13 +179,19 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                 }
             } else {
 
-                dateMiseEnLigneAsString = value.replaceAll("^\\?$", "");
+                dateMiseEnLigneAsString = value.replaceAll("^(?i)ouvert$", "");
+                dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(?i)n/c$", "");
                 dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(?i)n/a$", "");
                 dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(\\d{4})\\?$", "12/$1");
                 dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(\\d{4})$", "12/$1");
                 dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("(\\d{4})-(\\d{4})", "12/$2");
 
-                if (!value.matches("\\?") && !value.matches("(?i)n/a")) {
+                // We store the value as such in dateMiseEnLigneTexte to keep the information as it was provided,
+                // typically when value is: "2020-2021"
+                // No need to store information "ouvert" or "nr" because:
+                // - "ouvert" can be inferred from "statutDemat=enLigneEntierement"
+                // - "nr" can be inferred from "dateMiseEnLigne=''"
+                if (!value.matches("(?i)ouvert")  && !value.matches("(?i)n/c")) {
                     dateMiseEnLigneTexte = value;
                 }
             }
@@ -248,18 +255,18 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             new String[] {DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION};
         for (String propertyName : propertyNames) {
             String value = data.get(propertyName);
-            if ("?".equals(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
+            if ("n/c".equalsIgnoreCase(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
                 data.put(propertyName, "");
             }
         }
     }
 
-    // Replace common static list values by their corresponding key in the démarche property: replace "?" by
+    // Replace common static list values by their corresponding key in the démarche property: replace "n/c" by
     // "nr" ("non renseigné"), "n/a" by "na", "Oui" by "oui", "Non" by "non", "A venir" by "nr"
     protected String normalizeStaticListValue(String value)
     {
         if (StringUtils.isNotEmpty(value)) {
-            value = value.replaceAll("^\\?$", "nr");
+            value = value.replaceAll("(?i)^n/c$", "nr");
             value = value.replaceAll("(?i)^n/a$", "na");
             value = value.replaceAll("(?i)^partiel$", "partiel");
             value = value.replaceAll("(?i)^a venir$", "nr");
@@ -312,12 +319,12 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     protected void processUrl(Map<String, String> data, List<String> row, List<String> headers)
     {
         String value = getRowDataByHeader(row, HEADER_URL, headers);
-        if ("?".equals(value) || "-".equals(value)) {
+        if (value == null || "?".equals(value) || "-".equals(value)) {
             data.put(DEMARCHE_PROPERTY_URL, "");
         }
     }
 
-    protected void processGroupes(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
+    protected void processGroups(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
         BatchImportConfiguration config)
     {
         // Concatenate existing groupes with the value from the file
