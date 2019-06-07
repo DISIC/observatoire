@@ -162,11 +162,13 @@
     <dateMiseEnLigne>
       <customDisplay>{{velocity}}
 {{html clean="false"}}
-#set ($statutDemat = "$!object.getValue('statutDemat')")
 #if ($type == 'edit')
   #template('displayer_date.vm')
 #else
-  #if ("$!value" != '')
+  #set ($statutDemat = "$!object.getValue('statutDemat')")
+  #if ("$!statutDemat" == 'enLigneEntierement')
+$services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_ouvert")
+  #elseif ("$!value" != '')
     #template('displayer_date.vm')
   #else
 $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr")

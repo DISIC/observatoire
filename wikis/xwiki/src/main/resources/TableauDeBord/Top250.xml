@@ -199,10 +199,10 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
         '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; permet-il de s\'identifier avec FranceConnect ? &lt;/span&gt;' + addBadge(data.franceConnect, computeBadgeStyle) + '&lt;/li&gt;' +
         '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; est-il accessible sur smartphone ? &lt;/span&gt;' + addBadge(data.adapteMobile, computeBadgeStyle) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; propose-t-il un support de qualité ? &lt;/span&gt;' + addBadge(data.qualiteSupport, computeBadgeStyle) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; propose-t-il un support de qualité ? &lt;/span&gt;' + addBadge(data.qualiteSupport, computeBadgeStyle) + '&lt;/li&gt;';
+        //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
         if (data.avisCount &gt;= 100) {
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.statisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.satisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
         } else {
            output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Bouton de vote MonAvis à intégrer&lt;/span&gt;&lt;/li&gt;';
         }

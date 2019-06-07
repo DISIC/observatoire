@@ -86,6 +86,8 @@
     #set ($idx = $percentDematDisplay.indexOf('%'))
     #if ($idx &gt; 0)
       #set ($percentDemat = $util.parseFloat($percentDematDisplay.replace('%','').replace(',','.').trim()))
+      #set ($percentDematRounded = $mathtool.round($percentDemat))
+      #set ($percentDematDisplay = "$percentDematRounded %")
     #else
       #set ($percentDemat = $mathtool.sub(0,$percentDematDisplay.hashCode()))
       #if ($percentDematDisplay == "Sans objet")
@@ -96,26 +98,24 @@
     #end
     ## If statutDemat is "Oui", then dateMiseEnLigneDispay should be "Ouvert"
     #set ($statutDemat = $obj.get('statutDemat'))
-    #if ($statutDemat == "Oui")
-      #set ($dateMiseEnLigneDisplay = "Ouvert")
-      #set ($dateMiseEnLigne = 10)
+    #set ($dateMiseEnLigneTexte = $obj.get('dateMiseEnLigneTexte'))
+    ## dateMiseEnLigneTexte has priority in terms of display over dateMiseEnLigne
+    #if ("$!dateMiseEnLigneTexte" != '')
+      #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneTexte)
     #else
-      #set ($dateMiseEnLigneTexte = $obj.get('dateMiseEnLigneTexte'))
-      ## dateMiseEnLigneTexte has priority in terms of display over dateMiseEnLigne
-      #if ("$!dateMiseEnLigneTexte" != '')
-        #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneTexte)
-      #else
-        #set ($dateMiseEnLigneDisplay = $obj.get('dateMiseEnLigne'))
-        #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneDisplay.replace('renseigné', 'renseignée'))
-      #end
-      #set ($dateMiseEnLigne = $obj.getValue('dateMiseEnLigne'))
-      #if ("$!dateMiseEnLigne" != '')
-        ## Add a hashcode, because we want to differentiate for example "2019" from "12/2019" while both have the same dateMiseEnLigne set to "12/2019"
-        #set ($s = "$!dateMiseEnLigneTexte")
-        #set ($h = $s.hashCode())
-        #set ($dateMiseEnLigne = $mathtool.add($dateMiseEnLigne.getTime(), $h))
-      #else
-        #set ($dateMiseEnLigne = 0)
+      #set ($dateMiseEnLigneDisplay = $obj.get('dateMiseEnLigne'))
+      #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneDisplay.replace('renseigné', 'renseignée'))
+    #end
+    #set ($dateMiseEnLigne = $obj.getValue('dateMiseEnLigne'))
+    #if ("$!dateMiseEnLigne" != '')
+      ## Add a hashcode, because we want to differentiate for example "2019" from "12/2019" while both have the same dateMiseEnLigne set to "12/2019"
+      #set ($s = "$!dateMiseEnLigneTexte")
+      #set ($h = $s.hashCode())
+      #set ($dateMiseEnLigne = $mathtool.add($dateMiseEnLigne.getTime(), $h))
+    #else
+      #set ($dateMiseEnLigne = 0)
+      #if ($dateMiseEnLigneDisplay == "Ouvert")
+        #set ($dateMiseEnLigne = 10)
       #end
     #end
     #set ($urlScore = $obj.get('urlScore'))
@@ -143,7 +143,7 @@
         "adapteMobile": $obj.get('adapteMobile'),
         "qualiteSupport": $obj.get('qualiteSupport'),
         "avisCount": $avisCount,
-        "statisfactionIndex": $satisfactionIndexPercentRounded,
+        "satisfactionIndex": $satisfactionIndexPercentRounded,
         "urlScore": $urlScore
       }))
   #end
