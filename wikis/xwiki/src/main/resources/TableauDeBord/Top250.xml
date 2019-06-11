@@ -260,7 +260,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             },
             {
               data: "ministere",
-              visible: false
+              visible: true
             },
             { data: "statutDemat",
               render: function ( data, type, row ) {
