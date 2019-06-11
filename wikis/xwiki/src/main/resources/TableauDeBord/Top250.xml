@@ -242,7 +242,9 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               ministeres.push(ministere);
             }
           };
-          ministeres.sort();
+          ministeres.sort(function (a, b) {
+            return a.localeCompare(b);
+          });
          return json.data;
         }
       },
