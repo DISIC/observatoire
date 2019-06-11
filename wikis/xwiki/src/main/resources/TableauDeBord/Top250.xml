@@ -43,6 +43,14 @@
 {{html clean="false" wiki="false"}}
 &lt;h2&gt;Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 &lt;a href="$xwiki.getURL("Aide.Observatoire de la dématérialisation")"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
 
+&lt;dl&gt;
+  &lt;dt&gt;Ministère :&lt;/dt&gt;
+  &lt;dd&gt;
+  &lt;select name="ministereSelect"&gt;
+  &lt;option value="tous"&gt;Chargement...&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
 
 &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
   &lt;thead&gt;
@@ -151,7 +159,6 @@
     }
 });
 
-
 require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
 
     function computeBadgeStyle(value) {
@@ -209,9 +216,36 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       return output;
     }
 
-    // TODO: the language labels could be loaded directly from the datatables-plugin
+    // Addition of a search function to the list of search functions for filtering on the ministère value.
+    $.fn.dataTable.ext.search.push(
+      function( settings, data, dataIndex ) {
+        var selectedMinistere =  $('select[name="ministereSelect"]').val();
+        var ministere = data[2];
+        if (selectedMinistere == "tous" || ministere == selectedMinistere) {
+          return true;
+        }
+        return false;
+      }
+    );
+
+    var ministeres = [];
+
     var table = $('#top-demarches').DataTable({
-      ajax: "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
+      ajax: {
+        type: 'GET',
+        url: "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
+        dataSrc: function (json) {
+          var data = json.data;
+          for (var i = 0; i &lt; data.length; i++) {
+            var ministere = data[i].ministere;
+            if (ministeres.indexOf(ministere) &lt; 0) {
+              ministeres.push(ministere);
+            }
+          };
+          ministeres.sort();
+         return json.data;
+        }
+      },
       paging: false,
       columns: [
             {
@@ -224,7 +258,10 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               data: "title",
               className: 'column-title'
             },
-            { data: "ministere" },
+            {
+              data: "ministere",
+              visible: false
+            },
             { data: "statutDemat",
               render: function ( data, type, row ) {
                 return addBadge(data, computeBadgeStyle);
@@ -257,18 +294,30 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               className: 'column-pourcentageRecoursVoieDematerialisee'
             }
       ],
-      "order": [[2, 'asc']],
+      order: [[2, 'asc']],
       language: {
-          info: "Total : _TOTAL_ démarches",
-          infoEmpty: "Aucune démarche trouvée",
-          infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
-          loadingRecords: "Chargement...",
-          processing: "Traitement...",
-          search: "Recherche :",
-          zeroRecords: "Aucune entrée trouvée"
-        }
+        info: "Total : _TOTAL_ démarches",
+        infoEmpty: "Aucune démarche trouvée",
+        infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
+        loadingRecords: "Chargement...",
+        processing: "Traitement...",
+        search: "Recherche :",
+        zeroRecords: "Aucune entrée trouvée"
+      },
+      initComplete: function(settings, json ) {
+        var select = $('select[name="ministereSelect"]');
+        select.empty();
+        select.append($("&lt;option /&gt;").val("tous").text("Tous"));
+        $.each(ministeres, function() {
+           select.append($("&lt;option /&gt;").val(this).text(this));
+        });
       }
-    );
+    });
+
+    var select = $('select[name="ministereSelect"]');
+    select.change(function () {
+      table.draw();
+    });
 
     $('#top-demarches tbody').on('click', 'td.details-control', function () {
       var tr = $(this).closest('tr');
