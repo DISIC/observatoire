@@ -854,10 +854,10 @@
       <brand-warning>#D58000</brand-warning>
     </property>
     <property>
-      <breadcrumb-bg>#384285</breadcrumb-bg>
+      <breadcrumb-bg>#ffffff</breadcrumb-bg>
     </property>
     <property>
-      <breadcrumb-color>#ffffff</breadcrumb-color>
+      <breadcrumb-color>#0a0a0a</breadcrumb-color>
     </property>
     <property>
       <breadcrumb-separator>/</breadcrumb-separator>
@@ -1068,6 +1068,14 @@ select[size="1"]{
 /* Custom wikidemarches stuff!                     */
 /***************************************************/
 
+/* 
+ * Add bottom border to the header, to separate it from the page content (as it has the same color)
+ */
+
+#headerglobal {
+  border-bottom: 2px solid #d3d3d3;
+}
+
 /*
  * Make some room around the logo on the topbar
  */
@@ -1100,6 +1108,9 @@ select[size="1"]{
 
       span {
         display: block;
+      }
+      i {
+       font-weight: 400;
       }
     }
   }
@@ -1213,11 +1224,11 @@ legend {
 }
 
 /*
- * Footer is the same color as body content and same text color, and aligned left on desktop &amp; tablet
+ * Footer is the inverse color of the nav and same text color, and aligned left on desktop &amp; tablet
  */
 #footerglobal {
-  background-color: @body-bg;
-  color: @text-color;
+  background-color: @navbar-default-color;
+  color: @navbar-default-bg;
 }
 
 @media (min-width: @screen-sm-min) {
@@ -1228,7 +1239,7 @@ legend {
 
 #footerglobal a, 
 #footerglobal a:hover {
-  color: @link-color;
+  color: @navbar-default-bg;
 }
 
 /*
@@ -1380,7 +1391,6 @@ Visually, there's the title row and then all the rows from the document content,
   padding-right: 0;
 }
 
-
 </lessCode>
     </property>
     <property>
@@ -1390,25 +1400,25 @@ Visually, there's the title row and then all the rows from the document content,
       <logo>Marianne-temp.png</logo>
     </property>
     <property>
-      <navbar-default-bg>#384285</navbar-default-bg>
+      <navbar-default-bg>#ffffff</navbar-default-bg>
     </property>
     <property>
-      <navbar-default-color>#ffffff</navbar-default-color>
+      <navbar-default-color>#0a0a0a</navbar-default-color>
     </property>
     <property>
-      <navbar-default-link-active-bg>#384285</navbar-default-link-active-bg>
+      <navbar-default-link-active-bg>#ffffff</navbar-default-link-active-bg>
     </property>
     <property>
-      <navbar-default-link-active-color>#ffffff</navbar-default-link-active-color>
+      <navbar-default-link-active-color>#0a0a0a</navbar-default-link-active-color>
     </property>
     <property>
-      <navbar-default-link-color>#ffffff</navbar-default-link-color>
+      <navbar-default-link-color>#0a0a0a</navbar-default-link-color>
     </property>
     <property>
-      <navbar-default-link-hover-bg>#384285</navbar-default-link-hover-bg>
+      <navbar-default-link-hover-bg>#ffffff</navbar-default-link-hover-bg>
     </property>
     <property>
-      <navbar-default-link-hover-color>#ffffff</navbar-default-link-hover-color>
+      <navbar-default-link-hover-color>#0a0a0a</navbar-default-link-hover-color>
     </property>
     <property>
       <navbar-height>30px</navbar-height>
