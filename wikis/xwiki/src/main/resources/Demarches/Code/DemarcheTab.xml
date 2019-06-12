@@ -106,7 +106,7 @@
         &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
         &lt;dd&gt;$doc.name&lt;/dd&gt;
         #end
-        #set ($propList = ['nomComplet', 'proprietaires', 'objet', 'statut', 'champ', 'direction', 'ministeres', 'groupes', 'organismesTraitement'])
+        #set ($propList = ['nomComplet', 'proprietaires', 'objet', 'statut', 'champ', 'direction', 'ministeres', 'groupes', 'groupesExternes', 'organismesTraitement'])
         #if ($isSimplifiedForm)
           #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
         #end

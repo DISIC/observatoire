@@ -57,7 +57,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>accompagnement</name>
-      <number>32</number>
+      <number>33</number>
       <picker>0</picker>
       <prettyName>Accompagnement humain personnalisé</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -79,7 +79,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>adapteMobile</name>
-      <number>30</number>
+      <number>31</number>
       <picker>0</picker>
       <prettyName>Adapté mobile</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -101,7 +101,7 @@
       <hint/>
       <multiSelect>1</multiSelect>
       <name>api</name>
-      <number>34</number>
+      <number>35</number>
       <picker>0</picker>
       <prettyName>API</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -123,7 +123,7 @@
       <hint>Catégorie(s) de public(s) concerné(s) par la démarche</hint>
       <multiSelect>1</multiSelect>
       <name>categoriesPublics</name>
-      <number>16</number>
+      <number>17</number>
       <picker>0</picker>
       <prettyName>Catégories de publics concernés</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -181,7 +181,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <emptyIsToday>0</emptyIsToday>
       <hint>Date de mise en ligne prévue ou réalisée</hint>
       <name>dateMiseEnLigne</name>
-      <number>39</number>
+      <number>40</number>
       <picker>1</picker>
       <prettyName>Date de mise en ligne</prettyName>
       <size>20</size>
@@ -195,7 +195,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <disabled>0</disabled>
       <hint>Ce champ indique une date d'ouverture approximative par opposition au champ « Date de mise en ligne » qui indique un mois et une année précis.</hint>
       <name>dateMiseEnLigneTexte</name>
-      <number>40</number>
+      <number>41</number>
       <picker>0</picker>
       <prettyName>Date approximative d'ouverture du service dématérialisé</prettyName>
       <size>30</size>
@@ -212,7 +212,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <hint/>
       <multiSelect>0</multiSelect>
       <name>demarcheSimplifiee</name>
-      <number>35</number>
+      <number>36</number>
       <picker>0</picker>
       <prettyName>Démarche simplifiée</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -234,7 +234,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <displayType/>
       <hint>Ce champ indique si les usagers sont obligés de remplir la démarche en dématérialisation.</hint>
       <name>dematObligatoire</name>
-      <number>26</number>
+      <number>27</number>
       <prettyName>Dématérialisation obligatoire</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -286,7 +286,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <idField/>
       <multiSelect>1</multiSelect>
       <name>evenements</name>
-      <number>18</number>
+      <number>19</number>
       <picker>1</picker>
       <prettyName>Événements de vie</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -309,7 +309,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <displayType/>
       <hint>Démarche exclue du SVE par décret</hint>
       <name>exclusionSve</name>
-      <number>27</number>
+      <number>28</number>
       <prettyName>Démarche exclue du SVE</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -321,7 +321,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <disabled>0</disabled>
       <hint>Référence(s) d'un ou plusieurs CERFA séparé(e)s par des virgules</hint>
       <name>formulaires</name>
-      <number>12</number>
+      <number>13</number>
       <picker>0</picker>
       <prettyName>Formulaires CERFA</prettyName>
       <size>30</size>
@@ -338,7 +338,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <hint/>
       <multiSelect>0</multiSelect>
       <name>franceConnect</name>
-      <number>29</number>
+      <number>30</number>
       <picker>0</picker>
       <prettyName>FranceConnect</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -358,13 +358,13 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <customDisplay/>
       <disabled>0</disabled>
       <displayType>input</displayType>
-      <hint>Groupes au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
+      <hint>Groupe(s) interne(s) au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
       <idField/>
       <multiSelect>1</multiSelect>
       <name>groupes</name>
       <number>9</number>
       <picker>1</picker>
-      <prettyName>Groupes</prettyName>
+      <prettyName>Regroupement interne</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
       <separators/>
@@ -377,6 +377,31 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </groupes>
+    <groupesExternes>
+      <cache>0</cache>
+      <classname/>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>input</displayType>
+      <hint>Groupe(s) externe(s) au(x)quel(s) est rattachée la démarche (exemple : Éducation)</hint>
+      <idField/>
+      <multiSelect>1</multiSelect>
+      <name>groupesExternes</name>
+      <number>10</number>
+      <picker>1</picker>
+      <prettyName>Regroupement externe</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators/>
+      <size>5</size>
+      <sort>none</sort>
+      <sql/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <valueField/>
+      <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+    </groupesExternes>
     <ministeres>
       <cache>0</cache>
       <classname/>
@@ -422,7 +447,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <hint/>
       <multiSelect>0</multiSelect>
       <name>moyensDeContact</name>
-      <number>31</number>
+      <number>32</number>
       <picker>0</picker>
       <prettyName>Au moins deux moyens de contact différents, dont un formulaire de contact</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -444,7 +469,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <hint/>
       <multiSelect>1</multiSelect>
       <name>niveauDemat</name>
-      <number>23</number>
+      <number>24</number>
       <picker>0</picker>
       <prettyName>Niveau de dématérialisation actuel</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -480,7 +505,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <disabled>0</disabled>
       <hint>Nom du projet de dématérialisation auquel est rattachée la démarche</hint>
       <name>nomProjet</name>
-      <number>37</number>
+      <number>38</number>
       <picker>0</picker>
       <prettyName>Nom du projet de dématérialisation</prettyName>
       <size>30</size>
@@ -516,7 +541,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <idField/>
       <multiSelect>1</multiSelect>
       <name>organismesTraitement</name>
-      <number>10</number>
+      <number>11</number>
       <picker>1</picker>
       <prettyName>Organismes de traitement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -536,7 +561,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <disabled>0</disabled>
       <hint>100 % si la démarche peut être réalisée en ligne complètement, 50% si la démarche est en phase de déploiement, et 10% si elle est en phase d’expérimentation</hint>
       <name>pourcentageDematerialisation</name>
-      <number>25</number>
+      <number>26</number>
       <prettyName>Pourcentage de dématérialisation</prettyName>
       <script>{{velocity}}
 #set ($enLigneEntierement = $object.getValue("enLigneEntierement"))
@@ -565,7 +590,7 @@ ${percent} %
       <disabled>0</disabled>
       <hint>Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée</hint>
       <name>pourcentageRecoursVoieDematerialisee</name>
-      <number>21</number>
+      <number>22</number>
       <prettyName>Pourcentage de recours à la voie dématérialisée</prettyName>
       <script>{{velocity}}
 {{html clean="false"}}
@@ -620,7 +645,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_pourcentageRecoursV
       <idField/>
       <multiSelect>1</multiSelect>
       <name>publics</name>
-      <number>17</number>
+      <number>18</number>
       <picker>1</picker>
       <prettyName>Publics</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -664,7 +689,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint/>
       <name>qualiteSupport</name>
-      <number>33</number>
+      <number>34</number>
       <prettyName>Support de qualité</prettyName>
       <script/>
       <unmodifiable>0</unmodifiable>
@@ -677,7 +702,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint>Référence de la démarche dans la base Service Public</hint>
       <name>referenceServicePublic</name>
-      <number>11</number>
+      <number>12</number>
       <picker>0</picker>
       <prettyName>Référence Service Public</prettyName>
       <size>30</size>
@@ -693,7 +718,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <editor>Text</editor>
       <hint/>
       <name>remarques</name>
-      <number>36</number>
+      <number>37</number>
       <picker>0</picker>
       <prettyName>Remarques</prettyName>
       <rows>5</rows>
@@ -733,7 +758,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <hint>Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; Non dans le cas contraire ; Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
       <multiSelect>0</multiSelect>
       <name>statutDemat</name>
-      <number>24</number>
+      <number>25</number>
       <picker>0</picker>
       <prettyName>Peut être réalisée en ligne complètement</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -755,7 +780,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <hint/>
       <multiSelect>0</multiSelect>
       <name>statutIntegration</name>
-      <number>28</number>
+      <number>29</number>
       <picker>0</picker>
       <prettyName>Avis MonAvis  intégré ?</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -777,7 +802,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <hint>Statut du projet de dématérialisation incluant la planification de celle-ci</hint>
       <multiSelect>0</multiSelect>
       <name>statutProjetDemat</name>
-      <number>38</number>
+      <number>39</number>
       <picker>0</picker>
       <prettyName>Statut du projet de dématérialisation</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -798,7 +823,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <editor>Text</editor>
       <hint>Textes de lois associés à la démarche</hint>
       <name>textes</name>
-      <number>13</number>
+      <number>14</number>
       <picker>0</picker>
       <prettyName>Textes de référence</prettyName>
       <rows>5</rows>
@@ -855,7 +880,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <displayType/>
       <hint/>
       <name>top</name>
-      <number>22</number>
+      <number>23</number>
       <prettyName>Top 250</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
@@ -867,7 +892,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint/>
       <name>urlAvailability</name>
-      <number>42</number>
+      <number>43</number>
       <numberType>double</numberType>
       <prettyName>Disponibilité</prettyName>
       <size>30</size>
@@ -881,7 +906,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint>Adresse web permettant d'effectuer la démarche</hint>
       <name>urlDemarche</name>
-      <number>15</number>
+      <number>16</number>
       <picker>0</picker>
       <prettyName>Adresse web de la démarche</prettyName>
       <size>30</size>
@@ -895,7 +920,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint>Adresse web des informations concernant la démarche</hint>
       <name>urlInfos</name>
-      <number>14</number>
+      <number>15</number>
       <picker>0</picker>
       <prettyName>Adresse web informations</prettyName>
       <size>30</size>
@@ -909,7 +934,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint/>
       <name>urlResponseTime</name>
-      <number>41</number>
+      <number>42</number>
       <numberType>long</numberType>
       <prettyName>Temps de réponse</prettyName>
       <size>30</size>
@@ -975,7 +1000,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint/>
       <name>urlScore</name>
-      <number>43</number>
+      <number>44</number>
       <prettyName>Disponibilité / temps de réponse</prettyName>
       <script/>
       <unmodifiable>0</unmodifiable>
@@ -1000,7 +1025,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint>Nombre total de démarches reçues par an (estimation)</hint>
       <name>volumetrie</name>
-      <number>19</number>
+      <number>20</number>
       <numberType>long</numberType>
       <prettyName>Volumétrie de la démarche</prettyName>
       <size>30</size>
@@ -1029,7 +1054,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_volumetrieDemat_nr"
       <disabled>0</disabled>
       <hint>Nombre de démarches reçues par la voie d'une téléprocédure ou d'un EDI par an.</hint>
       <name>volumetrieDemat</name>
-      <number>20</number>
+      <number>21</number>
       <numberType>long</numberType>
       <prettyName>Volumétrie de la dématérialisation</prettyName>
       <size>30</size>
