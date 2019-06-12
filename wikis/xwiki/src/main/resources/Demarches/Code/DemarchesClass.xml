@@ -772,28 +772,6 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|nonDemat=Non|nr=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutDemat>
-    <statutIntegration>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>radio</displayType>
-      <hint/>
-      <multiSelect>0</multiSelect>
-      <name>statutIntegration</name>
-      <number>29</number>
-      <picker>0</picker>
-      <prettyName>Avis MonAvis  intégré ?</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>oui=Oui|non=Non|na=Sans objet|nr=À venir</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </statutIntegration>
     <statutProjetDemat>
       <cache>0</cache>
       <customDisplay/>

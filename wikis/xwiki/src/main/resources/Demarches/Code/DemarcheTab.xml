@@ -204,7 +204,7 @@
               #if ($action == 'edit')
                 ## Some properties can be edited only by administrators
                 #if ($hasAdmin)
-                  #foreach($propName in ['statutIntegration', 'franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
+                  #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
                     #displayProperty($object, $propName, false, $action)
                   #end
                 #else
@@ -214,7 +214,7 @@
                 #end
               #else
                 ## Display all properties, including the computed one
-                #foreach($propName in ['statutIntegration', 'franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'api', 'demarcheSimplifiee', 'urlScore'])
+                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'api', 'demarcheSimplifiee', 'urlScore'])
                   #displayProperty($object, $propName, false, $action)
                 #end
               #end

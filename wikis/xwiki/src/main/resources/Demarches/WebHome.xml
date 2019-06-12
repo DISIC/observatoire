@@ -88,7 +88,6 @@
   'volumetrie': {'type': 'hidden'},
   'volumetrieDemat': {'type': 'hidden'},
   'pourcentageRecoursVoieDematerialisee': {'type': 'hidden'},
-  'statutIntegration': {'type': 'hidden'},
   'franceConnect': {'type': 'hidden'},
   'adapteMobile': {'type': 'hidden'},
   'qualiteSupport': {'type': 'hidden'},
