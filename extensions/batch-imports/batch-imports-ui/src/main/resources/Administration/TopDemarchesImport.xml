@@ -277,18 +277,20 @@
       <listseparator>,</listseparator>
     </property>
     <property>
-      <mapping>Avis MonAvis intégré ?=statutIntegration
+      <mapping>Commentaires administration + annonce CITP=remarques
 Ministère=ministeres
-Date d'ouverture du service dématérialisé=dateMiseEnLigne
+Date d'ouverture du service dématérialisé (usage interne)=dateMiseEnLigne
 Identification via FranceConnect ?=franceConnect
 Volumétrie de la démarche=volumetrie
-Date d'ouverture du service dématérialisé=dateMiseEnLigneTexte
+Date d'ouverture du service dématérialisé (usage interne)=dateMiseEnLigneTexte
 Accessible sur  smartphone ?=adapteMobile
 Constant:1=top
 Référence NosDémarches (à ne pas supprimer)=doc.name
 Volumétrie du recours à la voie dématérialisée=volumetrieDemat
 URL de la démarches=urlDemarche
+Démarches phares=doc.title
 Support de qualité ?=moyensDeContact
+Groupe=groupesExternes
 Peut être réalisée en ligne complètement ?=statutDemat
 Support de qualité ?=accompagnement
 Administration concernée=direction</mapping>

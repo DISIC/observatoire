@@ -20,8 +20,6 @@
 package com.xwiki.projects.dinsic.wikidemarches.extensions.batchimports;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +43,7 @@ import org.xwiki.model.reference.DocumentReference;
 import org.xwiki.model.reference.DocumentReferenceResolver;
 import org.xwiki.text.StringUtils;
 
-import com.xpn.xwiki.XWiki;
 import com.xpn.xwiki.XWikiContext;
-import com.xpn.xwiki.XWikiException;
-import com.xpn.xwiki.doc.XWikiDocument;
-import com.xpn.xwiki.objects.BaseObject;
 
 // TODO: consider firing an error that blocks the import as soon as an unexpected value is found, in order to avoid
 // importing invalid data
@@ -109,8 +103,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String DEMARCHE_PROPERTY_REMARQUES = "remarques";
 
-    public static String DEMARCHE_PROPERTY_GROUPES = "groupes";
-
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
@@ -122,7 +114,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      */
     @Override
     public void postProcessRow(Map<String, String> data, List<String> row, int rowIndex, Map<String, String> mapping,
-        List<String> headers, BatchImportConfiguration config)
+            List<String> headers, BatchImportConfiguration config)
     {
         trimAllValues(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
@@ -132,9 +124,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         normalizeStaticListValue(DEMARCHE_PROPERTY_FRANCE_CONNECT, data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
         processSupportDeQualite(data, row, headers);
-        //processComments(data, row, rowIndex, headers, config);
+        processComments(data, row, rowIndex, headers, config);
         processUrl(data, row, headers);
-        //processGroups(data, row, rowIndex, headers, config);
         logger.debug("New data after processing: ", data);
     }
 
@@ -191,7 +182,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                 // No need to store information "ouvert" or "nr" because:
                 // - "ouvert" can be inferred from "statutDemat=enLigneEntierement"
                 // - "nr" can be inferred from "dateMiseEnLigne=''"
-                if (!value.matches("(?i)ouvert")  && !value.matches("(?i)n/c")) {
+                if (!value.matches("(?i)ouvert") && !value.matches("(?i)n/c")) {
                     dateMiseEnLigneTexte = value;
                 }
             }
@@ -202,32 +193,20 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     protected void processComments(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
-        BatchImportConfiguration config)
+            BatchImportConfiguration config)
     {
         // Concatenate all comments to the possibly existing "remarques" property value
         DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
         DocumentReference reference = defaultBatchImport.getPageName(data, rowIndex, config, null);
         if (reference != null) {
-            try {
-                XWikiContext xcontext = this.xwikiContextProvider.get();
-                XWiki xwiki = xcontext.getWiki();
-                XWikiDocument document = xwiki.getDocument(reference, xcontext);
-                String classReference = config.getMappingClassName();
-                BaseObject baseObject = document.getXObject(resolver.resolve(classReference));
-                String remarques = "";
-                if (baseObject != null) {
-                    remarques = baseObject.getLargeStringValue(DEMARCHE_PROPERTY_REMARQUES);
-                }
-                String comment1 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
-                String comment2 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
-                String comment3 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
+            String remarques = "";
+            String comment1 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
+            String comment2 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
+            String comment3 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
 
-                String joined = Stream.of(remarques, comment1, comment2, comment3)
+            String joined = Stream.of(remarques, comment1, comment2, comment3)
                     .filter(s -> StringUtils.isNotEmpty(s)).collect(Collectors.joining("\n\n")).trim();
-                data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
-            } catch (XWikiException e) {
-                logger.warn("Exception while concatenating data for row " + rowIndex, e);
-            }
+            data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
         }
     }
 
@@ -252,7 +231,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     protected void processNumbers(Map<String, String> data)
     {
         String[] propertyNames =
-            new String[] {DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION};
+                new String[]{ DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION };
         for (String propertyName : propertyNames) {
             String value = data.get(propertyName);
             if ("n/c".equalsIgnoreCase(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
@@ -321,43 +300,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         String value = getRowDataByHeader(row, HEADER_URL, headers);
         if (value == null || "?".equals(value) || "-".equals(value)) {
             data.put(DEMARCHE_PROPERTY_URL, "");
-        }
-    }
-
-    protected void processGroups(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
-        BatchImportConfiguration config)
-    {
-        // Concatenate existing groupes with the value from the file
-        DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
-        DocumentReference reference = defaultBatchImport.getPageName(data, rowIndex, config, null);
-        if (reference != null) {
-            try {
-                XWikiContext xcontext = this.xwikiContextProvider.get();
-                XWiki xwiki = xcontext.getWiki();
-                XWikiDocument document = xwiki.getDocument(reference, xcontext);
-                String classReference = config.getMappingClassName();
-                BaseObject baseObject = document.getXObject(resolver.resolve(classReference));
-                List<String> existingGroups = new ArrayList<String>();
-                if (baseObject != null) {
-                    existingGroups = baseObject.getListValue(DEMARCHE_PROPERTY_GROUPES);
-                    if (existingGroups.size() > 0) {
-                        logger.debug("Found existing groups for row " + rowIndex + ":" + existingGroups);
-                        List<String> finalGroups = new ArrayList<>();
-                        finalGroups.addAll(existingGroups);
-                        String readGroupsString = data.get(DEMARCHE_PROPERTY_GROUPES);
-                        if (StringUtils.isNotEmpty(readGroupsString)) {
-                            logger.debug("Found new groups for row " + rowIndex + ":" + readGroupsString);
-                            finalGroups
-                                .addAll(Arrays.asList(StringUtils.split(readGroupsString, config.getListSeparator())));
-                            logger.debug("Preparing to store groups for row " + rowIndex + ":" + finalGroups);
-                        }
-                        data.put(DEMARCHE_PROPERTY_GROUPES, StringUtils.join(finalGroups, config.getListSeparator()));
-                    }
-                }
-
-            } catch (XWikiException e) {
-                logger.warn("Exception while concatenating groups data for row " + rowIndex, e);
-            }
         }
     }
 
