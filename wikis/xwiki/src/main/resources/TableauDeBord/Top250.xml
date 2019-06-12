@@ -321,11 +321,6 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       }
     });
 
-    var select = $('select[name="ministereSelect"]');
-    select.change(function () {
-      table.draw();
-    });
-
     $('#top-demarches tbody').on('click', 'td.details-control', function () {
       var tr = $(this).closest('tr');
       var row = table.row( tr );
