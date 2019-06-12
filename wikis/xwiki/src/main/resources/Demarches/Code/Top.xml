@@ -67,13 +67,18 @@
       #end
     #end
     #set ($avisStats = $page.getObject('Avis.Code.AvisStatsClass'))
-    #set ($avisCount = 0)
-    #set ($satisfactionIndexPercentRounded = -1)
     #set ($avisCount = $avisStats.getValue('occurrences'))
-    #if ($avisCount &amp;&amp; $avisCount &gt; 0)
+    #if ($avisCount &amp;&amp; $avisCount &gt;= 100)
       #set ($satisfactionIndex = $avisStats.getValue('moyenne'))
-      #set($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
-      #set ($satisfactionIndexPercentRounded = ${mathtool.round($satisfactionIndexPercent)})
+      #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
+      #set ($satisfactionIndexValue = ${mathtool.round($satisfactionIndexPercent)})
+      #set ($satisfactionIndexDisplay = "$satisfactionIndexValue %")
+    #elseif ($statutDemat == 'Non')
+      #set ($satisfactionIndexValue = -2)
+      #set ($satisfactionIndexDisplay = 'n/a')
+    #else
+      #set ($satisfactionIndexValue = -1)
+      #set ($satisfactionIndexDisplay = 'À venir')
     #end
     #set ($volumetrie = $obj.getValue('volumetrie'))
     #set ($volumetrieDisplay = $obj.get('volumetrie'))
@@ -90,32 +95,33 @@
       #set ($percentDematDisplay = "$percentDematRounded %")
     #else
       #set ($percentDemat = $mathtool.sub(0,$percentDematDisplay.hashCode()))
-      #if ($percentDematDisplay == "Sans objet")
+      #if ($percentDematDisplay == "n/a")
         #set ($percentDemat = -2)
-      #elseif ($percentDematDisplay == "Non renseigné")
+      #elseif ($percentDematDisplay == "n/c")
         #set ($percentDemat = -1)
       #end
     #end
     ## If statutDemat is "Oui", then dateMiseEnLigneDispay should be "Ouvert"
+    ## Else: if a date is present, display it, otherwise display "n/c"
     #set ($statutDemat = $obj.get('statutDemat'))
-    #set ($dateMiseEnLigneTexte = $obj.get('dateMiseEnLigneTexte'))
-    ## dateMiseEnLigneTexte has priority in terms of display over dateMiseEnLigne
-    #if ("$!dateMiseEnLigneTexte" != '')
-      #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneTexte)
+    #if ($statutDemat == 'Oui')
+      #set ($dateMiseEnLigneDisplay = 'Ouvert')
+      #set ($dateMiseEnLigne = 10)
     #else
-      #set ($dateMiseEnLigneDisplay = $obj.get('dateMiseEnLigne'))
-      #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneDisplay.replace('renseigné', 'renseignée'))
-    #end
-    #set ($dateMiseEnLigne = $obj.getValue('dateMiseEnLigne'))
-    #if ("$!dateMiseEnLigne" != '')
-      ## Add a hashcode, because we want to differentiate for example "2019" from "12/2019" while both have the same dateMiseEnLigne set to "12/2019"
-      #set ($s = "$!dateMiseEnLigneTexte")
-      #set ($h = $s.hashCode())
-      #set ($dateMiseEnLigne = $mathtool.add($dateMiseEnLigne.getTime(), $h))
-    #else
-      #set ($dateMiseEnLigne = 0)
-      #if ($dateMiseEnLigneDisplay == "Ouvert")
-        #set ($dateMiseEnLigne = 10)
+      #set ($dateMiseEnLigne = $obj.getValue('dateMiseEnLigne'))
+      #if ("$!dateMiseEnLigne" != '')
+        ## Add a hashcode, because we want to differentiate for example "2019" from "12/2019" while both have the same dateMiseEnLigne set to "12/2019"
+        #set ($dateMiseEnLigneDisplay = $obj.get('dateMiseEnLigne'))
+        #set ($dateMiseEnLigneTexte = $obj.getValue('dateMiseEnLigneTexte'))
+        #set ($s = "$!dateMiseEnLigneTexte")
+        #set ($h = $s.hashCode())
+        #set ($dateMiseEnLigne = $mathtool.add($dateMiseEnLigne.getTime(), $h))
+        #if ("$!dateMiseEnLigneTexte" != '')
+          #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneTexte)
+        #end
+      #else
+        #set ($dateMiseEnLigneDisplay = 'n/c')
+        #set ($dateMiseEnLigne = 0)
       #end
     #end
     #set ($urlScore = $obj.get('urlScore'))
@@ -138,12 +144,14 @@
           "display": $percentDematDisplay,
           "value": $percentDemat
         },
-        "statutIntegration": $obj.get("statutIntegration"),
         "franceConnect": $obj.get('franceConnect'),
         "adapteMobile": $obj.get('adapteMobile'),
         "qualiteSupport": $obj.get('qualiteSupport'),
         "avisCount": $avisCount,
-        "satisfactionIndex": $satisfactionIndexPercentRounded,
+        "satisfactionIndex": {
+          "display": $satisfactionIndexDisplay,
+          "value": $satisfactionIndexValue
+        },
         "urlScore": $urlScore
       }))
   #end

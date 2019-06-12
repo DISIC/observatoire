@@ -40,9 +40,17 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-{{html clean="false" wiki="false"}}
-&lt;h2&gt;Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 &lt;a href="$xwiki.getURL("Aide.Observatoire de la dématérialisation")"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
+(%class='row tbd-explanationrow'%)(((
+(%class='container'%)(((
+(%style="text-align: center"%)
+Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 [[(%class="fa fa-question-circle-o%)(%%)&gt;&gt;Aide.Observatoire de la dématérialisation]].
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consectetur leo id eros aliquam porttitor. Praesent faucibus tincidunt ex quis sagittis. Nunc libero odio, maximus in posuere ut, bibendum et leo. Sed neque ligula, condimentum in fermentum ac, suscipit ac diam. Donec vel quam sollicitudin, commodo neque sed, pharetra magna. Suspendisse odio risus, semper ac porta ac, interdum ac metus. Etiam sit amet odio lorem.
 
+
+
+)))
+)))
+{{html clean="false" wiki="false"}}
 &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -50,9 +58,11 @@
       &lt;th&gt;Démarche&lt;/th&gt;
       &lt;th&gt;Ministère&lt;/th&gt;
       &lt;th&gt;Peut être réalisée complètement en ligne&lt;/th&gt;
-      &lt;th&gt;Date d'ouverture du service dématérialisé&lt;/th&gt;
-      &lt;th&gt;Volumétrie&lt;/th&gt;
-      &lt;th&gt;Pourcentage du recours à la voie dématérialisée&lt;/th&gt;
+      &lt;th&gt;Identification FranceConnect&lt;/th&gt;
+      &lt;th&gt;Accessibilité smartphone&lt;/th&gt;
+      &lt;th&gt;Support de qualité&lt;/th&gt;
+      &lt;th&gt;Performance&lt;/th&gt;
+      &lt;th&gt;Indice de satisfaction&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
 &lt;/table&gt;
@@ -189,20 +199,18 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       var output = '&lt;div class="row"&gt;' +
         '&lt;div class="col-md-12"&gt;' +
         '&lt;div class="row-details"&gt;' +
-        '&lt;p class="row-details-title"&gt;Qualité de la démarche&lt;/p&gt;' +
-        '&lt;p class="row-details-subtitle"&gt;Le service en ligne&amp;hellip;&lt;/p&gt;' +
         '&lt;ul&gt;' +
         // '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
         //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; permet-il de s\'identifier avec FranceConnect ? &lt;/span&gt;' + addBadge(data.franceConnect, computeBadgeStyle) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; est-il accessible sur smartphone ? &lt;/span&gt;' + addBadge(data.adapteMobile, computeBadgeStyle) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; propose-t-il un support de qualité ? &lt;/span&gt;' + addBadge(data.qualiteSupport, computeBadgeStyle) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
-        if (data.avisCount &gt;= 100) {
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé &lt;/span&gt;' + data.dateMiseEnLigne.display + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;' +
+        '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée &lt;/span&gt;' + data.pourcentageRecoursVoieDematerialisee.display + '&lt;/li&gt;';
+        //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
+        /*if (data.avisCount &gt;= 100) {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.satisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
         } else {
            output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Bouton de vote MonAvis à intégrer&lt;/span&gt;&lt;/li&gt;';
-        }
+        }*/
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
     }
@@ -249,42 +257,52 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             },
             {
               data: "title",
-              className: 'column-title'
+              className: 'column-title',
+              render : function (data, type, row) {
+                return data + '&lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
+              }
             },
             {
               data: "ministere",
-              visible: true
+              visible: false
             },
             { data: "statutDemat",
-              render: function ( data, type, row ) {
+              render: function (data, type, row) {
                 return addBadge(data, computeBadgeStyle);
               }
             },
             {
-              data: "dateMiseEnLigne",
-              type: "num",
-              render: {
-                _: 'display',
-                sort: 'value'
+              data: "franceConnect",
+              render: function (data, type, row) {
+                return addBadge(data, computeBadgeStyle);
               }
             },
             {
-              data: "volumetrie",
-              type: "num",
-              render: {
-                _: 'display',
-                sort: 'value'
-              },
-              className: 'column-volumetrie'
+              data: "adapteMobile",
+              render: function (data, type, row) {
+                return addBadge(data, computeBadgeStyle);
+              }
             },
             {
-              data: "pourcentageRecoursVoieDematerialisee",
+              data: "qualiteSupport",
+              render: function (data, type, row) {
+                return addBadge(data, computeBadgeStyle);
+              }
+            },
+            {
+              data: "urlScore",
+              type: "num",
+              render: function (data, type, row) {
+                return addBadge(data, computeUrlScoreBadgeStyle);
+              }
+            },
+            {
+              data: "satisfactionIndex",
               type: "num",
               render: {
-                _: 'display',
-                sort: 'value'
-              },
-              className: 'column-pourcentageRecoursVoieDematerialisee'
+                _: "display",
+                sort: "value"
+              }
             }
       ],
       order: [[2, 'asc']],
@@ -294,7 +312,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
         loadingRecords: "Chargement...",
         processing: "Traitement...",
-        search: "Recherche :",
+        search: "Démarche :",
         zeroRecords: "Aucune entrée trouvée"
       },
       initComplete: function(settings, json ) {
@@ -493,6 +511,12 @@ tr.shown td.details-control::before {
 
   td.column-title {
     width: 38%;
+    vertical-align: middle;
+    .ministere-groupe {
+      display: block;
+      font-size: 85%;
+      color: #555;
+    }
   }
 
   /* Styles for the détails panel */
