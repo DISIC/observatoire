@@ -43,15 +43,6 @@
 {{html clean="false" wiki="false"}}
 &lt;h2&gt;Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 &lt;a href="$xwiki.getURL("Aide.Observatoire de la dématérialisation")"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
 
-&lt;dl&gt;
-  &lt;dt&gt;Ministère :&lt;/dt&gt;
-  &lt;dd&gt;
-  &lt;select name="ministereSelect"&gt;
-  &lt;option value="tous"&gt;Chargement...&lt;/option&gt;
-  &lt;/select&gt;
-  &lt;/dd&gt;
-&lt;/dl&gt;
-
 &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -221,7 +212,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       function( settings, data, dataIndex ) {
         var selectedMinistere =  $('select[name="ministereSelect"]').val();
         var ministere = data[2];
-        if (selectedMinistere == "tous" || ministere == selectedMinistere) {
+        if (!selectedMinistere || selectedMinistere == "tous" || ministere == selectedMinistere) {
           return true;
         }
         return false;
@@ -307,12 +298,26 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         zeroRecords: "Aucune entrée trouvée"
       },
       initComplete: function(settings, json ) {
-        var select = $('select[name="ministereSelect"]');
-        select.empty();
-        select.append($("&lt;option /&gt;").val("tous").text("Tous"));
-        $.each(ministeres, function() {
-           select.append($("&lt;option /&gt;").val(this).text(this));
-        });
+        // add the ministries filter in the filters
+        var filtersContainer = $('#top-demarches_filter');
+        if (filtersContainer) {
+          // prepare the label and select of ministries
+          var ministriesLabel = $('&lt;label&gt;Ministère :&lt;/label&gt;')
+          var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
+          ministriesLabel.append(ministriesSelect);
+          ministriesSelect.empty();
+          ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous"));
+          $.each(ministeres, function() {
+             ministriesSelect.append($("&lt;option /&gt;").val(this).text(this));
+          });
+          // add the ministries select at the beginning of the filter line
+          filtersContainer.prepend(ministriesLabel);
+          // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
+          var this_tbl = settings.oInstance.api();
+          ministriesSelect.change(function () {
+            this_tbl.draw();
+          });
+        }
       }
     });
 
@@ -334,8 +339,6 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       }
     });
 });
-
-
 </code>
     </property>
     <property>
@@ -551,13 +554,21 @@ tr.shown td.details-control::before {
   margin-bottom: 1em;
   label {
     font-weight: normal;
-    width: 100%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
-  input {
+  input, select {
     border: 1px solid #E8E8E8;
     padding: 6px 12px;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    width: 50%;
+    margin-left: 0.5em;
+    display: inline-block;
+  }
+  input {
+    min-width: 30em;
+  }
+  select {
+    min-width: 18em;
   }
 }
 #top-demarches_wrapper {
