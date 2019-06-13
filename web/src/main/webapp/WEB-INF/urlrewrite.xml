@@ -21,26 +21,12 @@
   </rule>
 
   <rule>
-    <note>Redirect "/observatoire".</note>
-    <condition name="host">monavis.numerique.gouv.fr</condition>
-    <from>^/observatoire$</from>
-    <to type="forward">/TableauDeBord/Top250</to>
-  </rule>
-
-  <rule>
     <note>
       For all other URLs we prepend the "/bin/" prefix so that they get routed to the XWiki Action Servlet.
     </note>
     <from>^/(.*)$</from>
     <to type="forward">/bin/$1</to>
   </rule>
-
-  <outbound-rule>
-    <note>This is the reverse rule of the one above related to path "/observatoire".</note>
-    <condition name="host">monavis.numerique.gouv.fr</condition>
-    <from>/bin/TableauDeBord/Top250$</from>
-    <to>/observatoire</to>
-  </outbound-rule>
 
   <outbound-rule>
     <note>
