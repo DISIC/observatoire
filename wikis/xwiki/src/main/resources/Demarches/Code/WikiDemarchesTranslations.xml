@@ -56,15 +56,29 @@ wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car v
 #Démarches
 wikidemarches.sitename=MonAvis.numerique.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
-wikidemarches.home.title=Évaluez votre démarche en ligne
+wikidemarches.home.title=Nous améliorons les services publics en ligne, grâce à vos avis !
 wikidemarches.home.subtitle=
 wikidemarches.home.subsearchhint=Votre démarche n'était pas disponible en ligne&amp;nbsp;? Vous pourrez demander sa dématérialisation.
-wikidemarches.search.label=Démarche recherchée
+wikidemarches.search.label=Chercher une démarche
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.mostwanted.title=Démarches les plus courantes
 wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
+wikidemarches.observatoire.title=Où en est-on ?
+wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'Etat.\\\\\\\\**En mai 2019**, 65% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction MonAvis a commencé.
+wikidemarches.observatoire.button=CONSULTER l'observatoire
+wikidemarches.evaluation.title=Comment la qualité des démarches en ligne de l'Etat est-elle évaluée ?
+wikidemarches.evaluation.content.firstcol=Nous recueillons l'avis des usagers à la fin des démarches en ligne
+wikidemarches.evaluation.content.secondcol=Nous analysons les résultats pour identifier les démarches à améliorer en priorité
+wikidemarches.evaluation.content.thirdcol=Nous testons leur conformité à des critères de qualité définis
+wikidemarches.evaluation.icon.firstcol=smile-o
+wikidemarches.evaluation.icon.secondcol=search
+wikidemarches.evaluation.icon.thirdcol=cogs
+wikidemarches.help.title=Comment donner votre avis sur une démarche ?
+wikidemarches.help.content=L'ensemble des démarches en ligne de l'Etat intègrent progressivement un bouton MonAvis, menant vers un questionnaire de satisfaction.
+wikidemarches.help.image.title=Comment donner son avis?
+wikidemarches.help.button=EN SAVOIR PLUS
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche

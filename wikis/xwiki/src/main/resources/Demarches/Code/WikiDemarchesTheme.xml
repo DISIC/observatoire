@@ -1196,11 +1196,12 @@ select[size="1"]{
 
 
 /*
- * Sizes of the titles
+ * Sizes of the titles and style
  */
 #document-title h1 {
   font-size: 1.8em;
   line-height: 1.25;
+  font-weight: 600;
 }
 
 /* Larger title on desktop */
@@ -1212,10 +1213,12 @@ select[size="1"]{
 
 h2 {
   font-size: 1.5em;
+  font-weight: 600;
 }
 
 h3 {
   font-size: 1.20em;
+  font-weight: 600;
 }
 
 
@@ -1390,6 +1393,7 @@ Visually, there's the title row and then all the rows from the document content,
   padding-left: 0;
   padding-right: 0;
 }
+
 
 </lessCode>
     </property>
