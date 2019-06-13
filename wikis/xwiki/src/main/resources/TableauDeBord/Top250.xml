@@ -198,7 +198,15 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
 
     function addBadge(value, badgeStyleFunction) {
       var badgeStyle = badgeStyleFunction.apply(this, [value]);
-      return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+      if (value) {
+        value = value.replace("n/a", "-");
+        value = value.replace("n/c", "À venir");
+      }
+      if (value.indexOf('%') &gt; 0) {
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      } else {
+        return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+      }
     }
 
     function format (data) {
@@ -302,15 +310,23 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               data: "urlScore",
               type: "num",
               render: function (data, type, row) {
-                return addBadge(data, computeUrlScoreBadgeStyle);
+                console.log(data);
+                if (type === "sort") {
+                  return data.value;
+                } else {
+                  return addBadge(data.display, computeUrlScoreBadgeStyle);
+                }
               }
             },
             {
               data: "satisfactionIndex",
               type: "num",
-              render: {
-                _: "display",
-                sort: "value"
+              render: function (data, type, row) {
+                if (type === "sort") {
+                  return data.value;
+                } else {
+                  return addBadge(data.display, computeBadgeStyle);
+                }
               }
             }
       ],
