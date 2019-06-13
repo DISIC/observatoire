@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="TableauDeBord.Top250" locale="">
-  <web>TableauDeBord</web>
-  <name>Top250</name>
+<xwikidoc version="1.3" reference="observatoire.WebHome" locale="">
+  <web>observatoire</web>
+  <name>WebHome</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -49,8 +49,9 @@
 (%id='document-title'%)(((
 = $doc.title =
 )))
-Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 [[(% class="fa fa-question-circle-o" %) &gt;&gt;Aide.Observatoire]]
+Tableau de bord des démarches phares de l’Etat – Situation à juin 2019.
 Afin que gouvernement, citoyens et administrations puissent suivre l’état d’avancement et la qualité de la dématérialisation, un observatoire de la dématérialisation est mis en place. Celui-ci produit un tableau de bord consultable par tous en ligne, et mis à jour tous les 3 mois afin de suivre les évolutions. Cet outil qui permet d’alimenter le débat public en données chiffrées et partagées fournit pour les 250 démarches phares des données concernant l’état d’avancement de sa dématérialisation, le respect de critères de qualité précis (qualité du support, accessibilité sur smartphone, disponibilité, temps de réponse, …) ainsi que les retours utilisateurs au travers d’un indice de satisfaction usagers. Cet indice de satisfaction est capté sur les démarche administratives en ligne elles-mêmes, grâce à un bouton « MonAvis » proposé en fin de parcours utilisateur. Ce bouton est en cours de déploiement progressif sur l’ensemble des démarches phares de l’Etat.
+[[En savoir plus sur les critères de qualité&gt;&gt;Aide.Observatoire]]
 
 
 
@@ -76,10 +77,10 @@ Afin que gouvernement, citoyens et administrations puissent suivre l’état d�
 {{/velocity}}
 </content>
   <object>
-    <name>TableauDeBord.Top250</name>
+    <name>observatoire.WebHome</name>
     <number>0</number>
     <className>XWiki.JavaScriptExtension</className>
-    <guid>71a848a2-8aae-4a4b-a076-5218bc89cda6</guid>
+    <guid>749e05e9-9dad-4c6a-9f55-1d5239c7a922</guid>
     <class>
       <name>XWiki.JavaScriptExtension</name>
       <customClass/>
@@ -202,7 +203,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         value = value.replace("n/a", "-");
         value = value.replace("n/c", "À venir");
       }
-      if (value.indexOf('%') &gt; 0) {
+      if (value.indexOf('%') &gt; 0 || value == '-') {
         return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
       } else {
         return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
@@ -218,10 +219,15 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
         var dateMiseEnLigne = data.dateMiseEnLigne.display;
         if (dateMiseEnLigne != 'Ouvert') {
+          if (dateMiseEnLigne == 'n/c')
+            dateMiseEnLigne = 'À venir';
           output += '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé &lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
         }
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie totale de la démarche &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;' +
-          '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + data.pourcentageRecoursVoieDematerialisee.display + '&lt;/li&gt;';
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie totale de la démarche &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
+        var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
+        if (pourcentage != 'n/c' &amp;&amp; pourcentage != 'n/a') {
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+        }
         //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
         /*if (data.avisCount &gt;= 100) {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.satisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
@@ -390,10 +396,10 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
     </property>
   </object>
   <object>
-    <name>TableauDeBord.Top250</name>
+    <name>observatoire.WebHome</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>7c15fac7-c869-4715-878b-4c7deb9da4d2</guid>
+    <guid>6d28fd6c-1f62-4ec3-9d95-0531465aa258</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>
