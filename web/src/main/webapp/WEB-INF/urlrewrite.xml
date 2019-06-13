@@ -36,6 +36,13 @@
   </rule>
 
   <outbound-rule>
+    <note>This is the reverse rule of the one above related to path "/observatoire".</note>
+    <condition name="host">monavis.numerique.gouv.fr</condition>
+    <from>/bin/TableauDeBord/Top250$</from>
+    <to>/observatoire</to>
+  </outbound-rule>
+
+  <outbound-rule>
     <note>
       Rewrite outbound URLs to remove the "/wiki/demarches" part when there are two paths after it.
     </note>
