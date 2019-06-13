@@ -40,11 +40,17 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
+#set($displayDocTitle = false)
+#set($displayTitleContentSeparator = false)
+
+
 (%class='row tbd-explanationrow'%)(((
-(%class='container'%)(((
-(%style="text-align: center"%)
-Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 [[(%class="fa fa-question-circle-o%)(%%)&gt;&gt;Aide.Observatoire de la dématérialisation]].
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consectetur leo id eros aliquam porttitor. Praesent faucibus tincidunt ex quis sagittis. Nunc libero odio, maximus in posuere ut, bibendum et leo. Sed neque ligula, condimentum in fermentum ac, suscipit ac diam. Donec vel quam sollicitudin, commodo neque sed, pharetra magna. Suspendisse odio risus, semper ac porta ac, interdum ac metus. Etiam sit amet odio lorem.
+(%class='container' style="text-align: center"%)(((
+(%id='document-title'%)(((
+= $doc.title =
+)))
+Tableau de bord des démarches phares de l’Etat – Situation à juin 2019 [[(%class="fa fa-question-circle-o"%)(%%)&gt;&gt;Aide.Observatoire de la dématérialisation]].
+Afin que gouvernement, citoyens et administrations puissent suivre l’état d’avancement et la qualité de la dématérialisation, un observatoire de la dématérialisation est mis en place. Celui-ci produit un tableau de bord consultable par tous en ligne, et mis à jour tous les 3 mois afin de suivre les évolutions. Cet outil qui permet d’alimenter le débat public en données chiffrées et partagées fournit pour les 250 démarches phares des données concernant l’état d’avancement de sa dématérialisation, le respect de critères de qualité précis (qualité du support, accessibilité sur smartphone, disponibilité, temps de réponse, …) ainsi que les retours utilisateurs au travers d’un indice de satisfaction usagers. Cet indice de satisfaction est capté sur les démarche administratives en ligne elles-mêmes, grâce à un bouton « MonAvis » proposé en fin de parcours utilisateur. Ce bouton est en cours de déploiement progressif sur l’ensemble des démarches phares de l’Etat.
 
 
 
@@ -60,9 +66,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consectetur leo id 
       &lt;th&gt;Peut être réalisée complètement en ligne&lt;/th&gt;
       &lt;th&gt;Identification FranceConnect&lt;/th&gt;
       &lt;th&gt;Accessibilité smartphone&lt;/th&gt;
-      &lt;th&gt;Support de qualité&lt;/th&gt;
-      &lt;th&gt;Performance&lt;/th&gt;
-      &lt;th&gt;Indice de satisfaction&lt;/th&gt;
+      &lt;th&gt;Support usager de qualité&lt;/th&gt;
+      &lt;th&gt;Disponibilité et temps de réponse&lt;/th&gt;
+      &lt;th&gt;Indice de satisfaction usager&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
 &lt;/table&gt;
@@ -199,12 +205,15 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       var output = '&lt;div class="row"&gt;' +
         '&lt;div class="col-md-12"&gt;' +
         '&lt;div class="row-details"&gt;' +
-        '&lt;ul&gt;' +
+        '&lt;ul&gt;';
         // '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
         //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé &lt;/span&gt;' + data.dateMiseEnLigne.display + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;' +
-        '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée &lt;/span&gt;' + data.pourcentageRecoursVoieDematerialisee.display + '&lt;/li&gt;';
+        var dateMiseEnLigne = data.dateMiseEnLigne.display;
+        if (dateMiseEnLigne != 'Ouvert') {
+          output += '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé &lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+        }
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;' +
+          '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage du recours à la voie dématérialisée &lt;/span&gt;' + data.pourcentageRecoursVoieDematerialisee.display + '&lt;/li&gt;';
         //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
         /*if (data.avisCount &gt;= 100) {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.satisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
