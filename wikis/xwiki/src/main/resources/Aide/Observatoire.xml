@@ -24,15 +24,15 @@
   <web>Aide</web>
   <name>Observatoire</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1559809805000</creationDate>
-  <parent>Main.WebHome</parent>
+  <creationDate>1544396400000</creationDate>
+  <parent>xwiki:Aide.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1559810510000</date>
-  <contentUpdateDate>1559810510000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Observatoire de la dématérialisation – Aide</title>
   <comment/>
@@ -47,27 +47,27 @@
 
 == Identification FranceConnect ==
 
-Possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise : « Oui » si la démarche propose le bouton FranceConnect ;  "Non" si ce n’est pas le cas ; « n/a » si le critère est sans objet : elle ne nécessite pas l’identification de l’usager ou concerne les entrepris
+Possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise : « Oui » si la démarche propose le bouton FranceConnect ;  « Non » si ce n’est pas le cas ; « n/a » si le critère est sans objet : elle ne nécessite pas l’identification de l’usager ou concerne les entreprises.
 
 == Accessibilité smartphone ==
 
-Possibilité d’utiliser les services en ligne sur un smartphone : « Oui » si le critère est respecté ; « Non » si ce n’est pas le cas ; « Partiel » si la démarche est accessible sur smartphone mais avec des défauts d’affichage ou si certaines pages ne sont pas accessibles ;  «n/a» si le critère est non applicable (démarche non dématérialisée par exemple)
+Possibilité d’utiliser les services en ligne sur un smartphone : « Oui » si le critère est respecté ; « Non » si ce n’est pas le cas ; « Partiel » si la démarche est accessible sur smartphone mais avec des défauts d’affichage ou si certaines pages ne sont pas accessibles ;  « n/a » si le critère est non applicable (démarche non dématérialisée par exemple).
 
 == Support usager de qualité ==
 
-Qualité du support apporté aux utilisateurs : ce critère permet de vérifier si chaque démarche en ligne propose des moyens de contact facilement accessibles (au moins deux) facilement accessibles, ainsi qu’un accompagnement humain personnalisé : "Oui" si la démarche respecte les deux critères ; "Non" si la démarche ne respecte pas les deux critères ; "Partiel" si l’un des deux critères seulement est respecté ; «n/a» si le critère est non applicable (démarche non dématérialisée par exemple)
+Qualité du support apporté aux utilisateurs : ce critère permet de vérifier si chaque démarche en ligne propose des moyens de contact facilement accessibles (au moins deux), ainsi qu’un accompagnement humain personnalisé : « Oui » si la démarche respecte les deux critères ; « Non » si la démarche ne respecte pas les deux critères ; « Partiel » si l’un des deux critères seulement est respecté ; « n/a » si le critère est non applicable (démarche non dématérialisée par exemple).
 
 == Disponibilité / temps de réponse ==
 
-Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur à 7, « orange » pour un score entre 5 et 6, et « rouge » si le score total est inférieur à 4
+Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur à 7, « orange » pour un score entre 5 et 6, et « rouge » si le score total est inférieur à 4.
 
 == Indice de satisfaction usagers ==
 
 Il n’est affiché que lorsque le nombre d'avis recueillis sur MonAvis est supérieur à 100.
 
-Il est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? » du formulaire MonAvis présent à la fin des démarches administratives. Les réponses ayant reçu l'avis « Pas bien » comptent pour 0, les réponses ayant reçu l'avis « Moyen » comptent pour 1, les réponses ayant reçu l'avis « Très bien » comptent pour 2. Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100%.
+Il est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? » du formulaire MonAvis présent à la fin des démarches administratives. Les réponses ayant reçu l'avis « Pas bien » comptent pour 0, les réponses ayant reçu l'avis « Moyen » comptent pour 1, les réponses ayant reçu l'avis « Très bien » comptent pour 2. Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100 %.
 
-Si l’administration n’a pas encore placé le bouton MonAvis à la fin des démarches le tableau affiche l’information « A venir »
+Si l’administration n’a pas encore placé le bouton MonAvis à la fin des démarches le tableau affiche l’information « A venir ».
 
 == Date d'ouverture du service dématérialisé ==
 
@@ -75,7 +75,7 @@ Cette colonne indique la date de mise en ligne prévue, si le service dématéri
 
 == Volumétrie totale de la démarche ==
 
-Volumétrie de la démarche quels que soient les canaux de communication avec l’administration, papier ou voie dématérialisée
+Volumétrie de la démarche quels que soient les canaux de communication avec l’administration, papier ou voie dématérialisée.
 
 == Pourcentage de recours à la voie dématérialisée ==
 
