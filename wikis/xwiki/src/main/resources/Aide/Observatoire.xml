@@ -39,7 +39,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>Cette page documente les données présentées sur [[l'observatoire de la dématérialisation&gt;&gt;TableauDeBord.Top250]].
+  <content>Cette page documente les données présentées sur [[l'observatoire de la dématérialisation&gt;&gt;observatoire.WebHome]].
 
 == Peut être réalisée complètement en ligne ==
 
@@ -79,7 +79,5 @@ Volumétrie de la démarche quels que soient les canaux de communication avec l�
 
 == Pourcentage de recours à la voie dématérialisée ==
 
-Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée.
-
-</content>
+Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée.</content>
 </xwikidoc>
