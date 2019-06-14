@@ -136,7 +136,7 @@
         "title": $page.displayTitle,
         "statutDemat": $statutDemat,
         "ministere": $ministereName,
-        "groupes": $obj.get('groupes'),
+        "groupes": $obj.get('groupesExternes'),
         "direction": $directionName,
         "dateMiseEnLigne": {
           "display": $dateMiseEnLigneDisplay,
