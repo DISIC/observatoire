@@ -215,8 +215,6 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         '&lt;div class="col-md-12"&gt;' +
         '&lt;div class="row-details"&gt;' +
         '&lt;ul&gt;';
-        // '&lt;li&gt;&lt;span class="row-details-key"&gt;Administration concernée : &lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.direction + '&lt;/span&gt;&lt;/li&gt;' +
-        //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; intègre-t-il le questionnaire de satisfaction MonAvis ? &lt;/span&gt;' + addBadgeSpan(data.statutIntegration) + '&lt;/li&gt;' +
         var dateMiseEnLigne = data.dateMiseEnLigne.display;
         if (dateMiseEnLigne != 'Ouvert') {
           if (dateMiseEnLigne == 'n/c')
