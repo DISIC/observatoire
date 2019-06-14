@@ -86,9 +86,10 @@
   ## display the demarche
 
 #if (($xcontext.action == 'edit' || $isSimplifiedForm) &amp;&amp; !$hasAdmin)
-&lt;p&gt;
-&lt;a href="$xwiki.getURL('Aide.Description du modèle de données')" target="_blank"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;span style="padding-left: 0.2em;"&gt;Description du modèle de données&lt;/span&gt;&lt;/a&gt;
-&lt;/p&gt;
+  &lt;p&gt;
+    &lt;a href="$xwiki.getURL('Aide.Description du modèle de données')" target="_blank"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;span style="padding-left: 0.2em;"&gt;Description du modèle de données&lt;/span&gt;&lt;/a&gt;
+  &lt;/p>
+#end
 
 &lt;div class="row"&gt;
   &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
