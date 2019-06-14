@@ -125,6 +125,12 @@
       #end
     #end
     #set ($urlScore = $obj.get('urlScore'))
+    #set ($urlScoreValue = $urlScore)
+    #if ($urlScore == 'n/a')
+      #set ($urlScoreValue = -100)
+    #elseif ($urlScore == 'n/c')
+      #set ($urlScoreValue = -50)
+    #end
     #set ($discard = $data.add(
       {
         "title": $page.displayTitle,
@@ -152,7 +158,10 @@
           "display": $satisfactionIndexDisplay,
           "value": $satisfactionIndexValue
         },
-        "urlScore": $urlScore
+        "urlScore": {
+          "display": $urlScore,
+          "value": $urlScoreValue
+        }
       }))
   #end
   #set ($map = { "data": $data})
@@ -162,7 +171,7 @@
   A new json has been generated and attached to this page: [[attach:data.json]].
 #else
   {{info}}
-  This page allows to generate a json representation of the demarches and to attach it to this page, in a format that is suitable for getting consumed by page [[TableauDeBord.Top250]]. In order to generate and attach the json, press the button below.
+  This page allows to generate a json representation of the demarches and to attach it to this page, in a format that is suitable for getting consumed by page [[observatoire.WebHome]]. In order to generate and attach the json, press the button below.
 
   [[Generate json data and attach it to this page&gt;&gt;path:$doc.getURL('view', 'execute=1')||class="btn btn-default]]
   {{/info}}

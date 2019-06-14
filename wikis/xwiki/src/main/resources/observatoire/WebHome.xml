@@ -56,7 +56,7 @@
     #set ($size = $mathtool.div($size, 1000))
     #set ($size = $mathtool.round($size))
     (% class="download" %)
-    [[(% class="fa fa-download" %) Télécharger la version imprimable (PDF $size Ko)&gt;&gt;path:$doc.getAttachmentURL('observatoire-de-la-dematerialisation-juin-2019.pdf')||class="btn btn-default btn-download"]]
+    [[$services.icon.render('download') Télécharger la version imprimable (PDF $size Ko)&gt;&gt;path:$doc.getAttachmentURL('observatoire-de-la-dematerialisation-juin-2019.pdf')||class="btn btn-default btn-download"]]
   )))
 )))
 
@@ -215,7 +215,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         value = value.replace("n/a", "-");
         value = value.replace("n/c", "À venir");
       }
-      if (value.indexOf('%') &gt; 0 || value == '-') {
+      if (value &amp;&amp; (value.indexOf('%') &gt; 0 || value == '-')) {
         return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
       } else {
         return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
