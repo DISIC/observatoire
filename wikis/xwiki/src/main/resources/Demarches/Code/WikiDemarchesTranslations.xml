@@ -129,8 +129,10 @@ wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également n
 wikidemarches.demande.newdemarche.warning=Cette démarche a été ajoutée par un(e) internaute le {0}. Elle est en cours de vérification par l''administration mais vous pouvez déjà donner votre avis.
 
 #Footer
-wikidemarches.footer.administrationlinks.intro=Réseau
+wikidemarches.footer.administrationlinks.intro=Les sites publics
 wikidemarches.footer.administrationlinks.newwindow=nouvelle fenêtre
+wikidemarches.footer.nosunivers.title=Nos univers
+wikidemarches.footer.services.title=Services aux usagers
 
 # Tableau de bord
 wikidemarches.dematdashboard.title=Tableau de bord de la dématérialisation
