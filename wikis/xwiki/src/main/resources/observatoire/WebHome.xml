@@ -225,15 +225,9 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         }
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie totale de la démarche &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
         var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
-        if (pourcentage != 'n/c' &amp;&amp; pourcentage != 'n/a') {
+        if (data.statutDemat != 'Non') {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
         }
-        //'&lt;li&gt;&lt;span class="row-details-key"&gt;&amp;hellip; a-t-il un haut niveau de performance et de disponibilité ? &lt;/span&gt;' + addBadge(data.urlScore, computeUrlScoreBadgeStyle) + '&lt;/li&gt;';
-        /*if (data.avisCount &gt;= 100) {
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Indice de satisfaction :&lt;/span&gt;&lt;span class="row-details-value"&gt;' + data.satisfactionIndex + ' % - calculé sur un total de ' + data.avisCount + ' avis recueillis&lt;/span&gt;&lt;/li&gt;';
-        } else {
-           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Bouton de vote MonAvis à intégrer&lt;/span&gt;&lt;/li&gt;';
-        }*/
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
     }
