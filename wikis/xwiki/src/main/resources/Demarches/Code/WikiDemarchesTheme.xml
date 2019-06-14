@@ -1186,7 +1186,6 @@ Visually, there's the title row and then all the rows from the document content,
 /* 
  * Add bottom border to the header, to separate it from the page content (as it has the same color)
  */
-
 #headerglobal {
   border-bottom: 2px solid #d3d3d3;
 }
@@ -1346,18 +1345,57 @@ legend {
  */
 #footerglobal {
   background-color: @navbar-default-color;
-  color: @navbar-default-bg;
-}
-
-@media (min-width: @screen-sm-min) {
-  #footerglobal {
-    text-align: left;
-  }
+  color: darken(@navbar-default-bg, 10%);
+  /* Since footer is black now, we add some margin above it to make room between it and the content. 
+     If a page makes a stacked rows layout, it need to reset this */
+  margin-top: @grid-gutter-width;
 }
 
 #footerglobal a, 
 #footerglobal a:hover {
   color: @navbar-default-bg;
+}
+
+/* Styling of the custom footer */
+#footerglobal {
+  font-size: 90%;
+  padding-top: @grid-gutter-width;
+  padding-bottom: @grid-gutter-width;
+  text-align: left;
+  ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  h3 {
+    font-weight: normal;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    @media (min-width: @screen-md-min) {
+      margin-bottom: 2em;
+      margin-top: 0;
+    }
+  }
+  .footer-col-sitename {
+    h3 {
+      font-size: 1.5em;
+      margin-bottom: 1.5em;
+      margin-top: 0
+    }
+    ul {
+      text-transform: uppercase;
+    }
+  }
+  .footer-col-sites {
+    text-align: center;
+    margin-top: @grid-gutter-width / 2;
+    font-size: 90%;
+    a {
+      display: inline-block;
+      margin-left: 0.4em;
+      margin-right: 0.4em;
+    }
+  }
 }
 
 /*
@@ -1393,6 +1431,8 @@ abbr.asterix {
     background-color: @body-bg;
   }
 }
+
+
 </lessCode>
     </property>
     <property>
