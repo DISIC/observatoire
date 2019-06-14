@@ -41,7 +41,6 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html wiki="true"}}
-#maybeSetWarningBackground()
 &lt;div class="tab-pane fade #if($selectedTab == 'avis-tab')active in#end" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
 #set ($step = "$!request.session.getAttribute('avis-form-step')")
 
@@ -67,12 +66,6 @@
     ## that any new form submission will result in a new avis.
     #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
   #end
-#else
-  #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
-  #if ($modality == "demarche-newly-submitted-by-current-user")
-    #displayMessage("avis.form.initial-step.demarche-newly-submitted-by-current-user")
-  #end
-  #maybeDisplayStatusWarning()
 #end
 
 #if ($step != "final-step")
@@ -88,14 +81,12 @@
       &lt;span class="info-box-mandatory small"&gt;$services.localization.render('avis.mandatory-info')&lt;/span&gt;
       &lt;/div&gt;
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
-      #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
       #set ($presetModalite = "$!request.nd_mode")
       #if ($doc.fullName == $FRANCE_CONNECT_ID)
         #set ($presetModalite = "en-ligne-entièrement")
       #end
-      #if ($modality != "demarche-newly-submitted-by-current-user" &amp;&amp; $presetModalite == '')
-        ## We're not in the case where the user has just submitted a new demarche, hence we display the 'modalite' question.
-        ## We also don't have a preset modalite received from request parameters
+      #if ($presetModalite == '')
+        ## We don't have a preset modalite received from request parameters, hence we display the 'modalite' question
         #setDefaultModalite($avis)
         &lt;div class="modalite"&gt;
           #displayObjectForm($avis,['modalite'])
@@ -108,7 +99,6 @@
           ## The user has just submitted a new demarche, hence we retrieve the 'modalite' value from the session, and we clean the session from this point of view.
           #set ($modalite = $request.session.getAttribute('avis-modalite'))
           #set ($discard = $request.session.removeAttribute('avis-modalite'))
-          #set ($discard = $request.session.removeAttribute('initial-step-modality'))
         #end
         &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
       #end
