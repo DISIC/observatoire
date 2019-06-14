@@ -283,7 +283,8 @@ yet validated. *#
 #* Displays a warning message on the first step of the avis form, for demarche newly submitted, but not by the current user (no need to inform the submitter himself). *#
 #macro(maybeDisplayStatusWarning)
   #set ($obj = $doc.getObject('Demarches.Code.DemarchesClass'))
-  #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur')
+  #set ($modality = "$!request.session.getAttribute('initial-step-modality')")
+  #if ($obj &amp;&amp; $obj.getProperty('statut').value == 'demandeUtilisateur' &amp;&amp; ($modality != "demarche-newly-submitted-by-current-user"))
     #set($demarcheDate = $datetool.format("d MMMM yyyy", $doc.creationDate))
     (%class='newdemande-message'%)(((
     {{info}}$services.localization.render('wikidemarches.demande.newdemarche.warning', [$demarcheDate]){{/info}}
