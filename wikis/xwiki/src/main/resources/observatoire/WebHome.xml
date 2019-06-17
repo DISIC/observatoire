@@ -45,8 +45,12 @@
 
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
-    (% id='document-title' %)(((
-      = $doc.title =
+    (% class='document-header'%) (((
+      (% class='document-info'%) (((
+        (% id='document-title' %)(((
+          = $doc.title =
+        )))
+      )))
     )))
     Tableau de bord des démarches phares de l’Etat – Situation à juin 2019.
     [[En savoir plus sur le tableau de bord&gt;&gt;Aide.Observatoire]]

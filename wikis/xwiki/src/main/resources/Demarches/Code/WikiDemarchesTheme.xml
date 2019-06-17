@@ -1194,8 +1194,8 @@ Visually, there's the title row and then all the rows from the document content,
  * Make some room around the logo on the topbar
  */
 #menuview .navbar {
-  padding-top: @grid-gutter-width;
-  padding-bottom: @grid-gutter-width;
+  padding-top: @grid-gutter-width * 2/3;
+  padding-bottom: @grid-gutter-width * 2/3;
 }
 
 /*
@@ -1437,6 +1437,7 @@ abbr.asterix {
     background-color: @body-bg;
   }
 }
+
 
 
 
