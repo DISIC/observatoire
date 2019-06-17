@@ -121,17 +121,17 @@
 ## Set variables indicating what should be displayed when accessing a demarche page.
 ## Set avis form display to true if:
 ## - The requested page corresponds to a demarche page and:
-##   - the view mode is set to 'formulaire-avis' and the request matches with the demarche embed API key,
-##   - or the avis submission form has started.
-## Set cerfa numerique display to true if:
-## - the requested page corresponds to a demarche page and the view mode is set to 'cerfa-numerique'.
-#set ($viewMode = "$!request['view-mode']")
+##   - the avis submission form has started,
+##   - or the view mode is set to 'formulaire-avis' and the request matches with the demarche embed API key,
+##   - or nd_mode is present with valid value and nd_source is present
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche) 
   #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
   #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
   #set ($providedDemarcheEmbedApiKeyIsPresent = false)
-  #if ($request.key)
+  #if ("$!avisId" != '')
+    #set ($displayAvisFormOnly = true)
+  #elseif ($request.key)
     #set ($providedDemarcheEmbedApiKeyIsPresent = true)
     ## Check that the API key is valid
     #set ($demarchePage = $xwiki.getDocument($doc.fullName))
@@ -141,15 +141,22 @@
     #set ($demarcheAPIObject = $demarcheAPIDoc.getXObject($services.model.resolveDocument($EMBED_CLASS), 'key', "$!request.key"))
     #set ($hasEmbedCode = $demarcheAPIObject != $NULL)
     #set ($providedDemarcheEmbedApiKeyIsValid = $demarcheAPIObject != $NULL)
+    #set ($viewMode = "$!request['view-mode']")
+    #set ($displayAvisFormOnly = ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsValid))
+    ## Set variable in order to display a message if the provided key is invalid
+    #if ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsPresent &amp;&amp; !$providedDemarcheEmbedApiKeyIsValid)
+      #set ($displayInvalidKeyMessage = true)
+    #end
+  #else
+    ## Temporary implementation allowing to still accept avis coming directly from the site and also to preserve legacy URLs without api key at all: If key is not present assume it's all ok. TODO: check if the legacy URLs can be replaced by full URLs with keys
+    #set ($ndMode = "$!request['nd_mode']")
+    #set ($ndSource = "$!request['nd_source']")
+    #set ($modalities = ['en-ligne-entièrement', 'en-ligne-partiellement', 'autrement'])
+    #if ($modalities.indexOf($ndMode) &gt;=0 &amp;&amp; $ndSource != '')
+      #set ($displayAvisFormOnly = true)
+    #end
   #end
-  #set ($displayAvisFormOnly = ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsValid) || "$!avisId" != '')
-  ## Set variable in order to display a message if the provided key is invalid
-  ## Temporary implementation allowing to still accept avis coming directly from the site and also to preserve legacy URLs without api key at all: If key is not present assume it's all ok.
-  #if ($viewMode == 'formulaire-avis' &amp;&amp; $providedDemarcheEmbedApiKeyIsPresent &amp;&amp; !$providedDemarcheEmbedApiKeyIsValid)
-    #set ($displayInvalidKeyMessage = true)
-  #end
-#end
-</content>
+#end</content>
     </property>
     <property>
       <path>layoutExtraVars.vm</path>
@@ -422,7 +429,7 @@
           &lt;li&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
         &lt;ul&gt;
-          #if(!($displayAvisFormOnly || $displayCerfaNumeriqueOnly))
+          #if(!($displayAvisFormOnly))
             #if ($isGuest)
               &lt;li&gt;&lt;a href="$xwiki.getURL($doc.fullName,'login')"&gt;
               $services.localization.render('wd.login')
@@ -706,7 +713,7 @@
   #set($logoElt = 'a')
   #set($url = "$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)")
   #set($logoAttr = "href='$escapetool.xml($url)'")
-  #if ($displayAvisFormOnly || $displayCerfaNumeriqueOnly)
+  #if ($displayAvisFormOnly)
     #set($logoElt = 'span')
     #set($logoAttr = '')
   #end

@@ -125,27 +125,24 @@
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
-  #else
+  #elseif (!$isGuest)
     #set ($selectedTab = "$!request['tab']")
     #if ($selectedTab == '')
-      #if ($isGuest)
-        #set ($selectedTab = 'avis-tab')
-      #else
-        #set ($selectedTab = 'demarche-tab')
-      #end
+      #set ($selectedTab = 'demarche-tab')
     #end
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
         #if (!$isGuest)
           &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
         #end
-        &lt;li role="presentation" #if($selectedTab == 'avis-tab')class="active"#end&gt;&lt;a href="#avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisForm')&lt;/a&gt;&lt;/li&gt;
         #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
           &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
         #end
         #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
           &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
         #end
-        &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+        #if ($xwiki.hasAccessLevel('edit', $xcontext.user, $doc.fullName))
+          &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+        #end
         #if (!$isGuest &amp;&amp; $cerfaNumerique != $NULL)
           &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
         #end
@@ -154,18 +151,27 @@
         #if (!$isGuest)
           {{include reference="Demarches.Code.DemarcheTab" /}}
         #end
-        {{include reference="Demarches.Code.DemarcheAvisFormTab" /}}
         #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
           {{include reference="Demarches.Code.EmbedTab" /}}
         #end
         #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
           {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
         #end
-        {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+        #if ($xwiki.hasAccessLevel('edit', $xcontext.user, $doc.fullName))
+          {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
+        #end
         #if (!$isGuest &amp;&amp; $cerfaNumerique != $NULL)
           {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
         #end
     &lt;/div&gt;
+ #else
+   (% style="margin-top: 1em" %)(((
+     {{info}}
+     #set($loginURL = $xwiki.getURL('XWiki.XWikiLogin', 'login', "xredirect=$escapetool.url($doc.getURL())"))
+     $services.localization.render('wd.login-notice')
+     [[$services.localization.render('wd.login-button')&gt;&gt;path:$loginURL||class="button"]]
+     {{/info}}
+    )))
   #end
 #elseif ($xcontext.action == 'edit')
   ## There's just one tab, but we need to make it visible.
