@@ -241,10 +241,12 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     // Replace common static list values by their corresponding key in the démarche property: replace "n/c" by
-    // "nr" ("non renseigné"), "n/a" by "na", "Oui" by "oui", "Non" by "non", "A venir" by "nr"
+    // "nr" ("non renseigné"), "n/a" by "na", "Oui" by "oui", "Non" by "non", "A venir" by "nr", "sans identification"
+    // by "sansIdentification"
     protected String normalizeStaticListValue(String value)
     {
         if (StringUtils.isNotEmpty(value)) {
+            value = value.replaceAll("(?i)^sans identification$", "sansIdentification");
             value = value.replaceAll("(?i)^n/c$", "nr");
             value = value.replaceAll("(?i)^n/a$", "na");
             value = value.replaceAll("(?i)^partiel$", "partiel");
