@@ -129,6 +129,13 @@
         #set ($dateMiseEnLigne = 0)
       #end
     #end
+    #set ($franceConnectValue = $obj.getValue('franceConnect'))
+    #set ($franceConnectDisplay = $obj.get('franceConnect'))
+    #if ($franceConnectValue == 'sansIdentification')
+      #set ($franceConnectDisplay =  'n/a')
+    #elseif ($franceConnectValue == 'na' &amp;&amp; $statutDemat == 'Non')
+      #set ($franceConnectDisplay = '-')
+    #end
     #set ($urlScore = $obj.get('urlScore'))
     #set ($urlScoreValue = $urlScore)
     #if ($urlScore == 'n/a')
@@ -156,7 +163,7 @@
           "display": $percentDematDisplay,
           "value": $percentDemat
         },
-        "franceConnect": $obj.get('franceConnect'),
+        "franceConnect": $franceConnectDisplay,
         "adapteMobile": $obj.get('adapteMobile'),
         "qualiteSupport": $obj.get('qualiteSupport'),
         "avisCount": {

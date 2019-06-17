@@ -216,10 +216,12 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       return demarchePage.getURL('view', 'view-mode=statistics');
     }
 
-    function format(value, badgeStyleFunction, demarcheId) {
+    function format(value, badgeStyleFunction, replaceNa, demarcheId) {
       var badgeStyle = badgeStyleFunction.apply(this, [value]);
       if (value) {
-        value = value.replace("n/a", "-");
+        if (replaceNa) {
+          value = value.replace("n/a", "-");
+        }
         value = value.replace("n/c", "À venir");
       }
       if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
@@ -312,25 +314,25 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             },
             { data: "statutDemat",
               render: function (data, type, row) {
-                return format(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle, true);
               }
             },
             {
               data: "franceConnect",
               render: function (data, type, row) {
-                return format(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle, false);
               }
             },
             {
               data: "adapteMobile",
               render: function (data, type, row) {
-                return format(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle, true);
               }
             },
             {
               data: "qualiteSupport",
               render: function (data, type, row) {
-                return format(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle, true);
               }
             },
             {
@@ -340,7 +342,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
                 if (type === "sort") {
                   return data.value;
                 } else {
-                  return format(data.display, computeUrlScoreBadgeStyle);
+                  return format(data.display, computeUrlScoreBadgeStyle, true);
                 }
               }
             },
@@ -351,7 +353,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
                 if (type === "sort") {
                   return data.value;
                 } else {
-                  return format(data.display, computeBadgeStyle,  row['id']);
+                  return format(data.display, computeBadgeStyle,  true, row['id']);
                 }
               }
             },

@@ -349,7 +349,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>oui=Oui|non=Non|na=Sans objet|nr=Non renseigné</values>
+      <values>oui=Oui|non=Non|sansIdentification=Sans identification|na=Sans objet|nr=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </franceConnect>
     <groupes>
