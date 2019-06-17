@@ -1340,6 +1340,12 @@ legend {
   font-size: 1.20em;
 }
 
+/* section edit is the size of h1 which is too big and we never have h1 in the content of the pages, for accessibility reasons =&gt; make it borrow the size of h2 */
+.edit_section {
+  margin: -1.5em 0 0;
+}
+
+
 /*
  * Footer is the inverse color of the nav and same text color, and aligned left on desktop &amp; tablet
  */
@@ -1431,6 +1437,7 @@ abbr.asterix {
     background-color: @body-bg;
   }
 }
+
 
 
 </lessCode>
