@@ -179,6 +179,7 @@
     }
 });
 
+
 require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
 
     function computeBadgeStyle(value) {
@@ -209,20 +210,28 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       return "danger";
     }
 
-    function addBadge(value, badgeStyleFunction) {
+    function getDemarcheStatisticsUrl(demarcheId) {
+      var reference = XWiki.Model.resolve(demarcheId, XWiki.EntityType.DOCUMENT);
+      var demarchePage = new XWiki.Document(reference);
+      return demarchePage.getURL('view', 'view-mode=statistics');
+    }
+
+    function format(value, badgeStyleFunction, demarcheId) {
       var badgeStyle = badgeStyleFunction.apply(this, [value]);
       if (value) {
         value = value.replace("n/a", "-");
         value = value.replace("n/c", "À venir");
       }
-      if (value &amp;&amp; (value.indexOf('%') &gt; 0 || value == '-')) {
+      if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
+        return '&lt;span class="row-details-value"&gt;&lt;a href="' + getDemarcheStatisticsUrl(demarcheId) + '"&gt;' + value + '&lt;/a&gt;&lt;/span&gt;';
+      } else if (value &amp;&amp; value == '-') {
         return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
       } else {
         return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
       }
     }
 
-    function format (data) {
+    function displayChildRow(data) {
       var output = '&lt;div class="row"&gt;' +
         '&lt;div class="col-md-12"&gt;' +
         '&lt;div class="row-details"&gt;' +
@@ -239,7 +248,8 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
         }
         if (data.avisCount.value &gt;= 100) {
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
+          var demarcheId = data.id;
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;&lt;a href="' + getDemarcheStatisticsUrl(demarcheId) + '"&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
         }
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
@@ -302,36 +312,35 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             },
             { data: "statutDemat",
               render: function (data, type, row) {
-                return addBadge(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle);
               }
             },
             {
               data: "franceConnect",
               render: function (data, type, row) {
-                return addBadge(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle);
               }
             },
             {
               data: "adapteMobile",
               render: function (data, type, row) {
-                return addBadge(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle);
               }
             },
             {
               data: "qualiteSupport",
               render: function (data, type, row) {
-                return addBadge(data, computeBadgeStyle);
+                return format(data, computeBadgeStyle);
               }
             },
             {
               data: "urlScore",
               type: "num",
               render: function (data, type, row) {
-                console.log(data);
                 if (type === "sort") {
                   return data.value;
                 } else {
-                  return addBadge(data.display, computeUrlScoreBadgeStyle);
+                  return format(data.display, computeUrlScoreBadgeStyle);
                 }
               }
             },
@@ -342,7 +351,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
                 if (type === "sort") {
                   return data.value;
                 } else {
-                  return addBadge(data.display, computeBadgeStyle);
+                  return format(data.display, computeBadgeStyle,  row['id']);
                 }
               }
             },
@@ -401,7 +410,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         tr.removeClass('shown');
       }
       else {
-        row.child( format(row.data()) ).show();
+        row.child( displayChildRow(row.data()) ).show();
         tr.addClass('shown');
       }
     });

@@ -138,6 +138,7 @@
     #end
     #set ($discard = $data.add(
       {
+        "id": $page.fullName,
         "title": $page.displayTitle,
         "statutDemat": $statutDemat,
         "ministere": $ministereName,
