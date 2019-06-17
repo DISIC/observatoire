@@ -68,6 +68,7 @@
     #end
     #set ($avisStats = $page.getObject('Avis.Code.AvisStatsClass'))
     #set ($avisCount = $avisStats.getValue('occurrences'))
+    #set ($statutDemat = $obj.get('statutDemat'))
     #if ($avisCount &amp;&amp; $avisCount &gt;= 100)
       #set ($satisfactionIndex = $avisStats.getValue('moyenne'))
       #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
@@ -103,7 +104,6 @@
     #end
     ## If statutDemat is "Oui", then dateMiseEnLigneDispay should be "Ouvert"
     ## Else: if a date is present, display it, otherwise display "n/c"
-    #set ($statutDemat = $obj.get('statutDemat'))
     #if ($statutDemat == 'Oui')
       #set ($dateMiseEnLigneDisplay = 'Ouvert')
       #set ($dateMiseEnLigne = 10)
