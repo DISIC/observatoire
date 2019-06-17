@@ -67,9 +67,10 @@
       #end
     #end
     #set ($avisStats = $page.getObject('Avis.Code.AvisStatsClass'))
-    #set ($avisCount = $avisStats.getValue('occurrences'))
+    #set ($avisCountValue = $avisStats.getValue('occurrences'))
     #set ($statutDemat = $obj.get('statutDemat'))
-    #if ($avisCount &amp;&amp; $avisCount &gt;= 100)
+    #if ($avisCountValue &amp;&amp; $avisCountValue &gt;= 100)
+      #set ($avisCountDisplay = $numbertool.integer($avisCountValue))
       #set ($satisfactionIndex = $avisStats.getValue('moyenne'))
       #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
       #set ($satisfactionIndexValue = ${mathtool.round($satisfactionIndexPercent)})
@@ -77,8 +78,12 @@
     #elseif ($statutDemat == 'Non')
       #set ($satisfactionIndexValue = -2)
       #set ($satisfactionIndexDisplay = 'n/a')
+      #set ($avisCountDisplay = $avisCountValue)
+      #set ($avisCountValue = -2)
     #else
       #set ($satisfactionIndexValue = -1)
+      #set ($avisCountDisplay = $avisCountValue)
+      #set ($avisCountValue = -1)
       #set ($satisfactionIndexDisplay = 'À venir')
     #end
     #set ($volumetrie = $obj.getValue('volumetrie'))
@@ -153,7 +158,10 @@
         "franceConnect": $obj.get('franceConnect'),
         "adapteMobile": $obj.get('adapteMobile'),
         "qualiteSupport": $obj.get('qualiteSupport'),
-        "avisCount": $avisCount,
+        "avisCount": {
+          "value": $avisCountValue,
+          "display": $avisCountDisplay
+         },
         "satisfactionIndex": {
           "display": $satisfactionIndexDisplay,
           "value": $satisfactionIndexValue

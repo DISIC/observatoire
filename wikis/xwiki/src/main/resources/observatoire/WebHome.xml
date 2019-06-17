@@ -67,12 +67,14 @@
       &lt;th&gt;&lt;/th&gt;
       &lt;th&gt;Démarche&lt;/th&gt;
       &lt;th&gt;Ministère&lt;/th&gt;
+      &lt;th&gt;Regroupement&lt;/th&gt;
       &lt;th&gt;Peut être réalisée complètement en ligne&lt;/th&gt;
       &lt;th&gt;Identification FranceConnect&lt;/th&gt;
       &lt;th&gt;Accessibilité smartphone&lt;/th&gt;
       &lt;th&gt;Support usager de qualité&lt;/th&gt;
       &lt;th&gt;Disponibilité / temps de réponse&lt;/th&gt;
       &lt;th&gt;Indice de satisfaction usagers&lt;/th&gt;
+      &lt;th&gt;Volumétrie&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
 &lt;/table&gt;
@@ -237,8 +239,8 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         if (data.statutDemat != 'Non') {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
         }
-        if (data.avisCount &gt;= 100) {
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;' + data.avisCount + '&lt;/li&gt;';
+        if (data.avisCount.value &gt;= 100) {
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
         }
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
@@ -295,6 +297,10 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
               data: "ministere",
               visible: false
             },
+            {
+              data: "groupes",
+              visible: false
+            },
             { data: "statutDemat",
               render: function (data, type, row) {
                 return addBadge(data, computeBadgeStyle);
@@ -340,9 +346,21 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
                   return addBadge(data.display, computeBadgeStyle);
                 }
               }
+            },
+            {
+              data: "volumetrie",
+              type: "num",
+              visible: false,
+              render: function (data, type, row) {
+                if (type === "sort") {
+                  return data.value;
+                } else {
+                  return data.display;
+                }
+              }
             }
       ],
-      order: [[2, 'asc']],
+      order: [[2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
       language: {
         info: "Total : _TOTAL_ démarches",
         infoEmpty: "Aucune démarche trouvée",
