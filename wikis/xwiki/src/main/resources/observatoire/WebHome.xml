@@ -34,7 +34,7 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Observatoire de la dématérialisation</title>
+  <title>Observatoire de la dématérialisation de qualité</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -49,8 +49,7 @@
       = $doc.title =
     )))
     Tableau de bord des démarches phares de l’Etat – Situation à juin 2019.
-    Afin que gouvernement, citoyens et administrations puissent suivre l’état d’avancement et la qualité de la dématérialisation, un observatoire de la dématérialisation est mis en place. Celui-ci produit un tableau de bord consultable par tous en ligne, et mis à jour tous les 3 mois afin de suivre les évolutions. Cet outil qui permet d’alimenter le débat public en données chiffrées et partagées fournit pour les 250 démarches phares des données concernant l’état d’avancement de sa dématérialisation, le respect de critères de qualité précis (qualité du support, accessibilité sur smartphone, disponibilité, temps de réponse, …) ainsi que les retours utilisateurs au travers d’un indice de satisfaction usagers. Cet indice de satisfaction est capté sur les démarches administratives en ligne elles-mêmes, grâce à un bouton « MonAvis » proposé en fin de parcours utilisateur. Ce bouton est en cours de déploiement progressif sur l’ensemble des démarches phares de l’Etat.
-    [[En savoir plus sur les critères de qualité&gt;&gt;Aide.Observatoire]]
+    [[En savoir plus sur le tableau de bord&gt;&gt;Aide.Observatoire]]
 
     #set ($size = $doc.getAttachment('observatoire-de-la-dematerialisation-juin-2019.pdf').getLongSize())
     #set ($size = $mathtool.div($size, 1000))
@@ -523,9 +522,6 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
 
 .observatoire-explanation {
   text-align: center;
-  p.download {
-    text-align: right;
-  }
   .btn-default.btn-download {
     background-image: none;
     background-color: transparent;
@@ -533,6 +529,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
     border: .1em solid #222;
     border-radius: .95em;
     font-size: 0.9em;
+    margin-top: 1.5em;
     margin-bottom: 2em;
   }
 }
