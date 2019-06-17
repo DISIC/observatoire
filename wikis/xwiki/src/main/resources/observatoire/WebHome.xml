@@ -80,7 +80,6 @@
 {{/velocity}}</content>
   <attachment>
     <filename>observatoire-de-la-dematerialisation-juin-2019.pdf</filename>
-    <mimetype>application/pdf</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -237,6 +236,9 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
         if (data.statutDemat != 'Non') {
           output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+        }
+        if (data.avisCount &gt;= 100) {
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;' + data.avisCount + '&lt;/li&gt;';
         }
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
