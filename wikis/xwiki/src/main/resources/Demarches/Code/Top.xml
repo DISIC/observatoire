@@ -131,9 +131,7 @@
     #end
     #set ($franceConnectValue = $obj.getValue('franceConnect'))
     #set ($franceConnectDisplay = $obj.get('franceConnect'))
-    #if ($franceConnectValue == 'sansIdentification')
-      #set ($franceConnectDisplay =  'n/a')
-    #elseif ($franceConnectValue == 'na' &amp;&amp; $statutDemat == 'Non')
+    #if ($statutDemat == 'Non' &amp;&amp; $franceConnectValue == 'na')
       #set ($franceConnectDisplay = '-')
     #end
     #set ($urlScore = $obj.get('urlScore'))

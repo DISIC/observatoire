@@ -327,7 +327,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
                 if (type === "sort") {
                   return data.display;
                 } else {
-                  return format(data.display, computeBadgeStyle, true);
+                  return format(data.display, computeBadgeStyle, false);
                 }
               }
             },

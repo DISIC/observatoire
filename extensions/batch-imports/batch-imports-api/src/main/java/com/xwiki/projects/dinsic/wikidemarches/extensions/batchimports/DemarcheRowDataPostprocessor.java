@@ -246,7 +246,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     protected String normalizeStaticListValue(String value)
     {
         if (StringUtils.isNotEmpty(value)) {
-            value = value.replaceAll("(?i)^sans identification$", "sansIdentification");
             value = value.replaceAll("(?i)^n/c$", "nr");
             value = value.replaceAll("(?i)^n/a$", "na");
             value = value.replaceAll("(?i)^partiel$", "partiel");
