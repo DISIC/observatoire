@@ -469,7 +469,7 @@
             #set($nosServicesOrdre = ['franceconnect.gouv.fr', 'demarches-simplifiees.fr'])
             &lt;ul&gt;
               #foreach($ns in $nosServicesOrdre)
-                &lt;li&gt;&lt;a href="$nosServices.get($nu)" target="_blank" title="$ns ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$ns&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="$nosServices.get($ns)" target="_blank" title="$ns ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$ns&lt;/a&gt;&lt;/li&gt;
               #end
             &lt;/ul&gt;
           &lt;/div&gt;
