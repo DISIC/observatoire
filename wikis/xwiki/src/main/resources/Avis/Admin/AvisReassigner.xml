@@ -20,29 +20,46 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Avis.Admin.WebHome" locale="">
+<xwikidoc version="1.3" reference="Avis.Admin.AvisReassigner" locale="">
   <web>Avis.Admin</web>
-  <name>WebHome</name>
+  <name>AvisReassigner</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
-  <parent>Avis.WebHome</parent>
+  <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Administration des avis</title>
+  <title>AvisReassigner</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
-  <content>* [[Effacer les avis sans score du tout&gt;&gt;doc:AvisNoScore]]
-* [[Effacer les avis invalides&gt;&gt;doc:AvisScoreInvalide]]
-* [[Effacer les avis par date de création&gt;&gt;doc:AvisMassCleanup]]
-* [[Afficher les avis ayant été édités par un utilisateur identifié&gt;&gt;doc:AvisEdited]]
-* [[Afficher le nombre d'avis par session et par démarche&gt;&gt;doc:AvisSessionManager]]
-* [[Réaffection d'avis d'une démarche à une autre&gt;&gt;doc:AvisReassigner]]</content>
+  <hidden>true</hidden>
+  <content>{{info}}
+Cette page permet de réaffecter des avis d'une démarche à une autre. Éditer la page pour définir la démarche d'origine et la démarche cible, puis ajouter "?execute=1" à l'URL pour exécuter l'action.
+{{/info}}
+
+{{velocity}}
+#set ($demarcheFrom = 'Demarches.1293')
+#set ($demarcheTo = 'Demarches.829')
+
+#set ($hql = "select obj.name from BaseObject as obj, StringProperty as demarche where obj.className = 'Avis.Code.AvisClass' and demarche.id.name = 'demarche' and demarche.id.id = obj.id and demarche.value = :demarcheFrom")
+#set ($entries = $services.query.hql($hql).bindValue('demarcheFrom', $demarcheFrom).execute())
+
+#if ($request.execute == 1)
+  |=Avis
+  #foreach ($entry in $entries)
+    |$velocityCount|[[$entry]]
+    #set ($avis = $xwiki.getDocument($entry))
+    #set ($avisObject = $avis.getObject('Avis.Code.AvisClass'))
+    #set ($discard = $avisObject.set('demarche', $demarcheTo))
+    #set ($discard = $avis.save("Réaffectation à la démarche $demarcheTo"))
+  #end
+#end
+
+{{/velocity}}</content>
 </xwikidoc>
