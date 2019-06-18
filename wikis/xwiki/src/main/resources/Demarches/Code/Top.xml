@@ -163,7 +163,10 @@
           "display": $percentDematDisplay,
           "value": $percentDemat
         },
-        "franceConnect": $franceConnectDisplay,
+        "franceConnect": {
+          "display": $franceConnectDisplay,
+          "value": $franceConnectValue
+        },
         "adapteMobile": $obj.get('adapteMobile'),
         "qualiteSupport": $obj.get('qualiteSupport'),
         "avisCount": {

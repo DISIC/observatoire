@@ -324,7 +324,11 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             {
               data: "franceConnect",
               render: function (data, type, row) {
-                return format(data, computeBadgeStyle, false);
+                if (type === "sort") {
+                  return data.display;
+                } else {
+                  return format(data.display, computeBadgeStyle, true);
+                }
               }
             },
             {
