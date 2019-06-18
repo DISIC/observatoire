@@ -55,6 +55,30 @@
     Tableau de bord des démarches phares de l’Etat – Situation à juin 2019.
     [[En savoir plus sur le tableau de bord&gt;&gt;Aide.Observatoire]]
 
+    == Partager ==
+    #set ($socialNetworks = [{
+        "icon": "fa-twitter",
+        "url": "https://twitter.com/intent/tweet?url="
+      },
+      {
+        "icon": "fa-linkedin",
+        "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
+      },
+      {
+        "icon": "fa-facebook",
+        "url": "https://www.facebook.com/sharer.php?u="
+      },
+      {
+        "icon": "fa-envelope",
+        "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
+      }
+    ])
+    {{html clean="false"}}
+    #foreach ($socialNetwork in $socialNetworks)
+      #set ($url = $escapetool.xml($doc.getExternalURL()))
+      &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt;
+    #end
+    {{/html}}
     #set ($size = $doc.getAttachment('observatoire-de-la-dematerialisation-juin-2019.pdf').getLongSize())
     #set ($size = $mathtool.div($size, 1000))
     #set ($size = $mathtool.round($size))
@@ -541,6 +565,18 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
 
 .observatoire-explanation {
   text-align: center;
+  a.social-network {
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 1em;
+    font-size: 1.5em;
+    #gradient &gt; .horizontal(#0E5A96; #28acb8);
+    text-decoration: none;
+    color: white;
+  }
+
   .btn-default.btn-download {
     background-image: none;
     background-color: transparent;
@@ -686,7 +722,9 @@ tr.shown td.details-control::before {
 
 table#top-demarches.no-footer {
   border-bottom: 0px;
-}</code>
+}
+
+</code>
     </property>
     <property>
       <contentType>LESS</contentType>
