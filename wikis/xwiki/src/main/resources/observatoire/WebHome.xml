@@ -229,7 +229,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         value = value.replace("n/c", "À venir");
       }
       if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
-        return '&lt;span class="row-details-value"&gt;&lt;a href="' + getDemarcheStatisticsUrl(demarcheId) + '"&gt;' + value + '&lt;/a&gt;&lt;/span&gt;';
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
       } else if (value &amp;&amp; value == '-') {
         return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
       } else {
@@ -255,7 +255,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         }
         if (data.avisCount.value &gt;= 100) {
           var demarcheId = data.id;
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;&lt;a href="' + getDemarcheStatisticsUrl(demarcheId) + '"&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
         }
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
