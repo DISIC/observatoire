@@ -301,6 +301,16 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
       }
     );
 
+    jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+      "french-string-asc" : function (s1, s2) {
+          return s1.localeCompare(s2, 'fr');
+      },
+
+      "french-string-desc" : function (s1, s2) {
+          return s2.localeCompare(s1, 'fr');
+      }
+    });
+
     var ministeres = [];
 
     var table = $('#top-demarches').DataTable({
@@ -316,7 +326,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             }
           };
           ministeres.sort(function (a, b) {
-            return a.localeCompare(b);
+            return a.localeCompare(b, 'fr');
           });
          return json.data;
         }
@@ -338,11 +348,13 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             },
             {
               data: "ministere",
-              visible: false
+              visible: false,
+              type: "french-string"
             },
             {
               data: "groupes",
-              visible: false
+              visible: false,
+              type: "french-string"
             },
             { data: "statutDemat",
               render: function (data, type, row) {
