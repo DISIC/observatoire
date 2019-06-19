@@ -79,11 +79,11 @@
       #set ($satisfactionIndexValue = -2)
       #set ($satisfactionIndexDisplay = 'n/a')
       #set ($avisCountDisplay = $avisCountValue)
-      #set ($avisCountValue = -2)
+      #set ($avisCountValue = 0)
     #else
       #set ($satisfactionIndexValue = -1)
       #set ($avisCountDisplay = $avisCountValue)
-      #set ($avisCountValue = -1)
+      #set ($avisCountValue = 0)
       #set ($satisfactionIndexDisplay = 'À venir')
     #end
     #set ($volumetrie = $obj.getValue('volumetrie'))
