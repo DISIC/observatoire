@@ -57,9 +57,10 @@
         ##
         ## regular logged in users see the demarches they're porteurs of
         ##
-        ## slightly fix this query to avoid prefix usernames to match too much.
-        #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and owners.value like '%$xcontext.user%'")
-        #set ($ownedDemarches = $services.query.hql($hql).execute())
+        #set ($userMatch1 = ",$services.model.serialize($xcontext.userReference, 'default'),")
+        #set ($userMatch2 = ",$services.model.serialize($xcontext.userReference, 'compact'),")
+        #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2)")
+        #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
         (%class='row'%)(((
           (%class='col-xs-12 col-md-4'%)(((
             ==$services.localization.render('wikidemarches.owned-demarches')==
@@ -192,7 +193,6 @@
 {{/velocity}}</content>
   <attachment>
     <filename>banner2-wide.png</filename>
-    <mimetype>image/png</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
