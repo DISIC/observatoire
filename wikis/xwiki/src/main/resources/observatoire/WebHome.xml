@@ -235,9 +235,9 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
     function computeUrlScoreBadgeStyle(value) {
       if (isNaN(value))
         return "default";
-      if (value &gt;= 7)
+      if (value &gt; 7)
         return "success";
-      if (value &gt;= 4 &amp;&amp; value &lt; 7)
+      if (value &gt;= 4 &amp;&amp; value &lt;= 7)
         return "warning";
       return "danger";
     }

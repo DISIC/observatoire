@@ -61,7 +61,7 @@ Qualité du support apporté aux utilisateurs : ce critère permet de vérifier 
 
 === Disponibilité / temps de réponse ===
 
-Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur ou égal à 7, « orange » pour un score entre 5 et 6, et « rouge » si le score total est inférieur à 4. La valeur est à « non disponible » si l'information n'est pas disponible.
+Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur ou égal à 8, « orange » pour un score entre 5 et 7, et « rouge » si le score total est inférieur à 4. La valeur est à « non disponible » si l'information n'est pas disponible.
 
 === Indice de satisfaction usagers ===
 
