@@ -48,12 +48,15 @@
     (% class='document-header'%) (((
       (% class='document-info'%) (((
         (% id='document-title' %)(((
-          = $doc.title =
+          #set ($break = '\\')
+          #set ($subtitle = $services.localization.render("wikidemarches.observatoire.subtitle", ["juin 2019"]))
+          #set ($subtitle = $subtitle.replace(' – ', $break))
+          = $doc.title$break$subtitle =
         )))
       )))
     )))
-    Tableau de bord des démarches phares de l’Etat – Situation à juin 2019.
-    [[En savoir plus sur le tableau de bord&gt;&gt;Aide.Observatoire]]
+
+    [[$services.localization.render("wikidemarches.observatoire.help-link")&gt;&gt;Aide.Observatoire]]
 
     == Partager ==
     #set ($socialNetworks = [{
@@ -251,7 +254,7 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         if (replaceNa) {
           value = value.replace("n/a", "-");
         }
-        value = value.replace("n/c", "À venir");
+        value = value.replace("n/c", "Non disponible");
       }
       if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
         return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
@@ -270,17 +273,17 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
         var dateMiseEnLigne = data.dateMiseEnLigne.display;
         if (dateMiseEnLigne != 'Ouvert') {
           if (dateMiseEnLigne == 'n/c')
-            dateMiseEnLigne = 'À venir';
-          output += '&lt;li&gt;&lt;span class="row-details-key"&gt;Date d\'ouverture du service dématérialisé &lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+            dateMiseEnLigne = 'Non disponible';
+          output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.date-ouverture")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
         }
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Volumétrie totale de la démarche &lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.volumetrie")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
         var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
         if (data.statutDemat != 'Non') {
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Pourcentage de recours à la voie dématérialisée &lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.pourcentage-recours-demat")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
         }
         if (data.avisCount.value &gt;= 100) {
           var demarcheId = data.id;
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;Nombre d\'avis recueillis &lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
+          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.avis")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
         }
         output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
       return output;
@@ -359,7 +362,11 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
             {
               data: "adapteMobile",
               render: function (data, type, row) {
-                return format(data, computeBadgeStyle, true);
+                if (type === "sort") {
+                  return data.display;
+                } else {
+                  return format(data.display, computeBadgeStyle, false);
+                }
               }
             },
             {

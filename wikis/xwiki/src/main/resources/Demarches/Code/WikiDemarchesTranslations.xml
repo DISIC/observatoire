@@ -49,10 +49,10 @@ wd.login=Accès administration
 wd.logout=Déconnexion
 wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne. Il permet également de piloter le chantier de la dématérialisation en recensant les démarches administratives et en les restituant sous la forme de tableaux de bord.
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
-wd.login-button=Authentification 
+wd.login-button=Authentification
 
 # Invalid account screen
-wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription. 
+wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription.
 wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
 
 #Démarches
@@ -68,9 +68,15 @@ wikidemarches.mostwanted.title=Démarches les plus courantes
 wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
 wikidemarches.observatoire.title=Où en est-on ?
-wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'Etat.\\\\\\\\**En mai 2019**, 67% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction MonAvis a commencé.
+wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'État.\\\\\\\\**En mai 2019**, 67% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction MonAvis a commencé.
 wikidemarches.observatoire.button=Consulter l'observatoire
-wikidemarches.evaluation.title=Comment la qualité des démarches en ligne de l'Etat est-elle évaluée ?
+wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation à {0}
+wikidemarches.observatoire.help-link=En savoir plus sur le tableau de bord
+wikidemarches.observatoire.date-ouverture=Date d'ouverture du service dématérialisé
+wikidemarches.observatoire.volumetrie=Volumétrie totale de la démarche
+wikidemarches.observatoire.pourcentage-recours-demat=Pourcentage de recours à la voie dématérialisée
+wikidemarches.observatoire.avis=Nombre d'avis usagers recueillis
+wikidemarches.evaluation.title=Comment la qualité des démarches en ligne de l'État est-elle évaluée ?
 wikidemarches.evaluation.content.firstcol=Nous testons la conformité des démarches par rapport à des critères de qualité définis.
 wikidemarches.evaluation.content.secondcol=Nous recueillons l'avis des usagers à la fin de celles-ci.
 wikidemarches.evaluation.content.thirdcol=Nous analysons les résultats pour identifier les démarches à améliorer en priorité.
@@ -81,6 +87,7 @@ wikidemarches.help.title=Comment donner votre avis sur une démarche ?
 wikidemarches.help.content=L'ensemble des démarches en ligne de l'État intègrent progressivement un bouton MonAvis, menant vers un questionnaire de satisfaction.
 wikidemarches.help.content.step1=Effectuez une démarche en ligne
 wikidemarches.help.content.step2=À la fin de la démarche, répondez au questionnaire de satisfaction via un bouton MonAvis
+wikidemarches.help.image.title=Comment donner son avis?
 wikidemarches.help.button=En savoir plus
 
 # Démarche tabs

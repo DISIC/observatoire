@@ -134,6 +134,11 @@
     #if ($statutDemat == 'Non' &amp;&amp; $franceConnectValue == 'na')
       #set ($franceConnectDisplay = '-')
     #end
+    #set ($adapteMobileValue = $obj.getValue('adapteMobile'))
+    #set ($adapteMobileDisplay = $obj.get('adapteMobile'))
+    #if ($statutDemat == 'Non' &amp;&amp; $adapteMobileValue == 'na')
+      #set ($adapteMobileDisplay = '-')
+    #end
     #set ($urlScore = $obj.get('urlScore'))
     #set ($urlScoreValue = $urlScore)
     #if ($urlScore == 'n/a')
@@ -165,7 +170,10 @@
           "display": $franceConnectDisplay,
           "value": $franceConnectValue
         },
-        "adapteMobile": $obj.get('adapteMobile'),
+        "adapteMobile": {
+          "display": $adapteMobileDisplay,
+          "value": $adapteMobileValue
+        },
         "qualiteSupport": $obj.get('qualiteSupport'),
         "avisCount": {
           "value": $avisCountValue,
