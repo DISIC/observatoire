@@ -27,7 +27,7 @@
   <parent>
     <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-    <version>3.3-SNAPSHOT</version>
+    <version>3.3</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-wikis-main-upgrade</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - Main wiki upgrade package</name>
