@@ -51,8 +51,13 @@
   #set ($idx = $idx + 1)
   #set ($domain = $userEmail.substring($idx).toLowerCase())
   #set ($whiteList = $xwiki.getDocumentAsAuthor('Administration.Domaines autorisés').getContent().split('\r\n'))
+  #set ($whiteList = $xwiki.getDocumentAsAuthor('Administration.Domaines autorisés').getContent().trim().toLowerCase().split('\n'))
+  #set ($whiteListTrimmed = [])
+  #foreach ($element in $whiteList)
+    #set ($discard = $whiteListTrimmed.add($element.trim()))
+  #end
   ## The domain must match exactly one domain present in the white list.
-  #if ($whiteList.contains($domain))
+  #if ($whiteListTrimmed.contains($domain))
     #if($xwiki.validateUser(true) == 0)
       #set($loginURL = $xwiki.getURL('XWiki.XWikiLogin', 'login'))
       {{info}}{{html clean="false"}}$services.localization.render('xe.admin.accountvalidation.success', [${loginURL}]){{/html}}{{/info}}
