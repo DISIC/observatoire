@@ -69,7 +69,7 @@ wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
 wikidemarches.observatoire.title=Où en est-on ?
 wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'Etat.\\\\\\\\**En mai 2019**, 67% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction MonAvis a commencé.
-wikidemarches.observatoire.button=CONSULTER l'observatoire
+wikidemarches.observatoire.button=Consulter l'observatoire
 wikidemarches.evaluation.title=Comment la qualité des démarches en ligne de l'Etat est-elle évaluée ?
 wikidemarches.evaluation.content.firstcol=Nous testons la conformité des démarches par rapport à des critères de qualité définis.
 wikidemarches.evaluation.content.secondcol=Nous recueillons l'avis des usagers à la fin de celles-ci.
@@ -78,9 +78,10 @@ wikidemarches.evaluation.icon.firstcol=cogs
 wikidemarches.evaluation.icon.secondcol=smile-o
 wikidemarches.evaluation.icon.thirdcol=search
 wikidemarches.help.title=Comment donner votre avis sur une démarche ?
-wikidemarches.help.content=L'ensemble des démarches en ligne de l'Etat intègrent progressivement un bouton MonAvis, menant vers un questionnaire de satisfaction.
-wikidemarches.help.image.title=Comment donner son avis?
-wikidemarches.help.button=EN SAVOIR PLUS
+wikidemarches.help.content=L'ensemble des démarches en ligne de l'État intègrent progressivement un bouton MonAvis, menant vers un questionnaire de satisfaction.
+wikidemarches.help.content.step1=Effectuez une démarche en ligne
+wikidemarches.help.content.step2=À la fin de la démarche, répondez au questionnaire de satisfaction via un bouton MonAvis
+wikidemarches.help.button=En savoir plus
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche
