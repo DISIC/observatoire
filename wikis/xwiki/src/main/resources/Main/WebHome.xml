@@ -143,7 +143,7 @@
 
           (% class="helpschema" %) (((
             (% class="row" %)(((
-              (% class="hidden-xs col-md-6 col-md-push-3 col-line" %)(((
+              (% class="hidden-xs hidden-sm col-md-6 col-md-push-3 col-line" %)(((
                 ----
               )))
             )))
@@ -436,7 +436,7 @@
     .col-step {
       text-align: center;
       /* On bigger screens, make it go over the horizontal line above (when the line is present) */
-      @media (min-width: @screen-sm-min) {
+      @media (min-width: @screen-md-min) {
         margin-top: -4.4em;
       }
       .step {
