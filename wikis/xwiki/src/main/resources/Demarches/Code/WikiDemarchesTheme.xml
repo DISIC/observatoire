@@ -1349,9 +1349,10 @@ legend {
 /*
  * Footer is the inverse color of the nav and same text color, and aligned left on desktop &amp; tablet
  */
+@footer-color: darken(@navbar-default-bg, 10%);
 #footerglobal {
   background-color: @navbar-default-color;
-  color: darken(@navbar-default-bg, 10%);
+  color: @footer-color;
   /* Since footer is black now, we add some margin above it to make room between it and the content. 
      If a page makes a stacked rows layout, it need to reset this */
   margin-top: @grid-gutter-width;
@@ -1359,7 +1360,7 @@ legend {
 
 #footerglobal a, 
 #footerglobal a:hover {
-  color: @navbar-default-bg;
+  color: @footer-color;
 }
 
 /* Styling of the custom footer */
@@ -1368,28 +1369,54 @@ legend {
   padding-top: @grid-gutter-width;
   padding-bottom: @grid-gutter-width;
   text-align: left;
+  img {
+    width: 30%;
+    @media (min-width: @screen-md-min) {
+      width: 50%;
+    }
+  }
+  ul.social-networks {
+    margin-top: 2em;
+    li {
+      display: inline;
+      a {
+        display: inline-block;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        border-radius: 1em;
+        font-size: 1.5em;
+        background-color: @footer-color;
+        text-decoration: none;
+        color: black;
+        text-align: center;
+        margin-right: 0.3em;
+      }
+    }
+  }
   ul {
     list-style-type: none;
     margin-left: 0;
     padding-left: 0;
+    &amp;.emphasis {
+      text-transform: uppercase;
+    }
+    margin-bottom: 2em;
+    margin-top: 0;
   }
   h3 {
     font-weight: normal;
-    margin-bottom: 1em;
-    margin-top: 1em;
-    @media (min-width: @screen-md-min) {
-      margin-bottom: 2em;
-      margin-top: 0;
-    }
+    margin-bottom: 2em;
+    margin-top: 0;
   }
   .footer-col-sitename {
     h3 {
       font-size: 1.5em;
       margin-bottom: 1.5em;
-      margin-top: 0
     }
-    ul {
-      text-transform: uppercase;
+    p {
+      font-size: 1.1em;
+      margin-bottom: 2em;
     }
   }
   .footer-col-sites {
