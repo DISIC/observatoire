@@ -41,18 +41,155 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'proprietaires': {'displayName':'Porteur(s)', 'type' : 'list', 'sortable': false, 'filterable' : true, 'html' : true},
+  'proprietaires': {'displayName':'Porteur(s)', 'type' : 'list', 'sortable': false, 'filterable' : true, 'html' : true, 'match' : 'exact'},
   'doc.title': {'displayName':'Démarche','link':'view'},
-  'doc.date' : {'displayName':'Dernière modification', 'sortable': true, 'filterable' : true, 'type': 'date'}
+  'doc.date' : {'displayName':'Dernière modification', 'sortable': true, 'filterable' : true, 'type': 'date'},
+  'top': {},
+  'ministeres': {'sortable': false}
 })
-#set ($options = {
+#set ($baseOptions = {
   'className': 'Demarches.Code.DemarchesClass',
   'translationPrefix': 'demarches.livetable.',
-  'rowCount': 50,
+  'rowCount': 10,
   'maxPages': 10,
   'selectedColumn': 'doc.date',
-  'defaultOrder': 'desc'
+  'defaultOrder': 'desc',
+  'resultPage' : 'Demarches.Admin.Porteurs.DemarchesPorteursLiveTableResults'
 })
-#set ($columns = ['doc.title', 'proprietaires', 'doc.date'])
-#livetable('demarches-porteurs' $columns $columnsProperties $options)</content>
+{{html clean='false' wiki='false'}}
+&lt;ul id='tabs' class="nav nav-tabs"&gt;
+  &lt;li role="withporteurs" class="active"&gt;&lt;a href="#avec-porteurs"&gt;Avec porteurs&lt;/a&gt;&lt;/li&gt;
+  &lt;li role="withoutporteurs"&gt;&lt;a href="#sans-porteurs"&gt;Sans porteurs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+{{/html}}
+##
+##
+(%class='tab-content'%)(((
+  (%id='avec-porteurs' class='tab-pane fade active in' role="tabpanel" %)(((
+    #set($optionsWithPorteurs = $baseOptions.clone())
+    #set($discard = $optionsWithPorteurs.put('extraParams', 'withPorteurs=true'))
+    #livetable('demarches-withporteurs' ['doc.title', 'proprietaires', 'top', 'ministeres', 'doc.date'] $columnsProperties $optionsWithPorteurs)
+  )))
+##
+##
+  (%id='sans-porteurs' class='tab-pane fade' role="tabpanel" %)(((
+    #set($optionsWithoutPorteurs = $baseOptions.clone())
+    #set($discard = $optionsWithoutPorteurs.put('extraParams', 'withoutPorteurs=true'))
+    #livetable('demarches-withoutporteurs' ['doc.title', 'top', 'ministeres', 'doc.date'] $columnsProperties $optionsWithoutPorteurs)
+  )))
+)))
+{{/velocity}}</content>
+  <object>
+    <name>Demarches.Admin.Porteurs.Demarches</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>0f2206b3-bc56-4358-b1fd-a3f80697abdd</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require(['jquery'], function($) {
+  $(document).ready(function() {
+    $('#tabs a').click(function (e) {
+      //e.preventDefault();
+      $(this).tab('show');
+    })
+
+    if(window.location.hash) {
+      var hash = decodeURIComponent(window.location.hash);
+      var idx = hash.indexOf('|');
+      if (idx &gt; 0) {
+        hash = hash.substring(0, idx);
+      }
+      var tab = $('#tabs a[href="' + hash + '"]');
+      if (tab &amp;&amp; tab.tab) {
+        tab.tab('show') // Select tab by name
+      }
+    }
+  });
+});</code>
+    </property>
+    <property>
+      <name>Bootstrap tabs</name>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
 </xwikidoc>
