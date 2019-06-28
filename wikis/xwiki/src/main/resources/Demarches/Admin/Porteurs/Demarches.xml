@@ -41,7 +41,7 @@
   <hidden>false</hidden>
   <content>{{velocity}}
 #set ($columnsProperties = {
-  'proprietaires': {'displayName':'Porteur(s)', 'type' : 'list', 'sortable': false, 'filterable' : true, 'html' : true, 'match' : 'exact'},
+  'proprietaires': {'displayName':'Porteur(s)', 'type' : 'list', 'sortable': false, 'filterable' : true, 'html' : true, 'match' : 'partial'},
   'doc.title': {'displayName':'Démarche','link':'view'},
   'doc.date' : {'displayName':'Dernière modification', 'sortable': true, 'filterable' : true, 'type': 'date'},
   'top': {},

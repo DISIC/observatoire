@@ -80,8 +80,10 @@
 ## custom filter for filtering with empty porteurs.
 #set($extraFrom = '')
 #if ("$!request.withPorteurs" == 'true')
-  #set ($extra = "${extra} and prop_proprietaires.id.id = obj.id and prop_proprietaires.id.name = 'proprietaires' and prop_proprietaires.value &lt;&gt; ''")
-  #set($extraFrom = ", LargeStringProperty as prop_proprietaires ")
+  #if ("$!request.proprietaires" == '')
+    #set ($extra = "${extra} and prop_proprietaires.id.id = obj.id and prop_proprietaires.id.name = 'proprietaires' and prop_proprietaires.value &lt;&gt; ''")
+    #set($extraFrom = ", LargeStringProperty as prop_proprietaires ")
+  #end
 #end
 #if ("$!request.withoutPorteurs" == 'true')
   #set ($extra = "${extra} and obj.id not in (select obj1.id from BaseObject obj1, LargeStringProperty pr where obj1.className = ? and pr.id.id = obj1.id and pr.id.name = 'proprietaires' and pr.value &lt;&gt; '')")
