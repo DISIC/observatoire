@@ -42,6 +42,7 @@
   <content>{{velocity}}
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
+#set ($live = "$!request.live")
 
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
@@ -49,11 +50,22 @@
       (% class='document-info'%) (((
         (% id='document-title' %)(((
           #set ($break = '\\')
-          #set ($subtitle = $services.localization.render("wikidemarches.observatoire.subtitle", ["juin 2019"]))
+          #set ($label = "à juin 2019")
+          #if ($live == '1')
+            #set ($label = "en temps réel")
+          #end
+          #set ($subtitle = $services.localization.render("wikidemarches.observatoire.subtitle", [$label]))
           #set ($subtitle = $subtitle.replace(' – ', $break))
           = $doc.title$break$subtitle =
         )))
       )))
+      #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+        #if ($live == '')
+          [[En temps réel&gt;&gt;$doc.fullName||queryString='live=1' class="btn btn-default"]]
+        #else
+          [[À juin 2019&gt;&gt;$doc.fullName||queryString='' class="btn btn-default"]]
+        #end
+      #end
     )))
 
     [[$services.localization.render("wikidemarches.observatoire.help-link")&gt;&gt;Aide.Observatoire]]
@@ -313,10 +325,15 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
 
     var ministeres = [];
 
+    var url = "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')";
+    var parameters = new URLSearchParams(window.location.search);
+    if (parameters.get('live') == '1') {
+      url = "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1&amp;live=1')";
+    }
     var table = $('#top-demarches').DataTable({
       ajax: {
         type: 'GET',
-        url: "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')",
+        url: url,
         dataSrc: function (json) {
           var data = json.data;
           for (var i = 0; i &lt; data.length; i++) {
