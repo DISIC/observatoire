@@ -189,6 +189,7 @@ wikidemarches.administration.publics.home-link=Publics
 wikidemarches.administration.evenements.home-link=Événements
 wikidemarches.administration.avis.home-link=Avis
 wikidemarches.administration.avis.statistiques=Statistiques
+wikidemarches.administration.tools=Outils d'administration
 wikidemarches.administration.avis.invalid-key=URL invalide.
 wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée.\\\\Par contre, comme l'adresse utilisée n'est pas une adresse .gouv.fr, une **validation supplémentaire** par les administrateurs du site est nécessaire avant de pouvoir vous authentifier avec ce compte. Un e-mail de notification vous sera envoyé lors de cette validation.
 

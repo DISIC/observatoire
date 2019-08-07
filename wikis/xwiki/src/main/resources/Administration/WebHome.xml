@@ -24,7 +24,7 @@
   <web>Administration</web>
   <name>WebHome</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -39,37 +39,161 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>== Mise à jour de la langue par défaut des pages ==
+  <content>{{velocity}}
 
-* [[FarmTools.DefaultLanguageUpdater]]
+#macro (panel $title $text $icon)
+  (% class="panel panel-default" %)(((
+    (% class="panel-heading text-center"%)(((
+      $title
+    )))
+    (% class="panel-body" %)(((
+      $text
+    )))
+  )))
+#end
 
-== Gestion des utilisateurs et des groupes ==
+(% class="row" %)(((
+  (% class="col-md-6 col-xs-12" %)(((
+    #panel('Utilisateurs', "
+      * [[Comptes utilisateurs à valider&gt;&gt;Demarches.Admin.ActivationDeComptes]]
+    ",'user')
+  )))
+  (% class="col-md-6 col-xs-12" %)(((
+    #panel('Porteurs', "
+      * [[Porteurs par démarche&gt;&gt;Demarches.Admin.Porteurs.Demarches]]
+      * [[Démarches par porteur&gt;&gt;Demarches.Admin.Porteurs.Utilisateurs]]
+    ",'list')
+  )))
+)))
+(% class="row" %)(((
+  (% class="col-md-6 col-xs-12" %) (((
+    #panel('Avis', "
+      * [[Statistiques de création d'avis&gt;&gt;Avis.Admin.Statistiques]]
+    ",'star')
+  )))
+  (% class="col-md-6 col-xs-12" %) (((
+    #panel('Directions', "
+      * [[Création de direction et du groupe associé&gt;&gt;Administration.DirectionsManager]]
+    ",'building')
+  )))
+)))
 
-* [[Création des groupes associés aux directions&gt;&gt;Administration.GroupManager]]
-* [[Restriction des droits d'accès aux profils utilisateurs&gt;&gt;Administration.RestrictUsersRights]]
-* [[Ajout de tous les membres de 'XWikiAllGroup' au groupe 'AdministrateursMinisteriels'&gt;&gt;GroupFiller]]
 
-== Gestion des directions et ministères ==
 
-* [[Création de direction&gt;&gt;Administration.DirectionsManager]]
-
-== Démarches ==
-
-* [[Normalisation des noms de démarches&gt;&gt;Administration.DemarcheNormalizer]]
-* [[Scripts de gestion des démarches&gt;&gt;Administration.Scripts]]
-* [[Administration des démarches&gt;&gt;Demarches.Admin.WebHome]]
-
-== Avis ==
-
-* [[Administration des avis&gt;&gt;Avis.Admin.WebHome]]
-
-== Batch Imports ==
-
-* [[DemarchesImport]]
-* [[DirectionsImport]]
-* [[EvenementsImport]]
-* [[MinisteresImport]]
-* [[PublicsImport]]
-* [[TopDemarchesImport]]
-</content>
+{{/velocity}}</content>
+  <object>
+    <name>Administration.WebHome</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>4f799545-a98e-40f2-ba92-eb07c36baff2</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.panel-heading {
+  font-weight: 100;
+}</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
 </xwikidoc>
