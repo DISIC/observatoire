@@ -43,6 +43,9 @@
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
 #set ($live = "$!request.live")
+#set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+#set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
+#set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
 
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
@@ -59,7 +62,7 @@
           = $doc.title$break$subtitle =
         )))
       )))
-      #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+      #if ($hasAdmin || $isAdministrateurMinisteriel)
         #if ($live == '')
           [[En temps réel&gt;&gt;$doc.fullName||queryString='live=1' class="btn btn-default"]]
         #else
