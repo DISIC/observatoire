@@ -50,6 +50,7 @@
 #########################
 #set($categories = [])
 #set($discard = $categories.add({'id':'profile', 'sheet':'XWiki.XWikiUserProfileSheet', 'glyphicon': 'user'}))
+#set($discard = $categories.add({'id':'groups', 'sheet':'XWiki.XWikiUserMembershipSheet', 'glyphicon': 'group'}))
 #set($isMyProfile = ($services.model.resolveDocument($xcontext.user) == $doc.documentReference))
 #if($isMyProfile || $hasAdmin)
   #set($discard = $categories.add({'id':'preferences', 'sheet':'XWiki.XWikiUserPreferencesSheet', 'glyphicon': 'wrench'}))
