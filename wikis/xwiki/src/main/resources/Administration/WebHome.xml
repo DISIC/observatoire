@@ -24,7 +24,7 @@
   <web>Administration</web>
   <name>WebHome</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -56,12 +56,14 @@
   (% class="col-md-6 col-xs-12" %)(((
     #panel('Utilisateurs', "
       * [[Comptes utilisateurs à valider&gt;&gt;Demarches.Admin.ActivationDeComptes]]
+      * [[Domaines autorisés&gt;&gt;Administration.Domaines autorisés]]
     ",'user')
   )))
   (% class="col-md-6 col-xs-12" %)(((
-    #panel('Porteurs', "
+    #panel('Porteurs et démarches', "
       * [[Porteurs par démarche&gt;&gt;Demarches.Admin.Porteurs.Demarches]]
       * [[Démarches par porteur&gt;&gt;Demarches.Admin.Porteurs.Utilisateurs]]
+      * [[Tableau de bord&gt;&gt;TableauDeBord.WebHome]]
     ",'list')
   )))
 )))
