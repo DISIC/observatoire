@@ -43,9 +43,16 @@
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
 #set ($live = "$!request.live")
-#set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
-#set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
-#set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+#set ($isAdministrateurMinisteriel = false)
+#if ($xcontext.userReference != $NULL)
+  #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+  #set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
+  #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+#end
+#set ($demarcheSheetId = 'Demarches.Code.DemarchesSheet')
+## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
+#set ($discard = $xwiki.ssx.use($demarcheSheetId))
+#set ($discard = $xwiki.jsx.use($demarcheSheetId))
 
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
@@ -227,281 +234,439 @@
     }
 });
 
-require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
+var XWiki = (function (XWiki) {
 
-    function computeBadgeStyle(value) {
-      value = value.toLowerCase();
-      switch (value) {
-        case 'oui':
-          return "success";
-        case 'non':
+  function init() {
+    require(['jquery', 'xwiki-events-bridge', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
+
+    XWiki.widgets.XPopup = Class.create(XWiki.widgets.ModalPopup, {
+     /** Default parameters can be added to the custom class. */
+      defaultInteractionParameters : {
+      },
+     /** Constructor. Registers the key listener that pops up the dialog. */
+      initialize : function($super, interactionParameters) {
+       this.interactionParameters = Object.extend(Object.clone(this.defaultInteractionParameters), interactionParameters || {});
+        // call constructor from ModalPopup with params content, shortcuts, options
+        $super(
+         this.createContent(this.interactionParameters),
+          {
+           "show"  : { method : this.showDialog,  keys : [] },
+           "close" : { method : this.closeDialog, keys : ['Esc'] }
+          },
+          {
+             displayCloseButton : true,
+             backgroundColor : "#FFF",
+             removeOnClose : true,
+             verticalPosition : 'top',
+             title : decodeURI(this.interactionParameters.title)
+          }
+        );
+       this.showDialog();
+       this.setClass("x-modal-popup");
+      },
+     /** Get the content of the modal dialog using ajax */
+      createContent : function (data) {
+        var content =  new Element('div', {'class': 'modal-popup'});
+        var that = this;
+        // get page content for the pageURL
+        new Ajax.Request(data.editUrl,
+        {
+          method:'get',
+          onSuccess: function(transport) {
+            var response = transport.responseText || "no response text";
+            var nodes = $($.parseHTML(response));
+            // add div node with class 'main' so that styles defined in the skin CSS file apply (e.g. '.main panel-body')
+            var main = $('&lt;div/&gt;').addClass('main');
+            //main.append($('&lt;h2/&gt;').append(data.title));
+            var form = $('&lt;form id="inline" method="post" action="' + data.saveUrl + '" class="withLock"/&gt;');
+
+            form.append($('&lt;input/&gt;').attr('type', 'hidden').attr('name', 'template').val('some-template').get(0));
+            form.append(nodes.get(0));
+            form.find("input[name='async']").val('true');
+            form.find("input[name='xvalidate']").val('0');
+            #set ($csrf = $services.csrf.getToken())
+            form.append($('&lt;input/&gt;').attr('type', 'hidden').attr('name', 'form_token').val("$csrf").get(0));
+            // add buttons
+            var saveButton = $('&lt;input/&gt;').addClass('btn btn-primary row-editor-save').attr('type', 'submit').attr('name', 'action_saveandcontinue').val('Enregistrer');
+            saveButton.on('click', function(event) {
+              event.preventDefault();
+            });
+            var closeButton = $('&lt;input/&gt;').addClass('btn btn-default row-editor-cancel').attr('type', 'submit').val('Annuler');
+            closeButton.on('click', function(event) {
+              //TODO: submit form to release lock
+              event.preventDefault();
+              that.closeDialog(event);
+            });
+            form.append(saveButton.get(0));
+            form.append('&amp;nbsp;')
+            form.append(closeButton.get(0));
+            main.append(form.get(0));
+            content.insert(main.get(0));
+            $.getScript( "$xwiki.getSkinFile('js/xwiki/actionbuttons/actionButtons.js')", function( dataResult, textStatus, jqxhr ) {
+                $(document).on("xwiki:document:saved", function(event) {
+                  $(document).trigger("xwiki:demarche:updated", {id : data.id});
+                  that.closeDialog(event);
+                });
+                return true;
+            });
+          },
+          onFailure: function(){ content.insert('Something went wrong...');
+        }
+        });
+
+        return content;
+      }
+    });
+
+      function computeBadgeStyle(value) {
+        value = value.toLowerCase();
+        switch (value) {
+          case 'oui':
+            return "success";
+          case 'non':
+            return "danger";
+          case 'partiel':
+            return "warning";
+          case 'expérimentation':
+            return 'info';
+          case 'déploiement partiel':
+            return 'warning';
+          default:
+            return "default";
+                     }
+      }
+
+        function computeUrlScoreBadgeStyle(value) {
+          if (isNaN(value))
+            return "default";
+          if (value &gt; 7)
+            return "success";
+          if (value &gt;= 4 &amp;&amp; value &lt;= 7)
+            return "warning";
           return "danger";
-        case 'partiel':
-          return "warning";
-        case 'expérimentation':
-          return 'info';
-        case 'déploiement partiel':
-          return 'warning';
-        default:
-          return "default";
-      }
-    }
-
-    function computeUrlScoreBadgeStyle(value) {
-      if (isNaN(value))
-        return "default";
-      if (value &gt; 7)
-        return "success";
-      if (value &gt;= 4 &amp;&amp; value &lt;= 7)
-        return "warning";
-      return "danger";
-    }
-
-    function getDemarcheStatisticsUrl(demarcheId) {
-      var reference = XWiki.Model.resolve(demarcheId, XWiki.EntityType.DOCUMENT);
-      var demarchePage = new XWiki.Document(reference);
-      return demarchePage.getURL('view', 'view-mode=statistics');
-    }
-
-    function format(value, badgeStyleFunction, replaceNa, demarcheId) {
-      var badgeStyle = badgeStyleFunction.apply(this, [value]);
-      if (value) {
-        if (replaceNa) {
-          value = value.replace("n/a", "-");
         }
-        value = value.replace("n/c", "Non disponible");
-      }
-      if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
-        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
-      } else if (value &amp;&amp; value == '-') {
-        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
-      } else {
-        return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
-      }
-    }
 
-    function displayChildRow(data) {
-      var output = '&lt;div class="row"&gt;' +
-        '&lt;div class="col-md-12"&gt;' +
-        '&lt;div class="row-details"&gt;' +
-        '&lt;ul&gt;';
-        var dateMiseEnLigne = data.dateMiseEnLigne.display;
-        if (dateMiseEnLigne != 'Ouvert') {
-          if (dateMiseEnLigne == 'n/c')
-            dateMiseEnLigne = 'Non disponible';
-          output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.date-ouverture")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+        function getDemarcheStatisticsUrl(demarcheId) {
+          var reference = XWiki.Model.resolve(demarcheId, XWiki.EntityType.DOCUMENT);
+          var demarchePage = new XWiki.Document(reference);
+          return demarchePage.getURL('view', 'view-mode=statistics');
         }
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.volumetrie")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
-        var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
-        if (data.statutDemat != 'Non') {
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.pourcentage-recours-demat")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
-        }
-        if (data.avisCount.value &gt;= 100) {
-          var demarcheId = data.id;
-          output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.avis")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
-        }
-        output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
-      return output;
-    }
 
-    // Addition of a search function to the list of search functions for filtering on the ministère value.
-    $.fn.dataTable.ext.search.push(
-      function( settings, data, dataIndex ) {
-        var selectedMinistere =  $('select[name="ministereSelect"]').val();
-        var ministere = data[2];
-        if (!selectedMinistere || selectedMinistere == "tous" || ministere == selectedMinistere) {
-          return true;
-        }
-        return false;
-      }
-    );
-
-    jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-      "french-string-asc" : function (s1, s2) {
-          return s1.localeCompare(s2, 'fr');
-      },
-
-      "french-string-desc" : function (s1, s2) {
-          return s2.localeCompare(s1, 'fr');
-      }
-    });
-
-    var ministeres = [];
-
-    var url = "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')";
-    var parameters = new URLSearchParams(window.location.search);
-    if (parameters.get('live') == '1') {
-      url = "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1&amp;live=1')";
-    }
-    var table = $('#top-demarches').DataTable({
-      ajax: {
-        type: 'GET',
-        url: url,
-        dataSrc: function (json) {
-          var data = json.data;
-          for (var i = 0; i &lt; data.length; i++) {
-            var ministere = data[i].ministere;
-            if (ministeres.indexOf(ministere) &lt; 0) {
-              ministeres.push(ministere);
+        function format(value, badgeStyleFunction, replaceNa, demarcheId) {
+          var badgeStyle = badgeStyleFunction.apply(this, [value]);
+          if (value) {
+            if (replaceNa) {
+              value = value.replace("n/a", "-");
             }
-          };
-          ministeres.sort(function (a, b) {
-            return a.localeCompare(b, 'fr');
-          });
-         return json.data;
+            value = value.replace("n/c", "Non disponible");
+          }
+          if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
+            return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+          } else if (value &amp;&amp; value == '-') {
+            return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+          } else {
+            return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+          }
         }
-      },
-      paging: false,
-      columns: [
-            {
-              className:      'details-control',
-              orderable:      false,
-              data:           null,
-              defaultContent: ''
-            },
-            {
-              data: "title",
-              className: 'column-title',
-              render : function (data, type, row) {
-                return data + '&lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
-              }
-            },
-            {
-              data: "ministere",
-              visible: false,
-              type: "french-string"
-            },
-            {
-              data: "groupes",
-              visible: false,
-              type: "french-string"
-            },
-            { data: "statutDemat",
-              render: function (data, type, row) {
-                return format(data, computeBadgeStyle, true);
-              }
-            },
-            {
-              data: "franceConnect",
-              render: function (data, type, row) {
-                if (type === "sort") {
-                  return data.display;
-                } else {
-                  return format(data.display, computeBadgeStyle, false);
-                }
-              }
-            },
-            {
-              data: "adapteMobile",
-              render: function (data, type, row) {
-                if (type === "sort") {
-                  return data.display;
-                } else {
-                  return format(data.display, computeBadgeStyle, false);
-                }
-              }
-            },
-            {
-              data: "qualiteSupport",
-              render: function (data, type, row) {
-                return format(data, computeBadgeStyle, true);
-              }
-            },
-            {
-              data: "urlScore",
-              type: "num",
-              render: function (data, type, row) {
-                if (type === "sort") {
-                  return data.value;
-                } else {
-                  return format(data.display, computeUrlScoreBadgeStyle, true);
-                }
-              }
-            },
-            {
-              data: "satisfactionIndex",
-              type: "num",
-              render: function (data, type, row) {
-                if (type === "sort") {
-                  return data.value;
-                } else {
-                  return format(data.display, computeBadgeStyle,  true, row['id']);
-                }
-              }
-            },
-            {
-              data: "volumetrie",
-              type: "num",
-              visible: false,
-              render: function (data, type, row) {
-                if (type === "sort") {
-                  return data.value;
-                } else {
-                  return data.display;
-                }
-              }
-            },
-            {
-              data: "avisCount",
-              type: "num",
-              visible: false,
-              render: function (data, type, row) {
-                if (type === "sort") {
-                  return data.value;
-                } else {
-                  return data.display;
-                }
-              }
-            }
-      ],
-      // order by: avis, ministère, groupe, volumétrie, name
-      order: [[11, 'desc'], [2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
-      language: {
-        info: "Total : _TOTAL_ démarches",
-        infoEmpty: "Aucune démarche trouvée",
-        infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
-        loadingRecords: "Chargement...",
-        processing: "Traitement...",
-        search: "Démarche :",
-        zeroRecords: "Aucune entrée trouvée"
-      },
-      initComplete: function(settings, json ) {
-        // add the ministries filter in the filters
-        var filtersContainer = $('#top-demarches_filter');
-        if (filtersContainer) {
-          // prepare the label and select of ministries
-          var ministriesLabel = $('&lt;label&gt;Ministère :&lt;/label&gt;')
-          var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
-          ministriesLabel.append(ministriesSelect);
-          ministriesSelect.empty();
-          ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous"));
-          $.each(ministeres, function() {
-             ministriesSelect.append($("&lt;option /&gt;").val(this).text(this));
-          });
-          // add the ministries select at the beginning of the filter line
-          filtersContainer.prepend(ministriesLabel);
-          // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
-          var this_tbl = settings.oInstance.api();
-          ministriesSelect.change(function () {
-            this_tbl.draw();
-          });
-        }
-      }
-    });
 
-    $('#top-demarches tbody').on('click', 'td.details-control', function () {
-      var tr = $(this).closest('tr');
-      var row = table.row( tr );
-      if ( row.child.isShown() ) {
-        row.child.hide();
-        tr.removeClass('shown');
-      }
-      else {
-        row.child( displayChildRow(row.data()) ).show();
-        tr.addClass('shown');
-      }
+        function addDetailsRow(data) {
+          var output = '&lt;div class="row"&gt;' +
+            '&lt;div class="col-md-12"&gt;' +
+            '&lt;div class="row-details"&gt;' +
+            '&lt;ul&gt;';
+            var dateMiseEnLigne = data.dateMiseEnLigne.display;
+            if (dateMiseEnLigne != 'Ouvert') {
+              if (dateMiseEnLigne == 'n/c')
+                dateMiseEnLigne = 'Non disponible';
+              output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.date-ouverture")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+            }
+            output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.volumetrie")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
+            var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
+            if (data.statutDemat != 'Non') {
+              output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.pourcentage-recours-demat")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+            }
+            if (data.avisCount.value &gt;= 100) {
+              var demarcheId = data.id;
+              output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.avis")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
+            }
+            output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
+          return output;
+        }
+
+        function addToolbarRow(data) {
+          var output = '&lt;div class="row observatoire-toolbar"&gt;' +
+              '&lt;div class="col-md-12"&gt;' +
+                '&lt;div&gt;';
+          output = output + '&lt;i class="fa fa-edit"&gt;&lt;/i&gt;&lt;a href="' + url + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;Modifier ces informations&lt;/a&gt;';
+          output = output + '&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
+          return output;
+        }
+
+        // Addition of a search function to the list of search functions for filtering on the ministère value.
+        $.fn.dataTable.ext.search.push(
+          function( settings, data, dataIndex ) {
+            var selectedMinistere =  $('select[name="ministereSelect"]').val();
+            var ministere = data[2];
+            if (!selectedMinistere || selectedMinistere == "tous" || ministere == selectedMinistere) {
+              return true;
+            }
+            return false;
+          }
+        );
+
+        jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+          "french-string-asc" : function (s1, s2) {
+              return s1.localeCompare(s2, 'fr');
+          },
+
+          "french-string-desc" : function (s1, s2) {
+              return s2.localeCompare(s1, 'fr');
+          }
+        });
+
+        var ministeres = [];
+
+        var url = "$xwiki.getAttachmentURL('Demarches.Code.Top', 'data.json')";
+        var parameters = new URLSearchParams(window.location.search);
+        if (parameters.get('live') == '1') {
+          url = "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1&amp;live=1')";
+        }
+        var table = $('#top-demarches').DataTable({
+          ajax: {
+            type: 'GET',
+            url: url,
+            dataSrc: function (json) {
+              var data = json.data;
+              for (var i = 0; i &lt; data.length; i++) {
+                var ministere = data[i].ministere;
+                if (ministeres.indexOf(ministere) &lt; 0) {
+                  ministeres.push(ministere);
+                }
+              };
+              ministeres.sort(function (a, b) {
+                return a.localeCompare(b, 'fr');
+              });
+             return json.data;
+            }
+          },
+          rowId: 'id',
+          paging: false,
+          columns: [
+                {
+                  className:      'details-control',
+                  orderable:      false,
+                  data:           null,
+                  defaultContent: ''
+                },
+                {
+                  data: "title",
+                  className: 'column-title',
+                  render : function (data, type, row) {
+                    return data + '&lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
+                  }
+                },
+                {
+                  data: "ministere",
+                  visible: false,
+                  type: "french-string"
+                },
+                {
+                  data: "groupes",
+                  visible: false,
+                  type: "french-string"
+                },
+                { data: "statutDemat",
+                  render: function (data, type, row) {
+                    return format(data, computeBadgeStyle, true);
+                  }
+                },
+                {
+                  data: "franceConnect",
+                  render: function (data, type, row) {
+                    if (type === "sort") {
+                      return data.display;
+                    } else {
+                      return format(data.display, computeBadgeStyle, false);
+                    }
+                  }
+                },
+                {
+                  data: "adapteMobile",
+                  render: function (data, type, row) {
+                    if (type === "sort") {
+                      return data.display;
+                    } else {
+                      return format(data.display, computeBadgeStyle, false);
+                    }
+                  }
+                },
+                {
+                  data: "qualiteSupport",
+                  render: function (data, type, row) {
+                    return format(data, computeBadgeStyle, true);
+                  }
+                },
+                {
+                  data: "urlScore",
+                  type: "num",
+                  render: function (data, type, row) {
+                    if (type === "sort") {
+                      return data.value;
+                    } else {
+                      return format(data.display, computeUrlScoreBadgeStyle, true);
+                    }
+                  }
+                },
+                {
+                  data: "satisfactionIndex",
+                  type: "num",
+                  render: function (data, type, row) {
+                    if (type === "sort") {
+                      return data.value;
+                    } else {
+                      return format(data.display, computeBadgeStyle,  true, row['id']);
+                    }
+                  }
+                },
+                {
+                  data: "volumetrie",
+                  type: "num",
+                  visible: false,
+                  render: function (data, type, row) {
+                    if (type === "sort") {
+                      return data.value;
+                    } else {
+                      return data.display;
+                    }
+                  }
+                },
+                {
+                  data: "avisCount",
+                  type: "num",
+                  visible: false,
+                  render: function (data, type, row) {
+                    if (type === "sort") {
+                      return data.value;
+                    } else {
+                      return data.display;
+                    }
+                  }
+                }
+          ],
+          // order by: avis, ministère, groupe, volumétrie, name
+          order: [[11, 'desc'], [2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
+          language: {
+            info: "Total : _TOTAL_ démarches",
+            infoEmpty: "Aucune démarche trouvée",
+            infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
+            loadingRecords: "Chargement...",
+            processing: "Traitement...",
+            search: "Démarche :",
+            zeroRecords: "Aucune entrée trouvée"
+          },
+          initComplete: function(settings, json ) {
+            // add the ministries filter in the filters
+            var filtersContainer = $('#top-demarches_filter');
+            if (filtersContainer) {
+              // prepare the label and select of ministries
+              var ministriesLabel = $('&lt;label&gt;Ministère :&lt;/label&gt;')
+              var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
+              ministriesLabel.append(ministriesSelect);
+              ministriesSelect.empty();
+              ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous"));
+              $.each(ministeres, function() {
+                 ministriesSelect.append($("&lt;option /&gt;").val(this).text(this));
+              });
+              // add the ministries select at the beginning of the filter line
+              filtersContainer.prepend(ministriesLabel);
+              // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
+              var this_tbl = settings.oInstance.api();
+              ministriesSelect.change(function () {
+                this_tbl.draw();
+              });
+            }
+          }
+        });
+
+        $(document).on('xwiki:demarche:updated', function(event, data) {
+          console.log(data);
+          var row = table.row('#' + data.id);
+          var idx = data.id.indexOf('.');
+          var demarcheShortId = data.id.substring(idx + 1);
+          var rowData = row.data();
+          console.log(rowData);
+          //var reference = XWiki.Model.resolve(demarcheId, XWiki.EntityType.DOCUMENT);
+          //var demarchePage = new XWiki.Document(reference);
+          #set ($endpoint = "$services.rest.url($xwiki.getDocument('Demarches.1289').getDocumentReference())")
+          var url = "$endpoint/objects/Demarches.Code.DemarchesClass/0?media=json";
+          url = url.replace('1289', demarcheShortId);
+          console.log(url);
+          $.get(url, function(freshData) {
+            //var tablePropertyNames = ['adapteMobile', 'franceConnect', 'pourcentageRecoursVoieDematerialisee', 'qualiteSupport', 'satisfactionIndex', 'statutDemat', 'urlScore', 'volumetrie'];
+            var tablePropertyNames = ['adapteMobile', 'franceConnect', 'volumetrie'];
+            freshData.properties.each(function (property, index) {
+                if (tablePropertyNames.includes(property.name)) {
+                  console.log(property.name);
+                  console.log(property.value);
+                  rowData[property.name] = {
+                    display: property.value,
+                    value: property.value
+                  }
+                  row.data(rowData);
+                  row.draw();
+                }
+            });
+/*
+            data.volumetrie = { display: '18 201', value: 18201};
+            row.data(data);
+            row.draw();
+            */
+          });
+        });
+
+        $('#top-demarches tbody').on('click', 'td.details-control', function () {
+          var tr = $(this).closest('tr');
+          var row = table.row(tr);
+          if (row.child.isShown()) {
+            row.child.hide();
+            tr.removeClass('shown');
+          } else {
+            var data = row.data();
+            #set ($hasAdmin = $services.security.authorization.hasAccess('admin'))
+            #set ($isAdministrateurMinisteriel =  false)
+            #if ($xcontext.userReference != $NULL)
+              #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+              #set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
+              #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+            #end
+            #if ($hasAdmin || $isAdministrateurMinisteriel)
+              row.child([addDetailsRow(data), addToolbarRow(data)], 'child-row').show();
+              var parent = $(row.node()).parent();
+              var control = parent.find('.row-edit-control').first();
+              control.on('click', function(event) {
+                event.preventDefault();
+                var demarcheId = control.data('demarche-id');
+                var title = decodeURI(control.data('demarche-name'));
+                var reference = XWiki.Model.resolve(demarcheId, XWiki.EntityType.DOCUMENT);
+                var demarchePage = new XWiki.Document(reference);
+                var editUrl = demarchePage.getURL('edit', 'xpage=plain&amp;mode=row-edition');
+                var saveUrl = demarchePage.getURL('preview');
+                return new XWiki.widgets.XPopup({title: title, editUrl: editUrl, saveUrl: saveUrl, id: demarcheId})
+              });
+            #else
+              row.child([addDetailsRow(data)], 'child-row').show();
+            #end
+            tr.addClass('shown');
+          }
+        });
     });
-});
+  }
+
+  (XWiki.domIsLoaded &amp;&amp; init()) || document.observe('xwiki:dom:loaded', init);
+
+  return XWiki;
+}(XWiki || {}));
+
 </code>
     </property>
     <property>
@@ -616,6 +781,13 @@ require(['jquery', 'datatables', 'css!datatables-css', 'domReady!'], function ($
   width: 100%;
 }
 
+.xdialog-box {
+  width: 60%;
+  .col-lg-6.col-md-6.col-sm-6 {
+    width: 100%;
+  }
+}
+
 .observatoire-explanation {
   text-align: center;
   a.social-network {
@@ -696,7 +868,7 @@ tr.shown td.details-control::before {
   }
 
   /* Styles for the détails panel */
-  tr.shown + tr {
+  tr.shown + tr.child-row, tr.shown + tr.child-row + tr.child-row  {
     background-color: #f6f6f6;
     td {
       border-top: 0px;
@@ -704,34 +876,42 @@ tr.shown td.details-control::before {
       padding-left: 38px;
       padding-right: 0px;
     }
-
-    .row-details {
-      font-size: 90%;
-      padding-left: 10px;
-      margin: 8px 0 0 0;
-      .row-details-title {
-        margin: 0;
-        font-weight: bold;
+    .row {
+      &amp;.observatoire-toolbar {
+        text-align: right;
+        margin-right: 1em;
+        .fa {
+          margin-right: 0.2em;
+        }
       }
-      .row-details-subtitle {
-        margin: 0;
-      }
-      ul {
-        list-style-type: none;
-        margin-left: 0;
-        padding-left: 0;
-        display: table;
-        li {
-          display: table-row;
-          .row-details-key, .row-details-value {
-            display: table-cell;
-            padding-top: 0.2em;
-            padding-bottom: 0.2em;
-            /* padding-right copied from the table cell of datatables */
-            padding-right: 10px;
-          }
-          .row-details-key {
+      .row-details {
+        font-size: 90%;
+        padding-left: 10px;
+        margin: 8px 0 0 0;
+        .row-details-title {
+          margin: 0;
+          font-weight: bold;
+        }
+        .row-details-subtitle {
+          margin: 0;
+        }
+        ul {
+          list-style-type: none;
+          margin-left: 0;
+          padding-left: 0;
+          display: table;
+          li {
+            display: table-row;
+            .row-details-key, .row-details-value {
+              display: table-cell;
+              padding-top: 0.2em;
+              padding-bottom: 0.2em;
+              /* padding-right copied from the table cell of datatables */
+              padding-right: 10px;
+            }
+            .row-details-key {
 
+            }
           }
         }
       }
