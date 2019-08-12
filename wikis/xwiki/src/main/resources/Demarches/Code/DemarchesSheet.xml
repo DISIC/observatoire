@@ -929,17 +929,17 @@ label.question {
   }
 }
 
-h2 {
-  padding-bottom: 0.2em;
-  border-bottom: 1px solid #e5e5e5;
-}
-
 /** Used by the avis statistics tab */
 #statistics-tab {
   font-size: 0.9em;
 
   .lighter {
     color: #777;
+  }
+
+  h2 {
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid #e5e5e5;
   }
 
   h3 {
