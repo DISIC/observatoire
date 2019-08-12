@@ -69,7 +69,7 @@
           = $doc.title$break$subtitle =
         )))
       )))
-      [[À juin 2019&gt;&gt;$doc.fullName||queryString='' class="btn btn-default"]]#if ($hasAdmin || $isAdministrateurMinisteriel) [[En temps réel&gt;&gt;$doc.fullName||queryString='live=1' class="btn btn-default"]]#end
+      #if ($hasAdmin || $isAdministrateurMinisteriel)[[À juin 2019&gt;&gt;$doc.fullName||queryString='' class="btn btn-default"]] [[En temps réel&gt;&gt;$doc.fullName||queryString='live=1' class="btn btn-default"]]#end
     )))
 
     [[$services.localization.render("wikidemarches.observatoire.help-link")&gt;&gt;Aide.Observatoire]]
