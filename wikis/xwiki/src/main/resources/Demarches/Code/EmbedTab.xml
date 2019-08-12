@@ -68,19 +68,22 @@
           ## don't display the URL / button for démarches with too high volumetrie
           ## too high = 5000000
           #set($LIMIT_VOL = 5000000)
+          #set($LIMIT_BYPASS = ['Demarches.824', 'Demarches.1258', 'Demarches.1901', 'Demarches.1894'])
           #set($volumetrieDemat = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrieDemat').value)
           #set($volumetrie = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrie').value)
           #set ($displayURL = true)
           #set ($volumetrieMsg = '')
-          #if ($volumetrieDemat)
-            #if ($volumetrieDemat &gt; $LIMIT_VOL)
-              #set ($displayURL = false)
-              #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrieDemat', [$volumetrieDemat]))
-            #end
-          #elseif ($volumetrie)
-            #if ($volumetrie &gt; $LIMIT_VOL)
-              #set ($displayURL = false)
-              #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrie', [$volumetrie]))
+          #if (!$LIMIT_BYPASS.contains($doc.fullName))
+            #if ($volumetrieDemat)
+              #if ($volumetrieDemat &gt; $LIMIT_VOL)
+                #set ($displayURL = false)
+                #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrieDemat', [$volumetrieDemat]))
+              #end
+            #elseif ($volumetrie)
+              #if ($volumetrie &gt; $LIMIT_VOL)
+                #set ($displayURL = false)
+                #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrie', [$volumetrie]))
+              #end
             #end
           #end
         #end
