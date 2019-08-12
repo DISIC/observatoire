@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1526657566000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Directions.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528897881000</date>
-  <contentUpdateDate>1526657566000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Directions Class</title>
   <comment/>
@@ -54,13 +54,13 @@
       <classname/>
       <customDisplay/>
       <disabled>0</disabled>
-      <displayType>select</displayType>
+      <displayType>input</displayType>
       <hint/>
       <idField/>
       <multiSelect>0</multiSelect>
       <name>ministere</name>
       <number>3</number>
-      <picker>0</picker>
+      <picker>1</picker>
       <prettyName>Ministère</prettyName>
       <relationalStorage>1</relationalStorage>
       <separator> </separator>
@@ -107,7 +107,7 @@
     <name>Directions.Code.DirectionsClass</name>
     <number>0</number>
     <className>AppWithinMinutes.MetadataClass</className>
-    <guid>992de0f6-2949-431b-b323-492f549f34b8</guid>
+    <guid>b5c043b2-2ae1-4c77-96d0-0005846674e3</guid>
     <class>
       <name>AppWithinMinutes.MetadataClass</name>
       <customClass/>
@@ -139,7 +139,7 @@
     <name>Directions.Code.DirectionsClass</name>
     <number>0</number>
     <className>XWiki.ClassSheetBinding</className>
-    <guid>85984214-daf2-43ed-941e-29e05f130cb2</guid>
+    <guid>5f23081c-1525-4259-a7b8-4f5eaac2a126</guid>
     <class>
       <name>XWiki.ClassSheetBinding</name>
       <customClass/>
@@ -171,7 +171,7 @@
     <name>Directions.Code.DirectionsClass</name>
     <number>0</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>f09feb59-b59f-4455-808f-eb71006404d2</guid>
+    <guid>961eda3b-8ea7-42ee-b37b-3643c45ca576</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>
@@ -203,7 +203,7 @@
     <name>Directions.Code.DirectionsClass</name>
     <number>1</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>de4a17c5-16ef-42b8-9717-c52174ce7075</guid>
+    <guid>b1599ea0-2ae5-4038-bc7f-1e5d3089136c</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>
