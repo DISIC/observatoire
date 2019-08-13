@@ -81,7 +81,7 @@
     #if ($hint)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
     &lt;/dt&gt;
   #end
-  &lt;dd #if ($fieldIsInvalid)class="validation-failure"#end&gt;
+  &lt;dd class="property-value#if ($fieldIsInvalid) validation-failure#end"&gt;
     #if(!$isBoolean || $action != 'edit')
       #if ($isNumber &amp;&amp; $object.getProperty($propName).value)
         #if ($action == 'view')

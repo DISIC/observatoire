@@ -753,6 +753,25 @@ label.question {
   border-bottom: 1px solid #e5e5e5;
 }
 
+/** Demarche tab styles */
+#demarche-tab {
+  dd.property-value {
+    label {
+      display: inline-block;
+      margin-right: 0.8em;
+    }
+  }
+}
+
+form {
+  #demarche-tab {
+    .xHint {
+      margin-bottom: 0.3em;
+    }
+  }
+}
+
+
 #avis-tab {
   margin-top: 1em;
 }
