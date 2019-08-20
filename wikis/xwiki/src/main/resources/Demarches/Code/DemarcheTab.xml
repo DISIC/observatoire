@@ -169,7 +169,7 @@
         &lt;dl&gt;
         #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
         #if ($isRowEditor)
-          #set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
+          #set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
         #end
         #if ($action == 'edit')
           #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))

@@ -402,7 +402,7 @@ var XWiki = (function (XWiki) {
                 return true;
               });
               },
-              onFailure: function(){ content.insert('Something went wrong...');
+              onFailure: function(){ content.insert('Error while...');
             }
           });
           return content;
@@ -599,42 +599,8 @@ var XWiki = (function (XWiki) {
         }
       });
 
-      $(document).on('xwiki:demarche:updated', function(event, data) {
-        var row = table.row('#' + data.id);
-        var idx = data.id.indexOf('.');
-        var demarcheShortId = data.id.substring(idx + 1);
-        var rowData = row.data();
-        console.log(rowData);
-        ## TODO: FIX computation of URL
-        #set ($endpoint = "$services.rest.url($xwiki.getDocument('Demarches.1289').getDocumentReference())")
-        var url = "$endpoint/objects/Demarches.Code.DemarchesClass/0?media=json";
-        url = url.replace('1289', demarcheShortId);
-        console.log(url);
-        $.get(url, function(freshData) {
-          //var tablePropertyNames = ['adapteMobile', 'franceConnect', 'pourcentageRecoursVoieDematerialisee', 'qualiteSupport', 'satisfactionIndex', 'statutDemat', 'urlScore', 'volumetrie'];
-          var tablePropertyNames = ['adapteMobile', 'franceConnect', 'volumetrie'];
-          freshData.properties.each(function (property, index) {
-              if (tablePropertyNames.includes(property.name)) {
-                console.log(property.name);
-                console.log(property.value);
-                rowData[property.name] = {
-                  display: property.value,
-                  value: property.value
-                }
-                row.data(rowData);
-                row.draw();
-              }
-          });
-    /*
-          data.volumetrie = { display: '18 201', value: 18201};
-          row.data(data);
-          row.draw();
-          */
-        });
-      });
-
-      $('#top-demarches tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
+      function addChildrenRows(tableRow) {
+        var tr = tableRow;
         var row = table.row(tr);
         if (row.child.isShown()) {
           row.child.hide();
@@ -649,26 +615,101 @@ var XWiki = (function (XWiki) {
             #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
           #end
           #if ($hasAdmin || $isAdministrateurMinisteriel)
-            row.child([addDetailsRow(data), addToolbarRow(data)], 'child-row').show();
-            //var parent = $(row.node()).parent();
-            var toolbarRow = $(row.node()).next().next();
-            var control = toolbarRow.find('.row-edit-control').first();
-            // TODO: is it really worth storing the data values in the HTML itself for not loading the memory too much?
-            control.on('click', function(event) {
-              event.preventDefault();
-              var demarcheId = $(this).data('demarche-id');
-              var title = $(this).data('demarche-name');
-              var page = getPage(demarcheId);
-              var editUrl = page.getURL('edit', 'xpage=plain&amp;mode=row-edition');
-              var saveUrl = page.getURL('preview');
-              var dialogData = {title: title, editUrl: editUrl, saveUrl: saveUrl, id: demarcheId};
-              return new XWiki.widgets.XPopup(dialogData);
-            });
+            var parameters = new URLSearchParams(window.location.search);
+            // Show the toolbar row only for the live version of the dashboard
+            if (parameters.get('live') == '1') {
+              row.child([addDetailsRow(data), addToolbarRow(data)], 'child-row').show();
+              //var parent = $(row.node()).parent();
+              var toolbarRow = $(row.node()).next().next();
+              var control = toolbarRow.find('.row-edit-control').first();
+              // TODO: is it really worth storing the data values in the HTML itself for not loading the memory too much?
+              control.on('click', function(event) {
+                event.preventDefault();
+                var demarcheId = $(this).data('demarche-id');
+                var title = $(this).data('demarche-name');
+                var page = getPage(demarcheId);
+                var editUrl = page.getURL('edit', 'xpage=plain&amp;mode=row-edition');
+                var saveUrl = page.getURL('preview');
+                var dialogData = {title: title, editUrl: editUrl, saveUrl: saveUrl, id: demarcheId};
+                return new XWiki.widgets.XPopup(dialogData);
+              });
+            } else {
+              row.child([addDetailsRow(data)], 'child-row').show();
+            }
           #else
             row.child([addDetailsRow(data)], 'child-row').show();
           #end
           tr.addClass('shown');
         }
+      }
+
+      $(document).on('xwiki:demarche:updated', function(event, data) {
+        var row = table.row('#' + data.id);
+        var idx = data.id.indexOf('.');
+        var demarcheShortId = data.id.substring(idx + 1);
+        var rowData = row.data();
+        console.log(rowData);
+        ## TODO: compute URL in JavaScript?
+        #set ($endpoint = "$services.rest.url($xwiki.getDocument('Demarches.WebHome').getDocumentReference())")
+        var url = "$endpoint/objects/Demarches.Code.DemarchesClass/0?media=json";
+        url = url.replace('WebHome', demarcheShortId);
+        $.get(url, function(freshData) {
+          var tablePropertyNames = ['adapteMobile', 'franceConnect', 'pourcentageRecoursVoieDematerialisee', 'qualiteSupport', 'statutDemat', 'volumetrie'];
+          freshData.properties.each(function (property, index) {
+              if (tablePropertyNames.includes(property.name)) {
+                var display = property.value;
+                var value = property.value;
+                if (['adapteMobile', 'franceConnect', 'qualiteSupport'].indexOf(property.name) &gt;= 0) {
+                   if (value == "na")
+                     display = "n/a";
+                   else if (value == "oui")
+                     display = "Oui";
+                   else if (value == "non")
+                     display = "Non";
+                }
+                rowData[property.name] = {
+                  display: display,
+                  value: value
+                }
+                if (property.name == 'qualiteSupport') {
+                  rowData[property.name] = display;
+                } else if (property.name == 'pourcentageRecoursVoieDematerialisee') {
+                  rowData[property.name] = {
+                    display: value + " %",
+                    value: value
+                  }
+                } else if (property.name == 'statutDemat') {
+                  if (value == 'enLigneEntierement')
+                    display = 'Oui';
+                  else if (value == 'experimentation')
+                    display = 'Expérimentation';
+                  else if (value == 'deploiementPartiel')
+                    display = 'Déploiement partiel';
+                  else if (value == 'nr')
+                    display = 'Non renseigné';
+                  else
+                    display = 'Non';
+                  rowData[property.name] = display;
+                } else if (property.name == 'volumetrie') {
+                  rowData[property.name] = {
+                      display: value,
+                      value: value
+                    }
+                }
+              }
+          });
+          row.data(rowData);
+          row.draw();
+          // Remove and re-add the children rows to get the displayed data updated
+          row.child().remove();
+          var tr = $(row.node());
+          addChildrenRows(tr);
+        });
+      });
+
+      $('#top-demarches tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        addChildrenRows(tr);
       });
     });
   }
