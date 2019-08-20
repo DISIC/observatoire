@@ -184,7 +184,7 @@
         )))
       &lt;/div&gt;
     &lt;/div&gt;
-    #if (!$isSimplifiedForm &amp;&amp; !$isRowEditor)
+    #if (!$isSimplifiedForm)
       &lt;div class="panel panel-default"&gt;
         &lt;div class="panel-heading"&gt;Caractéristiques de la dématérialisation&lt;/div&gt;
           &lt;div class="panel-body"&gt;
@@ -192,6 +192,9 @@
           (((
           &lt;dl&gt;
           #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
+          #if ($isRowEditor)
+              #set ($caracteristiquesPropList = ['statutDemat'])
+          #end
           ## Don't display computed properties in edit mode
           #if ($action == 'edit')
             #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
@@ -213,14 +216,16 @@
             &lt;dl&gt;
               #if ($action == 'edit')
                 ## Some properties can be edited only by administrators
-                #if ($hasAdmin)
-                  #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
-                    #displayProperty($object, $propName, false, $action)
-                  #end
-                #else
-                  #foreach($propName in ['api', 'demarcheSimplifiee'])
-                    #displayProperty($object, $propName, false, $action)
-                  #end
+                #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
+                #if (!$hasAdmin)
+                  #set ($propertyNames = ['api', 'demarcheSimplifiee'])
+                #end
+                #if ($isRowEditor)
+                  #set ($discard = $propertyNames.remove('api'))
+                  #set ($discard = $propertyNames.remove('demarcheSimplifiee'))
+                #end
+                #foreach($propName in $propertyNames)
+                  #displayProperty($object, $propName, false, $action)
                 #end
               #else
                 ## Display all properties, including the computed one
