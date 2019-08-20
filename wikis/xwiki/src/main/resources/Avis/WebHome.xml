@@ -57,7 +57,7 @@
   'className': 'Avis.Code.AvisClass',
   'translationPrefix': 'avis.livetable.',
   'tagCloud': true,
-  'rowCount': 100,
+  'rowCount': 10,
   'maxPages': 10,
   'selectedColumn': 'doc.creationDate',
   'defaultOrder': 'desc',
