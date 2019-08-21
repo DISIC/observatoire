@@ -104,8 +104,6 @@ public class DemarcheEventListener extends AbstractEventListener {
 
     @Override
     public void onEvent(Event event, Object source, Object data) {
-        logger.debug("Event: [{}] - Source: [{}] - Data: [{}]", LISTENER_NAME, event, source, data);
-
         XWikiContext context = (XWikiContext) data;
         XWikiDocument pageV2 = (XWikiDocument) source, pageV1 = null;
         BaseObject demarcheV1 = null, demarcheV2 = null;
@@ -132,7 +130,7 @@ public class DemarcheEventListener extends AbstractEventListener {
             if (event instanceof DocumentCreatingEvent) {
                 try {
                     // In case of a DocumentCreatingEvent, initialize the AvisStats
-                    avisStatsComponent.computeAvisStats(pageV2.getDocumentReference(), false, context);
+                    avisStatsComponent.computeAvisStats(pageV2.getDocumentReference(), false);
                 } catch (QueryException | XWikiException e) {
                     logger.error("Error while adding an AvisStats object to a Demarche: [{}].",
                             compactWikiSerializer.serialize(pageV2.getDocumentReference()), e);
@@ -170,12 +168,14 @@ public class DemarcheEventListener extends AbstractEventListener {
      * removing all rights related to users, and allowing edit right to owners and to administrateurs ministeriels.
      */
     public boolean maybeUpdateAccessRights(BaseObject demarcheV1, BaseObject demarcheV2, XWikiContext context) throws XWikiException {
+
         if (demarcheV2 == null) {
             return false;
         }
 
         XWikiDocument pageV2 = demarcheV2.getOwnerDocument();
         if (ownersWereUpdated(demarcheV1, demarcheV2) && pageV2 != null) {
+            logger.debug("Démarche owners were updated: {}", demarcheV1.getDocumentReference());
             // Remove all rights related to users
             List<BaseObject> rights = pageV2.getXObjects(RIGHT_CLASS_REFERENCE);
             if (rights != null) {
@@ -220,6 +220,7 @@ public class DemarcheEventListener extends AbstractEventListener {
     }
 
     protected void sendNotification(BaseObject demarcheV1, BaseObject demarcheV2, XWikiContext context) throws MessagingException, XWikiException, XWikiVelocityException {
+        logger.debug("Send notification related to {}", demarcheV1.getDocumentReference());
         String ownerStringV1 = null, ownerStringV2 = null;
         if (demarcheV1 != null) {
             ownerStringV1 = demarcheV1.getLargeStringValue(DEMARCHE_PROPERTY_OWNERS);

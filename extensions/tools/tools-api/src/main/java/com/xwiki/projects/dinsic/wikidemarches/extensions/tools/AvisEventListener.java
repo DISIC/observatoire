@@ -99,7 +99,7 @@ public class AvisEventListener extends AbstractEventListener
                         documentReferenceResolver.resolve(demarcheId, document.getDocumentReference());
 
                     if (event instanceof XObjectAddedEvent) {
-                        avisStatsComponent.computeAvisStats(demarcheReference, true,context);
+                        avisStatsComponent.computeAvisStats(demarcheReference, true);
                     } else if (event instanceof XObjectUpdatedEvent) {
                         // Update event
                         // Check if the avis was attributed to a distinct a demarche, or if it's another property
@@ -108,17 +108,17 @@ public class AvisEventListener extends AbstractEventListener
                         if (!demarcheId.equals(originalDemarcheId)) {
                             // the demarche property was updated, so we need to recompute the AvisStats of both
                             // demarches
-                            avisStatsComponent.computeAvisStats(demarcheReference, true, context);
+                            avisStatsComponent.computeAvisStats(demarcheReference, true);
                             // also update the other demarche's stats, if it exists
                             if (originalDemarcheId != null) {
                                 avisStatsComponent
-                                    .computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), true, context);
+                                    .computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), true);
                             }
                         } else {
                             // other properties than the demarche one were updated, so we just need to recompute the
                             // AvisStats
                             // of the demarche of the updated Avis object
-                            avisStatsComponent.computeAvisStats(demarcheReference, true, context);
+                            avisStatsComponent.computeAvisStats(demarcheReference, true);
                         }
                     }
                 } else {
@@ -131,7 +131,7 @@ public class AvisEventListener extends AbstractEventListener
                 // that the event is an instance of XObjectDeletedEvent
                 if (event instanceof XObjectDeletedEvent) {
                     String originalDemarcheId = originalAvis.getStringValue(DEMARCHE_PROPERTY_NAME);
-                    avisStatsComponent.computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), true, context);
+                    avisStatsComponent.computeAvisStats(documentReferenceResolver.resolve(originalDemarcheId), true);
                 }
             } else {
                 // No Avis or original Avis was found -> the XObject event relates to another XWiki class: there's

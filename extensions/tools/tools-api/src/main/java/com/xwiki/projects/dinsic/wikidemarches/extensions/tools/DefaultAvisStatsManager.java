@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import org.slf4j.Logger;
@@ -41,12 +42,15 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     @Inject
     protected QueryManager queryManager;
 
+    @Inject
+    private Provider<XWikiContext> contextProvider;
+
     /**
      * Computes the AvisStats values and saves the AvisStats object for the demarche passed as parameter. We assume that
      * the demarcheReference is valid, no check is performed. <br>
      * TODO: is synchronized enough to cover the thread safety?
      */
-    public synchronized void computeAvisStats(DocumentReference demarcheReference, boolean save, XWikiContext context)
+    public synchronized void computeAvisStats(DocumentReference demarcheReference, boolean save)
         throws QueryException, XWikiException
     {
 
@@ -69,18 +73,18 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         long occurrences = (long) result[0];
         double satisfactionIndex = result[1] != null ? (double) result[1] : 0;
         long votes = result[2] != null ? (long) result[2] : 0;
-        logger.debug(String.format("Caching stats for demarche [%s] - Occurences: [%s], Satisfaction index [%s], Votes: [%s]",
-            demarcheReference, occurrences, satisfactionIndex, votes));
-        setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, save,false, context);
+        logger.debug("Computing stats for demarche {} - occurences: {} satisfaction index: {} votes: {}",
+            demarcheReference, occurrences, satisfactionIndex, votes);
+        setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, save,false);
     }
 
     /**
      * Computes the AvisStats values and saves the AvisStats objects for all demarches. Demarches which have not
      * received any Avis yet will get an AvisStats object initialized to its default values.
      */
-    public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException
+    public void computeAvisStats() throws QueryException, XWikiException
     {
-        logger.debug("Started to compute stats for all demarches");
+        logger.debug("Starting to compute stats for all demarches");
         // The query below will return values for Demarches having at least one Avis.
         // for now the 'vote' of an avis cannot be null (it's either empty value, or true or false),
         // and thus we can compute both score average and vote count in the same request.
@@ -110,10 +114,9 @@ public class DefaultAvisStatsManager implements AvisStatsManager
             long occurrences = (long) values[1];
             double satisfactionIndex = values[2] != null ? (double) values[2] : 0;
             long votes = (long) values[3];
-            logger.debug(
-                String.format("[%s] Computing stats for demarche [%s] - Occurences: [%s], Satisfaction index [%s], Votes: [%s]",
-                    ++handledDemarches, demarcheId, occurrences, satisfactionIndex, votes));
-            setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, true, false, context);
+            logger.debug("#{} Computing stats for demarche {} - occurences: {} satisfaction index: {} votes: {}",
+                    ++handledDemarches, demarcheId, occurrences, satisfactionIndex, votes);
+            setAvisStatsValues(demarcheReference, occurrences, satisfactionIndex, votes, true, false);
         }
 
         // Handle Demarches which have not received any Avis yet.
@@ -135,8 +138,8 @@ public class DefaultAvisStatsManager implements AvisStatsManager
         for (Object result : results) {
             String demarcheId = (String) result;
             DocumentReference demarcheReference = documentReferenceResolver.resolve(demarcheId);
-            logger.debug(String.format("[%s] Setting stats to 0 for demarche [%s]", ++handledDemarches, demarcheId));
-            setAvisStatsValues(demarcheReference, 0, 0, 0, true,false, context);
+            logger.debug("#{} Setting stats to 0 for demarche {}", ++handledDemarches, demarcheId);
+            setAvisStatsValues(demarcheReference, 0, 0, 0, true,false);
         }
         logger.debug("Done computing stats for all demarches");
     }
@@ -145,8 +148,9 @@ public class DefaultAvisStatsManager implements AvisStatsManager
      * Initializes or updates AvisStats values for a given demarche.
      */
     private synchronized void setAvisStatsValues(DocumentReference demarcheReference, long occurrences, double satisfactionIndex,
-        long votes, boolean save, boolean addVersionEntry, XWikiContext context) throws XWikiException
+        long votes, boolean save, boolean addVersionEntry) throws XWikiException
     {
+        XWikiContext context = contextProvider.get();
         XWiki wiki = context.getWiki();
         XWikiDocument demarche = wiki.getDocument(demarcheReference, context).clone();
         if (!demarche.isNew()) {

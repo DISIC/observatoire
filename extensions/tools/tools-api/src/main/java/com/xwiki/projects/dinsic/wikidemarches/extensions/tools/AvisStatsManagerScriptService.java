@@ -24,14 +24,16 @@ public class AvisStatsManagerScriptService implements ScriptService
     @Inject
     private AvisStatsManager avisStatsComponent;
 
-    public void computeAvisStats(DocumentReference demarcheReference, XWikiContext context)
+    public void computeAvisStats(DocumentReference demarcheReference)
         throws QueryException, XWikiException
     {
-        this.avisStatsComponent.computeAvisStats(demarcheReference, true, context);
+        this.avisStatsComponent.computeAvisStats(demarcheReference, true);
     }
 
-    public void computeAvisStats(XWikiContext context) throws QueryException, XWikiException
+    // TODO: this should not be exposed in a ScriptService since it allows any person with Script rights to
+    // launch the computation of the stats
+    public void computeAvisStats() throws QueryException, XWikiException
     {
-        this.avisStatsComponent.computeAvisStats(context);
+        this.avisStatsComponent.computeAvisStats();
     }
 }

@@ -52,12 +52,12 @@ Cette page permet d'initialiser ou de mettre à jour les statistiques d'avis (Av
 #if ($demarcheId != '')
   #set ($demarche = $xwiki.getDocument($demarcheId))
   ## TODO: cas où on soumet une démarche inexistante
-  $services.avisStats.computeAvisStats($demarche.getDocumentReference(), $xcontext.context)
+  $services.avisStats.computeAvisStats($demarche.getDocumentReference())
   {{info}}
   Les statistiques d'avis de la démarche [[$demarcheId]] ont été mises à jour.
   {{/info}}
 #elseif ($operation == 'compute-stats')
-  $services.avisStats.computeAvisStats($xcontext.context)
+  $services.avisStats.computeAvisStats()
   {{info}}
   Les statistiques d'avis ont été initialisées / mises à jour.
   {{/info}}

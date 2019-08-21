@@ -61,7 +61,8 @@
 == Avis
 
 * [[Liste des avis&gt;&gt;Avis.WebHome]]
-* [[Initialisation du cache d'avis&gt;&gt;Avis.Admin.AvisStatsManager]]
+* [[Initialisation des statistiques d'avis&gt;&gt;Avis.Admin.AvisStatsManager]]
+* [[Job planifié de mise à jour des statistiques d'avis&gt;&gt;Avis.Admin.StatisticsJob]]
 * [[Statistiques&gt;&gt;Avis.Admin.Statistiques]]
 * [[Avis ayant été édités par un utilisateur identifié&gt;&gt;doc:Avis.Admin.AvisEdited]]
 * [[Avis regroupés par session et par démarche&gt;&gt;doc:Avis.Admin.AvisSessionManager]]
