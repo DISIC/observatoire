@@ -233,20 +233,24 @@
 var XWiki = (function (XWiki) {
 
   function computeBadgeStyle(value) {
-    value = value.toLowerCase();
-    switch (value) {
-      case 'oui':
-        return "success";
-      case 'non':
-        return "danger";
-      case 'partiel':
-        return "warning";
-      case 'expérimentation':
-        return 'info';
-      case 'déploiement partiel':
-        return 'warning';
-      default:
-        return "default";
+    if (typeof value === 'string' || value instanceof String) {
+      value = value.toLowerCase();
+      switch (value) {
+        case 'oui':
+          return "success";
+        case 'non':
+          return "danger";
+        case 'partiel':
+          return "warning";
+        case 'expérimentation':
+          return 'info';
+        case 'déploiement partiel':
+          return 'warning';
+        default:
+          return "default";
+      }
+    } else {
+      return 'Erreur de formatage (' + value + ')';
     }
   }
 
@@ -261,19 +265,23 @@ var XWiki = (function (XWiki) {
   }
 
   function format(value, badgeStyleFunction, replaceNa, demarcheId) {
-    var badgeStyle = badgeStyleFunction.apply(this, [value]);
-    if (value) {
-      if (replaceNa) {
-        value = value.replace("n/a", "-");
+    if (typeof value === 'string' || value instanceof String) {
+      var badgeStyle = badgeStyleFunction.apply(this, [value]);
+      if (value) {
+        if (replaceNa) {
+          value = value.replace("n/a", "-");
+        }
+        value = value.replace("n/c", "Non disponible");
       }
-      value = value.replace("n/c", "Non disponible");
-    }
-    if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
-      return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
-    } else if (value &amp;&amp; value == '-') {
-      return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      } else if (value &amp;&amp; value == '-') {
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      } else {
+        return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+      }
     } else {
-      return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+      return '&lt;span class="row-details-value"&gt;Erreur de formatage (' + value + ')&lt;/span&gt;';
     }
   }
 
@@ -464,9 +472,9 @@ var XWiki = (function (XWiki) {
         paging: false,
         columns: [
           {
-            className:      'details-control',
-            orderable:      false,
-            data:           null,
+            className: 'details-control',
+            orderable: false,
+            data: null,
             defaultContent: ''
           },
           {
@@ -645,65 +653,19 @@ var XWiki = (function (XWiki) {
 
       $(document).on('xwiki:demarche:updated', function(event, data) {
         var row = table.row('#' + data.id);
-        var idx = data.id.indexOf('.');
-        var demarcheShortId = data.id.substring(idx + 1);
         var rowData = row.data();
-        console.log(rowData);
-        ## TODO: compute URL in JavaScript?
-        #set ($endpoint = "$services.rest.url($xwiki.getDocument('Demarches.WebHome').getDocumentReference())")
-        var url = "$endpoint/objects/Demarches.Code.DemarchesClass/0?media=json";
-        url = url.replace('WebHome', demarcheShortId);
+        var url = "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1&amp;live=1&amp;id=')";
+        url = url + data.id;
         $.get(url, function(freshData) {
-          var tablePropertyNames = ['adapteMobile', 'franceConnect', 'pourcentageRecoursVoieDematerialisee', 'qualiteSupport', 'statutDemat', 'volumetrie'];
-          freshData.properties.each(function (property, index) {
-              if (tablePropertyNames.includes(property.name)) {
-                var display = property.value;
-                var value = property.value;
-                if (['adapteMobile', 'franceConnect', 'qualiteSupport'].indexOf(property.name) &gt;= 0) {
-                   if (value == "na")
-                     display = "n/a";
-                   else if (value == "oui")
-                     display = "Oui";
-                   else if (value == "non")
-                     display = "Non";
-                }
-                rowData[property.name] = {
-                  display: display,
-                  value: value
-                }
-                if (property.name == 'qualiteSupport') {
-                  rowData[property.name] = display;
-                } else if (property.name == 'pourcentageRecoursVoieDematerialisee') {
-                  rowData[property.name] = {
-                    display: value + " %",
-                    value: value
-                  }
-                } else if (property.name == 'statutDemat') {
-                  if (value == 'enLigneEntierement')
-                    display = 'Oui';
-                  else if (value == 'experimentation')
-                    display = 'Expérimentation';
-                  else if (value == 'deploiementPartiel')
-                    display = 'Déploiement partiel';
-                  else if (value == 'nr')
-                    display = 'Non renseigné';
-                  else
-                    display = 'Non';
-                  rowData[property.name] = display;
-                } else if (property.name == 'volumetrie') {
-                  rowData[property.name] = {
-                      display: value,
-                      value: value
-                    }
-                }
-              }
-          });
-          row.data(rowData);
-          row.draw();
-          // Remove and re-add the children rows to get the displayed data updated
-          row.child().remove();
-          var tr = $(row.node());
-          addChildrenRows(tr);
+          if (freshData &amp;&amp; freshData.data &amp;&amp; freshData.data.length &gt; 0) {
+            var demarche = freshData.data[0];
+            row.data(demarche);
+            row.draw();
+            // Remove and re-add the children rows to get the displayed data updated
+            row.child().remove();
+            var tr = $(row.node());
+            addChildrenRows(tr);
+          }
         });
       });
 
