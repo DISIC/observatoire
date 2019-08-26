@@ -10,6 +10,7 @@ import org.xwiki.query.QueryException;
 
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.XWikiException;
+import com.xpn.xwiki.doc.XWikiDocument;
 
 /**
  * Interface (aka Role) of the Component
@@ -39,6 +40,8 @@ public interface AvisStatsManager
     String AVIS_VOTE_PROPERTY_NAME = "vote";
 
     void computeAvisStats(DocumentReference demarcheReference, boolean save) throws QueryException, XWikiException;
+
+    void computeAvisStats(XWikiDocument demarche, boolean save) throws QueryException, XWikiException;
 
     void computeAvisStats() throws QueryException, XWikiException;
 }
