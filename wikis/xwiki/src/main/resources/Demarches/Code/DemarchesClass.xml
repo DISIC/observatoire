@@ -941,7 +941,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
   #set ($scores = [-6, 0, 2, 3, 4, 6])
   #foreach ($boundary in $ranges)
     ## Most strict test: inferior or equal for availability, strictly inferior for response time
-    #if ($availability &lt;= $boundary)
+    #if ($availability &amp;&amp; $availability &lt;= $boundary)
       #set ($index = $mathtool.sub($velocityCount, 1))
       #set ($availabilityScore = $scores.get($index))
       #break
@@ -956,11 +956,11 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
   ## - Supérieure à 1s = -4
   #set ($ranges = [200, 400, 600, 800, 1000])
   #set ($scores = [4, 3, 2, 1, 0])
-  #if ($responseTime &gt;= $ranges.get($mathtool.sub($ranges.size(),1)))
+  #if ($responseTime &amp;&amp; $responseTime &gt;= $ranges.get($mathtool.sub($ranges.size(),1)))
   #set ($responseTimeScore = -4)
   #else
   #foreach ($boundary in $ranges)
-    #if ($responseTime &lt; $boundary)
+    #if ($responseTime &amp;&amp; $responseTime &lt; $boundary)
       #set ($index = $mathtool.sub($velocityCount, 1))
       #set ($responseTimeScore = $scores.get($index))
       #break
