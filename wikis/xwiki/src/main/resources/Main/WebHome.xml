@@ -173,7 +173,7 @@
   )))
   ##
   ##
-  #set($isAdminMin = $hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+  #set($isAdminMin = $hasAdmin || $isAdministrateurMinisteriel)
   #if ($isAdminMin)
   #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
   (%class='row demarches-administrationrow'%)(((

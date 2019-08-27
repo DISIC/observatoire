@@ -140,10 +140,10 @@
         #if (!$isGuest)
           &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
         #end
-        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+        #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
           &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
         #end
-        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+        #if ($hasAdmin || $isAdministrateurMinisteriel)
           &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
         #end
         &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
@@ -155,10 +155,10 @@
         #if (!$isGuest)
           {{include reference="Demarches.Code.DemarcheTab" /}}
         #end
-        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP) || $isDemarcheOwner)
+        #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
           {{include reference="Demarches.Code.EmbedTab" /}}
         #end
-        #if ($hasAdmin || $xwiki.user.isUserInGroup($ADMINISTRATEURS_MINISTERIELS_GROUP))
+        #if ($hasAdmin || $isAdministrateurMinisteriel)
           {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
         #end
         {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
