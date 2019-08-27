@@ -99,7 +99,7 @@
 #set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
 #if ($xcontext.userReference != $NULL)
   #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
-  #set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
+  #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
   #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
 #end
 #set ($displayContentFooter = false)
