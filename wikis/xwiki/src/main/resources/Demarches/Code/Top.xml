@@ -196,7 +196,7 @@
     #set ($entries = [$request.id])
   #else
     #set ($hql = "select distinct obj.name from BaseObject obj, IntegerProperty as prop where obj.className = '$DEMARCHE_CLASS_ID' and prop.id.id = obj.id and prop.id.name = 'top' and prop.value = 1")
-    #set ($entries = $services.query.hql($hql).setLimit(2).execute())
+    #set ($entries = $services.query.hql($hql).setLimit(0).execute())
   #end
   #foreach ($entry in $entries)
     #addDemarche($entry, $data)
