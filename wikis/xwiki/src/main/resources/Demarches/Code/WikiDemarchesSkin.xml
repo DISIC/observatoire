@@ -102,6 +102,7 @@
   #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
   #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
 #end
+#set ($LIVETABLE_EXPORTER_LIMIT = "500")
 #set ($displayContentFooter = false)
 #set ($displayDocChanges = false)
 #set ($displayContentMenu = $hasEdit)

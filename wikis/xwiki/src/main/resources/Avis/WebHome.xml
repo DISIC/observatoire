@@ -77,7 +77,7 @@ include all columns.
 #end
 #livetable('avis' $columns $columnsProperties $options)
 
-{{livetableExporter livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.LiveTableResults" /}}
+{{livetableExporter livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.LiveTableResults" limit="$LIVETABLE_EXPORTER_LIMIT"/}}
 
 #* Display the link to Avis administration only when no extraParams are set, that is when this
 page is not used as an include (e.g. from DemarchesSheet). *#
