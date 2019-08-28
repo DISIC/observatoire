@@ -74,27 +74,40 @@
   #set ($className = 'Avis.Code.AvisClass')
   #if ($percent)
     #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias &lt;&gt; ''")
-    #set ($total = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).execute().get(0))
+    #set ($total = $services.query.hql($query).bindValue('className', $className).bindValue('propertyName', $property).execute().get(0))
   #end
   #set ($showData = false)
   ## For 'smiley' tables, we iterate over the possible values: 0, 1, 2
-  #set ($smileyProperties = ['score','facile','comprehensible'])
+  #set ($smileyProperties = ['score', 'facile', 'comprehensible'])
   #if ($smileyProperties.contains($property))
     #set ($possibleValues = [1..3])
   #else
     ## All other properties are StaticLists
     #set ($possibleValues = $xwiki.getClass($className).get($property).getListValues())
   #end
-    #set ($list = [])
-    #foreach ($value in $possibleValues)
-      #set ($query = "select count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' and $propAlias = :propValue")
-      #set ($entries = $services.query.hql($query).bindValue('className',$className).bindValue('propertyName',$property).bindValue('propValue',$value).execute())
-      #set ($entry = $entries.get(0))
-      #if ($entry != 0)
-        #set ($showData = true)
-      #end
-      #set ($discard = $list.add([$value, $entry]))
+  ## dataMap is a LinkedHashMap, so the order is preserved
+  #set ($dataMap = {})
+  ## Initialize map with all possible values at 0, because we want them even if not returned by the database query
+  #foreach ($value in $possibleValues)
+    #set ($dataMap[$value] = 0)
+  #end
+  #set ($query = "select $propAlias, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, $propertyType, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = '$doc.fullName' group by $propAlias")
+  #set ($entries = $services.query.hql($query).bindValue('className', $className).bindValue('propertyName', $property).execute())
+  #foreach ($entry in $entries)
+    #set ($key = $entry.get(0))
+    #if ($key != $NULL)
+      #set ($value = $entry.get(1))
+      #set ($dataMap[$key] = $value)
     #end
+  #end
+  #set ($data = [])
+  #foreach ($key in $dataMap.keySet())
+    #set ($value = $dataMap[$key])
+    #if ($value != 0)
+      #set ($showData = true)
+    #end
+    #set ($discard = $data.add({'key': $key, 'value': $value}))
+  #end
   #if ($showData)
 
     &lt;table id="$tableId" class="hidden"&gt;
@@ -106,9 +119,9 @@
       &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
-    #foreach ($item in $list)
-      #set ($value = $item.get(0))
-      #set ($number = $item.get(1))
+    #foreach ($item in $data)
+      #set ($value = $item.get('key'))
+      #set ($number = $item.get('value'))
       #if(!$number)
         #set($number = 0)
       #end
@@ -153,7 +166,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center;"&gt;
       #addAvisDataTable('score', 'Répartition des avis', 'Satisfaction', 'score', 'IntegerProperty as prop', 'prop.value', true, {1: 'avis&amp;#10;négatifs', 2:'avis&amp;#10;moyens', 3:'avis&amp;#10;positifs'})
-      
+
       #if ($showData)
         #set($chartOptions = {
           "backgroundColors": ["#e62623", "#d58000", "#00ac07"],
@@ -279,7 +292,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
           }
         })
       #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
-        
+
       #if ($showData)
 
         {{tableToChartJS type='horizontalBar' table='difficultes' options='$options' cssClass='histo'/}}
