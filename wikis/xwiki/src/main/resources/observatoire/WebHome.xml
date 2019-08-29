@@ -417,7 +417,7 @@ var XWiki = (function (XWiki) {
         }
       });
 
-      function getDemarcheStatisticsUrl(demarcheId) {
+      function getAvisStatisticsUrl(demarcheId) {
         return getPage(demarcheId).getURL('view', 'view-mode=statistics');
       }
 
@@ -481,7 +481,7 @@ var XWiki = (function (XWiki) {
             data: "title",
             className: 'column-title',
             render : function (data, type, row) {
-              return data + '&lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
+              return data + ' &lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
             }
           },
           {
@@ -543,7 +543,11 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.value;
               } else {
-                return format(data.display, computeBadgeStyle,  true, row['id']);
+                if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
+                  return '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
+                } else {
+                  return format(data.display, computeBadgeStyle,  true, row['id']);
+                }
               }
             }
           },
@@ -616,12 +620,6 @@ var XWiki = (function (XWiki) {
         } else {
           var data = row.data();
           #set ($hasAdmin = $services.security.authorization.hasAccess('admin'))
-          #set ($isAdministrateurMinisteriel =  false)
-          #if ($xcontext.userReference != $NULL)
-            #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
-            #set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
-            #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
-          #end
           #if ($hasAdmin || $isAdministrateurMinisteriel)
             var parameters = new URLSearchParams(window.location.search);
             // Show the toolbar row only for the live version of the dashboard
