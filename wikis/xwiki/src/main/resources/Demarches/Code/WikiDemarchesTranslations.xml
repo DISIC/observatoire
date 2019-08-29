@@ -56,7 +56,7 @@ wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-
 wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
 
 #Démarches
-wikidemarches.sitename=MonAvis.numerique.gouv.fr
+wikidemarches.sitename=observatoire.numerique.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
 wikidemarches.home.title=Nous améliorons les services publics en ligne, grâce à vos avis !
 wikidemarches.home.subtitle=
@@ -70,7 +70,7 @@ wikidemarches.mostwanted.title=Démarches les plus courantes
 wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
 wikidemarches.observatoire.title=Où en est-on ?
-wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'État.\\\\\\\\**En mai 2019**, 67% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction MonAvis a commencé.
+wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'État.\\\\\\\\**En mai 2019**, 67% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction a commencé.
 wikidemarches.observatoire.button=Consulter l'observatoire
 wikidemarches.observatoire.title=Observatoire de la dématérialisation
 wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation {0}

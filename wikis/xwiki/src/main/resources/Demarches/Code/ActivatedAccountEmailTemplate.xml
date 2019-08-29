@@ -102,7 +102,7 @@
 Madame, Monsieur,
 &lt;/p&gt;
 &lt;p&gt;
-Votre compte MonAvis.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.&lt;/p&gt;
+Votre compte observatoire.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.&lt;/p&gt;
 
 &lt;a href="$homeUrl"&gt;$homeUrl&lt;/a&gt;
 
@@ -121,7 +121,7 @@ $services.localization.render('wikidemarches.sitename')
       <text>Madame, Monsieur,
 
 
-Votre compte MonAvis.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.
+Votre compte observatoire.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.
 
 $homeUrl
 
