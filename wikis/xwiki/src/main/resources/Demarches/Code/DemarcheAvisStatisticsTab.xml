@@ -309,6 +309,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
 
     &lt;/div&gt;
   &lt;/div&gt;
+  #*
   #set ($query = $services.query.hql("select count(*) from BaseObject as avis, StringProperty as modalite, StringProperty as demarche where avis.className = :avisClass and avis.id = modalite.id.id and modalite.id.name = :modaliteProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche"))
   #set ($discard = $query.bindValue("demarche", $doc.fullName))
   #set ($discard = $query.bindValue("avisClass", 'Avis.Code.AvisClass'))
@@ -439,6 +440,7 @@ ${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;$explanationLink
       #end
     &lt;/div&gt;
   #end
+  *#
 #else
  #set ($noAvisYet = $services.localization.render('wikidemarches.demarche.avis.stats.noAvisYet'))
  &lt;div class="lighter" style="font-size: 1.3em; text-align: center; margin: 5em 0;"&gt;$noAvisYet&lt;/div&gt;
