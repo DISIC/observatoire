@@ -412,7 +412,7 @@ var XWiki = (function (XWiki) {
       });
 
       function getAvisStatisticsUrl(demarcheId) {
-        return getPage(demarcheId).getURL('view', 'view-mode=statistics');
+        return getPage(demarcheId).getURL('view', 'view-mode=statistics&amp;date=2019-06-30');
       }
 
       // Addition of a search function to the list of search functions for filtering on the ministère value.
