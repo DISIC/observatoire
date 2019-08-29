@@ -45,7 +45,6 @@
   'doc.name': {"displayName": 'No.', "link":"view"},
   'session': {},
   'demarche': {},
-  'modalite': {},
   'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
   'score': {'displayName' : 'Avis', "html":true},
   'ministeres': {'sortable': true, 'filterable': true},
@@ -71,11 +70,11 @@
 - use this page as an include (e.g. from DemarchesSheet): extraParams are set, don't the same columns.
 *#
 #if (!$extraParams)
-  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'ministeres', 'direction', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
 #else
   #set ($discard = $options.put('extraParams', $extraParams))
   #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
-  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'modalite', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
 #end
 #livetable('avis' $columns $columnsProperties $options)
 
