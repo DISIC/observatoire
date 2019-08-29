@@ -61,7 +61,7 @@ wikidemarches.siteheadline=Améliorons les services publics en ligne
 wikidemarches.home.title=Nous améliorons les services publics en ligne, grâce à vos avis !
 wikidemarches.home.subtitle=
 wikidemarches.sitemap=Plan du site
-wikidemarches.by-dinsic=Un service proposé par la DINSIC
+wikidemarches.by-dinsic=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique et du système d’information et de communication de l’État"&gt;DINSIC&lt;/abbr&gt;&lt;/a&gt; .
 wikidemarches.home.subsearchhint=Votre démarche n'était pas disponible en ligne&amp;nbsp;? Vous pourrez demander sa dématérialisation.
 wikidemarches.search.label=Chercher une démarche
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…

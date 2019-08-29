@@ -1408,15 +1408,20 @@ legend {
     font-weight: normal;
     margin-bottom: 2em;
     margin-top: 0;
+    line-height: 1.875em;
   }
   .footer-col-sitename {
     h3 {
       font-size: 1.5em;
+      line-height: 1.5em;
       margin-bottom: 1.5em;
     }
     p {
       font-size: 1.1em;
       margin-bottom: 2em;
+      abbr {
+        text-decoration: none !important;
+      }
     }
   }
   .footer-col-sites {
@@ -1464,6 +1469,8 @@ abbr.asterix {
     background-color: @body-bg;
   }
 }
+
+
 
 
 
