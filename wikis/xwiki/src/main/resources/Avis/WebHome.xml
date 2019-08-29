@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1534427073000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1540987483000</date>
-  <contentUpdateDate>1540987483000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis</title>
   <comment/>
@@ -50,6 +50,9 @@
   'score': {'displayName' : 'Avis', "html":true},
   'ministeres': {'sortable': true, 'filterable': true},
   'direction': {'sortable': true, 'filterable': true},
+  'autreAide': {'displayName': 'Autre aide'},
+  'autreDifficulte': {'displayName': 'Autre difficulté'},
+  'autre': {'displayName': 'Verbatim'},
   'suggestion': {"filterable":false,"sortable":false,"html":true},
   '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
 })
@@ -63,17 +66,16 @@
   'defaultOrder': 'desc',
   'resultPage': 'Avis.Code.LiveTableResults'
 })
-#* Two situations: 
-- default: display the full list of avis 
-- use this page as an include (e.g. from DemarchesSheet): extraParams are set, don't
-include all columns.
+#* Two situations:
+- default: display the full list of avis
+- use this page as an include (e.g. from DemarchesSheet): extraParams are set, don't the same columns.
 *#
 #if (!$extraParams)
-  #set ($columns = ['doc.creationDate', 'doc.date', 'doc.name', 'sessionId', 'source', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'ministeres', 'direction', 'modalite', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
 #else
   #set ($discard = $options.put('extraParams', $extraParams))
   #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
-  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'modalite', 'score', 'vote', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'modalite', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
 #end
 #livetable('avis' $columns $columnsProperties $options)
 
