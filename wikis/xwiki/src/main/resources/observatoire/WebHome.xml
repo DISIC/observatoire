@@ -43,12 +43,6 @@
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
 #set ($live = "$!request.live")
-#set ($isAdministrateurMinisteriel = false)
-#if ($xcontext.userReference != $NULL)
-  #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
-  #set ($administrateursMinisterielsReference = $xwiki.getDocument($ADMINISTRATEURS_MINISTERIELS_GROUP).getDocumentReference())
-  #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
-#end
 #set ($demarcheSheetId = 'Demarches.Code.DemarchesSheet')
 ## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
 #set ($discard = $xwiki.ssx.use($demarcheSheetId))
