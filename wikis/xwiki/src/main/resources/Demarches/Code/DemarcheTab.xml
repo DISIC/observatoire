@@ -40,18 +40,21 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
+#set ($DEMARCHE_CLASS_ID = 'Demarches.Code.DemarchesClass')
 #set ($isRowEditor = false)
 #if ("$!request.mode" == 'row-edition')
-  ## extra small form used from the observatoire table
+  ## Extra small form used when editing a single row from the observatoire table
   #set ($isRowEditor = true)
 #end
 {{html wiki="true"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'demarche-tab')active in#end" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
   ## "object" and "action" can be set already if the page is included from NewDemarche
   #if (!$object)
-    #set ($object = $doc.getObject('Demarches.Code.DemarchesClass'))
+    #set ($object = $doc.getObject($DEMARCHE_CLASS_ID))
     #set ($action = $xcontext.action)
   #end
+  ## Variable "isTop" is used to customize the form in edit mode
+  #set ($isTop = "$!object.getValue('top')" == '1')
   #if ($action == 'edit')
     #set ($type = 'edit')
     &lt;input type="hidden" name="xvalidate" value="1" /&gt;
@@ -90,7 +93,7 @@
   #end
   ## display the demarche
 
-#if (($xcontext.action == 'edit' || $isSimplifiedForm) &amp;&amp; !$hasAdmin)
+#if (($xcontext.action == 'edit' || $isSimplifiedForm) &amp;&amp; !$hasAdmin &amp;&amp; !$isRowEditor)
 &lt;p&gt;
 &lt;a href="$xwiki.getURL('Aide.Description du modèle de données')" target="_blank"&gt;&lt;span class="fa fa-question-circle-o"&gt;&lt;/span&gt;&lt;span style="padding-left: 0.2em;"&gt;Description du modèle de données&lt;/span&gt;&lt;/a&gt;
 &lt;/p&gt;
@@ -169,12 +172,16 @@
         (% class="xform" %)
         (((
         &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
+        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
         #if ($isRowEditor)
           #set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
         #end
         #if ($action == 'edit')
           #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
+        #end
+        ## Only administrators are allowed to edit property 'top'
+        #if ($hasAdmin)
+          #set ($discard = $propList.add('top'))
         #end
         #if ($isSimplifiedForm)
           #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
@@ -186,7 +193,10 @@
         )))
       &lt;/div&gt;
     &lt;/div&gt;
-    #if (!$isSimplifiedForm)
+    ## The block below is shown only if "isSimplifiedForm" is false, and we're not in the case where "isRowEditor" is true (hence
+    ## also "isTop", in principle) and the user is not an administrator, because in that case, only property "statutDemat" would
+    ## be displayed, which is reserved to administrators.
+    #if (!$isSimplifiedForm &amp;&amp; !($isRowEditor &amp;&amp; $isTop &amp;&amp; !$hasAdmin))
       &lt;div class="panel panel-default"&gt;
         &lt;div class="panel-heading"&gt;Caractéristiques de la dématérialisation&lt;/div&gt;
           &lt;div class="panel-body"&gt;
@@ -196,6 +206,10 @@
           #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
           #if ($isRowEditor)
               #set ($caracteristiquesPropList = ['statutDemat'])
+          #end
+          ## If isTop, only administrators are allowed to edit 'statutDemat'
+          #if ($isTop &amp;&amp; !$hasAdmin)
+            #set ($discard = $caracteristiquesPropList.remove('statutDemat'))
           #end
           ## Don't display computed properties in edit mode
           #if ($action == 'edit')
@@ -209,7 +223,7 @@
       &lt;/div&gt;
     &lt;/div&gt;
     #end
-    #if (!$isSimplifiedForm)
+    #if (!$isSimplifiedForm &amp;&amp; !($isRowEditor &amp;&amp; $isTop &amp;&amp; !$hasAdmin))
     &lt;div class="panel panel-default"&gt;
       &lt;div class="panel-heading"&gt;Qualité de la dématérialisation&lt;/div&gt;
       &lt;div class="panel-body"&gt;
@@ -217,11 +231,18 @@
           (((
             &lt;dl&gt;
               #if ($action == 'edit')
-                ## Some properties can be edited only by administrators
-                #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
-                #if (!$hasAdmin)
-                  #set ($propertyNames = ['api', 'demarcheSimplifiee'])
+                ## If the demarche has property "top" set to true, some of its properties can be edited by administrators only
+                #if ($isTop)
+                  #if ($hasAdmin)
+                    #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
+                  #else
+                    #set ($propertyNames = ['api', 'demarcheSimplifiee'])
+                  #end
+                #else
+                  ## If the demarche is not part of the top, all its properties can be modified by the editor
+                  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
                 #end
+                ## In all cases, remove 'api' and 'demarcheSimplifiee' in row-editor mode
                 #if ($isRowEditor)
                   #set ($discard = $propertyNames.remove('api'))
                   #set ($discard = $propertyNames.remove('demarcheSimplifiee'))

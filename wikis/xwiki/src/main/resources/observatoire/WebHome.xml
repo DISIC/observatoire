@@ -212,7 +212,7 @@
       </use>
     </class>
     <property>
-      <cache>long</cache>
+      <cache>default</cache>
     </property>
     <property>
       <code>require.config({
@@ -614,6 +614,14 @@ var XWiki = (function (XWiki) {
         } else {
           var data = row.data();
           #set ($hasAdmin = $services.security.authorization.hasAccess('admin'))
+          ## Value of "isAdministrateurMinisteriel" is present in the skin, but needs to be computed locally because the
+          ## script is not executed in the skin context
+          #set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
+          #if ($xcontext.userReference != $NULL)
+            #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+            #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
+            #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+          #end
           #if ($hasAdmin || $isAdministrateurMinisteriel)
             var parameters = new URLSearchParams(window.location.search);
             // Show the toolbar row only for the live version of the dashboard
