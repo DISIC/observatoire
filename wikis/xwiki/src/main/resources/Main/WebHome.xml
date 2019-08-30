@@ -67,7 +67,7 @@
         (%class='col-xs-12 col-md-4'%)(((
           (%class='sat-stat'%) (((
             (%class='stat-statvalue'%)
-            43%
+            65%
 
             (%class='stat-statdescription'%)
             (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-smile-o'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Usagers satisfaits(%%)
