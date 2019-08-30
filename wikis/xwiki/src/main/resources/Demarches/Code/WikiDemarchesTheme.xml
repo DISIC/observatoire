@@ -1470,6 +1470,11 @@ abbr.asterix {
   }
 }
 
+/* Get rid of special display of internal vs. external links */
+span.wikiexternallink {
+  background-image: none;
+  padding-right: unset;
+}
 
 
 

@@ -58,20 +58,16 @@ wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car v
 #Démarches
 wikidemarches.sitename=observatoire.numerique.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
-wikidemarches.home.title=Nous améliorons les services publics en ligne, grâce à vos avis !
-wikidemarches.home.subtitle=
+wikidemarches.home.title=L'observatoire de la qualité des démarches en ligne.
+wikidemarches.home.subtitle=Nous suivons l'avancement et la qualité de la dématerialisation des 250 démarches administratives les plus utilisées par les particuliers et les entreprises.
 wikidemarches.sitemap=Plan du site
 wikidemarches.by-dinsic=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique et du système d’information et de communication de l’État"&gt;DINSIC&lt;/abbr&gt;&lt;/a&gt; .
-wikidemarches.home.subsearchhint=Votre démarche n'était pas disponible en ligne&amp;nbsp;? Vous pourrez demander sa dématérialisation.
 wikidemarches.search.label=Chercher une démarche
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
-wikidemarches.mostwanted.title=Démarches les plus courantes
 wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
-wikidemarches.observatoire.title=Où en est-on ?
-wikidemarches.observatoire.content=**L'observatoire de la qualité des services numériques** vous permet de suivre l'avancée et la qualité de la dématérialisation des 250 démarches phares de l'État.\\\\\\\\**En mai 2019**, 67% d'entre elles peuvent être réalisées par voie électronique. Nous visons 100% en 2022.\\\\\\\\Le déploiement du questionnaire de satisfaction a commencé.
-wikidemarches.observatoire.button=Consulter l'observatoire
+wikidemarches.observatoire.button=Consulter les 250 démarches
 wikidemarches.observatoire.title=Observatoire de la dématérialisation
 wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation {0}
 wikidemarches.observatoire.help-link=En savoir plus sur le tableau de bord
@@ -79,19 +75,6 @@ wikidemarches.observatoire.date-ouverture=Date d'ouverture du service dématéri
 wikidemarches.observatoire.volumetrie=Volumétrie totale de la démarche
 wikidemarches.observatoire.pourcentage-recours-demat=Pourcentage de recours à la voie dématérialisée
 wikidemarches.observatoire.avis=Nombre d'avis usagers recueillis
-wikidemarches.evaluation.title=Comment la qualité des démarches en ligne de l'État est-elle évaluée ?
-wikidemarches.evaluation.content.firstcol=Nous testons la conformité des démarches par rapport à des critères de qualité définis.
-wikidemarches.evaluation.content.secondcol=Nous recueillons l'avis des usagers à la fin de celles-ci.
-wikidemarches.evaluation.content.thirdcol=Nous analysons les résultats pour identifier les démarches à améliorer en priorité.
-wikidemarches.evaluation.icon.firstcol=cogs
-wikidemarches.evaluation.icon.secondcol=smile-o
-wikidemarches.evaluation.icon.thirdcol=search
-wikidemarches.help.title=Comment donner votre avis sur une démarche ?
-wikidemarches.help.content=L'ensemble des démarches en ligne de l'État intègrent progressivement un bouton MonAvis, menant vers un questionnaire de satisfaction.
-wikidemarches.help.content.step1=Effectuez une démarche en ligne
-wikidemarches.help.content.step2=À la fin de la démarche, répondez au questionnaire de satisfaction via un bouton MonAvis
-wikidemarches.help.image.title=Comment donner son avis?
-wikidemarches.help.button=En savoir plus
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche

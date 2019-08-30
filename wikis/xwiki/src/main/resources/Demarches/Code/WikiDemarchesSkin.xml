@@ -744,7 +744,7 @@
     #end
     &lt;span class='demarches-titlebar-sitename'&gt;
       &lt;span class='demarches-titlebar-name'&gt;
-        &lt;${eltname}&gt;$siteName.replace('.fr', '.&lt;i&gt;fr&lt;/i&gt;')&lt;/${eltname}&gt;
+        &lt;${eltname}&gt;$siteName.replace('.numerique.gouv.fr', '.&lt;i&gt;numerique.gouv.fr&lt;/i&gt;')&lt;/${eltname}&gt;
       &lt;/span&gt;
       ## &lt;span class='demarches-titlebar-headline'&gt;$services.localization.render('wikidemarches.siteheadline')&lt;/span&gt;
     &lt;/span&gt;
