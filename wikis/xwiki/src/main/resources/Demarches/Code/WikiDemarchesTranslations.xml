@@ -67,6 +67,7 @@ wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
+wikidemarches.evalrow.button=En savoir plus
 wikidemarches.observatoire.button=Consulter les 250 démarches
 wikidemarches.observatoire.title=Observatoire de la dématérialisation
 wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation {0}

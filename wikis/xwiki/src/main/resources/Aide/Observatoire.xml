@@ -43,33 +43,41 @@
 
 == Description des rubriques du tableau ==
 
-=== Peut être réalisée complètement en ligne ===
+=== Démarche dématérialisées ===
 
 « Oui » si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; « Non » dans le cas contraire ; « Expérimentation » si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; « Déploiement partiel » si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).
 
-=== Identification FranceConnect ===
-
-Possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise : « Oui » si la démarche propose le bouton FranceConnect ;  « Non » si ce n’est pas le cas ; « n/a » si le critère est sans objet (elle ne nécessite pas l’identification de l’usager ou concerne les entreprises) ; « non disponible » si l'information n'est pas disponible.
-
-=== Accessibilité smartphone ===
-
-Possibilité d’utiliser les services en ligne sur un smartphone : « Oui » si le critère est respecté ; « Non » si ce n’est pas le cas ; « Partiel » si la démarche est accessible sur smartphone mais avec des défauts d’affichage ou si certaines pages ne sont pas accessibles ;  « n/a » si le critère est non applicable (absence d'interface utilisateur par exemple pour la DSN par exemple) ; « non disponible » si l'information n'est pas disponible.
-
-=== Support usager de qualité ===
-
-Qualité du support apporté aux utilisateurs : ce critère permet de vérifier si chaque démarche en ligne propose des moyens de contact facilement accessibles (au moins deux), ainsi qu’un accompagnement humain personnalisé : « Oui » si la démarche respecte les deux critères ; « Non » si la démarche ne respecte pas les deux critères ; « Partiel » si l’un des deux critères seulement est respecté ; « non disponible » si l'information n'est pas disponible.
-
-=== Disponibilité / temps de réponse ===
-
-Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur ou égal à 8, « orange » pour un score entre 5 et 7, et « rouge » si le score total est inférieur à 4. La valeur est à « non disponible » si l'information n'est pas disponible.
-
-=== Indice de satisfaction usagers ===
+=== Usagers satisfaits ===
 
 Il n’est affiché que lorsque le nombre d'avis recueillis sur MonAvis est supérieur à 100.
 
 Il est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? » du formulaire MonAvis présent à la fin des démarches administratives. Les réponses ayant reçu l'avis « Pas bien » comptent pour 0, les réponses ayant reçu l'avis « Moyen » comptent pour 1, les réponses ayant reçu l'avis « Très bien » comptent pour 2. Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100 %.
 
 Si l’administration n’a pas encore placé le bouton MonAvis à la fin des démarches le tableau affiche l’information « A venir ».
+
+=== Optimisé sur mobile ===
+
+Possibilité d’utiliser les services en ligne sur un smartphone : « Oui » si le critère est respecté ; « Non » si ce n’est pas le cas ; « Partiel » si la démarche est accessible sur smartphone mais avec des défauts d’affichage ou si certaines pages ne sont pas accessibles ;  « n/a » si le critère est non applicable (absence d'interface utilisateur par exemple pour la DSN par exemple) ; « non disponible » si l'information n'est pas disponible.
+
+=== Support de qualité ===
+
+Qualité du support apporté aux utilisateurs : ce critère permet de vérifier si chaque démarche en ligne propose des moyens de contact facilement accessibles (au moins deux), ainsi qu’un accompagnement humain personnalisé : « Oui » si la démarche respecte les deux critères ; « Non » si la démarche ne respecte pas les deux critères ; « Partiel » si l’un des deux critères seulement est respecté ; « non disponible » si l'information n'est pas disponible.
+
+=== Disponibilité du service ===
+
+Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur ou égal à 8, « orange » pour un score entre 5 et 7, et « rouge » si le score total est inférieur à 4. La valeur est à « non disponible » si l'information n'est pas disponible.
+
+=== Intégration FranceConnect ===
+
+Possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise : « Oui » si la démarche propose le bouton FranceConnect ;  « Non » si ce n’est pas le cas ; « n/a » si le critère est sans objet (elle ne nécessite pas l’identification de l’usager ou concerne les entreprises) ; « non disponible » si l'information n'est pas disponible.
+
+=== Couverture Accessibilité ===
+
+A venir
+
+=== Dites-le nous une fois ===
+
+A venir
 
 === Date d'ouverture du service dématérialisé ===
 

@@ -131,13 +131,12 @@
   (%class='row demarches-evalrow'%)(((
     #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
     (%class='container'%)(((
-      (%class='row'%)(((
-        (%class='col-xs-12'%)(((
-          ==${evalHelpDoc.title}==
-        )))
+       ==${evalHelpDoc.title}==
 
-        {{display reference='$evalHelpDoc.fullName' /}}
-      )))
+      {{display reference='$evalHelpDoc.fullName' /}}
+
+      (%class='seemore-button-container'%)
+      [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
     )))
   )))
   (%class='row demarches-morerow'%)(((
@@ -439,33 +438,27 @@
 
 .demarches-evalrow, .demarches-morerow  {
   text-align: center;
-
   h2 {
     margin-bottom: @section-padding / 2;
-  }
-
-  p {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
 .demarches-evalrow {
   padding-bottom: 0;
+  .seemore-button-container {
+    margin-bottom: 0;
+    padding-top: @section-padding;
+  }
 }
 
 .evalrow-cards {
   text-align: center;
   .evalrow-card {
-    height: 20em;
     font-size: 0.85em;
     margin-bottom: @grid-gutter-width / 2;
     border-radius: @grid-gutter-width / 2;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
-    padding-left: @grid-gutter-width / 2;
-    padding-right: @grid-gutter-width / 2;
-    padding-top: @grid-gutter-width / 2;
+    padding: @grid-gutter-width / 2;
     p {
       width: 100%;
     }
@@ -493,6 +486,8 @@
 /* Some adjustment on larger devices:
  * * add max width to the searchbox
  * * larger titles
+ * * all cards explaining how demarche is evaluated get fixed height to display nicely.
+ * * the paragraphs with explanations are 80% of the width
  */
 @media (min-width: @screen-md-min) {
   .demarches-mydemarchesrow {
@@ -500,6 +495,13 @@
       max-width: 80%;
     }
   }
+
+  .evalrow-cards {
+    .evalrow-card {
+      height: 21em;
+    }
+  }
+
   .xcontent {
     font-size: 1.1em;
   }
@@ -514,6 +516,14 @@
 
   .demarches-titlerow h2.demarches-headline {
     font-size: 3em;
+  }
+
+  .demarches-evalrow, .demarches-morerow {
+    p {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }</code>
     </property>

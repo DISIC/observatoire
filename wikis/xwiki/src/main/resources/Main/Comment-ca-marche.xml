@@ -43,14 +43,12 @@
 #set($discard = $xwiki.ssx.use('Main.WebHome'))
 {{/velocity}}
 
-(% class="row evalrow-cards" %)
-(((
-(%class='col-xs-12%)(((
 Nous avons travaillé avec les différents ministères afin de recenser **les 250 démarches administratives les plus utilisées par les usagers**, particuliers ou professionnels. Nous avons ensuite établi **8 indicateurs pour nous permettre de suivre l’avancée de la dématéralisation** de façon très concrète :
 
 
 
-)))
+(% class="row evalrow-cards" %)
+(((
 (% class="col-md-3 col-xs-12"%)
 (((
 (%class='evalrow-card'%) 
