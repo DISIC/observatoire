@@ -111,12 +111,12 @@
       &lt;th&gt;Démarche&lt;/th&gt;
       &lt;th&gt;Ministère&lt;/th&gt;
       &lt;th&gt;Regroupement&lt;/th&gt;
-      &lt;th&gt;Peut être réalisée complètement en ligne&lt;/th&gt;
-      &lt;th&gt;Identification FranceConnect&lt;/th&gt;
-      &lt;th&gt;Accessibilité smartphone&lt;/th&gt;
-      &lt;th&gt;Support usager de qualité&lt;/th&gt;
-      &lt;th&gt;Disponibilité / temps de réponse&lt;/th&gt;
-      &lt;th&gt;Indice de satisfaction usagers&lt;/th&gt;
+      &lt;th&gt;Démarche dématérialisée&lt;/th&gt;
+      &lt;th&gt;Usagers satisfaits&lt;/th&gt;
+      &lt;th&gt;Optimisé sur mobile&lt;/th&gt;
+      &lt;th&gt;Support de qualité&lt;/th&gt;
+      &lt;th&gt;Disponibilité du service&lt;/th&gt;
+      &lt;th&gt;Intégration FranceConnect&lt;/th&gt;
       &lt;th&gt;Volumétrie&lt;/th&gt;
       &lt;th&gt;Nombre d'avis usagers recueillis&lt;/th&gt;
     &lt;/tr&gt;
@@ -499,12 +499,17 @@ var XWiki = (function (XWiki) {
             }
           },
           {
-            data: "franceConnect",
+            data: "satisfactionIndex",
+            type: "num",
             render: function (data, type, row) {
               if (type === "sort") {
-                return data.display;
+                return data.value;
               } else {
-                return format(data.display, computeBadgeStyle, false);
+                if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
+                  return '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
+                } else {
+                  return format(data.display, computeBadgeStyle,  true, row['id']);
+                }
               }
             }
           },
@@ -536,17 +541,12 @@ var XWiki = (function (XWiki) {
             }
           },
           {
-            data: "satisfactionIndex",
-            type: "num",
+            data: "franceConnect",
             render: function (data, type, row) {
               if (type === "sort") {
-                return data.value;
+                return data.display;
               } else {
-                if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
-                  return '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
-                } else {
-                  return format(data.display, computeBadgeStyle,  true, row['id']);
-                }
+                return format(data.display, computeBadgeStyle, false);
               }
             }
           },
@@ -685,7 +685,6 @@ var XWiki = (function (XWiki) {
 
   return XWiki;
 }(XWiki || {}));
-
 </code>
     </property>
     <property>
