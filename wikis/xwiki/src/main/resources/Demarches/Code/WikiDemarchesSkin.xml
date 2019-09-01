@@ -162,6 +162,15 @@
       #set ($displayAvisFormOnly = true)
     #end
   #end
+#end
+## set the variables indicating how the app is accessed (through what domain name). Possible values: observatoire, voxusagers, cerfa. Defaults to observatoire
+#set($currentDomainKey = 'observatoire')
+## test against the way a current external URL would resolve, since external URLs are using the current access URL.
+#set($testURL = $doc.externalURL)
+#if ($testURL.indexOf('://voxusagers.') &gt;= 0)
+  #set($currentDomainKey = 'voxusagers')
+#elseif($testURL.indexOf('://cerfa.') &gt;= 0)
+  #set($currentDomainKey = 'cerfa')
 #end</content>
     </property>
     <property>
@@ -427,8 +436,14 @@
 &lt;footer id="footerglobal" role="contentinfo"&gt;
   &lt;div class='container'&gt;
     &lt;div class='row'&gt;
-      &lt;div class='col-xs-12 col-md-4 footer-col-sitename'&gt;
-        &lt;h3&gt;$services.localization.render('wikidemarches.sitename')&lt;/h3&gt;
+      ## special handling for voxusagers, to display a different site name and no sitemap (this column takes width 6 instead of 4)
+      #if ($currentDomainKey == 'voxusagers')
+        &lt;div class='col-xs-12 col-md-6 footer-col-sitename'&gt;
+          &lt;h3&gt;$services.localization.render('wikidemarches.sitename').replace('observatoire', 'voxusagers')&lt;/h3&gt;
+      #else
+        &lt;div class='col-xs-12 col-md-4 footer-col-sitename'&gt;
+          &lt;h3&gt;$services.localization.render('wikidemarches.sitename')&lt;/h3&gt;
+      #end
         &lt;p&gt;$services.localization.render('wikidemarches.by-dinsic')&lt;/p&gt;
         &lt;ul class="social-networks"&gt;
           &lt;li&gt;&lt;a href="https://twitter.com/_dinsic" class="twitter" target="_blank"&gt;&lt;span class="fa fa-twitter"&gt;&lt;/span&gt;&lt;/a&gt;
@@ -453,44 +468,48 @@
           #end
         &lt;/ul&gt;
       &lt;/div&gt;
-      &lt;div class='col-xs-12 col-md-8'&gt;
-        &lt;div class='row'&gt;
-          &lt;div class='col-xs-12 col-md-6'&gt;
-            &lt;h3&gt;$services.localization.render('wikidemarches.sitemap')&lt;/h3&gt;
-            &lt;ul&gt;
-               &lt;li&gt;&lt;a href="$xwiki.getURL('observatoire.WebHome')"&gt;$services.localization.render('wikidemarches.observatoire.title')&lt;/a&gt;&lt;/li&gt;
-               &lt;li&gt;&lt;a href=""&gt;$services.localization.render('wikidemarches.help.title')&lt;/a&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/div&gt;
-          &lt;div class='col-xs-12 col-md-6 footer-col-services'&gt;
-            &lt;h3&gt;$services.localization.render('wikidemarches.footer.nosunivers.title')&lt;/h3&gt;
-            #set($nosUnivers = {'numerique.gouv.fr' : 'https://www.numerique.gouv.fr/', 
-                                'voxusagers.gouv.fr' : 'https://voxusagers.gouv.fr/',
-                                'etalab.gouv.fr' : 'https://www.etalab.gouv.fr/', 
-                                'data.gouv.fr' : 'https://data.gouv.fr/',
-                                'beta.gouv.fr' : 'https://beta.gouv.fr/', 
-                                'api.gouv.fr' : 'https://api.gouv.fr/', 
-                                'Nos documents de référence du SI de l’État' : 'https://references.modernisation.gouv.fr/',
-                                'agd.data.gouv.fr' : 'https://agd.data.gouv.fr/'
-                              })
-            #set($nosUniversOrdre = ['numerique.gouv.fr', 'voxusagers.gouv.fr', 'etalab.gouv.fr', 'data.gouv.fr', 'beta.gouv.fr', 'api.gouv.fr', 'Nos documents de référence du SI de l’État', 'agd.data.gouv.fr'])
-            &lt;ul&gt;
-              #foreach($nu in $nosUniversOrdre)
-                &lt;li&gt;&lt;a href="$nosUnivers.get($nu)" target="_blank" title="$nu ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$nu&lt;/a&gt;&lt;/li&gt;
-              #end
-            &lt;/ul&gt;
-            &lt;h3&gt;$services.localization.render('wikidemarches.footer.services.title')&lt;/h3&gt;
-            #set($nosServices = {'franceconnect.gouv.fr' : 'https://franceconnect.gouv.fr/', 
-                                'demarches-simplifiees.fr' : 'https://demarches-simplifiees.fr/'
-                              })
-            #set($nosServicesOrdre = ['franceconnect.gouv.fr', 'demarches-simplifiees.fr'])
-            &lt;ul&gt;
-              #foreach($ns in $nosServicesOrdre)
-                &lt;li&gt;&lt;a href="$nosServices.get($ns)" target="_blank" title="$ns ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$ns&lt;/a&gt;&lt;/li&gt;
-              #end
-            &lt;/ul&gt;
-          &lt;/div&gt;
+      ## special handling for voxusagers, to not display the sitemap since it's the sitemap of the observatoire
+      #if ($currentDomainKey != 'voxusagers')
+        &lt;div class='col-xs-12 col-md-4'&gt;
+          &lt;h3&gt;$services.localization.render('wikidemarches.sitemap')&lt;/h3&gt;
+          &lt;ul&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('observatoire.WebHome')"&gt;$services.localization.render('wikidemarches.observatoire.title')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href=""&gt;$services.localization.render('wikidemarches.help.title')&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
         &lt;/div&gt;
+      #end
+      ## special handling for voxusagers, to not display the sitemap since it's the sitemap of the observatoire. This column gets width 6
+      #set($footerColServicesSize = 4)
+      #if ($currentDomainKey == 'voxusagers')
+        #set($footerColServicesSize = 6)
+      #end
+      &lt;div class="col-xs-12 col-md-${footerColServicesSize} footer-col-services"&gt;
+        &lt;h3&gt;$services.localization.render('wikidemarches.footer.nosunivers.title')&lt;/h3&gt;
+        #set($nosUnivers = {'numerique.gouv.fr' : 'https://www.numerique.gouv.fr/', 
+                            'voxusagers.gouv.fr' : 'https://voxusagers.gouv.fr/',
+                            'etalab.gouv.fr' : 'https://www.etalab.gouv.fr/', 
+                            'data.gouv.fr' : 'https://data.gouv.fr/',
+                            'beta.gouv.fr' : 'https://beta.gouv.fr/', 
+                            'api.gouv.fr' : 'https://api.gouv.fr/', 
+                            'Nos documents de référence du SI de l’État' : 'https://references.modernisation.gouv.fr/',
+                            'agd.data.gouv.fr' : 'https://agd.data.gouv.fr/'
+                          })
+        #set($nosUniversOrdre = ['numerique.gouv.fr', 'voxusagers.gouv.fr', 'etalab.gouv.fr', 'data.gouv.fr', 'beta.gouv.fr', 'api.gouv.fr', 'Nos documents de référence du SI de l’État', 'agd.data.gouv.fr'])
+        &lt;ul&gt;
+          #foreach($nu in $nosUniversOrdre)
+            &lt;li&gt;&lt;a href="$nosUnivers.get($nu)" target="_blank" title="$nu ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$nu&lt;/a&gt;&lt;/li&gt;
+          #end
+        &lt;/ul&gt;
+        &lt;h3&gt;$services.localization.render('wikidemarches.footer.services.title')&lt;/h3&gt;
+        #set($nosServices = {'franceconnect.gouv.fr' : 'https://franceconnect.gouv.fr/', 
+                            'demarches-simplifiees.fr' : 'https://demarches-simplifiees.fr/'
+                          })
+        #set($nosServicesOrdre = ['franceconnect.gouv.fr', 'demarches-simplifiees.fr'])
+        &lt;ul&gt;
+          #foreach($ns in $nosServicesOrdre)
+            &lt;li&gt;&lt;a href="$nosServices.get($ns)" target="_blank" title="$ns ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$ns&lt;/a&gt;&lt;/li&gt;
+          #end
+        &lt;/ul&gt;
       &lt;/div&gt;
       &lt;div class='col-xs-12 footer-col-sites'&gt;
         $services.localization.render('wikidemarches.footer.administrationlinks.intro') : 
@@ -735,6 +754,10 @@
     #set($logoAttr = '')
   #end
   #set ($siteName = $services.localization.render('wikidemarches.sitename'))
+  ## special handling for voxusagers, to display a different site name
+  #if ($currentDomainKey == 'voxusagers')
+    #set ($siteName = $siteName.replace('observatoire', 'voxusagers'))
+  #end
   &lt;$logoElt $logoAttr title="$siteName" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
     &lt;img src="$!logourl" alt="Logo $siteName"/&gt;
     ## Site title next to the logo
