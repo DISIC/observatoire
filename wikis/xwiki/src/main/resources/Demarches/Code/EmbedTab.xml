@@ -92,7 +92,7 @@
           #foreach($clr in ['bleu', 'blanc'])
             &lt;div class='col-xs-12 col-sm-6'&gt;
               &lt;h2&gt;$services.localization.render("wikidemarches.demarche.embed.button-${clr}.title")&lt;/h2&gt;
-              #set ($buttonImgURL = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/monavis-static/bouton-${clr}.png")
+              #set ($buttonImgURL = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/bouton-${clr}.svg")
               &lt;div class='embed-demo-button'&gt;
                 &lt;img src="$escapetool.xml($buttonImgURL)" alt="$escapetool.xml($buttonAltText)" /&gt;
               &lt;/div&gt;
@@ -105,9 +105,13 @@
                     #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_mode=$escapetool.url($defaultVoteMode)&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
                     #set ($indentSize = '  ')
                     &lt;p class='embed-code-button-hint'&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
+                    ## transform the URLs before creating the button code, to use voxusagers URLs
+                    ## use loose replacements so that they work also for dev / staging servers
+                    #set($voxusagersVoteURL = $voteURL.replace('://observatoire.numerique', '://voxusagers.numerique'))
+                    #set($voxusagersButtonImgURL = $buttonImgURL.replace('://observatoire.numerique', '://voxusagers.numerique'))
                     &lt;textarea readonly='readonly' rows='5'&gt;
-                      $escapetool.xml("&lt;a href=${escapetool.quote}$voteURL${escapetool.quote}&gt;")
-                        ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$buttonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} title=${escapetool.quote}$escapetool.xml($buttonTitle)${escapetool.quote} /&gt;")
+                      $escapetool.xml("&lt;a href=${escapetool.quote}$voxusagersVoteURL${escapetool.quote}&gt;")
+                        ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$voxusagersButtonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} title=${escapetool.quote}$escapetool.xml($buttonTitle)${escapetool.quote} /&gt;")
                       $escapetool.xml("&lt;/a&gt;")
                     &lt;/textarea&gt;
                   #else
