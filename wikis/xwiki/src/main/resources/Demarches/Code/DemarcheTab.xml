@@ -172,16 +172,16 @@
         (% class="xform" %)
         (((
         &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
+        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
         #if ($isRowEditor)
           #set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
         #end
         #if ($action == 'edit')
           #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
-        #end
-        ## Only administrators are allowed to edit property 'top'
-        #if ($hasAdmin)
-          #set ($discard = $propList.add('top'))
+          ## Only administrators are allowed to edit property 'top'
+          #if (!$hasAdmin)
+            #set ($discard = $propList.remove('top'))
+          #end
         #end
         #if ($isSimplifiedForm)
           #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
