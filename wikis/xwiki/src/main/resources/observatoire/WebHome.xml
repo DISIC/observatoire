@@ -212,7 +212,7 @@
       </use>
     </class>
     <property>
-      <cache>default</cache>
+      <cache>forbid</cache>
     </property>
     <property>
       <code>require.config({
