@@ -103,7 +103,7 @@
   'className': 'Demarches.Code.DemarchesClass',
   'translationPrefix': 'demarches.livetable.',
   'tagCloud': true,
-  'rowCount': 100,
+  'rowCount': 10,
   'maxPages': 10,
   'selectedColumn': 'doc.title',
   'defaultOrder': 'asc',
