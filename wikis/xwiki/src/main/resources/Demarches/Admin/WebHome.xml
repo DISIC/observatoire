@@ -49,7 +49,6 @@
 == Démarches
 
 * [[Tableau des démarches&gt;&gt;Demarches.WebHome]]
-* [[Demandes utilisateurs&gt;&gt;Demarches.DemandesUtilisateurs]]
 * [[Liste des démarches non indexées ou indexées plusieurs fois&gt;&gt;SolrIndexChecker]]
 #set ($url = $xwiki.getDocument('FarmTools.DefaultLanguageUpdater').getURL('view','xaction=prepare&amp;wikis=xwiki&amp;spacesList=Demarches'))
 * [[Liste des démarches n'ayant pas de champ « langue »&gt;&gt;path:$url]]
