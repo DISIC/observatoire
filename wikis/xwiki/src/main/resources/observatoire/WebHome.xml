@@ -48,7 +48,7 @@
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.jsx.use($DEMARCHE_SHEET))
 
-#set ($discard = $xwiki.jsx.use($doc.fullName, {'minify': false}))
+#set ($discard = $xwiki.jsx.use($doc.fullName, {'minify': false, 'timestamp': $datetool.systemTime}))
 
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
