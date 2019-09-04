@@ -43,10 +43,12 @@
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
 #set ($live = "$!request.live")
-#set ($demarcheSheetId = 'Demarches.Code.DemarchesSheet')
+#set ($DEMARCHE_SHEET = 'Demarches.Code.DemarchesSheet')
 ## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
-#set ($discard = $xwiki.ssx.use($demarcheSheetId))
-#set ($discard = $xwiki.jsx.use($demarcheSheetId))
+#set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
+#set ($discard = $xwiki.jsx.use($DEMARCHE_SHEET))
+
+#set ($discard = $xwiki.jsx.use($doc.fullName, {'minify': false}))
 
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
@@ -404,7 +406,7 @@ var XWiki = (function (XWiki) {
                 return true;
               });
               },
-              onFailure: function(){ content.insert('Error while...');
+              onFailure: function(){ content.insert('Une erreur s\'est produite lors du chargement du formulaire. Si le problème persiste, merci de contacter l\'administrateur de ce site.');
             }
           });
           return content;
@@ -694,7 +696,7 @@ var XWiki = (function (XWiki) {
       <parse>1</parse>
     </property>
     <property>
-      <use>currentPage</use>
+      <use>onDemand</use>
     </property>
   </object>
   <object>
