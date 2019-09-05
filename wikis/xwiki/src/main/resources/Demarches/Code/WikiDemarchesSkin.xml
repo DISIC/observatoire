@@ -1445,6 +1445,90 @@ $services.localization.render('accountnotactive_email')
   </object>
   <object>
     <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>17</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>fae1441b-8730-4e02-a144-7cb26c1b88bc</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#set ($serverName = $request.serverName)
+#if ($serverName.startsWith('cerfa.numerique'))
+  $response.sendRedirect($xwiki.getURL('cerfa-numerique.404'))
+#else
+#if ($services.distribution.jobStatus &amp;&amp; $services.distribution.jobStatus.state.name() != 'FINISHED' &amp;&amp; $services.distribution.canDisplayDistributionWizard())
+  $response.sendRedirect($xwiki.getURL('XWiki.Distribution', 'distribution', "xredirect=$escapetool.url($xwiki.relativeRequestURL)"))
+#else
+  $response.setStatus(404)
+  #template("startpage.vm")
+  &lt;div class="main"&gt;
+  &lt;div id="mainContentArea"&gt;
+  #template("hierarchy.vm")
+  #set($titleToDisplay = $escapetool.xml($doc.getPlainTitle()))
+  #template('contentheader.vm')
+  #if($xwiki.exists("XWiki.DocumentDoesNotExist"))
+    $xwiki.includeForm("XWiki.DocumentDoesNotExist",false)
+  #else
+    #xwikimessageboxstart($services.localization.render('notice') $services.localization.render('thispagedoesnotexist'))
+    ## Create link
+    #if($hasEdit)
+      #set($url = $doc.getURL("create", $editparams))
+      $services.localization.render('core.viewers.content.doesnotexists.edittocreate', [$url])
+    #end
+    ## UI Extensions, if any.
+    #showExtensions()
+    ## Recycle bin
+    #template("recyclebinlist.vm")
+    #xwikimessageboxend()
+  #end
+  &lt;div class="clearfloats"&gt;&lt;/div&gt;
+  &lt;/div&gt;## mainContentArea
+  &lt;/div&gt;## main
+  #template("endpage.vm")
+#end
+##
+## Display any existing UI Extensions, sorted by order.
+##
+#macro (showExtensions)
+  #foreach ($extension in $services.uix.getExtensions('org.xwiki.platform.docdoesnotexist', {'sortByParameter' : 'order'}))
+    $services.rendering.render($extension.execute(), 'html/5.0')
+  #end
+#end
+#end</content>
+    </property>
+    <property>
+      <path>docdoesnotexist.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
     <number>0</number>
     <className>XWiki.XWikiSkins</className>
     <guid>f9020886-48b3-4f1a-bd54-392f886da30a</guid>
