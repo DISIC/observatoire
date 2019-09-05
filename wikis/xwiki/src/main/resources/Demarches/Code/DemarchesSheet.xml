@@ -103,6 +103,11 @@
       &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_objet')&lt;/dt&gt;
       &lt;dd&gt;$objet&lt;/dd&gt;
     #end
+    #set ($urlDemarche = $demarche.getValue('urlDemarche'))
+    #if ("$!viewMode" == 'cerfa-numerique' &amp;&amp; "$!urlDemarche" != '')
+      &lt;dt&gt;$services.localization.render('Demarches.Code.DemarchesClass_urlDemarche')&lt;/dt&gt;
+      &lt;dd&gt;$urlDemarche&lt;/dd&gt;
+    #end
     #set ($urlInfos = $demarche.getValue('urlInfos'))
     #if ("$!urlInfos" != '')
       &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.plus')&lt;/dt&gt;
