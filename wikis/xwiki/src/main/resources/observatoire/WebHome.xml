@@ -325,7 +325,7 @@ var XWiki = (function (XWiki) {
 
   function init() {
     require(['jquery', 'xwiki-events-bridge', 'datatables', 'css!datatables-css', 'domReady!'], function ($) {
-
+      // Documentation: https://www.xwiki.org/xwiki/bin/view/Documentation/DevGuide/FrontendResources/ModalPopup/
       XWiki.widgets.XPopup = Class.create(XWiki.widgets.ModalPopup, {
        /** Default parameters can be added to the custom class. */
         defaultInteractionParameters : {
@@ -337,8 +337,7 @@ var XWiki = (function (XWiki) {
           $super(
            this.createContent(this.interactionParameters),
             {
-             "show"  : { method : this.showDialog,  keys : [] },
-             "close" : { method : this.closeDialog, keys : [] }
+             "close" : { method : this.closeDialog, keys : ['ESC'] }
             },
             {
                displayCloseButton : true,
@@ -349,12 +348,6 @@ var XWiki = (function (XWiki) {
             }
           );
          this.showDialog();
-         this.setClass("x-modal-popup");
-        },
-        setData : function(data) {
-          this.interactionParameters = Object.extend(Object.clone(this.defaultInteractionParameters), data || {});
-          var content = createContent(data);
-          this.dialogBox._x_contentPlug.update(content);
         },
         /** Get the content of the modal dialog using ajax */
         createContent : function (data) {
