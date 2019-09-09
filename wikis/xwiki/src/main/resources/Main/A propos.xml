@@ -27,47 +27,31 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530628242000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1531297204000</date>
-  <contentUpdateDate>1531297183000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>À propos de NosDemarches.gouv.fr</title>
+  <title>Qui sommes-nous ?</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>Ce site a pour objet de recueillir et d'afficher l'avis des citoyens usagers sur les démarches de l'administration. Pour se renseigner sur les démarches, il convient de passer par le site [[Service-Public.fr&gt;&gt;https://www.service-public.fr/]].
+  <content>== Le gouvernement s’est donné comme objectif la numérisation de toutes les démarches administratives à 2022. ==
 
-== Une nouvelle étape de la dématérialisation des démarches administratives ==
+Offrir de plus en plus de services numériques aux citoyens, c’est bien, mais à condition que la simplicité d’utilisation soit au rendez vous.
 
-100% des démarches administratives accessibles en ligne au 1er janvier 2022 : c’est l’une des mesures phares annoncées par le gouvernement pour accélérer la transformation numérique de l’administration française menée dans le cadre du programme Action Publique 2022.
+== Pour 66 % des Français, les démarches administratives en ligne sont trop compliquées. ==
 
-Premier pas vers cet objectif annoncé lors du Comité interministériel de la transformation publique (CITP) du 1er février 2018 : le lancement en mars dernier, de [[demarches-simplifiees.fr&gt;&gt;https://www.demarches-simplifiees.fr/]], permettant aux administrations de dématérialiser facilement les démarches encore gérées sur papier. Le site comptabilise aujourd’hui plus de 30 000 démarches dématérialisées.
+Et 80 % affirment que la numérisation des démarches conduit à une déshumanisation des services publics. On recense aussi 13 millions de Français dit exclus du numérique, qui sont en difficulté pour effectuer des démarches en ligne.
 
-La direction interministérielle du numérique et du système d’information et de communication de l’Etat (DINSIC) lance aujourd’hui le site NosDemarches.gouv.fr, tableau de bord ouvert et contributif des démarches administratives accessibles en ligne. Destiné aux usagers, NosDemarches.gouv.fr répond à une double ambition :
+== Notre objectif : l’amélioration drastique de l’expérience des démarches en ligne pour tous les citoyens. ==
 
-* mesurer la satisfaction des usagers concernant les démarches en ligne existantes afin d’identifier les démarches exemplaires et celles ayant besoin d'être améliorées,
-* identifier les démarches papier à dématérialiser en priorité.
+Placés auprès du Premier Ministre, nous sommes en charge d’améliorer la qualité des services publics en ligne au sein de la DINSIC (Direction Interministérielle du Numérique). Nous envisageons un futur où les services numériques fonctionnent, et soient facile d’utilisation, attentifs et conviviaux. Pour cela, il faut partir de l’expérience des usagers.
 
-Grâce à NosDemarches.gouv.fr, les usagers, les agents publics ou encore les spécialistes de l’accompagnement des utilisateurs (Maisons de services au public, Point d'Information et de Médiation Multi Services, etc.) pourront :
+En juin 2019, nous avons créé cet observatoire de la qualité des démarches en ligne. À travers l’observatoire, nous suivons l’avancement et la qualité de la dématerialisation des 250 démarches administratives les plus utilisées par les particuliers et les entreprises. Nous faisons tout pour fournir aux plus grand nombre des informations sur la qualité des services publics en ligne, dans une perspective d’amélioration continue.
 
-* donner leur avis sur une démarche en ligne (déclaration d’impôts, demande d’acte de naissance, etc.),
-* consulter les avis exprimés par la communauté des utilisateurs,
-* demander la dématérialisation d’une démarche papier,
-* suivre l’avancement de la dématérialisation des démarches administratives.
-
-Les associations d’usagers et organismes professionnels pourront également y signaler les éventuels problèmes rencontrés par leurs mandants en effectuant leurs démarches en ligne.
-
-NosDemarches.gouv.fr sera régulièrement mis à jour grâce aux retours utilisateurs, dans une logique d’amélioration continue. Cet outil a vocation à devenir le tableau de bord de suivi de la dématérialisation des démarches administratives. Il affichera l’état d’avancement de la dématérialisation aussi bien pour les administrations que pour les usagers, dans une volonté de transparence.
-
-Le gouvernement franchit ainsi une nouvelle étape vers la totalité des démarches administratives accessibles en ligne, et espère ainsi rapprocher les citoyens de leurs administrations et améliorer la qualité des services publics rendus.
-
-(% style="font-size: 1em; margin-left: 2em;" %)
-&gt;Avec cet outil ouvert et contributif, nous souhaitons associer les usagers et utilisateurs de démarches en ligne à la transformation numérique de la France, car celle-ci ne peut se faire sans ceux qui la vivent au quotidien. Mieux connaître vos besoins, vos attentes et vos irritants pour orienter en conséquence la dématérialisation des services publics : c’est cela que permet la nouvelle plateforme nosdemarches.gouv.fr .
-
-(% style="text-align:right" %)
-Mounir Mahjoubi, secrétaire d’Etat auprès du Premier ministre, chargé du Numérique.</content>
+Nous nous appuyons pour cela sur nos propres enquêtes en testant nous mêmes la conformité des démarches par rapport à des critères de qualité définis. Nous recueillons également l’avis des usagers à la fin de chaque démarche, grâce au bouton “je donne mon avis” en cours d’installation sur les sites les plus importants de l’Etat. Enfin, nous analysons les résultats pour identifier avec les administrations les démarches à améliorer en priorité.</content>
 </xwikidoc>
