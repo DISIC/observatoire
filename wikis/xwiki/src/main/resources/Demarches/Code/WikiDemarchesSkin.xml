@@ -1533,6 +1533,249 @@ $services.localization.render('accountnotactive_email')
   </object>
   <object>
     <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>18</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>a86904dd-ebf0-4e07-9558-12e50a94ac15</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>### Ensure this template is only called once (for performance reasons), since it's called from several places
+#if ($hasMenuMacrosBeenCalled)
+  #break
+#else
+  #set ($hasMenuMacrosBeenCalled = true)
+#end
+###
+###    GLOBALS
+###
+#set ($isAdminAppInstalled = $xwiki.exists($services.model.createDocumentReference('', 'XWiki', 'AdminSheet')))
+###
+###    Toplevel Menu
+###
+#macro(xwikitopmenustart)
+  &lt;nav class="navbar navbar-default actionmenu"&gt;
+    &lt;div class="container"&gt;
+      ## Brand and toggle get grouped for better mobile display
+      &lt;div class="navbar-header"&gt;
+        #if (!$displayPageHeader)
+          #template("companylogo.vm")
+        #end
+      &lt;/div&gt;
+      ## Collect the nav links, forms, and other content for toggling
+      &lt;div id="xwikimainmenu"&gt;
+#end
+
+###
+###    Toplevel Menu
+###
+#macro(xwikitopmenuend)
+      &lt;/div&gt;## /.navbar-collapse
+    &lt;/div&gt; ## / container-fluid
+  &lt;/nav&gt;
+#end
+
+###
+###    Toplevel Left Menu
+###
+#macro(xwikitopmenuleftstart)
+  &lt;ul class="nav navbar-nav navbar-left"&gt;
+    #submenuseparator()
+#end
+
+###
+###    Toplevel Left Menu
+###
+#macro(xwikitopmenuleftend)
+  &lt;/ul&gt;
+#end
+
+###
+###    Toplevel Right Menu
+###
+#macro(xwikitopmenurightstart)
+  &lt;ul class="nav navbar-nav navbar-right"&gt;
+#end
+
+###
+###    Toplevel Right Menu
+###
+#macro(xwikitopmenurightend)
+  &lt;/ul&gt;
+#end
+
+###
+###    Toplevel Menu entry with subitems
+###
+### Generate a menu entry and start the subitem section
+###
+### @param actionurl The URL this entry points to
+### @param linktext The menu item text
+###
+#macro(xwikitopmenuentrystart $actionurl $linktext $id $class $icon $iconImg)
+  #set($sep = '__SEPARATOR__')
+  #set($linkName = $linktext)
+  #set($linkTitle = $linktext) 
+  #if ($linktext.contains($sep))
+    #set($linkWords = $linktext.split($sep, 2))
+    #set($linkName = $linkWords.get(1))
+    #set($linkTitle = "${linkWords.get(0)}: ${linkWords.get(1)}")
+  #end
+  &lt;li class="dropdown dropdown-split text-left" #if(!$stringtool.isBlank($id))id="$id"#end&gt;
+    ## The menu label. On large screens (tablet and desktop) the label is a link that triggers the default menu action
+    ## (e.g. navigation) and the menu is opened using a separated caret. On extra small screens (phones) the label opens
+    ## the menu and the default menu action is the first item in the menu.
+    &lt;a href="$actionurl" class="dropdown-split-left dropdown-toggle $!class" data-toggle="dropdown" title="$linkTitle"&gt;
+      ## This caret is displayed only on extra small screens to indicate that the label toggles the menu.
+      #glyphicon($icon)$!{iconImg} $linkName &lt;b class="caret"&gt;&lt;/b&gt;
+    ## Don't leave any space between the anchors because they have display:inline-block on large screens.
+    &lt;/a&gt;&lt;a href="#" class="dropdown-split-right dropdown-toggle hidden-xs $!class" data-toggle="dropdown"&gt;
+      ## This caret is used to toggle the menu on large screens (tablet and desktop).
+      &lt;b class="caret"&gt;&lt;/b&gt;
+    &lt;/a&gt;
+    &lt;ul class="dropdown-menu"&gt;
+#end
+
+###
+###    Toplevel Menu entry without subitems
+###
+### Generate a menu entry withut subitems
+###
+### @param actionurl The URL this entry points to
+### @param linktext The menu item text
+###
+#macro(xwikitopmenuentry $actionurl $linktext $id $class $icon $extraAttributes)
+  #submenuitem($actionurl $linktext $id $class $icon $extraAttributes)
+#end
+
+###
+###    Menu subitem entry
+###
+### Generate a submenu entry
+###
+### @param actionurl The URL this entry points to
+### @param linktext The menu item text
+###
+#macro(submenuitem $actionurl $linktext $linkid $class $icon $extraAttributes)
+  #set($sep = '__SEPARATOR__')
+  #set($linkName = $linktext)
+  #set($linkTitle = $linktext) 
+  #if ($linktext.contains($sep))
+    #set($linkWords = $linktext.split($sep))
+    #set($linkName = $linkWords.get(1))
+    #set($linkTitle = "${linkWords.get(0)}: ${linkWords.get(1)}")
+  #end
+  &lt;li class="$!class"&gt;&lt;a href="$actionurl" #if(!$stringtool.isBlank($linkid))id="$linkid"#end title="$linkTitle" $!extraAttributes&gt;$services.icon.renderHTML($icon) $linkName&lt;/a&gt;&lt;/li&gt;
+#end
+
+###
+###    Menu disabled subitem entry
+###
+### Generate a disabled submenu entry
+###
+### @param text The menu item text
+###
+#macro(submenuitemdisabled $text)
+&lt;span class="submenuitem disable"&gt;$text&lt;/span&gt;
+#end
+
+###
+###    Toplevel Menu entry separator
+###
+#macro(xwikitopmenuseparator)
+  &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
+#end
+
+###
+###    Menu submenu separator
+###
+#macro(submenuseparator)
+  &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
+#end
+
+###
+###    Toplevel Menu entry end
+###
+### End the subitem section
+###
+#macro(xwikitopmenuentryend)
+    &lt;/ul&gt;
+  &lt;/li&gt;
+#end
+
+#macro(xwikibutton $actionurl $linktext $id $class $icon)
+  &lt;a href="$actionurl" class="btn $!class" role="button" #if(!$stringtool.isBlank($id))id="$id"#end&gt;#glyphicon($icon) $linktext&lt;/a&gt;
+#end
+
+#macro(xwikibuttonentrystart $actionurl $linktext $id $class $icon)
+  &lt;div class="btn-group text-left" #if(!$stringtool.isBlank($id))id="$id"#end&gt;
+    &lt;button type="button" class="btn $!class dropdown-toggle" data-toggle="dropdown"&gt;#glyphicon($icon) $linktext &lt;span class="caret"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" role="menu"&gt;
+#end
+
+#macro(xwikisplitbuttonentrystart $actionurl $linktext $id $class $icon)
+  &lt;div class="btn-group text-left" #if(!$stringtool.isBlank($id))id="$id"#end&gt;
+    &lt;a href="$actionurl" class="btn $!class"&gt;#glyphicon($icon) $linktext&lt;/a&gt;
+    &lt;button type="button" class="btn $!class dropdown-toggle" data-toggle="dropdown"&gt;
+      &lt;span class="caret"&gt;&lt;/span&gt;
+      &lt;span class="sr-only"&gt;Toggle Dropdown&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" role="menu"&gt;
+#end
+
+#macro(xwikibuttonentryend $actionurl $linktext $id $class $icon)
+    &lt;/ul&gt;
+  &lt;/div&gt;
+#end
+
+#**
+ * Display extension points only if the author of the UIX has the admin right on the wiki.
+ *
+ * @param $name name of the extension points to display
+ * @since 7.3RC1
+ *#
+#macro(displaySimpleSecureUIX $name)
+  #foreach($uix in $services.uix.getExtensions($name, {'sortByParameter' : 'order'}))
+    #if ($services.security.authorization.hasAccess('admin', $uix.authorReference, $services.wiki.currentWikiDescriptor.reference))
+      $services.rendering.render($uix.execute(), 'html/5.0')
+    #end
+  #end
+#end</content>
+    </property>
+    <property>
+      <path>menus_macros.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
     <number>0</number>
     <className>XWiki.XWikiSkins</className>
     <guid>f9020886-48b3-4f1a-bd54-392f886da30a</guid>
