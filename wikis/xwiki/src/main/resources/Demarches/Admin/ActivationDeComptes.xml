@@ -40,72 +40,178 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-
-{{html wiki="true"}}
-#if ("$!request.action" == "activate" &amp;&amp; $services.csrf.isTokenValid($request.csrf))
+#set ($action = "$!request.action")
+#if (($action == 'activate' || $action == 'delete') &amp;&amp; $services.csrf.isTokenValid($request.csrf))
   #set ($userIds = $request.getParameterValues('id'))
   #if ($userIds.size() &gt; 0)
-    Le(s) compte(s) suivant(s) a(ont) été activé(s) :
-    &lt;ul&gt;
+    Le(s) compte(s) suivant(s) a(ont) été#if ($action == 'activate') activé(s)#else supprimés#end :
     #foreach ($userId in $userIds)
       #set ($userPage = $xwiki.getDocument($userId))
-      #set ($userObject = $userPage.getObject('XWiki.XWikiUsers'))
-      #set ($discard = $userObject.set('active', 1))
-      #set ($email = $userObject.getProperty('email').value)
-      #set ($discard = $userPage.save('Activation du compte'))
-      ## Send notification e-mail to user
-      #set ($mailTemplateReference = $services.model.createDocumentReference('', ['Demarches', 'Code'], 'ActivatedAccountEmailTemplate'))
-      #set ($from = $services.mailsender.configuration.fromAddress)
-      #set ($homeUrl = $xwiki.getDocument('Main.WebHome').externalURL)
-      #set ($message = $services.mailsender.createMessage('template', $mailTemplateReference, {'from' : $from, 'to' : $email, 'language' : $xcontext.locale}))
-      #set ($mailResult = $services.mailsender.send([$message], 'database'))
-      #if ($services.mailsender.lastError)
-        #displayError($exceptiontool.getStackTrace($services.mailsender.lastError))
-      #else
-        ## Send the message and wait for it to be sent or for any error to be raised.
+      #if ($action == 'activate')
+        #set ($userObject = $userPage.getObject('XWiki.XWikiUsers'))
+        #set ($discard = $userObject.set('active', 1))
+        #set ($email = $userObject.getProperty('email').value)
+        #set ($discard = $userPage.save('Activation du compte'))
+        ## Send notification e-mail to user
+        #set ($mailTemplateReference = $services.model.createDocumentReference('', ['Demarches', 'Code'], 'ActivatedAccountEmailTemplate'))
+        #set ($from = $services.mailsender.configuration.fromAddress)
+        #set ($homeUrl = $xwiki.getDocument('Main.WebHome').externalURL)
+        #set ($message = $services.mailsender.createMessage('template', $mailTemplateReference, {'from' : $from, 'to' : $email, 'language' : $xcontext.locale}))
         #set ($mailResult = $services.mailsender.send([$message], 'database'))
-        ## Check for errors during the send
         #if ($services.mailsender.lastError)
           #displayError($exceptiontool.getStackTrace($services.mailsender.lastError))
         #else
-          #set ($failedMailStatuses = $mailResult.statusResult.getAllErrors())
-          #if ($failedMailStatuses.hasNext())
-            #set ($mailStatus = $failedMailStatuses.next())
-            #displayError($mailStatus.errorDescription)
+          ## Send the message and wait for it to be sent or for any error to be raised.
+          #set ($mailResult = $services.mailsender.send([$message], 'database'))
+          ## Check for errors during the send
+          #if ($services.mailsender.lastError)
+            #displayError($exceptiontool.getStackTrace($services.mailsender.lastError))
           #else
-            &lt;li&gt;&lt;a href="$xwiki.getURL($userId)"&gt;$userId&lt;/li&gt;
+            #set ($failedMailStatuses = $mailResult.statusResult.getAllErrors())
+            #if ($failedMailStatuses.hasNext())
+              #set ($mailStatus = $failedMailStatuses.next())
+              #displayError($mailStatus.errorDescription)
+            #else
+              * [[$userId]]
+            #end
           #end
         #end
+      #elseif ($action == 'delete')
+        #set ($discard = $userPage.delete())
+        * $userId
       #end
     #end
-    &lt;/ul&gt;
   #end
 #end
-
+{{html clean="false"}}
 #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop where obj.name = doc.fullName and obj.className = 'XWiki.XWikiUsers' and prop.id.id = obj.id and prop.id.name='active' and prop.value = 0 ")
 #set ($entries = $services.query.hql($hql).execute())
 &lt;form action="" method="post"&gt;
-
-#if ($entries.size() &gt; 0)
-&lt;h2&gt;Comptes utilisateurs inactifs&lt;/h2&gt;
-
-&lt;ul&gt;
-#foreach ($entry in $entries)
-&lt;li&gt;&lt;input type="checkbox" name="id" value="$escapetool.url($entry)"&gt;&lt;a href="$xwiki.getURL($entry)"&gt;$entry&lt;/a&gt;&lt;/li&gt;
-#end
-&lt;/ul&gt;
-
-&lt;input type="hidden" name="csrf" value="$services.csrf.token" /&gt;
-&lt;input type="hidden" name="action" value="activate" /&gt;
-&lt;input type="submit" class="btn btn-primary" value="Activer les comptes sélectionnés" /&gt;
-&lt;/form&gt;
+  #if ($entries.size() &gt; 0)
+    &lt;h2&gt;Comptes utilisateurs inactifs&lt;/h2&gt;
+    &lt;ul&gt;
+      #foreach ($entry in $entries)
+        &lt;li&gt;&lt;input type="checkbox" name="id" value="$escapetool.url($entry)"/&gt;&lt;a href="$xwiki.getURL($entry)"&gt;$entry&lt;/a&gt;&lt;/li&gt;
+      #end
+    &lt;/ul&gt;
+    &lt;div&gt;&lt;input type="checkbox" name="check-all"/&gt;Tout sélectionner&lt;/div&gt;
+    &lt;input type="hidden" name="csrf" value="$services.csrf.token" /&gt;
+    &lt;button type="submit" class="btn btn-primary" name="action" value="activate"&gt;Activer les comptes sélectionnés&lt;/button&gt;
+    &lt;button type="submit" class="btn btn-primary" name="action" value="delete"&gt;Supprimer les comptes sélectionnés&lt;/button&gt;
+  &lt;/form&gt;
 #else
-{{info}}
-Aucun compte utilisateur n'est à activer.
-{{/info}}
+  {{info}}
+  Aucun compte utilisateur n'est à activer.
+  {{/info}}
 #end
 
 {{/html}}
 
 {{/velocity}}</content>
+  <object>
+    <name>Demarches.Admin.ActivationDeComptes</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>1ab48a62-4296-4446-9437-d7249f0ff4ad</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>function init() {
+  require(['jquery'], function($) {
+    $("[name='check-all']").on("click", function(event) {
+      var status = event.target.checked;
+      if (status) {
+        $("input[name='id']").prop('checked', true);
+      } else {
+        $("input[type='checkbox']").prop('checked', false);
+      }
+    });
+  });
+}
+(XWiki &amp;&amp; XWiki.domIsLoaded &amp;&amp; init()) || document.observe("xwiki:dom:loaded", init);</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
 </xwikidoc>
