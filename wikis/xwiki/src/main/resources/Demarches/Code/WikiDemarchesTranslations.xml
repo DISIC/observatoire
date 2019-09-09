@@ -61,7 +61,9 @@ wikidemarches.siteheadline=Améliorons les services publics en ligne
 wikidemarches.home.title=L'observatoire de la qualité des démarches en ligne.
 wikidemarches.home.subtitle=Nous suivons l'avancement et la qualité de la dématerialisation des 250 démarches administratives les plus utilisées par les particuliers et les entreprises.
 wikidemarches.sitemap=Plan du site
-wikidemarches.by-dinsic=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique et du système d’information et de communication de l’État"&gt;DINSIC&lt;/abbr&gt;&lt;/a&gt; .
+wikidemarches.by-dinsic=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique et du système d’information et de communication de l’État"&gt;DINSIC&lt;/abbr&gt;&lt;/a&gt;
+wikidemarches.qui-sommes-nous=Qui sommes-nous ?
+wikidemarches.code-open-source=Code open source
 wikidemarches.search.label=Chercher une démarche
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
@@ -72,6 +74,7 @@ wikidemarches.observatoire.button=Consulter les 250 démarches
 wikidemarches.observatoire.title=Observatoire de la dématérialisation
 wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation {0}
 wikidemarches.observatoire.help-link=En savoir plus sur le tableau de bord
+wikidemarches.observatoire.help-link-observatoire=En savoir plus sur l'observatoire
 wikidemarches.observatoire.date-ouverture=Date d'ouverture du service dématérialisé
 wikidemarches.observatoire.volumetrie=Volumétrie totale de la démarche
 wikidemarches.observatoire.pourcentage-recours-demat=Pourcentage de recours à la voie dématérialisée

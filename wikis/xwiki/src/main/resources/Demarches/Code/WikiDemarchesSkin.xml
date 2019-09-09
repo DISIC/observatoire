@@ -452,6 +452,7 @@
         &lt;ul class="emphasis"&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="https://github.com/DISIC/wikidemarches"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
         &lt;ul class="emphasis"&gt;
@@ -474,7 +475,8 @@
           &lt;h3&gt;$services.localization.render('wikidemarches.sitemap')&lt;/h3&gt;
           &lt;ul&gt;
              &lt;li&gt;&lt;a href="$xwiki.getURL('observatoire.WebHome')"&gt;$services.localization.render('wikidemarches.observatoire.title')&lt;/a&gt;&lt;/li&gt;
-             &lt;li&gt;&lt;a href=""&gt;$services.localization.render('wikidemarches.help.title')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('Aide.Observatoire')"&gt;$services.localization.render('wikidemarches.observatoire.help-link-observatoire')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.A propos')"&gt;$services.localization.render('wikidemarches.qui-sommes-nous')&lt;/a&gt;&lt;/li&gt;
           &lt;/ul&gt;
         &lt;/div&gt;
       #end
@@ -491,10 +493,12 @@
                             'data.gouv.fr' : 'https://data.gouv.fr/',
                             'beta.gouv.fr' : 'https://beta.gouv.fr/', 
                             'api.gouv.fr' : 'https://api.gouv.fr/', 
-                            'Nos documents de référence du SI de l’État' : 'https://references.modernisation.gouv.fr/',
-                            'agd.data.gouv.fr' : 'https://agd.data.gouv.fr/'
+                            'agd.data.gouv.fr' : 'https://agd.data.gouv.fr/',
+                            'Nos documents de référence' : 'https://references.modernisation.gouv.fr/',
+                            'Communauté UX design' : 'https://www.modernisation.gouv.fr/le-hub-des-communautes/communaute-ux'
+
                           })
-        #set($nosUniversOrdre = ['numerique.gouv.fr', 'voxusagers.gouv.fr', 'etalab.gouv.fr', 'data.gouv.fr', 'beta.gouv.fr', 'api.gouv.fr', 'Nos documents de référence du SI de l’État', 'agd.data.gouv.fr'])
+        #set($nosUniversOrdre = ['numerique.gouv.fr', 'voxusagers.gouv.fr', 'etalab.gouv.fr', 'data.gouv.fr', 'beta.gouv.fr', 'api.gouv.fr', 'agd.data.gouv.fr', 'Nos documents de référence', 'Communauté UX design'])
         &lt;ul&gt;
           #foreach($nu in $nosUniversOrdre)
             &lt;li&gt;&lt;a href="$nosUnivers.get($nu)" target="_blank" title="$nu ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$nu&lt;/a&gt;&lt;/li&gt;
