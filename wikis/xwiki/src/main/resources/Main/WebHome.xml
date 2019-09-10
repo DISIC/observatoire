@@ -77,7 +77,7 @@
             {{html clean='false'}}67&amp;nbsp;%{{/html}}
 
             (%class='stat-statdescription'%)
-            (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-cloud'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Demarches dématérialisées(%%)
+            (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-cloud'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Démarches numérisées(%%)
           )))
         )))
         (%class='col-xs-12 col-md-4 obsstat-col'%)(((
@@ -371,7 +371,6 @@
   padding: 0 1.5em;
   margin-top: 0;
   margin-bottom: 0;
-  outline: 0;
 }
 
 .demarches-titlerow {
@@ -461,6 +460,7 @@
             padding-left: 1em;
             font-size: 0.9em;
             padding-right: 30%;
+            font-weight: 600;
           }
         }
       }
@@ -472,10 +472,11 @@
       }
     }
     .obsstat-explanation-col {
-      font-size: 0.51em;
+      font-size: 0.6em;
       padding-left: @grid-gutter-width * 2.5;
       padding-right: @grid-gutter-width * 2.5;
       text-align: left;
+      opacity: 0.9;
     }
   }
 }
@@ -530,8 +531,9 @@
   text-align: center;
   margin-bottom: 2.2em; /*~40px*/
   .evalrow-card {
-    margin-bottom: @grid-gutter-width / 2;
-    border-radius: @grid-gutter-width / 2;
+    margin-bottom: @grid-gutter-width;
+    border-radius: @grid-gutter-width;
+    background-color: #fff;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
     padding: @grid-gutter-width @grid-gutter-width * 4/5;
     p {
