@@ -71,26 +71,26 @@
         )))
       )))
       (%class='row obsstats'%)(((
-        (%class='col-xs-12 col-md-4 col-md-offset-2 obsstat-col'%)(((
+        (%class='col-xs-12 col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2 obsstat-col'%)(((
           (%class='demat-stat'%) (((
             (%class='stat-statvalue'%)
             {{html clean='false'}}67&amp;nbsp;%{{/html}}
 
             (%class='stat-statdescription'%)
-            (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-cloud'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Démarches numérisées(%%)
+            (%class='stat-statdescription-icon'%)[[image:Main.Comment-ca-marche@cloud-white.svg]](%%)(%class='stat-statdescription-text'%)Démarches\\numérisées(%%)
           )))
         )))
-        (%class='col-xs-12 col-md-4 obsstat-col'%)(((
+        (%class='col-xs-12 col-md-5 col-lg-4 obsstat-col'%)(((
           (%class='sat-stat'%) (((
             (%class='stat-statvalue'%)
             {{html clean='false'}}65&amp;nbsp;%{{/html}}
 
             (%class='stat-statdescription'%)
-            (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-smile-o'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Usagers satisfaits(%%)
+            (%class='stat-statdescription-icon'%)[[image:Main.Comment-ca-marche@smiley-white.svg]](%%)(%class='stat-statdescription-text'%)Usagers\\satisfaits(%%)
           )))
         )))
         (%class='row'%)(((
-          (%class='col-xs-12 col-md-4 col-md-offset-6 obsstat-explanation-col'%)(((
+          (%class='col-xs-12 col-md-5 col-lg-4 col-md-offset-6 obsstat-explanation-col'%)(((
              Donnée issue des démarches munies du bouton “Je donne mon avis” (2.37% des démarches).
           )))
         )))
@@ -445,22 +445,21 @@
             display: table-cell;
           }
           .stat-statdescription-icon {
+            width: 2.8em;
+            height: 2.8em;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 1.5em;
+            text-align: center;
             vertical-align: middle;
-            span.fa {
-              line-height: 1.6em;
-              font-size: 1.6em;
-              height: 1.6em;
-              width: 1.6em;
-              text-align: center;
-              border-radius: 0.8em;
-              background-color: #fff6;
+            img {
+              max-width: 55%;
             }
           }
           .stat-statdescription-text {
             padding-left: 1em;
             font-size: 0.9em;
-            padding-right: 30%;
             font-weight: 600;
+            vertical-align: middle;
           }
         }
       }
@@ -545,14 +544,21 @@
       margin-top: 1.5em;
       font-weight: bold;
     }
-    .fa {
+    /* the icon p is the first paragraph in the card*/
+    p:first-child {
       background-color: fade(@obs-blue, 10%);
       color: @obs-blue;
-      font-size: 210%;
+      line-height: 4em;
+      width: 4em;
+      height: 4em;
+      border-radius: 2em;
+      margin-left: auto;
+      margin-right: auto;
+      vertical-align: middle;
+      text-align: center;
+    }
+    img {
       line-height: 1.5em;
-      height: 1.5em;
-      width: 1.5em;
-      border-radius: 0.75em;
     }
   }
 }
