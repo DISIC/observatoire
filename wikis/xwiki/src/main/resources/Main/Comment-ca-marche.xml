@@ -34,7 +34,7 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Concrètement, comment ça marche ?</title>
+  <title>Comment évaluons nous la qualité des démarches ?</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -43,7 +43,9 @@
 #set($discard = $xwiki.ssx.use('Main.WebHome'))
 {{/velocity}}
 
-Nous avons travaillé avec les différents ministères afin de recenser **les 250 démarches administratives les plus utilisées par les usagers**, particuliers ou professionnels. Nous avons ensuite établi **8 indicateurs pour nous permettre de suivre l’avancée de la dématéralisation** de façon très concrète :
+Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématéralisation, et l’experience usager de façon très concrète.
+
+
 
 
 
@@ -55,7 +57,7 @@ Nous avons travaillé avec les différents ministères afin de recenser **les 25
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-cloud"&gt;&lt;/span&gt;{{/html}}
 
-=== Démarche dématérialisée ===
+==== Démarche dématérialisée ====
 
 34 % des démarches administratives aujourd’hui ne sont pas faisables en ligne. Notre objectif : que ces 250 démarches soient dématérialisées. 
 )))
@@ -67,7 +69,7 @@ Nous avons travaillé avec les différents ministères afin de recenser **les 25
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-smile-o"&gt;&lt;/span&gt;{{/html}}
 
-=== Usagers satisfaits ===
+==== Usagers satisfaits ====
 
 la première mesure de la qualité d'une démarche c'est la satisfaction des usagers. Un bouton “Je donne mon avis” apparait au terme des démarches.
 )))
@@ -79,7 +81,7 @@ la première mesure de la qualité d'une démarche c'est la satisfaction des usa
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-mobile"&gt;&lt;/span&gt;{{/html}}
 
-=== Optimisé sur mobile ===
+==== Optimisé sur mobile ====
 
 55 % des démarches sont effectuées sur des smartphones. Un critère essentiel pour assurer la bonne expérience de nos usagers.  
 )))
@@ -91,7 +93,7 @@ la première mesure de la qualité d'une démarche c'est la satisfaction des usa
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-phone"&gt;&lt;/span&gt;{{/html}}
 
-=== Support de qualité ===
+==== Support de qualité ====
 
 Chaque démarche en ligne doit proposer des moyens de contact humains personnalisés facilement accessibles. 
 )))
@@ -103,7 +105,7 @@ Chaque démarche en ligne doit proposer des moyens de contact humains personnali
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-clock-o"&gt;&lt;/span&gt;{{/html}}
 
-=== Disponibilité du service ===
+==== Disponibilité du service ====
 
 Nous vérifions 24h/24h la disponibilité et le temps de réponse de chacun des services. 
 )))
@@ -115,7 +117,7 @@ Nous vérifions 24h/24h la disponibilité et le temps de réponse de chacun des 
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-user-o"&gt;&lt;/span&gt;{{/html}}
 
-=== FranceConnect ===
+==== FranceConnect ====
 
 Le système d’authentification FranceConnect permet aux usagers de se connecter aux services publics de façon sécurisée sans avoir à créer de nouveaux mots de passe. 
 )))
@@ -127,7 +129,7 @@ Le système d’authentification FranceConnect permet aux usagers de se connecte
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-wheelchair"&gt;&lt;/span&gt;{{/html}}
 
-=== Accessibilité ===
+==== Accessibilité ====
 
 18 % de français sont aujourd’hui en situation de handicap. La loi oblige tout site à …. L’État doit être exemplaire en la matière. 
 )))
@@ -139,7 +141,7 @@ Le système d’authentification FranceConnect permet aux usagers de se connecte
 (((
 {{html clean='false' wiki='false'}}&lt;span class="fa fa-briefcase"&gt;&lt;/span&gt;{{/html}}
 
-=== Dites-le nous une fois ===
+==== Dites-le nous une fois ====
 
 Personne n'aime se répéter. Nous encourageons les ministères à ouvrir et partager vos données de façon sécurisée afin d’améliorer votre expérience. 
 )))

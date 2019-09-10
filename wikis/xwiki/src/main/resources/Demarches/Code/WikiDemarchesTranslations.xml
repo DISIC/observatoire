@@ -58,8 +58,11 @@ wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car v
 #Démarches
 wikidemarches.sitename=observatoire.numerique.gouv.fr
 wikidemarches.siteheadline=Améliorons les services publics en ligne
-wikidemarches.home.title=L'observatoire de la qualité des démarches en ligne.
-wikidemarches.home.subtitle=Nous suivons l'avancement et la qualité de la dématerialisation des 250 démarches administratives les plus utilisées par les particuliers et les entreprises.
+wikidemarches.home.title=L’observatoire de la qualité des démarches en ligne
+wikidemarches.home.subtitle=Pour des services publics numériques faciles d’utilisation, conviviaux, et centrés sur l’usager.
+wikidemarches.home.explanation=Le gouvernement s’est donné comme objectif la numérisation de toutes les démarches administratives. Pour que ça marche, la simplicité d’utilisation doit être au rendez vous. Or, pour 66% des Français, les démarches administratives en ligne sont trop compliquées. Lancé en mai 2019, cet observatoire suit l’avancement et la qualité de la numérisation. Chaque trimestre, nous évaluons les 250 démarches les plus utilisées.
+wikidemarches.home.observatoire.title=Actuellement
+wikidemarches.home.observatoire.description=Pour donner une moyenne, voici les derniers chiffres sur la totalité des 250 démarches que nous suivons (mai 2019).  
 wikidemarches.sitemap=Plan du site
 wikidemarches.by-dinsic=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique et du système d’information et de communication de l’État"&gt;DINSIC&lt;/abbr&gt;&lt;/a&gt;
 wikidemarches.qui-sommes-nous=Qui sommes-nous ?
@@ -70,7 +73,7 @@ wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.owned-demarches=Mes démarches
 wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
 wikidemarches.evalrow.button=En savoir plus
-wikidemarches.observatoire.button=Consulter les 250 démarches
+wikidemarches.observatoire.button=Consulter l’observatoire
 wikidemarches.observatoire.title=Observatoire de la dématérialisation
 wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation {0}
 wikidemarches.observatoire.help-link=En savoir plus sur le tableau de bord

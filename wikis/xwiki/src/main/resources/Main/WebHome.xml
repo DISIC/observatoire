@@ -46,36 +46,56 @@
   #set($displayTitleContentSeparator = false)
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
-      (%class='demarches-headline'%)
-        == $services.localization.render('wikidemarches.home.title') ==
+      (%class='demarches-headline narrow-width'%)
+      == $services.localization.render('wikidemarches.home.title') ==
 
-        $services.localization.render('wikidemarches.home.subtitle')
+      (%class='demarches-subtitle narrow-width'%)
+      $services.localization.render('wikidemarches.home.subtitle')
+
+      (%class='demarches-explanation narrow-width'%)
+      $services.localization.render('wikidemarches.home.explanation')
+
+      (%class='seemore-button-container'%)
+      [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-default']]
     )))
   )))
   (%class='row demarches-observatoirerow'%)(((
     (%class='container'%)(((
       (%class='row'%)(((
-        (%class='col-xs-12 col-md-4 col-md-offset-2'%)(((
+        (%class='col-xs-12'%)(((
+          (%class='narrow-width'%)
+          === $services.localization.render('wikidemarches.home.observatoire.title') ===
+
+          (%class='narrow-width'%)
+          $services.localization.render('wikidemarches.home.observatoire.description')
+        )))
+      )))
+      (%class='row obsstats'%)(((
+        (%class='col-xs-12 col-md-4 col-md-offset-2 obsstat-col'%)(((
           (%class='demat-stat'%) (((
             (%class='stat-statvalue'%)
-            67%
+            {{html clean='false'}}67&amp;nbsp;%{{/html}}
 
             (%class='stat-statdescription'%)
             (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-cloud'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Demarches dématérialisées(%%)
           )))
         )))
-        (%class='col-xs-12 col-md-4'%)(((
+        (%class='col-xs-12 col-md-4 obsstat-col'%)(((
           (%class='sat-stat'%) (((
             (%class='stat-statvalue'%)
-            65%
+            {{html clean='false'}}65&amp;nbsp;%{{/html}}
 
             (%class='stat-statdescription'%)
             (%class='stat-statdescription-icon'%){{html clean='false'}}&lt;span class='fa fa-smile-o'&gt;&lt;/span&gt;{{/html}}(%%)(%class='stat-statdescription-text'%)Usagers satisfaits(%%)
           )))
         )))
+        (%class='row'%)(((
+          (%class='col-xs-12 col-md-4 col-md-offset-6 obsstat-explanation-col'%)(((
+             Donnée issue des démarches munies du bouton “Je donne mon avis” (2.37% des démarches).
+          )))
+        )))
       )))
-      (%class='seemore-button-container'%)
-      [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-default']]
+
     )))
   )))
   #if (!$isGuest)
@@ -90,7 +110,7 @@
         #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
         (%class='row'%)(((
           (%class='col-xs-12 col-md-4'%)(((
-            ==$services.localization.render('wikidemarches.owned-demarches')==
+            ===$services.localization.render('wikidemarches.owned-demarches')===
           )))
           (%class='col-xs-12 col-md-8'%)(((
             #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
@@ -130,8 +150,9 @@
   #end
   (%class='row demarches-evalrow'%)(((
     #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
-    (%class='container'%)(((
-       ==${evalHelpDoc.title}==
+    (%class='container narrow-width'%)(((
+       (%class='narrow-width'%)
+       ===${evalHelpDoc.title}===
 
       {{display reference='$evalHelpDoc.fullName' /}}
 
@@ -142,9 +163,10 @@
   (%class='row demarches-morerow'%)(((
     #set($afterHelpDoc = $xwiki.getDocument('Main.Et-apres'))
     (%class='container'%)(((
-      (%class='row'%)(((
+      (%class='row narrow-width'%)(((
         (%class='col-xs-12'%)(((
-          ==${afterHelpDoc.title}==
+          (%class='narrow-width'%)
+          ===${afterHelpDoc.title}===
 
           {{display reference='$afterHelpDoc.fullName' /}}
         )))
@@ -159,16 +181,32 @@
   (%class='row demarches-administrationrow'%)(((
     (%class='container' %)(((
       (%class='demarches-administration-link'%) (((
-        ==$services.localization.render('wikidemarches.administration.home-title')==
+        ===$services.localization.render('wikidemarches.administration.home-title')===
 
         (%class='demarches-administration-subtitle'%)
         $services.localization.render('wikidemarches.administration.home-subtitle')
 
-[[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default']] [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
-[[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']] [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']] [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='btn btn-default']] [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
-#if ($hasAdmin)
-  [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
-#end
+        (%class='row' %)(((
+          (%class='col-xs-12 col-md-4' %) (((
+            [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default']]
+
+            [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
+          )))
+          (%class='col-xs-12 col-md-4' %) (((
+            [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
+
+            [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']]
+
+            [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='btn btn-default']]
+
+            [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
+          )))
+          (%class='col-xs-12 col-md-4' %) (((
+            #if ($hasAdmin)
+              [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
+            #end
+          )))
+        )))
       )))
     )))
   )))
@@ -289,113 +327,162 @@
   margin-top: 0;
 }
 
-@section-padding: 2em;
-@bluegradient-start: #0E5A96;
-@bluegradient-end: #28acb8;
-
-.demarches-mydemarchesrow, .demarches-observatoirerow,
-.demarches-evalrow, .demarches-morerow,
-.demarches-administrationrow {
-  padding-top: @section-padding;
-  padding-bottom: @section-padding;
-  h2 {
-    margin-top: 0;
-    font-size: 1.5em;
-  }
+/* Reset the bottom margin of paragraphs, we need everything clean */
+.xcontent p {
+  margin-bottom: 0;
+  line-height: normal;
 }
 
-.demarches-titlerow {
+
+@section-padding-top-lg: 5.5em; /* ~99px for a 18px font */
+@section-padding-bottom-lg: 5.9em; /* ~106.2 for a 18px font */
+@section-padding-top-xs: 2.8em; /* mobile section paddings = half of the desktop */
+@section-padding-bottom-xs: 2.9em; /* mobile section paddings = half of the desktop */
+
+@obs-blue: #006be6;
+
+@headline-size-lg: 3.3em; /* ~59.4px for a 18px font */
+@headline-size-xs: 2.5em;
+
+.demarches-titlerow, .demarches-observatoirerow,
+.demarches-evalrow, .demarches-morerow,
+.demarches-mydemarchesrow, .demarches-administrationrow {
   text-align: center;
-  padding-top: @section-padding;
-  padding-bottom: @section-padding;
-  color: #fff;
-  #gradient &gt; .horizontal(@bluegradient-start; @bluegradient-end);
-  h2.demarches-headline {
-    font-size: 1.8em;
+  padding-top: @section-padding-top-xs;
+  padding-bottom: @section-padding-bottom-xs;
+  h2, h3 {
     margin-top: 0;
     margin-bottom: 0;
     font-weight: bold;
   }
-  p {
-    margin-top: 1.5em;
-    font-size: 1.2em;
+  @media (min-width: @screen-md-min) {
+    padding-top: @section-padding-top-lg;
+    padding-bottom: @section-padding-bottom-lg;
+  }
+}
+
+.xcontent  a.btn-default {
+  background-image: none;
+  background-color: transparent;
+  color: @text-color;
+  border: 0.1em solid @text-color;
+  border-radius: 1.5em;
+  line-height: 2.6em;
+  padding: 0 1.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+  outline: 0;
+}
+
+.demarches-titlerow {
+  background-color: #fff;
+
+  h2.demarches-headline {
+    font-size: @headline-size-xs; /* ~59.4px for a 18px font */
+    margin-bottom: 0.5em;; /*~30px*/
+  }
+
+  p.demarches-subtitle {
+    font-weight: bold;
+    font-size: 1.5em; /* ~27px for a 18px font */
+    margin-bottom: 1em;; /*~27px*/
+  }
+
+  .seemore-button-container a.btn-default {
+    margin-top: 2.25em; /*~40px for a 18px font*/
+    border: none;
+    background-color: #f45269;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  @media (min-width: @screen-md-min) {
+    p.demarches-subtitle {
+      width: 75%;
+    }
+    h2.demarches-headline {
+      font-size: @headline-size-lg;
+    }
+  }
+}
+
+.demarches-mydemarchesrow, .demarches-observatoirerow,
+.demarches-evalrow, .demarches-morerow,
+.demarches-administrationrow {
+   h3 {
+    font-size: 2.25em; /* ~40px for a 18px font */
+    margin-bottom: 0.625em; /*~25 px*/
   }
 }
 
 .demarches-observatoirerow {
-  #gradient &gt; .horizontal(@bluegradient-start; @bluegradient-end);
-  padding-bottom: 0;
-  padding-top: 0;
-  text-align: center;
+  background-color: @obs-blue;
   color: #fff;
-  .demat-stat, .sat-stat {
-    border-radius: @grid-gutter-width;
-    padding: @grid-gutter-width / 2;
-    height: 15em;
-    margin-bottom: @section-padding;
-    p {
-      margin-bottom: 0;
-    }
-    .stat-statvalue {
-      font-size: 6em;
-      line-height: 1.3em;
-      font-weight: bold;
-      text-align: left;
-      padding-left: 10%;
-    }
-    .stat-statdescription {
-      text-align: left;
-      width: 70%;
-      margin-left: 10%;
-      &amp;::before {
-        font: normal normal normal 14px/1 FontAwesome;
-      }
-      .stat-statdescription-icon, .stat-statdescription-text {
-        display: table-cell;
-      }
-      .stat-statdescription-icon {
-        vertical-align: middle;
-        span.fa {
-          line-height: 1.5em;
-          font-size: 1.5em;
-          height: 1.5em;
-          width: 1.5em;
-          text-align: center;
-          border-radius: 0.75em;
-          background-color: #fff6;
+  .obsstats {
+    margin-top: 1.9em; /* 34.2px for a 18px font*/
+    .obsstat-col {
+      padding-left: @grid-gutter-width;
+      padding-right: @grid-gutter-width;
+      margin-bottom: @grid-gutter-width / 2;
+      .demat-stat, .sat-stat {
+        border-radius: @grid-gutter-width * 2;
+        padding: @grid-gutter-width * 1.5 @grid-gutter-width * 1.5;
+        p {
+          margin-bottom: 0;
+        }
+        .stat-statvalue {
+          font-size: 6em;
+          line-height: 1;
+          margin-bottom: 0.1em;
+          font-weight: bold;
+          text-align: left;
+        }
+        .stat-statdescription {
+          text-align: left;
+          &amp;::before {
+            font: normal normal normal 14px/1 FontAwesome;
+          }
+          .stat-statdescription-icon, .stat-statdescription-text {
+            display: table-cell;
+          }
+          .stat-statdescription-icon {
+            vertical-align: middle;
+            span.fa {
+              line-height: 1.6em;
+              font-size: 1.6em;
+              height: 1.6em;
+              width: 1.6em;
+              text-align: center;
+              border-radius: 0.8em;
+              background-color: #fff6;
+            }
+          }
+          .stat-statdescription-text {
+            padding-left: 1em;
+            font-size: 0.9em;
+            padding-right: 30%;
+          }
         }
       }
-      .stat-statdescription-text {
-        padding-left: 1em;
+      .demat-stat {
+        #gradient &gt; .directional(#62d2b0; #4798f4; 131deg);
+      }
+      .sat-stat {
+        #gradient &gt; .directional(#ff6bc2; #fdf54d; 131deg);
       }
     }
+    .obsstat-explanation-col {
+      font-size: 0.51em;
+      padding-left: @grid-gutter-width * 2.5;
+      padding-right: @grid-gutter-width * 2.5;
+      text-align: left;
+    }
   }
-  .demat-stat {
-    background-color: #62d2b0;
-  }
-  .sat-stat {
-    background-color: #ff966b;
-  }
-}
-
-#xwikicontent .demarches-observatoirerow .seemore-button-container {
-  position: relative;
-  line-height: 1.5em;
-  top: 1.5em;
-  a.btn {
-    background-color: @bluegradient-start;
-    border-color: @bluegradient-start;
-    color: #fff;
-  }
-}
-
-/*Compensate for the overflowing button that links to the observatoire. */
-.demarches-observatoirerow + .demarches-mydemarchesrow, .demarches-observatoirerow + .demarches-evalrow {
-  padding-top: @section-padding + 1.5em;
 }
 
 .demarches-mydemarchesrow {
   background-color: @gray-lighter;
+  text-align: left;
   ul {
     margin-left: 0;
     padding-left: 0;
@@ -428,66 +515,57 @@
   }
 }
 
-#xwikicontent  a.btn-default {
-  background-image: none;
-  background-color: transparent;
-  color: @text-color;
-  border: 0.1em solid @text-color;
-  border-radius: 0.95em;
-}
-
-.demarches-evalrow, .demarches-morerow  {
-  text-align: center;
-  h2 {
-    margin-bottom: @section-padding / 2;
-  }
-}
-
 .demarches-evalrow {
-  padding-bottom: 0;
-  .seemore-button-container {
-    margin-bottom: 0;
-    padding-top: @section-padding;
+  background-color: #f7f7f7;
+  .seemore-button-container a.btn-default {
+    border-width: 2px;
+    border-color: @obs-blue;
+    color: @obs-blue;
+    font-weight: 600;
+    font-size: 0.8em;
   }
 }
 
 .evalrow-cards {
   text-align: center;
+  margin-bottom: 2.2em; /*~40px*/
   .evalrow-card {
-    font-size: 0.85em;
     margin-bottom: @grid-gutter-width / 2;
     border-radius: @grid-gutter-width / 2;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
-    padding: @grid-gutter-width / 2;
+    padding: @grid-gutter-width @grid-gutter-width * 4/5;
     p {
       width: 100%;
+      font-size: 0.78em;
     }
-    h3 {
-      font-size: 1.1em;
-      margin-bottom: 1em;
+    h4 {
+      font-size: 0.90em;
+      margin-top: 1.5em;
+      font-weight: bold;
     }
     .fa {
-      #gradient &gt; .horizontal(@bluegradient-start; @bluegradient-end);
-      font-size: 200%;
+      background-color: fade(@obs-blue, 10%);
+      color: @obs-blue;
+      font-size: 210%;
       line-height: 1.5em;
       height: 1.5em;
       width: 1.5em;
       border-radius: 0.75em;
-      color: #fff;
     }
   }
 }
 
 .demarches-administrationrow {
-  text-align: center;
   background-color: @gray-lighter;
+  p {
+    margin-bottom: 0.5em;
+  }
 }
 
 /* Some adjustment on larger devices:
  * * add max width to the searchbox
- * * larger titles
  * * all cards explaining how demarche is evaluated get fixed height to display nicely.
- * * the paragraphs with explanations are 80% of the width
+ * * the paragraphs with explanations are limited in horizontal size
  */
 @media (min-width: @screen-md-min) {
   .demarches-mydemarchesrow {
@@ -498,32 +576,24 @@
 
   .evalrow-cards {
     .evalrow-card {
-      height: 21em;
+      height: 16.5em;
     }
   }
 
   .xcontent {
-    font-size: 1.1em;
+    font-size: 1.125em;
   }
 
-  .demarches-mydemarchesrow, .demarches-observatoirerow,
-  .demarches-evalrow, .demarches-morerow,
-  .demarches-administrationrow {
-    h2 {
-      font-size: 2em;
-    }
+  p.narrow-width , div.narrow-width p {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .demarches-titlerow h2.demarches-headline {
-    font-size: 3em;
-  }
-
-  .demarches-evalrow, .demarches-morerow {
-    p {
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  h2.narrow-width, h3.narrow-width {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }</code>
     </property>
