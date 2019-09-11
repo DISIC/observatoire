@@ -494,11 +494,9 @@
                             'beta.gouv.fr' : 'https://beta.gouv.fr/', 
                             'api.gouv.fr' : 'https://api.gouv.fr/', 
                             'agd.data.gouv.fr' : 'https://agd.data.gouv.fr/',
-                            'Nos documents de référence' : 'https://references.modernisation.gouv.fr/',
-                            'Communauté UX design' : 'https://www.modernisation.gouv.fr/le-hub-des-communautes/communaute-ux'
-
+                            'Nos documents de référence' : 'https://references.modernisation.gouv.fr/'
                           })
-        #set($nosUniversOrdre = ['numerique.gouv.fr', 'voxusagers.gouv.fr', 'etalab.gouv.fr', 'data.gouv.fr', 'beta.gouv.fr', 'api.gouv.fr', 'agd.data.gouv.fr', 'Nos documents de référence', 'Communauté UX design'])
+        #set($nosUniversOrdre = ['numerique.gouv.fr', 'voxusagers.gouv.fr', 'etalab.gouv.fr', 'data.gouv.fr', 'beta.gouv.fr', 'api.gouv.fr', 'agd.data.gouv.fr', 'Nos documents de référence'])
         &lt;ul&gt;
           #foreach($nu in $nosUniversOrdre)
             &lt;li&gt;&lt;a href="$nosUnivers.get($nu)" target="_blank" title="$nu ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$nu&lt;/a&gt;&lt;/li&gt;
