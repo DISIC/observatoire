@@ -944,7 +944,7 @@
       <font-size-base>1em</font-size-base>
     </property>
     <property>
-      <headings-color/>
+      <headings-color>#000000</headings-color>
     </property>
     <property>
       <input-bg/>
@@ -1474,10 +1474,11 @@ span.wikiexternallink {
 
 
 
+
 </lessCode>
     </property>
     <property>
-      <link-color>#0d7bc6</link-color>
+      <link-color>#006be6</link-color>
     </property>
     <property>
       <logo>Logo_de_la_Republique_francaise.png</logo>
@@ -1522,7 +1523,7 @@ span.wikiexternallink {
       <table-border-color/>
     </property>
     <property>
-      <text-color>#222222</text-color>
+      <text-color>#444444</text-color>
     </property>
     <property>
       <xwiki-page-content-bg>#FFFFFF</xwiki-page-content-bg>

@@ -810,9 +810,9 @@ var XWiki = (function (XWiki) {
     line-height: 2em;
     border-radius: 1em;
     font-size: 1.5em;
-    #gradient &gt; .horizontal(#0E5A96; #28acb8);
+    background-color: fade(@link-color, 10%);
+    color: @link-color;
     text-decoration: none;
-    color: white;
   }
 
   .btn-default.btn-download {

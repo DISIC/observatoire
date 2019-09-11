@@ -59,6 +59,7 @@
       [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-default']]
     )))
   )))
+  #*
   (%class='row demarches-observatoirerow'%)(((
     (%class='container'%)(((
       (%class='row'%)(((
@@ -97,6 +98,7 @@
       )))
     )))
   )))
+  *#
   #if (!$isGuest)
     (%class='row demarches-mydemarchesrow'%)(((
       (%class='container'%)(((
@@ -340,7 +342,6 @@ li.wikidemarches-topmenu {
 /* Reset the bottom margin of paragraphs, we need everything clean */
 .xcontent p {
   margin-bottom: 0;
-  line-height: normal;
 }
 
 
@@ -349,7 +350,7 @@ li.wikidemarches-topmenu {
 @section-padding-top-xs: 2.8em; /* mobile section paddings = half of the desktop */
 @section-padding-bottom-xs: 2.9em; /* mobile section paddings = half of the desktop */
 
-@obs-blue: #006be6;
+@obs-blue: @link-color;
 
 @headline-size-lg: 3.3em; /* ~59.4px for a 18px font */
 @headline-size-xs: 2.5em;
@@ -377,10 +378,11 @@ li.wikidemarches-topmenu {
   color: @text-color;
   border: 0.1em solid @text-color;
   border-radius: 1.5em;
-  line-height: 2.6em;
-  padding: 0 1.5em;
+  line-height: 2.8em;
+  padding: 0 1.4em;
   margin-top: 0;
   margin-bottom: 0;
+  transition: all 0.2s;
 }
 
 .demarches-titlerow {
@@ -403,6 +405,9 @@ li.wikidemarches-topmenu {
     background-color: #f45269;
     color: #fff;
     font-weight: 600;
+    &amp;:hover {
+      background-color: #d54d60;
+    }
   }
 
   @media (min-width: @screen-md-min) {
@@ -526,13 +531,21 @@ li.wikidemarches-topmenu {
 }
 
 .demarches-evalrow {
-  background-color: #f7f7f7;
+  background-color: @obs-blue;
+  color: #fff;
   .seemore-button-container a.btn-default {
     border-width: 2px;
-    border-color: @obs-blue;
-    color: @obs-blue;
+    border-color: #fff;
+    color: #fff;
     font-weight: 600;
     font-size: 0.8em;
+    &amp;:hover {
+      background-color: #fff;
+      color: @link-color;
+    }
+  }
+  h3 {
+    color: #fff;
   }
 }
 
@@ -540,9 +553,10 @@ li.wikidemarches-topmenu {
   text-align: center;
   margin-bottom: 2.2em; /*~40px*/
   .evalrow-card {
-    margin-bottom: @grid-gutter-width;
+    margin-bottom: @grid-gutter-width * 1.5;
     border-radius: @grid-gutter-width;
     background-color: #fff;
+    color: #666;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
     padding: @grid-gutter-width @grid-gutter-width * 4/5;
     p {
