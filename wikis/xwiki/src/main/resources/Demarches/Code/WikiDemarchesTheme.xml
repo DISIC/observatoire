@@ -1347,6 +1347,9 @@ legend {
   /* Since footer is black now, we add some margin above it to make room between it and the content. 
      If a page makes a stacked rows layout, it need to reset this */
   margin-top: @grid-gutter-width;
+  h2, h3 {
+    color: @footer-color;
+  }
 }
 
 #footerglobal a, 
@@ -1466,6 +1469,7 @@ span.wikiexternallink {
   background-image: none;
   padding-right: unset;
 }
+
 
 
 
