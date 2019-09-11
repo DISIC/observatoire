@@ -82,6 +82,9 @@ wikidemarches.observatoire.date-ouverture=Date d'ouverture du service dématéri
 wikidemarches.observatoire.volumetrie=Volumétrie totale de la démarche
 wikidemarches.observatoire.pourcentage-recours-demat=Pourcentage de recours à la voie dématérialisée
 wikidemarches.observatoire.avis=Nombre d'avis usagers recueillis
+# Top menu
+wikidemarches.topmenu.observatoire=L'observatoire
+wikidemarches.topmenu.apropos=Qui sommes nous
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche
