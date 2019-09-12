@@ -44,6 +44,8 @@
 {{velocity}}
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
+  #set($discard = $xwiki.ssx.use('Demarches.Code.MontserratWebfontSSX'))
+  #set($discard = $xwiki.ssx.use($doc.fullName))
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
       (%class='demarches-headline narrow-width'%)
@@ -352,8 +354,8 @@ li.wikidemarches-topmenu {
 
 @obs-blue: @link-color;
 
-@headline-size-lg: 3.3em; /* ~59.4px for a 18px font */
-@headline-size-xs: 2.5em;
+@headline-size-lg: 3.1em; /* ~55.8px for a 18px font */
+@headline-size-xs: 2.3em;
 
 .demarches-titlerow, .demarches-observatoirerow,
 .demarches-evalrow, .demarches-morerow,
@@ -364,7 +366,8 @@ li.wikidemarches-topmenu {
   h2, h3 {
     margin-top: 0;
     margin-bottom: 0;
-    font-weight: bold;
+    font-weight: 900;
+    font-family: "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   @media (min-width: @screen-md-min) {
     padding-top: @section-padding-top-lg;
@@ -390,13 +393,14 @@ li.wikidemarches-topmenu {
 
   h2.demarches-headline {
     font-size: @headline-size-xs; /* ~59.4px for a 18px font */
-    margin-bottom: 0.5em;; /*~30px*/
+    margin-bottom: 0.3em;
   }
 
   p.demarches-subtitle {
     font-weight: bold;
     font-size: 1.5em; /* ~27px for a 18px font */
-    margin-bottom: 1em;; /*~27px*/
+    margin-bottom: 0.5em;
+    font-family: Montserrat, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .seemore-button-container a.btn-default {
@@ -411,8 +415,8 @@ li.wikidemarches-topmenu {
   }
 
   @media (min-width: @screen-md-min) {
-    p.demarches-subtitle {
-      width: 75%;
+    p.demarches-subtitle, p.demarches-explanation {
+      width: 70%;
     }
     h2.demarches-headline {
       font-size: @headline-size-lg;
@@ -424,7 +428,7 @@ li.wikidemarches-topmenu {
 .demarches-evalrow, .demarches-morerow,
 .demarches-administrationrow {
    h3 {
-    font-size: 2.25em; /* ~40px for a 18px font */
+    font-size: 2.05em; /* ~36.9px for a 18px font */
     margin-bottom: 0.625em; /*~25 px*/
   }
 }
@@ -608,7 +612,7 @@ li.wikidemarches-topmenu {
 
   .evalrow-cards {
     .evalrow-card {
-      height: 16.5em;
+      height: 17.5em;
     }
   }
 
@@ -639,7 +643,7 @@ li.wikidemarches-topmenu {
       <parse>1</parse>
     </property>
     <property>
-      <use>currentPage</use>
+      <use>onDemand</use>
     </property>
   </object>
   <object>
@@ -719,8 +723,7 @@ li.wikidemarches-topmenu {
 #if($doc.fullName == 'Main.WebHome')
 {{html clean="false"}}
   &lt;li class='wikidemarches-topmenu'&gt;
-    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;
-    &lt;a href="$xwiki.getURL('Main.A propos')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;
+    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('Main.A propos')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;
   &lt;/li&gt;
 {{/html}}
 #end
