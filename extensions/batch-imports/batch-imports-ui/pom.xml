@@ -27,7 +27,7 @@
   <parent>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <version>4.0</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports-ui</artifactId>
   <name>DINSIC Wiki Demarches - Batch Imports UI</name>
