@@ -452,7 +452,7 @@
         &lt;ul class="emphasis"&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite')&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href="https://github.com/DISIC/wikidemarches"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="https://github.com/DISIC/wikidemarches" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
         &lt;ul class="emphasis"&gt;

@@ -397,6 +397,7 @@ li.wikidemarches-topmenu {
   }
 
   p.demarches-subtitle {
+    color: @headings-color;
     font-weight: bold;
     font-size: 1.5em; /* ~27px for a 18px font */
     margin-bottom: 0.5em;
