@@ -1,0 +1,1056 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Dashboard.Code.DashboardSheet" locale="">
+  <web>Demarches.Dashboard.Code</web>
+  <name>DashboardSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1569247833000</creationDate>
+  <parent>xwiki:Demarches.Dashboard.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1569255668000</date>
+  <contentUpdateDate>1569255668000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{include reference="Demarches.Dashboard.Code.DashboardMacros"/}}
+
+{{velocity}}
+
+#set($displayDocTitle = false)
+#set($displayTitleContentSeparator = false)
+#set ($dashboard = $doc.getObject($DASHBOARD_CLASS_ID))
+## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
+#set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
+#set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
+#set ($discard = $xwiki.jsx.use($DEMARCHE_SHEET))
+#set ($discard = $xwiki.jsx.use($DASHBOARD_SHEET, {'minify': false, 'timestamp': $datetool.systemTime}))
+
+## If this is a live dashboard, redirect to URL with parameter 'live=1' so that the JavaScript can infer that the data should be generated live
+#set ($type = $dashboard.getValue('type'))
+#if ("$!type" == 'live' &amp;&amp; "$!request.live" == '')
+  $response.sendRedirect($doc.getURL('view', 'live=1'))
+#end
+
+## Dashboard header ##
+(% class='row observatoire-explanation' %)(((
+  (% class='container' %)(((
+    (% class='document-header'%) (((
+      (% class='document-info'%) (((
+        (% id='document-title' %)(((
+          #set ($break = '\\')
+          #set ($subtitle = $services.localization.render("wikidemarches.observatoire.subtitle"))
+          = Observatoire de la dématérialisation de qualité$break$subtitle$break$doc.title =
+        )))
+      )))
+
+      {{html clean="false"}}
+      &lt;div class="btn-group controls"&gt;
+        &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+        #if ($doc.name == 'live')Données antérieures#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        #set ($hql = 'select obj.name from BaseObject as obj where obj.className = :className and obj.name not like :template and obj.name &lt;&gt; :live')
+        #set ($entries = $services.query.hql($hql).bindValue('className', $DASHBOARD_CLASS_ID).bindValue('template', '%DashboardTemplate%').bindValue('live', 'observatoire.live').execute())
+        &lt;ul class="dropdown-menu"&gt;
+          #foreach ($entry in $entries)
+            #set ($page = $xwiki.getDocument($entry))
+            &lt;li&gt;
+              &lt;a href="$xwiki.getURL($entry)"&gt;$page.title&lt;/a&gt;
+            &lt;/li&gt;
+            #end
+        &lt;/ul&gt;
+        #if ($hasAdmin || $isAdministrateurMinisteriel)
+         &lt;a href="$xwiki.getURL('observatoire.live')" class='btn btn-default' style='margin-left: 0.5em'&gt;En temps réel&lt;/a&gt;
+        #end
+      &lt;/div&gt;
+      {{/html}}
+
+    )))
+
+    [[$services.localization.render("wikidemarches.observatoire.help-link")&gt;&gt;Aide.Observatoire]]
+
+    == Partager ==
+    #set ($socialNetworks = [{
+        "icon": "fa-twitter",
+        "url": "https://twitter.com/intent/tweet?url="
+      },
+      {
+        "icon": "fa-linkedin",
+        "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
+      },
+      {
+        "icon": "fa-facebook",
+        "url": "https://www.facebook.com/sharer.php?u="
+      },
+      {
+        "icon": "fa-envelope",
+        "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
+      }
+    ])
+    {{html clean="false"}}
+    #foreach ($socialNetwork in $socialNetworks)
+      #set ($url = $escapetool.xml($doc.getExternalURL()))
+      &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt;
+    #end
+    {{/html}}
+    #set ($size = $doc.getAttachment('observatoire-de-la-dematerialisation-juin-2019.pdf').getLongSize())
+    #set ($size = $mathtool.div($size, 1000))
+    #set ($size = $mathtool.round($size))
+    (% class="download" %)
+    [[$services.icon.render('download') Télécharger la version imprimable (PDF $size Ko)&gt;&gt;path:$doc.getAttachmentURL('observatoire-de-la-dematerialisation-juin-2019.pdf')||class="btn btn-default btn-download"]]
+  )))
+)))
+
+## Dashboard metadata view / edit ##
+#if ($hasAdmin)
+(% class='row' %)(((
+  (% class='container' %)(((
+      #set ($class = $xwiki.getClass($DASHBOARD_CLASS_ID))
+      #foreach($property in $class.properties)
+      |=(% style="width: 20%" %)$property.prettyName|$dashboard.display($property.name, $xcontext.action)
+      #end
+      |=Pièce jointe|(((
+      #if ($doc.getAttachment('data.json') != $NULL)
+        [[attach:data.json]]
+      #else
+        Aucune pièce jointe
+      #end
+      )))
+
+      #if ($doc.getObject($DASHBOARD_CLASS_ID) != $NULL &amp;&amp; $xcontext.action == 'view')
+        {{info}}
+        Cliquer sur le bouton ci-dessous pour exporter les données actuelles et les stocker sous la forme d'un fichier joint à la présente page.
+
+         {{html wiki="false" clean="false"}}
+         &lt;form action="" method="post"&gt;
+           &lt;button class="btn btn-default" name="action" value="generate-json"&gt;Générer&lt;/button&gt;
+           &lt;input type="hidden" name="token" value="$!{services.csrf.getToken()}" /&gt;
+         &lt;/form&gt;
+         {{/html}}
+        {{/info}}
+      #end
+
+      #if ("$!request.action" == 'generate-json' &amp;&amp; $services.csrf.isTokenValid($request.token))
+        #generateJson()
+        #if ("$!request.live" == 1)
+          #writeJsonToResponse()
+        #else
+          #attachJsonAsFile()
+        #end
+      #end
+  )))
+)))
+#end
+
+## Dashboard table ##
+{{html clean="false" wiki="false"}}
+&lt;table id="top-demarches" class="hover" style="width:100%"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Démarche&lt;/th&gt;
+      &lt;th&gt;Ministère&lt;/th&gt;
+      &lt;th&gt;Regroupement&lt;/th&gt;
+      &lt;th&gt;Démarche dématérialisée&lt;/th&gt;
+      &lt;th&gt;Usagers satisfaits&lt;/th&gt;
+      &lt;th&gt;Optimisé sur mobile&lt;/th&gt;
+      &lt;th&gt;Support de qualité&lt;/th&gt;
+      &lt;th&gt;Disponibilité du service&lt;/th&gt;
+      &lt;th&gt;Intégration FranceConnect&lt;/th&gt;
+      &lt;th&gt;Volumétrie&lt;/th&gt;
+      &lt;th&gt;Nombre d'avis usagers recueillis&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+&lt;/table&gt;
+{{/html}}
+{{/velocity}}
+</content>
+  <object>
+    <name>Demarches.Dashboard.Code.DashboardSheet</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>33e13e17-bc95-4a72-b3f8-507fc776bf7e</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require.config({
+    paths: {
+       'css': '$services.webjars.url('require-css/0.1.7/css.js')',
+       'domReady': '$services.webjars.url('requirejs-domready/2.0.1/domReady.js')',
+       'datatables': '$services.webjars.url('datatables/1.10.19/js/jquery.dataTables.js')',
+       'datatables-css': '$services.webjars.url('datatables/1.10.19/css/jquery.dataTables.min')'
+    }
+});
+
+var XWiki = (function (XWiki) {
+
+  function computeBadgeStyle(value) {
+    if (typeof value === 'string' || value instanceof String) {
+      value = value.toLowerCase();
+      switch (value) {
+        case 'oui':
+          return "success";
+        case 'non':
+          return "danger";
+        case 'partiel':
+          return "warning";
+        case 'expérimentation':
+          return 'info';
+        case 'déploiement partiel':
+          return 'warning';
+        default:
+          return "default";
+      }
+    } else {
+      return 'Erreur de formatage (' + value + ')';
+    }
+  }
+
+  function computeUrlScoreBadgeStyle(value) {
+    if (isNaN(value))
+      return "default";
+    if (value &gt; 7)
+      return "success";
+    if (value &gt;= 4 &amp;&amp; value &lt;= 7)
+      return "warning";
+    return "danger";
+  }
+
+  function format(value, badgeStyleFunction, replaceNa, demarcheId) {
+    if (typeof value === 'string' || value instanceof String) {
+      var badgeStyle = badgeStyleFunction.apply(this, [value]);
+      if (value) {
+        if (replaceNa) {
+          value = value.replace("n/a", "-");
+        }
+        value = value.replace("n/c", "Non disponible");
+      }
+      if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      } else if (value &amp;&amp; value == '-') {
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      } else {
+        return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+      }
+    } else {
+      return '&lt;span class="row-details-value"&gt;Erreur de formatage (' + value + ')&lt;/span&gt;';
+    }
+  }
+
+  function addDetailsRow(data) {
+    var output = '&lt;div class="row"&gt;' +
+      '&lt;div class="col-md-12"&gt;' +
+      '&lt;div class="row-details"&gt;' +
+      '&lt;ul&gt;';
+      var dateMiseEnLigne = data.dateMiseEnLigne.display;
+      if (dateMiseEnLigne != 'Ouvert') {
+        if (dateMiseEnLigne == 'n/c')
+          dateMiseEnLigne = 'Non disponible';
+        output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.date-ouverture")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+      }
+      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.volumetrie")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
+      var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
+      if (data.statutDemat != 'Non') {
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.pourcentage-recours-demat")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+      }
+      if (data.avisCount.value &gt;= 100) {
+        var demarcheId = data.id;
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.avis")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
+      }
+    output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
+    return output;
+  }
+
+  function getPage(pageId) {
+    var reference = XWiki.Model.resolve(pageId, XWiki.EntityType.DOCUMENT);
+    return new XWiki.Document(reference);
+  }
+
+  function getURL(pageId, action) {
+    return getPage(pageId).getURL(action);
+  }
+
+  function addToolbarRow(data) {
+    var output = '&lt;div class="row observatoire-toolbar"&gt;' +
+        '&lt;div class="col-md-12"&gt;' +
+          '&lt;div&gt;';
+    output = output + '&lt;i class="fa fa-edit"&gt;&lt;/i&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;Modifier ces informations&lt;/a&gt;';
+    output = output + '&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
+    return output;
+  }
+
+  function init() {
+    require(['jquery', 'xwiki-meta', 'xwiki-events-bridge', 'datatables', 'css!datatables-css', 'domReady!'], function ($, xwikiMeta) {
+      // Documentation: https://www.xwiki.org/xwiki/bin/view/Documentation/DevGuide/FrontendResources/ModalPopup/
+      XWiki.widgets.XPopup = Class.create(XWiki.widgets.ModalPopup, {
+       /** Default parameters can be added to the custom class. */
+        defaultInteractionParameters : {
+        },
+       /** Constructor. Registers the key listener that pops up the dialog. */
+        initialize : function($super, interactionParameters) {
+         this.interactionParameters = Object.extend(Object.clone(this.defaultInteractionParameters), interactionParameters || {});
+          // call constructor from ModalPopup with params content, shortcuts, options
+          $super(
+           this.createContent(this.interactionParameters),
+            {
+             "close" : { method : this.closeDialog, keys : ['ESC'] }
+            },
+            {
+               displayCloseButton : true,
+               backgroundColor : "#FFF",
+               removeOnClose : true,
+               verticalPosition : 'top',
+               title : decodeURI(this.interactionParameters.title)
+            }
+          );
+         this.showDialog();
+        },
+        /** Get the content of the modal dialog using ajax */
+        createContent : function (data) {
+          var content =  new Element('div', {'class': 'modal-popup'});
+          var that = this;
+          // get page content for the pageURL
+          new Ajax.Request(data.editUrl, {
+            method:'get',
+            onSuccess: function(transport) {
+              var response = transport.responseText || "no response text";
+              var nodes = $($.parseHTML(response));
+              // add div node with class 'main' so that styles defined in the skin CSS file apply (e.g. '.main panel-body')
+              var main = $('&lt;div/&gt;').addClass('main');
+              //main.append($('&lt;h2/&gt;').append(data.title));
+              var form = $('&lt;form id="inline" method="post" action="' + data.saveUrl + '" class="withLock"/&gt;');
+
+              form.append($('&lt;input/&gt;').attr('type', 'hidden').attr('name', 'template').val('some-template').get(0));
+              form.append(nodes.get(0));
+              form.find("input[name='async']").val('true');
+              form.find("input[name='xvalidate']").val('0');
+              #set ($csrf = $services.csrf.getToken())
+              form.append($('&lt;input/&gt;').attr('type', 'hidden').attr('name', 'form_token').val("$csrf").get(0));
+              // add buttons
+              var saveButton = $('&lt;input/&gt;').addClass('btn btn-primary row-editor-save').attr('type', 'submit').attr('name', 'action_saveandcontinue').val('Enregistrer');
+              saveButton.on('click', function(event) {
+                event.preventDefault();
+              });
+              var closeButton = $('&lt;input/&gt;').addClass('btn btn-default row-editor-cancel').attr('type', 'submit').val('Annuler');
+              closeButton.on('click', function(event) {
+                //TODO: submit form to release lock
+                event.preventDefault();
+                that.closeDialog(event);
+              });
+              form.append(saveButton.get(0));
+              form.append('&amp;nbsp;')
+              form.append(closeButton.get(0));
+              main.append(form.get(0));
+              content.insert(main.get(0));
+              // Remove event handlers that may have been previously registered by previous dialogs on xwiki:document:saved, so that
+              // the update is performed only for the current data
+              $(document).off("xwiki:document:saved");
+              // Remove all observers on save so that only one ajax request gets fired
+              document.stopObserving('xwiki:actions:save');
+              $.getScript( "$xwiki.getSkinFile('js/xwiki/actionbuttons/actionButtons.js', true)", function( dataResult, textStatus, jqxhr ) {
+                $(document).on("xwiki:document:saved", function(event) {
+                  $(document).trigger("xwiki:demarche:updated", {id : data.id});
+                  that.closeDialog(event);
+                });
+                return true;
+              });
+              },
+              onFailure: function(){ content.insert('Une erreur s\'est produite lors du chargement du formulaire. Si le problème persiste, merci de contacter l\'administrateur de ce site.');
+            }
+          });
+          return content;
+        }
+      });
+
+      function getAvisStatisticsUrl(demarcheId) {
+        var parameters = new URLSearchParams(window.location.search);
+        if (parameters.get('live') == '1') {
+          return getPage(demarcheId).getURL('view', 'view-mode=statistics');
+        } else {
+          return getPage(demarcheId).getURL('view', 'view-mode=statistics&amp;date=2019-06-30');
+        }
+      }
+
+      // Addition of a search function to the list of search functions for filtering on the ministère value.
+      $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+          var selectedMinistere =  $('select[name="ministereSelect"]').val();
+          var ministere = data[2];
+          if (!selectedMinistere || selectedMinistere == "tous" || ministere == selectedMinistere) {
+            return true;
+          }
+          return false;
+        }
+      );
+
+      jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+        "french-string-asc" : function (s1, s2) {
+            return s1.localeCompare(s2, 'fr');
+        },
+
+        "french-string-desc" : function (s1, s2) {
+            return s2.localeCompare(s1, 'fr');
+        }
+      });
+
+      var ministeres = [];
+
+      var currentPage = new XWiki.Document(xwikiMeta.documentReference);
+      var dataEndpoint = currentPage.getURL('download') + '/data.json';
+      // If URL contains 'live=1', then pass it to the data endpoint URL
+      var currentLocation = new URL(window.location);
+      var parameters = new URLSearchParams(currentLocation.search);
+      var live = parameters.get('live');
+      if (live == '1') {
+        dataEndpoint = currentPage.getURL('view', "action=generate-json&amp;live=1&amp;token=$!{services.csrf.getToken()}");
+      }
+
+      var table = $('#top-demarches').DataTable({
+        ajax: {
+          type: 'GET',
+          url: dataEndpoint,
+          dataSrc: function (json) {
+            var data = json.data;
+            for (var i = 0; i &lt; data.length; i++) {
+              var ministere = data[i].ministere;
+              if (ministeres.indexOf(ministere) &lt; 0) {
+                ministeres.push(ministere);
+              }
+            };
+            ministeres.sort(function (a, b) {
+              return a.localeCompare(b, 'fr');
+            });
+           return json.data;
+          }
+        },
+        rowId: 'id',
+        paging: false,
+        columns: [
+          {
+            className: 'details-control',
+            orderable: false,
+            data: null,
+            defaultContent: ''
+          },
+          {
+            data: "title",
+            className: 'column-title',
+            render : function (data, type, row) {
+              return data + ' &lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
+            }
+          },
+          {
+            data: "ministere",
+            visible: false,
+            type: "french-string"
+          },
+          {
+            data: "groupes",
+            visible: false,
+            type: "french-string"
+          },
+          { data: "statutDemat",
+            render: function (data, type, row) {
+              return format(data, computeBadgeStyle, true);
+            }
+          },
+          {
+            data: "satisfactionIndex",
+            type: "num",
+            render: function (data, type, row) {
+              if (type === "sort") {
+                return data.value;
+              } else {
+                if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
+                  return '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
+                } else {
+                  return format(data.display, computeBadgeStyle,  true, row['id']);
+                }
+              }
+            }
+          },
+          {
+            data: "adapteMobile",
+            render: function (data, type, row) {
+              if (type === "sort") {
+                return data.display;
+              } else {
+                return format(data.display, computeBadgeStyle, false);
+              }
+            }
+          },
+          {
+            data: "qualiteSupport",
+            render: function (data, type, row) {
+              return format(data, computeBadgeStyle, true);
+            }
+          },
+          {
+            data: "urlScore",
+            type: "num",
+            render: function (data, type, row) {
+              if (type === "sort") {
+                return data.value;
+              } else {
+                return format(data.display, computeUrlScoreBadgeStyle, true);
+              }
+            }
+          },
+          {
+            data: "franceConnect",
+            render: function (data, type, row) {
+              if (type === "sort") {
+                return data.display;
+              } else {
+                return format(data.display, computeBadgeStyle, false);
+              }
+            }
+          },
+          {
+            data: "volumetrie",
+            type: "num",
+            visible: false,
+            render: function (data, type, row) {
+              if (type === "sort") {
+                return data.value;
+              } else {
+                return data.display;
+              }
+            }
+          },
+          {
+            data: "avisCount",
+            type: "num",
+            visible: false,
+            render: function (data, type, row) {
+              if (type === "sort") {
+                return data.value;
+              } else {
+                return data.display;
+              }
+            }
+          }
+        ],
+        // order by: avis, ministère, groupe, volumétrie, name
+        order: [[11, 'desc'], [2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
+        language: {
+          info: "Total : _TOTAL_ démarches",
+          infoEmpty: "Aucune démarche trouvée",
+          infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
+          loadingRecords: "Chargement...",
+          processing: "Traitement...",
+          search: "Démarche :",
+          zeroRecords: "Aucune entrée trouvée"
+        },
+        initComplete: function(settings, json ) {
+          // add the ministries filter in the filters
+          var filtersContainer = $('#top-demarches_filter');
+          if (filtersContainer) {
+            // prepare the label and select of ministries
+            var ministriesLabel = $('&lt;label&gt;Ministère :&lt;/label&gt;')
+            var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
+            ministriesLabel.append(ministriesSelect);
+            ministriesSelect.empty();
+            ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous"));
+            $.each(ministeres, function() {
+               ministriesSelect.append($("&lt;option /&gt;").val(this).text(this));
+            });
+            // add the ministries select at the beginning of the filter line
+            filtersContainer.prepend(ministriesLabel);
+            // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
+            var this_tbl = settings.oInstance.api();
+            ministriesSelect.change(function () {
+              this_tbl.draw();
+            });
+          }
+        }
+      });
+
+      function addChildrenRows(tableRow) {
+        var tr = tableRow;
+        var row = table.row(tr);
+        if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+        } else {
+          var data = row.data();
+          #set ($hasAdmin = $services.security.authorization.hasAccess('admin'))
+          ## Value of "isAdministrateurMinisteriel" is present in the skin, but needs to be computed locally because the
+          ## script is not executed in the skin context
+          #set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
+          #if ($xcontext.userReference != $NULL)
+            #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+            #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
+            #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+          #end
+          #if ($hasAdmin || $isAdministrateurMinisteriel)
+            var parameters = new URLSearchParams(window.location.search);
+            // Show the toolbar row only for the live version of the dashboard
+            if (parameters.get('live') == '1') {
+              row.child([addDetailsRow(data), addToolbarRow(data)], 'child-row').show();
+              //var parent = $(row.node()).parent();
+              var toolbarRow = $(row.node()).next().next();
+              var control = toolbarRow.find('.row-edit-control').first();
+              // TODO: is it really worth storing the data values in the HTML itself for not loading the memory too much?
+              control.on('click', function(event) {
+                event.preventDefault();
+                var demarcheId = $(this).data('demarche-id');
+                var title = $(this).data('demarche-name');
+                var page = getPage(demarcheId);
+                var editUrl = page.getURL('edit', 'xpage=plain&amp;mode=row-edition');
+                var saveUrl = page.getURL('preview');
+                var dialogData = {title: title, editUrl: editUrl, saveUrl: saveUrl, id: demarcheId};
+                return new XWiki.widgets.XPopup(dialogData);
+              });
+            } else {
+              row.child([addDetailsRow(data)], 'child-row').show();
+            }
+          #else
+            row.child([addDetailsRow(data)], 'child-row').show();
+          #end
+          tr.addClass('shown');
+        }
+      }
+
+      $(document).on('xwiki:demarche:updated', function(event, data) {
+        var row = table.row('#' + data.id);
+        var rowData = row.data();
+        var url = "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1&amp;live=1&amp;id=')";
+        url = url + data.id;
+        $.get(url, function(freshData) {
+          if (freshData &amp;&amp; freshData.data &amp;&amp; freshData.data.length &gt; 0) {
+            var demarche = freshData.data[0];
+            row.data(demarche);
+            row.draw();
+            // Remove and re-add the children rows to get the displayed data updated
+            row.child().remove();
+            var tr = $(row.node());
+            addChildrenRows(tr);
+          }
+        });
+      });
+
+      $('#top-demarches tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        addChildrenRows(tr);
+      });
+    });
+  }
+
+  (XWiki.domIsLoaded &amp;&amp; init()) || document.observe('xwiki:dom:loaded', init);
+
+  return XWiki;
+}(XWiki || {}));
+</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Dashboard.Code.DashboardSheet</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>e7e47164-c764-4951-9876-fef066cbfe44</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>input[name='title'] {
+  width: 100%;
+}
+
+#contentcontainerinner {
+  width: 100%;
+}
+
+.xdialog-box {
+  width: 60%;
+  .col-lg-6.col-md-6.col-sm-6 {
+    width: 100%;
+  }
+}
+
+.observatoire-explanation {
+  text-align: center;
+  a.social-network {
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border-radius: 1em;
+    font-size: 1.5em;
+    background-color: fade(@link-color, 10%);
+    color: @link-color;
+    text-decoration: none;
+  }
+
+  .btn-default.btn-download {
+    background-image: none;
+    background-color: transparent;
+    color: #222;
+    border: .1em solid #222;
+    border-radius: .95em;
+    font-size: 0.9em;
+    margin-top: 1.5em;
+    margin-bottom: 2em;
+  }
+}
+
+td.details-control {
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+td.details-control::before {
+  content: "+";
+  background-color: @brand-primary;
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+  width: 1.2em;
+  vertical-align: top;
+  border-radius: 0.1em;
+}
+tr.shown td.details-control::before {
+  content: "-";
+}
+
+.controls {
+  margin: 1em;
+}
+
+#top-demarches {
+  thead th {
+    vertical-align: middle;
+  }
+
+  tr.shown {
+    background-color: #f6f6f6;
+    td {
+      border-bottom: 0.5px dotted #555;
+    }
+    td.details-control {
+      border-bottom: none;
+    }
+  }
+
+  td.details-control {
+    padding-left: 0;
+    padding-right: 0;
+    width: 38px;
+  }
+
+  td.column-title {
+    width: 38%;
+    vertical-align: middle;
+    .ministere-groupe {
+      display: block;
+      font-size: 85%;
+      color: #555;
+    }
+  }
+
+  /* Styles for the détails panel */
+  tr.shown + tr.child-row, tr.shown + tr.child-row + tr.child-row  {
+    background-color: #f6f6f6;
+    td {
+      border-top: 0px;
+      padding-top: 0px;
+      padding-left: 38px;
+      padding-right: 0px;
+    }
+    .row {
+      &amp;.observatoire-toolbar {
+        text-align: right;
+        margin-right: 1em;
+        .fa {
+          margin-right: 0.2em;
+        }
+      }
+      .row-details {
+        font-size: 90%;
+        padding-left: 10px;
+        margin: 8px 0 0 0;
+        .row-details-title {
+          margin: 0;
+          font-weight: bold;
+        }
+        .row-details-subtitle {
+          margin: 0;
+        }
+        ul {
+          list-style-type: none;
+          margin-left: 0;
+          padding-left: 0;
+          display: table;
+          li {
+            display: table-row;
+            .row-details-key, .row-details-value {
+              display: table-cell;
+              padding-top: 0.2em;
+              padding-bottom: 0.2em;
+              /* padding-right copied from the table cell of datatables */
+              padding-right: 10px;
+            }
+            .row-details-key {
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  td.column-volumetrie, td.column-pourcentageRecoursVoieDematerialisee {
+    text-align: right;
+  }
+}
+
+#top-demarches_wrapper .dataTables_filter {
+  float: none;
+  text-align: center;
+  margin-bottom: 1em;
+  label {
+    font-weight: normal;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  input, select {
+    border: 1px solid #E8E8E8;
+    padding: 6px 12px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    margin-left: 0.5em;
+    display: inline-block;
+  }
+  input {
+    min-width: 20em;
+  }
+  select {
+    min-width: 20em;
+  }
+}
+#top-demarches_wrapper {
+  .dataTables_info {
+    font-size: 90%;
+    color: #888;
+  }
+}
+
+table#top-demarches.no-footer {
+  border-bottom: 0px;
+}
+
+</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+</xwikidoc>

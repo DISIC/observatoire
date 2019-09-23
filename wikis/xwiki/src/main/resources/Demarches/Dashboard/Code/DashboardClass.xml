@@ -20,19 +20,19 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Demarches.Code.DashboardClass" locale="">
-  <web>Demarches.Code</web>
+<xwikidoc version="1.3" reference="Demarches.Dashboard.Code.DashboardClass" locale="">
+  <web>Demarches.Dashboard.Code</web>
   <name>DashboardClass</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
-  <parent>Main.WebHome</parent>
+  <creationDate>1569247829000</creationDate>
+  <parent>xwiki:Demarches.Dashboard.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1569248825000</date>
+  <contentUpdateDate>1569247829000</contentUpdateDate>
   <version>1.1</version>
   <title>DashboardClass</title>
   <comment/>
@@ -41,7 +41,7 @@
   <hidden>true</hidden>
   <content/>
   <class>
-    <name>Demarches.Code.DashboardClass</name>
+    <name>Demarches.Dashboard.Code.DashboardClass</name>
     <customClass/>
     <customMapping/>
     <defaultViewSheet/>
@@ -62,12 +62,34 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
     </title>
+    <type>
+      <cache>0</cache>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <hint>Type de tableau : en direct ou archivé</hint>
+      <multiSelect>0</multiSelect>
+      <name>type</name>
+      <number>2</number>
+      <picker>0</picker>
+      <prettyName>Type</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <values>live=En direct|archive=Archive</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </type>
   </class>
   <object>
-    <name>Demarches.Code.DashboardClass</name>
+    <name>Demarches.Dashboard.Code.DashboardClass</name>
     <number>0</number>
     <className>XWiki.ClassSheetBinding</className>
-    <guid>672a4d61-21e3-460d-b780-3a78c5e0f668</guid>
+    <guid>1d0cc829-188f-4620-b52e-3606fb99fc88</guid>
     <class>
       <name>XWiki.ClassSheetBinding</name>
       <customClass/>
@@ -92,14 +114,14 @@
       </sheet>
     </class>
     <property>
-      <sheet>Demarches.Code.DashboardSheet</sheet>
+      <sheet>Demarches.Dashboard.Code.DashboardSheet</sheet>
     </property>
   </object>
   <object>
-    <name>Demarches.Code.DashboardClass</name>
+    <name>Demarches.Dashboard.Code.DashboardClass</name>
     <number>0</number>
     <className>XWiki.DocumentSheetBinding</className>
-    <guid>9af9aa67-55c8-4623-95ee-112663c2d29c</guid>
+    <guid>ab41a7c7-d021-47e9-a398-eaf6e680fe63</guid>
     <class>
       <name>XWiki.DocumentSheetBinding</name>
       <customClass/>

@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
+  <creationDate>1534414167000</creationDate>
   <parent>Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1569254058000</date>
+  <contentUpdateDate>1569254058000</contentUpdateDate>
   <version>1.1</version>
   <title>WikiDemarchesTranslations</title>
   <comment/>
@@ -76,7 +76,7 @@ wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune 
 wikidemarches.evalrow.button=En savoir plus
 wikidemarches.observatoire.button=Consulter l’observatoire
 wikidemarches.observatoire.title=Observatoire de la dématérialisation
-wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État – Situation {0}
+wikidemarches.observatoire.subtitle=Tableau de bord des démarches phares de l’État
 wikidemarches.observatoire.help-link=En savoir plus sur le tableau de bord
 wikidemarches.observatoire.help-link-observatoire=En savoir plus sur l'observatoire
 wikidemarches.observatoire.date-ouverture=Date d'ouverture du service dématérialisé
