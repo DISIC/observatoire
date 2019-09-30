@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1569247830000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>xwiki:Demarches.Dashboard.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1569255354000</date>
-  <contentUpdateDate>1569255354000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -43,13 +43,35 @@
 #set ($DEMARCHE_CLASS_ID = 'Demarches.Code.DemarchesClass')
 #set ($MINISTERE_CLASS_ID = 'Ministeres.Code.MinisteresClass')
 #set ($DIRECTION_CLASS_ID = 'Directions.Code.DirectionsClass')
-#set ($AVIS_CLASS_ID = 'Avis.Code.AvisStatsClass')
-#set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
+#set ($AVIS_CLASS_ID = 'Avis.Code.AvisClass')
 #set ($DEMARCHE_SHEET = 'Demarches.Code.DemarchesSheet')
+#set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
 
-#macro (addDemarche $demarcheId $data)
-  #set ($page = $xwiki.getDocument($entry))
+## Gets target demarches identifiers and computes dashboard data for these demarches
+#macro (computeDashboardData $limit)
+  #if ("$!limit" == '') #set ($limit = 0) #end
+  #set ($data = [])
+  ## Handle the case where just one demarche is requested, from the dashboard table editor
+  #if ("$!request.id" != '')
+    #set ($entries = [$request.id])
+  #else
+    ## Get all top demarches
+    #set ($hql = "select distinct obj.name from BaseObject obj, IntegerProperty as prop where obj.className = '$DEMARCHE_CLASS_ID' and prop.id.id = obj.id and prop.id.name = 'top' and prop.value = 1")
+    #set ($entries = $services.query.hql($hql).setLimit($limit).execute())
+  #end
+  #set ($dashboard = $doc.getObject($DASHBOARD_CLASS_ID))
+  #set ($dashboardDate = $dashboard.getValue('date'))
+  #foreach ($entry in $entries)
+    #computeDemarcheData($entry, $dashboardDate, $data)
+  #end
+  #set ($map = { "data": $data})
+  #set ($json = $jsontool.serialize($map))
+#end
+
+## Computes the demarche data of given demarche to the given data array for the given date as far as avis statistics are concerned
+#macro (computeDemarcheData $demarcheId $dashboardDate $data)
+  #set ($page = $xwiki.getDocument($demarcheId))
   #set ($obj = $page.getObject($DEMARCHE_CLASS_ID))
   #set ($ministereIds = $obj.getValue('ministeres'))
   #set ($ministereName = '')
@@ -69,12 +91,22 @@
       #set ($directionName = $directionObject.getValue('nom'))
     #end
   #end
-  #set ($avisStats = $page.getObject($AVIS_CLASS_ID))
-  #set ($avisCountValue = $avisStats.getValue('occurrences'))
   #set ($statutDemat = $obj.get('statutDemat'))
+  ##set ($avisStats = $page.getObject($AVIS_CLASS_ID))
+  ##set ($avisCountValue = $avisStats.getValue('occurrences'))
+  ##set ($satisfactionIndex = $avisStats.getValue('moyenne'))
+  ## Compute statistics at the dashboard date
+  #set ($hql = 'select count(*), avg(score.value) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &lt;= :date')
+  #set ($avisStats = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheId).bindValue('date', $dashboardDate).execute())
+  ## Reinitialize avisCountValue since the Velocity scope is global
+  #set ($avisCountValue = $NULL)
+  #if ($avisStats.size() &gt; 0)
+    #set ($stats  = $avisStats[0])
+    #set ($avisCountValue = $stats[0])
+    #set ($satisfactionIndex = $stats[1])
+  #end
   #if ($avisCountValue &amp;&amp; $avisCountValue &gt;= 100)
     #set ($avisCountDisplay = $numbertool.integer($avisCountValue))
-    #set ($satisfactionIndex = $avisStats.getValue('moyenne'))
     #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
     #set ($satisfactionIndexValue = ${mathtool.round($satisfactionIndexPercent)})
     #set ($satisfactionIndexDisplay = "$satisfactionIndexValue %")
@@ -193,23 +225,7 @@
     }))
 #end
 
-#macro (generateJson $demarcheIds)
-  #set ($data = [])
-  ## Handle the case where just one demarche is requested, from the dashboard table editor
-  #if ("$!request.id" != '')
-    #set ($entries = [$request.id])
-  #else
-    #set ($hql = "select distinct obj.name from BaseObject obj, IntegerProperty as prop where obj.className = '$DEMARCHE_CLASS_ID' and prop.id.id = obj.id and prop.id.name = 'top' and prop.value = 1")
-    #set ($entries = $services.query.hql($hql).setLimit(0).execute())
-  #end
-  #foreach ($entry in $entries)
-    #addDemarche($entry, $data)
-  #end
-  #set ($map = { "data": $data})
-  #set ($json = $jsontool.serialize($map))
-#end
-
-#macro (writeJsonToResponse)
+#macro (writeJson)
   ## Code copied from template/macros.vm:jsonResponse in XWiki 11.1
   #set ($discard = $response.setContentType('application/json'))
   #set ($characterEncoding = 'utf-8')
@@ -220,12 +236,14 @@
   #set ($discard = $xcontext.setFinished(true))
 #end
 
-#macro (attachJsonAsFile)
+#macro (attachJson)
   #set ($discard = $doc.addAttachment("data.json", $json.getBytes()))
   #set ($discard = $doc.save("Generate and attach file 'data.json'"))
+  
   {{info}}
-  Un nouveau fichier JSON a été généré et joint à cette page : [[attach:data.json]].
+  $services.localization.render('dashboard.generation.done')
   {{/info}}
+  
 #end
 {{/velocity}}</content>
 </xwikidoc>

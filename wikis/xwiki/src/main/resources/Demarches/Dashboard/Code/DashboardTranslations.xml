@@ -24,15 +24,15 @@
   <web>Demarches.Dashboard.Code</web>
   <name>DashboardTranslations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1569247834000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>xwiki:Demarches.Dashboard.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1569248277000</date>
-  <contentUpdateDate>1569248277000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>DashboardTranslations</title>
   <comment/>
@@ -42,6 +42,10 @@
   <content># Template
 dashboard.template.name=Tableau de bord
 dashboard.template.description=Suivi de la dématérialisation
+
+# Sheet
+dashboard.generation.hint=Cliquer sur le bouton ci-dessous pour exporter les données à la date indiquée (pour ce qui concerne les statistiques d'avis uniquement) et les stocker sous la forme d'un fichier joint à la présente page.
+dashboard.generation.done=Un nouveau fichier JSON a été généré et joint à cette page : [[attach:data.json]].
 
 # Livetable
 dashboard.livetable.doc.title=Nom
@@ -53,7 +57,16 @@ dashboard.livetable._actions=Actions
 dashboard.livetable._actions.edit=Modifier
 dashboard.livetable._actions.delete=Supprimer
 dashboard.livetable.emptyvalue=-
-dashboard.livetable.title=Nom</content>
+dashboard.livetable.title=Nom
+
+# DashboardClass
+Demarches.Dashboard.Code.DashboardClass_title=Nom
+Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord
+Demarches.Dashboard.Code.DashboardClass_date=Date
+Demarches.Dashboard.Code.DashboardClass_date_hint=Date de génération des données
+Demarches.Dashboard.Code.DashboardClass_type=Type de tableau de bord
+Demarches.Dashboard.Code.DashboardClass_type_hint=Type de tableau de bord : en direct ou archivé
+</content>
   <object>
     <name>Demarches.Dashboard.Code.DashboardTranslations</name>
     <number>0</number>
