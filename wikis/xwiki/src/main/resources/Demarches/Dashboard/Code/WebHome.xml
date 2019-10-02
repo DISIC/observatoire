@@ -24,7 +24,7 @@
   <web>Demarches.Dashboard.Code</web>
   <name>WebHome</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>

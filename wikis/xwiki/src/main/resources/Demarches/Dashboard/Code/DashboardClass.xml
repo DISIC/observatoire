@@ -53,7 +53,7 @@
       <customDisplay/>
       <dateFormat>dd/MM/yyyy</dateFormat>
       <disabled>0</disabled>
-      <emptyIsToday>1</emptyIsToday>
+      <emptyIsToday>0</emptyIsToday>
       <hint/>
       <name>date</name>
       <number>3</number>
@@ -78,28 +78,6 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
     </title>
-    <type>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>select</displayType>
-      <hint/>
-      <multiSelect>0</multiSelect>
-      <name>type</name>
-      <number>2</number>
-      <picker>0</picker>
-      <prettyName/>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>live=En direct|archive=Archive</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </type>
   </class>
   <object>
     <name>Demarches.Dashboard.Code.DashboardClass</name>

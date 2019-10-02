@@ -255,7 +255,7 @@
       <template>Demarches.Dashboard.Code.DashboardTemplate</template>
     </property>
     <property>
-      <terminal>1</terminal>
+      <terminal>0</terminal>
     </property>
     <property>
       <visibilityRestrictions/>

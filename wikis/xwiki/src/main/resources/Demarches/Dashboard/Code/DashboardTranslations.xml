@@ -44,7 +44,8 @@ dashboard.template.name=Tableau de bord
 dashboard.template.description=Suivi de la dématérialisation
 
 # Sheet
-dashboard.generation.hint=Cliquer sur le bouton ci-dessous pour exporter les données à la date indiquée (pour ce qui concerne les statistiques d'avis uniquement) et les stocker sous la forme d'un fichier joint à la présente page.
+dashboard.live.name=En temps réel
+dashboard.generation.hint=Cliquer sur le bouton ci-dessous pour exporter les données à la date indiquée (celle-ci sera utilisée pour calculer les statistiques d'avis) et les stocker sous la forme d'un fichier joint à la présente page.
 dashboard.generation.done=Un nouveau fichier JSON a été généré et joint à cette page : [[attach:data.json]].
 
 # Livetable
@@ -61,11 +62,9 @@ dashboard.livetable.title=Nom
 
 # DashboardClass
 Demarches.Dashboard.Code.DashboardClass_title=Nom
-Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord
+Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord (exemple : « À décembre 2019 »)
 Demarches.Dashboard.Code.DashboardClass_date=Date
-Demarches.Dashboard.Code.DashboardClass_date_hint=Date de génération des données
-Demarches.Dashboard.Code.DashboardClass_type=Type de tableau de bord
-Demarches.Dashboard.Code.DashboardClass_type_hint=Type de tableau de bord : en direct ou archivé
+Demarches.Dashboard.Code.DashboardClass_date_hint=Date utilisée pour le calcul des statistiques (laisser ce champ vide pour des statistiques calculées au moment de la consultation)
 </content>
   <object>
     <name>Demarches.Dashboard.Code.DashboardTranslations</name>

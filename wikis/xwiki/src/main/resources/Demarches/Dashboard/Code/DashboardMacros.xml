@@ -48,7 +48,7 @@
 #set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
 
-## Gets target demarches identifiers and computes dashboard data for these demarches
+## Gets top demarches identifiers and computes dashboard data for these demarches at the dashoard date
 #macro (computeDashboardData $limit)
   #if ("$!limit" == '') #set ($limit = 0) #end
   #set ($data = [])
@@ -62,14 +62,17 @@
   #end
   #set ($dashboard = $doc.getObject($DASHBOARD_CLASS_ID))
   #set ($dashboardDate = $dashboard.getValue('date'))
+  #if ("$!dashboardDate" != '')
+    #set ($formattedDashboardDate = $datetool.format('yyyy-MM-dd',$dashboardDate))
+  #end
   #foreach ($entry in $entries)
     #computeDemarcheData($entry, $dashboardDate, $data)
   #end
-  #set ($map = { "data": $data})
+  #set ($map = { "data": $data, "metadata": {"date": "$!formattedDashboardDate"}})
   #set ($json = $jsontool.serialize($map))
 #end
 
-## Computes the demarche data of given demarche to the given data array for the given date as far as avis statistics are concerned
+## Computes the demarche data of given demarche for the given date as far as avis statistics are concerned, and adds the result to the given parameter "data"
 #macro (computeDemarcheData $demarcheId $dashboardDate $data)
   #set ($page = $xwiki.getDocument($demarcheId))
   #set ($obj = $page.getObject($DEMARCHE_CLASS_ID))
@@ -95,9 +98,14 @@
   ##set ($avisStats = $page.getObject($AVIS_CLASS_ID))
   ##set ($avisCountValue = $avisStats.getValue('occurrences'))
   ##set ($satisfactionIndex = $avisStats.getValue('moyenne'))
+  #if ("$!dashboardDate" != '')
+    #set ($maxDate = $dashboardDate)
+  #else
+    #set ($maxDate = $datetool.getDate())
+  #end
   ## Compute statistics at the dashboard date
   #set ($hql = 'select count(*), avg(score.value) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &lt;= :date')
-  #set ($avisStats = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheId).bindValue('date', $dashboardDate).execute())
+  #set ($avisStats = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheId).bindValue('date', $maxDate).execute())
   ## Reinitialize avisCountValue since the Velocity scope is global
   #set ($avisCountValue = $NULL)
   #if ($avisStats.size() &gt; 0)
@@ -239,11 +247,11 @@
 #macro (attachJson)
   #set ($discard = $doc.addAttachment("data.json", $json.getBytes()))
   #set ($discard = $doc.save("Generate and attach file 'data.json'"))
-  
+
   {{info}}
   $services.localization.render('dashboard.generation.done')
   {{/info}}
-  
+
 #end
 {{/velocity}}</content>
 </xwikidoc>
