@@ -88,7 +88,10 @@
     ",'star')
   )))
   (% class="col-md-6 col-xs-12" %) (((
-   
+   #panel('Données Pingdom', "
+      * [[Récuperer les données&gt;&gt;Demarches.Code.PerformanceUpdateJob]]
+      * [[Liste des données récupérés&gt;&gt;Demarches.Performance.WebHome]]
+    ",'star')
   )))
 )))
 
