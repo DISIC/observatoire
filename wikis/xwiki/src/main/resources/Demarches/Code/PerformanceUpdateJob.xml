@@ -103,12 +103,11 @@ if(request.confirm &amp;&amp; request.confirm.equals("true") &amp;&amp; pingdomA
       LOGGER.debug("... Fetched information for " + check.name + "(" + check.id + ", " + check.hostname + ")");
 
       if (checkInfo != null &amp;&amp; checkInfo instanceof java.util.Map) {
-        def uptimeRatio = 0;
-        try {
-          uptimeRatio = 100 * checkInfo.status.totalup / (checkInfo.status.totalup + checkInfo.status.totaldown);
-        } catch (Exception e) {
-          LOGGER.warn("Exception computing the uptime ratio for demarche " + check.name + ", " + check.id + " total up " + checkInfo.status.totalup + " total down " + checkInfo.status.totaldown);
+        if ((checkInfo.status.totalup + checkInfo.status.totaldown) == 0) {
+          LOGGER.warn("The demarche " + check.name + " has 0 total time for the given period, not including it in the report");
+          continue;
         }
+        uptimeRatio = 100 * checkInfo.status.totalup / (checkInfo.status.totalup + checkInfo.status.totaldown);
         def from = checkInfo.responsetime.from != 0 ? DATE_FORMAT.format(new java.util.Date(Long.valueOf(checkInfo.responsetime.from) * 1000)) : "-";
         def to = checkInfo.responsetime.to != 0 ? DATE_FORMAT.format(new java.util.Date(Long.valueOf(checkInfo.responsetime.to) * 1000)) : "-";
         fakeDemarche.set('urlAvailability', uptimeRatio);
