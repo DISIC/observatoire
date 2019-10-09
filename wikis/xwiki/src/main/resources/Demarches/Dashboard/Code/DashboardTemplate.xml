@@ -70,6 +70,20 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
       </date>
+      <pdf>
+        <customDisplay>{{attachmentSelector classname="Demarches.Dashboard.Code.DashboardClass" property="pdf" filter="pdf" savemode="form" link="true"/}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>pdf</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName/>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </pdf>
       <title>
         <customDisplay>{{include reference="AppWithinMinutes.Title"/}}</customDisplay>
         <disabled>0</disabled>

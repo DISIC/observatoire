@@ -47,6 +47,7 @@
 #set ($DEMARCHE_SHEET = 'Demarches.Code.DemarchesSheet')
 #set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
+#set ($LIVE_DASHBOARD_ID = 'observatoire.en-direct.WebHome')
 
 ## Gets top demarches identifiers and computes dashboard data for these demarches at the dashoard date
 #macro (computeDashboardData $limit)
@@ -229,7 +230,8 @@
       "urlScore": {
         "display": $urlScore,
         "value": $urlScoreValue
-      }
+      },
+      "urlDemarche": "$!obj.getValue('urlDemarche')"
     }))
 #end
 

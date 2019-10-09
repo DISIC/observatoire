@@ -39,14 +39,46 @@
   <minorEdit>false</minorEdit>
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
-  <content># Template
+  <content># DashboardClass
+Demarches.Dashboard.Code.DashboardClass_title=Nom
+Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord (exemple : « À décembre 2019 »)
+Demarches.Dashboard.Code.DashboardClass_date=Date
+Demarches.Dashboard.Code.DashboardClass_date_hint=Date utilisée pour le calcul des statistiques (laisser ce champ vide pour des statistiques calculées au moment de la consultation)
+Demarches.Dashboard.Code.DashboardClass_pdf=Fichier PDF
+Demarches.Dashboard.Code.DashboardClass_pdf_hint=Fichier à rendre disponible au téléchargement sur la page du tableau de bord
+
+# Template
 dashboard.template.name=Tableau de bord
 dashboard.template.description=Suivi de la dématérialisation
 
 # Sheet
+dashboard.title=Observatoire de la dématérialisation
+dashboard.subtitle=Tableau de bord des démarches phares de l’État
+dashboard.help=En savoir plus sur l'observatoire
+dashboard.title=Observatoire de la dématérialisation de qualité
 dashboard.live.name=En temps réel
 dashboard.generation.hint=Cliquer sur le bouton ci-dessous pour exporter les données à la date indiquée (celle-ci sera utilisée pour calculer les statistiques d'avis) et les stocker sous la forme d'un fichier joint à la présente page.
 dashboard.generation.done=Un nouveau fichier JSON a été généré et joint à cette page : [[attach:data.json]].
+dashboard.previous-data=Données antérieures
+dashboard.generate-data=Générer
+dashboard.download-pdf=Télécharger la version imprimable (PDF {0} ko)
+dashboard.edit-entry=Modifier ces informations
+
+# Table
+dashboard.table.demarche=Démarche
+dashboard.table.ministry=Ministère
+dashboard.table.group=Regroupement
+dashboard.table.digitalization=Démarche dématérialisée
+dashboard.table.satisfaction=Usagers satisfaits
+dashboard.table.mobile=Optimisé sur mobile
+dashboard.table.support=Support de qualité
+dashboard.table.performance=Disponibilité du service
+dashboard.table.france-connect=Intégration FranceConnect
+dashboard.table.open-date=Date d'ouverture du service dématérialisé
+dashboard.table.volumetry=Volumétrie totale de la démarche
+dashboard.table.digitalized-usage-percent=Pourcentage de recours à la voie dématérialisée
+dashboard.table.avis-count=Nombre d'avis usagers recueillis
+dashboard.table.url-demarche=Lien
 
 # Livetable
 dashboard.livetable.doc.title=Nom
@@ -60,11 +92,6 @@ dashboard.livetable._actions.delete=Supprimer
 dashboard.livetable.emptyvalue=-
 dashboard.livetable.title=Nom
 
-# DashboardClass
-Demarches.Dashboard.Code.DashboardClass_title=Nom
-Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord (exemple : « À décembre 2019 »)
-Demarches.Dashboard.Code.DashboardClass_date=Date
-Demarches.Dashboard.Code.DashboardClass_date_hint=Date utilisée pour le calcul des statistiques (laisser ce champ vide pour des statistiques calculées au moment de la consultation)
 </content>
   <object>
     <name>Demarches.Dashboard.Code.DashboardTranslations</name>

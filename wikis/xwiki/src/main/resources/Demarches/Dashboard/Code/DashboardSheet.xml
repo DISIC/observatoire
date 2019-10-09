@@ -45,7 +45,6 @@
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
 #set ($dashboard = $doc.getObject($DASHBOARD_CLASS_ID))
-#set ($LIVE_DASHBOARD_ID = 'observatoire.en-direct.WebHome')
 ## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
@@ -56,15 +55,16 @@
       (% class='document-info'%) (((
         (% id='document-title' %)(((
           #set ($break = '\\')
-          #set ($subtitle = $services.localization.render("wikidemarches.observatoire.subtitle"))
-          = Observatoire de la dématérialisation de qualité$break$subtitle$break$doc.title =
+          #set ($subtitle = $services.localization.render("dashboard.subtitle"))
+          #set ($title = $services.localization.render("dashboard.title"))
+          = $title$break$subtitle$break$doc.title =
         )))
       )))
 
       {{html clean="false"}}
       &lt;div class="btn-group controls"&gt;
         &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
-        #if ($doc.fullName == $LIVE_DASHBOARD_ID)Données antérieures#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
+        #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
         &lt;/button&gt;
         #set ($hql = 'select obj.name from BaseObject as obj where obj.className = :className and obj.name not like :template and obj.name &lt;&gt; :live')
         #set ($entries = $services.query.hql($hql).bindValue('className', $DASHBOARD_CLASS_ID).bindValue('template', '%DashboardTemplate%').bindValue('live', $LIVE_DASHBOARD_ID).execute())
@@ -84,7 +84,7 @@
 
     )))
 
-    [[$services.localization.render("wikidemarches.observatoire.help-link")&gt;&gt;Aide.Observatoire]]
+    [[$services.localization.render("dashboard.help")&gt;&gt;Aide.Observatoire]]
 
     == Partager ==
     #set ($socialNetworks = [{
@@ -110,19 +110,14 @@
       &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt;
     #end
     {{/html}}
-    ## Use first PDF found, if any
-    #foreach ($attachment in $doc.getAttachmentList())
-      #if ($attachment.filename.indexOf('.pdf') &gt; 0)
-        #set ($pdf = $attachment)
-        #break()
-      #end
-    #end
-    #if ($pdf != $NULL)
-      #set ($size = $pdf.getLongSize())
+    #set ($pdf = $dashboard.getValue('pdf'))
+    #if ("$!pdf" != '')
+      #set ($pdfFile = $doc.getAttachment($pdf))
+      #set ($size = $pdfFile.getLongSize())
       #set ($size = $mathtool.div($size, 1000))
       #set ($size = $mathtool.round($size))
       (% class="download" %)
-      [[$services.icon.render('download') Télécharger la version imprimable (PDF $size Ko)&gt;&gt;path:$doc.getAttachmentURL($pdf.filename)||class="btn btn-default btn-download"]]
+      [[$services.icon.render('download') $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)||class="btn btn-default btn-download"]]
     #end
   )))
 )))
@@ -155,14 +150,14 @@
 
          {{html wiki="false" clean="false"}}
          &lt;form action="" method="post"&gt;
-           &lt;button class="btn btn-default" name="action" value="generate-json"&gt;Générer&lt;/button&gt;
+           &lt;button class="btn btn-default" name="action" value="json"&gt;$services.localization.render('dashboard.generate-data')&lt;/button&gt;
            &lt;input type="hidden" name="token" value="$!{services.csrf.getToken()}" /&gt;
          &lt;/form&gt;
          {{/html}}
         {{/info}}
 
       #end
-      #if ("$!request.action" == 'generate-json' &amp;&amp; $services.csrf.isTokenValid($request.token))
+      #if ("$!request.action" == 'json' &amp;&amp; $services.csrf.isTokenValid($request.token))
         #computeDashboardData(0)
         #if ("$!request.live" == 1)
           #writeJson()
@@ -183,18 +178,19 @@
   &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
     &lt;thead&gt;
       &lt;tr&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.demarche')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.ministry')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.group')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.digitalization')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.satisfaction')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.mobile')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.support')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.performance')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.france-connect')&lt;/th&gt;
         &lt;th&gt;&lt;/th&gt;
-        &lt;th&gt;Démarche&lt;/th&gt;
-        &lt;th&gt;Ministère&lt;/th&gt;
-        &lt;th&gt;Regroupement&lt;/th&gt;
-        &lt;th&gt;Démarche dématérialisée&lt;/th&gt;
-        &lt;th&gt;Usagers satisfaits&lt;/th&gt;
-        &lt;th&gt;Optimisé sur mobile&lt;/th&gt;
-        &lt;th&gt;Support de qualité&lt;/th&gt;
-        &lt;th&gt;Disponibilité du service&lt;/th&gt;
-        &lt;th&gt;Intégration FranceConnect&lt;/th&gt;
-        &lt;th&gt;Volumétrie&lt;/th&gt;
-        &lt;th&gt;Nombre d'avis usagers recueillis&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.volumetry')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.avis-count')&lt;/th&gt;
+        &lt;th&gt;$services.localization.render('dashboard.table.url-demarche')&lt;/th&gt;
       &lt;/tr&gt;
     &lt;/thead&gt;
   &lt;/table&gt;
@@ -298,7 +294,17 @@
 var XWiki = (function (XWiki) {
 
   function computeBadgeStyle(value) {
-    if (typeof value === 'string' || value instanceof String) {
+    if (!isNaN(value)) {
+      if (value &gt;= 75) {
+        return "success";
+      } else if (value &gt;= 50) {
+        return "default";
+      } else if (value &gt;= 25) {
+        return "warning";
+      } else {
+        return "danger";
+      }
+    } else if (typeof value === 'string' || value instanceof String) {
       value = value.toLowerCase();
       switch (value) {
         case 'oui':
@@ -329,24 +335,39 @@ var XWiki = (function (XWiki) {
     return "danger";
   }
 
-  function format(value, badgeStyleFunction, replaceNa, demarcheId) {
-    if (typeof value === 'string' || value instanceof String) {
-      var badgeStyle = badgeStyleFunction.apply(this, [value]);
-      if (value) {
-        if (replaceNa) {
-          value = value.replace("n/a", "-");
-        }
-        value = value.replace("n/c", "Non disponible");
-      }
-      if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
-        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
-      } else if (value &amp;&amp; value == '-') {
-        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+  function format(value, display, badgeStyleFunction, replaceNa, demarcheId) {
+    if (typeof display === 'string' || display instanceof String) {
+      var badgeStyle;
+      if (display.indexOf('%') &gt; 0) {
+        badgeStyle = badgeStyleFunction.apply(this, [value]);
       } else {
-        return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + value + '&lt;/span&gt;&lt;/span&gt;';
+        badgeStyle = badgeStyleFunction.apply(this, [display]);
+      }
+      if (display) {
+        if (replaceNa) {
+          display = display.replace("n/a", "-");
+        }
+        display = display.replace("n/c", "Non disponible");
+      }
+      /*if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
+        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
+      } else*/
+      if (display &amp;&amp; display == '-') {
+        return '&lt;span class="row-details-value"&gt;' + display + '&lt;/span&gt;';
+      } else {
+        return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + display + '&lt;/span&gt;&lt;/span&gt;';
       }
     } else {
-      return '&lt;span class="row-details-value"&gt;Erreur de formatage (' + value + ')&lt;/span&gt;';
+      return '&lt;span class="row-details-value"&gt;Erreur de formatage (' + display + ')&lt;/span&gt;';
+    }
+  }
+
+  function getHostName(url) {
+    var match = url.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i);
+    if (match != null &amp;&amp; match.length &gt; 2 &amp;&amp; typeof match[2] === 'string' &amp;&amp; match[2].length &gt; 0) {
+      return match[2];
+    } else {
+      return url;
     }
   }
 
@@ -359,16 +380,20 @@ var XWiki = (function (XWiki) {
       if (dateMiseEnLigne != 'Ouvert') {
         if (dateMiseEnLigne == 'n/c')
           dateMiseEnLigne = 'Non disponible';
-        output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.date-ouverture")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+        output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.open-date")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
       }
-      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.volumetrie")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
+      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.volumetry")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
       var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
       if (data.statutDemat != 'Non') {
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.pourcentage-recours-demat")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.digitalized-usage-percent")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
       }
       if (data.avisCount.value &gt;= 100) {
         var demarcheId = data.id;
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("wikidemarches.observatoire.avis")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/a&gt;&lt;/li&gt;';
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.avis-count")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
+      }
+      if (data.urlDemarche &amp;&amp; data.urlDemarche.length &gt; 0) {
+        var hostname = getHostName(data.urlDemarche)
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;' + hostname + '&lt;/a&gt;&lt;/li&gt;';
       }
     output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
     return output;
@@ -387,7 +412,7 @@ var XWiki = (function (XWiki) {
     var output = '&lt;div class="row observatoire-toolbar"&gt;' +
         '&lt;div class="col-md-12"&gt;' +
           '&lt;div&gt;';
-    output = output + '&lt;i class="fa fa-edit"&gt;&lt;/i&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;Modifier ces informations&lt;/a&gt;';
+    output = output + '&lt;i class="fa fa-edit"&gt;&lt;/i&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;' + "$services.localization.render("dashboard.edit-entry")" + '&lt;/a&gt;';
     output = output + '&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
     return output;
   }
@@ -515,7 +540,7 @@ var XWiki = (function (XWiki) {
       // If this is the live dashboard, adapt the data endpoint accordingly
       #if ($pageId == $LIVE_DASHBOARD_ID)
         #set ($token = $services.csrf.getToken())
-        #set ($parameters = "action=generate-json&amp;live=1&amp;token=$token")
+        #set ($parameters = "action=json&amp;live=1&amp;token=$token")
         dataEndpoint = "$xwiki.getURL($pageId, 'view', $parameters)";
       #end
 
@@ -526,7 +551,6 @@ var XWiki = (function (XWiki) {
           dataSrc: function (json) {
             var data = json.data;
             date = json.metadata.date;
-            console.log(date);
             for (var i = 0; i &lt; data.length; i++) {
               var ministere = data[i].ministere;
               if (ministeres.indexOf(ministere) &lt; 0) {
@@ -546,12 +570,6 @@ var XWiki = (function (XWiki) {
         paging: false,
         columns: [
           {
-            className: 'details-control',
-            orderable: false,
-            data: null,
-            defaultContent: ''
-          },
-          {
             data: "title",
             className: 'column-title',
             render : function (data, type, row) {
@@ -570,7 +588,7 @@ var XWiki = (function (XWiki) {
           },
           { data: "statutDemat",
             render: function (data, type, row) {
-              return format(data, computeBadgeStyle, true);
+              return format(data, data, computeBadgeStyle, true);
             }
           },
           {
@@ -581,9 +599,10 @@ var XWiki = (function (XWiki) {
                 return data.value;
               } else {
                 if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
-                  return '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
+                  data.display = '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
+                  return format(data.value, data.display, computeBadgeStyle,  true, row['id']);
                 } else {
-                  return format(data.display, computeBadgeStyle,  true, row['id']);
+                  return format(data.value, data.display, computeBadgeStyle,  true, row['id']);
                 }
               }
             }
@@ -594,14 +613,14 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.display;
               } else {
-                return format(data.display, computeBadgeStyle, false);
+                return format(data.value, data.display, computeBadgeStyle, false);
               }
             }
           },
           {
             data: "qualiteSupport",
             render: function (data, type, row) {
-              return format(data, computeBadgeStyle, true);
+              return format(data, data, computeBadgeStyle, true);
             }
           },
           {
@@ -611,7 +630,7 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.value;
               } else {
-                return format(data.display, computeUrlScoreBadgeStyle, true);
+                return format(data.value, data.display, computeUrlScoreBadgeStyle, true);
               }
             }
           },
@@ -621,9 +640,15 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.display;
               } else {
-                return format(data.display, computeBadgeStyle, false);
+                return format(data.value, data.display, computeBadgeStyle, false);
               }
             }
+          },
+          {
+            className: 'details-control',
+            orderable: false,
+            data: null,
+            defaultContent: ''
           },
           {
             data: "volumetrie",
@@ -647,6 +672,13 @@ var XWiki = (function (XWiki) {
               } else {
                 return data.display;
               }
+            }
+          },
+          {
+            data: "urlDemarche",
+            visible: false,
+            render: function (data, type, row) {
+              return data;
             }
           }
         ],
@@ -734,8 +766,9 @@ var XWiki = (function (XWiki) {
       $(document).on('xwiki:demarche:updated', function(event, data) {
         var row = table.row('#' + data.id);
         var rowData = row.data();
-        var url = "$xwiki.getURL('Demarches.Code.Top', 'view', 'execute=1&amp;live=1&amp;id=')";
+        var url = "$xwiki.getURL('observatoire.en-direct.WebHome', 'view', 'action=json&amp;live=1&amp;id=')";
         url = url + data.id;
+        url = url + "&amp;token=" + "$services.csrf.getToken()";
         $.get(url, function(freshData) {
           if (freshData &amp;&amp; freshData.data &amp;&amp; freshData.data.length &gt; 0) {
             var demarche = freshData.data[0];
@@ -939,6 +972,16 @@ tr.shown td.details-control::before {
 #top-demarches {
   thead th {
     vertical-align: middle;
+  }
+
+  tr {
+    td {
+      .label {
+        a {
+          color: white;
+        }
+      }
+    }
   }
 
   tr.shown {
