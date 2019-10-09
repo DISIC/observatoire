@@ -62,7 +62,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>accompagnement</name>
-        <number>41</number>
+        <number>32</number>
         <picker>0</picker>
         <prettyName>Accompagnement humain personnalisé</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -84,7 +84,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>adapteMobile</name>
-        <number>33</number>
+        <number>30</number>
         <picker>0</picker>
         <prettyName>Adapté mobile</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -106,7 +106,7 @@
         <hint/>
         <multiSelect>1</multiSelect>
         <name>api</name>
-        <number>37</number>
+        <number>35</number>
         <picker>0</picker>
         <prettyName>API</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -128,7 +128,7 @@
         <hint>Catégorie(s) de public(s) concerné(s) par la démarche</hint>
         <multiSelect>1</multiSelect>
         <name>categoriesPublics</name>
-        <number>16</number>
+        <number>17</number>
         <picker>0</picker>
         <prettyName>Catégories de publics concernés</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -150,7 +150,7 @@
         <hint>Champ national ou territorial</hint>
         <multiSelect>0</multiSelect>
         <name>champ</name>
-        <number>12</number>
+        <number>6</number>
         <picker>0</picker>
         <prettyName>Champ de la démarche</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -165,13 +165,28 @@
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </champ>
       <dateMiseEnLigne>
-        <customDisplay/>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+  #template('displayer_date.vm')
+#else
+  #set ($statutDemat = "$!object.getValue('statutDemat')")
+  #if ("$!statutDemat" == 'enLigneEntierement')
+$services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_ouvert")
+  #elseif ("$!value" != '')
+    #template('displayer_date.vm')
+  #else
+$services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr")
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <dateFormat>MM/yyyy</dateFormat>
         <disabled>0</disabled>
         <emptyIsToday>0</emptyIsToday>
         <hint>Date de mise en ligne prévue ou réalisée</hint>
         <name>dateMiseEnLigne</name>
-        <number>37</number>
+        <number>40</number>
         <picker>1</picker>
         <prettyName>Date de mise en ligne</prettyName>
         <size>20</size>
@@ -202,7 +217,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>demarcheSimplifiee</name>
-        <number>41</number>
+        <number>36</number>
         <picker>0</picker>
         <prettyName>Démarche simplifiée</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -224,7 +239,7 @@
         <displayType/>
         <hint>Ce champ indique si les usagers sont obligés de remplir la démarche en dématérialisation.</hint>
         <name>dematObligatoire</name>
-        <number>30</number>
+        <number>27</number>
         <prettyName>Dématérialisation obligatoire</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
@@ -236,13 +251,11 @@
         <classname/>
         <customDisplay>{{velocity}}
 {{html clean="false"}}
-#set ($direction = $xwiki.getDocument($value))
-#if ($xcontext.action == 'get')
-  #if ($direction.sigle) $direction.sigle #else $!value #end
-#elseif ($xcontext.action == 'edit' || $isSimplifiedForm)
+#if ($xcontext.action == 'edit' || $isSimplifiedForm)
   #template('displayer_dblist.vm')
 #else
-  $direction.displayTitle
+  #set ($direction = $xwiki.getDocument($value))
+  #if ($direction.sigle) $direction.sigle #else $!value #end
 #end
 {{/html}}
 {{/velocity}}</customDisplay>
@@ -252,7 +265,7 @@
         <idField/>
         <multiSelect>0</multiSelect>
         <name>direction</name>
-        <number>10</number>
+        <number>7</number>
         <picker>1</picker>
         <prettyName>Direction ou établissement</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -260,7 +273,8 @@
         <separators/>
         <size>1</size>
         <sort>value</sort>
-        <sql>select doc.fullName,doc.title from XWikiDocument as doc,BaseObject as obj where doc.fullName=obj.name and obj.className='Directions.Code.DirectionsClass' and doc.fullName&lt;&gt;'Directions.Code.DirectionsTemplate' order by doc.title asc</sql>
+        <sql>select doc.fullName, sigle.value from XWikiDocument as doc, BaseObject as obj, StringProperty as sigle where doc.fullName = obj.name and obj.className = 'Directions.Code.DirectionsClass' and doc.fullName &lt;&gt; 'Directions.Code.DirectionsTemplate' and sigle.id.id = obj.id and sigle.id.name = 'sigle' order by sigle.value asc
+</sql>
         <unmodifiable>0</unmodifiable>
         <validationMessage>Demarches.Code.DemarchesClass_direction.validation</validationMessage>
         <validationRegExp/>
@@ -277,7 +291,7 @@
         <idField/>
         <multiSelect>1</multiSelect>
         <name>evenements</name>
-        <number>18</number>
+        <number>19</number>
         <picker>1</picker>
         <prettyName>Événements de vie</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -300,7 +314,7 @@
         <displayType/>
         <hint>Démarche exclue du SVE par décret</hint>
         <name>exclusionSve</name>
-        <number>31</number>
+        <number>28</number>
         <prettyName>Démarche exclue du SVE</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
@@ -312,7 +326,7 @@
         <disabled>0</disabled>
         <hint>Référence(s) d'un ou plusieurs CERFA séparé(e)s par des virgules</hint>
         <name>formulaires</name>
-        <number>4</number>
+        <number>13</number>
         <picker>0</picker>
         <prettyName>Formulaires CERFA</prettyName>
         <size>30</size>
@@ -329,7 +343,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>franceConnect</name>
-        <number>32</number>
+        <number>29</number>
         <picker>0</picker>
         <prettyName>FranceConnect</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -349,17 +363,17 @@
         <customDisplay/>
         <disabled>0</disabled>
         <displayType>input</displayType>
-        <hint>Groupes au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
+        <hint>Groupe(s) interne(s) au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
         <idField/>
         <multiSelect>1</multiSelect>
         <name>groupes</name>
-        <number>11</number>
+        <number>9</number>
         <picker>1</picker>
-        <prettyName>Groupes</prettyName>
+        <prettyName>Regroupement interne</prettyName>
         <relationalStorage>1</relationalStorage>
         <separator> </separator>
         <separators/>
-        <size>1</size>
+        <size>5</size>
         <sort>none</sort>
         <sql/>
         <unmodifiable>0</unmodifiable>
@@ -368,6 +382,31 @@
         <valueField/>
         <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
       </groupes>
+      <groupesExternes>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <hint>Groupe(s) externe(s) au(x)quel(s) est rattachée la démarche (exemple : Éducation)</hint>
+        <idField/>
+        <multiSelect>1</multiSelect>
+        <name>groupesExternes</name>
+        <number>10</number>
+        <picker>1</picker>
+        <prettyName>Regroupement externe</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>5</size>
+        <sort>none</sort>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </groupesExternes>
       <ministeres>
         <cache>0</cache>
         <classname/>
@@ -375,16 +414,11 @@
 {{html clean="false"}}
 #if ($type == 'edit')
   #template('displayer_dblist.vm')
-#elseif ($xcontext.action == 'get')
+#else
   #foreach ($ministere in $value)
     #set ($ministereDocument = $xwiki.getDocument($ministere))
     #set ($nom = $ministereDocument.get('nom'))
     #if ($velocityCount &gt; 1), #{end}#if ($nom)$nom#{else}${ministereDocument.name}#end
-  #end
-#elseif ($xcontext.action == 'view')
-  #foreach ($ministere in $value)
-    #set($ministereDocument = $xwiki.getDocument($ministere))
-    $ministereDocument.displayTitle
   #end
 #end
 {{/html}}
@@ -395,7 +429,7 @@
         <idField/>
         <multiSelect>1</multiSelect>
         <name>ministeres</name>
-        <number>9</number>
+        <number>8</number>
         <picker>1</picker>
         <prettyName>Champ ministériel</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -418,7 +452,7 @@
         <hint/>
         <multiSelect>0</multiSelect>
         <name>moyensDeContact</name>
-        <number>40</number>
+        <number>31</number>
         <picker>0</picker>
         <prettyName>Au moins deux moyens de contact différents, dont un formulaire de contact</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -440,7 +474,7 @@
         <hint/>
         <multiSelect>1</multiSelect>
         <name>niveauDemat</name>
-        <number>26</number>
+        <number>24</number>
         <picker>0</picker>
         <prettyName>Niveau de dématérialisation actuel</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -476,7 +510,7 @@
         <disabled>0</disabled>
         <hint>Nom du projet de dématérialisation auquel est rattachée la démarche</hint>
         <name>nomProjet</name>
-        <number>35</number>
+        <number>38</number>
         <picker>0</picker>
         <prettyName>Nom du projet de dématérialisation</prettyName>
         <size>30</size>
@@ -492,7 +526,7 @@
         <editor>Text</editor>
         <hint>Objet de la démarche</hint>
         <name>objet</name>
-        <number>7</number>
+        <number>4</number>
         <picker>0</picker>
         <prettyName>Objet</prettyName>
         <rows>5</rows>
@@ -512,7 +546,7 @@
         <idField/>
         <multiSelect>1</multiSelect>
         <name>organismesTraitement</name>
-        <number>13</number>
+        <number>11</number>
         <picker>1</picker>
         <prettyName>Organismes de traitement</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -532,7 +566,7 @@
         <disabled>0</disabled>
         <hint>100 % si la démarche peut être réalisée en ligne complètement, 50% si la démarche est en phase de déploiement, et 10% si elle est en phase d’expérimentation</hint>
         <name>pourcentageDematerialisation</name>
-        <number>43</number>
+        <number>26</number>
         <prettyName>Pourcentage de dématérialisation</prettyName>
         <script>{{velocity}}
 #set ($enLigneEntierement = $object.getValue("enLigneEntierement"))
@@ -561,21 +595,24 @@ ${percent} %
         <disabled>0</disabled>
         <hint>Rapport entre la volumétrie de la démarche et la volumétrie du recours à la voie dématérialisée</hint>
         <name>pourcentageRecoursVoieDematerialisee</name>
-        <number>43</number>
+        <number>22</number>
         <prettyName>Pourcentage de recours à la voie dématérialisée</prettyName>
         <script>{{velocity}}
 {{html clean="false"}}
+#set ($statutDemat = "$!object.getValue('statutDemat')")
 #set ($volumetrieDemat = $object.getValue("volumetrieDemat"))
 #set ($volumetrie = $object.getValue("volumetrie"))
 #set ($volumetrieDemat = $volumetrieDemat * 100)
-#if ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
+#if ($statutDemat == 'nonDemat')
+$services.localization.render("Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_na")
+#elseif ("$!volumetrie" != '' &amp;&amp; $volumetrie &gt; 0 &amp;&amp; "$!volumetrieDemat" != '')
   #set ($percent = $mathtool.div($volumetrieDemat, $volumetrie))
-  #set ($percent = $mathtool.roundTo(1, $percent))
-  ${percent} %
+  $numbertool.format("${escapetool.hash}${escapetool.hash}.${escapetool.hash}", $percent) %
+#else
+$services.localization.render("Demarches.Code.DemarchesClass_pourcentageRecoursVoieDematerialisee_nr")
 #end
 {{/html}}
-{{/velocity}}
-</script>
+{{/velocity}}</script>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
@@ -613,7 +650,7 @@ ${percent} %
         <idField/>
         <multiSelect>1</multiSelect>
         <name>publics</name>
-        <number>17</number>
+        <number>18</number>
         <picker>1</picker>
         <prettyName>Publics</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -640,24 +677,24 @@ ${percent} %
 #if ("$!moyensDeContact" == '')
   #set ($moyensDeContact = 'nr')
 #end
-#set ($notApplicableOrNoInformation = ['na', 'nr'])
-#set ($result = 'Partiel')
+#set ($noOrnotApplicableOrNoInformation = ['non', 'na', 'nr'])
+#set ($result = 'non')
 #if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
-  #set ($result = 'Oui')
-#elseif ($accompagnement == 'non' &amp;&amp; $moyensDeContact == 'non')
-  #set ($result = 'Non')
-#elseif (($accompagnement == 'non' &amp;&amp; $notApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'non' &amp;&amp; $notApplicableOrNoInformation.contains($accompagnement)))
-  #set ($result = 'Non')
-#elseif ($accompagnement == 'nr' &amp;&amp; $moyensDeContact == 'nr')
-  #set ($result = 'Non renseigné')
+  #set ($result = 'oui')
+#elseif (($accompagnement == 'nr' &amp;&amp; ($moyensDeContact == 'nr' || $moyensDeContact == 'na')) || ($moyensDeContact == 'nr' &amp;&amp; ($accompagnement == 'nr' || $accompagnement == 'na')))
+  #set ($result = 'nr')
+#elseif ($accompagnement == 'na' &amp;&amp; $moyensDeContact == 'na')
+  #set ($result = 'na')
+#elseif (($accompagnement == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($accompagnement)))
+  #set ($result = 'partiel')
 #end
-$result
+$services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$result")
 {{/html}}
 {{/velocity}}</customDisplay>
         <disabled>0</disabled>
         <hint/>
         <name>qualiteSupport</name>
-        <number>36</number>
+        <number>33</number>
         <prettyName>Support de qualité</prettyName>
         <script/>
         <unmodifiable>0</unmodifiable>
@@ -670,7 +707,7 @@ $result
         <disabled>0</disabled>
         <hint>Référence de la démarche dans la base Service Public</hint>
         <name>referenceServicePublic</name>
-        <number>6</number>
+        <number>12</number>
         <picker>0</picker>
         <prettyName>Référence Service Public</prettyName>
         <size>30</size>
@@ -686,7 +723,7 @@ $result
         <editor>Text</editor>
         <hint/>
         <name>remarques</name>
-        <number>38</number>
+        <number>37</number>
         <picker>0</picker>
         <prettyName>Remarques</prettyName>
         <rows>5</rows>
@@ -704,7 +741,7 @@ $result
         <hint/>
         <multiSelect>0</multiSelect>
         <name>statut</name>
-        <number>34</number>
+        <number>5</number>
         <picker>0</picker>
         <prettyName>Statut de la démarche</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -726,7 +763,7 @@ $result
         <hint>Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; Non dans le cas contraire ; Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
         <multiSelect>0</multiSelect>
         <name>statutDemat</name>
-        <number>42</number>
+        <number>25</number>
         <picker>0</picker>
         <prettyName>Peut être réalisée en ligne complètement</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -740,28 +777,6 @@ $result
         <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|nonDemat=Non|nr=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </statutDemat>
-      <statutIntegration>
-        <cache>0</cache>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <displayType>radio</displayType>
-        <hint/>
-        <multiSelect>0</multiSelect>
-        <name>statutIntegration</name>
-        <number>40</number>
-        <picker>0</picker>
-        <prettyName>Avis Nos Démarches intégré ?</prettyName>
-        <relationalStorage>1</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <sort>none</sort>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <values>oui=Oui|non=Non|na=Sans objet|nr=Non renseigné</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </statutIntegration>
       <statutProjetDemat>
         <cache>0</cache>
         <customDisplay/>
@@ -770,7 +785,7 @@ $result
         <hint>Statut du projet de dématérialisation incluant la planification de celle-ci</hint>
         <multiSelect>0</multiSelect>
         <name>statutProjetDemat</name>
-        <number>36</number>
+        <number>39</number>
         <picker>0</picker>
         <prettyName>Statut du projet de dématérialisation</prettyName>
         <relationalStorage>1</relationalStorage>
@@ -784,6 +799,31 @@ $result
         <values>prevu=Prévu|encours=En cours|termine=Terminé</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </statutProjetDemat>
+      <tellUsOnce>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+  &lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="5" type="text" value="$!value"&gt;
+#else
+  #if ("$!value" != '')
+    #set ($stars = $mathtool.toInteger($value))
+    #if ($stars &gt; 0)#foreach ($item in [1..$stars])✫#end#end
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>tellUsOnce</name>
+        <number>34</number>
+        <numberType>double</numberType>
+        <prettyName>Dites-le nous une fois</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </tellUsOnce>
       <textes>
         <contenttype>---</contenttype>
         <customDisplay/>
@@ -848,19 +888,33 @@ $result
         <displayType/>
         <hint/>
         <name>top</name>
-        <number>39</number>
+        <number>23</number>
         <prettyName>Top 250</prettyName>
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
       </top>
+      <urlAvailability>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>urlAvailability</name>
+        <number>43</number>
+        <numberType>double</numberType>
+        <prettyName>Disponibilité</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </urlAvailability>
       <urlDemarche>
         <customDisplay/>
         <disabled>0</disabled>
         <hint>Adresse web permettant d'effectuer la démarche</hint>
         <name>urlDemarche</name>
-        <number>20</number>
+        <number>16</number>
         <picker>0</picker>
         <prettyName>Adresse web de la démarche</prettyName>
         <size>30</size>
@@ -874,7 +928,7 @@ $result
         <disabled>0</disabled>
         <hint>Adresse web des informations concernant la démarche</hint>
         <name>urlInfos</name>
-        <number>19</number>
+        <number>15</number>
         <picker>0</picker>
         <prettyName>Adresse web informations</prettyName>
         <size>30</size>
@@ -883,12 +937,103 @@ $result
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </urlInfos>
-      <volumetrie>
+      <urlResponseTime>
         <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>urlResponseTime</name>
+        <number>42</number>
+        <numberType>long</numberType>
+        <prettyName>Temps de réponse</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </urlResponseTime>
+      <urlScore>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($availability = $object.getValue('urlAvailability'))
+#set ($responseTime = $object.getValue('urlResponseTime'))
+#set ($statutDemat = $object.getValue('statutDemat'))
+#if ($statutDemat == 'nonDemat')
+  $services.localization.render('Demarches.Code.DemarchesClass_urlScore_na')
+#else
+  ## Availability score
+  ## - Supérieure à 99.9% = 6
+  ## - Entre 99.9% et 99.5% = 4
+  ## - Entre 99,5% et 99% = 3
+  ## - Entre 99% et 98% = 2
+  ## - Entre 98% et 95% = 0
+  ## - Inférieure à 95% = -6
+  #set ($ranges = [95, 98, 99, 99.5, 99.9, 100])
+  #set ($scores = [-6, 0, 2, 3, 4, 6])
+  #foreach ($boundary in $ranges)
+    ## Most strict test: inferior or equal for availability, strictly inferior for response time
+    #if ($availability &amp;&amp; $availability &lt;= $boundary)
+      #set ($index = $mathtool.sub($velocityCount, 1))
+      #set ($availabilityScore = $scores.get($index))
+      #break
+    #end
+  #end
+  ## Response time score
+  ## - Inférieure à 0.2s (200ms) = 4
+  ## - Entre 0.2s et 0.4s (400ms) = 3
+  ## - Entre 0.4s et 0.6s (600ms) = 2
+  ## - Entre 0.6s et 0.8s (800ms) = 1
+  ## - Entre 0.8s et 1s (1000ms) = 0
+  ## - Supérieure à 1s = -4
+  #set ($ranges = [200, 400, 600, 800, 1000])
+  #set ($scores = [4, 3, 2, 1, 0])
+  #if ($responseTime &amp;&amp; $responseTime &gt;= $ranges.get($mathtool.sub($ranges.size(),1)))
+  #set ($responseTimeScore = -4)
+  #else
+  #foreach ($boundary in $ranges)
+    #if ($responseTime &amp;&amp; $responseTime &lt; $boundary)
+      #set ($index = $mathtool.sub($velocityCount, 1))
+      #set ($responseTimeScore = $scores.get($index))
+      #break
+    #end
+  #end
+  #end
+  #if ($availabilityScore &amp;&amp; $responseTimeScore)
+    $mathtool.add($availabilityScore, $responseTimeScore)
+  #else
+    $services.localization.render('Demarches.Code.DemarchesClass_urlScore_nr')
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>urlScore</name>
+        <number>44</number>
+        <prettyName>Disponibilité / temps de réponse</prettyName>
+        <script/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+      </urlScore>
+      <volumetrie>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+&lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="30" type="text" value="$!value"&gt;
+#else
+  #if ("$!value" != '')
+    $value
+  #else
+    $services.localization.render("Demarches.Code.DemarchesClass_volumetrie_nr")
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <disabled>0</disabled>
         <hint>Nombre total de démarches reçues par an (estimation)</hint>
         <name>volumetrie</name>
-        <number>22</number>
+        <number>20</number>
         <numberType>long</numberType>
         <prettyName>Volumétrie de la démarche</prettyName>
         <size>30</size>
@@ -898,11 +1043,26 @@ $result
         <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
       </volumetrie>
       <volumetrieDemat>
-        <customDisplay/>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($statutDemat = "$!object.getValue('statutDemat')")
+#if ($type == 'edit')
+&lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="30" type="text" value="$!value"&gt;
+#else
+  #if ($statutDemat == 'nonDemat')
+$services.localization.render("Demarches.Code.DemarchesClass_volumetrieDemat_na")
+  #elseif ("$!value" != '')
+    $value
+  #else
+$services.localization.render("Demarches.Code.DemarchesClass_volumetrieDemat_nr")
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
         <disabled>0</disabled>
         <hint>Nombre de démarches reçues par la voie d'une téléprocédure ou d'un EDI par an.</hint>
         <name>volumetrieDemat</name>
-        <number>23</number>
+        <number>21</number>
         <numberType>long</numberType>
         <prettyName>Volumétrie de la dématérialisation</prettyName>
         <size>30</size>

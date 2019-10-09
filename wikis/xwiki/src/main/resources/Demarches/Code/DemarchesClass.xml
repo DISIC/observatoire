@@ -57,7 +57,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>accompagnement</name>
-      <number>33</number>
+      <number>32</number>
       <picker>0</picker>
       <prettyName>Accompagnement humain personnalisé</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -79,7 +79,7 @@
       <hint/>
       <multiSelect>0</multiSelect>
       <name>adapteMobile</name>
-      <number>31</number>
+      <number>30</number>
       <picker>0</picker>
       <prettyName>Adapté mobile</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -338,7 +338,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <hint/>
       <multiSelect>0</multiSelect>
       <name>franceConnect</name>
-      <number>30</number>
+      <number>29</number>
       <picker>0</picker>
       <prettyName>FranceConnect</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -447,7 +447,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <hint/>
       <multiSelect>0</multiSelect>
       <name>moyensDeContact</name>
-      <number>32</number>
+      <number>31</number>
       <picker>0</picker>
       <prettyName>Au moins deux moyens de contact différents, dont un formulaire de contact</prettyName>
       <relationalStorage>1</relationalStorage>
@@ -689,7 +689,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <disabled>0</disabled>
       <hint/>
       <name>qualiteSupport</name>
-      <number>34</number>
+      <number>33</number>
       <prettyName>Support de qualité</prettyName>
       <script/>
       <unmodifiable>0</unmodifiable>
@@ -794,6 +794,31 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <values>prevu=Prévu|encours=En cours|termine=Terminé</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutProjetDemat>
+    <tellUsOnce>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+  &lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="5" type="text" value="$!value"&gt;
+#else
+  #if ("$!value" != '')
+    #set ($stars = $mathtool.toInteger($value))
+    #if ($stars &gt; 0)#foreach ($item in [1..$stars])✫#end#end
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>tellUsOnce</name>
+      <number>34</number>
+      <numberType>double</numberType>
+      <prettyName>Dites-le nous une fois</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+    </tellUsOnce>
     <textes>
       <contenttype>---</contenttype>
       <customDisplay/>

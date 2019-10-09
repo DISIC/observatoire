@@ -234,13 +234,13 @@
                 ## If the demarche has property "top" set to true, some of its properties can be edited by administrators only
                 #if ($isTop)
                   #if ($hasAdmin)
-                    #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
+                    #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'tellUsOnce', 'api', 'demarcheSimplifiee'])
                   #else
                     #set ($propertyNames = ['api', 'demarcheSimplifiee'])
                   #end
                 #else
                   ## If the demarche is not part of the top, all its properties can be modified by the editor
-                  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'api', 'demarcheSimplifiee'])
+                  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'tellUsOnce', 'api', 'demarcheSimplifiee'])
                 #end
                 ## In all cases, remove 'api' and 'demarcheSimplifiee' in row-editor mode
                 #if ($isRowEditor)
@@ -252,7 +252,7 @@
                 #end
               #else
                 ## Display all properties, including the computed one
-                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'api', 'demarcheSimplifiee', 'urlScore'])
+                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'tellUsOnce', 'api', 'demarcheSimplifiee', 'urlScore'])
                   #displayProperty($object, $propName, false, $action)
                 #end
               #end
