@@ -1273,6 +1273,15 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
+/* top menu style */
+li.wikidemarches-topmenu {
+  &gt; a {
+    display: inline-block;
+    max-width: unset;
+    line-height: unset;
+    font-size: 0.875em;
+  }
+}
 
 /*
  * A couple of adjustments on the search suggest, related to the fact that there is a single source of results. Easier to hack from CSS than to modify the source of results.
@@ -1469,6 +1478,7 @@ span.wikiexternallink {
   background-image: none;
   padding-right: unset;
 }
+
 
 
 

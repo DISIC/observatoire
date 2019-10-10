@@ -324,16 +324,6 @@
   .container();
 }
 
-/* top menu style */
-li.wikidemarches-topmenu {
-  &gt; a {
-    display: inline-block;
-    max-width: unset;
-    line-height: unset;
-    font-size: 0.875em;
-  }
-}
-
 /* Done undoing container, custom style */
 
 /* This page is stacked layout, reset footer margin, we'll handle it */
@@ -645,102 +635,6 @@ li.wikidemarches-topmenu {
     </property>
     <property>
       <use>onDemand</use>
-    </property>
-  </object>
-  <object>
-    <name>Main.WebHome</name>
-    <number>0</number>
-    <className>XWiki.UIExtensionClass</className>
-    <guid>438c1920-40d8-43c7-a15c-6dde31a91c16</guid>
-    <class>
-      <name>XWiki.UIExtensionClass</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <content>
-        <disabled>0</disabled>
-        <editor>Text</editor>
-        <name>content</name>
-        <number>3</number>
-        <prettyName>Extension Content</prettyName>
-        <rows>10</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </content>
-      <extensionPointId>
-        <disabled>0</disabled>
-        <name>extensionPointId</name>
-        <number>1</number>
-        <prettyName>Extension Point ID</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </extensionPointId>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>2</number>
-        <prettyName>Extension ID</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <parameters>
-        <contenttype>PureText</contenttype>
-        <disabled>0</disabled>
-        <editor>PureText</editor>
-        <name>parameters</name>
-        <number>4</number>
-        <prettyName>Extension Parameters</prettyName>
-        <rows>10</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </parameters>
-      <scope>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>scope</name>
-        <number>5</number>
-        <prettyName>Extension Scope</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>wiki=Current Wiki|user=Current User|global=Global</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </scope>
-    </class>
-    <property>
-      <content>{{velocity}}
-#if($doc.fullName == 'Main.WebHome')
-{{html clean="false"}}
-  &lt;li class='wikidemarches-topmenu'&gt;
-    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('Main.A propos')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;
-  &lt;/li&gt;
-{{/html}}
-#end
-{{/velocity}}</content>
-    </property>
-    <property>
-      <extensionPointId>org.xwiki.platform.topmenu.right</extensionPointId>
-    </property>
-    <property>
-      <name>wikidemarches.topmenu</name>
-    </property>
-    <property>
-      <parameters>order=30000</parameters>
-    </property>
-    <property>
-      <scope>wiki</scope>
     </property>
   </object>
 </xwikidoc>
