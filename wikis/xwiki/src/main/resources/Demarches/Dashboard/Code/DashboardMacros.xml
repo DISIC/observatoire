@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
+  <creationDate>1569247830000</creationDate>
   <parent>xwiki:Demarches.Dashboard.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1570717182000</date>
+  <contentUpdateDate>1570717182000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -48,6 +48,20 @@
 #set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
 #set ($LIVE_DASHBOARD_ID = 'observatoire.en-direct.WebHome')
+
+## Gets the published dashboards order by date descendant, except the live dashboard
+#macro (getPublishedDashboards)
+  #set ($hql = "select distinct obj.name from BaseObject obj, StringProperty as status, DateProperty as date where obj.className = '$DASHBOARD_CLASS_ID' and status.id.id = obj.id and status.id.name = 'status' and status.value = 'published' and date.id.id = obj.id and date.id.name = 'date' and obj.name not like :template and obj.name &lt;&gt; :live order by date.value desc")
+  #set ($publishedDashboards = $services.query.hql($hql).bindValue('template', '%DashboardTemplate%').bindValue('live', $LIVE_DASHBOARD_ID).execute())
+#end
+
+## Gets the dashboard with status = 'published' and with the most recent value for property 'date'
+#macro (getCurrentDashboard)
+  #getPublishedDashboards()
+  #if ($publishedDashboards.size() &gt; 0)
+    #set ($currentDashboard = $publishedDashboards.get(0))
+  #end
+#end
 
 ## Gets top demarches identifiers and computes dashboard data for these demarches at the dashoard date
 #macro (computeDashboardData $limit)

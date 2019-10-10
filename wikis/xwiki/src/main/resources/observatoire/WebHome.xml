@@ -39,5 +39,14 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{include reference="observatoire.2019-06-30.WebHome" context="new" /}}</content>
+  <content>{{include reference="Demarches.Dashboard.Code.DashboardMacros" /}}
+
+{{velocity}}
+#getCurrentDashboard()
+
+{{include reference="$currentDashboard" context="new" /}}
+
+{{/velocity}}
+
+</content>
 </xwikidoc>
