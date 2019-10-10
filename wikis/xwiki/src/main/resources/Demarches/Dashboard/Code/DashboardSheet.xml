@@ -48,159 +48,183 @@
 ## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.MontserratWebfontSSX'))
 ## Dashboard header ##
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
     (% class='document-header'%) (((
       (% class='document-info'%) (((
         (% id='document-title' %)(((
-          #set ($break = '\\')
-          #set ($subtitle = $services.localization.render("dashboard.subtitle"))
-          #set ($title = $services.localization.render("dashboard.title"))
-          = $title$break$subtitle$break$doc.title =
+          = $services.localization.render("dashboard.title") =
         )))
       )))
-
-      {{html clean="false"}}
-      &lt;div class="btn-group controls"&gt;
-        &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
-        #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
-        &lt;/button&gt;
-        #set ($hql = 'select obj.name from BaseObject as obj where obj.className = :className and obj.name not like :template and obj.name &lt;&gt; :live')
-        #set ($entries = $services.query.hql($hql).bindValue('className', $DASHBOARD_CLASS_ID).bindValue('template', '%DashboardTemplate%').bindValue('live', $LIVE_DASHBOARD_ID).execute())
-        &lt;ul class="dropdown-menu"&gt;
-          #foreach ($entry in $entries)
-            #set ($page = $xwiki.getDocument($entry))
-            &lt;li&gt;
-              &lt;a href="$xwiki.getURL($entry)"&gt;$page.title&lt;/a&gt;
-            &lt;/li&gt;
-            #end
-        &lt;/ul&gt;
-        #if ($hasAdmin || $isAdministrateurMinisteriel)
-         &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn btn-default' style='margin-left: 0.5em'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
-        #end
-      &lt;/div&gt;
+    )))
+  )))
+  #if ($hasAdmin)
+    (%class='dashboard-container'%)(((
+      {{html clean='false'}}
+      &lt;ul class="nav nav-tabs nav-dashboard"&gt;
+        &lt;li #if($xcontext.action == "view") class="active" #end&gt;&lt;a data-toggle="tab" href="#view-dashboard"&gt;Tableau&lt;/a&gt;&lt;/li&gt;
+        &lt;li #if($xcontext.action == "edit") class="active" #end&gt;&lt;a data-toggle="tab" href="#view-details"&gt;Détails&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
       {{/html}}
-
+    )))
+  #end
+)))
+##
+##
+(%class='tab-content'%)(((
+  (%id="view-dashboard" class="tab-pane fade #if($xcontext.action=='view')in active#end"%)(((
+    (%class='row download-share'%)(((
+      (% class='dashboard-container' %)(((
+        (%class='col-xs-12 col-md-6 downloadcol'%) (((
+          #set ($pdf = $dashboard.getValue('pdf'))
+          #if ("$!pdf" != '')
+            #set ($pdfFile = $doc.getAttachment($pdf))
+            #set ($size = $pdfFile.getLongSize())
+            #set ($size = $mathtool.div($size, 1000))
+            #set ($size = $mathtool.round($size))
+            (% class="download" %)
+            [[$services.icon.render('download') $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)]]
+          #end
+        )))
+        (%class='col-xs-12 col-md-6 sharecol'%) (((
+          #set ($socialNetworks = [{
+            "icon": "fa-twitter",
+            "url": "https://twitter.com/intent/tweet?url="
+          },
+          {
+            "icon": "fa-linkedin",
+            "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
+          },
+          {
+            "icon": "fa-facebook",
+            "url": "https://www.facebook.com/sharer.php?u="
+          },
+          {
+            "icon": "fa-envelope",
+            "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
+          }])
+          {{html clean="false"}}
+          #set ($url = $escapetool.xml($doc.getExternalURL()))
+          $services.localization.render('dashboard.share.label') :  #foreach ($socialNetwork in $socialNetworks) #if ($velocityCount != 1)&lt;span class='separator'&gt;/&lt;/span&gt;#end &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt; #end
+          {{/html}}
+        )))
+      )))
+    )))
+    (%class='row table-tools'%)(((
+      (% class='dashboard-container' %)(((
+        (%class='col-xs-12 col-md-6 dashboard-filters'%)(((
+        )))
+        (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
+          {{html clean="false"}}
+          &lt;div class="btn-group controls"&gt;
+            &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+            #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            #getPublishedDashboards()
+            &lt;ul class="dropdown-menu"&gt;
+              #foreach ($entry in $publishedDashboards)
+                #set ($page = $xwiki.getDocument($entry))
+                &lt;li&gt;
+                  &lt;a href="$xwiki.getURL($entry)"&gt;$page.title&lt;/a&gt;
+                &lt;/li&gt;
+                #end
+            &lt;/ul&gt;
+            #if ($hasAdmin || $isAdministrateurMinisteriel)
+             &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn btn-default'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
+            #end
+          &lt;/div&gt;
+          {{/html}}
+        )))
+      )))
     )))
 
-    [[$services.localization.render("dashboard.help")&gt;&gt;Aide.Observatoire]]
+    (%class='row table-rows'%)(((
+      (% class='dashboard-container' %)(((
+        #if ($xcontext.action == 'view')
+          ## Dashboard table ##
+          #set ($discard = $xwiki.jsx.use($DEMARCHE_SHEET))
+          #set ($discard = $xwiki.jsx.use($DASHBOARD_SHEET, {'minify': false, 'timestamp': $datetool.systemTime, 'pageId': $doc.fullName}))
 
-    == Partager ==
-    #set ($socialNetworks = [{
-        "icon": "fa-twitter",
-        "url": "https://twitter.com/intent/tweet?url="
-      },
-      {
-        "icon": "fa-linkedin",
-        "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
-      },
-      {
-        "icon": "fa-facebook",
-        "url": "https://www.facebook.com/sharer.php?u="
-      },
-      {
-        "icon": "fa-envelope",
-        "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
-      }
-    ])
-    {{html clean="false"}}
-    #foreach ($socialNetwork in $socialNetworks)
-      #set ($url = $escapetool.xml($doc.getExternalURL()))
-      &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt;
-    #end
-    {{/html}}
-    #set ($pdf = $dashboard.getValue('pdf'))
-    #if ("$!pdf" != '')
-      #set ($pdfFile = $doc.getAttachment($pdf))
-      #set ($size = $pdfFile.getLongSize())
-      #set ($size = $mathtool.div($size, 1000))
-      #set ($size = $mathtool.round($size))
-      (% class="download" %)
-      [[$services.icon.render('download') $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)||class="btn btn-default btn-download"]]
-    #end
-  )))
-)))
+          {{html clean="false" wiki="false"}}
+          &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.demarche')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.ministry')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.group')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.digitalization')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.satisfaction')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.mobile')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.support')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.performance')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.france-connect')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.tell-us-once')&lt;/th&gt;
+                &lt;th&gt;&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.volumetry')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.avis-count')&lt;/th&gt;
+                &lt;th&gt;$services.localization.render('dashboard.table.url-demarche')&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+          &lt;/table&gt;
+          {{/html}}
 
-## Dashboard metadata view / edit ##
-#if ($hasAdmin)
-(% class='row xform' %)(((
-  (% class='container' %)(((
-      #set ($class = $xwiki.getClass($DASHBOARD_CLASS_ID))
-      #foreach($property in $class.properties)
-      |=(% style="width: 20%" %)$doc.displayPrettyName($property.name, $dashboard)|(((
-        $dashboard.display($property.name, $xcontext.action)
-        #if ($xcontext.action == 'edit')(% class="xHint" %)$services.localization.render("${DASHBOARD_CLASS_ID}_${property.name}_hint")(% %)#end
+        #end
       )))
-      #end
-      #if ($xcontext.action == 'view')
-        |=Pièce jointe|(((
-        #if ($doc.getAttachment('data.json') != $NULL)
-          [[attach:data.json]]
-        #else
-          Aucune pièce jointe
-        #end
-        )))
-      #end
-
-      #if ($doc.getObject($DASHBOARD_CLASS_ID) != $NULL &amp;&amp; $xcontext.action == 'view')
-
-        {{info}}
-        $services.localization.render('dashboard.generation.hint')
-
-         {{html wiki="false" clean="false"}}
-         &lt;form action="" method="post"&gt;
-           &lt;button class="btn btn-default" name="action" value="json"&gt;$services.localization.render('dashboard.generate-data')&lt;/button&gt;
-           &lt;input type="hidden" name="token" value="$!{services.csrf.getToken()}" /&gt;
-         &lt;/form&gt;
-         {{/html}}
-        {{/info}}
-
-      #end
-      #if ("$!request.action" == 'json' &amp;&amp; $services.csrf.isTokenValid($request.token))
-        #computeDashboardData(0)
-        #if ("$!request.live" == 1)
-          #writeJson()
-        #else
-          #attachJson()
-        #end
-      #end
+    )))
   )))
+  ##
+  ## Dashboard metadata view / edit ##
+  #if ($hasAdmin)
+    (%id="view-details" class="tab-pane fade #if($xcontext.action=='edit') in active #end"%)(((
+      (% class='row xform' %)(((
+        (% class='container' %)(((
+            #set ($class = $xwiki.getClass($DASHBOARD_CLASS_ID))
+            #foreach($property in $class.properties)
+            |=(% style="width: 20%" %)$doc.displayPrettyName($property.name, $dashboard)|(((
+              $dashboard.display($property.name, $xcontext.action)
+              #if ($xcontext.action == 'edit')(% class="xHint" %)$services.localization.render("${DASHBOARD_CLASS_ID}_${property.name}_hint")(% %)#end
+            )))
+            #end
+            #if ($xcontext.action == 'view')
+              |=Pièce jointe|(((
+              #if ($doc.getAttachment('data.json') != $NULL)
+                [[attach:data.json]]
+              #else
+                Aucune pièce jointe
+              #end
+              )))
+            #end
+
+            #if ($doc.getObject($DASHBOARD_CLASS_ID) != $NULL &amp;&amp; $xcontext.action == 'view')
+
+              {{info}}
+              $services.localization.render('dashboard.generation.hint')
+
+               {{html wiki="false" clean="false"}}
+               &lt;form action="" method="post"&gt;
+                 &lt;button class="btn btn-default" name="action" value="json"&gt;$services.localization.render('dashboard.generate-data')&lt;/button&gt;
+                 &lt;input type="hidden" name="token" value="$!{services.csrf.getToken()}" /&gt;
+               &lt;/form&gt;
+               {{/html}}
+              {{/info}}
+
+            #end
+            #if ("$!request.action" == 'json' &amp;&amp; $services.csrf.isTokenValid($request.token))
+              #computeDashboardData(0)
+              #if ("$!request.live" == 1)
+                #writeJson()
+              #else
+                #attachJson()
+              #end
+            #end
+        )))
+      )))
+    )))
+  #end
 )))
-#end
-
-#if ($xcontext.action == 'view')
-  ## Dashboard table ##
-  #set ($discard = $xwiki.jsx.use($DEMARCHE_SHEET))
-  #set ($discard = $xwiki.jsx.use($DASHBOARD_SHEET, {'minify': false, 'timestamp': $datetool.systemTime, 'pageId': $doc.fullName}))
-
-  {{html clean="false" wiki="false"}}
-  &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.demarche')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.ministry')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.group')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.digitalization')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.satisfaction')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.mobile')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.support')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.performance')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.france-connect')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.tell-us-once')&lt;/th&gt;
-        &lt;th&gt;&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.volumetry')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.avis-count')&lt;/th&gt;
-        &lt;th&gt;$services.localization.render('dashboard.table.url-demarche')&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/thead&gt;
-  &lt;/table&gt;
-  {{/html}}
-
-#end
-
-{{/velocity}}
-</content>
+{{/velocity}}</content>
   <object>
     <name>Demarches.Dashboard.Code.DashboardSheet</name>
     <number>0</number>
@@ -930,29 +954,75 @@ var XWiki = (function (XWiki) {
   }
 }
 
+.dashboard-container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@obs-blue: @link-color;
+@obs-blue-dark: #175fc9;
+
 .observatoire-explanation {
   text-align: center;
-  a.social-network {
-    display: inline-block;
-    height: 2em;
-    width: 2em;
-    line-height: 2em;
-    border-radius: 1em;
-    font-size: 1.5em;
-    background-color: fade(@link-color, 10%);
-    color: @link-color;
-    text-decoration: none;
+  background-color: @obs-blue;
+  color: #fff;
+  .nav-tabs.nav-dashboard {
+    padding-top: 0;
+    padding-bottom:0;
+    margin-top: 0;
+    margin-bottom: 0;
+    &gt; li &gt; a {
+      background-color: lighten(@link-color, 40%);
+    }
+    &gt; li.active &gt; a {
+      background-color: #fff;
+    }
+  }
+  .document-header {
+    margin: 0;
+    padding: 0;
+  }
+  .document-info {
+    margin: 0;
+    padding: 0;
+  }
+  #document-title h1 {
+    color: #fff;
+    font-weight: 900;
+    font-family: "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 1.5em;
     margin-bottom: 1.5em;
   }
+  .nav-tabs {
+    border-bottom: none;
+  }
+}
 
-  .btn-default.btn-download {
-    background-image: none;
-    background-color: transparent;
-    color: #222;
-    border: .1em solid #222;
-    border-radius: .95em;
-    font-size: 0.9em;
-    margin-bottom: 2em;
+.download-share {
+  background-color: @obs-blue-dark;
+  font-size: 0.67em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  color: #fff;
+  a {
+    color: #fff;
+  }
+  .sharecol {
+    text-align: right;
+    .separator {
+      color: #fff;
+    }
+  }
+  .downloadcol p.download {
+    margin-bottom: 0;
+  }
+}
+
+.table-tools {
+  background-color: #fafafa;
+  .dashboard-selector {
+    text-align: right;
   }
 }
 
@@ -1017,7 +1087,7 @@ tr.shown td.details-control::before {
     vertical-align: middle;
     .ministere-groupe {
       display: block;
-      font-size: 85%;
+      font-size: 87%;
       color: #555;
     }
   }
@@ -1110,9 +1180,7 @@ tr.shown td.details-control::before {
 
 table#top-demarches.no-footer {
   border-bottom: 0px;
-}
-
-</code>
+}</code>
     </property>
     <property>
       <contentType>LESS</contentType>
