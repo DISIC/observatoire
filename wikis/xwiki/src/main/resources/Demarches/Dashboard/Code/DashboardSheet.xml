@@ -162,9 +162,6 @@
                 &lt;th&gt;$services.localization.render('dashboard.table.france-connect')&lt;/th&gt;
                 &lt;th&gt;$services.localization.render('dashboard.table.tell-us-once')&lt;/th&gt;
                 &lt;th&gt;&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.volumetry')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.avis-count')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.url-demarche')&lt;/th&gt;
               &lt;/tr&gt;
             &lt;/thead&gt;
           &lt;/table&gt;
@@ -576,6 +573,11 @@ var XWiki = (function (XWiki) {
           dataSrc: function (json) {
             var data = json.data;
             date = json.metadata.date;
+            var schema = json.metadata.schema;
+            if (!schema || schema == '1.0') {
+              // Do not display "Tell us once" column for schema version &lt; 1.1
+              table.column(9).visible(false);
+            }
             for (var i = 0; i &lt; data.length; i++) {
               var ministere = data[i].ministere;
               if (ministeres.indexOf(ministere) &lt; 0) {
@@ -672,6 +674,9 @@ var XWiki = (function (XWiki) {
           {
             data: "tellUsOnce",
             render: function (data, type, row) {
+              if (!data) {
+                return "";
+              }
               if (type === "sort") {
                 return data.value;
               } else {
@@ -708,13 +713,6 @@ var XWiki = (function (XWiki) {
               } else {
                 return data.display;
               }
-            }
-          },
-          {
-            data: "urlDemarche",
-            visible: false,
-            render: function (data, type, row) {
-              return data;
             }
           }
         ],
