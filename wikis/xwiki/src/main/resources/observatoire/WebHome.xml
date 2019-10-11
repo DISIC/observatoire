@@ -42,6 +42,7 @@
   <content>{{include reference="Demarches.Dashboard.Code.DashboardMacros" /}}
 
 {{velocity}}
+#set($displayDocTitle = false)
 #getCurrentDashboard()
 
 {{include reference="$currentDashboard" context="new" /}}
