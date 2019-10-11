@@ -393,11 +393,8 @@ var XWiki = (function (XWiki) {
     }
   }
 
-  function addDetailsRow(data) {
-    var output = '&lt;div class="row"&gt;' +
-      '&lt;div class="col-md-12"&gt;' +
-      '&lt;div class="row-details"&gt;' +
-      '&lt;ul&gt;';
+  function addDetailsRow(data, withEditButton) {
+    var output = '&lt;div class="row-details"&gt;&lt;ul&gt;';
       var dateMiseEnLigne = data.dateMiseEnLigne.display;
       if (dateMiseEnLigne != 'Ouvert') {
         if (dateMiseEnLigne == 'n/c')
@@ -417,7 +414,11 @@ var XWiki = (function (XWiki) {
         var hostname = getHostName(data.urlDemarche)
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;' + hostname + '&lt;/a&gt;&lt;/li&gt;';
       }
-    output = output + '&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
+      output = output + '&lt;/ul&gt;&lt;/div&gt;';
+      if (withEditButton) {
+        output += '&lt;div class="row-toolbar"&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;&lt;i class="fa fa-pencil"&gt;&lt;/i&gt; ' + "$services.localization.render("dashboard.edit-entry")" + '&lt;/a&gt;&lt;/div&gt;';
+      }
+      output += '&lt;/div&gt;&lt;/div&gt;';
     return output;
   }
 
@@ -428,15 +429,6 @@ var XWiki = (function (XWiki) {
 
   function getURL(pageId, action) {
     return getPage(pageId).getURL(action);
-  }
-
-  function addToolbarRow(data) {
-    var output = '&lt;div class="row observatoire-toolbar"&gt;' +
-        '&lt;div class="col-md-12"&gt;' +
-          '&lt;div&gt;';
-    output = output + '&lt;i class="fa fa-edit"&gt;&lt;/i&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;' + "$services.localization.render("dashboard.edit-entry")" + '&lt;/a&gt;';
-    output = output + '&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;';
-    return output;
   }
 
   function init() {
@@ -537,7 +529,7 @@ var XWiki = (function (XWiki) {
       $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
           var selectedMinistere =  $('select[name="ministereSelect"]').val();
-          var ministere = data[2];
+          var ministere = data[1];
           if (!selectedMinistere || selectedMinistere == "tous" || ministere == selectedMinistere) {
             return true;
           }
@@ -605,21 +597,26 @@ var XWiki = (function (XWiki) {
           },
           {
             data: "ministere",
+            className: 'column-ministry',
             visible: false,
             type: "french-string"
           },
           {
             data: "groupes",
+            className: 'column-groups',
             visible: false,
             type: "french-string"
           },
-          { data: "statutDemat",
+          {
+            data: "statutDemat",
+            className: 'column-digitalization-status',
             render: function (data, type, row) {
               return format(data, data, computeBadgeStyle, true);
             }
           },
           {
             data: "satisfactionIndex",
+            className: 'column-satisfaction-index',
             type: "num",
             render: function (data, type, row) {
               if (type === "sort") {
@@ -636,6 +633,7 @@ var XWiki = (function (XWiki) {
           },
           {
             data: "adapteMobile",
+            className: 'column-mobile',
             render: function (data, type, row) {
               if (type === "sort") {
                 return data.display;
@@ -646,12 +644,14 @@ var XWiki = (function (XWiki) {
           },
           {
             data: "qualiteSupport",
+            className: 'column-support',
             render: function (data, type, row) {
               return format(data, data, computeBadgeStyle, true);
             }
           },
           {
             data: "urlScore",
+            className: 'column-url-score',
             type: "num",
             render: function (data, type, row) {
               if (type === "sort") {
@@ -663,6 +663,7 @@ var XWiki = (function (XWiki) {
           },
           {
             data: "franceConnect",
+            className: 'column-france-connect',
             render: function (data, type, row) {
               if (type === "sort") {
                 return data.display;
@@ -673,6 +674,7 @@ var XWiki = (function (XWiki) {
           },
           {
             data: "tellUsOnce",
+            className: 'column-tell-us-once',
             render: function (data, type, row) {
               if (!data) {
                 return "";
@@ -686,9 +688,9 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            data: 'details',
             className: 'details-control',
             orderable: false,
-            data: null,
             defaultContent: ''
           },
           {
@@ -717,7 +719,8 @@ var XWiki = (function (XWiki) {
           }
         ],
         // order by: avis, ministère, groupe, volumétrie, name
-        order: [[11, 'desc'], [2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
+        //order: [[11, 'desc'], [2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
+        order: [[12, 'desc'], [1, 'asc'], [2, 'asc'], [11, 'desc'], [0, 'asc']],
         language: {
           info: "Total : _TOTAL_ démarches",
           infoEmpty: "Aucune démarche trouvée",
@@ -772,9 +775,9 @@ var XWiki = (function (XWiki) {
             var parameters = new URLSearchParams(window.location.search);
             // Show the toolbar row only for the live version of the dashboard
             #if ($pageId == $LIVE_DASHBOARD_ID)
-              row.child([addDetailsRow(data), addToolbarRow(data)], 'child-row').show();
+              row.child([addDetailsRow(data, true)], 'child-row').show();
               //var parent = $(row.node()).parent();
-              var toolbarRow = $(row.node()).next().next();
+              var toolbarRow = $(row.node()).next();
               var control = toolbarRow.find('.row-edit-control').first();
               // TODO: is it really worth storing the data values in the HTML itself for not loading the memory too much?
               control.on('click', function(event) {
@@ -788,10 +791,10 @@ var XWiki = (function (XWiki) {
                 return new XWiki.widgets.XPopup(dialogData);
               });
             #else
-              row.child([addDetailsRow(data)], 'child-row').show();
+              row.child([addDetailsRow(data, false)], 'child-row').show();
             #end
           #else
-            row.child([addDetailsRow(data)], 'child-row').show();
+            row.child([addDetailsRow(data, false)], 'child-row').show();
           #end
           tr.addClass('shown');
         }
@@ -937,7 +940,10 @@ var XWiki = (function (XWiki) {
       <cache>long</cache>
     </property>
     <property>
-      <code>input[name='title'] {
+      <code>@obs-blue: @link-color;
+@obs-blue-dark: #175fc9;
+
+input[name='title'] {
   width: 100%;
 }
 
@@ -957,9 +963,6 @@ var XWiki = (function (XWiki) {
   margin-left: auto;
   margin-right: auto;
 }
-
-@obs-blue: @link-color;
-@obs-blue-dark: #175fc9;
 
 .observatoire-explanation {
   text-align: center;
@@ -999,7 +1002,7 @@ var XWiki = (function (XWiki) {
 
 .download-share {
   background-color: @obs-blue-dark;
-  font-size: 0.67em;
+  font-size: 0.75em;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
   color: #fff;
@@ -1022,121 +1025,156 @@ var XWiki = (function (XWiki) {
   .dashboard-selector {
     text-align: right;
   }
-}
 
-td.details-control {
-  text-align: center;
-  cursor: pointer;
-  vertical-align: middle;
-}
-
-td.details-control::before {
-  content: "+";
-  background-color: @brand-primary;
-  color: #fff;
-  font-weight: bold;
-  display: inline-block;
-  line-height: 1.2em;
-  width: 1.2em;
-  vertical-align: top;
-  border-radius: 0.1em;
-}
-tr.shown td.details-control::before {
-  content: "-";
-}
-
-.controls {
-  margin: 1em;
+  .controls {
+    margin: 1em;
+  }
 }
 
 #top-demarches {
+  border-spacing: 0 1em;
   thead th {
-    vertical-align: middle;
+    vertical-align: bottom;
+    text-align: center;
+    font-size: 0.75em;
+    border-bottom: 2px solid #ddd;
+    padding: 0.5em 1em 0.5em 1em;
+    &amp;.column-title {
+      font-size: 1em;
+      width: 38%;
+      text-align: left;
+    }
   }
 
   tr {
+    &amp;:hover {
+      background-color: transparent;
+    }
     td {
-      .label {
-        a {
-          color: white;
+      vertical-align: middle;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-width: 1px 0 1px 0;
+      &amp;:last-child {
+        border-right-width: 1px;
+        border-top-right-radius: 1em;
+        border-bottom-right-radius: 1em;
+      }
+      &amp;:first-child {
+        border-left-width: 1px;
+        border-top-left-radius: 1em;
+        border-bottom-left-radius: 1em;
+      }
+      &amp;.column-title {
+        width: 38%;
+        font-weight: 600;
+        text-align: left;
+        padding: 1.25em;
+        .ministere-groupe {
+          display: block;
+          font-size: 0.875em;
+          font-weight: normal;
+          color: #666;
         }
       }
-    }
-  }
-
-  tr.shown {
-    background-color: #f6f6f6;
-    td {
-      border-bottom: 0.5px dotted #555;
-    }
-    td.details-control {
-      border-bottom: none;
+      &amp;.details-control {
+        padding-right: 1.25em;
+      }
+      &amp;.column-tell-us-once {
+        width: 8%;
+        text-align: left;
+      }
+      .label {
+        display: inline-block;
+        white-space: normal;
+        padding: 0.5em 1em 0.5em 1em;
+        border-radius: 0.25em;
+        a {
+          color: #fff;
+        }
+      }
     }
   }
 
   td.details-control {
     padding-left: 0;
-    padding-right: 0;
     width: 38px;
+    text-align: center;
+    cursor: pointer;
   }
 
-  td.column-title {
-    width: 38%;
-    vertical-align: middle;
-    .ministere-groupe {
-      display: block;
-      font-size: 87%;
-      color: #555;
+  td.details-control::before {
+    content: "\f078";
+    font: normal normal normal 14px/1 FontAwesome;
+    display: inline-block;
+  }
+  tr.shown td.details-control::before {
+    content: "\f077";
+  }
+
+  tr.shown {
+    td {
+      background-color: rgba(0, 107, 230, 0.05);
+      border-bottom: 0.5px dotted #555;
+      &amp;:last-child {
+        border-bottom-right-radius: 0;
+      }
+      &amp;:first-child {
+        border-bottom-left-radius: 0;
+      }
     }
   }
 
   /* Styles for the détails panel */
-  tr.shown + tr.child-row, tr.shown + tr.child-row + tr.child-row  {
-    background-color: #f6f6f6;
+  tr.shown + tr.child-row {
+    /* Make it stick to the row above, so that we can style it in a big box with rounded corners. */
+    position: relative;
+    top: -1em;
     td {
+      background-color: rgba(0, 107, 230, 0.05);
       border-top: 0px;
-      padding-top: 0px;
-      padding-left: 38px;
-      padding-right: 0px;
-    }
-    .row {
-      &amp;.observatoire-toolbar {
-        text-align: right;
-        margin-right: 1em;
-        .fa {
-          margin-right: 0.2em;
-        }
+      /* reset padding */
+      padding: 0;
+      &amp;:last-child {
+        border-top-right-radius: 0;
       }
-      .row-details {
-        font-size: 90%;
-        padding-left: 10px;
-        margin: 8px 0 0 0;
-        .row-details-title {
-          margin: 0;
-          font-weight: bold;
-        }
-        .row-details-subtitle {
-          margin: 0;
-        }
-        ul {
-          list-style-type: none;
-          margin-left: 0;
-          padding-left: 0;
-          display: table;
-          li {
-            display: table-row;
-            .row-details-key, .row-details-value {
-              display: table-cell;
-              padding-top: 0.2em;
-              padding-bottom: 0.2em;
-              /* padding-right copied from the table cell of datatables */
-              padding-right: 10px;
-            }
-            .row-details-key {
-
-            }
+      &amp;:first-child {
+        border-top-left-radius: 0;
+      }
+    }
+    .row-details {
+      font-size: 0.875em;
+      padding: 1.4285em;
+      text-align: left;
+      ul {
+        /* Reset the border spacing inherited from the table */
+        border-spacing: 0;
+        list-style-type: none;
+        margin-left: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        display: table;
+        li {
+          display: table-row;
+          .row-details-key, .row-details-value {
+            display: table-cell;
+            padding-top: 0.2em;
+            padding-bottom: 0.2em;
+            /* padding-right copied from the table cell of datatables */
+            padding-right: 10px;
           }
         }
+      }
+    }
+    .row-toolbar {
+      text-align: right;
+      background-color: @obs-blue;
+      color: #fff;
+      font-size: 0.75em;
+      padding: 1em;
+      border-radius: 0 0 1.34em 1.34em;
+      a {
+        color: #fff;
       }
     }
   }
