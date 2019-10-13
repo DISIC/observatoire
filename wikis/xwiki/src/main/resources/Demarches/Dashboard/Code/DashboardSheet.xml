@@ -155,19 +155,35 @@
           #set ($discard = $xwiki.jsx.use($DASHBOARD_SHEET, {'minify': false, 'timestamp': $datetool.systemTime, 'pageId': $doc.fullName}))
 
           {{html clean="false" wiki="false"}}
+          #set($tableHeaderElements = {
+            'demarche' : '',
+            'ministry' : '',
+            'group' : '',
+            'digitalization' : 'cloud.svg',
+            'satisfaction' : 'smiley.svg',
+            'mobile' : 'mobile.svg',
+            'support' : 'support.svg',
+            'performance' : 'clock.svg',
+            'france-connect' : 'user.svg',
+            'tell-us-once' : 'briefcase.svg'
+            })
           &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
             &lt;thead&gt;
               &lt;tr&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.demarche')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.ministry')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.group')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.digitalization')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.satisfaction')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.mobile')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.support')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.performance')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.france-connect')&lt;/th&gt;
-                &lt;th&gt;$services.localization.render('dashboard.table.tell-us-once')&lt;/th&gt;
+                #foreach($thElt in $tableHeaderElements.entrySet())
+                  #set($icon = $thElt.value)
+                  #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}"))
+                  &lt;th&gt;
+                    #if("$!icon" != '')
+                      &lt;span class='thead-icon'&gt;&lt;img src="$xwiki.getAttachmentURL('Demarches.Code.WikiDemarchesTheme', $icon)" alt='$escapetool.xml($thLabel)' /&gt;&lt;/span&gt;
+                      &lt;span class='thead-label'&gt;
+                    #end
+                    $thLabel
+                    #if("$!icon" != '')
+                      &lt;/span&gt;
+                    #end
+                  &lt;/th&gt;
+                #end
                 &lt;th&gt;&lt;/th&gt;
               &lt;/tr&gt;
             &lt;/thead&gt;
@@ -1087,6 +1103,7 @@ input[name='title'] {
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
     border-radius: 0.25em;
     display: inline-block;
+    background-color: #fff;
   }
   input {
     min-width: 20em;
@@ -1096,9 +1113,21 @@ input[name='title'] {
   select {
     min-width: 20em;
   }
+  label {
+    position: relative;
+    &amp;:before {
+      content: "\f002";
+      font: normal normal normal 14px/1 FontAwesome;
+      display: inline-block;
+      position: absolute;
+      right: 1em;
+      top: 1em;
+    }
+  }
 }
 
 #top-demarches {
+  margin-top: 3em;
   border-spacing: 0 1em;
   thead th {
     vertical-align: bottom;
@@ -1106,10 +1135,36 @@ input[name='title'] {
     font-size: 0.75em;
     border-bottom: 2px solid #ddd;
     padding: 0.5em 1em 0.5em 1em;
+    background-position-y: 5.3em;
+    font-weight: 600;
+    color: #000;
     &amp;.column-title {
       font-size: 1em;
       width: 38%;
       text-align: left;
+      background-position-y: 4em;
+      font-weight: bold;
+    }
+    .thead-icon {
+      display: block;
+      background-color: fade(@obs-blue, 10%);
+      color: @obs-blue;
+      line-height: 3.33em;
+      width: 3.33em;
+      height: 3.33em;
+      border-radius: 1.7em;
+      margin-left: auto;
+      margin-right: auto;
+      vertical-align: middle;
+      margin-bottom: 0.6em;
+      img {
+        line-height: 1.5em;
+        max-width: 1.67em;
+        max-height: 1.67em;
+      }
+    }
+    .thead-label {
+      display: block;
     }
   }
 
@@ -1137,6 +1192,7 @@ input[name='title'] {
         font-weight: 600;
         text-align: left;
         padding: 1.25em;
+        color: #000;
         .ministere-groupe {
           display: block;
           font-size: 0.875em;
@@ -1148,7 +1204,7 @@ input[name='title'] {
         padding-right: 1.25em;
       }
       &amp;.column-tell-us-once {
-        width: 8%;
+        min-width: 5.7em;
         text-align: left;
       }
       .label {
@@ -1170,18 +1226,19 @@ input[name='title'] {
     cursor: pointer;
   }
 
-  td.details-control::before {
+  td.details-control:before {
     content: "\f078";
     font: normal normal normal 14px/1 FontAwesome;
     display: inline-block;
+    color: #666;
   }
-  tr.shown td.details-control::before {
+  tr.shown td.details-control:before {
     content: "\f077";
   }
 
   tr.shown {
     td {
-      background-color: rgba(0, 107, 230, 0.05);
+      background-color: fade(@obs-blue, 5%);
       border-bottom: 0.5px dotted #555;
       &amp;:last-child {
         border-bottom-right-radius: 0;
@@ -1198,7 +1255,7 @@ input[name='title'] {
     position: relative;
     top: -1em;
     td {
-      background-color: rgba(0, 107, 230, 0.05);
+      background-color: fade(@obs-blue, 5%);
       border-top: 0px;
       /* reset padding */
       padding: 0;
