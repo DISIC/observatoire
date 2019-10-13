@@ -77,68 +77,72 @@
   (%id="view-dashboard" class="tab-pane fade #if($xcontext.action=='view')in active#end"%)(((
     (%class='row download-share'%)(((
       (% class='dashboard-container' %)(((
-        (%class='col-xs-12 col-md-6 downloadcol'%) (((
-          #set ($pdf = $dashboard.getValue('pdf'))
-          #if ("$!pdf" != '')
-            #set ($pdfFile = $doc.getAttachment($pdf))
-            #set ($size = $pdfFile.getLongSize())
-            #set ($size = $mathtool.div($size, 1000))
-            #set ($size = $mathtool.round($size))
-            (% class="download" %)
-            [[$services.icon.render('download') $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)]]
-          #end
-        )))
-        (%class='col-xs-12 col-md-6 sharecol'%) (((
-          #set ($socialNetworks = [{
-            "icon": "fa-twitter",
-            "url": "https://twitter.com/intent/tweet?url="
-          },
-          {
-            "icon": "fa-linkedin",
-            "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
-          },
-          {
-            "icon": "fa-facebook",
-            "url": "https://www.facebook.com/sharer.php?u="
-          },
-          {
-            "icon": "fa-envelope",
-            "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
-          }])
-          {{html clean="false"}}
-          #set ($url = $escapetool.xml($doc.getExternalURL()))
-          $services.localization.render('dashboard.share.label') :  #foreach ($socialNetwork in $socialNetworks) #if ($velocityCount != 1)&lt;span class='separator'&gt;/&lt;/span&gt;#end &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt; #end
-          {{/html}}
+        (%class='row'%)(((
+          (%class='col-xs-12 col-md-6 downloadcol'%) (((
+            #set ($pdf = $dashboard.getValue('pdf'))
+            #if ("$!pdf" != '')
+              #set ($pdfFile = $doc.getAttachment($pdf))
+              #set ($size = $pdfFile.getLongSize())
+              #set ($size = $mathtool.div($size, 1000))
+              #set ($size = $mathtool.round($size))
+              (% class="download" %)
+              [[$services.icon.render('download') $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)]]
+            #end
+          )))
+          (%class='col-xs-12 col-md-6 sharecol'%) (((
+            #set ($socialNetworks = [{
+              "icon": "fa-twitter",
+              "url": "https://twitter.com/intent/tweet?url="
+            },
+            {
+              "icon": "fa-linkedin",
+              "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
+            },
+            {
+              "icon": "fa-facebook",
+              "url": "https://www.facebook.com/sharer.php?u="
+            },
+            {
+              "icon": "fa-envelope",
+              "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
+            }])
+            {{html clean="false"}}
+            #set ($url = $escapetool.xml($doc.getExternalURL()))
+            $services.localization.render('dashboard.share.label') :  #foreach ($socialNetwork in $socialNetworks) #if ($velocityCount != 1)&lt;span class='separator'&gt;/&lt;/span&gt;#end &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt; #end
+            {{/html}}
+          )))
         )))
       )))
     )))
     (%class='row table-tools'%)(((
       (% class='dashboard-container' %)(((
-        (%class='col-xs-12 col-md-6 dashboard-filters'%)(((
-          {{html clean='false'}}
-            &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
-          {{/html}}
-        )))
-        (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
-          {{html clean="false"}}
-          &lt;div class="btn-group controls"&gt;
-            &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
-            #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
-            &lt;/button&gt;
-            #getPublishedDashboards()
-            &lt;ul class="dropdown-menu"&gt;
-              #foreach ($entry in $publishedDashboards)
-                #set ($page = $xwiki.getDocument($entry))
-                &lt;li&gt;
-                  &lt;a href="$xwiki.getURL($entry)"&gt;$page.title&lt;/a&gt;
-                &lt;/li&gt;
-                #end
-            &lt;/ul&gt;
-            #if ($hasAdmin || $isAdministrateurMinisteriel)
-             &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn btn-default'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
-            #end
-          &lt;/div&gt;
-          {{/html}}
+        (% class='row'%)(((
+          (%class='col-xs-12 col-md-6 dashboard-filters'%)(((
+            {{html clean='false'}}
+              &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
+            {{/html}}
+          )))
+          (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
+            {{html clean="false"}}
+            &lt;div class="btn-group controls"&gt;
+              &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+              #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
+              &lt;/button&gt;
+              #getPublishedDashboards()
+              &lt;ul class="dropdown-menu"&gt;
+                #foreach ($entry in $publishedDashboards)
+                  #set ($page = $xwiki.getDocument($entry))
+                  &lt;li&gt;
+                    &lt;a href="$xwiki.getURL($entry)"&gt;$page.title&lt;/a&gt;
+                  &lt;/li&gt;
+                  #end
+              &lt;/ul&gt;
+              #if ($hasAdmin || $isAdministrateurMinisteriel)
+               &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn btn-default'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
+              #end
+            &lt;/div&gt;
+            {{/html}}
+          )))
         )))
       )))
     )))
@@ -179,7 +183,7 @@
   #if ($hasAdmin)
     (%id="view-details" class="tab-pane fade #if($xcontext.action=='edit') in active #end"%)(((
       (% class='row xform' %)(((
-        (% class='container' %)(((
+        (% class='dashboard-container' %)(((
             #set ($class = $xwiki.getClass($DASHBOARD_CLASS_ID))
             #foreach($property in $class.properties)
             |=(% style="width: 20%" %)$doc.displayPrettyName($property.name, $dashboard)|(((
@@ -757,7 +761,7 @@ var XWiki = (function (XWiki) {
           var filtersToggle = $('#top-demarches-filters-toggle');
           filtersToggle.click(function(evt){
             $(this).toggleClass('pushed');
-            $('#top-demarches_wrapper .dataTables_filter').toggle(400);
+            $('#top-demarches_wrapper .dataTables_filter').toggle(200);
           });
         }
       });
@@ -966,10 +970,11 @@ input[name='title'] {
   }
 }
 
+@max-width-dashboard: 1440px;
+
 .dashboard-container {
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
+  .container-fixed();
+  max-width: @max-width-dashboard;
 }
 
 .observatoire-explanation {
@@ -1070,18 +1075,23 @@ input[name='title'] {
   padding-bottom: 1.58em;
   border-top: 1px solid #ddd;
   /* Simulation of a full colored row using box shadow. Thanks Caty.*/
-  box-shadow: -75rem 0 0 #fafafa, 75rem 0 0 #fafafa;
+  /* screen &lt; fixed width of dashboard : move shadow only with the gutter width to cover the padding */
+  box-shadow: -@grid-gutter-width 0 0 #fafafa, @grid-gutter-width 0 0 #fafafa;
+  /* screen &gt; fixed width of dashboard: move shadow of 1400px to cover as much as possible of the white space */
+  @media (min-width: @max-width-dashboard + @grid-gutter-width) {
+    box-shadow: -(@max-width-dashboard - @grid-gutter-width - 10px) 0 0 #fafafa, @max-width-dashboard - @grid-gutter-width - 10px 0 0 #fafafa;
+  }
   input, select {
     border: none;
     padding: 1em 1.8em 1em 1.8em;
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
     border-radius: 0.25em;
-    margin-left: 0.5em;
     display: inline-block;
   }
   input {
     min-width: 20em;
     font-weight: normal;
+    margin-left: 1em;
   }
   select {
     min-width: 20em;
@@ -1251,6 +1261,10 @@ input[name='title'] {
 
 table#top-demarches.no-footer {
   border-bottom: 0px;
+}
+
+#footerglobal {
+  margin-top: 4em;
 }</code>
     </property>
     <property>
