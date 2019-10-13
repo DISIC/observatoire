@@ -67,9 +67,10 @@ dashboard.generate-data=Générer
 dashboard.download-pdf=Télécharger la version imprimable (PDF {0} ko)
 dashboard.share.label=Partager
 dashboard.edit-entry=Modifier ces informations
+dashboard.tools.filters.label=Filtres
 
 # Table
-dashboard.table.demarche=Démarche
+dashboard.table.demarche=Les démarches
 dashboard.table.ministry=Ministère
 dashboard.table.group=Regroupement
 dashboard.table.digitalization=Démarche dématérialisée

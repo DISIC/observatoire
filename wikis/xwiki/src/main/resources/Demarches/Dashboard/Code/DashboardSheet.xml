@@ -115,6 +115,9 @@
     (%class='row table-tools'%)(((
       (% class='dashboard-container' %)(((
         (%class='col-xs-12 col-md-6 dashboard-filters'%)(((
+          {{html clean='false'}}
+            &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
+          {{/html}}
         )))
         (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
           {{html clean="false"}}
@@ -727,30 +730,35 @@ var XWiki = (function (XWiki) {
           infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
           loadingRecords: "Chargement...",
           processing: "Traitement...",
-          search: "Démarche :",
+          search: "",
+          searchPlaceholder: "Mot clé",
           zeroRecords: "Aucune entrée trouvée"
         },
         initComplete: function(settings, json ) {
           // add the ministries filter in the filters
           var filtersContainer = $('#top-demarches_filter');
           if (filtersContainer) {
-            // prepare the label and select of ministries
-            var ministriesLabel = $('&lt;label&gt;Ministère :&lt;/label&gt;')
+            // prepare the select of ministries
             var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
-            ministriesLabel.append(ministriesSelect);
             ministriesSelect.empty();
-            ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous"));
+            ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous les ministères"));
             $.each(ministeres, function() {
                ministriesSelect.append($("&lt;option /&gt;").val(this).text(this));
             });
             // add the ministries select at the beginning of the filter line
-            filtersContainer.prepend(ministriesLabel);
+            filtersContainer.prepend(ministriesSelect);
             // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
             var this_tbl = settings.oInstance.api();
             ministriesSelect.change(function () {
               this_tbl.draw();
             });
           }
+          // add the hook for the filters display upon click on the filters button
+          var filtersToggle = $('#top-demarches-filters-toggle');
+          filtersToggle.click(function(evt){
+            $(this).toggleClass('pushed');
+            $('#top-demarches_wrapper .dataTables_filter').toggle(400);
+          });
         }
       });
 
@@ -1022,12 +1030,61 @@ input[name='title'] {
 
 .table-tools {
   background-color: #fafafa;
+  padding-top: 1.58em;
+  padding-bottom: 1.58em;
+  font-size: 0.75em;
+  .btn {
+    padding: 1em 1.8em 1em 1.8em;
+    background-image: none;
+    background-color: #fff;
+    border: none;
+    border-radius: 0.25em;
+    &amp;.btn-primary {
+      background-color: @obs-blue;
+    }
+    box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
+  }
   .dashboard-selector {
     text-align: right;
+    .btn {
+      font-weight: 600;
+    }
   }
+  .dashboard-filters {
+    .btn-default.pushed {
+      background-color: @obs-blue;
+      color: #fff;
+    }
+  }
+}
 
-  .controls {
-    margin: 1em;
+#top-demarches_wrapper .dataTables_filter {
+  /* Hidden by default, will be displayed by javascript */
+  display: none;
+  float: none;
+  text-align: left;
+  font-size: 0.75em;
+  color: #666;
+  background-color: #fafafa;
+  padding-top: 1.58em;
+  padding-bottom: 1.58em;
+  border-top: 1px solid #ddd;
+  /* Simulation of a full colored row using box shadow. Thanks Caty.*/
+  box-shadow: -75rem 0 0 #fafafa, 75rem 0 0 #fafafa;
+  input, select {
+    border: none;
+    padding: 1em 1.8em 1em 1.8em;
+    box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
+    border-radius: 0.25em;
+    margin-left: 0.5em;
+    display: inline-block;
+  }
+  input {
+    min-width: 20em;
+    font-weight: normal;
+  }
+  select {
+    min-width: 20em;
   }
 }
 
@@ -1057,13 +1114,13 @@ input[name='title'] {
       border-width: 1px 0 1px 0;
       &amp;:last-child {
         border-right-width: 1px;
-        border-top-right-radius: 1em;
-        border-bottom-right-radius: 1em;
+        border-top-right-radius: 0.6em;
+        border-bottom-right-radius: 0.6em;
       }
       &amp;:first-child {
         border-left-width: 1px;
-        border-top-left-radius: 1em;
-        border-bottom-left-radius: 1em;
+        border-top-left-radius: 0.6em;
+        border-bottom-left-radius: 0.6em;
       }
       &amp;.column-title {
         width: 38%;
@@ -1172,7 +1229,7 @@ input[name='title'] {
       color: #fff;
       font-size: 0.75em;
       padding: 1em;
-      border-radius: 0 0 1.34em 1.34em;
+      border-radius: 0 0 0.8em 0.8em;
       a {
         color: #fff;
       }
@@ -1184,29 +1241,7 @@ input[name='title'] {
   }
 }
 
-#top-demarches_wrapper .dataTables_filter {
-  float: none;
-  text-align: center;
-  margin-bottom: 1em;
-  label {
-    font-weight: normal;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-  input, select {
-    border: 1px solid #E8E8E8;
-    padding: 6px 12px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    margin-left: 0.5em;
-    display: inline-block;
-  }
-  input {
-    min-width: 20em;
-  }
-  select {
-    min-width: 20em;
-  }
-}
+
 #top-demarches_wrapper {
   .dataTables_info {
     font-size: 90%;
