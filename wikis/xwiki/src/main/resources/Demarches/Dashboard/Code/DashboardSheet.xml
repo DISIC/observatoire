@@ -1140,10 +1140,15 @@ input[name='title'] {
     color: #000;
     &amp;.column-title {
       font-size: 1em;
-      width: 38%;
+      /* we need to set both for IE 10/11 which seems to ignore the min-width when a width is set inline on the element itself. */
+      min-width: 38% !important;
+      width: 38% !important;
       text-align: left;
       background-position-y: 4em;
       font-weight: bold;
+    }
+    &amp;.column-tell-us-once {
+      min-width: 5.7em;
     }
     .thead-icon {
       display: block;
@@ -1188,7 +1193,7 @@ input[name='title'] {
         border-bottom-left-radius: 0.6em;
       }
       &amp;.column-title {
-        width: 38%;
+        min-width: 38%;
         font-weight: 600;
         text-align: left;
         padding: 1.25em;
@@ -1239,7 +1244,7 @@ input[name='title'] {
   tr.shown {
     td {
       background-color: fade(@obs-blue, 5%);
-      border-bottom: 0.5px dotted #555;
+      border-bottom: 0;
       &amp;:last-child {
         border-bottom-right-radius: 0;
       }
@@ -1251,12 +1256,13 @@ input[name='title'] {
 
   /* Styles for the détails panel */
   tr.shown + tr.child-row {
-    /* Make it stick to the row above, so that we can style it in a big box with rounded corners. */
-    position: relative;
-    top: -1em;
     td {
+      /* Make it stick to the row above, so that we can style it in a big box with rounded corners. 
+         Apparently this is the only solution working fine on most browsers, I initially moved the whole row but rows can only be moved on Firefox, while cells work on all browsers. */
+      position: relative;
+      top: -1em;
       background-color: fade(@obs-blue, 5%);
-      border-top: 0px;
+      border-top: 0.5px dotted #555;
       /* reset padding */
       padding: 0;
       &amp;:last-child {
