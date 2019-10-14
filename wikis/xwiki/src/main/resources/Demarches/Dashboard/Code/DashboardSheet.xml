@@ -64,8 +64,8 @@
     (%class='dashboard-container'%)(((
       {{html clean='false'}}
       &lt;ul class="nav nav-tabs nav-dashboard"&gt;
-        &lt;li #if($xcontext.action == "view") class="active" #end&gt;&lt;a data-toggle="tab" href="#view-dashboard"&gt;Tableau&lt;/a&gt;&lt;/li&gt;
-        &lt;li #if($xcontext.action == "edit") class="active" #end&gt;&lt;a data-toggle="tab" href="#view-details"&gt;Détails&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="nav-view-dashboard-tab #if($xcontext.action == "view") active #end"&gt;&lt;a data-toggle="tab" href="#view-dashboard"&gt;Tableau&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="nav-view-details-tab #if($xcontext.action == "edit") active #end"&gt;&lt;a data-toggle="tab" href="#view-details"&gt;Détails&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
       {{/html}}
     )))
@@ -86,7 +86,7 @@
               #set ($size = $mathtool.div($size, 1000))
               #set ($size = $mathtool.round($size))
               (% class="download" %)
-              [[$services.icon.render('download') $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)]]
+              [[(% class='fa fa-cloud-download'%) (%%) $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)]]
             #end
           )))
           (%class='col-xs-12 col-md-6 sharecol'%) (((
@@ -196,9 +196,18 @@
     (%id="view-details" class="tab-pane fade #if($xcontext.action=='edit') in active #end"%)(((
       (% class='row xform' %)(((
         (% class='dashboard-container' %)(((
+            #if ($xcontext.action != 'edit')
+              (% class='row document-header' %)(((
+                (% class='document-menu col-xs-12 col-md-5 col-md-push-7' %)(((
+                  {{html clean='false' wiki='false'}}
+                  #template("menus_content.vm")
+                  {{/html}}
+                )))
+              )))
+            #end
             #set ($class = $xwiki.getClass($DASHBOARD_CLASS_ID))
             #foreach($property in $class.properties)
-            |=(% style="width: 20%" %)$doc.displayPrettyName($property.name, $dashboard)|(((
+              |=(% style="width: 20%" %)$doc.displayPrettyName($property.name, $dashboard)|(((
               $dashboard.display($property.name, $xcontext.action)
               #if ($xcontext.action == 'edit')(% class="xHint" %)$services.localization.render("${DASHBOARD_CLASS_ID}_${property.name}_hint")(% %)#end
             )))
@@ -999,10 +1008,20 @@ input[name='title'] {
     margin-top: 0;
     margin-bottom: 0;
     &gt; li &gt; a {
-      background-color: lighten(@link-color, 40%);
+      background-color: lighten(@obs-blue, 40%);
+      border-color: lighten(@obs-blue, 40%);
+      color: @text-color;
+      border-bottom: none;
+      margin-right: 0.25em;
     }
     &gt; li.active &gt; a {
       background-color: #fff;
+      color: @text-color;
+    }
+    &gt; .nav-view-dashboard-tab.active &gt; a {
+      border-color: @obs-blue-dark;
+      background-color: @obs-blue-dark;
+      color: #fff;
     }
   }
   .document-header {
@@ -1323,6 +1342,10 @@ input[name='title'] {
 
 table#top-demarches.no-footer {
   border-bottom: 0px;
+}
+
+#view-details table {
+  margin-top: 3em;
 }
 
 #footerglobal {
