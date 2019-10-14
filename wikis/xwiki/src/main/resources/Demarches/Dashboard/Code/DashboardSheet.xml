@@ -176,12 +176,8 @@
                   &lt;th&gt;
                     #if("$!icon" != '')
                       &lt;span class='thead-icon'&gt;&lt;img src="$xwiki.getAttachmentURL('Demarches.Code.WikiDemarchesTheme', $icon)" alt='$escapetool.xml($thLabel)' /&gt;&lt;/span&gt;
-                      &lt;span class='thead-label'&gt;
                     #end
-                    $thLabel
-                    #if("$!icon" != '')
-                      &lt;/span&gt;
-                    #end
+                    &lt;span class='thead-label'&gt;$thLabel&lt;/span&gt;
                   &lt;/th&gt;
                 #end
                 &lt;th&gt;&lt;/th&gt;
