@@ -1212,6 +1212,9 @@ input[name='title'] {
         min-width: 5.7em;
         text-align: left;
       }
+      .row-details-value {
+        display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
+      }
       .label {
         display: inline-block;
         white-space: normal;
@@ -1234,7 +1237,7 @@ input[name='title'] {
   td.details-control:before {
     content: "\f078";
     font: normal normal normal 14px/1 FontAwesome;
-    display: inline-block;
+    display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
     color: #666;
   }
   tr.shown td.details-control:before {
