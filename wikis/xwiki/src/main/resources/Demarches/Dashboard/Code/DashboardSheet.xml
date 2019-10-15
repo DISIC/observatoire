@@ -347,17 +347,7 @@
 var XWiki = (function (XWiki) {
 
   function computeBadgeStyle(value) {
-    if (!isNaN(value)) {
-      if (value &gt;= 75) {
-        return "success";
-      } else if (value &gt;= 50) {
-        return "default";
-      } else if (value &gt;= 25) {
-        return "warning";
-      } else {
-        return "danger";
-      }
-    } else if (typeof value === 'string' || value instanceof String) {
+    if (typeof value === 'string' || value instanceof String) {
       value = value.toLowerCase();
       switch (value) {
         case 'oui':
@@ -375,6 +365,37 @@ var XWiki = (function (XWiki) {
       }
     } else {
       return 'Erreur de formatage (' + value + ')';
+    }
+  }
+
+  function computeBadgeStyleSatisfactionIndex(value) {
+    if (!isNaN(value)) {
+      if (value &gt;= 75) {
+        return "success";
+      } else if (value &gt;= 50) {
+        return "default";
+      } else if (value &gt;= 25) {
+        return "warning";
+      } else {
+        return "danger";
+      }
+    } else {
+      return "default";
+    }
+  }
+
+
+  function computeBadgeStyleDitesLeNousUneFois(value) {
+    if (!isNaN(value)) {
+      if (value == 0) {
+        return "success";
+      } else if (value &lt; 6) {
+        return "warning";
+      } else {
+        return "danger";
+      }
+    } else {
+      return "default";
     }
   }
 
@@ -656,7 +677,7 @@ var XWiki = (function (XWiki) {
               } else {
                 if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
                   data.display = '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
-                  return format(data.value, data.display, computeBadgeStyle,  true, row['id']);
+                  return format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  true, row['id']);
                 } else {
                   return format(data.value, data.display, computeBadgeStyle,  true, row['id']);
                 }
@@ -705,7 +726,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
-            data: "tellUsOnce",
+            data: "ditesLeNousUneFois",
             className: 'column-tell-us-once',
             render: function (data, type, row) {
               if (!data) {
@@ -714,8 +735,9 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.value;
               } else {
-                //return format(data.value, data.display, computeBadgeStyle, false);
-                return data.display;
+                if (data.value === null)
+                  return "-";
+                return format(data.value, data.display, computeBadgeStyleDitesLeNousUneFois, true);
               }
             }
           },

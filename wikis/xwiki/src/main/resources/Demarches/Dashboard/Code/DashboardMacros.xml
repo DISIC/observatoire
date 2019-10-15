@@ -202,8 +202,8 @@
   #elseif ($urlScore == 'n/c')
     #set ($urlScoreValue = -50)
   #end
-  #set ($tellUsOnce = $obj.getValue('tellUsOnce'))
-  #set ($tellUsOnceDisplay = $obj.get('tellUsOnce'))
+  #set ($ditesLeNousUneFois = $obj.getValue('ditesLeNousUneFois'))
+  #set ($ditesLeNousUneFoisDisplay = $obj.get('ditesLeNousUneFois'))
   #set ($discard = $data.add(
     {
       "id": $page.fullName,
@@ -246,9 +246,9 @@
         "value": $urlScoreValue
       },
       "urlDemarche": "$!obj.getValue('urlDemarche')",
-      "tellUsOnce": {
-          "value": $tellUsOnce,
-          "display": $tellUsOnceDisplay
+      "ditesLeNousUneFois": {
+          "value": $ditesLeNousUneFois,
+          "display": $ditesLeNousUneFoisDisplay
         }
     }))
 #end

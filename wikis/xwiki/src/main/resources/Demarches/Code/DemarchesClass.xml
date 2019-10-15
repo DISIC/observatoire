@@ -276,6 +276,20 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </direction>
+    <ditesLeNousUneFois>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>ditesLeNousUneFois</name>
+      <number>34</number>
+      <numberType>long</numberType>
+      <prettyName>Dites-le-nous une fois</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+    </ditesLeNousUneFois>
     <evenements>
       <cache>0</cache>
       <classname/>
@@ -794,28 +808,6 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <values>prevu=Prévu|encours=En cours|termine=Terminé</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutProjetDemat>
-    <tellUsOnce>
-      <cache>0</cache>
-      <customDisplay/>
-      <disabled>0</disabled>
-      <displayType>select</displayType>
-      <hint/>
-      <multiSelect>0</multiSelect>
-      <name>tellUsOnce</name>
-      <number>34</number>
-      <picker>0</picker>
-      <prettyName>Dites-le nous une fois</prettyName>
-      <relationalStorage>1</relationalStorage>
-      <separator> </separator>
-      <separators>|, </separators>
-      <size>1</size>
-      <sort>none</sort>
-      <unmodifiable>0</unmodifiable>
-      <validationMessage/>
-      <validationRegExp/>
-      <values>ameliorable|excellent|insuffisant|na|nonmesure</values>
-      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-    </tellUsOnce>
     <textes>
       <contenttype>---</contenttype>
       <customDisplay/>
