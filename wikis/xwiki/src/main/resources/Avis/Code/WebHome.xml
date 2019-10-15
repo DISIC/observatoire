@@ -28,7 +28,7 @@
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1528186553000</creationDate>
-  <parent>wikidemarches:Avis.WebHome</parent>
+  <parent>Avis.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <date>1528186553000</date>
