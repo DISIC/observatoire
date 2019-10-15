@@ -70,7 +70,7 @@
 - use this page as an include (e.g. from DemarchesSheet): extraParams are set, don't the same columns.
 *#
 #if (!$extraParams)
-  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'ministeres', 'direction', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
+  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'ministeres', 'direction', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', 'sessionId', '_actions'])
 #else
   #set ($discard = $options.put('extraParams', $extraParams))
   #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
