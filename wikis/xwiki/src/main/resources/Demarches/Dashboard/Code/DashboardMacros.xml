@@ -111,9 +111,6 @@
     #end
   #end
   #set ($statutDemat = $obj.get('statutDemat'))
-  ##set ($avisStats = $page.getObject($AVIS_CLASS_ID))
-  ##set ($avisCountValue = $avisStats.getValue('occurrences'))
-  ##set ($satisfactionIndex = $avisStats.getValue('moyenne'))
   #if ("$!dashboardDate" != '')
     #set ($maxDate = $dashboardDate)
   #else
