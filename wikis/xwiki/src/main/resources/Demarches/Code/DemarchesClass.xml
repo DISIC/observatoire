@@ -795,29 +795,26 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutProjetDemat>
     <tellUsOnce>
-      <customDisplay>{{velocity}}
-{{html clean="false"}}
-#if ($type == 'edit')
-  &lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="5" type="text" value="$!value"&gt;
-#else
-  #if ("$!value" != '')
-    #set ($stars = $mathtool.toInteger($value))
-    #if ($stars &gt; 0)#foreach ($item in [1..$stars])✫#end#end
-  #end
-#end
-{{/html}}
-{{/velocity}}</customDisplay>
+      <cache>0</cache>
+      <customDisplay/>
       <disabled>0</disabled>
+      <displayType>select</displayType>
       <hint/>
+      <multiSelect>0</multiSelect>
       <name>tellUsOnce</name>
       <number>34</number>
-      <numberType>double</numberType>
+      <picker>0</picker>
       <prettyName>Dites-le nous une fois</prettyName>
-      <size>30</size>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      <values>ameliorable|excellent|insuffisant|na|nonmesure</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </tellUsOnce>
     <textes>
       <contenttype>---</contenttype>

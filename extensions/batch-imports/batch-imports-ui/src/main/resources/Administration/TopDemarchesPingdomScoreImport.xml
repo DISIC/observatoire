@@ -280,9 +280,9 @@
       <listseparator>,</listseparator>
     </property>
     <property>
-      <mapping>lwrptime=urlResponseTime
-name=doc.name
-lwdispo=urlAvailability</mapping>
+      <mapping>Temps de réponse=urlResponseTime
+Démarche=doc.name
+Uptime=urlAvailability</mapping>
     </property>
     <property>
       <metadatafilename/>

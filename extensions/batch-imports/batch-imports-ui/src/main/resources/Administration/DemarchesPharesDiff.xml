@@ -1,0 +1,90 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Administration.DemarchesPharesDiff" locale="">
+  <web>Administration</web>
+  <name>DemarchesPharesDiff</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1571124198000</creationDate>
+  <parent>xwiki:Administration.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1571124198000</date>
+  <contentUpdateDate>1571124198000</contentUpdateDate>
+  <version>1.1</version>
+  <title>DemarchesPharesDiff</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{info}}
+This page allows to compute the diff between the top démarches in two files added as attachments with a single column containing identifiers as integers.
+{{/info}}
+
+{{velocity output="false"}}
+
+#macro (extractIdentifiers $fileName)
+  #set ($attachment = $doc.getAttachment($fileName))
+  #set ($content = $attachment.getContentAsString())
+  #set ($ids = $content.split("\n"))
+  #set ($list = [])
+  #foreach ($id in $ids)
+    #set ($value = $mathtool.toInteger($id))
+    #if ($value)
+      #set ($discard = $list.add($value))
+    #end
+  #end
+#end
+
+#macro (printDemarches $list)
+  #foreach ($id in $sorttool.sort($list))
+    #set ($id = "Demarches.$id")
+    #set ($page = $xwiki.getDocument($id))
+    |[[$page.fullName]]|$page.title
+  #end
+#end
+
+#extractIdentifiers("top-20190615.txt")
+#set ($top1 = $list)
+#extractIdentifiers("top-20191014.txt")
+#set ($top2 = $list)
+
+#set ($top3 = [])
+#set ($discard = $top3.addAll($top1))
+#set ($discard = $top1.removeAll($top2))
+#set ($discard = $top2.removeAll($top3))
+{{/velocity}}
+
+{{velocity}}
+== New top démarches
+
+#printDemarches($top2)
+
+== Old top démarches
+
+#printDemarches($top1)
+
+{{/velocity}}</content>
+</xwikidoc>
