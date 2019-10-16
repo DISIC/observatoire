@@ -277,7 +277,21 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </direction>
     <ditesLeNousUneFois>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+&lt;input id="Demarches.Code.DemarchesClass_0_ditesLeNousUneFois" name="Demarches.Code.DemarchesClass_0_ditesLeNousUneFois" size="30" type="text" value="$!value"&gt;
+#else
+  #if ($value == -1)
+    n/a
+  #elseif (!$value)
+    -
+  #else
+    $value
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <disabled>0</disabled>
       <hint/>
       <name>ditesLeNousUneFois</name>

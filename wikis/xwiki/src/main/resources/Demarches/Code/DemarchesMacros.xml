@@ -85,7 +85,7 @@
     #if(!$isBoolean || $action != 'edit')
       #if ($isNumber &amp;&amp; $object.getProperty($propName).value)
         #if ($action == 'view')
-          #if ($propName == 'tellUsOnce')
+          #if ($propName == 'ditesLeNousUneFois')
             $object.display($propName, $action)
           #else
             $numbertool.format('integer', $object.getProperty($propName).value)

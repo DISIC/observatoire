@@ -728,16 +728,23 @@ var XWiki = (function (XWiki) {
           {
             data: "ditesLeNousUneFois",
             className: 'column-tell-us-once',
+            type: "num",
             render: function (data, type, row) {
               if (!data) {
                 return "";
               }
               if (type === "sort") {
-                return data.value;
+                var value;
+                if (data.display == "n/a")
+                  return -2;
+                else if (data.display == "-")
+                  return -1;
+                else
+                  return data.value;
               } else {
-                if (data.value === null)
-                  return "-";
-                return format(data.value, data.display, computeBadgeStyleDitesLeNousUneFois, true);
+                if (data.display == "n/a" || data.display == "-")
+                  return data.display;
+                return format(data.value, data.display, computeBadgeStyleDitesLeNousUneFois, false);
               }
             }
           },
