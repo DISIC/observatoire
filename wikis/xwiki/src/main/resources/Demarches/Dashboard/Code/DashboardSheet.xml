@@ -191,6 +191,16 @@
       )))
     )))
   )))
+
+  #if ("$!request.action" == 'json' &amp;&amp; $services.csrf.isTokenValid($request.token))
+    #computeDashboardData(0)
+    #if ("$!request.live" == 1)
+      #writeJson()
+    #else
+      #attachJson()
+    #end
+  #end
+
   ##
   ## Dashboard metadata view / edit ##
   #if ($hasAdmin)
@@ -236,14 +246,9 @@
                {{/html}}
               {{/info}}
 
-            #end
-            #if ("$!request.action" == 'json' &amp;&amp; $services.csrf.isTokenValid($request.token))
-              #computeDashboardData(0)
-              #if ("$!request.live" == 1)
-                #writeJson()
-              #else
-                #attachJson()
-              #end
+               #if ("$!info" != '')
+                 $info
+               #end
             #end
         )))
       )))

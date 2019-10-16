@@ -273,11 +273,7 @@
 #macro (attachJson)
   #set ($discard = $doc.addAttachment("data.json", $json.getBytes()))
   #set ($discard = $doc.save("Generate and attach file 'data.json'"))
-
-  {{info}}
-  $services.localization.render('dashboard.generation.done')
-  {{/info}}
-
+  #set ($info = "{{info}}$services.localization.render('dashboard.generation.done'){{/info}}")
 #end
 {{/velocity}}</content>
 </xwikidoc>
