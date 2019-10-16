@@ -165,7 +165,7 @@
             'support' : 'support.svg',
             'performance' : 'clock.svg',
             'france-connect' : 'user.svg',
-            'accessibility' : 'briefcase.svg',
+            'accessibility' : 'accessibility.svg',
             'tell-us-once' : 'briefcase.svg'
             })
           &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
