@@ -585,11 +585,17 @@ var XWiki = (function (XWiki) {
       $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
           var selectedMinistere =  $('select[name="ministereSelect"]').val();
+          var selectedPublicCategory =  $('select[name="publicCategorySelect"]').val();
           var ministere = data[1];
+          var publicCategory = data[14];
+          var keep1, keep2 = false;
           if (selectedMinistere === undefined || selectedMinistere == "tous" || ministere == selectedMinistere) {
-            return true;
+            keep1 = true;
           }
-          return false;
+          if (selectedPublicCategory === undefined || selectedPublicCategory == "tous" || publicCategory.indexOf(selectedPublicCategory) &gt;= 0) {
+            keep2 = true;
+          }
+          return keep1 &amp;&amp; keep2;
         }
       );
 
@@ -604,6 +610,12 @@ var XWiki = (function (XWiki) {
       });
 
       var ministeres = [];
+      var publicCategories = [];
+      // TODO: retrieve static list values from DemarchesClass property
+      publicCategories.push({key: "associations", value: "Associations"});
+      publicCategories.push({key: "collectivites", value: "Collectivités"});
+      publicCategories.push({key: "particuliers", value: "Particuliers"});
+      publicCategories.push({key: "professionnels", value: "Professionnels"});
 
       var date;
 
@@ -797,6 +809,17 @@ var XWiki = (function (XWiki) {
                 return data.display;
               }
             }
+          },
+          {
+            data: "categoriesPublics",
+            visible: false,
+            type: "string",
+            render: function (data, type, row) {
+              if (data != undefined)
+                return data.value;
+              else
+                return "";
+            }
           }
         ],
         // order by: avis, ministère, groupe, volumétrie, name
@@ -816,6 +839,19 @@ var XWiki = (function (XWiki) {
           // add the ministries filter in the filters
           var filtersContainer = $('#top-demarches_filter');
           if (filtersContainer) {
+            var schema = json.metadata.schema;
+            if (schema != undefined &amp;&amp; schema != '1.0') {
+              var publicCategorySelect = $("&lt;select name='publicCategorySelect'/&gt;");
+              publicCategorySelect.empty();
+              publicCategorySelect.append($("&lt;option /&gt;").val("tous").text("Tous les publics"));
+              $.each(publicCategories, function() {
+                 var value = this.key;
+                 var text = this.value;
+                 publicCategorySelect.append($("&lt;option /&gt;").val(value).text(text));
+              });
+              // add the ministries select at the beginning of the filter line
+              filtersContainer.prepend(publicCategorySelect);
+            }
             // prepare the select of ministries
             var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
             ministriesSelect.empty();
@@ -828,6 +864,11 @@ var XWiki = (function (XWiki) {
 
             // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
             var this_tbl = settings.oInstance.api();
+            if (schema != undefined &amp;&amp; schema != '1.0') {
+              publicCategorySelect.change(function () {
+                this_tbl.draw();
+              });
+            }
             ministriesSelect.change(function () {
               this_tbl.draw();
             });
