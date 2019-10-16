@@ -336,11 +336,10 @@
     paths: {
        'css': '$services.webjars.url('require-css/0.1.7/css.js')',
        'domReady': '$services.webjars.url('requirejs-domready/2.0.1/domReady.js')',
-       'datatables.net': '$services.webjars.url('datatables.net/js/jquery.dataTables.min.js')',
-       'datatables.net-dt': '$services.webjars.url('datatables.net-dt/js/dataTables.dataTables.js')',
-       'datatables.net-dt-css': '$services.webjars.url('datatables.net-dt/css/jquery.dataTables')',
-       'datatables.net-fixedheader': '$services.webjars.url('datatables.net-fixedheader/js/dataTables.fixedHeader.js')',
-       'datatables.net-fixedheader-bs-css': '$services.webjars.url('datatables.net-fixedheader-bs/3.1.5/css/fixedHeader.bootstrap')'
+       'datatables.net': '$services.webjars.url('datatables/1.10.19/js/jquery.dataTables.js')',
+       'datatables-css': '$services.webjars.url('datatables/1.10.19/css/jquery.dataTables.min')',
+       'datatables-fixedheader': '$services.webjars.url('datatables-fixedheader/3.1.4/js/dataTables.fixedHeader.js')',
+       'datatables-fixedheader-css': '$services.webjars.url('datatables-fixedheader/3.1.4/css/fixedHeader.dataTables')'
     }
 });
 
@@ -484,7 +483,7 @@ var XWiki = (function (XWiki) {
   }
 
   function init() {
-    require(['jquery', 'xwiki-meta', 'xwiki-events-bridge', 'datatables.net', 'datatables.net-dt', 'css!datatables.net-dt-css', 'datatables.net-fixedheader', 'css!datatables.net-fixedheader-bs-css', 'domReady!'], function ($, xwikiMeta) {
+    require(['jquery', 'xwiki-meta', 'xwiki-events-bridge', 'datatables.net', 'css!datatables-css', 'datatables-fixedheader', 'domReady!'], function ($, xwikiMeta) {
       // Documentation: https://www.xwiki.org/xwiki/bin/view/Documentation/DevGuide/FrontendResources/ModalPopup/
       XWiki.widgets.XPopup = Class.create(XWiki.widgets.ModalPopup, {
        /** Default parameters can be added to the custom class. */
@@ -1009,6 +1008,7 @@ var XWiki = (function (XWiki) {
       <code>@obs-blue: @link-color;
 @obs-blue-dark: #175fc9;
 
+
 input[name='title'] {
   width: 100%;
 }
@@ -1222,6 +1222,28 @@ table.fixedHeader-locked {
     }
   }
 }
+
+// start:datatables-fixed-header-styling
+table.fixedHeader-floating {
+	position: fixed !important;
+	background-color: white;
+}
+
+table.fixedHeader-floating.no-footer {
+	border-bottom-width: 0;
+}
+
+table.fixedHeader-locked {
+	position: absolute !important;
+	background-color: white;
+}
+
+@media print {
+    table.fixedHeader-floating {
+        display: none;
+    }
+}
+// end:datatables-fixedheader-styling
 
 /* Table header styling, when floating */
 table.dataTable.no-footer.fixedHeader-floating,
