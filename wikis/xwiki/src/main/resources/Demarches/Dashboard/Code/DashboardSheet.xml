@@ -615,13 +615,13 @@ var XWiki = (function (XWiki) {
         return data;
       }
 
-      /*jQuery.extend(jQuery.fn.dataTableExt.ofnSearch, {
+      /*jQuery.extend(jQuery.fn.dataTable.ext.ofnSearch, {
          "french-string":  function ( data ) {
            return ! data ? '' :  typeof data === 'string' ? removeAccents( data ) : data;
          }
       });*/
 
-      jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+      jQuery.extend( jQuery.fn.dataTable.ext.oSort, {
         "french-string-asc" : function (s1, s2) {
             return s1.localeCompare(s2, 'fr');
         },
@@ -846,8 +846,7 @@ var XWiki = (function (XWiki) {
           }
         ],
         // order by: avis, ministère, groupe, volumétrie, name
-        //order: [[11, 'desc'], [2, 'asc'], [3, 'asc'], [10, 'desc'], [1, 'asc']],
-        order: [[12, 'desc'], [1, 'asc'], [2, 'asc'], [11, 'desc'], [0, 'asc']],
+        order: [[13, 'desc'], [1, 'asc'], [2, 'asc'], [12, 'desc'], [0, 'asc']],
         language: {
           info: "Total : _TOTAL_ démarches",
           infoEmpty: "Aucune démarche trouvée",
