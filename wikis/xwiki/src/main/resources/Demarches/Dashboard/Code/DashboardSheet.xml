@@ -165,6 +165,7 @@
             'support' : 'support.svg',
             'performance' : 'clock.svg',
             'france-connect' : 'user.svg',
+            'accessibility' : 'briefcase.svg',
             'tell-us-once' : 'briefcase.svg'
             })
           &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
@@ -585,7 +586,7 @@ var XWiki = (function (XWiki) {
         function( settings, data, dataIndex ) {
           var selectedMinistere =  $('select[name="ministereSelect"]').val();
           var ministere = data[1];
-          if (!selectedMinistere || selectedMinistere == "tous" || ministere == selectedMinistere) {
+          if (selectedMinistere === undefined || selectedMinistere == "tous" || ministere == selectedMinistere) {
             return true;
           }
           return false;
@@ -603,6 +604,7 @@ var XWiki = (function (XWiki) {
       });
 
       var ministeres = [];
+
       var date;
 
       var dataEndpoint = "$xwiki.getAttachmentURL($pageId, 'data.json')";
@@ -622,8 +624,9 @@ var XWiki = (function (XWiki) {
             date = json.metadata.date;
             var schema = json.metadata.schema;
             if (!schema || schema == '1.0') {
-              // Do not display "Tell us once" column for schema version &lt; 1.1
+              // Do not display columns about accessibility and "tells us once" for schema version &lt; 1.1
               table.column(9).visible(false);
+              table.column(10).visible(false);
             }
             for (var i = 0; i &lt; data.length; i++) {
               var ministere = data[i].ministere;
@@ -729,6 +732,20 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            data: "accessibility",
+            className: 'column-accessibility',
+            render: function (data, type, row) {
+              if (!data) {
+                return "";
+              }
+              if (type === "sort") {
+                return data.display;
+              } else {
+                return format(data.value, data.display, computeBadgeStyle, false);
+              }
+            }
+          },
+          {
             data: "ditesLeNousUneFois",
             className: 'column-tell-us-once',
             type: "num",
@@ -808,6 +825,7 @@ var XWiki = (function (XWiki) {
             });
             // add the ministries select at the beginning of the filter line
             filtersContainer.prepend(ministriesSelect);
+
             // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
             var this_tbl = settings.oInstance.api();
             ministriesSelect.change(function () {

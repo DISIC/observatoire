@@ -86,6 +86,7 @@ dashboard.table.digitalized-usage-percent=Pourcentage de recours à la voie dém
 dashboard.table.avis-count=Nombre d'avis usagers recueillis
 dashboard.table.url-demarche=Lien
 dashboard.table.categories-publics=Catégories de publics concernés
+dashboard.table.accessibility=Couverture accessibilité
 
 # Livetable
 dashboard.livetable.doc.title=Nom
