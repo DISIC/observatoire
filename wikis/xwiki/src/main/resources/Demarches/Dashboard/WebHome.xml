@@ -43,7 +43,9 @@
 #set ($columnsProperties = {
   'title': {'html': true, 'link': 'view'},
   'doc.author': {},
-  'doc.creationDate': {'sortable': true, 'type': 'date'}
+  'doc.creationDate': {'sortable': true, 'type': 'date'},
+  'status' : {'filterable' : true, 'sortable' : false},
+  'date' : {'sortable' : true, 'filterable' : true}
 })
 #set ($options = {
   'className': 'Demarches.Dashboard.Code.DashboardClass',
@@ -54,10 +56,7 @@
   'selectedColumn': 'doc.title',
   'defaultOrder': 'asc'
 })
-#set ($columns = [])
-#foreach ($entry in $columnsProperties.keySet())
-  #set ($discard = $columns.add($entry))
-#end
+#set ($columns = ['title', 'status', 'date', 'doc.author', 'doc.creationDate'])
 #livetable('dashboards' $columns $columnsProperties $options)
 
 {{/velocity}}</content>

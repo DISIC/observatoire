@@ -63,8 +63,6 @@
     #panel('Porteurs et démarches', "
       * [[Porteurs par démarche&gt;&gt;Demarches.Admin.Porteurs.Demarches]]
       * [[Démarches par porteur&gt;&gt;Demarches.Admin.Porteurs.Utilisateurs]]
-      * [[Tableaux de bord&gt;&gt;Demarches.Dashboard.WebHome]]
-      * [[Ancien tableau de bord&gt;&gt;TableauDeBord.WebHome]]
     ",'list')
   )))
 )))
@@ -82,9 +80,11 @@
 )))
 (% class="row" %)(((
   (% class="col-md-6 col-xs-12" %) (((
-    #panel('Tableaux de bord', "
+    #panel('Tableaux de bord - top 250', "
       * [[Créer un nouveau tableau de bord&gt;&gt;path:$xwiki.getURL('observatoire.WebHome', 'create')]]
-      * [[Modifier le tableau de bord par défaut&gt;&gt;path:$xwiki.getURL('observatoire.WebHome', 'edit')]]
+      * [[Tableaux de bord&gt;&gt;Demarches.Dashboard.WebHome]]
+
+      * [[Ancien tableau de bord&gt;&gt;TableauDeBord.WebHome]]
     ",'star')
   )))
   (% class="col-md-6 col-xs-12" %) (((

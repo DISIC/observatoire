@@ -99,6 +99,8 @@ dashboard.livetable._actions.edit=Modifier
 dashboard.livetable._actions.delete=Supprimer
 dashboard.livetable.emptyvalue=-
 dashboard.livetable.title=Nom
+dashboard.livetable.status=Status
+dashboard.livetable.date=Date des données du tableau de bord
 
 </content>
   <object>
