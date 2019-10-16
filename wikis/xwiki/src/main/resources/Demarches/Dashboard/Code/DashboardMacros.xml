@@ -204,6 +204,8 @@
   #end
   #set ($ditesLeNousUneFois = $obj.getValue('ditesLeNousUneFois'))
   #set ($ditesLeNousUneFoisDisplay = $obj.get('ditesLeNousUneFois'))
+  #set ($categoriesPublics = $obj.getValue('categoriesPublics'))
+  #set ($categoriesPublicsDisplay = $obj.get('categoriesPublics'))
   #set ($discard = $data.add(
     {
       "id": $page.fullName,
@@ -247,9 +249,13 @@
       },
       "urlDemarche": "$!obj.getValue('urlDemarche')",
       "ditesLeNousUneFois": {
-          "value": $ditesLeNousUneFois,
-          "display": $ditesLeNousUneFoisDisplay
-        }
+        "value": $ditesLeNousUneFois,
+        "display": $ditesLeNousUneFoisDisplay
+      },
+      "categoriesPublics": {
+        "value": $categoriesPublics,
+        "display": $categoriesPublicsDisplay
+      }
     }))
 #end
 

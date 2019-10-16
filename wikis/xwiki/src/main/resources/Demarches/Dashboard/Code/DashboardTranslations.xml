@@ -85,6 +85,7 @@ dashboard.table.volumetry=Volumétrie totale de la démarche
 dashboard.table.digitalized-usage-percent=Pourcentage de recours à la voie dématérialisée
 dashboard.table.avis-count=Nombre d'avis usagers recueillis
 dashboard.table.url-demarche=Lien
+dashboard.table.categories-publics=Catégories de publics concernés
 
 # Livetable
 dashboard.livetable.doc.title=Nom

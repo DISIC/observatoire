@@ -465,6 +465,10 @@ var XWiki = (function (XWiki) {
         var hostname = getHostName(data.urlDemarche)
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;' + hostname + '&lt;/a&gt;&lt;/li&gt;';
       }
+      if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
+        var categoriesPublicsDisplay = data.categoriesPublics.display;
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.categories-publics")" + '&lt;/span&gt;' + data.categoriesPublics.display + '&lt;/li&gt;';
+      }
       output = output + '&lt;/ul&gt;&lt;/div&gt;';
       if (withEditButton) {
         output += '&lt;div class="row-toolbar"&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;&lt;i class="fa fa-pencil"&gt;&lt;/i&gt; ' + "$services.localization.render("dashboard.edit-entry")" + '&lt;/a&gt;&lt;/div&gt;';
