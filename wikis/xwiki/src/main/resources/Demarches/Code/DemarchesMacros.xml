@@ -43,10 +43,13 @@
 ## These macros are used to display two types of objects: either Demarches or Avis
 
 ## Demarche view/edit form macros
-#macro (isDemarcheOwner)
+#macro (isDemarcheOwner $ownedDemarchePage)
+  #if (!$ownedDemarchePage)
+    #set ($ownedDemarchePage = $doc)
+  #end
   #set ($user = $xcontext.user)
-  #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
-  #set ($owners = $demarche.getProperty('proprietaires').getValue())
+  #set ($demarche = $ownedDemarchePage.getObject('Demarches.Code.DemarchesClass'))
+  #set ($owners = $demarche.getValue('proprietaires'))
   ## FIXME: this is not the best test, prefix users will match. XWiki.aluca vs XWiki.alucas
   #if ($owners.indexOf($xcontext.user) &gt;= 0)
     #set ($isDemarcheOwner = true)

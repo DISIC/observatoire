@@ -1,0 +1,169 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Avis.Code.DemarcheAvisLivetableResults" locale="">
+  <web>Avis.Code</web>
+  <name>DemarcheAvisLivetableResults</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>Avis.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{include reference="XWiki.LiveTableResultsMacros" /}}
+{{include reference="Demarches.Code.DemarchesMacros" /}}
+
+{{velocity output="false"}}
+## Overrides XWiki.LiveTableResultsMacros#gridresult_buildRowJSON in order to give access to Avis pages by bypassing XWiki rights, for
+## users who have specic roles with respect to a démarche, i.e.: they are owner of the démarche.
+## Changes brought:
+## - the property 'doc_viewable' is set to 'true'
+## - each page is retrieved via 'getDocumentAsAuthor' to bypass the rights
+#macro(gridresult_buildRowJSON $item $rows)
+  ## Handle both the case where the "language" filter is used and thus languages are returned too and the case where
+  ## only the document name is returned. When more than the document name is returned the $item variable is a list.
+  #if($item.size())
+    ## Extract doc name and doc language from $item
+    #set($docName = $item[0])
+    #set($docLanguage = $item[1])
+  #else
+    #set($docName = $item)
+    #set($docLanguage = '')
+  #end
+  #set ($docReference = $services.model.resolveDocument($docName))
+  ##'doc_viewable': $services.security.authorization.hasAccess('view', $docReference),
+  #set ($row = {
+    'doc_viewable': true,
+    'doc_fullName': $services.model.serialize($docReference, 'local'),
+    'doc_space': $services.model.serialize($docReference.parent, 'local'),
+    'doc_location': "#hierarchy($docReference, {'limit': 5, 'plain': false, 'local': true, 'displayTitle': false})",
+    'doc_url': $xwiki.getURL($docReference),
+    'doc_space_url': $xwiki.getURL($docReference.parent),
+    'doc_wiki': $docReference.wikiReference.name,
+    'doc_wiki_url': $xwiki.getURL($docReference.wikiReference),
+    'doc_hasadmin': $xwiki.hasAdminRights(),
+    'doc_hasedit': $services.security.authorization.hasAccess('edit', $docReference),
+    'doc_hasdelete': $services.security.authorization.hasAccess('delete', $docReference),
+    'doc_edit_url': $xwiki.getURL($docReference, 'edit'),
+    'doc_copy_url': $xwiki.getURL($docReference, 'view', 'xpage=copy'),
+    'doc_delete_url': $xwiki.getURL($docReference, 'delete'),
+    'doc_rename_url': $xwiki.getURL($docReference, 'view', 'xpage=rename&amp;step=1')
+  })
+  #set ($isTranslation = "$!docLanguage" != '' &amp;&amp; $xwiki.getLanguagePreference() != $docLanguage)
+  ## Display the language after the document name so that not all translated documents have the same name displayed.
+  #set ($row.doc_name = "$docReference.name#if ($isTranslation) ($docLanguage)#end")
+  #set ($row.doc_hascopy = $row.doc_viewable)
+  #set ($row.doc_hasrename = $row.doc_hasdelete)
+  #set ($row.doc_hasrights = $row.doc_hasedit &amp;&amp; $isAdvancedUser)
+  #if ($docReference.name == 'WebHome')
+    ## For nested pages, use the page administration.
+    #set ($webPreferencesReference = $services.model.createDocumentReference('WebPreferences', $docReference.lastSpaceReference))
+    #set ($row.doc_rights_url = $xwiki.getURL($webPreferencesReference, 'admin', 'editor=spaceadmin&amp;section=PageRights'))
+  #else
+    ## For terminal pages, use the old rights editor.
+    ## TODO: We should create a page administration for terminal pages too.
+    #set ($row.doc_rights_url = $xwiki.getURL($docReference, 'edit', 'editor=rights'))
+  #end
+  #if ($row.doc_viewable)
+    ## Customization
+    ##set ($itemDoc = $xwiki.getDocument($docReference))
+    #set ($itemDoc = $xwiki.getDocumentAsAuthor($docReference))
+    ## Handle translations. We need to make sure we display the data associated to the correct document if the returned
+    ## result is a translation.
+    #if ($isTranslation)
+      #set ($translatedDoc = $itemDoc.getTranslatedDocument($docLanguage))
+    #else
+      #set ($translatedDoc = $itemDoc.translatedDocument)
+    #end
+    #set($discard = $itemDoc.use($className))
+    #set($discard = $row.put('doc_edit_url', $itemDoc.getURL($itemDoc.defaultEditMode)))
+    #set($discard = $row.put('doc_author_url', $xwiki.getURL($translatedDoc.author)))
+    #set($discard = $row.put('doc_date', $xwiki.formatDate($translatedDoc.date)))
+    #set($discard = $row.put('doc_title', $translatedDoc.plainTitle))
+    #set($discard = $row.put('doc_author', $xwiki.getPlainUserName($translatedDoc.authorReference)))
+    #set($discard = $row.put('doc_creationDate', $xwiki.formatDate($translatedDoc.creationDate)))
+    #set($discard = $row.put('doc_creator', $xwiki.getPlainUserName($translatedDoc.creatorReference)))
+    #foreach($colname in $collist)
+      #gridresult_buildColumnJSON($colname $row)
+    #end
+  #end
+  #set($discard = $rows.add($row))
+#end
+{{/velocity}}
+
+{{velocity wiki="false"}}
+## The block below is a copy of the default one in XWiki.LiveTableResults with the following changes:
+## - The target démarche page identifier is retrieved, and a check is performed on whether the current user
+##   is an owner of the retrieved démarche.
+#set ($extra = '')
+#set ($params = [])
+#if ("$!request.space" != '')
+  #set ($extra = "${extra} AND doc.space = ?")
+  #set ($discard = $params.add($request.space))
+#end
+#if ("$!request.location" != '')
+  #set ($extra = "${extra} AND LOWER(doc.fullName) LIKE LOWER(?) ESCAPE '!'")
+  #set ($locationFilterValue = $request.location)
+  ## Note: the "_", "[", and the "%" characters have special meanings in standard SQL servers (they behave as wildcards).
+  ## However, it is not what the user expects (e.g. https://jira.xwiki.org/browse/XWIKI-12608).
+  ## As a consequence, we must escape these characters.
+  ## See http://www.jguru.com/faq/view.jsp?EID=8881 to understand why we use the special clause 'escape' above.
+  ## Since we use '!' for the escaping, we also double existing ones.
+  #set ($locationFilterValue = $locationFilterValue.replaceAll('([\[%_!])', '!$1'))
+  ## Because the user might filter with "/" as separator we replace that by "%", because it could be "." 
+  ## (the space separator) or "/" (as it is in the document name).
+  ## In addition, using "%" (any sequence of character) instead of "_" (any single character) gives the ability
+  ## to filter on different levels:
+  ##   e.g. filtering on "Blog/Intro" will return "Blog.BlogIntroduction".
+  ##        On the other hand, it will also returns: "BlogForIntrospection", which might be unexpected.
+  #set ($locationFilterValue = $locationFilterValue.replaceAll('/', '%'))
+  #set ($discard = $params.add("%${locationFilterValue}%"))
+#end
+#if ("$!request.parent" != '')
+  #set ($extra = "${extra} and doc.parent = ?")
+  #set ($discard = $params.add($request.parent))
+#end
+#if ("$!request.orphaned" == '1')
+  #set ($homepage = $services.wiki.getById($services.wiki.currentWikiId).mainPageReference)
+  #set ($homepageFullName = $services.model.serialize($homepage, 'local'))
+  ## On Oracle the empty parent is actually null.
+  #set ($extra = "${extra} and (doc.parent = '' or doc.parent is null) and doc.fullName &lt;&gt; ?")
+  #set ($discard = $params.add($homepageFullName))
+#end
+#set ($demarcheId = "$!request.demarche")
+#set ($demarchePage = $xwiki.getDocument($demarcheId))
+#isDemarcheOwner($demarchePage)
+#if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
+  #gridresultwithfilter("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
+#end
+{{/velocity}}</content>
+</xwikidoc>

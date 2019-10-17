@@ -40,10 +40,41 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
-{{html wiki="true"}}
+{{html wiki="true" clean="false"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
-  #set ($extraParams = "demarche=$doc.fullName")
-  {{include document="Avis.WebHome" /}}
+
+#set ($columnsProperties = {
+  'doc.creationDate': {'filterable': true, 'type': 'date', 'displayName': 'Date'},
+  'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
+  'demarche': {'type': 'hidden'},
+  'score': {'displayName' : 'Satisfaction', "html":true},
+  'facile': {'displayName': 'Facilité'},
+  'comprehensible': {'displayName': 'Simplicité'},
+  'difficultes': {'displayName': 'Difficultés'},
+  'autreDifficulte': {'displayName': 'Autre difficulté'},
+  'aide': {'displayName': 'Aide'},
+  'autreAide': {'displayName': 'Autre aide'},
+  'autre': {'displayName': 'Verbatim'}
+})
+#set ($options = {
+  'className': 'Avis.Code.AvisClass',
+  'translationPrefix': 'avis.livetable.',
+  'tagCloud': false,
+  'rowCount': 10,
+  'maxPages': 10,
+  'selectedColumn': 'doc.creationDate',
+  'defaultOrder': 'desc',
+  'resultPage': 'Avis.Code.DemarcheAvisLivetableResults',
+  'extraParams': "demarche=$escapetool.url($doc.fullName)"
+})
+
+#set ($columns = ['doc.creationDate', 'demarche', 'score', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'autre', 'source'])
+
+#livetable('avis' $columns $columnsProperties $options)
+
+##{{livetableExporter livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResults" limit="$LIVETABLE_EXPORTER_LIMIT"/}}
+
+
 &lt;/div&gt;
 {{/html}}
 {{/velocity}}</content>
