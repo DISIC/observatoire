@@ -44,10 +44,10 @@
 &lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
 
 #set ($columnsProperties = {
+  'demarche': {'type': 'hidden'},
   'doc.creationDate': {'filterable': true, 'type': 'date', 'displayName': 'Date'},
   'doc.name': {'filterable': true, 'displayName': 'Identifiant'},
   'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
-  'demarche': {'type': 'hidden'},
   'score': {'displayName' : 'Satisfaction', "html":true},
   'facile': {'displayName': 'Facilité'},
   'comprehensible': {'displayName': 'Simplicité'},
@@ -69,11 +69,11 @@
   'extraParams': "demarche=$escapetool.url($doc.fullName)"
 })
 
-#set ($columns = ['doc.creationDate', 'doc.name', 'demarche', 'score', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'autre', 'source'])
+#set ($columns = ['demarche', 'doc.creationDate', 'doc.name', 'score', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'autre', 'source'])
 
 #livetable('avis' $columns $columnsProperties $options)
 
-{{livetableExporter livetable="avis" withAllFields="false" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResults" limit="$LIVETABLE_EXPORTER_LIMIT"/}}
+{{livetableExporter livetable="avis" withAllFields="false" withPageName="false" withPageURL="false" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResults" limit="$LIVETABLE_EXPORTER_LIMIT"/}}
 
 &lt;/div&gt;
 {{/html}}
