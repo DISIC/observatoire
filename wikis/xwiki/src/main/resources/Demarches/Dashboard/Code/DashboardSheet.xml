@@ -125,7 +125,7 @@
           (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
             {{html clean="false"}}
             &lt;div class="btn-group controls"&gt;
-              &lt;button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+              &lt;button type="button" class="btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-default #else btn-primary #end dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
               #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
               &lt;/button&gt;
               #getPublishedDashboards()
@@ -138,7 +138,7 @@
                   #end
               &lt;/ul&gt;
               #if ($hasAdmin || $isAdministrateurMinisteriel)
-               &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn btn-default'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
+               &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-primary #else btn-default #end'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
               #end
             &lt;/div&gt;
             {{/html}}
@@ -1209,6 +1209,9 @@ input[name='title'] {
     text-align: right;
     .btn {
       font-weight: 600;
+    }
+    .dropdown-toggle .caret {
+      margin-left: 0.5em;
     }
   }
   .dashboard-filters {
