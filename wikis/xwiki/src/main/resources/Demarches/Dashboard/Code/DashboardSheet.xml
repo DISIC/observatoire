@@ -1401,10 +1401,6 @@ table.dataTable.no-footer.fixedHeader-locked {
       &amp;.details-control {
         padding-right: 1.25em;
       }
-      &amp;.column-tell-us-once {
-        min-width: 5.7em;
-        text-align: left;
-      }
       .row-details-value {
         display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
       }
