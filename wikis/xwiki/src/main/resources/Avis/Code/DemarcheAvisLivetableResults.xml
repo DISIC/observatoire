@@ -163,7 +163,150 @@
 #set ($demarchePage = $xwiki.getDocument($demarcheId))
 #isDemarcheOwner($demarchePage)
 #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
-  #gridresultwithfilter("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
+  #if ($request.outputSyntaxType == 'excel')
+    #gridresultwithfilterexcel("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
+  #else
+    #gridresultwithfilter("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
+  #end
 #end
-{{/velocity}}</content>
+
+## Copied from Macros.AddExcelExportToLivetableMacroResultsPage in order to support Excel export
+#macro(gridresultwithfilterexcel $className $collist $filterfrom $filterwhere $filterParams)
+  #if($xcontext.action == 'get' &amp;&amp; "$!{request.outputSyntaxType}" == 'excel')
+    #set($calc = $xwiki.calc)
+    #if ($calc)
+      ## get the columns to export. If the all the class properties are asked for, then force add all the properties of the class in the export
+      #if("$!{request.withAllFields}" == 'true')
+        #set($excelLtCollist = [])
+        #foreach($e in $collist)
+          #set($discard = $excelLtCollist.add($e))
+        #end
+        ## DEBUG: $excelLtCollist
+        ## get all the properties from the passed class to add them in the list
+        #foreach($p in $xwiki.getDocument($className).getxWikiClass().properties)
+          #if (!$excelLtCollist.contains($p.name))
+            #set($discard = $excelLtCollist.add($p.name))
+            ## DEBUG: adding additional column $p.name
+          #end
+        #end
+        ## DEBUG: exporting: $excelLtCollist
+        #set($collist = $excelLtCollist)
+      #end
+      ## Make sure the 'email' property is kept only for admins, even if it was explicitly requested in the 'collist' parameter
+      #if (!$hasAdmin)
+        #set($discard = $collist.remove('email'))
+      #end
+      ##
+      ## Prepare the excel elements (workbook, sheet, first line of the sheet with column names)
+      ##
+      #set($wb = $calc.getWritableWorkbook())
+      #set($sheet = $wb.createSheet("XWiki", 0))
+      #set($colCount = 0)
+      #foreach($colname in $collist)
+        ##DEBUG: generating column $colname on position $colCount
+        #set($ok = $sheet.setColumnView($velocityCount, 15))
+        #if($colname.startsWith('doc.'))
+          #set($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
+          #set($ok = $calc.setLabelCell($sheet, 0, $colCount, $colPrettyName))
+          #set($ok = $sheet.setColumnView($colCount, 20))
+        #elseif($colname == '_action')
+        #else
+          #set($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
+          #if($colPrettyName == "$!{request.transprefix}${colname}")
+            ## col pretty name was not found from translations, try to use the property's pretty name (important for user directory export, for example)
+            #set($propNameTranslationKey = "${className}_${colname}")
+            #set($colPrettyName = $services.localization.render($propNameTranslationKey))
+          #end
+          #set($ok = $calc.setLabelCell($sheet, 0, $colCount, $colPrettyName))
+          #set($ok = $sheet.setColumnView($colCount, 20))
+        #end
+        #set($colCount = $colCount + 1)
+      #end
+      #if("$!{request.withPageName}" == 'true')
+        #set($ok = $calc.setLabelCell($sheet, 0, $colCount, "Reference"))
+        #set($ok = $sheet.setColumnView($colCount, 20))
+        #set($colCount = $colCount + 1)
+      #end
+      #if("$!{request.withPageURL}" == 'true')
+        #set($ok = $calc.setLabelCell($sheet, 0, $colCount, "URL"))
+        #set($ok = $sheet.setColumnView($colCount, 80))
+      #end
+      ##
+      ## Build the JSON in memory (using basic Java data types) so that it can be adjusted before serialization, using the same functions as the livetable results
+      ##
+      #set($map = {})
+      #gridresultwithfilter_buildJSON($className $collist $filterfrom $filterwhere $filterParams $map)
+      ## marshall all data from the $map.rows to the excel
+      #set($rowCount = 1)
+      #foreach($curRow in $map.rows)
+        #set($colCount = 0)
+        ## DEBUG: exporting $curRow
+        #foreach($colname in $collist)
+          ## get the value of the column from the current row and put it in the excel
+          #if ($colname.startsWith('doc.'))
+            #set($colVal = "$!curRow.get($colname.replace('doc.', 'doc_'))")
+          #else
+            #set($colVal = "$!curRow.get($colname)")
+            ## hack when the cell contains html, to use the cell_value instead
+            #if ($colVal.indexOf('&lt;') &gt;= 0)
+              #set($colVal_Value = $curRow.get("${colname}_value"))
+              #if("$!colVal_Value" != '')
+                #set($colVal = $colVal_Value)
+              #end
+            #end
+          #end
+          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, $colVal))
+          #set($colCount = $colCount + 1)
+        #end
+        #if("$!{request.withPageName}" == 'true')
+          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, "$!curRow.get('doc_fullName')"))
+          #set($colCount = $colCount + 1)
+        #end
+        #if("$!{request.withPageURL}" == 'true')
+          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, "$!curRow.get('doc_url')"))
+          #set($colCount = $colCount + 1)
+        #end
+        #set($rowCount = $rowCount + 1)
+      #end
+      ## ==============================================
+      ## excel ended, now output
+      ## ==============================================
+      #if(!$request.debug)
+        #set($bytes = $calc.getWritableWorkbookAsBytes($wb))
+        #if($bytes)
+          #set($ok = $response.setContentType("application/ms-excel"))
+          ## prepare filename from parameters, if any is passed
+          #set($filename = "livetable.xls")
+          #if ("$!request.filename" != '')
+            #set($filename = "$!{request.filename}.xls")
+          #end
+          #set($contentHeader = 'inline; filename="' + $filename + '"')
+          #set($ok = $response.setHeader("Content-Disposition", $contentHeader))
+          #set($ok = $xcontext.setFinished(true))
+          #set($ok = $response.getOutputStream().write($bytes))
+          ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
+          ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
+          #set($ok = $response.setHeader("Cache-Control", 'private'))
+          #set($ok = $response.setHeader("Pragma", 'cache'))
+          #set($expires = $util.getDate().getTime())
+          #set($expires = $expires+120000)
+          #set($expires =$util.getDate($expires))
+          #set($ok = $response.setDateHeader("Expires",$expires.getTime()))
+        #else
+          ## TODO need nice translated error message
+          Failed to generate Excel file:
+
+          $!context.exception
+        #end
+      #else
+        DONE
+      #end
+    #else
+      ## TODO need nice translated error message
+      Excel plugin is not installed
+    #end
+  #end
+#end
+{{/velocity}}
+</content>
 </xwikidoc>
