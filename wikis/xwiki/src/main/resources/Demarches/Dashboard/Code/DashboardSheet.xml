@@ -858,7 +858,7 @@ var XWiki = (function (XWiki) {
           zeroRecords: "Aucune entrée trouvée"
         },
         initComplete: function(settings, json ) {
-          // add the ministries filter in the filters
+          // add the publics filter in the filters
           var filtersContainer = $('#top-demarches_filter');
           if (filtersContainer) {
             var schema = json.metadata.schema;
@@ -871,8 +871,10 @@ var XWiki = (function (XWiki) {
                  var text = this.value;
                  publicCategorySelect.append($("&lt;option /&gt;").val(value).text(text));
               });
-              // add the ministries select at the beginning of the filter line
-              filtersContainer.prepend(publicCategorySelect);
+              // add the publics select at the beginning of the filter line
+              var publicsSelectLabel = $("&lt;span class='label-publicsfilter'/&gt;");
+              publicsSelectLabel.prepend(publicCategorySelect);
+              filtersContainer.prepend(publicsSelectLabel);
             }
             // prepare the select of ministries
             var ministriesSelect = $("&lt;select name='ministereSelect'/&gt;");
@@ -882,7 +884,9 @@ var XWiki = (function (XWiki) {
                ministriesSelect.append($("&lt;option /&gt;").val(this).text(this));
             });
             // add the ministries select at the beginning of the filter line
-            filtersContainer.prepend(ministriesSelect);
+            var ministriesSelectLabel = $("&lt;span class='label-ministriesfilter'/&gt;");
+            ministriesSelectLabel.prepend(ministriesSelect);
+            filtersContainer.prepend(ministriesSelectLabel);
 
             // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
             var this_tbl = settings.oInstance.api();
@@ -1241,20 +1245,38 @@ input[name='title'] {
   input {
     min-width: 20em;
     font-weight: normal;
-    margin-left: 1em;
   }
   select {
     min-width: 20em;
+    -webkit-appearance: textfield;
   }
-  label {
+  label, span.label-publicsfilter, span.label-ministriesfilter {
     position: relative;
+    display: inline-block;
     &amp;:before {
-      content: "\f002";
+      content: "\f002"; /* magnifier */
       font: normal normal normal 14px/1 FontAwesome;
       display: inline-block;
       position: absolute;
       right: 1em;
       top: 1em;
+    }
+  }
+  span.label-publicsfilter:before,
+  span.label-ministriesfilter:before {
+    content: "\f078"; /* chevron */
+  }
+
+  span.label-publicsfilter select, input {
+    margin-left: 1em;
+  }
+
+  /* Hack to not display the arrow on the selectboxes on IE, selector taken from 
+  https://stackoverflow.com/a/30743013 */
+  @media screen and (min-width:0\0) {
+    span.label-publicsfilter:before,
+    span.label-ministriesfilter:before {
+      display: none;
     }
   }
 }
