@@ -127,7 +127,7 @@
       <picker>0</picker>
       <prettyName>Catégories de publics concernés</prettyName>
       <relationalStorage>1</relationalStorage>
-      <separator> </separator>
+      <separator>, </separator>
       <separators>|, </separators>
       <size>4</size>
       <sort>value</sort>
