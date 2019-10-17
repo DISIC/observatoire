@@ -1413,6 +1413,18 @@ table.dataTable.no-footer.fixedHeader-locked {
           color: #fff;
         }
       }
+      .label-success {
+        background-color: #62d2b0;
+      }
+      .label-danger {
+        background-color: #f45269;
+      }
+      .label-warning {
+        background-color: #fe8d5e;
+      }
+      .label-info {
+        background-color: @obs-blue;
+      }
     }
   }
 
