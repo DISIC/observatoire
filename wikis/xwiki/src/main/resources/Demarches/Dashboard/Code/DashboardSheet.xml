@@ -375,15 +375,8 @@ var XWiki = (function (XWiki) {
 
   function computeBadgeStyleSatisfactionIndex(value) {
     if (!isNaN(value)) {
-      if (value &gt;= 75) {
-        return "success";
-      } else if (value &gt;= 50) {
-        return "default";
-      } else if (value &gt;= 25) {
-        return "warning";
-      } else {
-        return "danger";
-      }
+      /* Not a badge style, on purpose to get default display of the satisfaction index value, no color, nothing, whenever it is a numeric value, and badge for the other cases */
+      return "none";
     } else {
       return "default";
     }
@@ -1412,9 +1405,6 @@ table.dataTable.no-footer.fixedHeader-locked {
         white-space: normal;
         padding: 0.5em 1em 0.5em 1em;
         border-radius: 0.25em;
-        a {
-          color: #fff;
-        }
       }
       .label-success {
         background-color: #62d2b0;
