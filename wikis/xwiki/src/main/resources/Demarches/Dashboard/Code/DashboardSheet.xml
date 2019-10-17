@@ -903,7 +903,7 @@ var XWiki = (function (XWiki) {
           var filtersToggle = $('#top-demarches-filters-toggle');
           filtersToggle.click(function(evt){
             $(this).toggleClass('pushed');
-            $('#top-demarches_wrapper .dataTables_filter').toggle(200);
+            $('#top-demarches_wrapper .dataTables_filter').toggle();
           });
         }
       });
@@ -1292,8 +1292,8 @@ table.fixedHeader-locked {
     vertical-align: bottom;
     text-align: center;
     font-size: 0.75em;
-    border-bottom: 2px solid #ddd;
-    padding: 0.5em 1em 0.5em 1em;
+    border-bottom: 1px solid #ddd;
+    padding: 1.5em 1em 1.5em 1em;
     background-position-y: 5.3em;
     font-weight: 600;
     color: #000;
@@ -1359,11 +1359,9 @@ table.fixedHeader-locked {
 table.dataTable.no-footer.fixedHeader-floating,
 table.dataTable.no-footer.fixedHeader-locked {
   border-bottom: none;
-  box-shadow: 0px 32px 32px #fff;
 }
 
 #top-demarches {
-  margin-top: 3em;
   border-spacing: 0 1em;
 
   tr {
@@ -1391,11 +1389,13 @@ table.dataTable.no-footer.fixedHeader-locked {
         text-align: left;
         padding: 1.25em;
         color: #000;
+        line-height: 1.3em;
         .ministere-groupe {
           display: block;
           font-size: 0.875em;
           font-weight: normal;
           color: #666;
+          margin-top: 0.4em;
         }
       }
       &amp;.details-control {
