@@ -44,11 +44,13 @@
 #set ($MINISTERE_CLASS_ID = 'Ministeres.Code.MinisteresClass')
 #set ($DIRECTION_CLASS_ID = 'Directions.Code.DirectionsClass')
 #set ($AVIS_CLASS_ID = 'Avis.Code.AvisClass')
+#set ($AVIS_STATS_CLASS_ID = 'Avis.Code.AvisStatsClass')
 #set ($DEMARCHE_SHEET = 'Demarches.Code.DemarchesSheet')
 #set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
 #set ($LIVE_DASHBOARD_ID = 'observatoire.en-direct.WebHome')
 #set ($SCHEMA_VERSION = "1.1")
+#set ($logger = $services.logging.getLogger('DashboardMacros'))
 
 ## Gets the published dashboards order by date descendant, except the live dashboard
 #macro (getPublishedDashboards)
@@ -64,8 +66,15 @@
   #end
 #end
 
+#macro (printDelta $step)
+  #set ($now = $xwiki.jodatime.dateTime)
+  $logger.warn("delta {} {}", $step, $mathtool.sub($now.toDate().getTime(), $t0.toDate().getTime()))
+  #set ($t0 = $xwiki.jodatime.dateTime)
+#end
+
 ## Gets top demarches identifiers and computes dashboard data for these demarches at the dashoard date
 #macro (computeDashboardData $limit)
+  #set ($t0 = $xwiki.jodatime.dateTime)
   #if ("$!limit" == '') #set ($limit = 0) #end
   #set ($data = [])
   ## Handle the case where just one demarche is requested, from the dashboard table editor
@@ -79,17 +88,22 @@
   #set ($dashboard = $doc.getObject($DASHBOARD_CLASS_ID))
   #set ($dashboardDate = $dashboard.getValue('date'))
   #if ("$!dashboardDate" != '')
-    #set ($formattedDashboardDate = $datetool.format('yyyy-MM-dd',$dashboardDate))
+    #set ($formatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd'))
+    #set ($formattedDashboardDate = $formatter.print($dashboardDate))
+    #set ($maxDateTime = $xwiki.jodatime.getDateTime($dashboardDate.getTime()).withHourOfDay(23).withMinuteOfHour(59).withSecondOfMinute(59))
+    #set ($minDateTime = $xwiki.jodatime.dateTime.withYear($maxDateTime.year).withMonthOfYear(1).withDayOfMonth(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+  #else
+    #set ($maxDateTime = $NULL)
   #end
   #foreach ($entry in $entries)
-    #computeDemarcheData($entry, $dashboardDate, $data)
+    #computeDemarcheData($entry, $data)
   #end
   #set ($map = { "data": $data, "metadata": {"date": "$!formattedDashboardDate", "schema": $SCHEMA_VERSION}})
   #set ($json = $jsontool.serialize($map))
 #end
 
 ## Computes the demarche data of given demarche for the given date as far as avis statistics are concerned, and adds the result to the given parameter "data"
-#macro (computeDemarcheData $demarcheId $dashboardDate $data)
+#macro (computeDemarcheData $demarcheId $data)
   #set ($page = $xwiki.getDocument($demarcheId))
   #set ($obj = $page.getObject($DEMARCHE_CLASS_ID))
   #set ($ministereIds = $obj.getValue('ministeres'))
@@ -111,20 +125,26 @@
     #end
   #end
   #set ($statutDemat = $obj.get('statutDemat'))
-  #if ("$!dashboardDate" != '')
-    #set ($maxDate = $dashboardDate)
-  #else
-    #set ($maxDate = $datetool.getDate())
-  #end
-  ## Compute statistics at the dashboard date
-  #set ($hql = 'select count(*), avg(score.value) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &lt;= :date')
-  #set ($avisStats = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheId).bindValue('date', $maxDate).execute())
   ## Reinitialize avisCountValue since the Velocity scope is global
   #set ($avisCountValue = $NULL)
-  #if ($avisStats.size() &gt; 0)
-    #set ($stats  = $avisStats[0])
-    #set ($avisCountValue = $stats[0])
-    #set ($satisfactionIndex = $stats[1])
+  #if ($maxDateTime == $NULL)
+    ## Retrieve stats directly from the AvisStats object
+    #set ($avisStats = $page.getObject($AVIS_STATS_CLASS_ID))
+    #set ($avisCountValue = $avisStats.getValue('occurrences'))
+    #set ($satisfactionIndex = $avisStats.getValue('moyenne'))
+  #else
+    ## Compute statistics at the dashboard date
+    #set ($dateClause = ' and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate')
+    #set ($hql = "select count(*), avg(score.value) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 $dateClause")
+    #set ($query = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheId))
+    #set ($query = $query.bindValue('minDate', $minDateTime.toDate()))
+    #set ($query = $query.bindValue('maxDate', $maxDateTime.toDate()))
+    #set ($avisStats = $query.execute())
+    #if ($avisStats.size() &gt; 0)
+      #set ($stats  = $avisStats[0])
+      #set ($avisCountValue = $stats[0])
+      #set ($satisfactionIndex = $stats[1])
+    #end
   #end
   #if ($avisCountValue &amp;&amp; $avisCountValue &gt;= 100)
     #set ($avisCountDisplay = $numbertool.integer($avisCountValue))
