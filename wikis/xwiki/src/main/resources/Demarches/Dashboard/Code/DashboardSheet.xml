@@ -1248,6 +1248,7 @@ input[name='title'] {
   select {
     min-width: 20em;
     -webkit-appearance: textfield;
+    -moz-appearance: textfield;
   }
   label, span.label-publicsfilter, span.label-ministriesfilter {
     position: relative;
