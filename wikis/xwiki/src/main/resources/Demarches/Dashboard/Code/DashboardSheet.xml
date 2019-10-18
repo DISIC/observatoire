@@ -1290,7 +1290,6 @@ table.fixedHeader-locked {
     font-size: 0.75em;
     border-bottom: 1px solid #ddd;
     padding: 1.5em 1em 1.5em 1em;
-    background-position-y: 5.3em;
     font-weight: 600;
     color: #000;
     &amp;.column-title {
@@ -1299,7 +1298,6 @@ table.fixedHeader-locked {
       min-width: 38% !important;
       width: 38% !important;
       text-align: left;
-      background-position-y: 4em;
       font-weight: bold;
     }
     &amp;.column-tell-us-once {
@@ -1325,6 +1323,9 @@ table.fixedHeader-locked {
     }
     .thead-label {
       display: block;
+    }
+    &amp;.sorting, &amp;.sorting_asc, &amp;.sorting_desc {
+      background-image: none;
     }
   }
 }
