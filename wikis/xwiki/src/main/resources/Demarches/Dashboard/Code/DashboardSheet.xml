@@ -79,13 +79,17 @@
       (% class='dashboard-container' %)(((
         (%class='row'%)(((
           (%class='col-xs-12 col-md-6 downloadcol'%) (((
+            (% class="download" %)
+            #set ($dataURL = $dashboard.getProperty('dataURL').value)
+            #if ("$!dataURL" != '')
+              [[(% class='fa fa-database'%) (%%) $services.localization.render('dashboard.dataurl')&gt;&gt;$dataURL]] ## it's important to have a comment at the end of this line, to eat the newline that would be added otherwise between the 2 links
+            #end
             #set ($pdf = $dashboard.getValue('pdf'))
             #if ("$!pdf" != '')
               #set ($pdfFile = $doc.getAttachment($pdf))
               #set ($size = $pdfFile.getLongSize())
               #set ($size = $mathtool.div($size, 1000))
               #set ($size = $mathtool.round($size))
-              (% class="download" %)
               [[(% class='fa fa-cloud-download'%) (%%) $services.localization.render('dashboard.download-pdf', $size)&gt;&gt;path:$doc.getAttachmentURL($pdfFile.filename)]]
             #end
           )))
@@ -1195,6 +1199,10 @@ input[name='title'] {
   }
   .downloadcol p.download {
     margin-bottom: 0;
+    a {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
   }
 }
 
