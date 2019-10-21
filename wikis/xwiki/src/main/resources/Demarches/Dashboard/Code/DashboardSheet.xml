@@ -1317,8 +1317,8 @@ table.fixedHeader-locked {
       text-align: left;
       font-weight: bold;
     }
-    &amp;.column-tell-us-once {
-      min-width: 5.7em;
+    &amp;.column-accessibility {
+      min-width: 7.5em;
     }
     .thead-icon {
       display: block;
