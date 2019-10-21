@@ -397,7 +397,11 @@ var XWiki = (function (XWiki) {
 
   function computeBadgeStyleDitesLeNousUneFois(value) {
     if (!isNaN(value)) {
-      if (value == 0) {
+      if (value == -1) {
+        return "default";
+      } else if (value == -2) {
+        return "default";
+      } else if (value == 0) {
         return "success";
       } else if (value &lt; 6) {
         return "warning";
@@ -802,8 +806,8 @@ var XWiki = (function (XWiki) {
                 else
                   return data.value;
               } else {
-                if (data.display == "n/a" || data.display == "-")
-                  return data.display;
+                if (data.display == "-")
+                  data.display = "Non mesuré";
                 return format(data.value, data.display, computeBadgeStyleDitesLeNousUneFois, false);
               }
             }
