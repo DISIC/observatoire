@@ -570,10 +570,10 @@
         &lt;div class='col-xs-12 col-md-4'&gt;
           &lt;h3&gt;$services.localization.render('wikidemarches.sitemap')&lt;/h3&gt;
           &lt;ul&gt;
-             &lt;li&gt;&lt;a href="$xwiki.getURL('observatoire.WebHome')"&gt;$services.localization.render('wikidemarches.observatoire.title')&lt;/a&gt;&lt;/li&gt;
-             &lt;li&gt;&lt;a href="$xwiki.getURL('Aide.Observatoire')"&gt;$services.localization.render('wikidemarches.observatoire.help-link-observatoire')&lt;/a&gt;&lt;/li&gt;
-             &lt;li&gt;&lt;a href="$xwiki.getURL('Aide.Donner son avis')"&gt;$services.localization.render('wikidemarches.donner-son-avis')&lt;/a&gt;&lt;/li&gt;
-             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.A propos')"&gt;$services.localization.render('wikidemarches.qui-sommes-nous')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('observatoire.WebHome')"&gt;$services.localization.render('wikidemarches.sitemap.observatoire')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('Aide.Observatoire')"&gt;$services.localization.render('wikidemarches.sitemap.observatoire.help-link-observatoire')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('Aide.Donner son avis')"&gt;$services.localization.render('wikidemarches.sitemap.donner-son-avis')&lt;/a&gt;&lt;/li&gt;
+             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.A propos')"&gt;$services.localization.render('wikidemarches.sitemap.qui-sommes-nous')&lt;/a&gt;&lt;/li&gt;
           &lt;/ul&gt;
         &lt;/div&gt;
       #end
