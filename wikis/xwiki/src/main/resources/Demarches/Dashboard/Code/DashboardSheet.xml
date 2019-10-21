@@ -373,6 +373,18 @@ var XWiki = (function (XWiki) {
     }
   }
 
+  function computeBadgeStyleAccessibility(value) {
+    if (typeof value === 'string' || value instanceof String) {
+      value = value.toLowerCase();
+      switch (value) {
+        default:
+          return "default";
+      }
+    } else {
+      return 'Erreur de formatage (' + value + ')';
+    }
+  }
+
   function computeBadgeStyleSatisfactionIndex(value) {
     if (!isNaN(value)) {
       /* Not a badge style, on purpose to get default display of the satisfaction index value, no color, nothing, whenever it is a numeric value, and badge for the other cases */
@@ -764,12 +776,12 @@ var XWiki = (function (XWiki) {
             className: 'column-accessibility',
             render: function (data, type, row) {
               if (!data) {
-                return "";
+                return format("", "À venir", computeBadgeStyleAccessibility, false);
               }
               if (type === "sort") {
                 return data.display;
               } else {
-                return format(data.value, data.display, computeBadgeStyle, false);
+                return format(data.value, data.display, computeBadgeStyleAccessibility, false);
               }
             }
           },
