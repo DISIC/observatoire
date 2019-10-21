@@ -39,45 +39,55 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>Afin que gouvernement, citoyens et administrations puissent suivre l’état d’avancement et la qualité de la dématérialisation, un observatoire de la dématérialisation est mis en place. Celui-ci produit un [[tableau de bord consultable par tous en ligne&gt;&gt;observatoire.WebHome]], et mis à jour tous les 3 mois afin de suivre les évolutions. Cet outil qui permet d’alimenter le débat public en données chiffrées et partagées fournit pour les 250 démarches phares des données concernant l’état d’avancement de sa dématérialisation, le respect de critères de qualité précis (qualité du support, accessibilité sur smartphone, disponibilité, temps de réponse, …) ainsi que les retours utilisateurs au travers d’un indice de satisfaction usagers. Cet indice de satisfaction est capté sur les démarches administratives en ligne elles-mêmes, grâce à un bouton « MonAvis » proposé en fin de parcours utilisateur. Ce bouton est en cours de déploiement progressif sur l’ensemble des démarches phares de l’Etat.
+  <content>Afin que gouvernement, citoyens et administrations puissent suivre l’état d’avancement et la qualité de la dématérialisation, un observatoire de la dématérialisation est mis en place. Celui-ci produit un [[tableau de bord consultable par tous en ligne&gt;&gt;observatoire.WebHome]], et mis à jour tous les 3 mois afin de suivre les évolutions. Cet outil qui permet d’alimenter le débat public en données chiffrées et partagées fournit pour les 250 démarches phares des données concernant l’état d’avancement de sa dématérialisation, le respect de critères de qualité précis (qualité du support, accessibilité sur smartphone, disponibilité, temps de réponse, …) ainsi que les retours utilisateurs au travers d’un indice de satisfaction usagers. Cet indice de satisfaction est capté sur les démarches administratives en ligne elles-mêmes, grâce à un bouton « je donne mon avis » proposé en fin de parcours utilisateur. Ce bouton est en cours de déploiement progressif sur l’ensemble des démarches phares de l’Etat.
 
 == Description des rubriques du tableau ==
 
-=== Démarche dématérialisées ===
+=== Réalisable en ligne ===
 
 « Oui » si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; « Non » dans le cas contraire ; « Expérimentation » si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; « Déploiement partiel » si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).
 
 === Usagers satisfaits ===
 
-Il n’est affiché que lorsque le nombre d'avis recueillis sur MonAvis est supérieur à 100.
+Il n’est affiché que lorsque le nombre d'avis recueillis sur grâce au bouton "je donne mon avis" est supérieur à 100.
 
-Il est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? » du formulaire MonAvis présent à la fin des démarches administratives. Les réponses ayant reçu l'avis « Pas bien » comptent pour 0, les réponses ayant reçu l'avis « Moyen » comptent pour 1, les réponses ayant reçu l'avis « Très bien » comptent pour 2. Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100 %.
+Il est calculé à partir des réponses des internautes à la question « Comment s'est passée cette démarche pour vous ? » du formulaire de satisfaction présent à la fin des démarches administratives. Les réponses ayant reçu l'avis « Pas bien » comptent pour 0, les réponses ayant reçu l'avis « Moyen » comptent pour 1, les réponses ayant reçu l'avis « Très bien » comptent pour 2. Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100 %.
 
-Si l’administration n’a pas encore placé le bouton MonAvis à la fin des démarches le tableau affiche l’information « A venir ».
+Si l’administration n’a pas encore placé le bouton "je donne mon avis" à la fin des démarches le tableau affiche l’information « A venir ».
 
-=== Optimisé sur mobile ===
+=== Compatible mobile ===
 
 Possibilité d’utiliser les services en ligne sur un smartphone : « Oui » si le critère est respecté ; « Non » si ce n’est pas le cas ; « Partiel » si la démarche est accessible sur smartphone mais avec des défauts d’affichage ou si certaines pages ne sont pas accessibles ;  « n/a » si le critère est non applicable (absence d'interface utilisateur par exemple pour la DSN par exemple) ; « non disponible » si l'information n'est pas disponible.
 
-=== Support de qualité ===
+=== Support accessible ===
 
 Qualité du support apporté aux utilisateurs : ce critère permet de vérifier si chaque démarche en ligne propose des moyens de contact facilement accessibles (au moins deux), ainsi qu’un accompagnement humain personnalisé : « Oui » si la démarche respecte les deux critères ; « Non » si la démarche ne respecte pas les deux critères ; « Partiel » si l’un des deux critères seulement est respecté ; « non disponible » si l'information n'est pas disponible.
 
-=== Disponibilité du service ===
+=== Disponibilité et rapidité ===
 
 Disponibilité / temps de réponse du service en ligne proposé : ce critère est évalué en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points). Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adresses url des sites afin de calculer les niveaux de disponibilité et de temps de réponse. Sur une échelle de 10, le site est « vert » si le score total est supérieur ou égal à 8, « orange » pour un score entre 5 et 7, et « rouge » si le score total est inférieur à 4. La valeur est à « non disponible » si l'information n'est pas disponible.
+
+Cette note ne prend en compte que l'accessibilité à  la page d'accueil.
 
 === Intégration FranceConnect ===
 
 Possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise : « Oui » si la démarche propose le bouton FranceConnect ;  « Non » si ce n’est pas le cas ; « n/a » si le critère est sans objet (elle ne nécessite pas l’identification de l’usager ou concerne les entreprises) ; « non disponible » si l'information n'est pas disponible.
 
-=== Couverture Accessibilité ===
+=== Prise en compte handicaps ===
 
 A venir
 
-=== Dites-le nous une fois ===
+=== Effort de ressaisie ===
 
-A venir
+L'indicateur proposé est un indicateur d'effort pour les usagers. Il permet de mesurer la compatibilité de la démarche aux principes du Dites-le nous une fois et il est calculé de la manière suivante :
+
+1 / on définit un panier de données qu'on estime ne plus devoir être demandées aux usagers compte tenu du fait que ces informations sont déjà connues de l'administration. Ce panier est composé des données suivantes :
+- Données personnes physiques : identité, revenus, composition familliale, attestations de droit, adresse, scolarité
+- Données personnes morales : identité, attestations, liasse, données comptables
+2 / on vérifie ensuite dans chaque procédure si les données de ce panier continuent à être demandées aux usagers, ou si au contraire elles ne sont plus demandées : soit la donnée pré-remplie et présentée à l'usager, soit la donnée récupérée auprès d'une autre administration qui possède la donnée de référence.
+3 / le score total est évalué en additionnant le nombre de données qui sont  re-demandées aux utilisateurs. Toutes les données re-demandées ne représentent pas toutefois le même degré de difficulté pour les usagers. La saisie de certaines données représente un effort modéré pour les usagers, alors que d'autres demandes d'information sont plus lourdes. Un coefficient vient donc pondérer la note pour chacune des données demandées. Exemple : re-saisie des données d'identité (nom-prénom-date et lieu de naissance : coefficient 1 ; fourniture des derniers bulletins de salaire : coefficient 3
+
+Les notes sont présentées sur le barème suivant : "excellent" : aucune des données du panier n'est demandée aux usagers (0 effort de ressaisie pour les usagers) ; "améliorable" : effort modéré de ressaisie demadé aux usagers : note entre 1 et 5 ; "insuffisant" : effort important de ressaisie demadé aux usagers : note supérieure à 6 ; "n/a" : le Dites le nous une fois ne s'applique pas (soit la démarche n'est pas encore dématérialisée, soit la démarche est en mode EDI" ; "non mesuré" : démarche pas encore testée
 
 === Date d'ouverture du service dématérialisé ===
 
@@ -93,5 +103,15 @@ Rapport entre la volumétrie de la démarche et la volumétrie du recours à la 
 
 === Nombre d'avis recueillis ===
 
-Nombre total d''usagers ayant répondu au questionnaire de satisfaction MonAvis</content>
+Nombre total d''usagers ayant répondu au questionnaire de satisfaction accessible par le bouton "je donne mon avis"
+
+=== **Lien** ===
+
+Adresse URL démarche permettant d'accéder à la démarche
+
+=== Catégories de publics concernés : ===
+
+Publics auquel s'adresse la démarche : particuliers, professionnels, associations, collectivités locales
+
+ </content>
 </xwikidoc>

@@ -57,7 +57,7 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 (((
 [[image:Demarches.Code.WikiDemarchesTheme@cloud.svg]]
 
-==== Démarche numérisée ====
+==== Démarche réalisable en ligne ====
 
 34 % des démarches administratives aujourd’hui ne sont pas faisables en ligne. Notre objectif : que ces 250 démarches soient numérisées.
 )))
@@ -81,7 +81,7 @@ La première mesure de la qualité d'une démarche c'est la satisfaction des usa
 (((
 [[image:Demarches.Code.WikiDemarchesTheme@mobile.svg]]
 
-==== Optimisé sur mobile ====
+==== Compatible mobile ====
 
 55 % des démarches sont effectuées sur des smartphones. Un critère essentiel pour assurer la bonne expérience de nos usagers.
 )))
@@ -93,7 +93,7 @@ La première mesure de la qualité d'une démarche c'est la satisfaction des usa
 (((
 [[image:Demarches.Code.WikiDemarchesTheme@support.svg]]
 
-==== Qualité du support usager ====
+==== Support accessible ====
 
 Chaque démarche en ligne doit proposer des moyens de contact humains personnalisés facilement accessibles.
 )))
@@ -105,7 +105,7 @@ Chaque démarche en ligne doit proposer des moyens de contact humains personnali
 (((
 [[image:Demarches.Code.WikiDemarchesTheme@clock.svg]]
 
-==== Disponibilité du service ====
+==== Disponibilité et rapidité ====
 
 Nous vérifions 24h/24h la disponibilité et le temps de réponse de chacun des sites.
 )))
@@ -119,7 +119,7 @@ Nous vérifions 24h/24h la disponibilité et le temps de réponse de chacun des 
 
 ==== FranceConnect ====
 
-Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.gouv.fr||target="_blank"]] permet aux usagers de se connecter aux services publics de façon sécurisée sans avoir à créer de nouveaux mots de passe.
+Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.gouv.fr||rel="noopener noreferrer" target="_blank"]] permet aux usagers de se connecter aux services publics de façon sécurisée sans avoir à créer de nouveaux mots de passe.
 )))
 )))
 
@@ -129,9 +129,9 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 (((
 [[image:Demarches.Code.WikiDemarchesTheme@accessibility.svg]]
 
-==== Accessibilité ====
+==== Prise en compte handicaps ====
 
-18 % des Français sont aujourd’hui en situation de handicap. Les services numériques de l’État sont soumis aux règles du [[Référentiel Général d'Accessibilité pour les Administrations&gt;&gt;https://references.modernisation.gouv.fr/accessibilite-numerique||target="_blank"]] (RGAA). 
+18 % des Français sont aujourd’hui en situation de handicap. Les services numériques de l’État sont soumis aux règles du [[Référentiel Général d'Accessibilité pour les Administrations&gt;&gt;https://references.modernisation.gouv.fr/accessibilite-numerique||rel="noopener noreferrer" target="_blank"]] (RGAA). 
 )))
 )))
 
@@ -141,9 +141,9 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 (((
 [[image:Demarches.Code.WikiDemarchesTheme@briefcase.svg]]
 
-==== Dites-le nous une fois ====
+==== Ressaisies demandées ====
 
-Plus de données partagées entre administrations permet aux usagers de ne pas avoir à se répéter et simplifie leur démarche.
+Plus de données partagées entre administrations permet aux usagers de ne pas avoir à se répéter et simplifie leur démarche. C'est la mise en oeuvre du principe du Dites-le nous une fois.
 )))
 )))
 )))</content>
