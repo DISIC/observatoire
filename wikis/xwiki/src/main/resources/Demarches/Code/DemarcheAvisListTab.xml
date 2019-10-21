@@ -45,17 +45,17 @@
 
 #set ($columnsProperties = {
   'demarche': {'type': 'hidden'},
-  'doc.creationDate': {'filterable': true, 'type': 'date', 'displayName': 'Date'},
-  'doc.name': {'filterable': true, 'displayName': 'Identifiant'},
+  'doc.creationDate': {'filterable': true, 'type': 'date'},
+  'doc.name': {'filterable': true},
   'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
-  'score': {'displayName' : 'Satisfaction', "html":true},
-  'facile': {'displayName': 'Facilité'},
-  'comprehensible': {'displayName': 'Simplicité'},
-  'difficultes': {'displayName': 'Difficultés'},
-  'autreDifficulte': {'displayName': 'Autre difficulté'},
-  'aide': {'displayName': 'Aide'},
-  'autreAide': {'displayName': 'Autre aide'},
-  'autre': {'displayName': 'Verbatim'}
+  'score': {'html': true},
+  'facile': {'type': 'number'},
+  'comprehensible': {'type': 'number'},
+  'difficultes': {'type': 'list'},
+  'autreDifficulte': {},
+  'aide': {'type': 'list'},
+  'autreAide': {},
+  'autre': {}
 })
 #set ($options = {
   'className': 'Avis.Code.AvisClass',

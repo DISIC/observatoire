@@ -27,12 +27,12 @@
   <defaultLanguage>fr</defaultLanguage>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1534427068000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>AvisClass</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1540982991000</date>
-  <contentUpdateDate>1540982991000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -43,26 +43,29 @@
 
 # Live table generic keys
 avis.livetable.doc.title=Titre de la page
-avis.livetable.doc.name=Nom de la page
+avis.livetable.doc.name=Identifiant
 avis.livetable.doc.space=Espace
 avis.livetable.sessionId=ID de session
 avis.livetable.demarche=Démarche
 avis.livetable.modalite=Modalité
 avis.livetable.source=Source
-avis.livetable.score=Avis global
+avis.livetable.score=Satisfaction
 avis.livetable.aide=Aide
+avis.livetable.autreAide=Autre aide
 avis.livetable.ministeres=Ministère(s)
 avis.livetable.direction=Direction
 avis.livetable.facile=Facilité
 avis.livetable.comprehensible=Simplicité
-avis.livetable.difficultes=Difficultés
+avis.livetable.difficultes=Difficulté
+avis.livetable.autreDifficulte=Autre difficulté
 avis.livetable.vote=Vote
+avis.livetable.autre=Verbatim
 avis.livetable.doc.fullname=Nom complet de la page
 avis.livetable.doc.location=Emplacement
 avis.livetable.doc.author=Dernier auteur
 avis.livetable.doc.creator=Créateur
 avis.livetable.doc.date=Date de dernière mise à jour
-avis.livetable.doc.creationDate=Date de création
+avis.livetable.doc.creationDate=Date
 avis.livetable._avatar=Avatar
 avis.livetable._images=Images
 avis.livetable._attachments=Pièces jointes
