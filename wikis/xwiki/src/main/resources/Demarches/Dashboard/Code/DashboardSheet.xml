@@ -1318,7 +1318,7 @@ table.fixedHeader-locked {
       font-weight: bold;
     }
     &amp;.column-accessibility {
-      min-width: 7.5em;
+      min-width: 8em;
     }
     .thead-icon {
       display: block;
