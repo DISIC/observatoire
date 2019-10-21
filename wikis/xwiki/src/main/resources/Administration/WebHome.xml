@@ -94,6 +94,21 @@
     ",'star')
   )))
 )))
+(% class="row" %)(((
+  (% class="col-md-6 col-xs-12" %) (((
+    #panel('Pages de textes explicatifs', "
+      * Sections de la page d'accueil
+      ** [[Explications des critères&gt;&gt;Main.Comment-ca-marche]]
+      ** [[Questions&gt;&gt;Main.Et-apres]]
+
+      * Autres pages avec explications
+      ** [[En savoir plus sur l'observatoire&gt;&gt;Aide.Observatoire]]
+      ** [[Comment donner son avis&gt;&gt;Aide.Donner son avis]]
+    ",'star')
+  )))
+  (% class="col-md-6 col-xs-12" %) (((
+  )))
+)))
 
 
 
