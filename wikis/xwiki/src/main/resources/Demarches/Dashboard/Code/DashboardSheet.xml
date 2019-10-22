@@ -1310,6 +1310,8 @@ input[name='title'] {
 #top-demarches,
 table.fixedHeader-floating,
 table.fixedHeader-locked {
+  table-layout: fixed;
+  min-width: 1140px;
   /* Important to keep all darn selectors in order to beat in strength the datatables CSS selectors */
   thead tr th {
     vertical-align: bottom;
@@ -1319,17 +1321,16 @@ table.fixedHeader-locked {
     padding: 1.5em 0.5em 1.5em 0.5em;
     font-weight: 600;
     color: #000;
-    min-width: 8.48em;
+    width: 8.48em !important;
     &amp;.column-title {
       font-size: 1em;
-      /* we need to set both for IE 10/11 which seems to ignore the min-width when a width is set inline on the element itself. */
-      min-width: 38% !important;
-      width: 38% !important;
       text-align: left;
       font-weight: bold;
+      min-width: unset;
+      width: auto !important;
     }
     &amp;.details-control {
-      min-width: unset;
+      width: 3em !important;
     }
     .thead-icon {
       display: block;
@@ -1384,6 +1385,8 @@ table.fixedHeader-locked {
 table.dataTable.no-footer.fixedHeader-floating,
 table.dataTable.no-footer.fixedHeader-locked {
   border-bottom: none;
+  /* Especially for Chrome which computes sizes bizarrely and makes this table bizarelly smaller, add some white shadow to cover the borders that pass under it, which are otherwise visible because table too small */
+  box-shadow: -15px 0 0 #fff, 15px 0 0 #fff;
 }
 
 #top-demarches {
@@ -1398,7 +1401,6 @@ table.dataTable.no-footer.fixedHeader-locked {
       text-align: center;
       border: 1px solid #ddd;
       border-width: 1px 0 1px 0;
-      min-width: 6.36em;
       padding: 0.375em; /*~6px*/
       &amp;:last-child {
         border-right-width: 1px;
@@ -1427,7 +1429,7 @@ table.dataTable.no-footer.fixedHeader-locked {
       }
       &amp;.details-control {
         padding-right: 1.25em;
-        min-width: unset;
+        padding-left: 0.875em;
       }
       .row-details-value {
         display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
@@ -1457,7 +1459,6 @@ table.dataTable.no-footer.fixedHeader-locked {
   }
 
   td.details-control {
-    width: 38px;
     text-align: center;
     cursor: pointer;
   }
