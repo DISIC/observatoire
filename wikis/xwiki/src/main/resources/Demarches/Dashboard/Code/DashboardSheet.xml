@@ -1429,7 +1429,7 @@ table.dataTable.no-footer.fixedHeader-locked {
       .label {
         display: inline-block;
         white-space: normal;
-        padding: 0.5em 1em 0.5em 1em;
+        padding: 0.675em 1em 0.675em 1em;
         border-radius: 0.25em;
       }
       .label-success {
@@ -1443,6 +1443,9 @@ table.dataTable.no-footer.fixedHeader-locked {
       }
       .label-info {
         background-color: @obs-blue;
+      }
+      .label-default {
+        background-color: #999999;
       }
     }
   }
