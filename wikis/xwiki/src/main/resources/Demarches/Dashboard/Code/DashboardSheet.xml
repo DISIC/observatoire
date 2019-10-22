@@ -367,6 +367,8 @@ var XWiki = (function (XWiki) {
           return "warning";
         case 'expérimentation':
           return 'info';
+        case 'bêta':
+          return 'info';
         case 'déploiement partiel':
           return 'warning';
         default:
@@ -1314,9 +1316,10 @@ table.fixedHeader-locked {
     text-align: center;
     font-size: 0.75em;
     border-bottom: 1px solid #ddd;
-    padding: 1.5em 1em 1.5em 1em;
+    padding: 1.5em 0.5em 1.5em 0.5em;
     font-weight: 600;
     color: #000;
+    min-width: 8.48em;
     &amp;.column-title {
       font-size: 1em;
       /* we need to set both for IE 10/11 which seems to ignore the min-width when a width is set inline on the element itself. */
@@ -1325,8 +1328,8 @@ table.fixedHeader-locked {
       text-align: left;
       font-weight: bold;
     }
-    &amp;.column-accessibility {
-      min-width: 8em;
+    &amp;.details-control {
+      min-width: unset;
     }
     .thead-icon {
       display: block;
@@ -1395,6 +1398,8 @@ table.dataTable.no-footer.fixedHeader-locked {
       text-align: center;
       border: 1px solid #ddd;
       border-width: 1px 0 1px 0;
+      min-width: 6.36em;
+      padding: 0.375em; /*~6px*/
       &amp;:last-child {
         border-right-width: 1px;
         border-top-right-radius: 0.6em;
@@ -1422,6 +1427,7 @@ table.dataTable.no-footer.fixedHeader-locked {
       }
       &amp;.details-control {
         padding-right: 1.25em;
+        min-width: unset;
       }
       .row-details-value {
         display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
@@ -1451,7 +1457,6 @@ table.dataTable.no-footer.fixedHeader-locked {
   }
 
   td.details-control {
-    padding-left: 0;
     width: 38px;
     text-align: center;
     cursor: pointer;
