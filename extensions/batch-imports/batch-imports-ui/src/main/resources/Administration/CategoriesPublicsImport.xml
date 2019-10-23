@@ -45,7 +45,6 @@
   #set ($attachment = $doc.getAttachment('publics.csv'))
   #set ($content = $attachment.getContentAsString())
   #set ($data = $content.split("\n"))
-  #set ($counter = 0)
   #foreach ($item in $data)
     #set ($item = $item.split('","'))
     #set ($id = $item[0].replace('"', ''))
@@ -65,7 +64,6 @@
         * [[$id]] - $publics.size() - $page - $object
         #set ($discard = $object.set('categoriesPublics', $publicList))
         #set ($discard = $page.save())
-        #set ($counter = $mathtool.add($counter, 1))
       #end
     #end
   #end
