@@ -91,8 +91,8 @@
     #set ($formatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd'))
     #set ($formattedDashboardDate = $formatter.print($dashboardDate))
     #set ($maxDateTime = $xwiki.jodatime.getDateTime($dashboardDate.getTime()).withHourOfDay(23).withMinuteOfHour(59).withSecondOfMinute(59))
-    ## minDateTime is maxDateTime minus one year
-    #set ($minDateTime = $maxDateTime.withYear($mathtool.sub($maxDateTime.year,1)).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+    ## minDateTime is maxDateTime minus one year plus one day, reest to midnight
+    #set ($minDateTime = $maxDateTime.minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
   #else
     #set ($maxDateTime = $NULL)
   #end
