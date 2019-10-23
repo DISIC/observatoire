@@ -59,7 +59,7 @@
       #foreach ($public in $publics)
         #set ($discard = $publicList.add($public))
       #end
-      #if ($xwiki.exists($id) &amp;&amp; $counter &lt; 100)
+      #if ($xwiki.exists($id))
         #set ($page = $xwiki.getDocument($id))
         #set ($object = $page.getObject('Demarches.Code.DemarchesClass'))
         * [[$id]] - $publics.size() - $page - $object
