@@ -177,7 +177,8 @@
   #set ($formatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd'))
   #set ($maxDateTime = $formatter.parseDateTime($maxDateString))
   #set ($maxDateTime = $maxDateTime.withHourOfDay(23).withMinuteOfHour(59).withSecondOfMinute(59))
-  #set ($minDateTime = $maxDateTime.withMonthOfYear(1).withDayOfMonth(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+  ## minDateTime is maxDateTime minus one year
+  #set ($minDateTime = $maxDateTime.withYear($mathtool.sub($maxDateTime.year,1)).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
 #else
   #set ($minDateTime = $NULL)
   #set($maxDateTime = $NULL)
@@ -195,7 +196,8 @@
       #set ($fMinDate = $formatter.print($xwiki.jodatime.dateTime.withYear(2018).withMonthOfYear(6).withDayOfMonth(15).withHourOfDay(0)))
       #set ($fMaxDate = $formatter.print($xwiki.jodatime.dateTime))
     #end
-    #set ($fMinDate = $fMinDate.replace('1 ', '1er '))
+    #set ($fMinDate = $fMinDate.replaceAll('^1 ', '1er '))
+    #set ($fMaxDate = $fMaxDate.replaceAll('^1 ', '1er '))
     #set ($label = $services.localization.render('wikidemarches.demarche.avis.stats.recueil.between', [$fMinDate, $fMaxDate, $avisCount]))
     &lt;span class="lighter"&gt;$label&lt;/span&gt;
   &lt;div class="row vertical-align"&gt;
