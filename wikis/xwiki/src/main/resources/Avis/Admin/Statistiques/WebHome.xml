@@ -27,22 +27,19 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530806802000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530808187000</date>
-  <contentUpdateDate>1530808187000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Statistiques</title>
+  <title>Statistiques des avis</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>
-{{awmchart category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par jour" function="year(doc.creationDate)*10000+month(doc.creationDate)*100+day(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc"/}}
-
-* [[Comptages&gt;&gt;Comptages]]
+  <content>* [[Comptages (par jour, par modalité, etc.)&gt;&gt;Comptages]]
 * [[Scores&gt;&gt;Scores]]
-</content>
+* [[Votes par date&gt;&gt;VotesByDate]]</content>
 </xwikidoc>
