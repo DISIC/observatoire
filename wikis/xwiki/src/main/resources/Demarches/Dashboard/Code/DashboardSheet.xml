@@ -812,8 +812,6 @@ var XWiki = (function (XWiki) {
                 else
                   return data.value;
               } else {
-                if (data.display == "-")
-                  data.display = "Non mesuré";
                 return format(data.value, data.display, computeBadgeStyleDitesLeNousUneFois, false);
               }
             }
