@@ -52,7 +52,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set($satisfactionLevelInfoLink = "&lt;a href='$escapetool.xml($satisfactionLevelInfo.getURL())' title='$escapetool.xml($satisfactionLevelInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
 #set($dematInfo = $xwiki.getDocument('Main.Dematerialisation'))
 #set($dematInfoLink = "&lt;a href='$escapetool.xml($dematInfo.getURL())' title='$escapetool.xml($dematInfo.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
-#set ($columns = ['doc.title', 'ministeres','direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'niveauDemat', 'statutDemat', 'dematObligatoire', 'votes', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie', 'doc.name'])
+#set ($columns = ['doc.title', 'ministeres','direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'niveauDemat', 'statutDemat', 'dematObligatoire', 'top', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie', 'doc.name'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
   'ministeres': {'type' : 'text', 'filterable' : 'true', 'sortable' : 'false'},
@@ -64,10 +64,10 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'urlInfos': {'type' : 'hidden'},
   'urlDemarche': {'type' : 'hidden'},
   'niveauDemat': {'type' : 'hidden'},
-  'statutDemat': {'filterable' : 'false', 'sortable' : 'false'},
+  'statutDemat': {'type' : 'hidden', 'filterable' : 'false', 'sortable' : 'false'},
   'dematObligatoire': {'type' : 'hidden'},
   'statut' : {'type' : 'hidden', 'filterable': 'false', 'sortable' : 'true'},
-  'votes' : {'displayName': "$services.localization.render('wikidemarches.dematdashboard.table.votes') $dematInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
+  'top' : {'displayName': 'Top 250', 'type' : 'boolean', 'filterable': 'true', 'sortable' : 'true'},
   'occurrences' : {'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'moyenne' : {'displayName' : "$services.localization.render('wikidemarches.dematdashboard.table.moyenne') $satisfactionLevelInfoLink", 'class' : 'Avis.Code.AvisStatsClass', 'filterable' : 'false', 'sortable' : 'true'},
   'volumetrie': {'type' : 'hidden', 'displayName': 'Volumétrie'},
