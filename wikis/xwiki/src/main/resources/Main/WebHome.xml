@@ -384,6 +384,7 @@
   h2.demarches-headline {
     font-size: @headline-size-xs; /* ~59.4px for a 18px font */
     margin-bottom: 0.3em;
+    line-height: 1.1em;
   }
 
   p.demarches-subtitle {
