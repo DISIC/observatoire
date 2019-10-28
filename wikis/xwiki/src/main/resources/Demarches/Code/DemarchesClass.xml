@@ -802,7 +802,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>enLigneEntierement|experimentation|deploiementPartiel|nonDemat|nr</values>
+      <values>enLigneEntierement=Oui|experimentation=Bêta|deploiementPartiel=Déploiement partiel|nonDemat=Non|nr=Non renseigné</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutDemat>
     <statutProjetDemat>
