@@ -280,24 +280,24 @@
       <mapping>Commentaires administration + annonce CITP=remarques
 Ministère=ministeres
 Date d'ouverture du service dématérialisé (usage interne)=dateMiseEnLigne
-Identification via FranceConnect ?=franceConnect
+Intégration FranceConnect=franceConnect
 Volumétrie de la démarche=volumetrie
 Date d'ouverture du service dématérialisé (usage interne)=dateMiseEnLigneTexte
-Complexité des informations re demandées value=ditesLeNousUneFois
-Accessible sur  smartphone ?=adapteMobile
+Ressaisies demandées value=ditesLeNousUneFois
+Compatible mobile=adapteMobile
 Constant:1=top
 Référence NosDémarches (à ne pas supprimer)=doc.name
 Volumétrie du recours à la voie dématérialisée=volumetrieDemat
 URL de la démarches=urlDemarche
 Démarches phares=doc.title
-Support de qualité ?=moyensDeContact
+Support accessible=moyensDeContact
 Groupe=groupesExternes
-Peut être réalisée en ligne complètement ?=statutDemat
-Support de qualité ?=accompagnement
+réalisable en ligne=statutDemat
+Support accessible=accompagnement
 Administration concernée=direction</mapping>
     </property>
     <property>
-      <metadatafilename>TDB démarches phares_20191410_1.xls</metadatafilename>
+      <metadatafilename>TDB démarches phares_20192810.xls</metadatafilename>
     </property>
     <property>
       <pageprefix/>
