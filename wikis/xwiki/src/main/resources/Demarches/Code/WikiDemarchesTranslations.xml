@@ -67,7 +67,7 @@ wikidemarches.sitemap=Plan du site
 wikidemarches.by-dinsic=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique et du système d’information et de communication de l’État"&gt;DINSIC&lt;/abbr&gt;&lt;/a&gt;
 wikidemarches.sitemap.observatoire=L'observatoire
 wikidemarches.sitemap.observatoire.help-link-observatoire=En savoir plus sur l'observatoire
-wikidemarches.sitemap.qui-sommes-nous=Qui sommes-nous ?
+wikidemarches.sitemap.qui-sommes-nous=À propos
 wikidemarches.sitemap.donner-son-avis=Comment donner son avis ?
 wikidemarches.code-open-source=Code open source
 wikidemarches.search.label=Chercher une démarche
@@ -79,7 +79,7 @@ wikidemarches.evalrow.button=En savoir plus
 wikidemarches.observatoire.button=Consulter l’observatoire
 # Top menu
 wikidemarches.topmenu.observatoire=L'observatoire
-wikidemarches.topmenu.apropos=Qui sommes nous
+wikidemarches.topmenu.apropos=À propos
 
 # Démarche tabs
 wikidemarches.demarche.details-on=Afficher le détail de la démarche

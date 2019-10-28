@@ -1429,6 +1429,7 @@ li.wikidemarches-topmenu {
 h2 {
   font-size: 1.5em;
   font-weight: 600;
+  line-height: 1.3em;
 }
 
 h3 {
@@ -1579,6 +1580,7 @@ span.wikiexternallink {
   background-image: none;
   padding-right: unset;
 }
+
 
 
 
