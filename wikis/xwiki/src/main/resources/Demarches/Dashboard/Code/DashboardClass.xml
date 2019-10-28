@@ -79,6 +79,23 @@
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
     </date>
+    <notes>
+      <contenttype>FullyRenderedText</contenttype>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <editor>Wysiwyg</editor>
+      <hint/>
+      <name>notes</name>
+      <number>6</number>
+      <picker>0</picker>
+      <prettyName/>
+      <rows>5</rows>
+      <size>40</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+    </notes>
     <pdf>
       <customDisplay>{{attachmentSelector classname="Demarches.Dashboard.Code.DashboardClass" property="pdf" filter="pdf" savemode="form" link="true"/}}</customDisplay>
       <disabled>0</disabled>

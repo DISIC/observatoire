@@ -192,6 +192,8 @@
           {{/html}}
 
         #end
+
+        $!dashboard.display('notes', 'view')
       )))
     )))
   )))

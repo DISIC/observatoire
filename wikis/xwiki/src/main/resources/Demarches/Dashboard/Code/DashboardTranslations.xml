@@ -52,6 +52,8 @@ Demarches.Dashboard.Code.DashboardClass_status=Statut
 Demarches.Dashboard.Code.DashboardClass_status_hint=Seuls les tableaux de bord ayant le statut « publié » sont accessibles depuis la page principale de l'observatoire.
 Demarches.Dashboard.Code.DashboardClass_status_draft=Brouillon
 Demarches.Dashboard.Code.DashboardClass_status_published=Publié
+Demarches.Dashboard.Code.DashboardClass_notes=Notes
+Demarches.Dashboard.Code.DashboardClass_notes_hint=Notes à publier sur l'observatoire, en bas de la page
 
 # Template
 dashboard.template.name=Tableau de bord
@@ -104,7 +106,7 @@ dashboard.livetable.emptyvalue=-
 dashboard.livetable.title=Nom
 dashboard.livetable.status=Status
 dashboard.livetable.date=Date des données du tableau de bord
-
+ 
 </content>
   <object>
     <name>Demarches.Dashboard.Code.DashboardTranslations</name>
