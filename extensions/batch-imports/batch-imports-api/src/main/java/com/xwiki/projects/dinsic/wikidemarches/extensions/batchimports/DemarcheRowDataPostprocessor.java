@@ -69,7 +69,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     private DocumentReferenceResolver<String> resolver;
 
-    public static String HEADER_SUPPORT_DE_QUALITE = "Support de qualité ?";
+    public static String HEADER_SUPPORT_DE_QUALITE = "Support accessible";
 
     public static String HEADER_COMMENT_1 = "Commentaires administration + annonce CITP";
 
