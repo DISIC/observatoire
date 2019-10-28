@@ -191,9 +191,10 @@
           &lt;/table&gt;
           {{/html}}
 
-        #end
+          {{id name='notes' /}}
 
-        $!dashboard.display('notes', 'view')
+          $!dashboard.display('notes', 'view')
+        #end
       )))
     )))
   )))
@@ -920,6 +921,11 @@ var XWiki = (function (XWiki) {
             $(this).toggleClass('pushed');
             $('#top-demarches_wrapper .dataTables_filter').toggle();
           });
+        },
+
+        /* Launch a custom event when the table is being (re)drawn */
+        drawCallback : function( settings ) {
+          $(document).trigger("observatoire:datatable:draw");
         }
       });
 
