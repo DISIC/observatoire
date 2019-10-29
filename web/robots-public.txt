@@ -1,2 +1,7 @@
 User-agent: *
-Disallow: /
+Allow: /static
+Allow: /Main
+Allow: /Aide
+Allow: /observatoire
+Allow: /$
+Disallow: /*
