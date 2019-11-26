@@ -540,10 +540,10 @@
         &lt;div class='col-xs-12 col-md-4 footer-col-sitename'&gt;
           &lt;h3&gt;$services.localization.render('wikidemarches.sitename')&lt;/h3&gt;
       #end
-        &lt;p&gt;$services.localization.render('wikidemarches.by-dinsic')&lt;/p&gt;
+        &lt;p&gt;$services.localization.render('wikidemarches.by-dinum')&lt;/p&gt;
         &lt;ul class="social-networks"&gt;
-          &lt;li&gt;&lt;a href="https://twitter.com/_dinsic" class="twitter" target="_blank"&gt;&lt;span class="fa fa-twitter"&gt;&lt;/span&gt;&lt;/a&gt;
-          &lt;li&gt;&lt;a href="https://www.linkedin.com/company/direction-interministerielle-du-numerique-et-du-si-de-l-etat-dinsic/" class="linkedin" target="_blank"&gt;&lt;span class="fa fa-linkedin"&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;li&gt;&lt;a href="https://twitter.com/_DINUM" class="twitter" target="_blank"&gt;&lt;span class="fa fa-twitter"&gt;&lt;/span&gt;&lt;/a&gt;
+          &lt;li&gt;&lt;a href="https://www.linkedin.com/company/direction-interministerielle-du-numerique-dinum/" class="linkedin" target="_blank"&gt;&lt;span class="fa fa-linkedin"&gt;&lt;/span&gt;&lt;/a&gt;
         &lt;/ul&gt;
         &lt;ul class="emphasis"&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
