@@ -1447,19 +1447,24 @@ table.dataTable.no-footer.fixedHeader-locked {
         border-radius: 0.25em;
       }
       .label-success {
-        background-color: #62d2b0;
+        background-color: #62D2B0;
+        color: #22493D;
       }
       .label-danger {
-        background-color: #f45269;
+        background-color: #FF7777;
+        color: #592929;
       }
       .label-warning {
-        background-color: #fe8d5e;
+        background-color: #FE8D5E;
+        color: #583120;
       }
       .label-info {
-        background-color: @obs-blue;
+        background-color: #71B3FF;
+        color: #273E59;
       }
       .label-default {
-        background-color: #999999;
+        background-color: #dedede;
+        color: #4d4d4d;
       }
     }
   }
