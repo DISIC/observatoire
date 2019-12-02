@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530722184000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530744397000</date>
-  <contentUpdateDate>1530744396000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Effacer les avis par date de création</title>
   <comment/>
@@ -54,6 +54,7 @@
     {{info}}Aucun Avis n'a été sélectionné pour l'effacement.{{/info}}
   #end
 #elseif ("$!request.action" == 'dopreview' &amp;&amp; ("$!request.dtStart" != '' || "$!request.dtEnd" != ''))
+  #set($from = "")
   #set($where = "")
   #set($params = {})
   #if ("$!request.dtStart" != '')
@@ -66,7 +67,12 @@
     #set($where = "$where and doc.creationDate &lt; :dtEnd ")
     #set($discard = $params.put('dtEnd', $dateEnd))
   #end
-  #set($selectedDocsHQL = $services.query.hql(", BaseObject obj where doc.fullName = obj.name and obj.className = 'Avis.Code.AvisClass' and doc.fullName != 'Avis.Code.AvisTemplate' $where order by doc.date desc"))
+  #if ("$!request.demarche" != '')
+    #set($from = ", StringProperty demarche")
+    #set($where = "$where and demarche.id.id = obj.id and demarche.id.name='demarche' and demarche.value = :dem ")
+    #set($discard = $params.put('dem', "Demarches.${request.demarche}"))
+  #end
+  #set($selectedDocsHQL = $services.query.hql(", BaseObject obj $from where doc.fullName = obj.name and obj.className = 'Avis.Code.AvisClass' and doc.fullName != 'Avis.Code.AvisTemplate' $where order by doc.date desc"))
   #foreach($pE in $params.entrySet())
     #set($discard = $selectedDocsHQL.bindValue($pE.key, $pE.value))
   #end
@@ -117,6 +123,12 @@
         &lt;dd&gt;
           &lt;input type="text" name='dtEnd' id='dtEnd' class="datetime t" title="$dateFormat" &gt;&lt;/input&gt;
         &lt;/dd&gt;
+        &lt;dt&gt;
+          &lt;label for='demarche'&gt;Démarche (optionnel) : &lt;/label&gt;
+        &lt;/dt&gt;
+        &lt;dd&gt;
+          &lt;input type="text" name='demarche' id='demarche' class="" title="Id de la démarche" &gt;&lt;/input&gt;
+        &lt;/dd&gt;
       &lt;/dl&gt;
       &lt;div class='buttonwrapper'&gt;
         &lt;input type='hidden' name='action' value='dopreview' /&gt;
@@ -131,7 +143,7 @@
     <name>Avis.Admin.AvisMassCleanup</name>
     <number>0</number>
     <className>XWiki.JavaScriptExtension</className>
-    <guid>5ab6ecf8-2b36-4dd5-8b2b-5a1eb3c0fd5b</guid>
+    <guid>9ad207ab-cead-4f7a-9175-3c503864b66e</guid>
     <class>
       <name>XWiki.JavaScriptExtension</name>
       <customClass/>
@@ -249,7 +261,7 @@
     <name>Avis.Admin.AvisMassCleanup</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
-    <guid>0eb43921-98f9-4fbf-92c2-a55e2640e342</guid>
+    <guid>a8ce47b1-0750-4461-9a1f-48826f19c125</guid>
     <class>
       <name>XWiki.StyleSheetExtension</name>
       <customClass/>
