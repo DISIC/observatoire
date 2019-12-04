@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-    <artifactId>wikidemarches-extensions</artifactId>
+    <artifactId>xwiki-dinsic-wikidemarches-extensions</artifactId>
     <version>4.2-SNAPSHOT</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports</artifactId>
-  <name>BatchImports Extension - Parent POM</name>
+  <name>XWiki Projects - DINSIC Wiki Demarches - BatchImports</name>
   <packaging>pom</packaging>
   <description>BatchImport configurations</description>
   <modules>

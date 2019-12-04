@@ -7,8 +7,8 @@
     <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
     <version>4.2-SNAPSHOT</version>
   </parent>
-  <artifactId>wikidemarches-extensions</artifactId>
-  <name>Wikidemarches - Extensions</name>
+  <artifactId>xwiki-dinsic-wikidemarches-extensions</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Extensions</name>
   <packaging>pom</packaging>
   <modules>
     <module>tools</module>

@@ -9,6 +9,7 @@
     <version>4.2-SNAPSHOT</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports-api</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Batch Imports API</name>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>

@@ -30,7 +30,7 @@
     <version>4.2-SNAPSHOT</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports-ui</artifactId>
-  <name>DINSIC Wiki Demarches - Batch Imports UI</name>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Batch Imports UI</name>
   <packaging>xar</packaging>
   <dependencies>
     <dependency>
