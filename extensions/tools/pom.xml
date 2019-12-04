@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-        <artifactId>wikidemarches-extensions</artifactId>
-        <version>4.2-SNAPSHOT</version>
-    </parent>
-    <artifactId>avis-stats</artifactId>
-    <name>Avis Stats Extension - Parent POM</name>
-    <packaging>pom</packaging>
-    <description>Manages statistics related to avis on demarches.</description>
-    <properties>
-        <xwiki.extension.name>Avis Stats Application</xwiki.extension.name>
-        <xwiki.extension.category>application</xwiki.extension.category>
-        <xwiki.release.jira.skip>true</xwiki.release.jira.skip>
-        <xwiki.issueManagement.system>jira</xwiki.issueManagement.system>
-    </properties>
-    <modules>
-        <module>tools-api</module>
-    </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
+    <artifactId>wikidemarches-extensions</artifactId>
+    <version>4.2-SNAPSHOT</version>
+  </parent>
+  <artifactId>avis-stats</artifactId>
+  <name>Avis Stats Extension - Parent POM</name>
+  <packaging>pom</packaging>
+  <description>Manages statistics related to avis on demarches.</description>
+  <properties>
+    <xwiki.extension.name>Avis Stats Application</xwiki.extension.name>
+    <xwiki.extension.category>application</xwiki.extension.category>
+    <xwiki.release.jira.skip>true</xwiki.release.jira.skip>
+    <xwiki.issueManagement.system>jira</xwiki.issueManagement.system>
+  </properties>
+  <modules>
+    <module>tools-api</module>
+  </modules>
 </project>
