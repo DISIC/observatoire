@@ -11,7 +11,7 @@
   <name>XWiki Projects - DINSIC Wiki Demarches - Extensions</name>
   <packaging>pom</packaging>
   <modules>
-    <module>tools</module>
+    <module>tools-api</module>
     <module>batch-imports</module>
   </modules>
 </project>

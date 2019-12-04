@@ -5,10 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-    <artifactId>avis-stats</artifactId>
+    <artifactId>xwiki-dinsic-wikidemarches-extensions</artifactId>
     <version>4.2-SNAPSHOT</version>
   </parent>
-  <artifactId>tools-api</artifactId>
+  <artifactId>xwiki-dinsic-wikidemarches-extensions-tools-api</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Tools API</name>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
