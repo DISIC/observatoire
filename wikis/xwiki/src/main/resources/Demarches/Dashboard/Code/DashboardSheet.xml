@@ -1340,7 +1340,7 @@ table.fixedHeader-locked {
     }
     .thead-icon {
       display: block;
-      background-color: fade(@obs-blue, 10%);
+      background-color: fade(@obs-blue, 6.4%);
       color: @obs-blue;
       line-height: 3.33em;
       width: 3.33em;
