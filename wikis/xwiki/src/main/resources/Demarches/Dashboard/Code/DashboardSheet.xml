@@ -823,7 +823,10 @@ var XWiki = (function (XWiki) {
             data: 'details',
             className: 'details-control',
             orderable: false,
-            defaultContent: ''
+            defaultContent: '',
+            render: function (data, type, row) {
+              return '&lt;div aria-label="Afficher les détails"&gt;&lt;span class="fa fa-chevron-down" aria-hidden="true"&gt;&lt;/span&gt;&lt;/div&gt;';
+            }
           },
           {
             data: "volumetrie",
@@ -935,6 +938,9 @@ var XWiki = (function (XWiki) {
         if (row.child.isShown()) {
           row.child.hide();
           tr.removeClass('shown');
+          var iconSpan = tr.find('.details-control .fa');
+          iconSpan.removeClass('fa-chevron-up');
+          iconSpan.addClass('fa-chevron-down');
         } else {
           var data = row.data();
           #set ($hasAdmin = $services.security.authorization.hasAccess('admin'))
@@ -972,6 +978,9 @@ var XWiki = (function (XWiki) {
             row.child([addDetailsRow(data, false)], 'child-row').show();
           #end
           tr.addClass('shown');
+          var iconSpan = tr.find('.details-control .fa');
+          iconSpan.removeClass('fa-chevron-down');
+          iconSpan.addClass('fa-chevron-up');
         }
       }
 
@@ -1472,16 +1481,7 @@ table.dataTable.no-footer.fixedHeader-locked {
   td.details-control {
     text-align: center;
     cursor: pointer;
-  }
-
-  td.details-control:before {
-    content: "\f078";
-    font: normal normal normal 14px/1 FontAwesome;
-    display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
     color: #666;
-  }
-  tr.shown td.details-control:before {
-    content: "\f077";
   }
 
   tr.shown {
