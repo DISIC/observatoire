@@ -1590,6 +1590,26 @@ span.wikiexternallink {
   padding-right: unset;
 }
 
+/* Quick navigation from the header. */
+.skip-link {
+  list-style:none;margin:0;padding:0;
+  li {
+      margin:0;
+      padding:0
+  }
+  a {
+    position:absolute;
+    top:-9em;
+    padding:.5em 1em;
+    border-radius:0 0 10px 10px;
+    box-shadow:0 1px 5px rgba(0,0,0,.2);
+    background-color:#0a0a0a;color:#fefefe;font-weight:700;
+    z-index: 10;
+  }
+  a:focus {
+    top:0;
+  }
+}
 
 
 

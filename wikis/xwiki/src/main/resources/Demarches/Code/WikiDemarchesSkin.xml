@@ -1910,9 +1910,19 @@ $services.localization.render('accountnotactive_email')
 #template("layoutvars.vm")
 #template("htmlheader.vm")
 #if($displayMainMenu)
+  &lt;header role="banner"&gt;
+    &lt;ul class="skip-link"&gt;
+      &lt;li&gt;&lt;a href="#menuview"&gt;$services.localization.render('wikidemarches.quick-links.menu')&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#xwikicontent"&gt;$services.localization.render('wikidemarches.quick-links.content')&lt;/a&gt;&lt;/li&gt;
+      #if (!$isGuest)
+        &lt;li&gt;&lt;a href="#search-input"&gt;$services.localization.render('wikidemarches.quick-links.search')&lt;/a&gt;&lt;/li&gt;
+      #end
+      &lt;li&gt;&lt;a href="#footerglobal"&gt;$services.localization.render('wikidemarches.quick-links.footer')&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt; 
   &lt;div id="menuview"&gt;
     #template("menus_view.vm")
   &lt;/div&gt;
+ &lt;/header&gt;
 #end
 #template("header.vm")
 
