@@ -1872,6 +1872,65 @@ $services.localization.render('accountnotactive_email')
   </object>
   <object>
     <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>19</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>59de159f-ef98-4810-86bf-116820cf55ea</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>#template("xwikivars.vm")
+#template("layoutvars.vm")
+#template("htmlheader.vm")
+#if($displayMainMenu)
+  &lt;div id="menuview"&gt;
+    #template("menus_view.vm")
+  &lt;/div&gt;
+#end
+#template("header.vm")
+
+&lt;div class="content#if($showLeftPanels == "0")hideleft#end#if($showRightPanels == "0")hideright#end" id="contentcontainer"&gt;
+&lt;div id="contentcontainerinner"&gt;
+&lt;div class="leftsidecolumns"&gt;
+#if($hidecolumns &amp;&amp; ($!hidecolumns == 1))
+  &lt;div id="contentcolumn" class="contenthidelefthideright"&gt;
+#else
+  &lt;div id="contentcolumn"&gt; ## class="content#if($showLeftPanels == "0")hideleft#end#if($showRightPanels == "0")hideright#end"&gt;
+#end</content>
+    </property>
+    <property>
+      <path>startpage.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
     <number>0</number>
     <className>XWiki.XWikiSkins</className>
     <guid>f9020886-48b3-4f1a-bd54-392f886da30a</guid>
