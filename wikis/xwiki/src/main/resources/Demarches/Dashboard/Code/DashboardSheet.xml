@@ -95,24 +95,24 @@
           )))
           (%class='col-xs-12 col-md-6 sharecol'%) (((
             #set ($socialNetworks = [{
-              "icon": "fa-twitter",
+              "icon": "twitter",
               "url": "https://twitter.com/intent/tweet?url="
             },
             {
-              "icon": "fa-linkedin",
+              "icon": "linkedin",
               "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url="
             },
             {
-              "icon": "fa-facebook",
+              "icon": "facebook",
               "url": "https://www.facebook.com/sharer.php?u="
             },
             {
-              "icon": "fa-envelope",
+              "icon": "envelope",
               "url": "mailto:?subject=Observatoire de la dématérialisation&amp;body="
             }])
             {{html clean="false"}}
             #set ($url = $escapetool.xml($doc.getExternalURL()))
-            $services.localization.render('dashboard.share.label') :#foreach ($socialNetwork in $socialNetworks) &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank"&gt;&lt;span class="fa $socialNetwork.icon"&gt;&lt;/span&gt;&lt;/a&gt; #end
+            $services.localization.render('dashboard.share.label') :#foreach ($socialNetwork in $socialNetworks) &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank" aria-label="$services.localization.render("dashboard.social-network.${socialNetwork.icon}")"&gt;&lt;span class="fa fa-$socialNetwork.icon" aria-hidden="true"&gt;&lt;/span&gt;&lt;/a&gt; #end
             {{/html}}
           )))
         )))
