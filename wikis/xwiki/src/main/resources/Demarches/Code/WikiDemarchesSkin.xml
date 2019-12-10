@@ -530,6 +530,7 @@
   #template($extraFooterTemplate)
 #end
 &lt;footer id="footerglobal" role="contentinfo"&gt;
+  &lt;h2&gt;$services.localization.render('wikidemarches.footer')&lt;/h2&gt;
   &lt;div class='container'&gt;
     &lt;div class='row'&gt;
       ## special handling for voxusagers, to display a different site name and no sitemap (this column takes width 6 instead of 4)

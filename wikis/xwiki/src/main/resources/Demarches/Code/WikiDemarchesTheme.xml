@@ -1509,6 +1509,15 @@ legend {
     margin-bottom: 2em;
     margin-top: 0;
   }
+  /* The h2 heading in the footer is meant to be seen only by screen-readers. See also: 
+   * - https://webaim.org/techniques/css/invisiblecontent/
+   * - https://www.w3.org/WAI/tutorials/page-structure/headings/
+   * - https://www.drupal.org/docs/7/creating-accessible-themes/using-headings-to-improve-accessibility
+   */
+  h2 {
+    text-indent: -8888px;
+    float: left;
+  }
   h3 {
     font-weight: normal;
     margin-bottom: 2em;
