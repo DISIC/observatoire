@@ -623,7 +623,8 @@ require(['jquery','xwiki-selectize'], function($) {
       <cache>default</cache>
     </property>
     <property>
-      <code>/*
+      <code>@gray-light: #666;
+/*
  * Remove all distance between document title and content, to make the subtitle appear as subtitle.
  */
 .document-header {
