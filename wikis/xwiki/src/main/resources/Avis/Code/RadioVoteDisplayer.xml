@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1528193242000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529511626000</date>
-  <contentUpdateDate>1529511626000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>RadioVoteDisplayer</title>
   <comment/>
@@ -195,19 +195,19 @@
       <code>@radiovote-iconsize: 2.8em;
 
 /* Some colors */
+/* #331: Redefine bootstrap defaults in order to increase contrast. */
+@brand-success: #22891f;
+@brand-warning: #ae650b;
+@brand-danger: #e62623;
 @bad : @brand-danger;
 // @medium : #ff0;
 @medium : @brand-warning;
 @good : @brand-success;
-@badish : #ffb400;
-@goodish : #849a63;
 
 /* Some whitened versions of these colors */
 @bad-light : tint(@bad, 60%);
 @medium-light : tint(@medium, 60%);
 @good-light : tint(@good, 60%);
-@badish-light : tint(@badish, 60%);
-@goodish-light : tint(@goodish, 60%);
 
 .radiovote-form-listclass-group {
   ul {
