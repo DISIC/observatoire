@@ -566,7 +566,7 @@
     }
     /* the icon p is the first paragraph in the card*/
     p:first-child {
-      background-color: fade(@obs-blue, 6.4%);
+      background-color: fade(@obs-blue, 10%);
       color: @obs-blue;
       line-height: 4em;
       width: 4em;
