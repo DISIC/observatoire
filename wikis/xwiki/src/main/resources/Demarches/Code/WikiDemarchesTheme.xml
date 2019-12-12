@@ -940,7 +940,7 @@
       <body-bg>#ffffff</body-bg>
     </property>
     <property>
-      <brand-danger>#E62623</brand-danger>
+      <brand-danger>#e62623</brand-danger>
     </property>
     <property>
       <brand-info>#2370C0</brand-info>
@@ -949,10 +949,10 @@
       <brand-primary>#0088CC</brand-primary>
     </property>
     <property>
-      <brand-success>#00AC07</brand-success>
+      <brand-success>#22891f</brand-success>
     </property>
     <property>
-      <brand-warning>#D58000</brand-warning>
+      <brand-warning>#ae650b</brand-warning>
     </property>
     <property>
       <breadcrumb-bg>#ffffff</breadcrumb-bg>

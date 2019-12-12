@@ -195,10 +195,6 @@
       <code>@radiovote-iconsize: 2.8em;
 
 /* Some colors */
-/* #331: Redefine bootstrap defaults in order to increase contrast. */
-@brand-success: #22891f;
-@brand-warning: #ae650b;
-@brand-danger: #e62623;
 @bad : @brand-danger;
 // @medium : #ff0;
 @medium : @brand-warning;
