@@ -1611,6 +1611,7 @@ span.wikiexternallink {
   }
 }
 
+@gray-light: #666;
 
 
 
