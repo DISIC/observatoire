@@ -1076,6 +1076,8 @@
 /* Extra Bootstrap variables / fixes */
 @line-height-base: 1.5;
 
+@gray-light: #666;
+
 /***************************************************/
 /* Bootstrap corrections to make the site          */
 /* accessible: font-size in em                     */
@@ -1610,18 +1612,6 @@ span.wikiexternallink {
     top:0;
   }
 }
-
-@gray-light: #666;
-
-
-
-
-
-
-
-
-
-
 </lessCode>
     </property>
     <property>
