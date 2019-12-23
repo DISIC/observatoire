@@ -49,6 +49,20 @@
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
 #set ($discard = $xwiki.ssx.use('Demarches.Code.MontserratWebfontSSX'))
+#set($tableHeaderElements = {
+  'demarche' : '',
+  'ministry' : '',
+  'group' : '',
+  'digitalization' : 'cloud.svg',
+  'satisfaction' : 'smiley.svg',
+  'mobile' : 'mobile.svg',
+  'support' : 'support.svg',
+  'performance' : 'watch.svg',
+  'france-connect' : 'user.svg',
+  'accessibility' : 'accessibility.svg',
+  'tell-us-once' : 'briefcase.svg'
+})
+
 ## Dashboard header ##
 (% class='row observatoire-explanation' %)(((
   (% class='container' %)(((
@@ -123,7 +137,18 @@
         (% class='row'%)(((
           (%class='col-xs-12 col-md-6 dashboard-filters'%)(((
             {{html clean='false'}}
-              &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
+              &lt;div class="dashboard-filter-sort"&gt;
+                &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
+                &lt;div class="btn-group controls"&gt;
+                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;$services.localization.render('dashboard.tools.sort.label')&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+                  &lt;ul class="dropdown-menu"&gt;
+                    #foreach($thElt in $tableHeaderElements.entrySet())
+                      #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}").replaceAll('&lt;br/&gt;',''))
+                      &lt;li&gt;&lt;a href="" class="observatoire-sort" data-key="$thElt.key" data-index="$mathtool.sub($velocityCount, 1)"&gt;$thLabel&lt;/a&gt;&lt;/li&gt;
+                    #end
+                  &lt;/ul&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
             {{/html}}
           )))
           (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
@@ -159,19 +184,6 @@
           #set ($discard = $xwiki.jsx.use($DASHBOARD_SHEET, {'minify': false, 'timestamp': $datetool.systemTime, 'pageId': $doc.fullName}))
 
           {{html clean="false" wiki="false"}}
-          #set($tableHeaderElements = {
-            'demarche' : '',
-            'ministry' : '',
-            'group' : '',
-            'digitalization' : 'cloud.svg',
-            'satisfaction' : 'smiley.svg',
-            'mobile' : 'mobile.svg',
-            'support' : 'support.svg',
-            'performance' : 'watch.svg',
-            'france-connect' : 'user.svg',
-            'accessibility' : 'accessibility.svg',
-            'tell-us-once' : 'briefcase.svg'
-            })
           &lt;table id="top-demarches" class="hover" style="width:100%"&gt;
             &lt;thead&gt;
               &lt;tr&gt;
@@ -606,7 +618,7 @@ var XWiki = (function (XWiki) {
 
       // Addition of a search function to the list of search functions for filtering on the ministère value.
       $.fn.dataTable.ext.search.push(
-        function( settings, data, dataIndex ) {
+        function (settings, data, dataIndex ) {
           var selectedMinistere =  $('select[name="ministereSelect"]').val();
           var selectedPublicCategory =  $('select[name="publicCategorySelect"]').val();
           var ministere = data[1];
@@ -908,15 +920,30 @@ var XWiki = (function (XWiki) {
             filtersContainer.prepend(ministriesSelectLabel);
 
             // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
-            var this_tbl = settings.oInstance.api();
+            // NB: on selection change, the selection is then retrieved during the execution of the code declared in "$.fn.dataTable.ext.search.push"
+            var thisDataTable = settings.oInstance.api();
             if (schema != undefined &amp;&amp; schema != '1.0') {
               publicCategorySelect.change(function () {
-                this_tbl.draw();
+                thisDataTable.draw();
               });
             }
+
             ministriesSelect.change(function () {
-              this_tbl.draw();
+              thisDataTable.draw();
             });
+
+            var sort =  $('.observatoire-sort').on('click', function(event) {
+              event.preventDefault();
+              var element = $(this);
+              var key = element.data('key');
+              var index = element.data('index');
+              var order = 'desc';
+              if (index == 0 || index == 1) {
+                order = 'asc'
+              }
+              thisDataTable.order( [ index, order ] ).draw();
+            });
+
           }
           // add the hook for the filters display upon click on the filters button
           var filtersToggle = $('#top-demarches-filters-toggle');
@@ -1213,8 +1240,15 @@ input[name='title'] {
     .social-network {
       margin-left: 0.5em;
     }
+    @media (max-width: 768px) {
+      text-align: center;
+      margin-top: 0.7em;
+    }
   }
   .downloadcol p.download {
+    @media (max-width: 768px) {
+      text-align: center;
+    }
     margin-bottom: 0;
     a {
       display: inline-block;
@@ -1252,6 +1286,15 @@ input[name='title'] {
     .btn-default.pushed {
       background-color: @obs-blue;
       color: #fff;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-bottom: 0.5em;
+    .dashboard-filter-sort {
+      margin-bottom: 1em;
+    }
+    .dashboard-filter-sort, .dashboard-selector {
+      text-align: center;
     }
   }
 }
@@ -1409,10 +1452,13 @@ input[name='title'] {
 }
 
 #top-demarches {
-  border-spacing: 0 1em;
+  @media screen and (min-width: 768px) {
+    border-spacing: 0 1em;
+  }
 
   // Turn columns to rows on small screens
   @media screen and (max-width: 768px) {
+
     //https://css-tricks.com/responsive-data-tables/
     thead, tbody, th, tr, td {
       display: block;

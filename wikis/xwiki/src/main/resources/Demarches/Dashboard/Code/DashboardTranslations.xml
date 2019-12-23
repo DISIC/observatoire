@@ -24,7 +24,7 @@
   <web>Demarches.Dashboard.Code</web>
   <name>DashboardTranslations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -73,6 +73,7 @@ dashboard.dataurl=Données ouvertes sur data.gouv.fr
 dashboard.share.label=Partager
 dashboard.edit-entry=Modifier ces informations
 dashboard.tools.filters.label=Filtres
+dashboard.tools.sort.label=Trier par
 
 # Social networks
 dashboard.social-network.twitter=Via Twitter
