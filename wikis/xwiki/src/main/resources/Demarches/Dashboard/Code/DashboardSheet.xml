@@ -135,23 +135,7 @@
     (%class='row table-tools'%)(((
       (% class='dashboard-container' %)(((
         (% class='row'%)(((
-          (%class='col-xs-12 col-md-6 dashboard-filters'%)(((
-            {{html clean='false'}}
-              &lt;div class="dashboard-filter-sort"&gt;
-                &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
-                &lt;div class="btn-group controls"&gt;
-                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;$services.localization.render('dashboard.tools.sort.label')&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
-                  &lt;ul class="dropdown-menu"&gt;
-                    #foreach($thElt in $tableHeaderElements.entrySet())
-                      #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}").replaceAll('&lt;br/&gt;',''))
-                      &lt;li&gt;&lt;a href="" class="observatoire-sort" data-key="$thElt.key" data-index="$mathtool.sub($velocityCount, 1)"&gt;$thLabel&lt;/a&gt;&lt;/li&gt;
-                    #end
-                  &lt;/ul&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            {{/html}}
-          )))
-          (%class='col-xs-12 col-md-6 dashboard-selector'%)(((
+          (%class='col-xs-12 col-md-6 col-md-push-6 dashboard-selector'%)(((
             {{html clean="false"}}
             &lt;div class="btn-group controls"&gt;
               &lt;button type="button" class="btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-default #else btn-primary #end dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
@@ -170,6 +154,22 @@
                &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-primary #else btn-default #end'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
               #end
             &lt;/div&gt;
+            {{/html}}
+          )))
+          (%class='col-xs-12 col-md-6 col-md-pull-6 dashboard-filters'%)(((
+            {{html clean='false'}}
+              &lt;div class="dashboard-filter-sort"&gt;
+                &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
+                &lt;div class="btn-group controls"&gt;
+                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;$services.localization.render('dashboard.tools.sort.label')&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+                  &lt;ul class="dropdown-menu"&gt;
+                    #foreach($thElt in $tableHeaderElements.entrySet())
+                      #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}").replaceAll('&lt;br/&gt;',''))
+                      &lt;li&gt;&lt;a href="" class="observatoire-sort" data-key="$thElt.key" data-index="$mathtool.sub($velocityCount, 1)"&gt;$thLabel&lt;/a&gt;&lt;/li&gt;
+                    #end
+                  &lt;/ul&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
             {{/html}}
           )))
         )))
@@ -1291,7 +1291,7 @@ input[name='title'] {
   @media screen and (max-width: 768px) {
     padding-bottom: 0.5em;
     .dashboard-filter-sort {
-      margin-bottom: 1em;
+      margin: 1em;
     }
     .dashboard-filter-sort, .dashboard-selector {
       text-align: center;
@@ -1492,16 +1492,10 @@ input[name='title'] {
           width: 45%;
           white-space  : nowrap;
           text-align: left;
-          font-size: .85em;
-          font-weight: 400;
+          font-size: .875em;
         }
         &amp;.column-title {
           padding: 0.4em !important;
-        }
-        .ministere-groupe {
-          position: absolute;
-          top: -9999px;
-          left: -9999px;
         }
       }
       /* Labels could alternatively be retrieved from a data attribute. */
@@ -1642,6 +1636,10 @@ input[name='title'] {
       }
     }
     .row-details {
+      @media screen and (max-width: 768px) {
+          padding: 0.5em;
+      }
+
       font-size: 0.875em;
       padding: 1.4285em;
       text-align: left;
