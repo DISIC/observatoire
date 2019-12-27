@@ -1460,7 +1460,7 @@ input[name='title'] {
   @media screen and (max-width: 768px) {
 
     //https://css-tricks.com/responsive-data-tables/
-    thead, tbody, th, tr, td {
+    thead, tbody, th, tr {
       display: block;
     }
 
@@ -1476,6 +1476,8 @@ input[name='title'] {
       padding-botom: 1rem;
       border-bottom: 1px solid #eee;
       td {
+        display: inline-block;
+        width: 46%;
         border: none !important;
         position: relative;
         text-align: right !important;
@@ -1492,10 +1494,14 @@ input[name='title'] {
           width: 45%;
           white-space  : nowrap;
           text-align: left;
-          font-size: .875em;
+          font-size: .675em;
         }
         &amp;.column-title {
           padding: 0.4em !important;
+          width: 100%;
+        }
+        &amp;.details-control {
+          width: 100%;
         }
       }
       /* Labels could alternatively be retrieved from a data attribute. */
@@ -1506,22 +1512,22 @@ input[name='title'] {
         content: "$services.localization.render('dashboard.table.satisfaction').replaceAll('&lt;br/&gt;', '')";
       }
       td:nth-of-type(4):before {
-        content: "$services.localization.render('dashboard.table.mobile').replaceAll('&lt;br/&gt;', '')";
+        content: "Mobile";
       }
       td:nth-of-type(5):before {
-        content: "$services.localization.render('dashboard.table.support').replaceAll('&lt;br/&gt;', '')";
+        content: "Support";
       }
       td:nth-of-type(6):before {
-        content: "$services.localization.render('dashboard.table.performance').replaceAll('&lt;br/&gt;', '')";
+        content: "Performance";
       }
       td:nth-of-type(7):before {
-        content: "$services.localization.render('dashboard.table.france-connect').replaceAll('&lt;br/&gt;', '')";
+        content: "FranceConnect";
       }
       td:nth-of-type(8):before {
-        content: "$services.localization.render('dashboard.table.accessibility').replaceAll('&lt;br/&gt;', ' ')";
+        content: "Handicap";
       }
       td:nth-of-type(9):before {
-        content: "$services.localization.render('dashboard.table.tell-us-once').replaceAll('&lt;br/&gt;', '')";
+        content: "Ressaisies";
       }
     }
   }
@@ -1605,27 +1611,41 @@ input[name='title'] {
   }
 
   tr.shown {
+    @media screen and (max-width: 768px) {
+      background-color: rgba(0,107,230,0.05);
+    }
     td {
-      background-color: fade(@obs-blue, 5%);
-      border-bottom: 0;
-      &amp;:last-child {
-        border-bottom-right-radius: 0;
-      }
-      &amp;:first-child {
-        border-bottom-left-radius: 0;
+      @media screen and (min-width: 768px) {
+        background-color: fade(@obs-blue, 5%);
+        border-bottom: 0;
+        &amp;:last-child {
+          border-bottom-right-radius: 0;
+        }
+        &amp;:first-child {
+          border-bottom-left-radius: 0;
+        }
       }
     }
   }
 
   /* Styles for the détails panel */
   tr.shown + tr.child-row {
+    margin-top: 0;
     td {
+      background-color: fade(@obs-blue, 5%);
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        display: inline-block;
+        font-size: 0.675em;
+      }
+      @media screen and (min-width: 768px) {
+        font-size: 0.875em;
+        border-top: 0.5px dotted #555;
+        top: -1rem;
+      }
       /* Make it stick to the row above, so that we can style it in a big box with rounded corners. 
          Apparently this is the only solution working fine on most browsers, I initially moved the whole row but rows can only be moved on Firefox, while cells work on all browsers. */
       position: relative;
-      top: -1em;
-      background-color: fade(@obs-blue, 5%);
-      border-top: 0.5px dotted #555;
       /* reset padding */
       padding: 0;
       &amp;:last-child {
@@ -1637,13 +1657,15 @@ input[name='title'] {
     }
     .row-details {
       @media screen and (max-width: 768px) {
-          padding: 0.5em;
+        padding: 0.5rem 0;
       }
 
-      font-size: 0.875em;
       padding: 1.4285em;
       text-align: left;
       ul {
+        @media screen and (max-width: 768px) {
+          padding-left: 0.5rem;
+        }
         /* Reset the border spacing inherited from the table */
         border-spacing: 0;
         list-style-type: none;
