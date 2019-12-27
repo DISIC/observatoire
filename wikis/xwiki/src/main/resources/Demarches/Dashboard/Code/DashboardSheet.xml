@@ -1446,7 +1446,7 @@ input[name='title'] {
 
 // Do dot show the floating table header on small screens, or when printing
 @media screen and (max-width:768px), print  {
-  table.fixedHeader-floating {
+  table.fixedHeader-floating, table.fixedHeader-locked {
     display: none;
   }
 }
@@ -1472,8 +1472,7 @@ input[name='title'] {
     }
 
     tr {
-      margin-top: 1rem;
-      padding-botom: 1rem;
+      padding-botom: 1em;
       border-bottom: 1px solid #eee;
       td {
         display: inline-block;
@@ -1483,16 +1482,18 @@ input[name='title'] {
         text-align: right !important;
         &amp;:first-child {
           text-align: left !important;
+          font-size: 0.875em;
+          .ministere-groupe {
+            font-size: 0.857em !important;
+          }
         }
         &amp;:nth-of-type(10) {
           text-align: center !important;
         }
         &amp;:before {
           position: absolute;
-          top: 1em;
           left: 0.5em;
           width: 45%;
-          white-space  : nowrap;
           text-align: left;
           font-size: .675em;
         }
@@ -1512,22 +1513,22 @@ input[name='title'] {
         content: "$services.localization.render('dashboard.table.satisfaction').replaceAll('&lt;br/&gt;', '')";
       }
       td:nth-of-type(4):before {
-        content: "Mobile";
+        content: "$services.localization.render('dashboard.table.mobile').replaceAll('&lt;br/&gt;', '')";
       }
       td:nth-of-type(5):before {
-        content: "Support";
+        content: "$services.localization.render('dashboard.table.support').replaceAll('&lt;br/&gt;', '')";
       }
       td:nth-of-type(6):before {
-        content: "Performance";
+        content: "$services.localization.render('dashboard.table.performance').replaceAll('&lt;br/&gt;', '')";
       }
       td:nth-of-type(7):before {
-        content: "FranceConnect";
+        content: "$services.localization.render('dashboard.table.france-connect').replaceAll('&lt;br/&gt;', '')";
       }
       td:nth-of-type(8):before {
-        content: "Handicap";
+        content: "$services.localization.render('dashboard.table.accessibility').replaceAll('&lt;br/&gt;', ' ')";
       }
       td:nth-of-type(9):before {
-        content: "Ressaisies";
+        content: "$services.localization.render('dashboard.table.tell-us-once').replaceAll('&lt;br/&gt;', '')";
       }
     }
   }
@@ -1568,9 +1569,12 @@ input[name='title'] {
           margin-top: 0.4em;
         }
       }
-      &amp;.details-control {
-        padding-right: 1.25em;
-        padding-left: 0.875em;
+      @media screen and (min-width: 768px) {
+        &amp;.details-control {
+          // This causes horizontal overflow on small screens
+          padding-right: 1.25em;
+          padding-left: 0.875em;
+        }
       }
       .row-details-value {
         display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
