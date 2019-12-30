@@ -1546,13 +1546,17 @@ input[name='title'] {
       padding: 0.375em; /*~6px*/
       &amp;:last-child {
         border-right-width: 1px;
-        border-top-right-radius: 0.6em;
-        border-bottom-right-radius: 0.6em;
+        @media screen and (min-width: 768px) {
+          border-top-right-radius: 0.6em;
+          border-bottom-right-radius: 0.6em;
+        }
       }
       &amp;:first-child {
         border-left-width: 1px;
-        border-top-left-radius: 0.6em;
-        border-bottom-left-radius: 0.6em;
+        @media screen and (min-width: 768px) {
+          border-top-left-radius: 0.6em;
+          border-bottom-left-radius: 0.6em;
+        }
       }
       &amp;.column-title {
         min-width: 38%;
