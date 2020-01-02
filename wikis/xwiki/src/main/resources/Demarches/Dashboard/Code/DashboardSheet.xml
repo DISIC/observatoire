@@ -1458,7 +1458,6 @@ input[name='title'] {
 
   // Turn columns to rows on small screens
   @media screen and (max-width: 768px) {
-
     //https://css-tricks.com/responsive-data-tables/
     thead, tbody, th, tr {
       display: block;
@@ -1472,14 +1471,19 @@ input[name='title'] {
     }
 
     tr {
-      padding-botom: 1em;
+      &amp;[role=row] {
+        padding-top: 1em;
+      }
       border-bottom: 1px solid #eee;
       td {
+        // override box-sizing: content-box of datatables because this causes some table cells to overflow their containing table (e.g. the column-title and the child-row cells)
+        box-sizing: inherit;
         display: inline-block;
         width: 46%;
         border: none !important;
         position: relative;
-        text-align: right !important;
+        text-align: left !important;
+        padding: 8px 10px !important; // default dataTable padding
         &amp;:first-child {
           text-align: left !important;
           font-size: 0.875em;
@@ -1487,22 +1491,25 @@ input[name='title'] {
             font-size: 0.857em !important;
           }
         }
-        &amp;:nth-of-type(10) {
-          text-align: center !important;
-        }
         &amp;:before {
-          position: absolute;
-          left: 0.5em;
-          width: 45%;
           text-align: left;
           font-size: .675em;
+          font-weight: bold;
         }
         &amp;.column-title {
-          padding: 0.4em !important;
+          padding: 8px 10px !important;
           width: 100%;
+        }
+        .row-details-value {
+          margin-top: 0.2em;
         }
         &amp;.details-control {
           width: 100%;
+          text-align: center !important;
+          // Add padding only when the chevron is down, that is when .row-details is not visible
+          .fa-chevron-down {
+            padding-bottom: 1em;
+          }
         }
       }
       /* Labels could alternatively be retrieved from a data attribute. */
@@ -1645,17 +1652,18 @@ input[name='title'] {
         width: 100%;
         display: inline-block;
         font-size: 0.675em;
+        padding-bottom: 1em;
       }
       @media screen and (min-width: 768px) {
         font-size: 0.875em;
         border-top: 0.5px dotted #555;
         top: -1rem;
+        padding: 0;
       }
       /* Make it stick to the row above, so that we can style it in a big box with rounded corners. 
          Apparently this is the only solution working fine on most browsers, I initially moved the whole row but rows can only be moved on Firefox, while cells work on all browsers. */
       position: relative;
       /* reset padding */
-      padding: 0;
       &amp;:last-child {
         border-top-right-radius: 0;
       }
@@ -1663,35 +1671,42 @@ input[name='title'] {
         border-top-left-radius: 0;
       }
     }
-    .row-details {
-      @media screen and (max-width: 768px) {
-        padding: 0.5rem 0;
-      }
+    &amp;.child-row {
 
-      padding: 1.4285em;
-      text-align: left;
-      ul {
+      .row-details {
         @media screen and (max-width: 768px) {
-          padding-left: 0.5rem;
+          padding: 0.5rem 0;
         }
-        /* Reset the border spacing inherited from the table */
-        border-spacing: 0;
-        list-style-type: none;
-        margin-left: 0;
-        margin-bottom: 0;
-        padding-left: 0;
-        display: table;
-        li {
-          display: table-row;
-          .row-details-key, .row-details-value {
-            display: table-cell;
-            padding-top: 0.2em;
-            padding-bottom: 0.2em;
-            /* padding-right copied from the table cell of datatables */
-            padding-right: 10px;
+
+        padding: 1.4285em;
+        text-align: left;
+        ul {
+          /* Reset the border spacing inherited from the table */
+          border-spacing: 0;
+          list-style-type: none;
+          margin-left: 0;
+          margin-bottom: 0;
+          padding-left: 0;
+          display: table;
+          li {
+            display: table-row;
+            .row-details-key {
+              @media screen and (max-width: 768px) {
+                font-weight:bold;
+              }
+            }
+            .row-details-key, .row-details-value {
+
+              display: table-cell;
+              padding-top: 0.2em;
+              padding-bottom: 0.2em;
+              /* padding-right copied from the table cell of datatables */
+              padding-right: 10px;
+            }
           }
         }
       }
+
     }
     .row-toolbar {
       text-align: right;
