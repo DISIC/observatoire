@@ -422,9 +422,9 @@ var XWiki = (function (XWiki) {
         return "default";
       } else if (value == -2) {
         return "default";
-      } else if (value == 0) {
+      } else if (value == 0 || value == 1) {
         return "success";
-      } else if (value &lt; 6) {
+      } else if (value &lt; 5) {
         return "warning";
       } else {
         return "danger";
