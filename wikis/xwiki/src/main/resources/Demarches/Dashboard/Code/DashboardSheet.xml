@@ -135,7 +135,7 @@
     (%class='row table-tools'%)(((
       (% class='dashboard-container' %)(((
         (% class='row'%)(((
-          (%class='col-xs-12 col-md-6 col-md-push-6 dashboard-selector'%)(((
+          (%class='col-xs-12 col-sm-6 col-sm-push-6 dashboard-selector'%)(((
             {{html clean="false"}}
             &lt;div class="btn-group controls"&gt;
               &lt;button type="button" class="btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-default #else btn-primary #end dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
@@ -156,7 +156,7 @@
             &lt;/div&gt;
             {{/html}}
           )))
-          (%class='col-xs-12 col-md-6 col-md-pull-6 dashboard-filters'%)(((
+          (%class='col-xs-12 col-sm-6 col-sm-pull-6 dashboard-filters'%)(((
             {{html clean='false'}}
               &lt;div class="dashboard-filter-sort"&gt;
                 &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
@@ -1268,7 +1268,7 @@ input[name='title'] {
 
 .table-tools {
   background-color: #fafafa;
-  padding-top: 1.58em;
+  padding-top: 0.79em;
   padding-bottom: 1.58em;
   font-size: 0.75em;
   .btn {
@@ -1281,6 +1281,9 @@ input[name='title'] {
       background-color: @obs-blue;
     }
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
+  }
+  .dashboard-selector, .dashboard-filters {
+    margin-top: 0.79em;
   }
   .dashboard-selector {
     text-align: right;
@@ -1298,10 +1301,6 @@ input[name='title'] {
     }
   }
   @media screen and (max-width: 768px) {
-    padding-bottom: 0.5em;
-    .dashboard-filter-sort {
-      margin: 1em;
-    }
     .dashboard-filter-sort, .dashboard-selector {
       text-align: center;
     }
@@ -1316,7 +1315,11 @@ input[name='title'] {
   font-size: 0.75em;
   color: #666;
   background-color: #fafafa;
-  padding-top: 1.58em;
+  margin-top: 0;
+  /* Simulate the same margins strategy as bootstrap to obtain flowing elements - on one or multiple lines, depending on the size of the screen*/
+  margin-left: -@grid-gutter-width/4;
+  margin-right: -@grid-gutter-width/4;
+  padding-top: 0.79em;
   padding-bottom: 1.58em;
   border-top: 1px solid #ddd;
   /* Simulation of a full colored row using box shadow. Thanks Caty.*/
@@ -1328,7 +1331,7 @@ input[name='title'] {
   }
   input, select {
     border: none;
-    padding: 1em 1.8em 1em 1.8em;
+    padding: 1em 0.8em 1em 1.8em;
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
     border-radius: 0.25em;
     display: inline-block;
@@ -1337,6 +1340,7 @@ input[name='title'] {
   input {
     min-width: 20em;
     font-weight: normal;
+    margin-left: 0;
   }
   select {
     min-width: 20em;
@@ -1351,17 +1355,18 @@ input[name='title'] {
       font: normal normal normal 14px/1 FontAwesome;
       display: inline-block;
       position: absolute;
-      right: 1em;
+      right: 1.5em;
       top: 1em;
     }
+    /* Simulate the same margins strategy as bootstrap to obtain flowing elements - on one or multiple lines, depending on the size of the screen*/
+    padding-left: @grid-gutter-width/4;
+    padding-right: @grid-gutter-width/4;
+    margin-top: 0.79em;
+    margin-bottom: 0;
   }
   span.label-publicsfilter:before,
   span.label-ministriesfilter:before {
     content: "\f078"; /* chevron */
-  }
-
-  span.label-publicsfilter select, input {
-    margin-left: 1em;
   }
 
   /* Hack to not display the arrow on the selectboxes on IE, selector taken from 
@@ -1371,6 +1376,9 @@ input[name='title'] {
     span.label-ministriesfilter:before {
       display: none;
     }
+  }
+  @media screen and (max-width: 768px) {
+    text-align: center;
   }
 }
 /* Table head styling, in place or fixed, only on medium or large screens */
