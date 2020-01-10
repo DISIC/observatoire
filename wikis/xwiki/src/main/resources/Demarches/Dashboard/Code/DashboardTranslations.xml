@@ -74,6 +74,8 @@ dashboard.share.label=Partager
 dashboard.edit-entry=Modifier ces informations
 dashboard.tools.filters.label=Filtres
 dashboard.tools.sort.label=Trier par
+dashboard.tools.sort.label.asc=Croissant
+dashboard.tools.sort.label.desc=Décroissant
 
 # Social networks
 dashboard.social-network.twitter=Via Twitter

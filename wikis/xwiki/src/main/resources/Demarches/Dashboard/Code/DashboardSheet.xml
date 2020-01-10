@@ -164,8 +164,11 @@
                   &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;$services.localization.render('dashboard.tools.sort.label')&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
                   &lt;ul class="dropdown-menu"&gt;
                     #foreach($thElt in $tableHeaderElements.entrySet())
-                      #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}").replaceAll('&lt;br/&gt;',''))
-                      &lt;li&gt;&lt;a href="" class="observatoire-sort" data-key="$thElt.key" data-index="$mathtool.sub($velocityCount, 1)"&gt;$thLabel&lt;/a&gt;&lt;/li&gt;
+                      #if ($thElt.key != 'group')
+                        #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}").replace('&lt;br/&gt;',' ').replace('  ', ' '))
+                        #set($dataIndex = $foreach.index)
+                        &lt;li class='observatoire-sortgroup sortgroup-${thElt.key}'&gt;$thLabel &lt;span class='observatoire-sortgroup-arrows'&gt;#foreach($order in ['asc', 'desc'])&lt;a href="#sort-${thElt.key}-${order}" class="observatoire-sort" data-key="$thElt.key" data-index="$dataIndex" data-order='$order' aria-label='$services.localization.render("dashboard.tools.sort.label.${order}")' title='$services.localization.render("dashboard.tools.sort.label.${order}")'&gt;&lt;span aria-hidden='true' class='fa fa-chevron-#if($order=='asc')up#{else}down#{end}'&gt;&lt;/span&gt;&lt;/a&gt; #end&lt;/span&gt;&lt;/li&gt;
+                      #end
                     #end
                   &lt;/ul&gt;
                 &lt;/div&gt;
@@ -696,6 +699,9 @@ var XWiki = (function (XWiki) {
               // Do not display columns about accessibility and "tells us once" for schema version &lt; 1.1
               table.column(9).visible(false);
               table.column(10).visible(false);
+              // remove also the sorting items that correspond to this
+              $('.table-tools .dashboard-filter-sort ul li.observatoire-sortgroup.sortgroup-accessibility').remove();
+              $('.table-tools .dashboard-filter-sort ul li.observatoire-sortgroup.sortgroup-tell-us-once').remove();
             }
             for (var i = 0; i &lt; data.length; i++) {
               var ministere = data[i].ministere;
@@ -887,6 +893,10 @@ var XWiki = (function (XWiki) {
         ],
         // order by: avis, ministère, groupe, volumétrie, name
         order: [[13, 'desc'], [1, 'asc'], [2, 'asc'], [12, 'desc'], [0, 'asc']],
+        columnDefs: [{
+          targets: "_all",
+          orderable: false
+        }],
         language: {
           info: "Total : _TOTAL_ démarches",
           infoEmpty: "Aucune démarche trouvée",
@@ -946,10 +956,14 @@ var XWiki = (function (XWiki) {
               var element = $(this);
               var key = element.data('key');
               var index = element.data('index');
-              var order = 'desc';
-              if (index == 0 || index == 1) {
-                order = 'asc'
-              }
+              var order = element.data('order');
+              // color stuff when a sort is happening
+              $('.observatoire-sort').removeClass('active');
+              $('.dashboard-filter-sort ul li.observatoire-sortgroup').removeClass('active');
+              element.addClass('active');
+              element.closest('li.observatoire-sortgroup').addClass('active');
+              $('#top-demarches-sort-toggle').addClass('pushed');
+              // finally, sort the table
               thisDataTable.order( [ index, order ] ).draw();
             });
 
@@ -1290,14 +1304,43 @@ input[name='title'] {
     .btn {
       font-weight: 600;
     }
-    .dropdown-toggle .caret {
-      margin-left: 0.5em;
-    }
+  }
+  .dropdown-toggle .caret {
+    margin-left: 0.5em;
   }
   .dashboard-filters {
     .btn-default.pushed {
       background-color: @obs-blue;
       color: #fff;
+    }
+  }
+  .dashboard-filter-sort {
+    ul {
+      li.observatoire-sortgroup {
+        display: block;
+        padding: 0.5em 4em 0.5em 1em;
+        position: relative;
+        cursor: default;
+        &amp;:hover {
+          background-color: #fafafa;
+        }
+        &amp;.active {
+          box-shadow: inset 0.3em 0 0 0 @obs-blue;
+        }
+        .observatoire-sortgroup-arrows {
+          position: absolute;
+          right: 1em;
+          top: 0.5em;
+          a.observatoire-sort {
+            display: inline-block;
+            padding-left: 0.5ex;
+            color: @text-color;
+            &amp;.active {
+              color: @obs-blue;
+            }
+          }
+        }
+      }
     }
   }
   @media screen and (max-width: 768px) {
