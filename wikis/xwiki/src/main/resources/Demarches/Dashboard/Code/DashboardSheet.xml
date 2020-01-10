@@ -408,8 +408,13 @@ var XWiki = (function (XWiki) {
 
   function computeBadgeStyleSatisfactionIndex(value) {
     if (!isNaN(value)) {
-      /* Not a badge style, on purpose to get default display of the satisfaction index value, no color, nothing, whenever it is a numeric value, and badge for the other cases */
-      return "none";
+      if (value &gt;= 80) {
+        return 'success';
+      } else if (value &gt;= 60) {
+        return "warning";
+      } else {
+        return "danger";
+      }
     } else {
       return "default";
     }
@@ -747,8 +752,12 @@ var XWiki = (function (XWiki) {
                 return data.value;
               } else {
                 if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
-                  data.display = '&lt;a href="' + getAvisStatisticsUrl(row['id']) + '"&gt;' + data.display + '&lt;/a&gt;';
-                  return format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  true, row['id']);
+                  var statsURL = getAvisStatisticsUrl(row['id']);
+                  data.display = '&lt;a href="' + statsURL + '"&gt;' + data.display + '&lt;/a&gt;';
+                  var valueToDisplay = format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  true, row['id']);
+                  // add a second link to the graphs under / next to the badge
+                  var linkToGraphs = '&lt;a class="satisfaction-details" href="' + statsURL + '"&gt;$escapetool.javascript($services.localization.render("dashboard.table.satisfaction.statslink"))&lt;/a&gt;';
+                  return valueToDisplay.replace('&lt;/span&gt;&lt;/span&gt;', '&lt;/span&gt;' + linkToGraphs + '&lt;/span&gt;');
                 } else {
                   return format(data.value, data.display, computeBadgeStyle,  true, row['id']);
                 }
@@ -1476,10 +1485,10 @@ input[name='title'] {
       }
       border-bottom: 1px solid #eee;
       td {
-        // override box-sizing: content-box of datatables because this causes some table cells to overflow their containing table (e.g. the column-title and the child-row cells)
+        /* override box-sizing: content-box of datatables because this causes some table cells to overflow their containing table (e.g. the column-title and the child-row cells) */
         box-sizing: inherit;
         display: inline-block;
-        width: 46%;
+        width: 50%;
         border: none !important;
         position: relative;
         text-align: left !important;
@@ -1589,32 +1598,80 @@ input[name='title'] {
       }
       .row-details-value {
         display: block; /* Needed in order to have the same table cell size on the whole line on Chrome. */
+        position: relative;
       }
       .label {
         display: inline-block;
         white-space: normal;
-        padding: 0.675em 1em 0.675em 1em;
+        padding: 0.375em 0.7em 0.375em 0.7em;
         border-radius: 0.25em;
+        border-width: 0.3em;
+        border-style: solid;
       }
       .label-success {
         background-color: #62D2B0;
+        border-color: #62D2B0;
         color: #22493D;
       }
       .label-danger {
         background-color: #FF7777;
+        border-color: #FF7777;
         color: #592929;
       }
       .label-warning {
         background-color: #FE8D5E;
+        border-color: #FE8D5E;
         color: #583120;
       }
       .label-info {
         background-color: #71B3FF;
+        border-color: #71B3FF;
         color: #273E59;
       }
       .label-default {
         background-color: #dedede;
+        border-color: #dedede;
         color: #4d4d4d;
+      }
+      &amp;.column-satisfaction-index {
+        span.label {
+          background-color: #ffffff;
+          a {
+            color: inherit;
+          }
+        }
+        .row-details-value .satisfaction-details {
+          display: inline-block;
+          padding: .375em .7em .375em .7em;
+          white-space: normal;
+          font-size: 67.5%;
+          color: #666;
+          text-decoration: underline;
+          /* desktop rules, the satisfaction details need to go under the label, absolutely positioned */
+          @media screen and (min-width: 768px) {
+            display: block;
+            position: absolute;
+            width: 9.42em; /* Corresponds to the 8.48 em width of the table header and makes this badge take all horizontal space so that its text is centered exactly under the badge */
+          }
+        }
+        /* These are the colors for the satisfaction index but they don't have good contrast with the white */
+        /*
+        span.label-success a {
+          color: #62D2B0;
+        }
+        span.label-danger a {
+          color: #FF7777;
+        }
+        span.label-warning a {
+          color: #FE8D5E;
+        }
+        span.label-info a {
+          color: #71B3FF;
+        }
+        span.label-default {
+          color: #dedede;
+        }
+        */
       }
     }
   }
