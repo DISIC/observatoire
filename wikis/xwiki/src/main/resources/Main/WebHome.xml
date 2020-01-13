@@ -398,11 +398,11 @@
   .seemore-button-container a.btn-default {
     margin-top: 2.25em; /*~40px for a 18px font*/
     border: none;
-    background-color: #f45269;
+    background-color: #e42239;
     color: #fff;
     font-weight: 600;
     &amp;:hover {
-      background-color: #d54d60;
+      background-color: #CB4450;
     }
   }
 
