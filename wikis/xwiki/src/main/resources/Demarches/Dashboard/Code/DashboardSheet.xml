@@ -1296,6 +1296,10 @@ input[name='title'] {
     }
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
   }
+  /* Overwrite default button background colors to fix contrast */
+  btn-default:active, .btn-default.active, .open &gt; .dropdown-toggle.btn-default, .open &gt; .dropdown-toggle.btn-default:hover {
+    background-color: #ccc;
+  }
   .dashboard-selector, .dashboard-filters {
     margin-top: 0.79em;
   }
@@ -1837,7 +1841,7 @@ input[name='title'] {
 #top-demarches_wrapper {
   .dataTables_info {
     font-size: 90%;
-    color: #888;
+    color: #666;
   }
 }
 
