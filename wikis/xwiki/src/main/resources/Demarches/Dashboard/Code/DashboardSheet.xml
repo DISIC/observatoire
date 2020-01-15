@@ -193,9 +193,9 @@
                 #foreach($thElt in $tableHeaderElements.entrySet())
                   #set($icon = $thElt.value)
                   #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}"))
-                  &lt;th&gt;
+                  &lt;th scope="col"&gt;
                     #if("$!icon" != '')
-                      &lt;span class='thead-icon'&gt;&lt;img src="$xwiki.getAttachmentURL('Demarches.Code.WikiDemarchesTheme', $icon)" alt='$escapetool.xml($thLabel)' /&gt;&lt;/span&gt;
+                      &lt;span class='thead-icon'&gt;&lt;img src="$xwiki.getAttachmentURL('Demarches.Code.WikiDemarchesTheme', $icon)" alt='$escapetool.xml($thLabel.replaceAll('&lt;br/&gt;', ''))' /&gt;&lt;/span&gt;
                     #end
                     &lt;span class='thead-label'&gt;$thLabel&lt;/span&gt;
                   &lt;/th&gt;
