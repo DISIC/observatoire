@@ -1391,8 +1391,8 @@ input[name='title'] {
   }
   select {
     min-width: 20em;
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
   label, span.label-publicsfilter, span.label-ministriesfilter {
     position: relative;
