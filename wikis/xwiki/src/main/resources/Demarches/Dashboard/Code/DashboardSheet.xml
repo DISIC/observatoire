@@ -759,9 +759,8 @@ var XWiki = (function (XWiki) {
               } else {
                 if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
                   var statsURL = getAvisStatisticsUrl(row['id']);
-                  data.display = '&lt;a href="' + statsURL + '"&gt;' + data.display + '&lt;/a&gt;';
                   var valueToDisplay = format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  true, row['id']);
-                  // add a second link to the graphs under / next to the badge
+                  // add the stats link to the graphs under / next to the badge
                   var linkToGraphs = '&lt;a class="satisfaction-details" href="' + statsURL + '"&gt;$escapetool.javascript($services.localization.render("dashboard.table.satisfaction.statslink"))&lt;/a&gt;';
                   return valueToDisplay.replace('&lt;/span&gt;&lt;/span&gt;', '&lt;/span&gt;' + linkToGraphs + '&lt;/span&gt;');
                 } else {
