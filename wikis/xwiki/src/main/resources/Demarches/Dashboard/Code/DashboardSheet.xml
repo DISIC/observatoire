@@ -479,15 +479,6 @@ var XWiki = (function (XWiki) {
     }
   }
 
-  function getHostName(url) {
-    var match = url.match(/:\/\/(www[0-9]?\.)?(.[^/:]+)/i);
-    if (match != null &amp;&amp; match.length &gt; 2 &amp;&amp; typeof match[2] === 'string' &amp;&amp; match[2].length &gt; 0) {
-      return match[2];
-    } else {
-      return url;
-    }
-  }
-
   function addDetailsRow(data, withEditButton) {
     var output = '&lt;div class="row-details"&gt;&lt;ul&gt;';
       var dateMiseEnLigne = data.dateMiseEnLigne.display;
@@ -506,7 +497,6 @@ var XWiki = (function (XWiki) {
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.avis-count")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
       }
       if (data.urlDemarche &amp;&amp; data.urlDemarche.length &gt; 0) {
-        //var hostname = getHostName(data.urlDemarche)
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;' + data.urlDemarche + '&lt;/a&gt;&lt;/li&gt;';
       }
       if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
