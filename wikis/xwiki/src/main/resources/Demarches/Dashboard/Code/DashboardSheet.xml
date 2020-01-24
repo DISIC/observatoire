@@ -496,8 +496,8 @@ var XWiki = (function (XWiki) {
         var demarcheId = data.id;
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.avis-count")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
       }
-      if (data.urlDemarche &amp;&amp; data.urlDemarche.length &gt; 0) {
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;' + data.urlDemarche + '&lt;/a&gt;&lt;/li&gt;';
+      if (data.urlDemarche &amp;&amp; data.urlDemarche.length &gt; 0 &amp;&amp; data.urlDemarche != 'n/a') {
+        output = output + '&lt;li class="row-details-prop-urlDemarche"&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;&lt;span class="link-desktop"&gt;' + data.urlDemarche + '&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;';
       }
       if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
         var categoriesPublicsDisplay = data.categoriesPublics.display;
@@ -1803,6 +1803,19 @@ input[name='title'] {
               padding-bottom: 0.2em;
               /* padding-right copied from the table cell of datatables */
               padding-right: 10px;
+            }
+            &amp;.row-details-prop-urlDemarche {
+              a span.link-desktop {
+                word-break: break-all;
+              }
+              @media screen and (max-width: 768px) {
+                a span.link-desktop {
+                  display: none;
+                }
+                a:after {
+                  content: "$services.localization.render('dashboard.table.url-demarche.linklabel')";
+                }
+              }
             }
           }
         }
