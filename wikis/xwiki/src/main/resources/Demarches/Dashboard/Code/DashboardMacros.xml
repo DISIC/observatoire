@@ -45,6 +45,7 @@
 #set ($DIRECTION_CLASS_ID = 'Directions.Code.DirectionsClass')
 #set ($AVIS_CLASS_ID = 'Avis.Code.AvisClass')
 #set ($AVIS_STATS_CLASS_ID = 'Avis.Code.AvisStatsClass')
+#set ($INDICATEURS_CLASS_ID = 'Demarches.Indicateurs.Code.IndicateursClass')
 #set ($DEMARCHE_SHEET = 'Demarches.Code.DemarchesSheet')
 #set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
@@ -129,13 +130,17 @@
   #set ($statutDemat = $obj.get('statutDemat'))
   ## Reinitialize avisCountValue since the Velocity scope is global
   #set ($avisCountValue = $NULL)
+  #set ($displayAvisStats = false)
   #if ($maxDateTime == $NULL)
     ## Retrieve stats directly from the AvisStats object
     #set ($avisStats = $page.getObject($AVIS_STATS_CLASS_ID))
     #set ($avisCountValue = $avisStats.getValue('occurrences'))
     #set ($satisfactionIndex = $avisStats.getValue('moyenne'))
+    #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
+    #set ($displayAvisStats = $avisCountValue &amp;&amp; $avisCountValue &gt;= 100)
   #else
     ## Compute statistics at the dashboard date
+    ## 1. if there are some avis for this demarche, use the information from the avis if there are more than 100
     #set ($dateClause = ' and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate')
     #set ($hql = "select count(*), avg(score.value) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 $dateClause")
     #set ($query = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheId))
@@ -146,11 +151,24 @@
       #set ($stats  = $avisStats[0])
       #set ($avisCountValue = $stats[0])
       #set ($satisfactionIndex = $stats[1])
+      #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
+    #end
+    #set ($displayAvisStats = $avisCountValue &amp;&amp; $avisCountValue &gt;= 100)
+    ## if there are no more than 100 avis, take the date from the stored indicator, if any
+    #if (!$displayAvisStats)
+      ## 2. if there is a stored indicator for this demarche, we take the data from there
+      #set ($indicatorHql = "select nbAvis.value, indice.value from BaseObject indicateurObj, StringProperty demarche, DoubleProperty indice, LongProperty nbAvis, DateProperty finPeriode where indicateurObj.className = :indicateurClass and demarche.id.id = indicateurObj.id and demarche.id.name = 'demarche' and demarche.value = :demarche and indice.id.id = indicateurObj.id and indice.id.name = 'indiceSatisfaction' and nbAvis.id.id = indicateurObj.id and nbAvis.id.name='nbAvis' and finPeriode.id.id = indicateurObj.id and finPeriode.id.name='finPeriode' and finPeriode.value &lt;= :dateEnd order by finPeriode.value desc")
+      #set ($indicatorQuery = $services.query.hql($indicatorHql).bindValue('indicateurClass', $INDICATEURS_CLASS_ID).bindValue('demarche', $demarcheId).bindValue('dateEnd', $maxDateTime.toDate()))
+      #set ($indicatorStats = $indicatorQuery.execute())
+      #if ($indicatorStats.size() &gt; 0)
+        #set ($avisCountValue = $indicatorStats.get(0)[0])
+        #set ($satisfactionIndexPercent = $indicatorStats.get(0)[1])
+        #set ($displayAvisStats = true)
+      #end
     #end
   #end
-  #if ($avisCountValue &amp;&amp; $avisCountValue &gt;= 100)
+  #if ($displayAvisStats)
     #set ($avisCountDisplay = $numbertool.integer($avisCountValue))
-    #set ($satisfactionIndexPercent = $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50))
     #set ($satisfactionIndexValue = ${mathtool.round($satisfactionIndexPercent)})
     #set ($satisfactionIndexDisplay = "$satisfactionIndexValue %")
   #elseif ($statutDemat == 'Non')
