@@ -242,6 +242,7 @@
   #elseif ($urlScore == 'n/c')
     #set ($urlScoreValue = -50)
   #end
+  #set ($accessibilityScore = $obj.get('accessibilityScore'))
   #set ($ditesLeNousUneFois = $obj.getValue('ditesLeNousUneFois'))
   #set ($ditesLeNousUneFoisDisplay = $obj.get('ditesLeNousUneFois'))
   #set ($categoriesPublics = $obj.getValue('categoriesPublics'))
@@ -295,6 +296,10 @@
       "categoriesPublics": {
         "value": $categoriesPublics,
         "display": $categoriesPublicsDisplay
+      },
+      "accessibilityScore": {
+        "display": $accessibilityScore,
+        "value": $accessibilityScore
       }
     }))
 #end

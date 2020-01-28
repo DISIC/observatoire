@@ -397,18 +397,6 @@ var XWiki = (function (XWiki) {
     }
   }
 
-  function computeBadgeStyleAccessibility(value) {
-    if (typeof value === 'string' || value instanceof String) {
-      value = value.toLowerCase();
-      switch (value) {
-        default:
-          return "default";
-      }
-    } else {
-      return 'Erreur de formatage (' + value + ')';
-    }
-  }
-
   function computeBadgeStyleSatisfactionIndex(value) {
     if (!isNaN(value)) {
       if (value &gt;= 80) {
@@ -801,16 +789,16 @@ var XWiki = (function (XWiki) {
             }
           },
           {
-            data: "accessibility",
+            data: "accessibilityScore",
             className: 'column-accessibility',
             render: function (data, type, row) {
               if (!data) {
-                return format("", "À venir", computeBadgeStyleAccessibility, false);
+                return format("", "À venir", computeBadgeStyle, false);
               }
               if (type === "sort") {
-                return data.display;
+                return data.value;
               } else {
-                return format(data.value, data.display, computeBadgeStyleAccessibility, false);
+                return format(data.value, data.display, computeBadgeStyle, false);
               }
             }
           },
