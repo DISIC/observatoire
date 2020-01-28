@@ -207,7 +207,9 @@
           (%class='col-xs-12 col-md-4' %) (((
             #if ($hasAdmin)
               [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
+
             #end
+            [[$services.localization.render('wikidemarches.administration.tableaudebord')&gt;&gt;TableauDeBord.WebHome||class='btn btn-default']]
           )))
         )))
       )))
