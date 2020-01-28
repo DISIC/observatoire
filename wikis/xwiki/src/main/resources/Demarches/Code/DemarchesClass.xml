@@ -81,7 +81,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_
       <cache>0</cache>
       <customDisplay/>
       <disabled>0</disabled>
-      <displayType>select</displayType>
+      <displayType>radio</displayType>
       <hint/>
       <multiSelect>0</multiSelect>
       <name>accessibilityStatement</name>
