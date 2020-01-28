@@ -232,15 +232,10 @@
             &lt;dl&gt;
               #if ($action == 'edit')
                 ## If the demarche has property "top" set to true, some of its properties can be edited by administrators only
-                #if ($isTop)
-                  #if ($hasAdmin)
-                    #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'ditesLeNousUneFois', 'api', 'demarcheSimplifiee'])
-                  #else
-                    #set ($propertyNames = ['api', 'demarcheSimplifiee'])
-                  #end
+                #if (!$isTop || $hasAdmin)
+                  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'ditesLeNousUneFois', 'accessibilityStatement', 'rgaaCompliancyLevel', 'api', 'demarcheSimplifiee', 'avisIntegration'])
                 #else
-                  ## If the demarche is not part of the top, all its properties can be modified by the editor
-                  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'ditesLeNousUneFois', 'api', 'demarcheSimplifiee'])
+                  #set ($propertyNames = ['api', 'demarcheSimplifiee'])
                 #end
                 ## In all cases, remove 'api' and 'demarcheSimplifiee' in row-editor mode
                 #if ($isRowEditor)
@@ -251,29 +246,10 @@
                   #displayProperty($object, $propName, false, $action)
                 #end
               #else
-                ## Display all properties, including the computed one
-                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'ditesLeNousUneFois', 'api', 'demarcheSimplifiee', 'urlScore'])
+                ## in view mode, display all properties, including the computed one
+                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'ditesLeNousUneFois', 'accessibilityStatement', 'rgaaCompliancyLevel', 'accessibilityScore', 'api', 'demarcheSimplifiee', 'urlScore', 'avisIntegration'])
                   #displayProperty($object, $propName, false, $action)
                 #end
-              #end
-            &lt;/dl&gt;
-          )))
-      &lt;/div&gt;
-    &lt;/div&gt;
-    #end
-    #if (!$isSimplifiedForm)
-    &lt;div class="panel panel-default"&gt;
-      &lt;div class="panel-heading"&gt;$services.localization.render('Demarches.Code.DemarchesClass_heading_accessibility')&lt;/div&gt;
-      &lt;div class="panel-body"&gt;
-        (% class="xform" %)
-          (((
-            &lt;dl&gt;
-              #set ($propertyNames = ['accessibilityStatement', 'rgaaCompliancyLevel', 'accessibilityScore'])
-              #if ($action == 'edit')
-                #set ($discard = $propertyNames.remove('accessibilityScore'))
-              #end
-              #foreach($propName in $propertyNames)
-                #displayProperty($object, $propName, false, $action)
               #end
             &lt;/dl&gt;
           )))

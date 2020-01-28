@@ -165,6 +165,21 @@ $services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_
       <values>apiparticuliers=API particuliers|apientreprises=API entreprises</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </api>
+    <avisIntegration>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>avisIntegration</name>
+      <number>48</number>
+      <prettyName>Intégration du bouton pour recueillir les avis</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </avisIntegration>
     <categoriesPublics>
       <cache>0</cache>
       <customDisplay/>
