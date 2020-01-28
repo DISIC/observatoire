@@ -85,6 +85,8 @@
       * [[Tableaux de bord&gt;&gt;Demarches.Dashboard.WebHome]]
 
       * [[Ancien tableau de bord&gt;&gt;TableauDeBord.WebHome]]
+
+      * [[Indicateurs provenant des sources externes&gt;&gt;Demarches.Indicateurs.WebHome]]
     ",'star')
   )))
   (% class="col-md-6 col-xs-12" %) (((
