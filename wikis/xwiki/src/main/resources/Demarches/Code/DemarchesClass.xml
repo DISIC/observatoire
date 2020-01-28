@@ -49,6 +49,56 @@
     <defaultWeb/>
     <nameField/>
     <validationScript/>
+    <accessibilityScore>
+      <customDisplay>{{velocity}}
+## Reference: https://github.com/DISIC/wikidemarches/issues/810
+#set ($accessibilityStatement = $object.getValue('accessibilityStatement'))
+#set ($rgaaCompliancyLevel = $object.getValue('rgaaCompliancyLevel'))
+#set ($result = 'non')
+#if ("$!accessibilityStatement" == 'na')
+  #set ($result = 'na')
+#elseif ("$!accessibilityStatement" == 'oui' &amp;&amp; $rgaaCompliancyLevel &gt; 75)
+  #set ($result = 'oui')
+#elseif ("$!accessibilityStatement" == 'oui')
+  #set ($result = 'partiel')
+#end
+{{html clean="false"}}
+$services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_$result")
+{{/html}}
+{{/velocity}}</customDisplay>
+      <disabled>0</disabled>
+      <hint/>
+      <name>accessibilityScore</name>
+      <number>47</number>
+      <prettyName>Prise en compte handicaps</prettyName>
+      <script/>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+    </accessibilityScore>
+    <accessibilityStatement>
+      <cache>0</cache>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <hint/>
+      <multiSelect>0</multiSelect>
+      <name>accessibilityStatement</name>
+      <number>45</number>
+      <picker>0</picker>
+      <prettyName>Déclaration d'accessibilité presente sur le site</prettyName>
+      <relationalStorage>1</relationalStorage>
+      <separator> </separator>
+      <separators>|, </separators>
+      <size>1</size>
+      <sort>none</sort>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <values>oui|non|na|nr</values>
+      <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+    </accessibilityStatement>
     <accompagnement>
       <cache>0</cache>
       <customDisplay/>
@@ -761,6 +811,20 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
     </remarques>
+    <rgaaCompliancyLevel>
+      <customDisplay/>
+      <disabled>0</disabled>
+      <hint/>
+      <name>rgaaCompliancyLevel</name>
+      <number>46</number>
+      <numberType>long</numberType>
+      <prettyName>Pourcentage de conformité au RGAA déclaré</prettyName>
+      <size>30</size>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+    </rgaaCompliancyLevel>
     <statut>
       <cache>0</cache>
       <customDisplay/>

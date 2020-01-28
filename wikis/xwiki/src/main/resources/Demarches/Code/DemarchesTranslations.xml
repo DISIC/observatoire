@@ -147,6 +147,20 @@ Demarches.Code.DemarchesClass_ditesLeNousUneFois_ameliorable=Améliorable
 Demarches.Code.DemarchesClass_ditesLeNousUneFois_nonmesure=Non mesuré
 Demarches.Code.DemarchesClass_ditesLeNousUneFois_insuffisant=Insuffisant
 Demarches.Code.DemarchesClass_ditesLeNousUneFois_na=n/a
+Demarches.Code.DemarchesClass_accessibilityStatement=Déclaration d'accessibilité presente sur le site
+Demarches.Code.DemarchesClass_accessibilityStatement_oui=Oui
+Demarches.Code.DemarchesClass_accessibilityStatement_non=Non
+Demarches.Code.DemarchesClass_accessibilityStatement_na=n/a
+Demarches.Code.DemarchesClass_accessibilityStatement_nr=Non renseigné
+Demarches.Code.DemarchesClass_rgaaCompliancyLevel=Pourcentage de conformité au RGAA déclaré
+Demarches.Code.DemarchesClass_accessibilityScore=Prise en compte handicaps
+Demarches.Code.DemarchesClass_accessibilityScore_oui=Oui
+Demarches.Code.DemarchesClass_accessibilityScore_non=Non
+Demarches.Code.DemarchesClass_accessibilityScore_na=n/a
+Demarches.Code.DemarchesClass_accessibilityScore_partiel=Partiel
+
+# DemarcheTab headings
+Demarches.Code.DemarchesClass_heading_accessibility=Prise en compte handicaps
 
 # Live table generic keys
 demarches.livetable.doc.title=Titre de la page
