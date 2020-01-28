@@ -817,7 +817,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <hint/>
       <name>rgaaCompliancyLevel</name>
       <number>46</number>
-      <numberType>long</numberType>
+      <numberType>double</numberType>
       <prettyName>Pourcentage de conformité au RGAA déclaré</prettyName>
       <size>30</size>
       <unmodifiable>0</unmodifiable>
