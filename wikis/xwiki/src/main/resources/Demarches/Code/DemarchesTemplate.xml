@@ -54,6 +54,56 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
+      <accessibilityScore>
+        <customDisplay>{{velocity}}
+## Reference: https://github.com/DISIC/wikidemarches/issues/810
+#set ($accessibilityStatement = $object.getValue('accessibilityStatement'))
+#set ($rgaaCompliancyLevel = $object.getValue('rgaaCompliancyLevel'))
+#set ($result = 'non')
+#if ("$!accessibilityStatement" == 'na')
+  #set ($result = 'na')
+#elseif ("$!accessibilityStatement" == 'oui' &amp;&amp; $rgaaCompliancyLevel &gt; 75)
+  #set ($result = 'oui')
+#elseif ("$!accessibilityStatement" == 'oui')
+  #set ($result = 'partiel')
+#end
+{{html clean="false"}}
+$services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_$result")
+{{/html}}
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>accessibilityScore</name>
+        <number>47</number>
+        <prettyName>Prise en compte handicaps</prettyName>
+        <script/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+      </accessibilityScore>
+      <accessibilityStatement>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>radio</displayType>
+        <hint/>
+        <multiSelect>0</multiSelect>
+        <name>accessibilityStatement</name>
+        <number>45</number>
+        <picker>0</picker>
+        <prettyName>Déclaration d'accessibilité presente sur le site</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>oui|non|na|nr</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </accessibilityStatement>
       <accompagnement>
         <cache>0</cache>
         <customDisplay/>
@@ -132,7 +182,7 @@
         <picker>0</picker>
         <prettyName>Catégories de publics concernés</prettyName>
         <relationalStorage>1</relationalStorage>
-        <separator> </separator>
+        <separator>, </separator>
         <separators>|, </separators>
         <size>4</size>
         <sort>value</sort>
@@ -281,6 +331,39 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
         <valueField/>
         <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
       </direction>
+      <ditesLeNousUneFois>
+        <customDisplay>{{velocity}}
+{{html clean="false"}}
+#if ($type == 'edit')
+&lt;input id="Demarches.Code.DemarchesClass_0_ditesLeNousUneFois" name="Demarches.Code.DemarchesClass_0_ditesLeNousUneFois" size="30" type="text" value="$!value"&gt;
+#else
+  #set ($statutDemat = $object.getValue('statutDemat'))
+  #if ("$!statutDemat" == 'nonDemat' || "$!statutDemat" == '')
+    -
+  #else
+    #if ($value == -1)
+      n/a
+    #elseif (!$value)
+      Non mesuré
+    #else
+      $value
+    #end
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <hint/>
+        <name>ditesLeNousUneFois</name>
+        <number>34</number>
+        <numberType>long</numberType>
+        <prettyName>Dites-le-nous une fois</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </ditesLeNousUneFois>
       <evenements>
         <cache>0</cache>
         <classname/>
@@ -733,6 +816,20 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
       </remarques>
+      <rgaaCompliancyLevel>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <hint/>
+        <name>rgaaCompliancyLevel</name>
+        <number>46</number>
+        <numberType>double</numberType>
+        <prettyName>Pourcentage de conformité au RGAA déclaré</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </rgaaCompliancyLevel>
       <statut>
         <cache>0</cache>
         <customDisplay/>
@@ -760,7 +857,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
         <customDisplay/>
         <disabled>0</disabled>
         <displayType>radio</displayType>
-        <hint>Oui si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire ; Non dans le cas contraire ; Expérimentation si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier ; Déploiement partiel si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès).</hint>
+        <hint/>
         <multiSelect>0</multiSelect>
         <name>statutDemat</name>
         <number>25</number>
@@ -774,7 +871,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
         <unmodifiable>0</unmodifiable>
         <validationMessage/>
         <validationRegExp/>
-        <values>enLigneEntierement=Oui|experimentation=Expérimentation|deploiementPartiel=Déploiement partiel|nonDemat=Non|nr=Non renseigné</values>
+        <values>enLigneEntierement=Oui|experimentation=Bêta|deploiementPartiel=Déploiement partiel|nonDemat=Non|nr=Non renseigné</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </statutDemat>
       <statutProjetDemat>
@@ -799,31 +896,6 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
         <values>prevu=Prévu|encours=En cours|termine=Terminé</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </statutProjetDemat>
-      <tellUsOnce>
-        <customDisplay>{{velocity}}
-{{html clean="false"}}
-#if ($type == 'edit')
-  &lt;input id="Demarches.Code.DemarchesClass_0_$name" name="Demarches.Code.DemarchesClass_0_$name" size="5" type="text" value="$!value"&gt;
-#else
-  #if ("$!value" != '')
-    #set ($stars = $mathtool.toInteger($value))
-    #if ($stars &gt; 0)#foreach ($item in [1..$stars])✫#end#end
-  #end
-#end
-{{/html}}
-{{/velocity}}</customDisplay>
-        <disabled>0</disabled>
-        <hint/>
-        <name>tellUsOnce</name>
-        <number>34</number>
-        <numberType>double</numberType>
-        <prettyName>Dites-le nous une fois</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
-      </tellUsOnce>
       <textes>
         <contenttype>---</contenttype>
         <customDisplay/>
@@ -1155,9 +1227,6 @@ $services.localization.render("Demarches.Code.DemarchesClass_volumetrieDemat_nr"
     </property>
     <property>
       <statutDemat>nr</statutDemat>
-    </property>
-    <property>
-      <statutIntegration>nr</statutIntegration>
     </property>
     <property>
       <statutProjetDemat>encours</statutProjetDemat>
