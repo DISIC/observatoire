@@ -166,7 +166,34 @@ $services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </api>
     <avisIntegration>
-      <customDisplay/>
+      <customDisplay>{{velocity}}
+{{html clean="false"}}
+#set ($propertyClass = $object.getxWikiClass().get($name))
+#if ($value == 1 &amp;&amp; $type != 'edit')
+  ## we're in view mode with a value of 1
+  $doc.displayView($propertyClass, $prefix, $object)
+#else
+  ## either we're in some edit mode or we're in view mode but the value is not set, in both cases, check the stats to see if the current démarche has some avis
+  #set ($avisStats = $doc.getObject('Avis.Code.AvisStatsClass'))
+  #set ($avisCountValue = $avisStats.getValue('occurrences'))
+  #if ($avisCountValue &gt; 100)
+    ## set the value to 1
+    #set($discard = $object.set($name, 1))
+    #set($displayReadonly = true)
+  #end
+  ## if in view mode, display it as view
+  #if ($type == 'view')
+    $doc.displayView($propertyClass, $prefix, $object)
+  #else
+    #set($editModeHTML = $doc.displayEdit($propertyClass, $prefix, $object))
+    #if ($displayReadonly)
+      #set($editModeHTML = $editModeHTML.replace('&lt;input ', '&lt;input readonly disabled '))
+    #end
+    $editModeHTML
+  #end
+#end
+{{/html}}
+{{/velocity}}</customDisplay>
       <defaultValue/>
       <disabled>0</disabled>
       <displayFormType>checkbox</displayFormType>
