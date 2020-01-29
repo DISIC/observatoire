@@ -598,7 +598,12 @@ var XWiki = (function (XWiki) {
         #if ($pageId == $LIVE_DASHBOARD_ID)
           return getPage(demarcheId).getURL('view', 'view-mode=statistics');
         #else
-          return getPage(demarcheId).getURL('view', 'view-mode=statistics&amp;date=' + date);
+          var avisDatesQueryString = '';
+          if (avisStartDate != undefined)
+            avisDatesQueryString = avisDatesQueryString + '&amp;date-debut=' + avisStartDate;
+          if (avisEndDate != undefined)
+            avisDatesQueryString = avisDatesQueryString + '&amp;date-fin=' + avisEndDate;
+          return getPage(demarcheId).getURL('view', 'view-mode=statistics' + avisDatesQueryString);
         #end
       }
 
@@ -655,7 +660,7 @@ var XWiki = (function (XWiki) {
       publicCategories.push({key: "particuliers", value: "Particuliers"});
       publicCategories.push({key: "professionnels", value: "Professionnels"});
 
-      var date;
+      var avisStartDate, avisEndDate;
 
       var dataEndpoint = "$xwiki.getAttachmentURL($pageId, 'data.json')";
       // If this is the live dashboard, adapt the data endpoint accordingly
@@ -671,7 +676,12 @@ var XWiki = (function (XWiki) {
           url: dataEndpoint,
           dataSrc: function (json) {
             var data = json.data;
-            date = json.metadata.date;
+            avisStartDate = json.metadata['avis-start-date'];
+            avisEndDate = json.metadata['avis-end-date'];
+            if (!avisEndDate) {
+              // This is for retro-compatibility for JSON schema version &lt;= 1.1
+              avisEndDate = json.metadata['date'];
+            }
             var schema = json.metadata.schema;
             if (!schema || schema == '1.0') {
               // Do not display columns about accessibility and "tells us once" for schema version &lt; 1.1

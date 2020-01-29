@@ -186,11 +186,14 @@
 #macro(displayStatsSource $minDate $maxDate $externalSource $nbAvis)
   #set ($statsSourceFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern("d MMMMM yyyy").withLocale($xwiki.getLocalePreference()))
   #if ($maxDate != $NULL)
-    #set ($fMinDate = $statsSourceFormatter.print($minDate))
     #set ($fMaxDate = $statsSourceFormatter.print($maxDate))
   #else
-    #set ($fMinDate = $statsSourceFormatter.print($xwiki.jodatime.dateTime.withYear(2018).withMonthOfYear(6).withDayOfMonth(15).withHourOfDay(0)))
     #set ($fMaxDate = $statsSourceFormatter.print($xwiki.jodatime.dateTime))
+  #end
+  #if ($minDate != $NULL)
+    #set ($fMinDate = $statsSourceFormatter.print($minDate))
+  #else
+    #set ($fMinDate = $statsSourceFormatter.print($xwiki.jodatime.dateTime.withYear(2018).withMonthOfYear(6).withDayOfMonth(15).withHourOfDay(0)))
   #end
   #set ($fMinDate = $fMinDate.replaceAll('^1 ', '1er '))
   #set ($fMaxDate = $fMaxDate.replaceAll('^1 ', '1er '))
@@ -220,17 +223,27 @@
   &lt;/div&gt;
 #end
 
-#set ($maxDateString = "$!request.date")
-#if ($maxDateString != '')
-  #set ($formatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd'))
-  #set ($maxDateTime = $formatter.parseDateTime($maxDateString))
-  #set ($maxDateTime = $maxDateTime.withHourOfDay(23).withMinuteOfHour(59).withSecondOfMinute(59))
-  ## minDateTime is maxDateTime minus one year plus one day, reest to midnight
-  ##set ($minDateTime = $maxDateTime.minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
-  #set ($minDateTime = $xwiki.jodatime.getDateTime(2018, 6, 15, 0, 0, 0, 0))
+## Reference: https://github.com/DISIC/wikidemarches/issues/800
+#set ($minDateString = $request.get('date-debut'))
+#set ($maxDateString = $request.get('date-fin'))
+## The line below is to make sure the previous URLs generated for JSON schema version &lt; 1.2 with parameter "date" keep working
+#if ($maxDateString == $NULL)#set ($maxDateString = $request.get('date'))#end
+#set ($minDateTime = $NULL)
+#set($maxDateTime = $NULL)
+#set ($formatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd'))
+#if ($maxDateString != $NULL)
+  #set ($maxDateTime = $formatter.parseDateTime($maxDateString).withHourOfDay(23).withMinuteOfHour(59).withSecondOfMinute(59))
+#end
+#if ($minDateString != $NULL)
+  #set ($minDateTime = $formatter.parseDateTime($minDateString).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
 #else
-  #set ($minDateTime = $NULL)
-  #set($maxDateTime = $NULL)
+  #if ($maxDateTime != $NULL)
+    ## Date where getting opinions started
+    #set ($minDateTime = $xwiki.jodatime.getDateTime(2018, 6, 15, 0, 0, 0, 0))
+  #else
+    ## Slippery year
+    #set ($minDateTime = $xwiki.jodatime.getDateTime().minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+  #end
 #end
 
 #computeAvisStats()
