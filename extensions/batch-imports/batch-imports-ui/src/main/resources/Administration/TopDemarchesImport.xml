@@ -280,6 +280,7 @@
       <mapping>Commentaires administration + annonce CITP=remarques
 Ministère=ministeres
 Déclaration d'accessibilité=accessibilityStatement
+Uptime=urlAvailability
 Date d'ouverture du service dématérialisé (usage interne)=dateMiseEnLigne
 Intégration FranceConnect=franceConnect
 Volumétrie de la démarche=volumetrie
@@ -291,6 +292,7 @@ Référence NosDémarches (à ne pas supprimer)=doc.name
 Volumétrie du recours à la voie dématérialisée=volumetrieDemat
 URL de la démarche=urlDemarche
 Conformité RGAA=rgaaCompliancyLevel
+Temps de réponse=urlResponseTime
 Démarches phares=doc.title
 Support accessible=moyensDeContact
 Groupe=groupesExternes
