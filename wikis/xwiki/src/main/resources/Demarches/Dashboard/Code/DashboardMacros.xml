@@ -182,7 +182,7 @@
     ## the demarche should have avis but doesn't yet, however the button was declared to be integrated
     ## 0.5 is there just to be able to sort these items between the ones with a value and the ones with "A venir", without changing the previous data and their meaning
     #set ($satisfactionIndexValue = -0.5)
-    #set ($satisfactionIndexDisplay = 'Collecte des avis en cours')
+    #set ($satisfactionIndexDisplay = 'En cours')
     #set ($avisCountDisplay = $avisCountValue)
     #set ($avisCountValue = 0)
   #else
