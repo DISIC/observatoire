@@ -60,6 +60,8 @@
             <exclude>**/Main/A propos.xml</exclude>
             <exclude>**/Main/Comment-ca-marche.xml</exclude>
             <exclude>**/Main/Et-apres.xml</exclude>
+            <exclude>**/Main/CGU.xml</exclude>
+            <exclude>**/Main/Accessibilite.xml</exclude>
             <exclude>**/Aide/**</exclude>
             <exclude>**/Administration/Domaines autorisés</exclude>
           </excludes>
