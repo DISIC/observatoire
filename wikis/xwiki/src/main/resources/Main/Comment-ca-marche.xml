@@ -43,7 +43,7 @@
 #set($discard = $xwiki.ssx.use('Main.WebHome'))
 {{/velocity}}
 
-Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématéralisation, et l’experience usager de façon très concrète.
+Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
 
 
 
@@ -59,7 +59,7 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 
 ==== Démarche réalisable en ligne ====
 
-31 % des démarches administratives aujourd’hui ne sont pas faisables en ligne. Notre objectif : que ces 250 démarches soient numérisées.
+Encore 31 % de ces 250 démarches ne sont pas faisables en ligne. L'objectif est de toutes les numériser d'ici 2022.
 )))
 )))
 
@@ -71,7 +71,7 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 
 ==== Usagers satisfaits ====
 
-La première mesure de la qualité d'une démarche c'est la satisfaction des usagers. Le bouton “[[Je donne mon avis&gt;&gt;Aide.Donner son avis]]” apparaît au terme de chaque démarche pour recenser le niveau de satisfaction.
+La première mesure de la qualité d'une démarche c'est la satisfaction des usagers. Le bouton « [[Je donne mon avis&gt;&gt;Aide.Donner son avis||rel="noopener noreferrer" target="_blank"]] » apparaît au terme de chaque démarche pour recenser le niveau de satisfaction.
 )))
 )))
 
@@ -83,7 +83,7 @@ La première mesure de la qualité d'une démarche c'est la satisfaction des usa
 
 ==== Compatible mobile ====
 
-55 % des démarches sont effectuées sur des smartphones. Un critère essentiel pour assurer la bonne expérience de nos usagers.
+55 % des démarches sont effectuées sur des smartphones. La compatibilité pour le mobile est un critère essentiel pour assurer la bonne expérience de nos usagers.
 )))
 )))
 
@@ -131,7 +131,7 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 
 ==== Prise en compte handicaps ====
 
-18 % des Français sont aujourd’hui en situation de handicap. Les services numériques de l’État sont soumis aux règles du [[référentiel général d’amélioration de l’accessibilité&gt;&gt;https://www.numerique.gouv.fr/publications/rgaa-accessibilite/]] (RGAA). 
+18 % des Français sont aujourd’hui en situation de handicap. Les services numériques de l’État sont soumis aux règles du [[référentiel général d’amélioration de l’accessibilité&gt;&gt;https://www.numerique.gouv.fr/publications/rgaa-accessibilite/||rel="noopener noreferrer" target="_blank"]] (RGAA). 
 )))
 )))
 
@@ -143,7 +143,7 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 
 ==== Ressaisies demandées ====
 
-Plus de données partagées entre administrations permet aux usagers de ne pas avoir à se répéter et simplifie leur démarche. C'est la mise en oeuvre du principe du Dites-le nous une fois.
+Plus de données partagées entre administrations permet aux usagers de ne pas avoir à se répéter et simplifie leur démarche. C'est la mise en œuvre du principe du Dites-le nous une fois.
 )))
 )))
 )))</content>
