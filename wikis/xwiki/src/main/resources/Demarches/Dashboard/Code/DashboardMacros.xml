@@ -101,8 +101,9 @@
     ##set ($minDateTime = $xwiki.jodatime.getDateTime(2018, 6, 15, 0, 0, 0, 0))
   #else
     #set ($maxDateTime = $NULL)
-    #set ($formattedMaxDate = '')
-    #set ($formattedMinDate = '')
+    #set ($formattedMaxDate = $formattedNow)
+    #set ($minDateTime = $now.minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+    #set ($formattedMinDate = $formatter.print($minDateTime))
   #end
   #foreach ($entry in $entries)
     #computeDemarcheData($entry, $data)
