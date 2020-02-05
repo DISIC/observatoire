@@ -597,16 +597,12 @@ var XWiki = (function (XWiki) {
       #set ($pageId = $request.pageId)
 
       function getAvisStatisticsUrl(demarcheId) {
-        #if ($pageId == $LIVE_DASHBOARD_ID)
-          return getPage(demarcheId).getURL('view', 'view-mode=statistics');
-        #else
-          var avisDatesQueryString = '';
-          if (avisStartDate != undefined)
-            avisDatesQueryString = avisDatesQueryString + '&amp;date-debut=' + avisStartDate;
-          if (avisEndDate != undefined)
-            avisDatesQueryString = avisDatesQueryString + '&amp;date-fin=' + avisEndDate;
-          return getPage(demarcheId).getURL('view', 'view-mode=statistics' + avisDatesQueryString);
-        #end
+        var avisDatesQueryString = '';
+        if (avisStartDate != undefined)
+          avisDatesQueryString = avisDatesQueryString + '&amp;date-debut=' + avisStartDate;
+        if (avisEndDate != undefined)
+          avisDatesQueryString = avisDatesQueryString + '&amp;date-fin=' + avisEndDate;
+        return getPage(demarcheId).getURL('view', 'view-mode=statistics' + avisDatesQueryString);
       }
 
       // Addition of a search function to the list of search functions for filtering on the ministère value.
@@ -895,7 +891,8 @@ var XWiki = (function (XWiki) {
         order: [[13, 'desc'], [1, 'asc'], [2, 'asc'], [12, 'desc'], [0, 'asc']],
         columnDefs: [{
           targets: "_all",
-          orderable: false
+          orderable: false,
+          defaultContent: "-"
         }],
         language: {
           info: "Total : _TOTAL_ démarches",
