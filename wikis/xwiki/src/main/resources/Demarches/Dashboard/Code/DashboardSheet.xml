@@ -488,8 +488,10 @@ var XWiki = (function (XWiki) {
         output = output + '&lt;li class="row-details-prop-urlDemarche"&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;&lt;span class="link-desktop"&gt;' + data.urlDemarche + '&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;';
       }
       if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
-        var categoriesPublicsDisplay = data.categoriesPublics.display;
         output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.categories-publics")" + '&lt;/span&gt;' + data.categoriesPublics.display + '&lt;/li&gt;';
+      }
+      if (data.rgaaCompliancyLevel != undefined &amp;&amp; data.rgaaCompliancyLevel.display != undefined &amp;&amp; data.accessibilityScore.value != undefined &amp;&amp; ['oui', 'partiel'].includes(data.accessibilityScore.value.toLowerCase()) ) {
+        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.rgaa-compliancy-level")" + '&lt;/span&gt;' + data.rgaaCompliancyLevel.display + '&lt;/li&gt;';
       }
       output = output + '&lt;/ul&gt;&lt;/div&gt;';
       if (withEditButton) {
@@ -875,6 +877,17 @@ var XWiki = (function (XWiki) {
                 return data.value;
               else
                 return "";
+            }
+          },
+          {
+            data: "rgaaCompliancyLevel",
+            visible: false,
+            type: "num",
+            render: function (data, type, row) {
+              if (data != undefined)
+                return data.display;
+              else
+                return undefined;
             }
           }
         ],

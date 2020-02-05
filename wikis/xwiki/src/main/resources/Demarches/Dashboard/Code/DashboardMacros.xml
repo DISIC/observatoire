@@ -242,16 +242,23 @@
       #set ($dateMiseEnLigne = 0)
     #end
   #end
-  #set ($franceConnectValue = $obj.getValue('franceConnect'))
-  #set ($franceConnectDisplay = $obj.get('franceConnect'))
-  #if ($statutDemat == 'Non' &amp;&amp; $franceConnectValue == 'na')
-    #set ($franceConnectDisplay = '-')
-  #end
   #set ($adapteMobileValue = $obj.getValue('adapteMobile'))
   #set ($adapteMobileDisplay = $obj.get('adapteMobile'))
   #if ($statutDemat == 'Non' &amp;&amp; $adapteMobileValue == 'na')
     #set ($adapteMobileDisplay = '-')
   #end
+  #set ($accessibilityScore = $obj.get('accessibilityScore'))
+  #set ($categoriesPublics = $obj.getValue('categoriesPublics'))
+  #set ($categoriesPublicsDisplay = $obj.get('categoriesPublics'))
+  #set ($ditesLeNousUneFois = $obj.getValue('ditesLeNousUneFois'))
+  #set ($ditesLeNousUneFoisDisplay = $obj.get('ditesLeNousUneFois'))
+  #set ($franceConnectValue = $obj.getValue('franceConnect'))
+  #set ($franceConnectDisplay = $obj.get('franceConnect'))
+  #if ($statutDemat == 'Non' &amp;&amp; $franceConnectValue == 'na')
+    #set ($franceConnectDisplay = '-')
+  #end
+  #set ($rgaaCompliancyLevel = $obj.getValue('rgaaCompliancyLevel'))
+  #set ($rgaaCompliancyLevelDisplay = "$!rgaaCompliancyLevel %")
   #set ($urlScore = $obj.get('urlScore'))
   #set ($urlScoreValue = $urlScore)
   #if ($urlScore == 'n/a')
@@ -259,11 +266,6 @@
   #elseif ($urlScore == 'n/c')
     #set ($urlScoreValue = -50)
   #end
-  #set ($accessibilityScore = $obj.get('accessibilityScore'))
-  #set ($ditesLeNousUneFois = $obj.getValue('ditesLeNousUneFois'))
-  #set ($ditesLeNousUneFoisDisplay = $obj.get('ditesLeNousUneFois'))
-  #set ($categoriesPublics = $obj.getValue('categoriesPublics'))
-  #set ($categoriesPublicsDisplay = $obj.get('categoriesPublics'))
   #set ($discard = $data.add(
     {
       "id": $page.fullName,
@@ -294,8 +296,8 @@
       },
       "qualiteSupport": $obj.get('qualiteSupport'),
       "avisCount": {
-        "value": $avisCountValue,
-        "display": $avisCountDisplay
+        "display": $avisCountDisplay,
+        "value": $avisCountValue
        },
       "satisfactionIndex": {
         "display": $satisfactionIndexDisplay,
@@ -307,12 +309,16 @@
       },
       "urlDemarche": "$!obj.getValue('urlDemarche')",
       "ditesLeNousUneFois": {
-        "value": $ditesLeNousUneFois,
-        "display": $ditesLeNousUneFoisDisplay
+        "display": $ditesLeNousUneFoisDisplay,
+        "value": $ditesLeNousUneFois
       },
       "categoriesPublics": {
-        "value": $categoriesPublics,
-        "display": $categoriesPublicsDisplay
+        "display": $categoriesPublicsDisplay,
+        "value": $categoriesPublics
+      },
+      "rgaaCompliancyLevel": {
+        "display": $rgaaCompliancyLevelDisplay,
+        "value": $rgaaCompliancyLevel
       },
       "accessibilityScore": {
         "display": $accessibilityScore,

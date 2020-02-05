@@ -103,6 +103,7 @@ dashboard.table.avis-count=Nombre d'avis usagers recueillis
 dashboard.table.url-demarche=Lien
 dashboard.table.url-demarche.linklabel=Voir la démarche
 dashboard.table.categories-publics=Catégories de publics concernés
+dashboard.table.rgaa-compliancy-level=Pourcentage de conformité au RGAA
 
 # Livetable
 dashboard.livetable.doc.title=Nom
