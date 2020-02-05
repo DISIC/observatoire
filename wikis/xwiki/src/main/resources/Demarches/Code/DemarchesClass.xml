@@ -201,7 +201,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_
       <hint/>
       <name>avisIntegration</name>
       <number>48</number>
-      <prettyName>Intégration du bouton pour recueillir les avis</prettyName>
+      <prettyName>Bouton de recueil d'avis intégré</prettyName>
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
