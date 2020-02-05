@@ -161,14 +161,14 @@
               &lt;div class="dashboard-filter-sort"&gt;
                 &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
                 &lt;div class="btn-group controls"&gt;
-                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;$services.localization.render('dashboard.tools.sort.label')&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+                  #set($sortButtonLabel = $services.localization.render('dashboard.tools.sort.label'))
+                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-default-label="$escapetool.xml($sortButtonLabel)"&gt;${sortButtonLabel}&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
                   &lt;ul class="dropdown-menu"&gt;
-                    #foreach($thElt in $tableHeaderElements.entrySet())
-                      #if ($thElt.key != 'group')
-                        #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}").replace('&lt;br/&gt;',' ').replace('  ', ' '))
-                        #set($dataIndex = $foreach.index)
-                        &lt;li class='observatoire-sortgroup sortgroup-${thElt.key}'&gt;$thLabel &lt;span class='observatoire-sortgroup-arrows'&gt;#foreach($order in ['asc', 'desc'])&lt;a href="#sort-${thElt.key}-${order}" class="observatoire-sort" data-key="$thElt.key" data-index="$dataIndex" data-order='$order' aria-label='$services.localization.render("dashboard.tools.sort.label.${order}")' title='$services.localization.render("dashboard.tools.sort.label.${order}")'&gt;&lt;span aria-hidden='true' class='fa fa-chevron-#if($order=='asc')up#{else}down#{end}'&gt;&lt;/span&gt;&lt;/a&gt; #end&lt;/span&gt;&lt;/li&gt;
-                      #end
+                    #set($sortProps = {'statutDemat' : 'desc', 'satisfactionIndex' : 'desc', 'avisCount' : 'desc', 'volumetrie' : 'desc'})
+                    #foreach($sortProp in $sortProps.entrySet())
+                      #set($thLabel = $services.localization.render("dashboard.tools.sort.label.${sortProp.key}"))
+                      #set($sortLabel = $services.localization.render('dashboard.tools.sort.label') + " " + $thLabel.toLowerCase() + " - " + $services.localization.render("dashboard.tools.sort.label.${sortProp.value}"))
+                      &lt;li&gt;&lt;a href="#sort-${$sortProp.key}-${sortProp.value}" class="observatoire-sort" data-key="$sortProp.key" data-order='$sortProp.value' aria-label="$sortLabel" title="$sortLabel"&gt;$thLabel&lt;/a&gt;&lt;/li&gt;
                     #end
                   &lt;/ul&gt;
                 &lt;/div&gt;
@@ -685,9 +685,6 @@ var XWiki = (function (XWiki) {
               // Do not display columns about accessibility and "tells us once" for schema version &lt; 1.1
               table.column(9).visible(false);
               table.column(10).visible(false);
-              // remove also the sorting items that correspond to this
-              $('.table-tools .dashboard-filter-sort ul li.observatoire-sortgroup.sortgroup-accessibility').remove();
-              $('.table-tools .dashboard-filter-sort ul li.observatoire-sortgroup.sortgroup-tell-us-once').remove();
             }
             for (var i = 0; i &lt; data.length; i++) {
               var ministere = data[i].ministere;
@@ -709,6 +706,7 @@ var XWiki = (function (XWiki) {
         paging: false,
         columns: [
           {
+            name: "title",
             data: "title",
             className: 'column-title',
             type: "french-string",
@@ -717,18 +715,21 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "ministere",
             data: "ministere",
             className: 'column-ministry',
             visible: false,
             type: "french-string"
           },
           {
+            name: "groupes",
             data: "groupes",
             className: 'column-groups',
             visible: false,
             type: "french-string"
           },
           {
+            name: "statutDemat",
             data: "statutDemat",
             className: 'column-digitalization-status',
             render: function (data, type, row) {
@@ -736,6 +737,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "satisfactionIndex",
             data: "satisfactionIndex",
             className: 'column-satisfaction-index',
             type: "num",
@@ -756,6 +758,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "adapteMobile",
             data: "adapteMobile",
             className: 'column-mobile',
             render: function (data, type, row) {
@@ -767,6 +770,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "qualiteSupport",
             data: "qualiteSupport",
             className: 'column-support',
             render: function (data, type, row) {
@@ -774,6 +778,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "urlScore",
             data: "urlScore",
             className: 'column-url-score',
             type: "num",
@@ -786,6 +791,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "franceConnect",
             data: "franceConnect",
             className: 'column-france-connect',
             render: function (data, type, row) {
@@ -797,6 +803,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "accessibilityScore",
             data: "accessibilityScore",
             className: 'column-accessibility',
             render: function (data, type, row) {
@@ -811,6 +818,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "ditesLeNousUneFois",
             data: "ditesLeNousUneFois",
             className: 'column-tell-us-once',
             type: "num",
@@ -832,6 +840,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: 'details',
             data: 'details',
             className: 'details-control',
             orderable: false,
@@ -841,6 +850,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "volumetrie",
             data: "volumetrie",
             type: "num",
             visible: false,
@@ -853,6 +863,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "avisCount",
             data: "avisCount",
             type: "num",
             visible: false,
@@ -865,6 +876,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "categoriesPublics",
             data: "categoriesPublics",
             visible: false,
             type: "string",
@@ -876,6 +888,7 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "rgaaCompliancyLevel",
             data: "rgaaCompliancyLevel",
             visible: false,
             type: "num",
@@ -952,16 +965,18 @@ var XWiki = (function (XWiki) {
               event.preventDefault();
               var element = $(this);
               var key = element.data('key');
-              var index = element.data('index');
               var order = element.data('order');
               // color stuff when a sort is happening
               $('.observatoire-sort').removeClass('active');
-              $('.dashboard-filter-sort ul li.observatoire-sortgroup').removeClass('active');
               element.addClass('active');
-              element.closest('li.observatoire-sortgroup').addClass('active');
-              $('#top-demarches-sort-toggle').addClass('pushed');
+              // get top element, to modify it as well
+              var sortTopControl = $('#top-demarches-sort-toggle');
+              var sortTopControlNewLabel = sortTopControl.data('default-label') + " : " + element.text() + "&amp;nbsp;&lt;span class='caret'&gt;&lt;/span&gt;";
+              sortTopControl.addClass('pushed');
+              sortTopControl.html(sortTopControlNewLabel);
               // finally, sort the table
-              thisDataTable.order( [ index, order ] ).draw();
+              var columnIndex = thisDataTable.column(key + ":name").index();
+              thisDataTable.order( [ columnIndex, order ] ).draw();
             });
 
           }
@@ -1317,29 +1332,12 @@ input[name='title'] {
   }
   .dashboard-filter-sort {
     ul {
-      li.observatoire-sortgroup {
+      a.observatoire-sort {
         display: block;
-        padding: 0.5em 4em 0.5em 1em;
-        position: relative;
-        cursor: default;
-        &amp;:hover {
-          background-color: #fafafa;
-        }
+        color: @text-color;
         &amp;.active {
-          box-shadow: inset 0.3em 0 0 0 @obs-blue;
-        }
-        .observatoire-sortgroup-arrows {
-          position: absolute;
-          right: 1em;
-          top: 0.5em;
-          a.observatoire-sort {
-            display: inline-block;
-            padding-left: 0.5ex;
-            color: @text-color;
-            &amp;.active {
-              color: @obs-blue;
-            }
-          }
+          /* don't display, it gets copied in the top button */
+          display: none;
         }
       }
     }
