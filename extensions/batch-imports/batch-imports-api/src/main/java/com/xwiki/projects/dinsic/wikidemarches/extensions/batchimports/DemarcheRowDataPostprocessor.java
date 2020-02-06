@@ -77,7 +77,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String HEADER_COMMENT_3 = "Commentaires UX/ test";
 
-    public static String HEADER_URL = "URL de la démarches";
+    public static String HEADER_URL = "URL de la démarche";
 
     public static String DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION = "statutDemat";
 
