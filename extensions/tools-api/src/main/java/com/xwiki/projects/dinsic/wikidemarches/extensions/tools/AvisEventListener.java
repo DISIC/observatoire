@@ -28,7 +28,7 @@ import com.xpn.xwiki.objects.BaseObject;
 /**
  * Listener firing the computation of AvisStats objects when Avis objects get created, updated or deleted. AvisStats
  * objects contain statistics about existing Avis objects related to a given Demarche, such as: number of occurrences,
- * average value. <br />
+ * average value. <br>
  * Note: this listener is disabled (removed from components.txt) since mid august 2019, the avis stats cache is updated
  * only once a day, during the night.
  *
