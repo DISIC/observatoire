@@ -199,7 +199,8 @@
       #set ($textKey = 'wikidemarches.demarche.avis.stats.external.unknownavis.between')
     #end
   #end
-  #set ($label = $services.localization.render($textKey, [$fMinDate, $fMaxDate, $nbAvis]))
+  #set ($nbAvisLabel = $numbertool.format("number", $nbAvis))
+  #set ($label = $services.localization.render($textKey, [$fMinDate, $fMaxDate, $nbAvisLabel]))
   &lt;span class="lighter"&gt;$label&lt;/span&gt;
 #end
 
@@ -211,7 +212,7 @@
   &lt;div class="#if(!$fullWidth)col-lg-6 col-md-6#end col-xs-12" style="text-align: center; padding: 2em 0;"&gt;
     &lt;div class="lighter"&gt;Indice de satisfaction global&lt;/div&gt;
     &lt;span style="font-size:400%"&gt;${satisfactionIndexPercentRounded}&amp;nbsp;%&amp;nbsp;#if($displayHelp)$explanationLink#end&lt;/span&gt;
-    &lt;div&gt;#if($nbAvis &amp;&amp; $nbAvis &gt; 0)($nbAvis avis)#end&lt;/div&gt;
+    &lt;div&gt;#if($nbAvis &amp;&amp; $nbAvis &gt; 0)($numbertool.format("number", $nbAvis) avis)#end&lt;/div&gt;
   &lt;/div&gt;
 #end
 
