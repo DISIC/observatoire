@@ -162,7 +162,8 @@
                 &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
                 &lt;div class="btn-group controls"&gt;
                   #set($sortButtonLabel = $services.localization.render('dashboard.tools.sort.label'))
-                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-default-label="$escapetool.xml($sortButtonLabel)"&gt;${sortButtonLabel}&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+                  #set($otherSortButtonLabel = $services.localization.render('dashboard.tools.sort.label.other'))
+                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-default-label="$escapetool.xml($sortButtonLabel)" data-othersort-label="$escapetool.xml($otherSortButtonLabel)"&gt;${sortButtonLabel}&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
                   &lt;ul class="dropdown-menu"&gt;
                     #set($sortProps = {'statutDemat' : 'desc', 'satisfactionIndex' : 'desc', 'avisCount' : 'desc', 'volumetrie' : 'desc', 'accessibilityScore' : 'desc'})
                     #foreach($sortProp in $sortProps.entrySet())
@@ -915,7 +916,7 @@ var XWiki = (function (XWiki) {
         order: [[13, 'desc'], [1, 'asc'], [2, 'asc'], [12, 'desc'], [0, 'asc']],
         columnDefs: [{
           targets: "_all",
-          orderable: false,
+          orderable: true,
           defaultContent: "-"
         }],
         language: {
@@ -1003,6 +1004,20 @@ var XWiki = (function (XWiki) {
         drawCallback : function( settings ) {
           $(document).trigger("observatoire:datatable:draw");
         }
+      });
+
+      /*
+       * When the table is ordered by clicking on the header, decorate the "trier par" control.
+       */
+      $("#top-demarches thead th.sorting, #top-demarches thead th.sorting_asc #top-demarches thead th.sorting_desc").click(function (){
+        var order = table.order();
+        // Deactivate all active elements from the sort button
+        $('.observatoire-sort').removeClass('active');
+        // mark top element as pushed and change its label
+        var sortTopControl = $('#top-demarches-sort-toggle');
+        var sortTopControlNewLabel = sortTopControl.data('default-label') + " : " + sortTopControl.data('othersort-label') + "&amp;nbsp;&lt;span class='caret'&gt;&lt;/span&gt;";
+        sortTopControl.addClass('pushed');
+        sortTopControl.html(sortTopControlNewLabel);
       });
 
       function addChildrenRows(tableRow) {

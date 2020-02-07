@@ -81,6 +81,7 @@ dashboard.tools.sort.label.statutDemat=Réalisable en ligne
 dashboard.tools.sort.label.satisfactionIndex=Usagers satisfaits
 dashboard.tools.sort.label.avisCount=Nombre d'avis usagers recueillis
 dashboard.tools.sort.label.accessibilityScore=Prise en compte handicaps
+dashboard.tools.sort.label.other=Autre
 
 # Social networks
 dashboard.social-network.twitter=Via Twitter
