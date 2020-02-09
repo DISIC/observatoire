@@ -60,22 +60,32 @@
 *#
 #macro(computeAvisStats $minDate $maxDate)
   #set ($avisStatsResult = {'source' : 'live', 'date_start' : $minDate, 'date_end' : $maxDate, 'occurrences' : 0})
-  #set ($hql = 'select count(*), avg(score.value) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate')
+  ## count each vote of each type, this allows to both compute the average and the total votes and also the each score individually
+  #set ($hql = 'select score.value, count(*) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by score.value')
   #set ($entries = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $doc.fullName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate).execute())
   #if ($entries.size() &gt; 0)
-    #set ($entry  = $entries[0])
-    #set ($avisCount = $entry[0])
-    #set ($satisfactionIndex = $entry[1])
+    ## compute the total number of avis, and the score values map as well as the moyenne
+    #set ($avisCount = 0)
+    #set ($totalSatisfactionPoints = 0)
+    #set ($scoreValuesMap = {})
+    #foreach($countRes in $entries)
+      #set ($discard = $scoreValuesMap.put("$countRes[0]", $countRes[1]))
+      #set ($avisCount = $avisCount + $countRes[1])
+      #set ($totalSatisfactionPoints = $totalSatisfactionPoints + $mathtool.mul($countRes[0], $countRes[1]))
+    #end
   #end
   #if ($avisCount &amp;&amp; $avisCount &gt; 0)
     ## add the number of avis in the map
     #set ($discard = $avisStatsResult.put('occurrences', $avisCount))
+    ## add the score values in the results
+    #set($discard = $avisStatsResult.put('score', $scoreValuesMap))
+    #set ($satisfactionIndex = $mathtool.div($totalSatisfactionPoints, $avisCount))
     ## add moyenne and satisfaction in the map
     #set ($discard = $avisStatsResult.put('moyenne', $satisfactionIndex))
     #set ($discard = $avisStatsResult.put('satisfaction', $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50)))
     ## Now that we know we have avis, let's go ahead and compute the rest of the elements of the map.
     ## 1. First, the integer properties
-    #foreach($propName in ['score', 'facile', 'comprehensible'])
+    #foreach($propName in ['facile', 'comprehensible'])
       ## query the avis for this property
       #set ($hql = "select prop.value, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche  and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate and prop.value &lt;&gt; '' group by prop.value")
       #set ($query = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('demarche', $doc.fullName).bindValue('propertyName', $propName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate))
@@ -146,11 +156,6 @@
 ##
 #macro(displayScoresPieChart)
   #set($scores = $avisStatsResult.score)
-  ## sum up all the results for the score to make the total, so that we can compute percentages
-  #set($totalScores = 0)
-  #foreach($v in $scores.entrySet())
-    #set($totalScores = $totalScores + $v.value)
-  #end
   ## display the table
   &lt;table id="score" class="hidden"&gt;
   &lt;caption&gt;Répartition des avis&lt;/caption&gt;
@@ -168,7 +173,7 @@
         #set($valueToDisplay = $scores.get($v))
       #end
       ## compute percentage
-      #set($valueToDisplay = $mathtool.round($mathtool.div($mathtool.mul($valueToDisplay, 100), $totalScores)))
+      #set($valueToDisplay = $mathtool.round($mathtool.div($mathtool.mul($valueToDisplay, 100), $avisStatsResult.occurrences)))
       ## display this value
       &lt;tr&gt;&lt;td&gt;$labels.get($v)&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
     #end
@@ -358,7 +363,7 @@
 ## Identification of the period for which avis need to be counted, this script needs to serve the following cases:
 ## 1/ no date parameters -&gt; the avis up to today will be counted and results for one year will be displayed (the previous year)
 ## 2/ only one date parameter, the end date, specified as "date" or "date-fin" -&gt; the period used is 15/06/2018 to the passed date
-## 3/ two date parameters, date-start and date-fin -&gt; the period used is the one defined by these parameters
+## 3/ two date parameters, date-debut and date-fin -&gt; the period used is the one defined by these parameters
 #set ($minDateString = $request.get('date-debut'))
 #set ($maxDateString = $request.get('date-fin'))
 ## The line below is to make sure the previous URLs generated for JSON schema version &lt; 1.2 with parameter "date" keep working
