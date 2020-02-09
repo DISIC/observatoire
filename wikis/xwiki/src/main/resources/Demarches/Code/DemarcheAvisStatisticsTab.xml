@@ -232,8 +232,14 @@
 #if ($minDateString != $NULL)
   #set ($minDateTime = $formatter.parseDateTime($minDateString).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
 #else
-  ## Slippery year
-  #set ($minDateTime = $maxDateTime.minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+  ## if we received a max date, but no min date, we use the "beginning of time" date, otherwise we use the one year window
+  #if ($maxDateString != $NULL)
+    ## Date where getting opinions started
+    #set ($minDateTime = $xwiki.jodatime.getDateTime(2018, 6, 15, 0, 0, 0, 0))
+  #else
+    ## Slippery year
+    #set ($minDateTime = $maxDateTime.minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+  #end
 #end
 
 #computeAvisStats()
