@@ -763,10 +763,14 @@ var XWiki = (function (XWiki) {
             data: "adapteMobile",
             className: 'column-mobile',
             render: function (data, type, row) {
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
               if (type === "sort") {
-                return data.display;
+                return dataDisplay;
               } else {
-                return format(data.value, data.display, computeBadgeStyle, false);
+                return format(data.value, dataDisplay, computeBadgeStyle, false);
               }
             }
           },
@@ -775,7 +779,11 @@ var XWiki = (function (XWiki) {
             data: "qualiteSupport",
             className: 'column-support',
             render: function (data, type, row) {
-              return format(data, data, computeBadgeStyle, true);
+              var dataDisplay = data;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
+              return format(data, dataDisplay, computeBadgeStyle, true);
             }
           },
           {
@@ -784,10 +792,14 @@ var XWiki = (function (XWiki) {
             className: 'column-url-score',
             type: "num",
             render: function (data, type, row) {
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
               if (type === "sort") {
                 return data.value;
               } else {
-                return format(data.value, data.display, computeUrlScoreBadgeStyle, true);
+                return format(data.value, dataDisplay, computeUrlScoreBadgeStyle, true);
               }
             }
           },
@@ -796,10 +808,14 @@ var XWiki = (function (XWiki) {
             data: "franceConnect",
             className: 'column-france-connect',
             render: function (data, type, row) {
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
               if (type === "sort") {
-                return data.display;
+                return dataDisplay;
               } else {
-                return format(data.value, data.display, computeBadgeStyle, false);
+                return format(data.value, dataDisplay, computeBadgeStyle, false);
               }
             }
           },
@@ -811,21 +827,27 @@ var XWiki = (function (XWiki) {
               if (!data) {
                 return format("", "À venir", computeBadgeStyle, false);
               }
+              var dataDisplay = data.display;
+              var dataValue = data.value;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+                dataValue = '-';
+              }
               if (type === "sort") {
                 /* Custom sort to make magic happen in the table */
-                if (data.value == "Oui") {
+                if (dataValue == "Oui") {
                   return 4;
-                } else if (data.value == "Partiel") {
+                } else if (dataValue == "Partiel") {
                   return 3;
-                } else if (data.value == "Non") {
+                } else if (dataValue == "Non") {
                   return 2;
-                } else if (data.value == "n/a") {
+                } else if (dataValue == "n/a") {
                   return 1;
                 } else {
                   return 0;
                 }
               } else {
-                return format(data.value, data.display, computeBadgeStyle, false);
+                return format(dataValue, dataDisplay, computeBadgeStyle, false);
               }
             }
           },
@@ -838,16 +860,20 @@ var XWiki = (function (XWiki) {
               if (!data) {
                 return "";
               }
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
               if (type === "sort") {
-                var value;
-                if (data.display == "n/a")
+                if (dataDisplay == "n/a") {
                   return -2;
-                else if (data.display == "-")
+                } else if (dataDisplay == "-") {
                   return -1;
-                else
+                } else {
                   return data.value;
+                }
               } else {
-                return format(data.value, data.display, computeBadgeStyleDitesLeNousUneFois, false);
+                return format(data.value, dataDisplay, computeBadgeStyleDitesLeNousUneFois, false);
               }
             }
           },
