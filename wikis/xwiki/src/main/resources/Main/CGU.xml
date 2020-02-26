@@ -64,10 +64,17 @@ Nous stockons votre adresse IP de façon temporaire pour des raisons d'analyse t
 === Cookies ===
 
 Nous collectons des données anonymes d’audience du site, dans le respect des conditions définies par la recommandation « Cookies » de la Commission nationale informatique et libertés (CNIL).
+L’outil de mesure d’audience que nous utilisons (Matomo) est paramétré de façon à ce que les informations recueillies soient anonymisées.
 
 === Vos données à caractère personnel ===
 
 Conformément aux dispositions de la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, vous disposez d’un droit d’accès, de modification, de rectification et de suppression des données qui vous concernent. Pour demander une modification, rectification ou suppression des données vous concernant, il vous suffit de nous écrire par voie électronique à nosdemarches@modernisation.gouv.fr ou postale à la Direction interministérielle du numérique (DINUM), 20, avenue de Ségur, 75007 Paris en justifiant de votre identité. Si vous estimez, après nous avoir contactés, que vos droits Informatique et Libertés ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL.
+
+=== Refuser le suivi de votre navigation ===
+
+Malgré tout, si vous le souhaitez, vous avez la possibilité de refuser que votre navigation sur notre site soit enregistrée, en cochant la case ci-dessous.
+
+{{display reference="XWiki.PiwikOptOut" /}}
 
 == Mentions légales ==
 
