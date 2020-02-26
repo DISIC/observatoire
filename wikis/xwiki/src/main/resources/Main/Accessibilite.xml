@@ -27,28 +27,36 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530018930000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530104265000</date>
-  <contentUpdateDate>1530104265000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Accessibilité</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>Nous faisons de notre mieux pour rendre ce site accessible à toutes et à tous.
-Pour cette première version, nos efforts ont porté sur l'utilisabilité des formulaires.
+  <content>== Déclaration de conformité - RGAA 4.0 ==
 
-== Signaler un dysfonctionnement ==
+L'audit de conformité du site observatoire.numerique.gouv.fr sera effectué prochainement et la déclaration publiée. Nous travaillons actuellement à l'amélioration de l'accessibilité du tableau et des graphiques.
 
-Si vous rencontrez un défaut d'accessibilité vous empêchant d'accéder à un contenu ou une fonctionnalité du site, merci de nous en faire part.
+== Droit à compensation ==
 
-Si vous n'obtenez pas de réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au [[Défenseur des droits&gt;&gt;https://www.defenseurdesdroits.fr]].
+Dans l’attente d’une mise en conformité totale, vous pouvez obtenir une version accessible des documents ou des informations qui y seraient contenues en envoyant un courriel à communication.dinum@modernisation.gouv.fr en indiquant le nom du document concerné et/ou les informations que vous souhaiteriez obtenir. Les informations demandées vous seront transmises dans les plus bref délais.
 
-== En savoir plus ==
+== Amélioration et contact ==
 
-Pour en savoir plus sur la politique d'accessibilité numérique de l'État : http://references.modernisation.gouv.fr/accessibilite-numerique</content>
+Vous pouvez nous aider à améliorer l’accessibilité du site en nous signalant les problèmes éventuels que vous rencontrez. Pour ce faire, envoyez-nous un courriel à communication.dinum@modernisation.gouv.fr.
+
+== Défenseur des droits ==
+
+Si vous constatez un défaut d'accessibilité vous empêchant d'accéder à un contenu ou une fonctionnalité du site, que vous nous le signalez et que vous ne parvenez pas à obtenir une réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits. Plusieurs moyens sont à votre disposition :
+
+* un [[formulaire de contact&gt;&gt;url:https://www.defenseurdesdroits.fr/nous-contacter]]  ;
+* la [[liste des délégués de votre région&gt;&gt;url:https://www.defenseurdesdroits.fr/fr/saisir/delegues]] avec leurs informations de contact directs ;
+* un numéro de téléphone : le 09 69 39 00 00 du lundi au vendredi de 8h00 à 20h00 (coût d'un appel local) ;
+* une adresse postale dans l'[[annuaire de l'administration&gt;&gt;url:https://lannuaire.service-public.fr/autorites-independantes/autorite-administrative-independante_195381]]</content>
 </xwikidoc>
