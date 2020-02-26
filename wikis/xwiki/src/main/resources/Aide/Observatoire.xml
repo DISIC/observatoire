@@ -60,7 +60,10 @@ Les réponses ayant reçu l'avis :
 
 Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne à une échelle de 100 %.
 
-Si l’administration n’a pas encore placé le bouton "je donne mon avis" à la fin des démarches le tableau affiche l’information « À venir ».
+Si l’administration n’a pas encore placé le bouton "je donne mon avis" à la fin des démarches le tableau affiche l’information « À venir ». Si le bouton a été installé à la fin de la démarche mais n'a pas encore recueilli plus de 100 votes l'information "En cours" s'affiche
+
+Les votes pris en compte sont ceux exprimés dans les 365 jours qui précèdent la date à laquelle est prise la mesure de l'indice.
+Point d'attention : les indices de satisfaction des démarches de la CNAMTS sont récupérées à  partir des données de satisfaction collectées par la CNAMTS sur son site Ameli.fr (emoticones "notez votre démarche").
 
 === Compatible mobile ===
 
@@ -117,9 +120,9 @@ L'indicateur proposé permet de mesurer la conformité des démarches au regard 
 
 La démarches est au vert si les deux critères sont respectés (la démarche est conforme), à orange si seul le premier critère est respecté (la démarche est partiellement conforme) et à rouge si aucun des deux critères n'est respecté (la démarche n'est pas conforme).
 
-=== Ressaisies demandées ===
+=== Dites-le nous une fois ===
 
-Ce critère est un indicateur d'effort de ressaisie de données pour les usagers. Il permet de mesurer le respect du principe [[Dites-le nous une fois&gt;&gt;https://www.numerique.gouv.fr/actualites/simplification-des-demarches-administratives-dites-le-nous-une-fois-passe-a-la-vitesse-superieure/||rel="noopener noreferrer" target="_blank"]] et il est calculé de la manière suivante :
+L'indicateur proposé est un indicateur d'effort pour les usagers. Il permet d'estimer l'effort de ressaisie de données que l'administration pourrait ne plus demander aux usagers en allant chercher elle-même ces informations. Il est calculé de la manière suivante :
 
 1. On définit un panier de données qu'on estime ne plus devoir être demandées aux usagers compte tenu du fait que ces informations sont déjà connues de l'administration. Ce panier est composé des données suivantes :
 1*. Données personnes physiques : identité, revenus, composition familiale, attestations de droit, adresse, scolarité
@@ -163,5 +166,7 @@ Adresse URL démarche permettant d'accéder à la démarche
 
 Publics auxquels s'adresse la démarche : particuliers, professionnels, associations, collectivités locales
 
- </content>
+=== Pourcentage de conformité RGAA ===
+
+Pourcentage de conformité de la démarche au Référentiel Général d'Accessibilité pour les Administrations</content>
 </xwikidoc>
