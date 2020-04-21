@@ -489,7 +489,7 @@ dt.annotationLabel label {
       <parse>1</parse>
     </property>
     <property>
-      <use>always</use>
+      <use>onDemand</use>
     </property>
   </object>
 </xwikidoc>

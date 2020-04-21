@@ -348,7 +348,7 @@ document.observe('xwiki:annotations:settings:loaded', function() {
       <parse/>
     </property>
     <property>
-      <use>always</use>
+      <use>onDemand</use>
     </property>
   </object>
   <object>
@@ -537,7 +537,7 @@ document.observe('xwiki:annotations:settings:loaded', function() {
       <parse>1</parse>
     </property>
     <property>
-      <use>always</use>
+      <use>onDemand</use>
     </property>
   </object>
 </xwikidoc>
