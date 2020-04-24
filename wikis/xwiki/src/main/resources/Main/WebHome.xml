@@ -44,7 +44,7 @@
 {{velocity}}
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
-  #set($discard = $xwiki.ssx.use('Demarches.Code.MontserratWebfontSSX'))
+  #set($discard = $xwiki.ssx.use('Fonts.MarianneWebfontSSX'))
   #set($discard = $xwiki.ssx.use($doc.fullName))
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
@@ -358,8 +358,8 @@
   h2, h3 {
     margin-top: 0;
     margin-bottom: 0;
-    font-weight: 900;
-    font-family: "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-family: "Marianne", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   @media (min-width: @screen-md-min) {
     padding-top: @section-padding-top-lg;
@@ -394,7 +394,7 @@
     font-weight: bold;
     font-size: 1.5em; /* ~27px for a 18px font */
     margin-bottom: 0.5em;
-    font-family: Montserrat, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Marianne, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .seemore-button-container a.btn-default {
