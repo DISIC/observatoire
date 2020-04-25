@@ -848,30 +848,19 @@
 &lt;div id="companylogo"&gt;
   #set($logoElt = 'a')
   #set($url = "$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)")
-  #set($logoAttr = "href='$escapetool.xml($url)'")
+  #set($siteName = $services.localization.render('wikidemarches.sitename'))
+  #set($logoAttr = "href='$escapetool.xml($url)' title='Accueil - $escapetool.xml($siteName)' rel='home'")
+  ## don't display link to home in the avis form display, because there is no link
   #if ($displayAvisFormOnly)
     #set($logoElt = 'span')
     #set($logoAttr = '')
   #end
-  #set ($siteName = $services.localization.render('wikidemarches.sitename'))
+  #set ($siteTitleImageName = 'LogoObservatoire.svg')
   ## special handling for voxusagers, to display a different site name
   #if ($currentDomainKey == 'voxusagers')
-    #set ($siteName = $siteName.replace('observatoire', 'voxusagers'))
+    #set ($siteTitleImageName = 'LogoVoxusagers.svg')
   #end
-  &lt;$logoElt $logoAttr title="$siteName" rel="home" #if(!$displayPageHeader)class="navbar-brand"#end&gt;
-    &lt;img src="$!logourl" alt="Logo $siteName"/&gt;
-    ## Site title next to the logo
-    #set($eltname = 'span')
-    #if ($doc.fullName == 'Main.WebHome')
-      #set($eltname = 'h1')
-    #end
-    &lt;span class='demarches-titlebar-sitename'&gt;
-      &lt;span class='demarches-titlebar-name'&gt;
-        &lt;${eltname}&gt;$siteName.replace('.numerique.gouv.fr', '.&lt;i&gt;numerique.gouv.fr&lt;/i&gt;')&lt;/${eltname}&gt;
-      &lt;/span&gt;
-      ## &lt;span class='demarches-titlebar-headline'&gt;$services.localization.render('wikidemarches.siteheadline')&lt;/span&gt;
-    &lt;/span&gt;
-  &lt;/$logoElt&gt;
+  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="Logo République française"/&gt;&lt;span class='demarches-titlebar-sitename'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="Logo $escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
 &lt;/div&gt;
 </content>
     </property>
