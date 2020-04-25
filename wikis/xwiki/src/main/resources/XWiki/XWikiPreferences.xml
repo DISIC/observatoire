@@ -2839,7 +2839,7 @@ $services.localization.render('wikidemarches.sitename')</confirmation_email_cont
 &lt;meta name="keywords" content="$escapetool.xml($keywords.replaceAll('[|,]', ' ').trim())" /&gt;
 &lt;meta name="twitter:card" content="summary_large_image" /&gt;
 &lt;meta property="og:url" content="${xcontext.context.getURLFactory().getServerURL($xcontext.context)}"/&gt;
-&lt;meta property="og:title" content="$services.localization.render('wikidemarches.home.title')" /&gt;
+&lt;meta property="og:title" content="$services.localization.render('wikidemarches.sitename')" /&gt;
 &lt;meta property="og:description" content="$services.localization.render('wikidemarches.home.subtitle')" /&gt;
 &lt;meta property="og:image" content="${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/observatoire.png" /&gt;
 &lt;meta name="rating" content="General" /&gt;

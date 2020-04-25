@@ -102,7 +102,7 @@
 Madame, Monsieur,
 &lt;/p&gt;
 &lt;p&gt;
-Votre compte observatoire.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.&lt;/p&gt;
+Votre compte $services.localization.render('wikidemarches.siteurl') est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.&lt;/p&gt;
 
 &lt;a href="$homeUrl"&gt;$homeUrl&lt;/a&gt;
 
@@ -115,13 +115,13 @@ $services.localization.render('wikidemarches.sitename')
       <language>fr</language>
     </property>
     <property>
-      <subject>Votre compte $services.localization.render('wikidemarches.sitename') est actif</subject>
+      <subject>Votre compte $services.localization.render('wikidemarches.siteurl') est actif</subject>
     </property>
     <property>
       <text>Madame, Monsieur,
 
 
-Votre compte observatoire.numerique.gouv.fr est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.
+Votre compte $services.localization.render('wikidemarches.siteurl') est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.
 
 $homeUrl
 

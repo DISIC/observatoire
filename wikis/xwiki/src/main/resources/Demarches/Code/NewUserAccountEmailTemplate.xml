@@ -116,7 +116,7 @@ $services.localization.render('wikidemarches.sitename')
       <language>fr</language>
     </property>
     <property>
-      <subject>Activation d'un nouveau compte utilisateur sur $services.localization.render('wikidemarches.sitename')</subject>
+      <subject>Activation d'un nouveau compte utilisateur sur $services.localization.render('wikidemarches.siteurl')</subject>
     </property>
     <property>
       <text>Un nouveau compte utilisateur a été créé. Vous pouvez l'activer en vous rendant à l'adresse ci-dessous.
