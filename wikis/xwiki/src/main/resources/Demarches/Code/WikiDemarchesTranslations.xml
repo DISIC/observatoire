@@ -56,8 +56,8 @@ wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-
 wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
 
 #Démarches
-wikidemarches.sitename=observatoire.numerique.gouv.fr
-wikidemarches.siteheadline=Améliorons les services publics en ligne
+wikidemarches.sitename=L’observatoire de la qualité des démarches en ligne
+wikidemarches.siteurl=observatoire.numerique.gouv.fr
 wikidemarches.home.title=L’observatoire de la qualité des démarches en ligne
 wikidemarches.home.subtitle=Pour des services publics numériques faciles d’utilisation, conviviaux, et centrés sur l’usager.
 wikidemarches.home.explanation=Le gouvernement s’est donné comme objectif la numérisation de toutes les démarches administratives. Pour que ça marche, la simplicité d’utilisation doit être au rendez vous. Or, pour 66% des Français, les démarches administratives en ligne sont trop compliquées. Lancé en mai 2019, cet observatoire suit l’avancement et la qualité de la numérisation. Chaque trimestre, nous évaluons les 250 démarches les plus utilisées.
