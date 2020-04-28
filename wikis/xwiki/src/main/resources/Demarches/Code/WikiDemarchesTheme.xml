@@ -1379,7 +1379,7 @@ Visually, there's the title row and then all the rows from the document content,
     }
   }
   #menuview .navbar-right {
-    padding-top: @sitename-top-desktop;
+    padding-top: @sitename-top-desktop + 7px;
   }
 }
 
@@ -1458,7 +1458,7 @@ li.wikidemarches-topmenu {
     display: inline-block;
     max-width: unset;
     line-height: unset;
-    font-size: 0.875em;
+    font-family: Marianne, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
 

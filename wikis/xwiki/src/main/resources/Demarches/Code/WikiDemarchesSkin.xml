@@ -125,6 +125,8 @@
       <content>{{velocity}}
 #if($currentDomainKey == 'observatoire')
 {{html clean="false"}}
+  ## we'll style this with Marianne font, so I am loading the SSX here
+  #set($discard = $xwiki.ssx.use('Fonts.MarianneWebfontSSX'))
   &lt;li class='wikidemarches-topmenu'&gt;
     &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('Main.A propos')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;
   &lt;/li&gt;
