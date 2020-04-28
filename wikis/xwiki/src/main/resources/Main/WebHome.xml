@@ -49,10 +49,7 @@
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
       (%class='demarches-headline narrow-width'%)
-      == $services.localization.render('wikidemarches.home.title') ==
-
-      (%class='demarches-subtitle narrow-width'%)
-      $services.localization.render('wikidemarches.home.subtitle')
+      = $services.localization.render('wikidemarches.home.subtitle') =
 
       (%class='demarches-explanation narrow-width'%)
       $services.localization.render('wikidemarches.home.explanation')
@@ -67,7 +64,7 @@
       (%class='row'%)(((
         (%class='col-xs-12'%)(((
           (%class='narrow-width'%)
-          === $services.localization.render('wikidemarches.home.observatoire.title') ===
+          == $services.localization.render('wikidemarches.home.observatoire.title') ==
 
           (%class='narrow-width'%)
           $services.localization.render('wikidemarches.home.observatoire.description')
@@ -113,7 +110,7 @@
         #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
         (%class='row'%)(((
           (%class='col-xs-12 col-md-4'%)(((
-            ===$services.localization.render('wikidemarches.owned-demarches')===
+            ==$services.localization.render('wikidemarches.owned-demarches')==
           )))
           (%class='col-xs-12 col-md-8'%)(((
             #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
@@ -155,7 +152,7 @@
     #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
     (%class='container narrow-width'%)(((
        (%class='narrow-width'%)
-       ===${evalHelpDoc.title}===
+       ==${evalHelpDoc.title}==
 
       {{display reference='$evalHelpDoc.fullName' /}}
 
@@ -169,7 +166,7 @@
       (%class='row narrow-width'%)(((
         (%class='col-xs-12'%)(((
           (%class='narrow-width'%)
-          ===${afterHelpDoc.title}===
+          ==${afterHelpDoc.title}==
 
           {{display reference='$afterHelpDoc.fullName' /}}
         )))
@@ -184,7 +181,7 @@
   (%class='row demarches-administrationrow'%)(((
     (%class='container' %)(((
       (%class='demarches-administration-link'%) (((
-        ===$services.localization.render('wikidemarches.administration.home-title')===
+        ==$services.localization.render('wikidemarches.administration.home-title')==
 
         (%class='demarches-administration-subtitle'%)
         $services.localization.render('wikidemarches.administration.home-subtitle')
@@ -346,7 +343,7 @@
 
 @obs-blue: @link-color;
 
-@headline-size-lg: 3.1em; /* ~55.8px for a 18px font */
+@headline-size-lg: 3.0em; /* ~54px for a 18px font */
 @headline-size-xs: 2.3em;
 
 .demarches-titlerow, .demarches-observatoirerow,
@@ -355,11 +352,12 @@
   text-align: center;
   padding-top: @section-padding-top-xs;
   padding-bottom: @section-padding-bottom-xs;
-  h2, h3 {
+  h1, h2 {
     margin-top: 0;
     margin-bottom: 0;
+    line-height: 1.1em;
     font-weight: 800;
-    font-family: "Marianne", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Marianne", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   @media (min-width: @screen-md-min) {
     padding-top: @section-padding-top-lg;
@@ -381,20 +379,15 @@
 }
 
 .demarches-titlerow {
+  padding-top: 2em;
   background-color: #fff;
 
-  h2.demarches-headline {
-    font-size: @headline-size-xs; /* ~59.4px for a 18px font */
-    margin-bottom: 0.3em;
+  h1.demarches-headline {
     line-height: 1.1em;
-  }
-
-  p.demarches-subtitle {
     color: @headings-color;
-    font-weight: bold;
-    font-size: 1.5em; /* ~27px for a 18px font */
+    font-size: @headline-size-xs; /* ~59.4px for a 18px font */
     margin-bottom: 0.5em;
-    font-family: Marianne, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Marianne, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .seemore-button-container a.btn-default {
@@ -412,7 +405,7 @@
     p.demarches-subtitle, p.demarches-explanation {
       width: 70%;
     }
-    h2.demarches-headline {
+    h1.demarches-headline {
       font-size: @headline-size-lg;
     }
   }
@@ -421,9 +414,9 @@
 .demarches-mydemarchesrow, .demarches-observatoirerow,
 .demarches-evalrow, .demarches-morerow,
 .demarches-administrationrow {
-   h3 {
-    font-size: 2.05em; /* ~36.9px for a 18px font */
-    margin-bottom: 0.625em; /*~25 px*/
+   h2 {
+    font-size: 2.0em; /* ~36px for a 18px font */
+    margin-bottom: 0.625em; /*~22.5 px*/
   }
 }
 
@@ -542,7 +535,7 @@
       color: @link-color;
     }
   }
-  h3 {
+  h2 {
     color: #fff;
   }
 }
@@ -561,7 +554,7 @@
       width: 100%;
       font-size: 0.78em;
     }
-    h4 {
+    h3 {
       font-size: 0.90em;
       margin-top: 1.5em;
       font-weight: bold;
@@ -620,7 +613,7 @@
     margin-right: auto;
   }
 
-  h2.narrow-width, h3.narrow-width {
+  h1.narrow-width, h2.narrow-width {
     width: 75%;
     margin-left: auto;
     margin-right: auto;
