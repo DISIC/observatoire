@@ -1337,6 +1337,8 @@ Visually, there's the title row and then all the rows from the document content,
 .navbar-brand,
 #menuview .navbar-brand img {
   height: @logo-height-mobile;
+}
+#menuview .navbar-brand img {
   margin-right: @logo-spacing-mobile;
 }
 #menuview .navbar-brand .demarches-titlebar-sitename {
@@ -1357,7 +1359,7 @@ Visually, there's the title row and then all the rows from the document content,
 @logo-spacing-desktop: 60px;
 @sitename-height-desktop: 44px;
 @sitename-top-desktop: 29px;
-@media (min-width: @screen-sm-min) {
+@media (min-width: @screen-md-min) {
   #menuview .navbar {
     padding-top: @navbar-padding-desktop;
     padding-bottom: @navbar-padding-desktop;
@@ -1366,6 +1368,8 @@ Visually, there's the title row and then all the rows from the document content,
   .navbar-brand,
   #menuview .navbar-brand img {
     height: @logo-height-desktop;
+  }
+  #menuview .navbar-brand img {
     margin-right: @logo-spacing-desktop;
   }
   #menuview .navbar-brand .demarches-titlebar-sitename {
@@ -1389,6 +1393,64 @@ Visually, there's the title row and then all the rows from the document content,
 /*
  * Done navbar and logo.
  */
+
+/* The point of switch between a view and another is the md-min instead of sm-min, from bootstrap/variables.less */
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+@grid-float-breakpoint:     @screen-md-min;
+//** Point at which the navbar begins collapsing.
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+
+.navbar-collapse {
+  border-top: 0;
+}
+
+/* 
+ * Navbar corrections for https://jira.xwiki.org/browse/XWIKI-17262
+ * As long as the navbar is collapsed, display the header and menus completely different.
+ * We're doing it like this and not mobile-first because we're already inheriting some desktop behaviour and I don't want to spend time resetting all that
+ */
+@media (max-width: @grid-float-breakpoint-max) {
+  #menuview {
+    .navbar-header, .navbar-left, .navbar-right {
+      float: none;
+    }
+    .navbar-left, .navbar-right {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+  /* Correction of the toggle display along with some customization */
+  .navbar-toggle {
+    /* Custom size of the toggle for the observatoire */
+    height: @logo-height-mobile;
+    /* Try to align the burger with the text from the logo */
+    padding-top: 0;
+    padding-bottom: 12px;
+    /* Reset some ugly styles */
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  /* Reset some ugly styles */
+  .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+  }
+  #companylogo {
+    float: left;
+  }
+  /* Custom elements of the observatoire */
+  #menuview .wikidemarches-topmenu {
+    clear: right;
+    &amp; &gt; a {
+      display: block;
+      text-align: right;
+    }
+  }
+}
 
 /* top menu style */
 li.wikidemarches-topmenu {

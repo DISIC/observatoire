@@ -1675,9 +1675,14 @@ $services.localization.render('accountnotactive_email')
         #if (!$displayPageHeader)
           #template("companylogo.vm")
         #end
+        ## Fix for https://jira.xwiki.org/browse/XWIKI-17262
+        &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-expanded="false"&gt;
+          &lt;span class="sr-only"&gt;Ouvrir la navigation&lt;/span&gt;
+          &lt;span class="fa fa-bars" /&gt;
+        &lt;/button&gt;
       &lt;/div&gt;
-      ## Collect the nav links, forms, and other content for toggling
-      &lt;div id="xwikimainmenu"&gt;
+      ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262 
+      &lt;div id="xwikimainmenu" class="collapse navbar-collapse"&gt;
 #end
 
 ###
