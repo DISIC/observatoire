@@ -533,14 +533,9 @@
   &lt;h2&gt;$services.localization.render('wikidemarches.footer')&lt;/h2&gt;
   &lt;div class='container'&gt;
     &lt;div class='row'&gt;
-      ## special handling for voxusagers, to display a different site name and no sitemap (this column takes width 6 instead of 4)
-      #if ($currentDomainKey == 'voxusagers')
-        &lt;div class='col-xs-12 col-md-6 footer-col-sitename'&gt;
-          &lt;h3&gt;$services.localization.render('wikidemarches.sitename').replace('observatoire', 'voxusagers')&lt;/h3&gt;
-      #else
-        &lt;div class='col-xs-12 col-md-4 footer-col-sitename'&gt;
-          &lt;h3&gt;$services.localization.render('wikidemarches.sitename')&lt;/h3&gt;
-      #end
+      ## special handling for voxusagers, no sitemap (this column takes width 6 instead of 4)
+      &lt;div class='col-xs-12 #if ($currentDomainKey == 'voxusagers') col-md-6 #else col-md-4 #end footer-col-sitename'&gt;
+        &lt;h3&gt;$services.localization.render('wikidemarches.sitename')&lt;/h3&gt;
         &lt;p&gt;$services.localization.render('wikidemarches.by-dinum')&lt;/p&gt;
         &lt;ul class="social-networks"&gt;
           &lt;li&gt;&lt;a href="https://twitter.com/_DINUM" class="twitter" target="_blank"&gt;&lt;span class="fa fa-twitter"&gt;&lt;/span&gt;&lt;/a&gt;
@@ -1676,10 +1671,12 @@ $services.localization.render('accountnotactive_email')
           #template("companylogo.vm")
         #end
         ## Fix for https://jira.xwiki.org/browse/XWIKI-17262
-        &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-expanded="false"&gt;
-          &lt;span class="sr-only"&gt;Ouvrir la navigation&lt;/span&gt;
-          &lt;span class="fa fa-bars" /&gt;
-        &lt;/button&gt;
+        #if($currentDomainKey == 'observatoire')
+          &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-expanded="false"&gt;
+            &lt;span class="sr-only"&gt;Ouvrir la navigation&lt;/span&gt;
+            &lt;span class="fa fa-bars" /&gt;
+          &lt;/button&gt;
+        #end
       &lt;/div&gt;
       ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262 
       &lt;div id="xwikimainmenu" class="collapse navbar-collapse"&gt;
