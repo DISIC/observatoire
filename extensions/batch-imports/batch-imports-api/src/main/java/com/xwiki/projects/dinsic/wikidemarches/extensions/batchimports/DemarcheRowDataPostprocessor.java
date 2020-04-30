@@ -66,7 +66,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     @Inject
     @Named("current")
-
     private DocumentReferenceResolver<String> resolver;
 
     public static String HEADER_SUPPORT_DE_QUALITE = "Support accessible";
@@ -114,7 +113,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      */
     @Override
     public void postProcessRow(Map<String, String> data, List<String> row, int rowIndex, Map<String, String> mapping,
-            List<String> headers, BatchImportConfiguration config)
+        List<String> headers, BatchImportConfiguration config)
     {
         trimAllValues(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
@@ -129,7 +128,11 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         logger.debug("New data after processing: ", data);
     }
 
-    // Trim all values, since some input files sometimes contain values with surrounding spaces (e.g. directions)
+    /**
+     * Trim all values, since some input files sometimes contain values with surrounding spaces (e.g. directions)
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     */
     protected void trimAllValues(Map<String, String> data)
     {
         Set<Map.Entry<String, String>> entries = data.entrySet();
@@ -140,15 +143,20 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         }
     }
 
-    // Process column "Date d'ouverture du service dématérialisé" and convert its values to 2 property values:
-    // dateMiseEnLigne and dateMiseEnLigneTexte, according to the following conversion rules:
-    // - "n/c" -> "", ""
-    // - "Ouvert" -> "", "Ouvert"
-    // - "2022" -> "01/12/2022", "2022"
-    // - "Sep-2019" -> "01/09/2019", ""
-    // - "2020-2021" -> "01/12/2020", "2020-2021"
-    // - "2020?" -> "01/12/2020", "2020"
-
+    /**
+     * Process column "Date d'ouverture du service dématérialisé" and convert its values to 2 property values:
+     * dateMiseEnLigne and dateMiseEnLigneTexte, according to the following conversion rules:
+     * <ul>
+     * <li>"n/c" -> "", ""</li>
+     * <li>"Ouvert" -> "", "Ouvert"</li>
+     * <li>"2022" -> "01/12/2022", "2022"</li>
+     * <li>"Sep-2019" -> "01/09/2019", ""</li>
+     * <li>"2020-2021" -> "01/12/2020", "2020-2021"</li>
+     * <li>"2020?" -> "01/12/2020", "2020"</li>
+     * </ul>
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     */
     protected void processOpeningDate(Map<String, String> data)
     {
         String value = data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE);
@@ -193,7 +201,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     protected void processComments(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
-            BatchImportConfiguration config)
+        BatchImportConfiguration config)
     {
         // Concatenate all comments to the possibly existing "remarques" property value
         DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
@@ -204,8 +212,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             String comment2 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
             String comment3 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
 
-            String joined = Stream.of(remarques, comment1, comment2, comment3)
-                    .filter(s -> StringUtils.isNotEmpty(s)).collect(Collectors.joining("\n\n")).trim();
+            String joined = Stream.of(remarques, comment1, comment2, comment3).filter(s -> StringUtils.isNotEmpty(s))
+                .collect(Collectors.joining("\n\n")).trim();
             data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
         }
     }
@@ -228,10 +236,15 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         return value;
     }
 
+    /**
+     * Cleans up the values for the number columns, "volumetrie" and "volumetrie" demat.
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     */
     protected void processNumbers(Map<String, String> data)
     {
         String[] propertyNames =
-                new String[]{ DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION };
+            new String[] {DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION};
         for (String propertyName : propertyNames) {
             String value = data.get(propertyName);
             if ("n/c".equalsIgnoreCase(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
@@ -240,9 +253,14 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         }
     }
 
-    // Replace common static list values by their corresponding key in the démarche property: replace "n/c" by
-    // "nr" ("non renseigné"), "n/a" by "na", "Oui" by "oui", "Non" by "non", "A venir" by "nr", "sans identification"
-    // by "sansIdentification"
+    /**
+     * Replace common static list values by their corresponding key in the démarche property: replace "n/c" by "nr"
+     * ("non renseigné"), "n/a" by "na", "Oui" by "oui", "Non" by "non", "A venir" by "nr", "sans identification" by
+     * "sansIdentification" .
+     *
+     * @param value the value to normalize
+     * @return the normalized value
+     */
     protected String normalizeStaticListValue(String value)
     {
         if (StringUtils.isNotEmpty(value)) {
@@ -266,15 +284,22 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         }
     }
 
-    // Infers the values of "accompagnement" and "moyens de contact" using the following rule:
-    // - support de qualité = oui -> accompagnement = oui and moyens de contact = oui
-    // - support de qualité = partiel -> accompagnement = oui and moyens de contact = non
-    // - support de qualité = non -> accompagnement = non and moyens de contact = non
-    // - support de qualité = na -> accompagnement = na and moyens de contact = na
-    // - support de qualité = nr -> accompagnement = nr and moyens de contact = nr
-    // - summary: "accompagnement" and "moyens de contact" have the same value as "support de qualité" except
-    // when value is "partiel"
-
+    /**
+     * Infers the values of "accompagnement" and "moyens de contact" using the following rule:
+     * <ul>
+     * <li>support de qualité = oui -> accompagnement = oui and moyens de contact = oui</li>
+     * <li>support de qualité = partiel -> accompagnement = oui and moyens de contact = non</li>
+     * <li>support de qualité = non -> accompagnement = non and moyens de contact = non</li>
+     * <li>support de qualité = na -> accompagnement = na and moyens de contact = na</li>
+     * <li>support de qualité = nr -> accompagnement = nr and moyens de contact = nr</li>
+     * <li>summary: "accompagnement" and "moyens de contact" have the same value as "support de qualité" except when
+     * value is "partiel"</li>
+     * </ul>
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param row the current row being read
+     * @param headers the headers of the file being read
+     */
     protected void processSupportDeQualite(Map<String, String> data, List<String> row, List<String> headers)
     {
         String value = getRowDataByHeader(row, HEADER_SUPPORT_DE_QUALITE, headers);
