@@ -35,11 +35,9 @@ import org.slf4j.Logger;
 import org.xwiki.batchimport.BatchImport;
 import org.xwiki.batchimport.BatchImportConfiguration;
 import org.xwiki.batchimport.RowDataPostprocessor;
-import org.xwiki.batchimport.internal.DefaultBatchImport;
 import org.xwiki.component.annotation.Component;
 import org.xwiki.component.annotation.InstantiationStrategy;
 import org.xwiki.component.descriptor.ComponentInstantiationStrategy;
-import org.xwiki.model.reference.DocumentReference;
 import org.xwiki.model.reference.DocumentReferenceResolver;
 import org.xwiki.text.StringUtils;
 
@@ -68,16 +66,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     @Named("current")
     private DocumentReferenceResolver<String> resolver;
 
-    public static String HEADER_SUPPORT_DE_QUALITE = "Support accessible";
-
-    public static String HEADER_COMMENT_1 = "Commentaires administration + annonce CITP";
-
-    public static String HEADER_COMMENT_2 = "Commentaire DINSIC";
-
-    public static String HEADER_COMMENT_3 = "Commentaires UX/ test";
-
-    public static String HEADER_URL = "URL de la démarche";
-
     public static String DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION = "statutDemat";
 
     public static String DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE = "dateMiseEnLigne";
@@ -102,6 +90,10 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String DEMARCHE_PROPERTY_REMARQUES = "remarques";
 
+    public static String HEADER_EXTRA_REMARQUES_1 = "Commentaire DINSIC";
+
+    public static String HEADER_EXTRA_REMARQUES_2 = "Commentaires UX/ test";
+
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
@@ -118,13 +110,13 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         trimAllValues(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
         processOpeningDate(data);
-        processNumbers(data);
+        processVolumetrieNumbers(data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_INTEGRATION, data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_FRANCE_CONNECT, data);
         normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
-        processSupportDeQualite(data, row, headers);
-        processComments(data, row, rowIndex, headers, config);
-        processUrl(data, row, headers);
+        processSupportDeQualite(data, mapping);
+        processComments(data, mapping, row, headers);
+        processUrl(data, mapping);
         logger.debug("New data after processing: ", data);
     }
 
@@ -144,6 +136,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     /**
+     * TODO: I don't like the logic of this function, it conditions the set of the text date with the non-text value, to
+     * redo.<br>
      * Process column "Date d'ouverture du service dématérialisé" and convert its values to 2 property values:
      * dateMiseEnLigne and dateMiseEnLigneTexte, according to the following conversion rules:
      * <ul>
@@ -196,23 +190,35 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             }
 
             data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE, dateMiseEnLigneAsString);
-            data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE, dateMiseEnLigneTexte);
+            // In addition, if the dateMiseEnLigneTexte is also mapped, set the value to dateMiseEnLigneTexte as well
+            if (StringUtils.isNotEmpty(data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE))) {
+                data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE, dateMiseEnLigneTexte);
+            }
         }
     }
 
-    protected void processComments(Map<String, String> data, List<String> row, int rowIndex, List<String> headers,
-        BatchImportConfiguration config)
+    /**
+     * Appends the values of fields "Commentaire DINSIC" and "Commentaires UX/ test" to the value mapped on the
+     * remarques property, if any.
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param mapping the current mapping, to be able to check that the property is mapped and intervene only if it's
+     *            the case
+     * @param row the current row being processed
+     * @param headers the full headers of the rows being processed
+     */
+    protected void processComments(Map<String, String> data, Map<String, String> mapping, List<String> row,
+        List<String> headers)
     {
-        // Concatenate all comments to the possibly existing "remarques" property value
-        DefaultBatchImport defaultBatchImport = (DefaultBatchImport) batchImport;
-        DocumentReference reference = defaultBatchImport.getPageName(data, rowIndex, config, null);
-        if (reference != null) {
-            String remarques = "";
-            String comment1 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_1, headers), HEADER_COMMENT_1);
-            String comment2 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_2, headers), HEADER_COMMENT_2);
-            String comment3 = maybeAddLabel(getRowDataByHeader(row, HEADER_COMMENT_3, headers), HEADER_COMMENT_3);
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_REMARQUES))) {
+            String comment1 =
+                maybeAddLabel(data.get(DEMARCHE_PROPERTY_REMARQUES), mapping.get(DEMARCHE_PROPERTY_REMARQUES));
+            String comment2 =
+                maybeAddLabel(getRowDataByHeader(row, HEADER_EXTRA_REMARQUES_1, headers), HEADER_EXTRA_REMARQUES_1);
+            String comment3 =
+                maybeAddLabel(getRowDataByHeader(row, HEADER_EXTRA_REMARQUES_2, headers), HEADER_EXTRA_REMARQUES_2);
 
-            String joined = Stream.of(remarques, comment1, comment2, comment3).filter(s -> StringUtils.isNotEmpty(s))
+            String joined = Stream.of(comment1, comment2, comment3).filter(s -> StringUtils.isNotEmpty(s))
                 .collect(Collectors.joining("\n\n")).trim();
             data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
         }
@@ -237,14 +243,17 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     /**
-     * Cleans up the values for the number columns, "volumetrie" and "volumetrie" demat.
+     * Cleans up the values for the number columns, "volumetrie" and "volumetrie" demat, by replacing some text values
+     * with empty values.
      *
      * @param data the data read from the file and mapped, ready to be imported
      */
-    protected void processNumbers(Map<String, String> data)
+    protected void processVolumetrieNumbers(Map<String, String> data)
     {
         String[] propertyNames =
             new String[] {DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION};
+        // The logic below only handles specific values of the data, so we don't check if the properties are mapped or
+        // not.
         for (String propertyName : propertyNames) {
             String value = data.get(propertyName);
             if ("n/c".equalsIgnoreCase(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
@@ -285,7 +294,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     /**
-     * Infers the values of "accompagnement" and "moyens de contact" using the following rule:
+     * Infers the values of "accompagnement" and "moyens de contact", only if they are mapped and mapped to the same
+     * header, using the following rule:
      * <ul>
      * <li>support de qualité = oui -> accompagnement = oui and moyens de contact = oui</li>
      * <li>support de qualité = partiel -> accompagnement = oui and moyens de contact = non</li>
@@ -297,35 +307,50 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      * </ul>
      *
      * @param data the data read from the file and mapped, ready to be imported
-     * @param row the current row being read
-     * @param headers the headers of the file being read
+     * @param mapping the current mapping,to be able to check that the fields are mapped and intervene only if mapped
      */
-    protected void processSupportDeQualite(Map<String, String> data, List<String> row, List<String> headers)
+    protected void processSupportDeQualite(Map<String, String> data, Map<String, String> mapping)
     {
-        String value = getRowDataByHeader(row, HEADER_SUPPORT_DE_QUALITE, headers);
-        value = normalizeStaticListValue(value);
-        // Initialize values to "nr" (for "non renseigné")
-        String accompagnement = "nr";
-        String moyensDeContact = "nr";
-        if (StringUtils.isNotEmpty(value)) {
-            if (value.equalsIgnoreCase("partiel")) {
-                accompagnement = "oui";
-                moyensDeContact = "non";
-            } else {
-                accompagnement = value;
-                moyensDeContact = value;
+        // Check that the 2 properties are mapped, and are mapped to the same column.
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_ACCOMPAGNEMENT))
+            && StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT))
+            && mapping.get(DEMARCHE_PROPERTY_ACCOMPAGNEMENT).equals(mapping.get(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT))) {
+            // if so, get the value as fetched in the data and work it
+            String value = data.get(DEMARCHE_PROPERTY_ACCOMPAGNEMENT);
+            value = normalizeStaticListValue(value);
+            // Initialize values to "nr" (for "non renseigné")
+            String accompagnement = "nr";
+            String moyensDeContact = "nr";
+            if (StringUtils.isNotEmpty(value)) {
+                if (value.equalsIgnoreCase("partiel")) {
+                    accompagnement = "oui";
+                    moyensDeContact = "non";
+                } else {
+                    accompagnement = value;
+                    moyensDeContact = value;
+                }
             }
-        }
 
-        data.put(DEMARCHE_PROPERTY_ACCOMPAGNEMENT, accompagnement);
-        data.put(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT, moyensDeContact);
+            data.put(DEMARCHE_PROPERTY_ACCOMPAGNEMENT, accompagnement);
+            data.put(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT, moyensDeContact);
+        }
     }
 
-    protected void processUrl(Map<String, String> data, List<String> row, List<String> headers)
+    /**
+     * Processes the demarche URL: cleans up all special values that can appear in the URL, if the URL is mapped to keep
+     * only valid values.
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param mapping the current mapping, to be able to verify that the URL is mapped and only intervene if there is a
+     *            mapping for the URL
+     */
+    protected void processUrl(Map<String, String> data, Map<String, String> mapping)
     {
-        String value = getRowDataByHeader(row, HEADER_URL, headers);
-        if (value == null || "?".equals(value) || "-".equals(value)) {
-            data.put(DEMARCHE_PROPERTY_URL, "");
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_URL))) {
+            String value = data.get(DEMARCHE_PROPERTY_URL);
+            if (value == null || "?".equals(value) || "-".equals(value)) {
+                data.put(DEMARCHE_PROPERTY_URL, "");
+            }
         }
     }
 
