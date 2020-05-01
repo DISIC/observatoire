@@ -97,16 +97,39 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     public void postProcessRow(Map<String, String> data, List<String> row, int rowIndex, Map<String, String> mapping,
         List<String> headers, BatchImportConfiguration config)
     {
+        logger.debug("Post processing demarche data: ", data);
+
         trimAllValues(data);
-        normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION))) {
+            normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
+        }
+
         processOpeningDate(data);
-        processVolumetrieNumbers(data);
-        normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_INTEGRATION, data);
-        normalizeStaticListValue(DEMARCHE_PROPERTY_FRANCE_CONNECT, data);
-        normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_VOLUMETRIE))
+            || StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION))) {
+            processVolumetrieNumbers(data);
+        }
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_STATUT_INTEGRATION))) {
+            normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_INTEGRATION, data);
+        }
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_FRANCE_CONNECT))) {
+            normalizeStaticListValue(DEMARCHE_PROPERTY_FRANCE_CONNECT, data);
+        }
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_ADAPTE_MOBILE))) {
+            normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
+        }
+
         processSupportDeQualite(data, mapping);
+
         processComments(data, mapping, row, headers);
+
         processUrl(data, mapping);
+
         logger.debug("New data after processing: ", data);
     }
 
