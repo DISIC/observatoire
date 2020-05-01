@@ -29,7 +29,6 @@ import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Provider;
 
 import org.slf4j.Logger;
 import org.xwiki.batchimport.BatchImport;
@@ -41,21 +40,12 @@ import org.xwiki.component.descriptor.ComponentInstantiationStrategy;
 import org.xwiki.model.reference.DocumentReferenceResolver;
 import org.xwiki.text.StringUtils;
 
-import com.xpn.xwiki.XWikiContext;
-
 // TODO: consider firing an error that blocks the import as soon as an unexpected value is found, in order to avoid
 // importing invalid data
-// NB: the property values that get marshalled need to be in the mapping. So we need to map properties such as
-// "accompagnement", "moyensDeContact", "remarques" to a fake column, since they are not present in the input file. We
-// could also consider modifying the mapping dynamically.
-
 @Component("demarche")
 @InstantiationStrategy(ComponentInstantiationStrategy.PER_LOOKUP)
 public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 {
-    @Inject
-    private Provider<XWikiContext> xwikiContextProvider;
-
     @Inject
     private Logger logger;
 
