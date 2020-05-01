@@ -140,6 +140,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      */
     protected void trimAllValues(Map<String, String> data)
     {
+        logger.debug("Trimming all values from the data row");
         Set<Map.Entry<String, String>> entries = data.entrySet();
         for (Map.Entry<String, String> entry : entries) {
             if (StringUtils.isNotEmpty(entry.getValue())) {
@@ -168,6 +169,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     {
         String value = data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE);
         if (StringUtils.isNotEmpty(value)) {
+            logger
+                .debug("Found not empty value for property " + DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE + " processing...");
 
             String dateMiseEnLigneAsString = "";
             String dateMiseEnLigneTexte = "";
@@ -202,9 +205,13 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                 }
             }
 
+            logger.debug("Setting processed value for property " + DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE + ": "
+                + dateMiseEnLigneAsString);
             data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE, dateMiseEnLigneAsString);
             // In addition, if the dateMiseEnLigneTexte is also mapped, set the value to dateMiseEnLigneTexte as well
             if (StringUtils.isNotEmpty(data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE))) {
+                logger.debug("Setting processed value for property " + DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE + ": "
+                    + dateMiseEnLigneTexte);
                 data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE, dateMiseEnLigneTexte);
             }
         }
@@ -224,6 +231,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         List<String> headers)
     {
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_REMARQUES))) {
+            logger.debug(DEMARCHE_PROPERTY_REMARQUES + " is mapped, adding the 2 other headers "
+                + HEADER_EXTRA_REMARQUES_1 + " and " + HEADER_EXTRA_REMARQUES_2);
             String comment1 =
                 maybeAddLabel(data.get(DEMARCHE_PROPERTY_REMARQUES), mapping.get(DEMARCHE_PROPERTY_REMARQUES));
             String comment2 =
@@ -233,6 +242,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
             String joined = Stream.of(comment1, comment2, comment3).filter(s -> StringUtils.isNotEmpty(s))
                 .collect(Collectors.joining("\n\n")).trim();
+            logger.debug(DEMARCHE_PROPERTY_REMARQUES + " is mapped, setting value after postprocessing: " + joined);
             data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
         }
     }
@@ -263,6 +273,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      */
     protected void processVolumetrieNumbers(Map<String, String> data)
     {
+        logger.debug("Processing volumetrie numbers...");
         String[] propertyNames =
             new String[] {DEMARCHE_PROPERTY_VOLUMETRIE, DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION};
         // The logic below only handles specific values of the data, so we don't check if the properties are mapped or
@@ -270,6 +281,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         for (String propertyName : propertyNames) {
             String value = data.get(propertyName);
             if ("n/c".equalsIgnoreCase(value) || "na".equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) {
+                logger.debug("Skipping volumetrie value " + value + " for property " + propertyName);
                 data.put(propertyName, "");
             }
         }
@@ -299,9 +311,11 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     protected void normalizeStaticListValue(String propertyName, Map<String, String> data)
     {
+        logger.debug("Normalizing data for property " + propertyName);
         String value = data.get(propertyName);
         String normalizedValue = normalizeStaticListValue(value);
         if (normalizedValue != null && !normalizedValue.equals(value)) {
+            logger.debug("Normalizing data for property " + propertyName + ": " + value + " -> " + normalizedValue);
             data.put(propertyName, normalizedValue);
         }
     }
@@ -328,8 +342,11 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_ACCOMPAGNEMENT))
             && StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT))
             && mapping.get(DEMARCHE_PROPERTY_ACCOMPAGNEMENT).equals(mapping.get(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT))) {
+            logger.debug("Support de qualité: properties " + DEMARCHE_PROPERTY_ACCOMPAGNEMENT + " and "
+                + DEMARCHE_PROPERTY_MOYENS_DE_CONTACT + " are both mapped to the same header, processing the value...");
             // if so, get the value as fetched in the data and work it
             String value = data.get(DEMARCHE_PROPERTY_ACCOMPAGNEMENT);
+            String transformationLog = "Support de qualité value " + value + " becomes ";
             value = normalizeStaticListValue(value);
             // Initialize values to "nr" (for "non renseigné")
             String accompagnement = "nr";
@@ -344,6 +361,9 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                 }
             }
 
+            transformationLog += DEMARCHE_PROPERTY_ACCOMPAGNEMENT + "=" + accompagnement + "; "
+                + DEMARCHE_PROPERTY_MOYENS_DE_CONTACT + "=" + moyensDeContact;
+            logger.debug(transformationLog);
             data.put(DEMARCHE_PROPERTY_ACCOMPAGNEMENT, accompagnement);
             data.put(DEMARCHE_PROPERTY_MOYENS_DE_CONTACT, moyensDeContact);
         }
@@ -361,7 +381,9 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     {
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_URL))) {
             String value = data.get(DEMARCHE_PROPERTY_URL);
+            logger.debug("Processing url...");
             if (value == null || "?".equals(value) || "-".equals(value)) {
+                logger.debug("Skipping url value " + value);
                 data.put(DEMARCHE_PROPERTY_URL, "");
             }
         }
