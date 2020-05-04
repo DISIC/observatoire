@@ -1,0 +1,209 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Admin.Top250RawValues" locale="">
+  <web>Demarches.Admin</web>
+  <name>Top250RawValues</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>Demarches.Admin.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{velocity output="false"}}
+#macro(displayPropertySource $demarcheObj $propertyName $isComputed)
+  #if($isComputed)
+    #if($propertyName == 'qualiteSupport')
+      Acc: $!{demarcheObj.getProperty('accompagnement').value} Mdc: $!{demarcheObj.getProperty('moyensDeContact').value} ##
+    #end
+  #else
+    $!demarcheObj.getProperty($propertyName).value ##
+  #end
+#end
+
+#macro(displayProperty $demarcheObj $propertyName $isComputed)
+  (%class='prop-$propertyName'%)((($demarcheObj.get($propertyName)
+  ----
+  #displayPropertySource($demarcheObj $propertyName $isComputed) )))##
+#end
+{{/velocity}}
+
+{{velocity}}
+#set ($hql = "select distinct obj.name from BaseObject obj, IntegerProperty as prop where obj.className = 'Demarches.Code.DemarchesClass' and prop.id.id = obj.id and prop.id.name = 'top' and prop.value = 1 order by length(obj.name) , obj.name")
+#set ($entries = $services.query.hql($hql).execute())
+##
+##
+#set($discard = $xwiki.ssx.use('Demarches.WebHome'))
+(% class="table-bordered table-striped" %)
+|=No|=Nom de la démarche|=Réalisable en ligne|=Id|=Lien|=Ouverture en ligne (date)|=Ouverture en ligne|=Volumétrie|=Volumétrie en ligne|=Pourcentage de recours à la voie dématérialisée|=Adapté mobile|=Support accessible|=France Connect|=Dlnuf|=Accessibilité|=Déclaration accessibilité|=Pourcentage RGAA|=Ministère|=Groupes externes|=Direction|=Uptime|=Temps de réponse|=Disponibilité et rapidité
+#foreach($e in $entries)
+  #set($demarcheDoc = $xwiki.getDocument($e))
+  #set($demarcheObj = $demarcheDoc.getObject("Demarches.Code.DemarchesClass"))
+  #set($properties = ['urlDemarche', 'dateMiseEnLigne', 'dateMiseEnLigneTexte', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'adapteMobile', 'qualiteSupport', 'franceConnect', 'ditesLeNousUneFois', 'accessibilityScore', 'accessibilityStatement', 'rgaaCompliancyLevel', 'ministeres', 'groupesExternes', 'direction', 'urlAvailability', 'urlResponseTime', 'urlScore'])
+  #set($computedProperties = ['pourcentageRecoursVoieDematerialisee','qualiteSupport', 'urlScore', 'accessibilityScore'])
+  ## |(% rowspan="2" %)$foreach.count|(% rowspan="2" %)$demarcheDoc.title|#displayProperty($demarcheObj, 'statutDemat', false)|(% rowspan="2" %)$demarcheDoc.name|#foreach($p in $properties)#displayProperty($demarcheObj, $p, $computedProperties.contains($p))#end
+  |**$foreach.count**|**$demarcheDoc.title**|#displayProperty($demarcheObj, 'statutDemat', false)|**${demarcheDoc.name}**#foreach($p in $properties)|#displayProperty($demarcheObj, $p, $computedProperties.contains($p))#end
+
+#end
+{{/velocity}}</content>
+  <object>
+    <name>Demarches.Admin.Top250RawValues</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>7e20254e-9767-4f82-a035-36e5f8aeb5a0</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>table td span.wikigeneratedlinkcontent {
+  word-break: break-all;
+}
+
+table td.prop-ditesLeNousUneFois {
+  white-space: nowrap;
+}
+
+table td.prop-adapteMobile {
+  white-space: nowrap;
+}
+
+table td.prop-franceConnect {
+  white-space: nowrap;
+}
+
+table td.prop-pourcentageRecoursVoieDematerialisee {
+  white-space: nowrap;
+}</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+</xwikidoc>
