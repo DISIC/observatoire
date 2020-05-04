@@ -25,8 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -71,8 +69,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String DEMARCHE_PROPERTY_URL = "urlDemarche";
 
-    public static String DEMARCHE_PROPERTY_REMARQUES = "remarques";
-
     public static String DEMARCHE_PROPERTY_UPTIME = "urlAvailability";
 
     public static String DEMARCHE_PROPERTY_RGAA_STATEMENT = "accessibilityStatement";
@@ -80,10 +76,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     public static String DEMARCHE_PROPERTY_RGAA_COMPLIANCE_LEVEL = "rgaaCompliancyLevel";
 
     public static String DEMARCHE_PROPERTY_DLNUF = "ditesLeNousUneFois";
-
-    public static String HEADER_EXTRA_REMARQUES_1 = "Commentaire DINSIC";
-
-    public static String HEADER_EXTRA_REMARQUES_2 = "Commentaires UX/ test";
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
 
@@ -138,8 +130,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
         processDLNUF(data, mapping);
 
-        processComments(data, mapping, row, headers);
-
         processUrl(data, mapping);
 
         logger.debug("New data after processing: " + data);
@@ -158,36 +148,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             if (StringUtils.isNotEmpty(entry.getValue())) {
                 entry.setValue(entry.getValue().trim());
             }
-        }
-    }
-
-    /**
-     * Appends the values of fields "Commentaire DINSIC" and "Commentaires UX/ test" to the value mapped on the
-     * remarques property, if any.
-     *
-     * @param data the data read from the file and mapped, ready to be imported
-     * @param mapping the current mapping, to be able to check that the property is mapped and intervene only if it's
-     *            the case
-     * @param row the current row being processed
-     * @param headers the full headers of the rows being processed
-     */
-    protected void processComments(Map<String, String> data, Map<String, String> mapping, List<String> row,
-        List<String> headers)
-    {
-        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_REMARQUES))) {
-            logger.debug(DEMARCHE_PROPERTY_REMARQUES + " is mapped, adding the 2 other headers "
-                + HEADER_EXTRA_REMARQUES_1 + " and " + HEADER_EXTRA_REMARQUES_2);
-            String comment1 =
-                maybeAddLabel(data.get(DEMARCHE_PROPERTY_REMARQUES), mapping.get(DEMARCHE_PROPERTY_REMARQUES));
-            String comment2 =
-                maybeAddLabel(getRowDataByHeader(row, HEADER_EXTRA_REMARQUES_1, headers), HEADER_EXTRA_REMARQUES_1);
-            String comment3 =
-                maybeAddLabel(getRowDataByHeader(row, HEADER_EXTRA_REMARQUES_2, headers), HEADER_EXTRA_REMARQUES_2);
-
-            String joined = Stream.of(comment1, comment2, comment3).filter(s -> StringUtils.isNotEmpty(s))
-                .collect(Collectors.joining("\n\n")).trim();
-            logger.debug(DEMARCHE_PROPERTY_REMARQUES + " is mapped, setting value after postprocessing: " + joined);
-            data.put(DEMARCHE_PROPERTY_REMARQUES, joined);
         }
     }
 
