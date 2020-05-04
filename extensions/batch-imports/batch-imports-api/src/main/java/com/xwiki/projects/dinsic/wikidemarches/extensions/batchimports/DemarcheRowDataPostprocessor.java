@@ -19,6 +19,7 @@
  */
 package com.xwiki.projects.dinsic.wikidemarches.extensions.batchimports;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -56,17 +57,9 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     @Named("current")
     private DocumentReferenceResolver<String> resolver;
 
-    public static String DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION = "statutDemat";
-
-    public static String DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE = "dateMiseEnLigne";
-
-    public static String DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE = "dateMiseEnLigneTexte";
-
     public static String DEMARCHE_PROPERTY_VOLUMETRIE = "volumetrie";
 
     public static String DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION = "volumetrieDemat";
-
-    public static String DEMARCHE_PROPERTY_STATUT_INTEGRATION = "statutIntegration";
 
     public static String DEMARCHE_PROPERTY_FRANCE_CONNECT = "franceConnect";
 
@@ -80,6 +73,14 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String DEMARCHE_PROPERTY_REMARQUES = "remarques";
 
+    public static String DEMARCHE_PROPERTY_UPTIME = "urlAvailability";
+
+    public static String DEMARCHE_PROPERTY_RGAA_STATEMENT = "accessibilityStatement";
+
+    public static String DEMARCHE_PROPERTY_RGAA_COMPLIANCE_LEVEL = "rgaaCompliancyLevel";
+
+    public static String DEMARCHE_PROPERTY_DLNUF = "ditesLeNousUneFois";
+
     public static String HEADER_EXTRA_REMARQUES_1 = "Commentaire DINSIC";
 
     public static String HEADER_EXTRA_REMARQUES_2 = "Commentaires UX/ test";
@@ -87,6 +88,8 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
+
+    public static SimpleDateFormat FORMATTER_TEXTDATE = new SimpleDateFormat("MMMMM d, yyyy");
 
     /**
      * {@inheritDoc}
@@ -97,40 +100,49 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     public void postProcessRow(Map<String, String> data, List<String> row, int rowIndex, Map<String, String> mapping,
         List<String> headers, BatchImportConfiguration config)
     {
-        logger.debug("Post processing demarche data: ", data);
+        logger.debug("Post processing demarche data: " + data);
 
         trimAllValues(data);
 
-        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION))) {
-            normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_DEMATERIALISATION, data);
-        }
+        // no more processing for the statutDemat, it is handled properly by the list preprocessor
 
-        processOpeningDate(data);
+        // no more processing of the opening date, we'll just import it as pure text, the date itself is to be done in a
+        // next version (if still needed)
 
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_VOLUMETRIE))
             || StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_VOLUMETRIE_DEMATERIALISATION))) {
             processVolumetrieNumbers(data);
         }
 
-        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_STATUT_INTEGRATION))) {
-            normalizeStaticListValue(DEMARCHE_PROPERTY_STATUT_INTEGRATION, data);
-        }
-
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_FRANCE_CONNECT))) {
-            normalizeStaticListValue(DEMARCHE_PROPERTY_FRANCE_CONNECT, data);
+            // only cleanup dash, the rest is handled by the list preprocessor
+            cleanupDash(data, DEMARCHE_PROPERTY_FRANCE_CONNECT);
         }
 
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_ADAPTE_MOBILE))) {
-            normalizeStaticListValue(DEMARCHE_PROPERTY_ADAPTE_MOBILE, data);
+            // only cleanup dash, the rest is handled by the list preprocessor
+            cleanupDash(data, DEMARCHE_PROPERTY_ADAPTE_MOBILE);
         }
 
         processSupportDeQualite(data, mapping);
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_UPTIME))) {
+            cleanupPercentage(data, DEMARCHE_PROPERTY_UPTIME);
+        }
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_RGAA_COMPLIANCE_LEVEL))) {
+            cleanupPercentage(data, DEMARCHE_PROPERTY_RGAA_COMPLIANCE_LEVEL);
+        }
+
+        processRGAAStatement(data, mapping);
+
+        processDLNUF(data, mapping);
 
         processComments(data, mapping, row, headers);
 
         processUrl(data, mapping);
 
-        logger.debug("New data after processing: ", data);
+        logger.debug("New data after processing: " + data);
     }
 
     /**
@@ -145,74 +157,6 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         for (Map.Entry<String, String> entry : entries) {
             if (StringUtils.isNotEmpty(entry.getValue())) {
                 entry.setValue(entry.getValue().trim());
-            }
-        }
-    }
-
-    /**
-     * TODO: I don't like the logic of this function, it conditions the set of the text date with the non-text value, to
-     * redo.<br>
-     * Process column "Date d'ouverture du service dématérialisé" and convert its values to 2 property values:
-     * dateMiseEnLigne and dateMiseEnLigneTexte, according to the following conversion rules:
-     * <ul>
-     * <li>"n/c" -> "", ""</li>
-     * <li>"Ouvert" -> "", "Ouvert"</li>
-     * <li>"2022" -> "01/12/2022", "2022"</li>
-     * <li>"Sep-2019" -> "01/09/2019", ""</li>
-     * <li>"2020-2021" -> "01/12/2020", "2020-2021"</li>
-     * <li>"2020?" -> "01/12/2020", "2020"</li>
-     * </ul>
-     *
-     * @param data the data read from the file and mapped, ready to be imported
-     */
-    protected void processOpeningDate(Map<String, String> data)
-    {
-        String value = data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE);
-        if (StringUtils.isNotEmpty(value)) {
-            logger
-                .debug("Found not empty value for property " + DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE + " processing...");
-
-            String dateMiseEnLigneAsString = "";
-            String dateMiseEnLigneTexte = "";
-
-            if (value.matches("[^-]*-\\d{2}")) {
-                // The value is a real date
-                try {
-                    Date date = FORMATTER_DATE_MISE_EN_LIGNE_INPUT.parse(value);
-                    dateMiseEnLigneAsString = FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT.format(date);
-                    dateMiseEnLigneTexte = "";
-                } catch (Exception e) {
-                    // TODO: handle errors properly. For now we throw a runtime exception to block the import and avoid
-                    // importing wrong data
-                    throw new RuntimeException("Invalid date input");
-                }
-            } else {
-
-                dateMiseEnLigneAsString = value.replaceAll("^(?i)ouvert$", "");
-                dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(?i)n/c$", "");
-                dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(?i)n/a$", "");
-                dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(\\d{4})\\?$", "12/$1");
-                dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("^(\\d{4})$", "12/$1");
-                dateMiseEnLigneAsString = dateMiseEnLigneAsString.replaceAll("(\\d{4})-(\\d{4})", "12/$2");
-
-                // We store the value as such in dateMiseEnLigneTexte to keep the information as it was provided,
-                // typically when value is: "2020-2021"
-                // No need to store information "ouvert" or "nr" because:
-                // - "ouvert" can be inferred from "statutDemat=enLigneEntierement"
-                // - "nr" can be inferred from "dateMiseEnLigne=''"
-                if (!value.matches("(?i)ouvert") && !value.matches("(?i)n/c")) {
-                    dateMiseEnLigneTexte = value;
-                }
-            }
-
-            logger.debug("Setting processed value for property " + DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE + ": "
-                + dateMiseEnLigneAsString);
-            data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE, dateMiseEnLigneAsString);
-            // In addition, if the dateMiseEnLigneTexte is also mapped, set the value to dateMiseEnLigneTexte as well
-            if (StringUtils.isNotEmpty(data.get(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE))) {
-                logger.debug("Setting processed value for property " + DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE + ": "
-                    + dateMiseEnLigneTexte);
-                data.put(DEMARCHE_PROPERTY_DATE_MISE_EN_LIGNE_TEXTE, dateMiseEnLigneTexte);
             }
         }
     }
@@ -288,9 +232,47 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     }
 
     /**
-     * Replace common static list values by their corresponding key in the démarche property: replace "n/c" by "nr"
-     * ("non renseigné"), "n/a" by "na", "Oui" by "oui", "Non" by "non", "A venir" by "nr", "sans identification" by
-     * "sansIdentification" .
+     * Cleans up the percentages from the value mapped for the given property
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param propertyName the property for which to perform the cleanup
+     */
+    protected void cleanupPercentage(Map<String, String> data, String propertyName)
+    {
+        logger.debug("Cleaning percentage from " + propertyName);
+        String value = data.get(propertyName);
+        value = value.replace("%", "");
+        data.put(propertyName, value);
+    }
+
+    /**
+     * Transforms dashes in the data into empty value, for the given property.
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param propertyName the property to perform the cleanup for
+     */
+    protected void cleanupDash(Map<String, String> data, String propertyName)
+    {
+        logger.debug("Cleaning dash from " + propertyName);
+        if (isDash(data.get(propertyName))) {
+            logger.debug("Found and cleaned up dash");
+            data.put(propertyName, "");
+        }
+    }
+
+    /**
+     * Checks if this value is equal to dash, including all variations of dash possible (shorter dash, longer, etc.)
+     *
+     * @param value the value to check
+     * @return true if the value is a dash, false otherwise
+     */
+    protected boolean isDash(String value)
+    {
+        return ("–".equals(value) || "-".equals(value));
+    }
+
+    /**
+     * Replace common static list values by their corresponding key in the démarche property.
      *
      * @param value the value to normalize
      * @return the normalized value
@@ -298,26 +280,15 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
     protected String normalizeStaticListValue(String value)
     {
         if (StringUtils.isNotEmpty(value)) {
-            value = value.replaceAll("(?i)^n/c$", "nr");
+            // actual values replacement
+            value = value.replaceAll("(?i)^en attente$", "nr");
             value = value.replaceAll("(?i)^n/a$", "na");
-            value = value.replaceAll("(?i)^partiel$", "partiel");
-            value = value.replaceAll("(?i)^a venir$", "nr");
-            value = value.replaceAll("(?i)^à venir$", "nr");
-            value = value.replaceAll("(?i)^oui$", "oui");
-            value = value.replaceAll("(?i)^non$", "non");
+            // and also empty the value if the value is -
+            if (isDash(value)) {
+                value = "nr";
+            }
         }
         return value;
-    }
-
-    protected void normalizeStaticListValue(String propertyName, Map<String, String> data)
-    {
-        logger.debug("Normalizing data for property " + propertyName);
-        String value = data.get(propertyName);
-        String normalizedValue = normalizeStaticListValue(value);
-        if (normalizedValue != null && !normalizedValue.equals(value)) {
-            logger.debug("Normalizing data for property " + propertyName + ": " + value + " -> " + normalizedValue);
-            data.put(propertyName, normalizedValue);
-        }
     }
 
     /**
@@ -382,10 +353,100 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_URL))) {
             String value = data.get(DEMARCHE_PROPERTY_URL);
             logger.debug("Processing url...");
-            if (value == null || "?".equals(value) || "-".equals(value)) {
+            if ("EDI".equals(value) || "En attente".equals(value)) {
                 logger.debug("Skipping url value " + value);
                 data.put(DEMARCHE_PROPERTY_URL, "");
             }
+        }
+    }
+
+    /**
+     * Processes the accessibility statement value, if mapped, from a date value (expects to be mapped on a date value),
+     * as follows: <br>
+     * - if there is a value, parse it as a date. If it's earlier than 3 years, store "oui" in the field <br>
+     * - if there is no value or it's no earlier than 3 years, <strong>look at the vlue of the field where the URL is
+     * mapped</strong>, and check the following: <br>
+     * - if the URL is set to EDI, then store "na" in the field (n/a) - if the URL is set to En attente, then "store" nr
+     * in the field (En attente) - in all other cases, store "no"
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param mapping the current mapping, to be able to verify that the accessibility statement is mapped and only
+     *            intervene if there is a mapping
+     */
+    protected void processRGAAStatement(Map<String, String> data, Map<String, String> mapping)
+    {
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_RGAA_STATEMENT))) {
+            logger.debug("Processing accessibility statement");
+            String valueToSet = "non";
+            String dateValue = data.get(DEMARCHE_PROPERTY_RGAA_STATEMENT);
+            // if the value is set, check how old it is
+            if (StringUtils.isNotEmpty(dateValue)) {
+                try {
+                    Date statementDate = FORMATTER_TEXTDATE.parse(dateValue);
+                    // add an extra day in the 3 years to cover for the probability that one of these 3 years is a leap
+                    // year, which is quite high (3/4)
+                    long threeYearsInMillis = (3 * 365 + 1) * 24 * 60 * 60 * 1000;
+                    if (new Date().getTime() - statementDate.getTime() <= threeYearsInMillis) {
+                        logger.debug("Processing accessibility statement: Date found and parsed " + statementDate
+                            + " and is within the 3 years");
+                        valueToSet = "yes";
+                    }
+                } catch (ParseException e) {
+                    logger.warn("Processing accessibility statement: Could not parse value " + dateValue
+                        + " as date for field " + DEMARCHE_PROPERTY_RGAA_STATEMENT + ", assuming empty value");
+                }
+            }
+            if ("non".equals(valueToSet)) {
+                // value does not exist, or could not be parsed to a date that is within 3 years from now, check if this
+                // is a special case
+                logger.debug("Processing accessibility statement: Date within 3 years not found, looking at URL");
+                // FIXME: this function only works if the URL is also mapped, but we'll make sure it's always mapped
+                String urlValue = data.get(DEMARCHE_PROPERTY_URL);
+                if ("EDI".equals(urlValue)) {
+                    logger.debug("Processing accessibility statement: URL is 'EDI', setting n/a");
+                    valueToSet = "na";
+                }
+                if (("En attente").equals(urlValue)) {
+                    logger.debug("Processing accessibility statement: URL is 'En attente', setting n/r (En attente)");
+                    valueToSet = "nr";
+                }
+            }
+            logger.debug("Processing accessibility statement: setting final value " + valueToSet);
+            data.put(DEMARCHE_PROPERTY_RGAA_STATEMENT, valueToSet);
+        }
+    }
+
+    /**
+     * Normalize the dlnuf column to numeric or empty values.
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param mapping the current mapping, to be able to verify that the dlnuf is mapped and only intervene if there is
+     *            a mapping
+     */
+    protected void processDLNUF(Map<String, String> data, Map<String, String> mapping)
+    {
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_DLNUF))) {
+            logger.debug("Processing DLNUF");
+            String value = data.get(DEMARCHE_PROPERTY_DLNUF);
+            // TODO: remove me when we'll have the column without colors
+            // replace all characters except ascii letters (uppercase and lowercase), numbers, the character -, the
+            // fancy
+            // dash –, the slash and empty space with nothing.
+            value = value.replaceAll("[^a-zA-Z0-9\\-\\–\\/\\s]+", "").trim();
+            // processing of the remaining value
+            if ("n/a".equals(value)) {
+                logger.debug("Processing DLNUF: normalizing n/a as -1");
+                value = "-1";
+            }
+            if ("En attente".equals(value)) {
+                logger.debug("Processing DLNUF: normalizing 'En attente' as empty value");
+                value = "";
+            }
+            if (isDash(value)) {
+                logger.debug("Processing DLNUF: normalizing dash as empty value");
+                value = "";
+            }
+            data.put(DEMARCHE_PROPERTY_DLNUF, value);
         }
     }
 
