@@ -716,7 +716,7 @@ var XWiki = (function (XWiki) {
             className: 'column-title',
             type: "french-string",
             render : function (data, type, row) {
-              return data + ' &lt;span class="ministere-groupe"&gt;' + row['ministere'] + (row['groupes'] ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
+              return data + ' &lt;span class="ministere-groupe"&gt;' + row['ministere'] + ((row['groupes'] &amp;&amp; row['groupes'] != row['ministere']) ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
             }
           },
           {
