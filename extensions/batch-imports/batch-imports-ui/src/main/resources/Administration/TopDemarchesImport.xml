@@ -281,27 +281,29 @@
     </property>
     <property>
       <mapping>Code ministère=ministeres
-[private] Date déclaration d'accessibilité=accessibilityStatement
 [private] Taux de disponibilité=urlAvailability
-Constant:=dateMiseEnLigne
 Intégration FranceConnect=franceConnect
-[private] Volumétrie totale 2019=volumetrie
-Ouverture en ligne=dateMiseEnLigneTexte
 Dites-le nous une fois sans carrés=ditesLeNousUneFois
-Compatible mobile=adapteMobile
+Lien=ediOnly
 Constant:1=top
-[private] ID=doc.name
-[private] Volumétrie en ligne 2019=volumetrieDemat
 Lien=urlDemarche
-Taux RGAA Audit=rgaaCompliancyLevel
-Nom de la démarche=nomComplet
 [private] Temps de réponse (milliseconde)=urlResponseTime
 Nom de la démarche=doc.title
-Support accessible=moyensDeContact
 Réalisable en ligne=statutDemat
 Support accessible=accompagnement
-Thème=groupesExternes
-Administration=direction</mapping>
+Administration=direction
+[private] Date déclaration d'accessibilité=accessibilityStatement
+Constant:=dateMiseEnLigne
+Usagers satisfaits=avisExemption
+[private] Volumétrie totale 2019=volumetrie
+Ouverture en ligne=dateMiseEnLigneTexte
+Compatible mobile=adapteMobile
+[private] ID=doc.name
+[private] Volumétrie en ligne 2019=volumetrieDemat
+Taux RGAA Audit=rgaaCompliancyLevel
+Nom de la démarche=nomComplet
+Support accessible=moyensDeContact
+Thème=groupesExternes</mapping>
     </property>
     <property>
       <metadatafilename/>
