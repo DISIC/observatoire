@@ -819,25 +819,30 @@ $services.localization.render("Demarches.Code.DemarchesClass_pourcentageRecoursV
     <qualiteSupport>
       <customDisplay>{{velocity}}
 {{html clean="false"}}
-#set ($accompagnement = $object.getValue('accompagnement'))
-#set ($moyensDeContact = $object.getValue('moyensDeContact'))
-## Set default values in case the properties are empty
-#if ("$!accompagnement" == '')
-  #set ($accompagnement = 'nr')
-#end
-#if ("$!moyensDeContact" == '')
-  #set ($moyensDeContact = 'nr')
-#end
-#set ($noOrnotApplicableOrNoInformation = ['non', 'na', 'nr'])
-#set ($result = 'non')
-#if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
-  #set ($result = 'oui')
-#elseif (($accompagnement == 'nr' &amp;&amp; ($moyensDeContact == 'nr' || $moyensDeContact == 'na')) || ($moyensDeContact == 'nr' &amp;&amp; ($accompagnement == 'nr' || $accompagnement == 'na')))
-  #set ($result = 'nr')
-#elseif ($accompagnement == 'na' &amp;&amp; $moyensDeContact == 'na')
-  #set ($result = 'na')
-#elseif (($accompagnement == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($accompagnement)))
-  #set ($result = 'partiel')
+#set ($statutDemat = $object.getValue('statutDemat'))
+#if ($statutDemat == 'nonDemat')
+  #set ($result = 'nonDemat')
+#else
+  #set ($accompagnement = $object.getValue('accompagnement'))
+  #set ($moyensDeContact = $object.getValue('moyensDeContact'))
+  ## Set default values in case the properties are empty
+  #if ("$!accompagnement" == '')
+    #set ($accompagnement = 'nr')
+  #end
+  #if ("$!moyensDeContact" == '')
+    #set ($moyensDeContact = 'nr')
+  #end
+  #set ($noOrnotApplicableOrNoInformation = ['non', 'na', 'nr'])
+  #set ($result = 'non')
+  #if ($accompagnement == 'oui' &amp;&amp; $moyensDeContact == 'oui')
+    #set ($result = 'oui')
+  #elseif (($accompagnement == 'nr' &amp;&amp; ($moyensDeContact == 'nr' || $moyensDeContact == 'na')) || ($moyensDeContact == 'nr' &amp;&amp; ($accompagnement == 'nr' || $accompagnement == 'na')))
+    #set ($result = 'nr')
+  #elseif ($accompagnement == 'na' &amp;&amp; $moyensDeContact == 'na')
+    #set ($result = 'na')
+  #elseif (($accompagnement == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($moyensDeContact)) || ($moyensDeContact == 'oui' &amp;&amp; $noOrnotApplicableOrNoInformation.contains($accompagnement)))
+    #set ($result = 'partiel')
+  #end
 #end
 $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$result")
 {{/html}}
