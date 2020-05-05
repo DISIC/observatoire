@@ -254,9 +254,11 @@
   #set ($rgaaCompliancyLevelDisplay = "$!rgaaCompliancyLevel %")
   #set ($urlScore = $obj.get('urlScore'))
   #set ($urlScoreValue = $urlScore)
-  #if ($urlScore == 'n/a')
+  #if ($urlScore == '-')
     #set ($urlScoreValue = -100)
-  #elseif ($urlScore == 'n/c')
+  #elseif ($urlScore == 'n/a')
+    #set ($urlScoreValue = -75)
+  #elseif ($urlScore == 'En attente')
     #set ($urlScoreValue = -50)
   #end
   #set ($discard = $data.add(
