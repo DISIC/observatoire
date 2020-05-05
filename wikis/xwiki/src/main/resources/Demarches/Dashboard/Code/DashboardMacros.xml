@@ -50,7 +50,7 @@
 #set ($DASHBOARD_CLASS_ID = 'Demarches.Dashboard.Code.DashboardClass')
 #set ($DASHBOARD_SHEET = 'Demarches.Dashboard.Code.DashboardSheet')
 #set ($LIVE_DASHBOARD_ID = 'observatoire.en-direct.WebHome')
-#set ($SCHEMA_VERSION = "1.2")
+#set ($SCHEMA_VERSION = "1.3")
 #set ($logger = $services.logging.getLogger('DashboardMacros'))
 
 ## Gets the published dashboards order by date descendant, except the live dashboard
@@ -182,14 +182,21 @@
   #elseif ($statutDemat == 'Non')
     ## démarche is not even online
     #set ($satisfactionIndexValue = -2)
-    #set ($satisfactionIndexDisplay = 'n/a')
+    #set ($satisfactionIndexDisplay = $services.localization.render("Demarches.Code.DemarchesClass_satisfactionIndex_nonDemat"))
+    #set ($avisCountDisplay = $avisCountValue)
+    #set ($avisCountValue = 0)
+  #elseif ($obj.getValue('avisExemption') &amp;&amp; $obj.getValue('avisExemption') &gt; 0)
+    ## the demarche has a good reason to not have an avis collection button
+    ## 0.5 is there just to be able to sort these items between the ones with a value and the ones with "A venir", without changing the previous data and their meaning
+    #set ($satisfactionIndexValue = -1.5)
+    #set ($satisfactionIndexDisplay = $services.localization.render("Demarches.Code.DemarchesClass_satisfactionIndex_na"))
     #set ($avisCountDisplay = $avisCountValue)
     #set ($avisCountValue = 0)
   #elseif ($obj.getValue('avisIntegration') &amp;&amp; $obj.getValue('avisIntegration') &gt; 0)
     ## the demarche should have avis but doesn't yet, however the button was declared to be integrated
     ## 0.5 is there just to be able to sort these items between the ones with a value and the ones with "A venir", without changing the previous data and their meaning
     #set ($satisfactionIndexValue = -0.5)
-    #set ($satisfactionIndexDisplay = 'En cours')
+    #set ($satisfactionIndexDisplay = $services.localization.render("Demarches.Code.DemarchesClass_satisfactionIndex_enCours"))
     #set ($avisCountDisplay = $avisCountValue)
     #set ($avisCountValue = 0)
   #else
@@ -197,7 +204,7 @@
     #set ($satisfactionIndexValue = -1)
     #set ($avisCountDisplay = $avisCountValue)
     #set ($avisCountValue = 0)
-    #set ($satisfactionIndexDisplay = 'À venir')
+    #set ($satisfactionIndexDisplay = $services.localization.render("Demarches.Code.DemarchesClass_satisfactionIndex_nr"))
   #end
   #set ($volumetrie = $obj.getValue('volumetrie'))
   #set ($volumetrieDisplay = $obj.get('volumetrie'))
@@ -327,6 +334,8 @@
     }))
 #end
 
+##
+##
 #macro (writeJson)
   ## Code copied from template/macros.vm:jsonResponse in XWiki 11.1
   #set ($discard = $response.setContentType('application/json'))
@@ -338,6 +347,8 @@
   #set ($discard = $xcontext.setFinished(true))
 #end
 
+##
+##
 #macro (attachJson)
   #set ($discard = $doc.addAttachment("data.json", $json.getBytes()))
   #set ($discard = $doc.save("Generate and attach file 'data.json'"))

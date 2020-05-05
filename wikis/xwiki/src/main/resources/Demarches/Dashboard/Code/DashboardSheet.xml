@@ -750,14 +750,16 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.value;
               } else {
+                // the n/a changes meaning starting with schema version 1.3 so we're not replacing it anymore with dash
+                var replaceNa = jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2';
                 if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
                   var statsURL = getAvisStatisticsUrl(row['id']);
-                  var valueToDisplay = format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  true, row['id']);
+                  var valueToDisplay = format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  replaceNa, row['id']);
                   // add the stats link to the graphs under / next to the badge
                   var linkToGraphs = '&lt;a class="satisfaction-details" href="' + statsURL + '"&gt;$escapetool.javascript($services.localization.render("dashboard.table.satisfaction.statslink"))&lt;/a&gt;';
                   return valueToDisplay.replace('&lt;/span&gt;&lt;/span&gt;', '&lt;/span&gt;' + linkToGraphs + '&lt;/span&gt;');
                 } else {
-                  return format(data.value, data.display, computeBadgeStyle,  true, row['id']);
+                  return format(data.value, data.display, computeBadgeStyle,  replaceNa, row['id']);
                 }
               }
             }
