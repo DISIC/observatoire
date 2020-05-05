@@ -346,7 +346,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      * - if there is no value or it's no earlier than 3 years, <strong>look at the vlue of the field where the URL is
      * mapped</strong>, and check the following: <br>
      * - if the URL is set to EDI, then store "na" in the field (n/a) - if the URL is set to En attente, then "store" nr
-     * in the field (En attente) - in all other cases, store "no"
+     * in the field (En attente) - in all other cases, store "non"
      *
      * @param data the data read from the file and mapped, ready to be imported
      * @param mapping the current mapping, to be able to verify that the accessibility statement is mapped and only
@@ -364,11 +364,14 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                     Date statementDate = FORMATTER_DATE_RGAA.parse(dateValue);
                     // add an extra day in the 3 years to cover for the probability that one of these 3 years is a leap
                     // year, which is quite high (3/4)
-                    long threeYearsInMillis = (3 * 365 + 1) * 24 * 60 * 60 * 1000;
-                    if (new Date().getTime() - statementDate.getTime() <= threeYearsInMillis) {
+                    long threeYearsInMillis = (long) (3 * 365 + 1) * 24 * 60 * 60 * 1000;
+                    // we evaluate the age of the declaration on the 1st of April 2020, to correspond to what AirTable
+                    // seems to display
+                    long firstApril2020InMillis = 1585692000000L;
+                    if (firstApril2020InMillis - statementDate.getTime() <= threeYearsInMillis) {
                         logger.debug("Processing accessibility statement: Date found and parsed " + statementDate
                             + " and is within the 3 years");
-                        valueToSet = "yes";
+                        valueToSet = "oui";
                     }
                 } catch (ParseException e) {
                     logger.warn("Processing accessibility statement: Could not parse value " + dateValue
