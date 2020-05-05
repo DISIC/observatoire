@@ -44,6 +44,8 @@
   #if($isComputed)
     #if($propertyName == 'qualiteSupport')
       Acc: $!{demarcheObj.getProperty('accompagnement').value} Mdc: $!{demarcheObj.getProperty('moyensDeContact').value} ##
+    #else
+      //[Computed]//
     #end
   #else
     $!demarcheObj.getProperty($propertyName).value ##
@@ -64,11 +66,11 @@
 ##
 #set($discard = $xwiki.ssx.use('Demarches.WebHome'))
 (% class="table-bordered table-striped" %)
-|=No|=Nom de la démarche|=Réalisable en ligne|=Id|=Lien|=Ouverture en ligne (date)|=Ouverture en ligne|=Volumétrie|=Volumétrie en ligne|=Pourcentage de recours à la voie dématérialisée|=Adapté mobile|=Support accessible|=France Connect|=Dlnuf|=Accessibilité|=Déclaration accessibilité|=Pourcentage RGAA|=Ministère|=Groupes externes|=Direction|=Uptime|=Temps de réponse|=Disponibilité et rapidité
+|=No|=Nom de la démarche|=Réalisable en ligne|=Id|=Lien|=Ouverture en ligne (date)|=Ouverture en ligne|=Volumétrie|=Volumétrie en ligne|=Pourcentage de recours à la voie dématérialisée|=Intégration du bouton|=Exemption d'intégration du bouton|=Adapté mobile|=Support accessible|=France Connect|=Dlnuf|=Accessibilité|=Déclaration accessibilité|=Pourcentage RGAA|=Ministère|=Groupes externes|=Direction|=Uptime|=Temps de réponse|=Démarche EDI uniquement|=Disponibilité et rapidité
 #foreach($e in $entries)
   #set($demarcheDoc = $xwiki.getDocument($e))
   #set($demarcheObj = $demarcheDoc.getObject("Demarches.Code.DemarchesClass"))
-  #set($properties = ['urlDemarche', 'dateMiseEnLigne', 'dateMiseEnLigneTexte', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'adapteMobile', 'qualiteSupport', 'franceConnect', 'ditesLeNousUneFois', 'accessibilityScore', 'accessibilityStatement', 'rgaaCompliancyLevel', 'ministeres', 'groupesExternes', 'direction', 'urlAvailability', 'urlResponseTime', 'urlScore'])
+  #set($properties = ['urlDemarche', 'dateMiseEnLigne', 'dateMiseEnLigneTexte', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'avisIntegration', 'avisExemption', 'adapteMobile', 'qualiteSupport', 'franceConnect', 'ditesLeNousUneFois', 'accessibilityScore', 'accessibilityStatement', 'rgaaCompliancyLevel', 'ministeres', 'groupesExternes', 'direction', 'urlAvailability', 'urlResponseTime', 'ediOnly', 'urlScore'])
   #set($computedProperties = ['pourcentageRecoursVoieDematerialisee','qualiteSupport', 'urlScore', 'accessibilityScore'])
   ## |(% rowspan="2" %)$foreach.count|(% rowspan="2" %)$demarcheDoc.title|#displayProperty($demarcheObj, 'statutDemat', false)|(% rowspan="2" %)$demarcheDoc.name|#foreach($p in $properties)#displayProperty($demarcheObj, $p, $computedProperties.contains($p))#end
   |**$foreach.count**|**$demarcheDoc.title**|#displayProperty($demarcheObj, 'statutDemat', false)|**${demarcheDoc.name}**#foreach($p in $properties)|#displayProperty($demarcheObj, $p, $computedProperties.contains($p))#end
@@ -191,6 +193,13 @@ table td.prop-franceConnect {
 
 table td.prop-pourcentageRecoursVoieDematerialisee {
   white-space: nowrap;
+}
+
+table td.prop-pourcentageRecoursVoieDematerialisee hr + p em,
+table td.prop-qualiteSupport hr + p em,
+table td.prop-urlScore hr + p em,
+table td.prop-accessibilityScore hr + p em {
+  color: #ccc;
 }</code>
     </property>
     <property>
