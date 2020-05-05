@@ -789,7 +789,8 @@ var XWiki = (function (XWiki) {
               if (row.statutDemat.toLowerCase() == 'non') {
                 dataDisplay = '-';
               }
-              return format(data, dataDisplay, computeBadgeStyle, true);
+              // replaceNa only for old versions of the observatoire
+              return format(data, dataDisplay, computeBadgeStyle, (jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2'));
             }
           },
           {
@@ -805,7 +806,8 @@ var XWiki = (function (XWiki) {
               if (type === "sort") {
                 return data.value;
               } else {
-                return format(data.value, dataDisplay, computeUrlScoreBadgeStyle, true);
+                // replaceNa only for old versions of the observatoire
+                return format(data.value, dataDisplay, computeUrlScoreBadgeStyle, (jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2'));
               }
             }
           },
