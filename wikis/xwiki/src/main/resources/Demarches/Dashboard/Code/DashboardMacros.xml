@@ -227,27 +227,13 @@
       #set ($percentDemat = -1)
     #end
   #end
-  ## If statutDemat is "Oui", then dateMiseEnLigneDispay should be "Ouvert"
-  ## Else: if a date is present, display it, otherwise display "n/c"
+  ## Version 1.3 of the observatoire only uses the date from text
   #if ($statutDemat == 'Oui')
     #set ($dateMiseEnLigneDisplay = 'Ouvert')
-    #set ($dateMiseEnLigne = 10)
+    #set ($dateMiseEnLigne = 'Ouvert')
   #else
-    #set ($dateMiseEnLigne = $obj.getValue('dateMiseEnLigne'))
-    #if ("$!dateMiseEnLigne" != '')
-      ## Add a hashcode, because we want to differentiate for example "2019" from "12/2019" while both have the same dateMiseEnLigne set to "12/2019"
-      #set ($dateMiseEnLigneDisplay = $obj.get('dateMiseEnLigne'))
-      #set ($dateMiseEnLigneTexte = $obj.getValue('dateMiseEnLigneTexte'))
-      #set ($s = "$!dateMiseEnLigneTexte")
-      #set ($h = $s.hashCode())
-      #set ($dateMiseEnLigne = $mathtool.add($dateMiseEnLigne.getTime(), $h))
-      #if ("$!dateMiseEnLigneTexte" != '')
-        #set ($dateMiseEnLigneDisplay = $dateMiseEnLigneTexte)
-      #end
-    #else
-      #set ($dateMiseEnLigneDisplay = 'n/c')
-      #set ($dateMiseEnLigne = 0)
-    #end
+    #set ($dateMiseEnLigneDisplay = $obj.get('dateMiseEnLigneTexte'))
+    #set ($dateMiseEnLigne = $dateMiseEnLigneDisplay)
   #end
   #set ($adapteMobileValue = $obj.getValue('adapteMobile'))
   #set ($adapteMobileDisplay = $obj.get('adapteMobile'))
