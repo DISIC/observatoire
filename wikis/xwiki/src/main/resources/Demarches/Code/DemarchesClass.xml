@@ -166,6 +166,21 @@ $services.localization.render("Demarches.Code.DemarchesClass_accessibilityScore_
       <values>apiparticuliers=API particuliers|apientreprises=API entreprises</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </api>
+    <avisExemption>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>avisExemption</name>
+      <number>49</number>
+      <prettyName>Exempté d'intégration du bouton de recueil d'avis</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </avisExemption>
     <avisIntegration>
       <customDisplay>{{velocity}}
 {{html clean="false"}}
@@ -402,6 +417,21 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <validationRegExp/>
       <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
     </ditesLeNousUneFois>
+    <ediOnly>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayFormType>checkbox</displayFormType>
+      <displayType/>
+      <hint/>
+      <name>ediOnly</name>
+      <number>50</number>
+      <prettyName>Démarche EDI Uniquement</prettyName>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+    </ediOnly>
     <evenements>
       <cache>0</cache>
       <classname/>
@@ -1067,7 +1097,10 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
 #set ($availability = $object.getValue('urlAvailability'))
 #set ($responseTime = $object.getValue('urlResponseTime'))
 #set ($statutDemat = $object.getValue('statutDemat'))
+#set ($ediOnly = $object.getValue('ediOnly'))
 #if ($statutDemat == 'nonDemat')
+  $services.localization.render('Demarches.Code.DemarchesClass_urlScore_nonDemat')
+#elseif ("$!ediOnly" == "1")
   $services.localization.render('Demarches.Code.DemarchesClass_urlScore_na')
 #else
   ## Availability score
