@@ -78,6 +78,12 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static String DEMARCHE_PROPERTY_DLNUF = "ditesLeNousUneFois";
 
+    public static String DEMARCHE_PROPERTY_AVIS_INTEGRATION = "avisIntegration";
+
+    public static String DEMARCHE_PROPERTY_AVIS_EXEMPTION = "avisExemption";
+
+    public static String DEMARCHE_PROPERTY_EDI_ONLY = "ediOnly";
+
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_INPUT = new SimpleDateFormat("MMM-yy");
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
@@ -132,6 +138,18 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         processDLNUF(data, mapping);
 
         processUrl(data, mapping);
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_AVIS_INTEGRATION))) {
+            processFlagForProperty(data, DEMARCHE_PROPERTY_AVIS_INTEGRATION, "<100votes", "1");
+        }
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_AVIS_EXEMPTION))) {
+            processFlagForProperty(data, DEMARCHE_PROPERTY_AVIS_EXEMPTION, "n/a", "1");
+        }
+
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_EDI_ONLY))) {
+            processFlagForProperty(data, DEMARCHE_PROPERTY_EDI_ONLY, "EDI", "1");
+        }
 
         logger.debug("New data after processing: " + data);
     }
@@ -409,6 +427,34 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             }
             data.put(DEMARCHE_PROPERTY_DLNUF, value);
         }
+    }
+
+    /**
+     * Sets a flag value (to {@code trueValueToSet} or empty) in the data, for the given property, if the current data
+     * (cleaned up of whitespaces) matches regardless of the case the {@code spacelessCaselessTrueValue} parameter.
+     *
+     * @param data the data read from the file and mapped, ready to be imported
+     * @param propertyName the property to make the processing for
+     * @param spacelessCaselessTrueValue the value of the data that would trigger the flag to be set to the value
+     *            indicated by {@code trueValueToSet} (otherwise will be set to empty)
+     * @param trueValueToSet the value to set in case the current matches spacelessCaselessTrueValue (empty string will
+     *            be set otherwise)
+     */
+    protected void processFlagForProperty(Map<String, String> data, String propertyName,
+        String spacelessCaselessTrueValue, String trueValueToSet)
+    {
+        logger.debug("Processing flag " + propertyName);
+        // we'll not set any value if the flag is not to be set, by the principle that the data should be left "as
+        // is" if there is no flag to set. However, I think this import is done with "honor empty values" so in
+        // practice it is the same thing as setting 0.
+        String valueToSet = "";
+        String fileValue = data.get(propertyName);
+        // test without whitespace, to try to cover a little more cases
+        if (spacelessCaselessTrueValue.equalsIgnoreCase(fileValue.replaceAll("\\s", ""))) {
+            valueToSet = trueValueToSet;
+        }
+        logger.debug("Setting flag " + propertyName + ": " + valueToSet);
+        data.put(propertyName, valueToSet);
     }
 
     /**
