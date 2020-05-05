@@ -669,6 +669,10 @@ var XWiki = (function (XWiki) {
         dataEndpoint = "$xwiki.getURL($pageId, 'view', $parameters)";
       #end
 
+      // Default JSON Schema for this observatoire, unset.
+      // As a global strategy, always add special handling for previous versions and have the current version be the default
+      var jsonSchemaVersion = '';
+
       var table = $('#top-demarches').DataTable({
         ajax: {
           type: 'GET',
@@ -681,8 +685,8 @@ var XWiki = (function (XWiki) {
               // This is for retro-compatibility for JSON schema version &lt;= 1.1
               avisEndDate = json.metadata['date'];
             }
-            var schema = json.metadata.schema;
-            if (!schema || schema == '1.0') {
+            jsonSchemaVersion = json.metadata.schema;
+            if (!jsonSchemaVersion || jsonSchemaVersion == '1.0') {
               // Do not display columns about accessibility and "tells us once" for schema version &lt; 1.1
               table.column(9).visible(false);
               table.column(10).visible(false);
@@ -959,8 +963,8 @@ var XWiki = (function (XWiki) {
           // add the publics filter in the filters
           var filtersContainer = $('#top-demarches_filter');
           if (filtersContainer) {
-            var schema = json.metadata.schema;
-            if (schema != undefined &amp;&amp; schema != '1.0') {
+            var jsonSchemaVersion = json.metadata.schema;
+            if (jsonSchemaVersion != undefined &amp;&amp; jsonSchemaVersion != '1.0') {
               var publicCategorySelect = $("&lt;select name='publicCategorySelect'/&gt;");
               publicCategorySelect.empty();
               publicCategorySelect.append($("&lt;option /&gt;").val("tous").text("Tous les publics"));
@@ -989,7 +993,7 @@ var XWiki = (function (XWiki) {
             // thanks, internet: https://datatables.net/forums/discussion/34352/passing-datatable-object-to-initcomplete-callback
             // NB: on selection change, the selection is then retrieved during the execution of the code declared in "$.fn.dataTable.ext.search.push"
             var thisDataTable = settings.oInstance.api();
-            if (schema != undefined &amp;&amp; schema != '1.0') {
+            if (jsonSchemaVersion != undefined &amp;&amp; jsonSchemaVersion != '1.0') {
               publicCategorySelect.change(function () {
                 thisDataTable.draw();
               });
