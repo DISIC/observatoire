@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -81,7 +82,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
 
-    public static SimpleDateFormat FORMATTER_TEXTDATE = new SimpleDateFormat("MMMMM d, yyyy");
+    public static SimpleDateFormat FORMATTER_DATE_RGAA = new SimpleDateFormat("MMMMM d, yyyy", Locale.ENGLISH);
 
     /**
      * {@inheritDoc}
@@ -342,7 +343,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             // if the value is set, check how old it is
             if (StringUtils.isNotEmpty(dateValue)) {
                 try {
-                    Date statementDate = FORMATTER_TEXTDATE.parse(dateValue);
+                    Date statementDate = FORMATTER_DATE_RGAA.parse(dateValue);
                     // add an extra day in the 3 years to cover for the probability that one of these 3 years is a leap
                     // year, which is quite high (3/4)
                     long threeYearsInMillis = (3 * 365 + 1) * 24 * 60 * 60 * 1000;
