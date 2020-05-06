@@ -48,7 +48,7 @@
 ## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
-#set ($discard = $xwiki.ssx.use('Demarches.Code.MontserratWebfontSSX'))
+#set ($discard = $xwiki.ssx.use('Fonts.MarianneWebfontSSX'))
 #set($tableHeaderElements = {
   'demarche' : '',
   'ministry' : '',
@@ -1308,8 +1308,8 @@ input[name='title'] {
   }
   #document-title h1 {
     color: #fff;
-    font-weight: 900;
-    font-family: "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    font-family: "Marianne", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
   }
