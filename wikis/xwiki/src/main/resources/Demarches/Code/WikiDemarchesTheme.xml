@@ -1607,6 +1607,7 @@ legend {
       font-size: 1.4em;
       line-height: 1.4em;
       margin-bottom: 1.5em;
+      font-weight: bold;
     }
     p {
       font-size: 1.1em;
