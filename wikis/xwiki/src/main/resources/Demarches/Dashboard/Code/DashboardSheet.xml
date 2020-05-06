@@ -436,7 +436,7 @@ var XWiki = (function (XWiki) {
       return "default";
     if (value &gt; 7)
       return "success";
-    if (value &gt;= 4 &amp;&amp; value &lt;= 7)
+    if (value &gt; 4 &amp;&amp; value &lt;= 7)
       return "warning";
     return "danger";
   }
