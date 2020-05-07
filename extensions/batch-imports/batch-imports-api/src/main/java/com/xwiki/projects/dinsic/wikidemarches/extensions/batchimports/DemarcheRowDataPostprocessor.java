@@ -274,11 +274,11 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
      * Infers the values of "accompagnement" and "moyens de contact", only if they are mapped and mapped to the same
      * header, using the following rule:
      * <ul>
-     * <li>support de qualité = oui -> accompagnement = oui and moyens de contact = oui</li>
-     * <li>support de qualité = partiel -> accompagnement = oui and moyens de contact = non</li>
-     * <li>support de qualité = non -> accompagnement = non and moyens de contact = non</li>
-     * <li>support de qualité = na -> accompagnement = na and moyens de contact = na</li>
-     * <li>support de qualité = nr -> accompagnement = nr and moyens de contact = nr</li>
+     * <li>support de qualité = oui -&gt; accompagnement = oui and moyens de contact = oui</li>
+     * <li>support de qualité = partiel -&gt; accompagnement = oui and moyens de contact = non</li>
+     * <li>support de qualité = non -&gt; accompagnement = non and moyens de contact = non</li>
+     * <li>support de qualité = na -&gt; accompagnement = na and moyens de contact = na</li>
+     * <li>support de qualité = nr -&gt; accompagnement = nr and moyens de contact = nr</li>
      * <li>summary: "accompagnement" and "moyens de contact" have the same value as "support de qualité" except when
      * value is "partiel"</li>
      * </ul>
