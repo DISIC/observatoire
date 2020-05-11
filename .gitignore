@@ -31,7 +31,6 @@ nbproject
 .sonar-ide.properties
 .clover
 *~
-/bin/
 
 #deploy
 *.sh
