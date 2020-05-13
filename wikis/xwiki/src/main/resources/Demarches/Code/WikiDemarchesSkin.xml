@@ -184,12 +184,6 @@
     </class>
     <property>
       <content>#set ($EMBED_CLASS = "API.Code.EmbedClass")
-#set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
-#if ($xcontext.userReference != $NULL)
-  #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
-  #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
-  #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
-#end
 #set ($LIVETABLE_EXPORTER_LIMIT = "500")
 #set ($displayContentFooter = false)
 #set ($displayDocChanges = false)
@@ -2108,11 +2102,62 @@ $services.localization.render('accountnotactive_email')
 #set ($isInPortletMode = $xwikimode == 1 || "$!request.getAttribute('javax.portlet.request')" != '')
 #set ($isInServletMode = $xwikimode == 0 &amp;&amp; !$isInPortletMode)
 #template("deprecatedVars.vm")
+#template("wdvars.vm")
 #end
 </content>
     </property>
     <property>
       <path>xwikivars.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>21</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>63f1e50e-ed6a-4c3c-a528-523a4eee4888</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>## as far as I can see this var does not seem to be used anywhere than here under, so I am not sure it makes sense to define it here like this. However, until I can check that, I will keep it.
+#set ($ADMINISTRATEURS_MINISTERIELS_GROUP = 'XWiki.AdministrateursMinisteriels')
+#if ($xcontext.userReference != $NULL)
+  #set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+  #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
+  ## this is the variable to be used, all others should be considered unstable.
+  #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+#end
+</content>
+    </property>
+    <property>
+      <path>wdvars.vm</path>
     </property>
   </object>
   <object>
