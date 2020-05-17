@@ -1459,6 +1459,7 @@ input[name='title'] {
       position: absolute;
       right: 1.5em;
       top: 1em;
+      pointer-events: none;
     }
     /* Simulate the same margins strategy as bootstrap to obtain flowing elements - on one or multiple lines, depending on the size of the screen*/
     padding-left: @grid-gutter-width/4;
