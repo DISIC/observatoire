@@ -25,41 +25,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
+    <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <version>4.5-SNAPSHOT</version>
   </parent>
-  <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
-  <name>XWiki Projects - DINSIC Wiki Demarches - Wikis</name>
-  <packaging>pom</packaging>
-  <modules>
-    <module>xwiki</module>
-    <module>xwiki-upgrade</module>
-    <module>devtools</module>
-  </modules>
+  <artifactId>xwiki-dinsic-wikidemarches-wikis-devtools</artifactId>
+  <name>XWiki Projects - DINSIC Wiki Demarches - Dev tools for the main wiki</name>
+  <description>Contains scripts that are only needed for tests or development, but not in production. </description>
+  <packaging>xar</packaging>
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-handlers</artifactId>
-        <version>${platform.version}</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
         <groupId>org.xwiki.commons</groupId>
         <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <version>${platform.version}</version>
         <configuration>
-          <!-- Default language of the applications is French (for translation files) -->
-          <defaultLanguage>fr</defaultLanguage>
-          <!-- Overwrite inherited setting for the titles verification, to allow any title for the preferences page -->
-          <titles>
-            <property>
-              <name>.*WebPreferences</name>
-              <value>.*</value>
-            </property>
-          </titles>
+          <includeDependencies>true</includeDependencies>
         </configuration>
       </plugin>
     </plugins>
