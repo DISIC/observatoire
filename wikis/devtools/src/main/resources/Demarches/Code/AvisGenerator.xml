@@ -1,0 +1,163 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Code.AvisGenerator" locale="">
+  <web>Demarches.Code</web>
+  <name>AvisGenerator</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>xwiki:Demarches.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{velocity}}
+## setup parameters
+#set($NB_AVIS = 100)
+#if ("$!request.nbavis" != '')
+  #set($NB_AVIS = $numbertool.toNumber("$!request.nbavis"))
+#end
+#set($DEMARCHE_ID = "")
+#if ("$!request.demarcheid" != '')
+  #set($DEMARCHE_ID = "$!request.demarcheid")
+#end
+## initialize dates with now and a year ago
+#set($DATE_END = $datetool.get("yyyy-MM-dd"))
+#set($aYearAgo = $datetool.calendar)
+## remove one year from that calendar
+#set($discard = $aYearAgo.add(1, -1))
+#set($DATE_START = $datetool.format("yyyy-MM-dd", $aYearAgo.time))
+## however, if dates are set, use those
+#if ("$!request.dateend" != '')
+  #set($DATE_END = $request.dateend)
+#end
+#if ("$!request.datestart" != '')
+  #set($DATE_START = $request.datestart)
+#end
+##
+## either show form or process, depending on what was setup
+##
+#if (("$!request.preview" == '' &amp;&amp; "$!request.confirm" == '') || "$!DEMARCHE_ID" == '')
+  {{html}}
+    &lt;form action='' method='post' class='xform half'&gt;
+      &lt;dl&gt;
+        &lt;dt&gt;&lt;label&gt;Nombre d'avis&lt;/label&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;input type="number" name='nbavis' value="$!escapetool.xml($NB_AVIS)"/&gt;&lt;/dd&gt;
+        &lt;dt&gt;&lt;label&gt;Id de la démarche&lt;/label&gt;
+          #if ("$!request.demarcheid" == '' &amp;&amp; ("$!request.preview" != '' || "$!request.confirm" != ''))
+            &lt;div class='error'&gt;Rentrer un id de démarche&lt;/div&gt;
+          #end
+        &lt;/dt&gt;
+        &lt;dd&gt;&lt;input type="number" name='demarcheid' value="$!escapetool.xml($DEMARCHE_ID)"/&gt;&lt;/dd&gt;
+        &lt;dt&gt;&lt;label&gt;Date de début&lt;/label&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;input type="date" name='datestart' value="$!escapetool.xml($DATE_START)"/&gt;&lt;/dd&gt;
+        &lt;dt&gt;&lt;label&gt;Date de début&lt;/label&gt;&lt;/dt&gt;
+        &lt;dd&gt;&lt;input type="date" name='dateend' value="$!escapetool.xml($DATE_END)"/&gt;&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;div class='buttonwrapper'&gt;
+        &lt;button class='btn-primary button' name='preview' value='true'&gt;Prévisualiser&lt;/button&gt;
+        &lt;button class='btn-primary button' name='confirm' value='true'&gt;Générer les avis&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  {{/html}}
+#else
+  ## we have some parameters to start the work
+  ##
+  #set($logger = $services.logging.getLogger($doc.fullName))
+  #set($dateStart = $datetool.toDate("yyyy-MM-dd", $DATE_START))
+  #set($dateEnd = $datetool.toDate("yyyy-MM-dd", $DATE_END))
+  #set($dateIntervalInMillis = $mathtool.sub($dateEnd.time, $dateStart.time))
+  #set($discard = $logger.warn("Generating $NB_AVIS avis for demarche $DEMARCHE_ID in interval $dateStart to $dateEnd (interval of $dateIntervalInMillis milliseconds)"))
+  Generating $NB_AVIS avis for demarche $DEMARCHE_ID in interval $dateStart to $dateEnd (interval of $dateIntervalInMillis milliseconds)...
+  #set($difficulties = ['manque-d-informations', 'dysfonctionnement', 'mobile', 'pieces-jointes', 'suite', 'autre'])
+  #set($aides = ['proche', 'association', 'agent', 'internet', 'autre'])
+  ##
+  #foreach($i in [1..$NB_AVIS])
+    #set($discard = $logger.warn("Generating avis ${i}..."))
+    #set($newAvisUin = $services.uin.getNext('avis'))
+    #set($newAvisDoc = $xwiki.getDocument("Avis.${newAvisUin}"))
+    #set($discard = $logger.warn("Creating avis ${newAvisDoc.fullName}..."))
+    #set($newAvisObj = $newAvisDoc.newObject("Avis.Code.AvisClass"))
+    ## set the demarche
+    #set($discard = $newAvisObj.set('demarche', "Demarches.${DEMARCHE_ID}"))
+    ## the avis is a random number between 1 and 3 included
+    #set($discard = $newAvisObj.set('score', $mathtool.ceil($mathtool.mul($mathtool.random, 3))))
+    ## same for the other scores
+    #set($discard = $newAvisObj.set('facile', $mathtool.ceil($mathtool.mul($mathtool.random, 3))))
+    #set($discard = $newAvisObj.set('comprehensible', $mathtool.ceil($mathtool.mul($mathtool.random, 3))))
+    ## set source as generator
+    #set($discard = $newAvisObj.set('source', 'generator'))
+    ## fill in the other properties with prefilled values
+    #set($discard = $newAvisObj.set('modalite', 'en-ligne-entièrement'))
+    ## empty session id and avis key
+    #set($discard = $newAvisObj.set('sessionId', ''))
+    #set($discard = $newAvisObj.set('apiKey', ''))
+    ## fill the difficulties and aide with random values
+    ## FIXME: DO NOT ACTIVATE THESE LINES, SOMEHOW THEY'RE INVALIDATING THE SET DATE AT THE END OF THIS DOCUMENT AND SETTING THE DOCUMENT DATE TO NOW INSTEAD OF THE NEEDED DATE. OR FIX THESE LINES.
+    ## #set($discard = $newAvisObj.set('difficultes', $difficulties.get($mathtool.floor($mathtool.mul($mathtool.random, $difficulties.size())))))
+    ## #set($discard = $newAvisObj.set('aide', $aides.get($mathtool.floor($mathtool.mul($mathtool.random, $aides.size())))))
+    ## 
+    #set($discard = $logger.warn("Avis is ready: $newAvisObj"))
+    ##
+    ## compute a date, based on a random fall into the interval
+    #set($dateOffsetInMillis = $mathtool.ceil($mathtool.mul($mathtool.random, $dateIntervalInMillis)))
+    #set($dateInMillis = $mathtool.add($dateStart.time, $dateOffsetInMillis))
+    #set($dateToSet = $datetool.toDate($dateInMillis))
+    #set($discard = $logger.warn("Date to set $dateToSet.class.name value $dateToSet"))
+    ## start saving the document
+    ##
+    ## set title to make sure the clone document is created
+    #set($discard = $newAvisDoc.setTitle(""))
+    ## set creator and author to null (guest)
+    #set($discard = $newAvisDoc.getDocument().setAuthor($NULL))
+    #set($discard = $newAvisDoc.getDocument().setContentAuthor($NULL))
+    #set($discard = $newAvisDoc.getDocument().setCreator($NULL))
+    ## set all dates to the computed date
+    #set($discard = $newAvisDoc.getDocument().setDate($dateToSet))
+    #set($discard = $newAvisDoc.getDocument().setCreationDate($dateToSet))
+    #set($discard = $newAvisDoc.getDocument().setContentUpdateDate($dateToSet))
+    ## set flags on the doc
+    #set($discard = $newAvisDoc.getDocument().setContentDirty(false))
+    #set($discard = $newAvisDoc.getDocument().setMetaDataDirty(false))
+    ## and save 
+    #if ("$!request.confirm" == 'true')
+      #set($discard = $logger.warn("Saving document $newAvisDoc.fullName"))
+      #set($discard = $xwiki.getXWiki().saveDocument($newAvisDoc.getDocument(), $xcontext.getContext()))
+      #set($discard = $logger.warn("Saved document $newAvisDoc.fullName"))
+      Saved document [[$newAvisDoc.fullName&gt;&gt;$newAvisDoc.fullName]]
+    #else
+      #set($discard = $logger.warn("Actual run would have saved document $newAvisDoc.fullName"))
+      Actual run would have saved document $newAvisDoc.fullName
+    #end
+  #end
+#end
+{{/velocity}}</content>
+</xwikidoc>
