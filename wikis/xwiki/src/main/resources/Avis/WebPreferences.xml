@@ -42,9 +42,9 @@
   <content/>
   <object>
     <name>Avis.WebPreferences</name>
-    <number>2</number>
+    <number>0</number>
     <className>XWiki.XWikiGlobalRights</className>
-    <guid>30370e19-2cfd-401b-b99b-2bd13568e53c</guid>
+    <guid>f09dad22-0bd6-49c7-968f-f4ecb2d8939f</guid>
     <class>
       <name>XWiki.XWikiGlobalRights</name>
       <customClass/>
@@ -114,10 +114,10 @@
       <allow>1</allow>
     </property>
     <property>
-      <groups>XWiki.AdministrateursMinisteriels</groups>
+      <groups>XWiki.XWikiAdminGroup</groups>
     </property>
     <property>
-      <levels>view,edit,delete</levels>
+      <levels>view</levels>
     </property>
   </object>
   <object>
