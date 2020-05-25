@@ -189,8 +189,10 @@
         (%class='row' %)(((
           (%class='col-xs-12 col-md-4' %) (((
             [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default']]
+            #if ($hasAdmin)
 
-            [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
+              [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
+            #end
           )))
           (%class='col-xs-12 col-md-4' %) (((
             [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
