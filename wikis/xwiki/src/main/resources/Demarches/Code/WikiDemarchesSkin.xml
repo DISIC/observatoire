@@ -2153,6 +2153,12 @@ $services.localization.render('accountnotactive_email')
   #set ($administrateursMinisterielsReference = $services.model.resolveDocument($ADMINISTRATEURS_MINISTERIELS_GROUP))
   ## this is the variable to be used, all others should be considered unstable.
   #set ($isAdministrateurMinisteriel = $userGroups != $NULL &amp;&amp; $userGroups.contains($administrateursMinisterielsReference))
+  ## if we're looking at a demarche, check if the current user is in the direction of the demarche
+  #if ($doc.getObject('Demarches.Code.DemarchesClass'))
+    #set ($demarcheDirection = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('direction').value)
+    #set ($directionGroupReference = $services.model.resolveDocument("XWiki.Groups.${demarcheDirection}"))
+    #set ($isInDemarcheDirection = $userGroups != $NULL &amp;&amp; $userGroups.contains($directionGroupReference))
+  #end
 #end
 </content>
     </property>

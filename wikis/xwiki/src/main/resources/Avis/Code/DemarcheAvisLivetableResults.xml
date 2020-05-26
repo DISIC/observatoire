@@ -162,7 +162,12 @@
 #set ($demarcheId = "$!request.demarche")
 #set ($demarchePage = $xwiki.getDocument($demarcheId))
 #isDemarcheOwner($demarchePage)
-#if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
+## check the groups of the current user to see if the user is an administrateur ministeriel and in the direction of this demarche
+#set ($userGroups = $services.user.group.getGroupsFromMemberWiki($xcontext.userReference))
+#set ($adMinRef = $services.model.resolveDocument('XWiki.AdministrateursMinisteriels'))
+#set ($demarcheDirection = $demarchePage.getObject('Demarches.Code.DemarchesClass').getProperty('direction').value)
+#set ($dirGrRef = $services.model.resolveDocument("XWiki.Groups.${demarcheDirection}"))
+#if ($xwiki.hasAccessLevel('admin') || ($userGroups != $NULL &amp;&amp; $userGroups.contains($adMinRef) &amp;&amp; $userGroups.contains($dirGrRef)) || $isDemarcheOwner)
   #if ($request.outputSyntaxType == 'excel')
     #gridresultwithfilterexcel("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
   #else
