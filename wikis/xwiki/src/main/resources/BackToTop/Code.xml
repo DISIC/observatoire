@@ -24,7 +24,7 @@
   <web>BackToTop</web>
   <name>Code</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -127,7 +127,7 @@
 
 $(document).ready(function(){
 	// text button
-        var text="Go to top"; // This text appear when you hover the button back to top
+        var text="Revenir en haut de la page"; // This text appear when you hover the button back to top
         var displaymode=""; // If empty the button displays in all modes, if you want to display it for the view mode put "view" or                if you want to display it for the edit mode put "edit"  
 
 	// create #back-top button
@@ -152,7 +152,7 @@ $(document).ready(function(){
 	// fade in #back-top
 	$(function () {
 		$(window).scroll(function () {
-			if ($(this).scrollTop() &gt; 100) {
+			if ($(this).scrollTop() &gt; 500) {
 				$('#back-top').fadeIn();
 			} else {
 				$('#back-top').fadeOut();
@@ -179,7 +179,7 @@ $(document).ready(function(){
       <parse>1</parse>
     </property>
     <property>
-      <use>always</use>
+      <use>onDemand</use>
     </property>
   </object>
   <object>
@@ -367,7 +367,7 @@ $(document).ready(function(){
       <parse>1</parse>
     </property>
     <property>
-      <use>always</use>
+      <use>onDemand</use>
     </property>
   </object>
   <object>
@@ -471,26 +471,32 @@ $(document).ready(function(){
       <code>/* flamingo skin */
 .skin-flamingo {
   #back-top {
-    background: @navbar-default-bg;
+    background: @link-color;
     a::before{
-      border-left: 10px solid @navbar-default-bg;
-      border-right: 10px solid @navbar-default-bg;
-      border-bottom: 15px solid @navbar-default-link-color;
+      border-left: 10px solid @link-color;
+      border-right: 10px solid @link-color;
+      border-bottom: 15px solid @xwiki-page-content-bg;
     }
     &amp;:hover {
-      box-shadow: 1px 1px 6px darken(@navbar-default-bg, 15%) inset;
-      -webkit-box-shadow: 1px 1px 6px darken(@navbar-default-bg, 15%) inset;
-      -moz-box-shadow: 1px 1px 6px darken(@navbar-default-bg, 15%) inset;
-      -ms-box-shadow: 1px 1px 6px darken(@navbar-default-bg, 15%) inset;
+      box-shadow: 1px 1px 6px darken(@link-color, 15%) inset;
+      -webkit-box-shadow: 1px 1px 6px darken(@link-color, 15%) inset;
+      -moz-box-shadow: 1px 1px 6px darken(@link-color, 15%) inset;
+      -ms-box-shadow: 1px 1px 6px darken(@link-color, 15%) inset;
     }
     span {
-      background:darken(@navbar-default-bg, 5%) ;
-      color: @navbar-default-link-color;
+      background:darken(@link-color, 5%) ;
+      color: @xwiki-page-content-bg;
     }
   }
 }
 
-</code>
+/* On small screens, display the button at the gutter distance from the screen margins */
+@media (max-width: @screen-md-min) {
+  .skin-flamingo #back-top {
+    bottom: @grid-gutter-width / 2;
+    right: @grid-gutter-width / 2;
+  }
+}</code>
     </property>
     <property>
       <contentType>LESS</contentType>
@@ -502,7 +508,7 @@ $(document).ready(function(){
       <parse>1</parse>
     </property>
     <property>
-      <use>always</use>
+      <use>onDemand</use>
     </property>
   </object>
 </xwikidoc>

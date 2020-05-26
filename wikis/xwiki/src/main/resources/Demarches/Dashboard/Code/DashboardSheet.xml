@@ -49,6 +49,9 @@
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
 #set ($discard = $xwiki.ssx.use('Fonts.MarianneWebfontSSX'))
+## include the back to top style and javascript
+#set ($discard = $xwiki.jsx.use("BackToTop.Code"))
+#set ($discard = $xwiki.ssx.use("BackToTop.Code"))
 #set($tableHeaderElements = {
   'demarche' : '',
   'ministry' : '',
