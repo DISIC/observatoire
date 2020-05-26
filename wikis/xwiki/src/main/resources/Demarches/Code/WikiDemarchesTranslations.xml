@@ -97,7 +97,7 @@ wikidemarches.demarche.tabs.embed=Code à intégrer
 wikidemarches.demarche.tabs.cerfaNumerique=Critères qualité Cerfa numérique
 wikidemarches.demarche.tabs.avisList=Liste des avis
 wikidemarches.demarche.tabs.avisForm=Donnez votre avis
-wikidemarches.demarche.tabs.avisStatistics=Tous les avis
+wikidemarches.demarche.tabs.avisStatistics=Synthèse des avis
 
 # Embed demarche tab
 wikidemarches.demarche.embed.details=Pour permettre à vos usagers de donner leur avis sur cette démarche, utilisez l'un de ces éléments :
