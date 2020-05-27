@@ -50,9 +50,6 @@
 ## - Second screen (key: "second-form-screen")
 ## - Third form screen (key: "third-form-screen")
 ## - Final step (key: "final-step")
-
-#set ($FRANCE_CONNECT_ID = "Demarches.1650")
-
 #if ($step == '')
   ## Initialize the step variable for the sake for clarity (i.e. do not leave the initial step empty).
   #set ($step = 'initial-step')
@@ -85,9 +82,6 @@
       &lt;/div&gt;
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
       #set ($presetModalite = "$!request.nd_mode")
-      #if ($doc.fullName == $FRANCE_CONNECT_ID)
-        #set ($presetModalite = "en-ligne-entièrement")
-      #end
       #if ($presetModalite == '')
         ## We don't have a preset modalite received from request parameters, hence we display the 'modalite' question
         #setDefaultModalite($avis)

@@ -41,7 +41,6 @@
   <hidden>true</hidden>
   <content>{{include reference="Avis.Code.AvisMacros" /}}
 {{velocity output="false"}}
-#set ($FRANCE_CONNECT_ID = "Demarches.1650")
 #set ($demarcheId = "$!request['Avis.Code.AvisClass_0_demarche']")
 #set ($step = "$!request['avis-form-step']")
 #set ($avisIdAttributeKey = "${demarcheId}-avis-id")
@@ -117,20 +116,12 @@
 #if ($target &amp;&amp; $xwiki.exists($target.fullName))
   $request.session.setAttribute($avisIdAttributeKey, $target.name)
   #if ($step == 'initial-step')
-    ## If the current demarche is FranceConnect, then the next step is the final step, hence we consider
-    ## that the avis has been submitted and that any new form submission will result in a new avis (just as below in the
-    ## third-form-screen step).
-    #if ($demarcheId == $FRANCE_CONNECT_ID)
-      #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
-      $request.session.setAttribute('avis-form-step', 'final-step')
+    ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'final-step'.
+    #set ($object = $target.getObject('Avis.Code.AvisClass'))
+    #if ($object.getValue('modalite') != 'autrement')
+      $request.session.setAttribute('avis-form-step', 'second-form-screen')
     #else
-      ## If 'modalite' is not 'autrement', then the next step is 'second-form-screen', otherwise it's 'final-step'.
-      #set ($object = $target.getObject('Avis.Code.AvisClass'))
-      #if ($object.getValue('modalite') != 'autrement')
-        $request.session.setAttribute('avis-form-step', 'second-form-screen')
-      #else
-        $request.session.setAttribute('avis-form-step', 'final-step')
-      #end
+      $request.session.setAttribute('avis-form-step', 'final-step')
     #end
   #elseif ($step == 'second-form-screen')
     $request.session.setAttribute('avis-form-step', 'final-step')
