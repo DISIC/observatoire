@@ -142,9 +142,7 @@
       #set ($selectedTab = 'demarche-tab')
     #end
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
-        #if (!$isGuest)
-          &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
-        #end
+        &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
         #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
           &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
         #end
@@ -152,14 +150,12 @@
           &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
         #end
         &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
-        #if (!$isGuest &amp;&amp; $cerfaNumerique != $NULL)
+        #if ($cerfaNumerique != $NULL)
           &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
         #end
     &lt;/ul&gt;
     &lt;div class="tab-content"&gt;
-        #if (!$isGuest)
-          {{include reference="Demarches.Code.DemarcheTab" /}}
-        #end
+        {{include reference="Demarches.Code.DemarcheTab" /}}
         #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
           {{include reference="Demarches.Code.EmbedTab" /}}
         #end
@@ -167,7 +163,7 @@
           {{include reference="Demarches.Code.DemarcheAvisListTab" /}}
         #end
         {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
-        #if (!$isGuest &amp;&amp; $cerfaNumerique != $NULL)
+        #if ($cerfaNumerique != $NULL)
           {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
         #end
     &lt;/div&gt;
