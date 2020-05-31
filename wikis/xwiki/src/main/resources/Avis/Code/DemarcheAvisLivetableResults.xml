@@ -40,125 +40,15 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{include reference="XWiki.LiveTableResultsMacros" /}}
+
+{{include reference="Macros.LivetableExporterResultsMacros" /}}
+
 {{include reference="Demarches.Code.DemarchesMacros" /}}
 
-{{velocity output="false"}}
-## Overrides XWiki.LiveTableResultsMacros#gridresult_buildRowJSON in order to give access to Avis pages by bypassing XWiki rights, for
-## users who have specic roles with respect to a démarche, i.e.: they are owner of the démarche.
-## Changes brought:
-## - the property 'doc_viewable' is set to 'true'
-## - each page is retrieved via 'getDocumentAsAuthor' to bypass the rights
-#macro(gridresult_buildRowJSON $item $rows)
-  ## Handle both the case where the "language" filter is used and thus languages are returned too and the case where
-  ## only the document name is returned. When more than the document name is returned the $item variable is a list.
-  #if($item.size())
-    ## Extract doc name and doc language from $item
-    #set($docName = $item[0])
-    #set($docLanguage = $item[1])
-  #else
-    #set($docName = $item)
-    #set($docLanguage = '')
-  #end
-  #set ($docReference = $services.model.resolveDocument($docName))
-  ##'doc_viewable': $services.security.authorization.hasAccess('view', $docReference),
-  #set ($row = {
-    'doc_viewable': true,
-    'doc_fullName': $services.model.serialize($docReference, 'local'),
-    'doc_space': $services.model.serialize($docReference.parent, 'local'),
-    'doc_location': "#hierarchy($docReference, {'limit': 5, 'plain': false, 'local': true, 'displayTitle': false})",
-    'doc_url': $xwiki.getURL($docReference),
-    'doc_space_url': $xwiki.getURL($docReference.parent),
-    'doc_wiki': $docReference.wikiReference.name,
-    'doc_wiki_url': $xwiki.getURL($docReference.wikiReference),
-    'doc_hasadmin': $xwiki.hasAdminRights(),
-    'doc_hasedit': $services.security.authorization.hasAccess('edit', $docReference),
-    'doc_hasdelete': $services.security.authorization.hasAccess('delete', $docReference),
-    'doc_edit_url': $xwiki.getURL($docReference, 'edit'),
-    'doc_copy_url': $xwiki.getURL($docReference, 'view', 'xpage=copy'),
-    'doc_delete_url': $xwiki.getURL($docReference, 'delete'),
-    'doc_rename_url': $xwiki.getURL($docReference, 'view', 'xpage=rename&amp;step=1')
-  })
-  #set ($isTranslation = "$!docLanguage" != '' &amp;&amp; $xwiki.getLanguagePreference() != $docLanguage)
-  ## Display the language after the document name so that not all translated documents have the same name displayed.
-  #set ($row.doc_name = "$docReference.name#if ($isTranslation) ($docLanguage)#end")
-  #set ($row.doc_hascopy = $row.doc_viewable)
-  #set ($row.doc_hasrename = $row.doc_hasdelete)
-  #set ($row.doc_hasrights = $row.doc_hasedit &amp;&amp; $isAdvancedUser)
-  #if ($docReference.name == 'WebHome')
-    ## For nested pages, use the page administration.
-    #set ($webPreferencesReference = $services.model.createDocumentReference('WebPreferences', $docReference.lastSpaceReference))
-    #set ($row.doc_rights_url = $xwiki.getURL($webPreferencesReference, 'admin', 'editor=spaceadmin&amp;section=PageRights'))
-  #else
-    ## For terminal pages, use the old rights editor.
-    ## TODO: We should create a page administration for terminal pages too.
-    #set ($row.doc_rights_url = $xwiki.getURL($docReference, 'edit', 'editor=rights'))
-  #end
-  #if ($row.doc_viewable)
-    ## Customization
-    ##set ($itemDoc = $xwiki.getDocument($docReference))
-    #set ($itemDoc = $xwiki.getDocumentAsAuthor($docReference))
-    ## Handle translations. We need to make sure we display the data associated to the correct document if the returned
-    ## result is a translation.
-    #if ($isTranslation)
-      #set ($translatedDoc = $itemDoc.getTranslatedDocument($docLanguage))
-    #else
-      #set ($translatedDoc = $itemDoc.translatedDocument)
-    #end
-    #set($discard = $itemDoc.use($className))
-    #set($discard = $row.put('doc_edit_url', $itemDoc.getURL($itemDoc.defaultEditMode)))
-    #set($discard = $row.put('doc_author_url', $xwiki.getURL($translatedDoc.author)))
-    #set($discard = $row.put('doc_date', $xwiki.formatDate($translatedDoc.date)))
-    #set($discard = $row.put('doc_title', $translatedDoc.plainTitle))
-    #set($discard = $row.put('doc_author', $xwiki.getPlainUserName($translatedDoc.authorReference)))
-    #set($discard = $row.put('doc_creationDate', $xwiki.formatDate($translatedDoc.creationDate)))
-    #set($discard = $row.put('doc_creator', $xwiki.getPlainUserName($translatedDoc.creatorReference)))
-    #foreach($colname in $collist)
-      #gridresult_buildColumnJSON($colname $row)
-    #end
-  #end
-  #set($discard = $rows.add($row))
-#end
-{{/velocity}}
+{{include reference="Avis.Code.DemarcheAvisLivetableResultsMacros" /}}
 
 {{velocity wiki="false"}}
-## The block below is a copy of the default one in XWiki.LiveTableResults with the following changes:
-## - The target démarche page identifier is retrieved, and a check is performed on whether the current user
-##   is an owner of the retrieved démarche.
-#set ($extra = '')
-#set ($params = [])
-#if ("$!request.space" != '')
-  #set ($extra = "${extra} AND doc.space = ?")
-  #set ($discard = $params.add($request.space))
-#end
-#if ("$!request.location" != '')
-  #set ($extra = "${extra} AND LOWER(doc.fullName) LIKE LOWER(?) ESCAPE '!'")
-  #set ($locationFilterValue = $request.location)
-  ## Note: the "_", "[", and the "%" characters have special meanings in standard SQL servers (they behave as wildcards).
-  ## However, it is not what the user expects (e.g. https://jira.xwiki.org/browse/XWIKI-12608).
-  ## As a consequence, we must escape these characters.
-  ## See http://www.jguru.com/faq/view.jsp?EID=8881 to understand why we use the special clause 'escape' above.
-  ## Since we use '!' for the escaping, we also double existing ones.
-  #set ($locationFilterValue = $locationFilterValue.replaceAll('([\[%_!])', '!$1'))
-  ## Because the user might filter with "/" as separator we replace that by "%", because it could be "." 
-  ## (the space separator) or "/" (as it is in the document name).
-  ## In addition, using "%" (any sequence of character) instead of "_" (any single character) gives the ability
-  ## to filter on different levels:
-  ##   e.g. filtering on "Blog/Intro" will return "Blog.BlogIntroduction".
-  ##        On the other hand, it will also returns: "BlogForIntrospection", which might be unexpected.
-  #set ($locationFilterValue = $locationFilterValue.replaceAll('/', '%'))
-  #set ($discard = $params.add("%${locationFilterValue}%"))
-#end
-#if ("$!request.parent" != '')
-  #set ($extra = "${extra} and doc.parent = ?")
-  #set ($discard = $params.add($request.parent))
-#end
-#if ("$!request.orphaned" == '1')
-  #set ($homepage = $services.wiki.getById($services.wiki.currentWikiId).mainPageReference)
-  #set ($homepageFullName = $services.model.serialize($homepage, 'local'))
-  ## On Oracle the empty parent is actually null.
-  #set ($extra = "${extra} and (doc.parent = '' or doc.parent is null) and doc.fullName &lt;&gt; ?")
-  #set ($discard = $params.add($homepageFullName))
-#end
+## Customization: make demarche owner check before exporting the results.
 #set ($demarcheId = "$!request.demarche")
 #set ($demarchePage = $xwiki.getDocument($demarcheId))
 #isDemarcheOwner($demarchePage)
@@ -168,150 +58,25 @@
 #set ($demarcheDirection = $demarchePage.getObject('Demarches.Code.DemarchesClass').getProperty('direction').value)
 #set ($dirGrRef = $services.model.resolveDocument("XWiki.Groups.${demarcheDirection}"))
 #if ($xwiki.hasAccessLevel('admin') || ($userGroups != $NULL &amp;&amp; $userGroups.contains($adMinRef) &amp;&amp; $userGroups.contains($dirGrRef)) || $isDemarcheOwner)
-  #if ($request.outputSyntaxType == 'excel')
-    #gridresultwithfilterexcel("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
-  #else
+  ##
+  ## the following code is the one from Macros.LivetableExporterResults, except for the TODO: comment
+  ##
+  #prepareGridResultsParamsFromRequest()
+  #if ($request.outputSyntaxType == $EXCEL || $request.outputSyntaxType == $CSV)
+    ## TODO: In order to preserve equivalence with the previous implementation, should prevent here the fetch of the email column for any user besides admin
+    #gridresultwithfilterexport("$!request.classname" $request.collist.split(',') '' "${extra}" $params $request.outputSyntaxType false "")
+  #elseif ($request.outputSyntaxType == 'json' || "$!request.outputSyntaxType" == '')
     #gridresultwithfilter("$!request.classname" $request.collist.split(',') '' "${extra}" $params)
+  #else
+    ##TODO: translation message
+    Error: unsupported export format.
   #end
+  ##
+  ## Done copying code from Macros.LivetableExporterResults.
+  ##
+#else
+  ##TODO: translation message
+  Error: access denied.
 #end
-
-## Copied from Macros.AddExcelExportToLivetableMacroResultsPage in order to support Excel export
-#macro(gridresultwithfilterexcel $className $collist $filterfrom $filterwhere $filterParams)
-  #if($xcontext.action == 'get' &amp;&amp; "$!{request.outputSyntaxType}" == 'excel')
-    #set($calc = $xwiki.calc)
-    #if ($calc)
-      ## get the columns to export. If the all the class properties are asked for, then force add all the properties of the class in the export
-      #if("$!{request.withAllFields}" == 'true')
-        #set($excelLtCollist = [])
-        #foreach($e in $collist)
-          #set($discard = $excelLtCollist.add($e))
-        #end
-        ## DEBUG: $excelLtCollist
-        ## get all the properties from the passed class to add them in the list
-        #foreach($p in $xwiki.getDocument($className).getxWikiClass().properties)
-          #if (!$excelLtCollist.contains($p.name))
-            #set($discard = $excelLtCollist.add($p.name))
-            ## DEBUG: adding additional column $p.name
-          #end
-        #end
-        ## DEBUG: exporting: $excelLtCollist
-        #set($collist = $excelLtCollist)
-      #end
-      ## Make sure the 'email' property is kept only for admins, even if it was explicitly requested in the 'collist' parameter
-      #if (!$hasAdmin)
-        #set($discard = $collist.remove('email'))
-      #end
-      ##
-      ## Prepare the excel elements (workbook, sheet, first line of the sheet with column names)
-      ##
-      #set($wb = $calc.getWritableWorkbook())
-      #set($sheet = $wb.createSheet("XWiki", 0))
-      #set($colCount = 0)
-      #foreach($colname in $collist)
-        ##DEBUG: generating column $colname on position $colCount
-        #set($ok = $sheet.setColumnView($velocityCount, 15))
-        #if($colname.startsWith('doc.'))
-          #set($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
-          #set($ok = $calc.setLabelCell($sheet, 0, $colCount, $colPrettyName))
-          #set($ok = $sheet.setColumnView($colCount, 20))
-        #elseif($colname == '_action')
-        #else
-          #set($colPrettyName = $services.localization.render("$!{request.transprefix}${colname}"))
-          #if($colPrettyName == "$!{request.transprefix}${colname}")
-            ## col pretty name was not found from translations, try to use the property's pretty name (important for user directory export, for example)
-            #set($propNameTranslationKey = "${className}_${colname}")
-            #set($colPrettyName = $services.localization.render($propNameTranslationKey))
-          #end
-          #set($ok = $calc.setLabelCell($sheet, 0, $colCount, $colPrettyName))
-          #set($ok = $sheet.setColumnView($colCount, 20))
-        #end
-        #set($colCount = $colCount + 1)
-      #end
-      #if("$!{request.withPageName}" == 'true')
-        #set($ok = $calc.setLabelCell($sheet, 0, $colCount, "Reference"))
-        #set($ok = $sheet.setColumnView($colCount, 20))
-        #set($colCount = $colCount + 1)
-      #end
-      #if("$!{request.withPageURL}" == 'true')
-        #set($ok = $calc.setLabelCell($sheet, 0, $colCount, "URL"))
-        #set($ok = $sheet.setColumnView($colCount, 80))
-      #end
-      ##
-      ## Build the JSON in memory (using basic Java data types) so that it can be adjusted before serialization, using the same functions as the livetable results
-      ##
-      #set($map = {})
-      #gridresultwithfilter_buildJSON($className $collist $filterfrom $filterwhere $filterParams $map)
-      ## marshall all data from the $map.rows to the excel
-      #set($rowCount = 1)
-      #foreach($curRow in $map.rows)
-        #set($colCount = 0)
-        ## DEBUG: exporting $curRow
-        #foreach($colname in $collist)
-          ## get the value of the column from the current row and put it in the excel
-          #if ($colname.startsWith('doc.'))
-            #set($colVal = "$!curRow.get($colname.replace('doc.', 'doc_'))")
-          #else
-            #set($colVal = "$!curRow.get($colname)")
-            ## hack when the cell contains html, to use the cell_value instead
-            #if ($colVal.indexOf('&lt;') &gt;= 0)
-              #set($colVal_Value = $curRow.get("${colname}_value"))
-              #if("$!colVal_Value" != '')
-                #set($colVal = $colVal_Value)
-              #end
-            #end
-          #end
-          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, $colVal))
-          #set($colCount = $colCount + 1)
-        #end
-        #if("$!{request.withPageName}" == 'true')
-          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, "$!curRow.get('doc_fullName')"))
-          #set($colCount = $colCount + 1)
-        #end
-        #if("$!{request.withPageURL}" == 'true')
-          #set($ok = $calc.setLabelCell($sheet, $rowCount, $colCount, "$!curRow.get('doc_url')"))
-          #set($colCount = $colCount + 1)
-        #end
-        #set($rowCount = $rowCount + 1)
-      #end
-      ## ==============================================
-      ## excel ended, now output
-      ## ==============================================
-      #if(!$request.debug)
-        #set($bytes = $calc.getWritableWorkbookAsBytes($wb))
-        #if($bytes)
-          #set($ok = $response.setContentType("application/ms-excel"))
-          ## prepare filename from parameters, if any is passed
-          #set($filename = "livetable.xls")
-          #if ("$!request.filename" != '')
-            #set($filename = "$!{request.filename}.xls")
-          #end
-          #set($contentHeader = 'inline; filename="' + $filename + '"')
-          #set($ok = $response.setHeader("Content-Disposition", $contentHeader))
-          #set($ok = $xcontext.setFinished(true))
-          #set($ok = $response.getOutputStream().write($bytes))
-          ## Start Internet Explorer file downloads over SSL do not work with the cache control headers : http://support.microsoft.com/kb/323308
-          ## For more explanations about this approach : http://stackoverflow.com/questions/3415370/ie-unable-to-download-from-unable-to-open-this-internet-site-the-request
-          #set($ok = $response.setHeader("Cache-Control", 'private'))
-          #set($ok = $response.setHeader("Pragma", 'cache'))
-          #set($expires = $util.getDate().getTime())
-          #set($expires = $expires+120000)
-          #set($expires =$util.getDate($expires))
-          #set($ok = $response.setDateHeader("Expires",$expires.getTime()))
-        #else
-          ## TODO need nice translated error message
-          Failed to generate Excel file:
-
-          $!context.exception
-        #end
-      #else
-        DONE
-      #end
-    #else
-      ## TODO need nice translated error message
-      Excel plugin is not installed
-    #end
-  #end
-#end
-{{/velocity}}
-</content>
+{{/velocity}}</content>
 </xwikidoc>
