@@ -51,7 +51,7 @@
   #set ($demarche = $ownedDemarchePage.getObject('Demarches.Code.DemarchesClass'))
   #set ($owners = $demarche.getValue('proprietaires'))
   ## FIXME: this is not the best test, prefix users will match. XWiki.aluca vs XWiki.alucas
-  #if ($owners.indexOf($xcontext.user) &gt;= 0)
+  #if ($owners &amp;&amp; $owners.indexOf($xcontext.user) &gt;= 0)
     #set ($isDemarcheOwner = true)
   #else
     #set ($isDemarcheOwner = false)
