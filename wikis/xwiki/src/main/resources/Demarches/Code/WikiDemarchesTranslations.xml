@@ -112,6 +112,13 @@ wikidemarches.demarche.embed.button.code.title=Je donne mon avis sur cette déma
 wikidemarches.demarche.embed.generate.details=Le code à intégrer est généré à la demande et n'est valable que pour cette démarche. Une clé d'API sera associée à votre compte et à tous les avis exprimés via ce code.
 wikidemarches.demarche.embed.generate.button=Générer le code
 
+# Liste des avis tab
+wikidemarches.demarche.avisList.export.title=Exporter les avis
+wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'éxport également.
+wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter : 
+wikidemarches.demarche.avisList.export.excel=Exporter pour excel
+wikidemarches.demarche.avisList.export.csv=Exporter en CSV
+
 # Demarche edition
 demarches.validation.error=Le formulaire n'a pas pu être validé en raison d'une ou plusieurs erreur(s) ci-dessous.
 Demarches.Code.DemarchesClass_title1.validation=Le champ « nom » ne doit pas être vide.
