@@ -719,9 +719,13 @@ require(['jquery','xwiki-selectize'], function($) {
   word-break: break-word;
 }
 
-/** Add margin top the docextra tabs */
+/** Add margin top the docextra tabs 
+ * Since now footer is so spaced from the content, for symmetry, so should the docextra. 
+ * This is more than the footer's margin because the docextra has some padding inside that makes its bottom spaced 45px away from the footer, 
+ * and for symmetry it's better to have the same distance on top and on bottom of the docextra.
+ */
 #xwikidata {
-  margin-top: 1em;
+  margin-top: 1.5 * @grid-gutter-width;
 }
 
 .wd-form .buttonwrapper {
