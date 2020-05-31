@@ -41,7 +41,17 @@
   <hidden>true</hidden>
   <content>jobmacro.log.message.success=Done.
 jobmacro.log.message.errors=Job terminated with errors.
-jobmacro.log.message.waiting=Execution is delayed due to other running jobs.</content>
+jobmacro.log.message.waiting=Execution is delayed due to other running jobs.
+## Traductions en français de la job macro et adaptés au contexte de l'export ##
+jobmacro.log.message.success=L'export est terminé.
+jobmacro.log.message.errors=L'export s'est terminé avec une erreur.
+jobmacro.log.message.waiting=L'export est mis en attente car un autre export est en cours. Il sera démarré automatiquement dés que l'export précédent sera terminé.
+job.log.begin=Démarrage de la tâche de type [{0}]
+job.log.beginWithId=Démarrage de la tâche de type [{0}] portant l''identifiant [{1}]
+job.log.end=Tâche de type [{0}] terminée
+job.log.endWithId=Tâche de type [{0}] portant l''identifiant [{1}] terminée
+
+job.log.label=Journal de la tâche</content>
   <object>
     <name>JobMacro.Translations</name>
     <number>0</number>
