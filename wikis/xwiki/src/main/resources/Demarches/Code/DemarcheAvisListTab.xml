@@ -42,6 +42,7 @@
   <content>{{velocity}}
 {{html wiki="true" clean="false"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
+#set($discard = $xwiki.jsx.use("Demarches.Code.DemarcheAvisListTab"))
 #set($discard = $xwiki.ssx.use("Demarches.Code.DemarcheAvisListTab"))
 #set ($columnsProperties = {
   'demarche': {'type': 'hidden'},
@@ -87,6 +88,142 @@
 &lt;/div&gt;
 {{/html}}
 {{/velocity}}</content>
+  <object>
+    <name>Demarches.Code.DemarcheAvisListTab</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>030d952b-a1bb-4661-a759-7fa99e4fa85c</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require(['jquery'], function($) {
+  $(document).ready(function() {
+    ## generate, from velocity, the maps of values for the 3 columns
+    var listOptions = {};
+    #foreach($propName in ['score', 'facile', 'comprehensible'])
+      listOptions["$propName"] = {
+        #foreach($v in [1..3]) #if($foreach.count != 1),#end 
+          '$v' : "$escapetool.javascript($services.localization.render("Avis.Code.AvisClass_${propName}_${v}"))"
+        #end
+      }
+    #end
+    // replace the avis livetable filters with selects
+    $.each(listOptions, function(property, values) {
+      var filterInput = $("table#avis td.xwiki-livetable-display-header-filter input[name='" + property + "']");
+      if (filterInput.length &lt;= 0) {
+        // no filter input found
+        return;
+      }
+      var inputValue = filterInput.val();
+      // prepare the select
+      var select = $("&lt;select&gt;").attr('name', property + 'Select')
+          .html("&lt;option value=''&gt;$escapetool.javascript($services.localization.render('platform.livetable.selectAll'))&lt;/option&gt;&lt;option disabled='disabled'&gt;────&lt;/option&gt;");
+      $.each(values, function(value, displayValue) {
+        var newOption = $("&lt;option&gt;").attr('value', value).html(displayValue);
+        if (value == inputValue) {
+          newOption.attr('selected', 'selected');
+        }
+        select.append(newOption);
+      });
+      // prepare the select listener
+      select.change(function(selectChangeEvent) {
+        filterInput.val($(selectChangeEvent.target).val());
+        // trigger the change event, which is not magically triggered otherwise.
+        // for some reason this doesn't work, will trigger the livetable change filters event
+        // filterInput.trigger('change');
+        $(document).trigger("xwiki:livetable:avis:filtersChanged");
+      });
+      // hide the input and add the select in the livetable filters
+      filterInput.after(select);
+      filterInput.hide();
+    });
+  });
+});</code>
+    </property>
+    <property>
+      <name>Livetable filters transformation to select, for the number values</name>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
   <object>
     <name>Demarches.Code.DemarcheAvisListTab</name>
     <number>0</number>
@@ -219,6 +356,26 @@ table#avis {
     }
     thead th:nth-child(12){
       width: 4.3%;
+    }
+  }
+  /* Filters styling */
+  .xwiki-livetable-display .xwiki-livetable-display-header-filter {
+    position: relative;
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    &amp;:nth-child(7), &amp;:nth-child(9),
+    &amp;:nth-child(3), &amp;:nth-child(5), &amp;:nth-child(6) {
+      &amp;:before {
+        content: "\f078"; /* chevron */
+        font: normal normal normal 14px/1 FontAwesome;
+        display: inline-block;
+        position: absolute;
+        right: 0.75em;
+        top: 0.2em;
+        pointer-events: none;
+      }
     }
   }
 }
