@@ -42,7 +42,7 @@
   <content>{{velocity}}
 {{html wiki="true" clean="false"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
-
+#set($discard = $xwiki.ssx.use("Demarches.Code.DemarcheAvisListTab"))
 #set ($columnsProperties = {
   'demarche': {'type': 'hidden'},
   'doc.creationDate': {'filterable': true, 'type': 'date'},
@@ -69,7 +69,7 @@
   'extraParams': "demarche=$escapetool.url($doc.fullName)"
 })
 
-#set ($columns = ['demarche', 'doc.creationDate', 'doc.name', 'score', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'autre', 'source'])
+#set ($columns = ['demarche', 'doc.creationDate', 'doc.name', 'score', 'autre', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'source'])
 
 #livetable('avis' $columns $columnsProperties $options)
 ## Add the HTML structure for the export buttons
@@ -87,4 +87,170 @@
 &lt;/div&gt;
 {{/html}}
 {{/velocity}}</content>
+  <object>
+    <name>Demarches.Code.DemarcheAvisListTab</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>f2bf36c6-4026-4543-90b8-26e919e8edf2</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>div.xwiki-livetable-container {
+  width: 100%;
+  overflow-x: auto;
+}
+table#avis {
+  width: 100%;
+  font-size: 81.25%; /* 13px for a base of 16 */
+  thead.xwiki-livetable-display-header {
+    font-size: 90%;
+  }
+  .xwiki-livetable-display {
+    table-layout: fixed;
+    width: 100%;
+    min-width: 108em; /* This fits in 1440 px, if ever we want to have that size */
+  }
+  .xwiki-livetable-display &gt; tbody &gt; tr &gt; td {
+    padding: 4px;
+  }
+  /* Some sizes for the columns depending on their content */
+  .xwiki-livetable-display {
+    thead th:nth-child(2), thead th:nth-child(3), thead th:nth-child(4){
+      width: 5.9%
+    }
+    thead th:nth-child(5) {
+      width: 17%;
+    }
+    thead th:nth-child(8), thead th:nth-child(9), thead th:nth-child(10), thead th:nth-child(11){
+      width: 12.7%;
+    }
+    thead th:nth-child(6), thead th:nth-child(7) {
+      width: 5.1%;
+    }
+    thead th:nth-child(12){
+      width: 4.3%;
+    }
+  }
+}
+
+/* Force the toplevel table to display block so that we can scroll only the second row, the one with the table, and have the pagination position properly. */
+table#avis {
+  display: block;
+  &amp;&gt;tbody {
+    display: block;
+    &amp;&gt;tr {
+      display: block;
+      &amp;&gt;td {
+        display: block;
+      }
+      &amp;&gt;td.xwiki-livetable-display-container {
+        overflow-x: auto;
+      }
+    }
+  }
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name>Style for the avis list tab (and livetable)</name>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
 </xwikidoc>
