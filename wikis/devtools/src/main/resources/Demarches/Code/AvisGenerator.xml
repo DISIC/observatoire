@@ -128,7 +128,8 @@
     #set($discard = $logger.warn("Avis is ready: $newAvisObj"))
     ##
     ## compute a date, based on a random fall into the interval
-    #set($dateOffsetInMillis = $mathtool.ceil($mathtool.mul($mathtool.random, $dateIntervalInMillis)))
+    ## DO NOT USE floor or ceil here as they only return integers which is not enough to cover the interval in milliseconds
+    #set($dateOffsetInMillis = $mathtool.roundTo(0, $mathtool.mul($mathtool.random, $dateIntervalInMillis)))
     #set($dateInMillis = $mathtool.add($dateStart.time, $dateOffsetInMillis))
     #set($dateToSet = $datetool.toDate($dateInMillis))
     #set($discard = $logger.warn("Date to set $dateToSet.class.name value $dateToSet"))
