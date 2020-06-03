@@ -56,6 +56,11 @@
    'comprehensible' : {'1' : , '2' : , '3' : }, -&gt; long numbers, all
    'difficultes' : {'manque-d-informations' : , 'dysfonctionnement': , 'mobile' : , 'pieces-jointes' : , 'suite' : , 'autre' : }, -&gt; long numbers, all
    'aide' : {'proche' : , 'association': , 'agent' : , 'internet' : , 'autre' : } -&gt; long numbers, all
+   'scorehistory_permonth' : {
+     year : {
+       month : {'1' : , '2' : , '3' : } -&gt; long numbers, all
+     } -&gt; one year object for each year in the period, one month object for each month in the year in the period. numeric format for both year and month, prefixed by 0 for the month
+   }
   }
 *#
 #macro(computeAvisStats $minDate $maxDate)
@@ -87,7 +92,9 @@
     #set ($discard = $avisStatsResult.put('moyenne', $satisfactionIndex))
     #set ($discard = $avisStatsResult.put('satisfaction', $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50)))
     ## Now that we know we have avis, let's go ahead and compute the rest of the elements of the map.
+    ##
     ## 1. First, the integer properties
+    ##
     #foreach($propName in ['facile', 'comprehensible'])
       ## query the avis for this property
       #set ($hql = "select prop.value, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche  and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate and prop.value &lt;&gt; '' group by prop.value")
@@ -102,7 +109,9 @@
         #set($discard = $avisStatsResult.put($propName, $valuesMap))
       #end
     #end
-    ## 2. And then the list properties
+    ##
+    ## 2. Then the list properties
+    ##
     #foreach($propName in ['difficultes', 'aide'])
       #set ($hql = "select list, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, DBStringListProperty as prop join prop.list list, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by list")
       #set ($query = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('demarche', $doc.fullName).bindValue('propertyName', $propName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate))
@@ -116,6 +125,32 @@
         #set($discard = $avisStatsResult.put($propName, $valuesMap))
       #end
     #end
+    ##
+    ## 3. And the history per month
+    ##
+    ## count each vote of each type, this allows to both compute the average and the total votes and also the each score individually
+    #set ($hql = 'select score.value, count(*), concat(year(doc.creationDate), month(doc.creationDate)) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by concat(year(doc.creationDate), month(doc.creationDate)), score.value')
+    #set ($entries = $services.query.hql($hql).bindValue('className', $AVIS_CLASS_ID).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $doc.fullName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate).execute())
+    #set($historyPerMonthResults = $collectionstool.orderedMap)
+    #foreach($countRes in $entries)
+      #set($y = $countRes[2].substring(0, 4))
+      #set($yearMonths = $historyPerMonthResults.get($y))
+      #if ("$!yearMonths" == '')
+        #set($yearMonths = $collectionstool.orderedMap)
+        #set($discard = $historyPerMonthResults.put($y, $yearMonths))
+      #end
+      #set($M = $countRes[2].substring(4))
+      #if ($M.length() &lt; 2)
+        #set($M = "0${M}")
+      #end
+      #set($monthValues = $yearMonths.get($M))
+      #if ("$!monthValues" == '')
+        #set($monthValues = {})
+        #set($discard = $yearMonths.put($M, $monthValues))
+      #end
+      #set($discard = $monthValues.put("$countRes[0]", $countRes[1]))
+    #end
+    #set($discard = $avisStatsResult.put('scorehistory_permonth', $historyPerMonthResults))
   #end
 #end
 ##
@@ -185,7 +220,7 @@
   ## prepare chart options and call macro to display the graph
   #set($chartOptions = {
     "backgroundColors": [$colorDanger, $colorWarning, $colorGood],
-    "opacity": 0.8,
+    "opacity": 1,
     "afterValue": "%",
     "skipZeros": true,
     "legend": {
@@ -242,7 +277,7 @@
     &lt;/table&gt;
     #set($chartOptions = {
         "backgroundColors": [$colorDanger, $colorWarning, $colorGood],
-        "opacity": 0.8,
+        "opacity": 1,
         "labelsMap": {"Mauvais": "\uf119", "Moyen": "\uf11a", "Bon":"\uf118"},
         "scales": {
           "xAxes": [{
@@ -312,7 +347,7 @@
     #set($chartOptions = {
         "maintainAspectRatio": false,
         "backgroundColors": ["#6b5f96"],
-        "opacity": 0.8,
+        "opacity": 1,
         "skipZeros": true,
         "scales": {
           "xAxes": [{
@@ -348,6 +383,187 @@
   #else
     &lt;span style="text-align:center"&gt;Aucune réponse.&lt;/span&gt;
   #end
+  ##
+  ## Computes the satisfaction index for the history per month data from the $avisStatsResult
+  ##
+  #macro(computeSatisfactionIndexForHistory)
+    #set($history = $avisStatsResult.get('scorehistory_permonth'))
+    #foreach($y in $history.entrySet())
+      #foreach($M in $y.value.entrySet())
+        #set($monthValues = $M.value)
+        #set($totalScorePointsPerMonth = 0)
+        #set($avisCountPerMonth = 0)
+        #set($satisfactionPerMonth = 0)
+        #foreach($v in [1..3])
+          #if ($monthValues.get("$v"))
+            #set($totalScorePointsPerMonth = $mathtool.mul($monthValues.get("$v"), $v) + $totalScorePointsPerMonth)
+            #set($avisCountPerMonth = $!monthValues.get("$v") + $avisCountPerMonth)
+          #end
+        #end
+        #if ($avisCountPerMonth &gt; 0)
+          #set($satisfactionPerMonth = $mathtool.mul($mathtool.sub($mathtool.div($totalScorePointsPerMonth, $avisCountPerMonth), 1), 50))
+        #end
+        #set($discard = $monthValues.put('satisfaction', $satisfactionPerMonth))
+        #set($discard = $monthValues.put('avisCount', $avisCountPerMonth))
+      #end
+    #end
+  #end
+  ##
+  ## Prepares the list of months to display the data history for, 
+  ## from the min date and the max date, 
+  ## with proper coordinates to be able to access data and labels, in the proper order for display.
+  ##
+  #macro(prepareCalendarForCharts $from $to)
+    #set($chartsCalendar = [])
+    #set($currentDateTime = $to)
+    #set($yearFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy'))
+    #set($monthFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('MM'))
+    #set($chartNameFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('MMM yyyy'))
+    ## max 2 years between minDate and maxDate
+    #foreach($i in [1..24])
+      #set($discard = $chartsCalendar.add({'year' : $yearFormatter.print($currentDateTime), 'month' : $monthFormatter.print($currentDateTime), 'label' : $chartNameFormatter.print($currentDateTime)}))
+      #set($currentDateTime = $currentDateTime.minusMonths(1))
+      #if ($currentDateTime.isBefore($from))
+        ## no more dates to display
+        #break
+      #end
+    #end
+    ## reverse the list, to make it start with the beginning
+    #set($discard = $collectionstool.reverse($chartsCalendar))
+  #end
+  ##
+  ## Prepares the variable chartOptions for the avis historybar charts, the common ones
+  ##
+  #macro(prepareHistoryBarChartOptions)
+    #set($chartOptions = {
+        "opacity": 1,
+        "scales": {
+          "xAxes": [{
+            "gridLines": {"display": false, "drawBorder": false},
+            "ticks": { "beginAtZero": true, "display": true}
+          }],
+          "yAxes": [{
+            "gridLines": {"display": false, "drawBorder": false},
+            "ticks": { "beginAtZero": true, "display": false},
+            "min" : 0
+          }]
+        },
+        "plugins": {
+          "datalabels": {
+            "anchor": "end",
+            "align": "end",
+            "font": { "weight" : "bold"}
+          }
+        }
+    })
+  #end
+  ##
+  ## Displays the history vertical satisfaction bars
+  ##
+  #macro(displayHistorySatisfactionBars)
+    ## display the table
+    &lt;table id="satisfactionHistory" class="hidden"&gt;
+    ## &lt;table id="satisfactionHistory"&gt;
+    &lt;caption&gt;Historique de l'indice de satisfaction global&lt;/caption&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Période&lt;/th&gt;
+        &lt;th&gt;Indice de satisfaction&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    #set($statValues = $avisStatsResult.get('scorehistory_permonth'))
+    #prepareCalendarForCharts($minDateTime, $maxDateTime)
+    &lt;tbody&gt;
+      ## iterate and display whatever is in the $avisStatsResult
+      #foreach($period in $chartsCalendar)
+        #set($valueToDisplay = 0)
+        #set($statValue = $statValues.get($period.year).get($period.month).satisfaction)
+        #if ($statValue)
+          #set($valueToDisplay = $mathtool.round($statValue))
+        #end
+        ## display this value
+        &lt;tr&gt;&lt;td&gt;$period.label&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+      #end
+    &lt;/tbody&gt;
+    &lt;/table&gt;
+    #prepareHistoryBarChartOptions()
+    #set ($extraChartOptions = {
+        "backgroundColors": ["$colorObservatoireBlue"],
+        "afterValue": "%",
+        "layout": {
+          "padding": {
+            "top": 50
+          }
+        },
+        "legend": {
+          "display": false
+        }
+    })
+    #set ($discard = $chartOptions.putAll($extraChartOptions))
+    ##
+    #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+
+    {{tableToChartJS type='bar' table='satisfactionHistory' options='$options'/}}
+
+  #end
+  ##
+  ## Displays the history vertical stacked avis bars
+  ##
+  #macro(displayHistoryScoreStackBars)
+    ## display the table
+    &lt;table id="scoreHistory" class="hidden"&gt;
+    ## &lt;table id="scoreHistory"&gt;
+    &lt;caption&gt;Historique du nombre d'avis&lt;/caption&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Période&lt;/th&gt;
+        &lt;th&gt;Type d'avis&lt;/th&gt;
+        &lt;th&gt;Nombre d'avis&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    #set($avisLabels = {'1' : 'Avis négatifs', '2' : 'Avis moyens', '3' : 'Avis positifs'})
+    #set($statValues = $avisStatsResult.get('scorehistory_permonth'))
+    #prepareCalendarForCharts($minDateTime, $maxDateTime)
+    &lt;tbody&gt;
+      ## iterate and display whatever is in the $avisStatsResult
+      #foreach($period in $chartsCalendar)
+        #set($monthResults = $statValues.get($period.year).get($period.month))
+        ## display this value
+        #foreach($v in ['1', '2', '3'])
+          &lt;tr&gt;
+            &lt;td&gt;$period.label&lt;/td&gt;
+            &lt;td&gt;$avisLabels.get($v)&lt;/td&gt;
+            &lt;td&gt;#if($monthResults.get($v))$monthResults.get($v)#{else}0#{end}&lt;/td&gt;
+          &lt;/tr&gt;
+        #end
+      #end
+    &lt;/tbody&gt;
+    &lt;/table&gt;
+    #prepareHistoryBarChartOptions()
+    #set ($extraChartOptions = {
+        "backgroundColors": [$colorDanger, $colorWarning, $colorGood],
+        "borderColors" : ["#FFFFFF", "#FFFFFF", "#FFFFFF"],
+        "borderWidths" : {'top' : 5, 'bottom' : 0, 'left' : 0, 'right' : 0},
+        "layout": {
+          "padding": {
+            "top": 20
+          }
+        },
+        "legend": {
+          "display": true,
+          "position" : "top"
+        },
+        "plugins" : {}
+    })
+    #set ($discard = $chartOptions.putAll($extraChartOptions))
+    #set ($discard = $chartOptions.scales.get("xAxes").get(0).put("stacked", true))
+    #set ($discard = $chartOptions.scales.get("yAxes").get(0).put("stacked", true))
+    ##
+    #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
+
+    {{tableToChartJS type='bar' table='scoreHistory' multipleDataSets="true" dataSetLabel="1" options='$options'/}}
+
+  #end
 #end
 {{/velocity}}
 
@@ -362,6 +578,7 @@
 #set ($colorDanger = $colorThemeObject.getValue('brand-danger'))
 #set ($colorWarning = $colorThemeObject.getValue('brand-warning'))
 #set ($colorGood = $colorThemeObject.getValue('brand-success'))
+#set ($colorObservatoireBlue = $colorThemeObject.getValue('link-color'))
 ##
 ## Identification of the period for which avis need to be counted, this script needs to serve the following cases:
 ## 1/ no date parameters -&gt; the avis up to today will be counted and results for one year will be displayed (the previous year)
@@ -443,6 +660,23 @@
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Aides sollicitées&lt;/h3&gt;
       #displayListValuesBarChart('aide', "Besoins d'aide", "Aide")
+    &lt;/div&gt;
+  &lt;/div&gt;
+  ##
+  ## Display the history of avis 
+  ##
+  #computeSatisfactionIndexForHistory()
+  &lt;h2&gt;Historique des avis&lt;/h2&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-xs-12"&gt;
+      &lt;h3&gt;Indice de satisfaction global&lt;/h3&gt;
+      #displayHistorySatisfactionBars()
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-xs-12"&gt;
+      &lt;h3&gt;Répartition des avis&lt;/h3&gt;
+      #displayHistoryScoreStackBars()
     &lt;/div&gt;
   &lt;/div&gt;
 #else
