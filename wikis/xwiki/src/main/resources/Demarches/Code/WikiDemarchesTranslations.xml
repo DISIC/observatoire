@@ -116,7 +116,7 @@ wikidemarches.demarche.embed.generate.button=Générer le code
 
 # Liste des avis tab
 wikidemarches.demarche.avisList.export.title=Exporter les avis
-wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'éxport également.
+wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également.
 wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter : 
 wikidemarches.demarche.avisList.export.excel=Exporter pour excel
 wikidemarches.demarche.avisList.export.csv=Exporter en CSV
