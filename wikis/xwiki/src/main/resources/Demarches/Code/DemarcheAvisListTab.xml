@@ -335,7 +335,7 @@ table#avis {
   .xwiki-livetable-display {
     table-layout: fixed;
     width: 100%;
-    min-width: 108em; /* This fits in 1440 px, if ever we want to have that size */
+    min-width: 142em; /* This fits in 1920px, if ever we want to put the table full width, it would fit in a Full HD*/
   }
   .xwiki-livetable-display &gt; tbody &gt; tr &gt; td {
     padding: 4px;
@@ -343,19 +343,22 @@ table#avis {
   /* Some sizes for the columns depending on their content */
   .xwiki-livetable-display {
     thead th:nth-child(2), thead th:nth-child(3), thead th:nth-child(4){
-      width: 5.9%
+      width: 4.9%
     }
     thead th:nth-child(5) {
-      width: 17%;
+      width: 21%;
     }
-    thead th:nth-child(8), thead th:nth-child(9), thead th:nth-child(10), thead th:nth-child(11){
-      width: 12.7%;
+    thead th:nth-child(8), thead th:nth-child(9) {
+      width: 15.5%;
+    }
+    thead th:nth-child(10), thead th:nth-child(11){
+      width: 10.5%;
     }
     thead th:nth-child(6), thead th:nth-child(7) {
-      width: 5.1%;
+      width: 4.4%;
     }
     thead th:nth-child(12){
-      width: 4.3%;
+      width: 3.5%;
     }
   }
   /* Filters styling */
