@@ -40,6 +40,25 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity output="false"}}
+##
+## Maps of avis values, as global variables, so that we can reuse them in macros to produce display value results without calling the expensive display function every time.
+##
+#set($avisPropertyValues = {})
+#set($avisClass = $xwiki.getDocument('Avis.Code.AvisClass').getxWikiClass())
+#foreach($avisNumberProp in ['score', 'facile', 'comprehensible'])
+  #set($avisNumberPropValues = {})
+  #foreach($v in [1..3])
+    #set($discard = $avisNumberPropValues.put($v, $services.localization.render("Avis.Code.AvisClass_${avisNumberProp}_${v}")))
+  #end
+  #set($discard = $avisPropertyValues.put($avisNumberProp, $avisNumberPropValues))
+#end
+#foreach($avisStaticListProp in ['difficultes', 'aide'])
+  #set($avisStaticListPropValues = {})
+  #foreach($lv in $avisClass.get($avisStaticListProp).listValues)
+    #set($discard = $avisStaticListPropValues.put($lv, $services.localization.render("Avis.Code.AvisClass_${avisStaticListProp}_${lv}")))
+  #end
+  #set($discard = $avisPropertyValues.put($avisStaticListProp, $avisStaticListPropValues))
+#end
 ## Overrides XWiki.LiveTableResultsMacros#gridresult_buildRowJSON in order to give access to Avis pages by bypassing XWiki rights, for
 ## users who have specic roles with respect to a démarche, i.e.: they are owner of the démarche.
 ## Changes brought:
@@ -114,6 +133,91 @@
     #end
   #end
   #set($discard = $rows.add($row))
+#end
+
+## Overrides XWiki.LiveTableResultsMacros#gridresult_buildColumnJSON in order to generate the values to display for avis
+## based on the global value maps built on top of this document, avoiding to call the custom displayers which are
+## a bomb in terms of velocity context memory consumption, especially bothering for the export (where all lines need
+## to be evaluated).
+#macro(gridresult_buildColumnJSON $colname $row)
+  #if($colname.startsWith('doc.'))
+  #elseif($colname == '_action')
+    #set($discard = $row.put($colname, $services.localization.render("${request.transprefix}actiontext")))
+  #elseif($colname == '_attachments')
+    #livetable_getAttachmentsList($translatedDoc)
+    #set($discard = $row.put($colname, $attachlist))
+  #elseif($colname == '_avatar')
+    #livetable_getAvatar($itemDoc)
+    #set($discard = $row.put($colname, $avatar))
+  #elseif($colname == '_images')
+    #livetable_getImagesList($itemDoc)
+    #set($discard = $row.put($colname, $imagesList))
+  #else
+    #livetable_getPropertyClassAndType($colname)
+    #if(!$propClass.equals($class))
+      #set($discard = $itemDoc.use($propClassName))
+    #end
+    #set($fieldValue = "$!itemDoc.getValue($colname)")
+    ##
+    ## Custom livetable for avis: get the display values from the cached map or other sources, just avoid calling displayers here, to save performance (custom displayers are a bomb)
+    ##
+    #if($propClass.name == 'Avis.Code.AvisClass')
+      #set($fieldRawValue = $itemDoc.getValue($colname))
+      ## property class and colname  $propClass.name $colname $fieldValue $fieldRawValue.getClass().getName() 
+      ## initialize with the raw value...
+      #set($fieldDisplayValue = $fieldValue)
+      ## ... and then try to find it in the cached map
+      ## check first if it's a list of values
+      #if($fieldRawValue.getClass().getName().endsWith('List'))
+        #set($fieldDisplayValue = '')
+        #foreach($fv in $fieldRawValue)
+          #if($foreach.index &gt; 0)
+            #set($fieldDisplayValue = "${fieldDisplayValue} ; ")
+          #end
+          #if($avisPropertyValues.get($colname).get($fv))
+            #set($fieldDisplayValue = "${fieldDisplayValue}${avisPropertyValues.get($colname).get($fv)}")
+          #else
+            #set($fieldDisplayValue = "${fieldDisplayValue}${fv}")
+          #end
+        #end
+      #else
+        ## if the column is the 'demarche' column, cheat and get the name of the document from the $demarchePage param, that is loaded by the caller (in DemarcheAvisLivetableResultsAsync and DemarcheAvisLivetableResults to check the rights)
+        #if ($colname == 'demarche')
+          #set($fieldDisplayValue = "$!demarchePage.title")
+          #if($fieldDisplayValue == '')
+            #set($fieldDisplayValue = $fieldValue)
+          #end
+        #else
+          ## is not a list and not the demarche, just try to find it in the cached values map and replace the raw value if found
+          #if($avisPropertyValues.get($colname).get($fieldRawValue))
+            #set($fieldDisplayValue = $avisPropertyValues.get($colname).get($fieldRawValue))
+          #end
+        #end
+      #end
+      #if($fieldDisplayValue == '')
+        #set($fieldDisplayValue = '-')
+      #end
+    #else
+      ## standard livetable display code
+      #set($fieldDisplayValue = "$!itemDoc.display($colname, 'view')")
+      #if($fieldDisplayValue == '')
+        #set($fieldDisplayValue = $services.localization.render("${request.transprefix}emptyvalue"))
+      #end
+    #end
+    #set($fieldUrl = '')
+    ## Only retrieve an URL for a DBListClass item
+    #if(($propType == 'DBListClass' || $propType == 'PageClass') &amp;&amp; $propClass.get($colname).getProperty('multiSelect').value != 1)
+      #set($fieldUrl = $xwiki.getURL($fieldValue))
+      #if($fieldUrl == $xwiki.getURL($services.model.resolveDocument('', 'default', $doc.documentReference.extractReference('WIKI'))))
+        #set($fieldUrl = '')
+      #end
+    #end
+    #set($discard = $row.put($colname, $fieldDisplayValue.replaceFirst($regextool.quote('{{html clean="false" wiki="false"}}'), '').replaceAll("$regextool.quote('{{/html}}')$", '')))
+    #set($discard = $row.put("${colname}_value", $fieldValue))
+    #set($discard = $row.put("${colname}_url", $fieldUrl))
+    ## Reset to the default class
+    #set($discard = $itemDoc.use($className))
+  #end
 #end
 {{/velocity}}</content>
 </xwikidoc>
