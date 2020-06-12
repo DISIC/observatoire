@@ -543,7 +543,7 @@
     #set ($extraChartOptions = {
         "backgroundColors": [$colorDanger, $colorWarning, $colorGood],
         "borderColors" : ["#FFFFFF", "#FFFFFF", "#FFFFFF"],
-        "borderWidths" : {'top' : 5, 'bottom' : 0, 'left' : 0, 'right' : 0},
+        "borderWidths" : {'top' : 2, 'bottom' : 0, 'left' : 0, 'right' : 0},
         "layout": {
           "padding": {
             "top": 20
@@ -552,10 +552,10 @@
         "legend": {
           "display": true,
           "position" : "top"
-        },
-        "plugins" : {}
+        }
     })
     #set ($discard = $chartOptions.putAll($extraChartOptions))
+    #set ($discard = $chartOptions.plugins.datalabels.put('computeTotals', true))
     #set ($discard = $chartOptions.scales.get("xAxes").get(0).put("stacked", true))
     #set ($discard = $chartOptions.scales.get("yAxes").get(0).put("stacked", true))
     ##
