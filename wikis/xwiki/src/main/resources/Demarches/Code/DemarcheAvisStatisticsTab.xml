@@ -418,7 +418,7 @@
     #set($currentDateTime = $to)
     #set($yearFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy'))
     #set($monthFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('MM'))
-    #set($chartNameFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('MMM yyyy'))
+    #set($chartNameFormatter = $xwiki.jodatime.getDateTimeFormatterForPattern('MMM yyyy').withLocale($services.localization.currentLocale))
     ## max 2 years between minDate and maxDate
     #foreach($i in [1..24])
       #set($discard = $chartsCalendar.add({'year' : $yearFormatter.print($currentDateTime), 'month' : $monthFormatter.print($currentDateTime), 'label' : $chartNameFormatter.print($currentDateTime)}))
