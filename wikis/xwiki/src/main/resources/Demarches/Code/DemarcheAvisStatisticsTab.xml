@@ -551,7 +551,8 @@
         },
         "legend": {
           "display": true,
-          "position" : "top"
+          "position" : "top",
+          "x_padding" : 25
         }
     })
     #set ($discard = $chartOptions.putAll($extraChartOptions))
