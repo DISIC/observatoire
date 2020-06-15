@@ -492,7 +492,7 @@
         "afterValue": "%",
         "layout": {
           "padding": {
-            "top": 50
+            "top": 55
           }
         },
         "legend": {
@@ -546,7 +546,7 @@
         "borderWidths" : {'top' : 2, 'bottom' : 0, 'left' : 0, 'right' : 0},
         "layout": {
           "padding": {
-            "top": 20
+            "top": 0
           }
         },
         "legend": {
@@ -669,13 +669,11 @@
   #computeSatisfactionIndexForHistory()
   &lt;h2&gt;Historique des avis&lt;/h2&gt;
   &lt;div class="row"&gt;
-    &lt;div class="col-xs-12"&gt;
+    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Indice de satisfaction global&lt;/h3&gt;
       #displayHistorySatisfactionBars()
     &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-xs-12"&gt;
+    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Répartition des avis&lt;/h3&gt;
       #displayHistoryScoreStackBars()
     &lt;/div&gt;
