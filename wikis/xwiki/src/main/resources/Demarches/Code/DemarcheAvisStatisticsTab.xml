@@ -642,6 +642,24 @@
       #end
     &lt;/div&gt;
   &lt;/div&gt;
+  ##
+  ## Display the history of avis
+  ##
+  #computeSatisfactionIndexForHistory()
+  &lt;h2&gt;Historique des avis&lt;/h2&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
+      &lt;h3&gt;Indice de satisfaction global&lt;/h3&gt;
+      #displayHistorySatisfactionBars()
+    &lt;/div&gt;
+    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
+      &lt;h3&gt;Nombre d'avis&lt;/h3&gt;
+      #displayHistoryScoreStackBars()
+    &lt;/div&gt;
+  &lt;/div&gt;
+  ##
+  ## Détails des avis
+  ##
   &lt;h2&gt;Détail des avis&lt;/h2&gt;
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
@@ -661,21 +679,6 @@
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Aides sollicitées&lt;/h3&gt;
       #displayListValuesBarChart('aide', "Besoins d'aide", "Aide")
-    &lt;/div&gt;
-  &lt;/div&gt;
-  ##
-  ## Display the history of avis 
-  ##
-  #computeSatisfactionIndexForHistory()
-  &lt;h2&gt;Historique des avis&lt;/h2&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
-      &lt;h3&gt;Indice de satisfaction global&lt;/h3&gt;
-      #displayHistorySatisfactionBars()
-    &lt;/div&gt;
-    &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
-      &lt;h3&gt;Répartition des avis&lt;/h3&gt;
-      #displayHistoryScoreStackBars()
     &lt;/div&gt;
   &lt;/div&gt;
 #else
