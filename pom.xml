@@ -10,7 +10,7 @@
   <artifactId>xwiki-dinsic-wikidemarches-parent</artifactId>
   <packaging>pom</packaging>
   <name>XWiki Projects - DINSIC Wiki Demarches - Parent POM</name>
-  <version>4.5-SNAPSHOT</version>
+  <version>4.5</version>
   <properties>
     <platform.version>9.11.3</platform.version>
     <commons.version>9.11.3</commons.version>
@@ -25,7 +25,7 @@
     <connection>scm:git:git://github.com/DISIC/wikidemarches.git</connection>
     <developerConnection>scm:git:git@github.com:DISIC/wikidemarches.git</developerConnection>
     <url>https://github.com/DISIC/wikidemarches/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>xwiki-dinsic-wikidemarches-parent-4.5</tag>
   </scm>
   <developers>
     <developer>
