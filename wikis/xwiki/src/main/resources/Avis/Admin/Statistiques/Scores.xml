@@ -44,5 +44,6 @@
 
 {{awmchart className="Avis.Code.AvisClass" category="demarche" type="bar" title="Par demarche" width="500" height="500" table="1" fromHQL="" whereHQL="" aggregate="score" aggregateFunction="avg" /}}
 
-{{query query="select propdemarche.value,count(doc.fullName),avg(propscore.value) from XWikiDocument as doc, BaseObject as obj, StringProperty as propdemarche, IntegerProperty as propscore where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and doc.fullName not like '%Template' and obj.id=propdemarche.id.id and propdemarche.id.name='demarche' and obj.id=propscore.id.id and propscore.id.name='score' group by propdemarche.value order by 2 desc" type="hql" class="Avis.Code.AvisClass" columns="demarche,AGG_COUNT,AGG_AVG_score" headers="1" links="0" actions="0" /}}</content>
+{{query query="select propdemarche.value,count(doc.fullName),avg(propscore.value),min(doc.creationDate) from XWikiDocument as doc, BaseObject as obj, StringProperty as propdemarche, IntegerProperty as propscore where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and doc.fullName not like '%Template' and obj.id=propdemarche.id.id and propdemarche.id.name='demarche' and obj.id=propscore.id.id and propscore.id.name='score' group by propdemarche.value order by 2 desc" type="hql" class="Avis.Code.AvisClass" columns="demarche,AGG_COUNT,AGG_AVG_score,AGG_MIN_creationDate" headers="1" links="0" actions="0"/}}
+</content>
 </xwikidoc>

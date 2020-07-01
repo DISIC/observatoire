@@ -40,15 +40,6 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-#if($request.demarche)
-{{awmchart chart="1" table="0" category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par semaine" function="year(doc.creationDate)*100+week(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc" fromHQL=", StringProperty propdem" whereHQL="and obj.id=propdem.id.id and propdem.id.name='demarche' and propdem.value = '${request.demarche}'" /}}
-
-(% class="col-md-12" %)
-(((
-)))
-
-{{awmchart chart="1" table="0" category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par jour" function="year(doc.creationDate)*10000+month(doc.creationDate)*100+day(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc" fromHQL=", StringProperty propdem" whereHQL="and obj.id=propdem.id.id and propdem.id.name='demarche' and propdem.value = '${request.demarche}'" /}}
-#else
 #if($request.date)
  #set($date = $request.date)
 #else
@@ -58,34 +49,74 @@
 {{html clean="false"}}
 &lt;form action=""&gt;
 Date: &lt;input type="date" name="date" value="${date}" /&gt;
+&lt;input type="hidden" name="demarche" value="$!request.demarche" /&gt;
+#if($request.demarche)
+&lt;select name="type"&gt;
+&lt;option value="tous" #if($request.type=="tous")SELECTED#end&gt;Tous&lt;/option&gt;
+&lt;option value="jour" #if($request.type=="jour" ||!$request.type)SELECTED#end&gt;par jour&lt;/option&gt;
+&lt;option value="semaine" #if($request.type=="semaine")SELECTED#end&gt;par semaine&lt;/option&gt;
+&lt;option value="score" #if($request.type=="score")SELECTED#end&gt;score&lt;/option&gt;
+&lt;/select&gt;
+#end
 &lt;input type="submit" value="Go" /&gt;
 &lt;/form&gt;
 {{/html}}
-#set($query = "select propdemarche.value,count(doc.fullName), avg(propscore.value), min(doc.creationDate), max(doc.creationDate), propvol.value from XWikiDocument as doc, BaseObject as obj, StringProperty as propdemarche, BaseObject as demobj, IntegerProperty as propscore, LongProperty  as propvol where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and doc.fullName not like '%Template' and obj.id=propdemarche.id.id and propdemarche.id.name='demarche' and obj.id=propscore.id.id and propscore.id.name='score' and doc.creationDate&gt;='${date}' and propdemarche.value=demobj.name and demobj.className='Demarches.Code.DemarchesClass' and demobj.id=propvol.id.id and propvol.id.name='volumetrieDemat' group by propdemarche.value order by 2 desc")
+#if($request.demarche &amp;&amp; $request.demarche!="")
+== Demarche: $xwiki.getDocument($request.demarche).getDisplayTitle() ==
 
-|=(% style="width: 50%;" %) Demarche |= Votes |= Score |= Nb Demat Annuel |= Ratio |= Graph
-#foreach($item in $services.query.hql($query).setLimit(20).execute())
+#if($request.type=="semaine" || $request.type=="tous")
+{{awmchart chart="1" table="1" category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par semaine" function="year(doc.creationDate)*100+week(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc" fromHQL=", StringProperty propdem" whereHQL="and obj.id=propdem.id.id and propdem.id.name='demarche' and propdem.value = '${request.demarche}' and doc.creationDate&gt;'${date}'" /}}
+
+(% class="col-md-12" %)
+(((
+)))
+#end
+
+#if($request.type=="jour" || !$request.type  || $request.type=="tous")
+{{awmchart chart="1" table="1" category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par jour" function="year(doc.creationDate)*10000+month(doc.creationDate)*100+day(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc" fromHQL=", StringProperty propdem" whereHQL="and obj.id=propdem.id.id and propdem.id.name='demarche' and propdem.value = '${request.demarche}' and doc.creationDate&gt;='${date}'" /}}
+
+(% class="col-md-12" %)
+(((
+)))
+#end
+
+#if($request.type=="score" || $request.type=="tous")
+{{awmchart chart="1" table="1" category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Score par semaine" function="year(doc.creationDate)*100+week(doc.creationDate)" aggregate="score" aggregateFunction="avg" orderColumn="doc.creationDate" orderDirection="asc" fromHQL=", StringProperty propdem" whereHQL="and obj.id=propdem.id.id and propdem.id.name='demarche' and propdem.value = '${request.demarche}' and doc.creationDate&gt;'${date}'" /}}
+#end
+
+#else
+#set($query = "select propdemarche.value,count(doc.fullName), avg(propscore.value), min(doc.creationDate), max(doc.creationDate) from XWikiDocument as doc, BaseObject as obj, StringProperty as propdemarche, IntegerProperty as propscore where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and obj.id=propdemarche.id.id and propdemarche.id.name='demarche' and obj.id=propscore.id.id and propscore.id.name='score' and doc.creationDate&gt;='${date}' group by propdemarche.value order by 2 desc")
+#set($topCount = 0)
+|=(% style="width: 50%;" %) Demarche |= Votes |= Top |= Score |= Nb Demat Annuel |= Ratio |= Graph
+#foreach($item in $services.query.hql($query).setLimit(100).execute())
 #set($demarche = $item.get(0))
 #set($count = $item.get(1))
 #set($score = $item.get(2))
 #set($date1 = $item.get(3))
 #set($date2 = $item.get(4))
-#set($nbdemat = $item.get(5))
 #set($diff = $date2.time - $date1.time)
 #set($diff = $mathtool.toDouble($diff))
 #set($diffdays = $diff / 1000 / 3600 / 24)
 #if($diffdays == 0)
  #set($diffdays = 1)
 #end 
+#set($demDoc = $xwiki.getDocument($demarche))
+#set($demname = $demDoc.getTitle())
+#set($top = $demDoc.getValue("top"))
+#if($top)
+ #set($topCount = $topCount + 1)
+#end
+#set($nbdemat = $demDoc.getValue("volumetrieDemat"))
 #set($nbdematmonth = $nbdemat / 10 / 30)
 #set($ratio1 = ($count * 10000) / $diffdays)
 #set($ratio2 = $nbdematmonth)
 #set($ratio1 = $mathtool.toDouble($ratio1))
 #set($ratio3 = $ratio1 / $ratio2 / 100)
 #set($ratio3 = $mathtool.roundTo(2, $ratio3))
-#set($demname = $xwiki.getDocument($demarche).getTitle())
-| [[${demname}&gt;&gt;${demarche}]] | $count | $score | $!nbdemat | $!{ratio3}% | [[Voir graphe&gt;&gt;||queryString="demarche=${demarche}"]]
+| [[${demname}&gt;&gt;${demarche}]] | $count | $!top | $score | $!nbdemat | $!{ratio3}% | [[Voir graphe&gt;&gt;||queryString="demarche=${demarche}"]]
 #end
+
+Top demarches: $topCount
 #end
 {{/velocity}}
 </content>

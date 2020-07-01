@@ -20,50 +20,45 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Avis.Admin.Statistiques.Comptages.WebHome" locale="">
-  <web>Avis.Admin.Statistiques.Comptages</web>
+<xwikidoc version="1.3" reference="Avis.Admin.Statistiques.Ministeres.WebHome" locale="">
+  <web>Avis.Admin.Statistiques.Ministeres</web>
   <name>WebHome</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530808065000</creationDate>
+  <creationDate>1531577617000</creationDate>
   <parent>Avis.Admin.Statistiques.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530808095000</date>
-  <contentUpdateDate>1530808095000</contentUpdateDate>
+  <date>1581099155000</date>
+  <contentUpdateDate>1581099155000</contentUpdateDate>
   <version>1.1</version>
-  <title>Comptages</title>
+  <title>Statistiques par Ministère</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-#if($request.date)
+#if($request.date &amp;&amp; $request.date!="")
  #set($date = $request.date)
 #else
- #set($x = $datetool.calendar)
- ## Subtract 1 month (year=int code 2 - see list below)
- #set($ok = $x.add(10, -72))
- #set($date = $datetool.format("yyyy-MM-dd", $x.time))
+ #set($date = $datetool.get("yyyy-MM-dd"))
 #end
-
-== Votes par jour depuis $date ==
 
 {{html clean="false"}}
 &lt;form action=""&gt;
-Date: &lt;input type="date" name="date" value="${date}" /&gt;
-&lt;input type="submit" value="Go" /&gt;
+Date: &lt;input type="date" name="date" value="${date}" /&gt;&lt;input type="submit" value="Go" /&gt;
 &lt;/form&gt;
 {{/html}}
 
-{{awmchart category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par jour" function="year(doc.creationDate)*10000+month(doc.creationDate)*100+day(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc" whereHQL="and doc.creationDate&gt;'$date'"/}}
+== Avis par Ministère ==
 
-== Votes par heure depuis $date ==
+{{awmchart className="Avis.Code.AvisClass" category="demarche_ministeres" type="pie" title="Chart" width="500" height="500" table="1" fromHQL="" whereHQL="and doc.creationDate &gt;= '${date}'" aggregate="doc.fullName" "count" /}}
 
-{{awmchart category="doc.creationDate" className="Avis.Code.AvisClass" type="line" title="Par heure" function="year(doc.creationDate)*1000000+month(doc.creationDate)*10000+100*day(doc.creationDate)+hour(doc.creationDate)" aggregate="doc.fullName" aggregateFunction="count" orderColumn="doc.creationDate" orderDirection="asc" whereHQL="and doc.creationDate&gt;'$date'"/}}
+== Score par Ministère ==
 
-{{/velocity}}
-</content>
+{{awmchart className="Avis.Code.AvisClass" category="demarche_ministeres" type="bar3D" title="Chart" width="500" height="500" table="1" fromHQL="" whereHQL="and doc.creationDate &gt;= '${date}'" aggregate="score" aggregateFunction="avg" /}}
+
+{{/velocity}}</content>
 </xwikidoc>
