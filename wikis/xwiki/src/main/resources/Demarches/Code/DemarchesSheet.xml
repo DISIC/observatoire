@@ -408,13 +408,13 @@ require(['jquery','xwiki-selectize'], function($) {
     var checked = inputElement.prop("checked");
     if (value == propName) {
       if (checked) {
-        $("#"+freeTextInputFieldId).show();
+        $("#" + freeTextInputFieldId + "-container").show();
       } else {
         // Make sure to empty the input before hiding it, so that only an empty
         // value gets sent to the server, no value that the user may have entered
         // before hiding the input.
-        $("#"+freeTextInputFieldId).val("");
-        $("#"+freeTextInputFieldId).hide();
+        $("#" + freeTextInputFieldId).val("");
+        $("#" + freeTextInputFieldId + "-container").hide();
       }
     }
   }
@@ -473,7 +473,7 @@ require(['jquery','xwiki-selectize'], function($) {
            // the input for 'aucune aide' has no name (as we don't want to store its value
            // in the database).
            $("#xwiki-form-autreAide-0").val("");
-           $("#xwiki-form-autreAide-0").hide();
+           $("#xwiki-form-autreAide-0-container").hide();
         });
       }
     });

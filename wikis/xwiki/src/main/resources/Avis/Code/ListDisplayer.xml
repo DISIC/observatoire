@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1529483269000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1529921307000</date>
-  <contentUpdateDate>1529921307000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>ListDisplayer</title>
   <comment/>
@@ -77,9 +77,13 @@
   #end
   #if (${clazz.name} == 'Avis.Code.AvisClass')
     #if ($name == 'difficultes')
-      &lt;input id="xwiki-form-autreDifficulte-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreDifficulte"))" name='Avis.Code.AvisClass_0_autreDifficulte' value='' size='40' style='margin-left: 0.5em; display: none' /&gt;
+      &lt;span id="xwiki-form-autreDifficulte-0-container" style="display: none; padding-left: .5em;"&gt;
+        &lt;input id="xwiki-form-autreDifficulte-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreDifficulte"))" name='Avis.Code.AvisClass_0_autreDifficulte' maxlength="250" value='' size='40' style="max-width: 100%"/&gt; &lt;span class='small'&gt;$services.localization.render("${clazz.name}_autreDifficulte_maxhint")&lt;/span&gt;
+      &lt;/span&gt;
     #elseif ($name == 'aide')
-      &lt;input id="xwiki-form-autreAide-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreAide"))" name='Avis.Code.AvisClass_0_autreAide' value='' size='40' style='margin-left: 0.5em; display: none' /&gt;
+      &lt;span id="xwiki-form-autreAide-0-container" style="display: none; padding-left: .5em;"&gt;
+        &lt;input id="xwiki-form-autreAide-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreAide"))" name='Avis.Code.AvisClass_0_autreAide' maxlength="250" value='' size='40' style="max-width: 100%"/&gt; &lt;span class='small'&gt;$services.localization.render("${clazz.name}_autreAide_maxhint")&lt;/span&gt;
+      &lt;/span&gt;
     #end
   #end
   &lt;/ul&gt;
