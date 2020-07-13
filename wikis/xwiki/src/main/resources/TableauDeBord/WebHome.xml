@@ -55,8 +55,8 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
 #set ($columns = ['doc.title', 'ministeres','direction', 'objet', 'categoriesPublics', 'publics', 'evenements', 'urlInfos', 'urlDemarche', 'niveauDemat', 'statutDemat', 'dematObligatoire', 'top', 'occurrences', 'moyenne', 'statut', 'volumetrie', 'volumetrieDemat', 'pourcentageDemat', 'niveauVolumetrie', 'doc.name'])
 #set ($columnsProperties = {
   'doc.title': {'filterable' : 'true', 'link': 'auto'},
-  'ministeres': {'type' : 'text', 'filterable' : 'true', 'sortable' : 'false'},
-  'direction' : {'type' : 'hidden', 'filterable': 'true', 'sortable' : 'false'},
+  'ministeres': {'filterable' : 'true', 'sortable' : 'false'},
+  'direction' : {'filterable': 'true', 'sortable' : 'true'},
   'objet': {'type' : 'hidden'},
   'categoriesPublics': {'type' : 'hidden'},
   'publics': {'type' : 'hidden'},
@@ -84,7 +84,7 @@ $services.localization.render('wikidemarches.dematdashboard.intro')
   'maxPages': 7,
   'selectedColumn': 'occurrences',
   'defaultOrder': 'desc',
-  'extraParams' : 'statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur'
+  'extraParams' : 'direction/join_mode=or&amp;ministeres/join_mode=or&amp;statut%2Fjoin_mode=or&amp;statut=active&amp;statut=demandeUtilisateur'
 })
 #livetable('demarches' $columns $columnsProperties $options)
 
