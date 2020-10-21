@@ -282,6 +282,7 @@
     <property>
       <mapping>Code ministère=ministeres
 [private] Taux de disponibilité=urlAvailability
+Usagers satisfaits=avisIntegration
 Intégration FranceConnect=franceConnect
 Dites-le nous une fois sans carrés=ditesLeNousUneFois
 Lien=ediOnly
@@ -292,7 +293,7 @@ Nom de la démarche=doc.title
 Réalisable en ligne=statutDemat
 Support accessible=accompagnement
 Administration=direction
-[private] Date déclaration d'accessibilité=accessibilityStatement
+[private] Date audit RGAA=accessibilityStatement
 Constant:=dateMiseEnLigne
 Usagers satisfaits=avisExemption
 [private] Volumétrie totale 2019=volumetrie
