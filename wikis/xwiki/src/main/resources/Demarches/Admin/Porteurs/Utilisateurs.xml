@@ -44,8 +44,33 @@
 {{/velocity}}
 
 {{groovy}}
-println "== Porteurs de démarches et démarches associées"
+println "== Porteurs de démarches et démarches associées =="
 
+// get users from direction groups
+def groupsMembershipHql = "select memberProp.value, obj.name from BaseObject obj, StringProperty memberProp where obj.className = 'XWiki.XWikiGroups' and (obj.name like 'XWiki.Groups.Directions.%' or obj.name='XWiki.AdministrateursMinisteriels') and memberProp.id.id = obj.id and memberProp.name='member' and memberProp.value &lt;&gt; '' order by obj.name";
+def userMembership = new HashMap();
+for (entry in services.query.hql(groupsMembershipHql).execute()) {
+  if (entry[0] &amp;&amp; entry[0].trim().length() &gt; 0) {
+    def currentUserMembership = userMembership.get(entry[0]);
+    if (currentUserMembership == null) {
+      currentUserMembership = "";
+    } else {
+      currentUserMembership += ", ";
+    }
+    // 2 steps replace so that administrateurs ministeriels is also cleaned up from its prefix
+    def directionValue = entry[1].replaceAll("XWiki.", '').replaceAll("Groups.Directions.", '');
+    currentUserMembership += directionValue;
+    userMembership.put(entry[0], currentUserMembership);
+    // put all values, with xwiki: prefix or without, because membership as well as demarches porteurs could be stored one way or the other
+    if (entry[0].startsWith("xwiki:")) {
+      userMembership.put(entry[0].replaceAll("xwiki:", ''), currentUserMembership);
+    } else {
+      userMembership.put("xwiki:" + entry[0], currentUserMembership);
+    }
+  }
+}
+
+// get demarches and porteurs from demarches
 def hql = "select prop.value, doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as prop where obj.name = doc.fullName and obj.className = 'Demarches.Code.DemarchesClass' and doc.name &lt;&gt; 'DemarchesTemplate' and prop.id.id = obj.id and prop.id.name = 'proprietaires' and prop.value &lt;&gt; ''"
 def entries = services.query.hql(hql).execute()
 def demarchesIdsByOwner =  new HashMap()
@@ -64,7 +89,7 @@ for (entry in entries) {
     }
   }
 }
-println "|=Porteur|=Nom|=Prénom|=Adresse e-mail|=Id démarche|=Démarche|=Top 250"
+println "|=Porteur|=Nom|=Prénom|=Adresse e-mail|=Directions (porteur)|=Id démarche|=Démarche|=Top 250"
 for (entry in demarchesIdsByOwner.entrySet()) {
   def userId = entry.key;
   def userData = xwiki.getDocument(userId).name + "|||";
@@ -78,11 +103,15 @@ for (entry in demarchesIdsByOwner.entrySet()) {
       userData = userData + "|||";
     }
   }
+  def userDirections = '';
+  if (userMembership.get(userId)) {
+    userDirections = userMembership.get(userId);
+  }
   for (demarcheId in entry.value) {
     def demarcheDoc = xwiki.getDocument(demarcheId);
     def title = demarcheDoc.displayTitle;
     def top250 = demarcheDoc.getValue('top');
-    println "|$userData|" + demarcheDoc.getName() + "|[[{{{${title}}}}&gt;&gt;$demarcheId]]|" + ((top250 == 1) ? "Oui" : "Non");
+    println "|$userData|" + userDirections + "|" + demarcheDoc.getName() + "|[[{{{${title}}}}&gt;&gt;$demarcheId]]|" + ((top250 == 1) ? "Oui" : "Non");
   }
 }
 
