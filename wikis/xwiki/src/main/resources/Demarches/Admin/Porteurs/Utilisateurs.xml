@@ -39,7 +39,11 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{groovy}}
+  <content>{{velocity}}
+#set($discard = $xwiki.ssx.use("Demarches.WebHome"))
+{{/velocity}}
+
+{{groovy}}
 println "== Porteurs de démarches et démarches associées"
 
 def hql = "select prop.value, doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as prop where obj.name = doc.fullName and obj.className = 'Demarches.Code.DemarchesClass' and doc.name &lt;&gt; 'DemarchesTemplate' and prop.id.id = obj.id and prop.id.name = 'proprietaires' and prop.value &lt;&gt; ''"
@@ -60,22 +64,26 @@ for (entry in entries) {
     }
   }
 }
-println "|=Porteur|=Adresse e-mail|=Démarche(s)"
+println "|=Porteur|=Nom|=Prénom|=Adresse e-mail|=Id démarche|=Démarche|=Top 250"
 for (entry in demarchesIdsByOwner.entrySet()) {
-  def userId = entry.key
-  def userName = xwiki.getDocument(userId).name
-  def userEmailAddress = ""
+  def userId = entry.key;
+  def userData = xwiki.getDocument(userId).name + "|||";
   if (xwiki.exists(userId)) {
-    userName = xwiki.getUserName(userId, false)
-    userName = "[[$userName&gt;&gt;$userId]]"
-    userEmailAddress = xwiki.getDocument(userId).getObject("XWiki.XWikiUsers").getValue("email")
-  }
-  println "|$userName|$userEmailAddress|((("
-    for (demarcheId in entry.value) {
-      def title = xwiki.getDocument(demarcheId).displayTitle
-      println "* [[$title&gt;&gt;$demarcheId]]"
+    userData = xwiki.getUserName(userId, false);
+    userData = "[[$userData&gt;&gt;$userId]]";
+    def userObj = xwiki.getDocument(userId).getObject("XWiki.XWikiUsers");
+    if (userObj != null) {
+      userData = userData + "|" + userObj.getValue("first_name") + "|" + userObj.getValue("last_name") + "|" + userObj.getValue("email");
+    } else {
+      userData = userData + "|||";
     }
-  println ")))"
+  }
+  for (demarcheId in entry.value) {
+    def demarcheDoc = xwiki.getDocument(demarcheId);
+    def title = demarcheDoc.displayTitle;
+    def top250 = demarcheDoc.getValue('top');
+    println "|$userData|" + demarcheDoc.getName() + "|[[{{{${title}}}}&gt;&gt;$demarcheId]]|" + ((top250 == 1) ? "Oui" : "Non");
+  }
 }
 
 
