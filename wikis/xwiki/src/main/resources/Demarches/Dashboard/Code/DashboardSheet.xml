@@ -757,7 +757,10 @@ var XWiki = (function (XWiki) {
                 var replaceNa = jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2';
                 if (!isNaN(data.value) &amp;&amp; data.value &gt;= 0) {
                   var statsURL = getAvisStatisticsUrl(row['id']);
-                  var valueToDisplay = format(data.value, data.display, computeBadgeStyleSatisfactionIndex,  replaceNa, row['id']);
+                  // Change ratio denominator from 100 (percent) to 10 (eg 87 becomes 8.7), at the display level only. In French, commas are used as a decimal separator.
+                  var value = data.value / 10;
+                  var display = value.toLocaleString("fr-FR", { maximumFractionDigits: 1, minimumFractionDigits: 0 });
+                  var valueToDisplay = format(data.value, display, computeBadgeStyleSatisfactionIndex,  replaceNa, row['id']);
                   // add the stats link to the graphs under / next to the badge
                   var linkToGraphs = '&lt;a class="satisfaction-details" href="' + statsURL + '"&gt;$escapetool.javascript($services.localization.render("dashboard.table.satisfaction.statslink"))&lt;/a&gt;';
                   return valueToDisplay.replace('&lt;/span&gt;&lt;/span&gt;', '&lt;/span&gt;' + linkToGraphs + '&lt;/span&gt;');
