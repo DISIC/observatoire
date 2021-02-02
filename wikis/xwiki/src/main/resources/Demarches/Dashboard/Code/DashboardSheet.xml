@@ -446,28 +446,20 @@ var XWiki = (function (XWiki) {
 
   function format(value, display, badgeStyleFunction, replaceNa, demarcheId) {
     if (typeof display === 'string' || display instanceof String) {
-      var badgeStyle;
-      if (display.indexOf('%') &gt; 0) {
-        badgeStyle = badgeStyleFunction.apply(this, [value]);
-      } else {
-        badgeStyle = badgeStyleFunction.apply(this, [display]);
-      }
+      var badgeStyle = badgeStyleFunction.apply(this, [display]);
       if (display) {
         if (replaceNa) {
           display = display.replace("n/a", "-");
         }
         display = display.replace("n/c", "Non disponible");
       }
-      /*if (value &amp;&amp; (value.indexOf('%') &gt; 0)) {
-        return '&lt;span class="row-details-value"&gt;' + value + '&lt;/span&gt;';
-      } else*/
       if (display &amp;&amp; display == '-') {
         return '&lt;span class="row-details-value"&gt;' + display + '&lt;/span&gt;';
       } else {
         return '&lt;span class="row-details-value"&gt;&lt;span class="label label-' + badgeStyle + '"&gt;' + display + '&lt;/span&gt;&lt;/span&gt;';
       }
     } else {
-      return '&lt;span class="row-details-value"&gt;Erreur de formatage (' + display + ')&lt;/span&gt;';
+      return '&lt;span class="row-details-value"&gt;Erreur de formattage (' + display + ')&lt;/span&gt;';
     }
   }
 
