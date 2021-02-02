@@ -402,10 +402,12 @@ var XWiki = (function (XWiki) {
   }
 
   function computeBadgeStyleSatisfactionIndex(value) {
-    if (!isNaN(value)) {
-      if (value &gt;= 80) {
+    // The "value" argument is a displayed value, hence a string formatted with a comma as decimal separator in French, so it needs to get turned into a number
+    var rounded = parseInt(value, 10);
+    if (!isNaN(rounded)) {
+      if (rounded &gt;= 8) {
         return 'success';
-      } else if (value &gt;= 60) {
+      } else if (rounded &gt;= 6) {
         return "warning";
       } else {
         return "danger";
