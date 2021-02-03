@@ -402,12 +402,10 @@ var XWiki = (function (XWiki) {
   }
 
   function computeBadgeStyleSatisfactionIndex(value) {
-    // The "value" argument is a displayed value, hence a string formatted with a comma as decimal separator in French, so it needs to get turned into a number
-    var rounded = parseInt(value, 10);
-    if (!isNaN(rounded)) {
-      if (rounded &gt;= 8) {
+    if (!isNaN(value)) {
+      if (value &gt;= 8) {
         return 'success';
-      } else if (rounded &gt;= 6) {
+      } else if (value &gt;= 6) {
         return "warning";
       } else {
         return "danger";
@@ -448,7 +446,7 @@ var XWiki = (function (XWiki) {
 
   function format(value, display, badgeStyleFunction, replaceNa, demarcheId) {
     if (typeof display === 'string' || display instanceof String) {
-      var badgeStyle = badgeStyleFunction.apply(this, [display]);
+      var badgeStyle = badgeStyleFunction.apply(this, [value]);
       if (display) {
         if (replaceNa) {
           display = display.replace("n/a", "-");
@@ -754,7 +752,7 @@ var XWiki = (function (XWiki) {
                   // Change ratio denominator from 100 (percent) to 10 (eg 87 becomes 8.7), at the display level only. In French, commas are used as a decimal separator.
                   var value = data.value / 10;
                   var display = value.toLocaleString("fr-FR", { maximumFractionDigits: 1, minimumFractionDigits: 0 });
-                  var valueToDisplay = format(data.value, display, computeBadgeStyleSatisfactionIndex,  replaceNa, row['id']);
+                  var valueToDisplay = format(value, display, computeBadgeStyleSatisfactionIndex,  replaceNa, row['id']);
                   // add the stats link to the graphs under / next to the badge
                   var linkToGraphs = '&lt;a class="satisfaction-details" href="' + statsURL + '"&gt;$escapetool.javascript($services.localization.render("dashboard.table.satisfaction.statslink"))&lt;/a&gt;';
                   return valueToDisplay.replace('&lt;/span&gt;&lt;/span&gt;', '&lt;/span&gt;' + linkToGraphs + '&lt;/span&gt;');
