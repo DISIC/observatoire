@@ -266,8 +266,8 @@
       "id": $page.fullName,
       "title": $page.displayTitle,
       "statutDemat": $statutDemat,
-      "ministere": $ministereName,
-      "groupes": $obj.get('groupesExternes'),
+      "ministere": $obj.get('groupesExternes'),
+      "groupes": '',
       "direction": $directionName,
       "dateMiseEnLigne": {
         "display": $dateMiseEnLigneDisplay,
