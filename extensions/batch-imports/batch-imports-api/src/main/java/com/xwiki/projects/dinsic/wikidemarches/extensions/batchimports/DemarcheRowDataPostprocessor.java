@@ -88,7 +88,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
 
     public static SimpleDateFormat FORMATTER_DATE_MISE_EN_LIGNE_OUTPUT = new SimpleDateFormat("MM/yyyy");
 
-    public static SimpleDateFormat FORMATTER_DATE_RGAA = new SimpleDateFormat("MMMMM d, yyyy", Locale.ENGLISH);
+    public static SimpleDateFormat FORMATTER_DATE_RGAA = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 
     /**
      * {@inheritDoc}
@@ -365,10 +365,10 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
                     // add an extra day in the 3 years to cover for the probability that one of these 3 years is a leap
                     // year, which is quite high (3/4)
                     long threeYearsInMillis = (long) (3 * 365 + 1) * 24 * 60 * 60 * 1000;
-                    // we evaluate the age of the declaration on the 1st of April 2020, to correspond to what AirTable
+                    // we evaluate the age of the declaration on the date of the import, to correspond to what AirTable
                     // seems to display
-                    long firstApril2020InMillis = 1585692000000L;
-                    if (firstApril2020InMillis - statementDate.getTime() <= threeYearsInMillis) {
+                    long todayInMillis = new Date().getTime();
+                    if (todayInMillis - statementDate.getTime() <= threeYearsInMillis) {
                         logger.debug("Processing accessibility statement: Date found and parsed " + statementDate
                             + " and is within the 3 years");
                         valueToSet = "oui";
