@@ -277,37 +277,37 @@
       <honoremptyvalues>1</honoremptyvalues>
     </property>
     <property>
-      <listseparator>,</listseparator>
+      <listseparator>;</listseparator>
     </property>
     <property>
       <mapping>Code ministère=ministeres
 [private] Taux de disponibilité=urlAvailability
-Usagers satisfaits=avisIntegration
+Satisfaction=avisIntegration
 Intégration FranceConnect=franceConnect
 Dites-le nous une fois sans carrés=ditesLeNousUneFois
 Lien=ediOnly
 Constant:1=top
 Lien=urlDemarche
 [private] Temps de réponse (milliseconde)=urlResponseTime
-Nom de la démarche=doc.title
-Réalisable en ligne=statutDemat
+Nom de la démarche / projet=doc.title
+En ligne=statutDemat
 Support accessible=accompagnement
 Administration=direction
-[private] Date audit RGAA=accessibilityStatement
+[private]  Date audit RGAA=accessibilityStatement
 Constant:=dateMiseEnLigne
-Usagers satisfaits=avisExemption
+Satisfaction=avisExemption
 [private] Volumétrie totale 2019=volumetrie
-Ouverture en ligne=dateMiseEnLigneTexte
+[private] Date de déploiement officielle=dateMiseEnLigneTexte
 Compatible mobile=adapteMobile
 [private] ID=doc.name
-[private] Volumétrie en ligne 2019=volumetrieDemat
+[private]  Volumétrie en ligne 2019=volumetrieDemat
 Taux RGAA Audit=rgaaCompliancyLevel
-Nom de la démarche=nomComplet
+Nom de la démarche / projet=nomComplet
 Support accessible=moyensDeContact
-Thème=groupesExternes</mapping>
+Ministère politique=groupesExternes</mapping>
     </property>
     <property>
-      <metadatafilename/>
+      <metadatafilename>Observatoire_top250_04_02_2021-forimport.csv</metadatafilename>
     </property>
     <property>
       <pageprefix/>
