@@ -446,7 +446,14 @@ var XWiki = (function (XWiki) {
 
   function format(value, display, badgeStyleFunction, replaceNa, demarcheId) {
     if (typeof display === 'string' || display instanceof String) {
-      var badgeStyle = badgeStyleFunction.apply(this, [value]);
+      var badgeStyle;
+      if (badgeStyleFunction === computeBadgeStyleSatisfactionIndex) {
+        // this is the satisfaction index
+        badgeStyle = badgeStyleFunction.apply(this, [value]);
+      } else {  
+        // all the rest
+        badgeStyle = badgeStyleFunction.apply(this, [display]);
+      }
       if (display) {
         if (replaceNa) {
           display = display.replace("n/a", "-");
