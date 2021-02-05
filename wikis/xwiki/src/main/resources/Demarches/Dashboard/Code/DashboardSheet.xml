@@ -951,8 +951,8 @@ var XWiki = (function (XWiki) {
             }
           }
         ],
-        // order by: avis, ministère, groupe, volumétrie, name
-        order: [[13, 'desc'], [1, 'asc'], [2, 'asc'], [12, 'desc'], [0, 'asc']],
+        // order by: ministère, name
+        order: [[1, 'asc'], [0, 'asc']],
         columnDefs: [{
           targets: "_all",
           orderable: true,
