@@ -170,7 +170,7 @@ wikidemarches.dematdashboard.table.statut=Statut
 wikidemarches.dematdashboard.table.direction=Direction
 wikidemarches.dematdashboard.table.votes=Demandes de dématerialisation
 wikidemarches.dematdashboard.table.occurrences=Nb. avis
-wikidemarches.dematdashboard.table.moyenne=Taux de satisfaction
+wikidemarches.dematdashboard.table.moyenne=Taux de satisfaction (/10)
 wikidemarches.dematdashboard.table.emptyvalue=-
 
 # Demarche avis stats

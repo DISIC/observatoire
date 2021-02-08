@@ -59,7 +59,14 @@
 #else
   ## only display something if there is at least one occurrence
   #if ($occurrences &gt; 0)
-    ${mathtool.round($mathtool.mul($mathtool.sub($value, 1), 50))} %
+    ## A NumberFormat formatter is used to deal at the same time with:
+    ## - the locale: coma decimal separator in French
+    ## - the rounding: we want at most one figure after the decimal separator
+    #set ($formatter = $numbertool.getNumberFormat('#.#', $xcontext.locale))
+    #set ($discard = $formatter.setMinimumFractionDigit(0))
+    #set ($discard = $formatter.setMaximumFractionDigit(1))
+    #set ($formattedValue = $formatter.format($mathtool.mul($mathtool.sub($value, 1), 5)))
+    $formattedValue
   #end
 #end
 {{/html}}
