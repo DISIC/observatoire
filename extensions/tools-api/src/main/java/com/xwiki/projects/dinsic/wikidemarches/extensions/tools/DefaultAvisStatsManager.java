@@ -51,7 +51,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
      * Returns a date interval which starts one year from now plus one day and ends now.
      * @return An array of two dates representing the past year.
      */
-    public Date[] getCurrentRollingYear() {
+    public Date[] getPastYearInterval() {
         Calendar maxDate = Calendar.getInstance();
         Calendar minDate = Calendar.getInstance();
         minDate.add(Calendar.YEAR, -1);
@@ -116,7 +116,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     public synchronized void computeAvisStats(XWikiDocument demarche, boolean save)
             throws QueryException, XWikiException
     {
-        Query query = createAvisStatsQuery(demarche.getDocumentReference(), getCurrentRollingYear());
+        Query query = createAvisStatsQuery(demarche.getDocumentReference(), getPastYearInterval());
         List results = query.execute();
         Object[] result = (Object[]) results.get(0);
         long occurrences = (long) result[1];
@@ -135,7 +135,7 @@ public class DefaultAvisStatsManager implements AvisStatsManager
     public void computeAvisStats() throws QueryException, XWikiException
     {
         logger.debug("Starting to compute stats for all demarches");
-        Query query = createAvisStatsQuery(null, getCurrentRollingYear());
+        Query query = createAvisStatsQuery(null, getPastYearInterval());
         int handledDemarches = 0;
         List results = query.execute();
         for (Object result : results) {
