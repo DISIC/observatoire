@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content>{{velocity}}
 ## setup parameters
 #set($NB_AVIS = 100)
@@ -79,7 +79,7 @@
         &lt;dd&gt;&lt;input type="number" name='demarcheid' value="$!escapetool.xml($DEMARCHE_ID)"/&gt;&lt;/dd&gt;
         &lt;dt&gt;&lt;label&gt;Date de début&lt;/label&gt;&lt;/dt&gt;
         &lt;dd&gt;&lt;input type="date" name='datestart' value="$!escapetool.xml($DATE_START)"/&gt;&lt;/dd&gt;
-        &lt;dt&gt;&lt;label&gt;Date de début&lt;/label&gt;&lt;/dt&gt;
+        &lt;dt&gt;&lt;label&gt;Date de fin&lt;/label&gt;&lt;/dt&gt;
         &lt;dd&gt;&lt;input type="date" name='dateend' value="$!escapetool.xml($DATE_END)"/&gt;&lt;/dd&gt;
       &lt;/dl&gt;
       &lt;div class='buttonwrapper'&gt;
@@ -110,6 +110,10 @@
     #set($discard = $newAvisObj.set('demarche', "Demarches.${DEMARCHE_ID}"))
     ## the avis is a random number between 1 and 3 included
     #set($discard = $newAvisObj.set('score', $mathtool.ceil($mathtool.mul($mathtool.random, 3))))
+    ## Explicitely set a vote value to something (empty string in this case), because:
+    ## 1) When filled in in production by real users, the Avis form always contains a 'vote' field value
+    ## 2) Class AvisStatsManager currently performs a join on the 'vote' property value, hence an inexistent value for that property entails wrong statistics
+    #set($discard = $newAvisObj.set('vote', ''))
     ## same for the other scores
     #set($discard = $newAvisObj.set('facile', $mathtool.ceil($mathtool.mul($mathtool.random, 3))))
     #set($discard = $newAvisObj.set('comprehensible', $mathtool.ceil($mathtool.mul($mathtool.random, 3))))
