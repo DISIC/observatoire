@@ -100,6 +100,8 @@
     [[Retourner&gt;&gt;$doc.fullName]]{{/info}}
   #end
 #else
+  Cet outil permet de effacer des avis de la plateforme par leur date de création, pour une démarche donnée.
+  Les avis ne sont pas effacés directement lors du remplissage des paramètres de recherche, il y a une étape de prévisualisation des avis à effacer, dans laquelle il faut sélectionner les avis à supprimer.
   ## A simple date picker widget.
   #set ($discard = $xwiki.ssfx.use('uicomponents/widgets/datepicker/calendarDateSelect.css', true))
   #set ($discard = $xwiki.jsfx.use('uicomponents/widgets/datepicker/calendarDateSelect.js', {'forceSkinAction': true, 'language': $xcontext.locale}))
@@ -125,6 +127,7 @@
         &lt;/dd&gt;
         &lt;dt&gt;
           &lt;label for='demarche'&gt;Démarche (optionnel) : &lt;/label&gt;
+          &lt;div class='xHint'&gt;Id de la démarche des avis à supprimer. Par exemple, 419 ou 2161. Si aucune valeur n'est remplie, tous les avis de la période sélectionnée seront supprimés, quelle que soit leur démarche.&lt;/div&gt;
         &lt;/dt&gt;
         &lt;dd&gt;
           &lt;input type="text" name='demarche' id='demarche' class="" title="Id de la démarche" &gt;&lt;/input&gt;

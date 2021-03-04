@@ -70,6 +70,8 @@
   (% class="col-md-6 col-xs-12" %) (((
     #panel('Avis', "
       * [[Statistiques de création d'avis&gt;&gt;Avis.Admin.Statistiques]]
+
+      * [[Suppression d'avis en masse, par date de création&gt;&gt;Avis.Admin.AvisMassCleanup]]
     ",'star')
   )))
   (% class="col-md-6 col-xs-12" %) (((
