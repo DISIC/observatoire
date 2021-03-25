@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1537516017000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1537516757000</date>
-  <contentUpdateDate>1537516257000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>TextAreaDisplayer</title>
   <comment/>
@@ -47,9 +47,11 @@
   &lt;/label&gt;
   #if ("$!field.hint" != '')
     #set ($key = "${object.xWikiClass.name}_$name.${field.hint}")
-    &lt;span id="${prefix}${name}_hint" class="xHint"&gt;$escapetool.xml($services.localization.render($key))&lt;/span&gt;
+    &lt;span id="${prefix}${name}_hint" class="xHint"&gt;$services.localization.render($key)&lt;/span&gt;
+    &lt;textarea id="${prefix}$name" name="${prefix}${name}" value="" rows="3" aria-describedby="${prefix}${name}_hint"&gt;$!value&lt;/textarea&gt;
+  #else
+    &lt;textarea id="${prefix}$name" name="${prefix}${name}" value="" rows="3"&gt;$!value&lt;/textarea&gt;
   #end
-  &lt;textarea id="${prefix}$name" name="${prefix}${name}" value="" rows="3" aria-describedby="${prefix}${name}_hint"&gt;$!value&lt;/textarea&gt;
 #else
   $!value
 #end

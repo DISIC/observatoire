@@ -141,7 +141,7 @@ Avis.Code.AvisClass_aide_autre=Autre
 Avis.Code.AvisClass_autreAide=Autre aide
 Avis.Code.AvisClass_autreAide_maxhint=(max. 250 signes)
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
-Avis.Code.AvisClass_autre.hint=Ne pas inclure d’informations personnelles (identité, date de naissance, adresse, identifiant administratif, etc.)
+Avis.Code.AvisClass_autre.hint=Ne communiquez aucune information personnelle ici.&lt;br/&gt;Ceci n’est pas un formulaire de contact. Si vous avez des questions sur cette démarche, contactez le service concerné.
 Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration concernant cette démarche, merci de nous indiquer votre adresse électronique :
 Avis.Code.AvisClass_source=Source
 

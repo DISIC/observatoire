@@ -685,6 +685,10 @@ require(['jquery','xwiki-selectize'], function($) {
   margin-bottom: 1.5em;
 }
 
+.wd-form .xHint {
+  padding: 0 0 1em 0;
+}
+
 .form-preambule {
   margin-bottom: 3em;
 

@@ -90,7 +90,7 @@
       <customDisplay>{{include reference="Avis.Code.TextAreaDisplayer" /}}</customDisplay>
       <disabled>0</disabled>
       <editor>---</editor>
-      <hint/>
+      <hint>hint</hint>
       <name>autre</name>
       <number>14</number>
       <picker>0</picker>
