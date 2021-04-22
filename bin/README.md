@@ -1,13 +1,6 @@
-# How to build xwiki-platform-legacy-oldcore to fix [XWIKI-15307](https://jira.xwiki.org/browse/XWIKI-15307) and [XWIKI-17141](https://jira.xwiki.org/browse/XWIKI-17141):
+# Backport for XWIKI-17423
 
-* Clone XWiki platform: `git clone git@github.com:xwiki/xwiki-platform.git`
-* Checkout tag 9.11.3: `git checkout xwiki-platform-9.11.3`
-* Create a branch: DINSICDEMA-9.11.3
-* In this branch, cherry-pick the following commits: 
-[6f8defa1fc77933baafa4368d907005a04094194](https://github.com/xwiki/xwiki-platform/commit/6f8defa1fc77933baafa4368d907005a04094194), [8741e2afddfda5632303c3969a0a03e2c9b3459e](https://github.com/xwiki/xwiki-platform/commit/8741e2afddfda5632303c3969a0a03e2c9b3459e), [eee5d157c5ec5d30b307039541e65abc9f7e8850](https://github.com/xwiki/xwiki-platform/commit/eee5d157c5ec5d30b307039541e65abc9f7e8850), [c90fcefaf7c749349222a1e9267ecb3e5dd44255](https://github.com/xwiki/xwiki-platform/commit/c90fcefaf7c749349222a1e9267ecb3e5dd44255)
-* Build xwiki-platform-oldcore: `mvn clean install -Dmaven.test.skip=true`
-* Build xwiki-platform-legacy/xwiki-platform-legacy-oldcore/
-* You will get `xwiki-platform-legacy-oldcore-9.11.3.jar` ready to be renamed into `xwiki-platform-legacy-oldcore-DINSICDEMA9.11.3-29b472cbb5dd72e6f98f05c17e5e8c0a1524434f.jar` to reflect the corresponding branch and commit, and ready to be deployed in the WEB-INF/lib directory in lieu of `xwiki-platform-legacy-oldcore-9.11.3.jar`
+* xwiki-platform-legacy-oldcore-DINSICDEMA9.11.3-5ac27ae16a240b3e43376195312e34076dfe9ae4.jar (build from the branch https://github.com/xwikisas/xwiki-platform/tree/DINSICDEMA9.11.3 at head 5ac27ae16a240b3e43376195312e34076dfe9ae4) - build the oldcore first, skip the tests.
 
 # Custom Solr API
 
