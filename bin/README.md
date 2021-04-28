@@ -1,4 +1,5 @@
-# Backport for XWIKI-17423
+# Oldcore (patches for [XWIKI-15307](https://jira.xwiki.org/browse/XWIKI-15307), [XWIKI-17141](https://jira.xwiki.org/browse/XWIKI-17141) and [XWIKI-17423
+](https://jira.xwiki.org/browse/XWIKI-17423))
 
 * xwiki-platform-legacy-oldcore-DINSICDEMA9.11.3-5ac27ae16a240b3e43376195312e34076dfe9ae4.jar (build from the branch https://github.com/xwikisas/xwiki-platform/tree/DINSICDEMA9.11.3 at head 5ac27ae16a240b3e43376195312e34076dfe9ae4) - build the oldcore first, skip the tests.
 
