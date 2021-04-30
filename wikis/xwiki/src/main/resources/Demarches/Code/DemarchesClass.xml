@@ -944,7 +944,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
       <unmodifiable>0</unmodifiable>
       <validationMessage/>
       <validationRegExp/>
-      <values>enLigneEntierement|experimentation|deploiementPartiel|nonDemat|nr</values>
+      <values>enLigneEntierement|experimentation|deploiementPartiel|deploiementLocal|nonDemat|nr</values>
       <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
     </statutDemat>
     <statutProjetDemat>

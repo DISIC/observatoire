@@ -387,12 +387,14 @@ var XWiki = (function (XWiki) {
           return "danger";
         case 'partiel':
           return "warning";
+        case 'déploiement partiel':
+          return 'warning';
         case 'expérimentation':
           return 'info';
         case 'bêta':
           return 'info';
-        case 'déploiement partiel':
-          return 'warning';
+        case 'en déploiement local':
+          return "semisuccess";
         default:
           return "default";
       }
@@ -1727,6 +1729,11 @@ input[name='title'] {
       .label-success {
         background-color: #62D2B0;
         border-color: #62D2B0;
+        color: #22493D;
+      }
+      .label-semisuccess {
+        background-color: #d1f7c4;
+        border-color: #d1f7c4;
         color: #22493D;
       }
       .label-danger {
