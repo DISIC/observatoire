@@ -289,25 +289,25 @@ Lien=ediOnly
 Constant:1=top
 Lien=urlDemarche
 [private] Temps de réponse (milliseconde)=urlResponseTime
-Nom de la démarche / projet=doc.title
+Nom de la démarche / projet / procédure PNU=doc.title
 En ligne=statutDemat
 Support accessible=accompagnement
 Administration=direction
-[private]  Date audit RGAA=accessibilityStatement
+[private]  Date déclaration d'accessibilité=accessibilityStatement
 Constant:=dateMiseEnLigne
 Satisfaction=avisExemption
-[private] Volumétrie totale 2019=volumetrie
+[private] Volumétrie totale=volumetrie
 [private] Date de déploiement officielle=dateMiseEnLigneTexte
 Compatible mobile=adapteMobile
 [private] ID=doc.name
-[private]  Volumétrie en ligne 2019=volumetrieDemat
+[private]  Volumétrie en ligne=volumetrieDemat
 Taux RGAA Audit=rgaaCompliancyLevel
-Nom de la démarche / projet=nomComplet
+Nom de la démarche / projet / procédure PNU=nomComplet
 Support accessible=moyensDeContact
 Ministère politique=groupesExternes</mapping>
     </property>
     <property>
-      <metadatafilename>Observatoire_top250_04_02_2021-forimport.csv</metadatafilename>
+      <metadatafilename/>
     </property>
     <property>
       <pageprefix/>
