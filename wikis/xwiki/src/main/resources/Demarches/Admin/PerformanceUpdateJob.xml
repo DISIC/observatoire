@@ -48,8 +48,8 @@ if(request.confirm &amp;&amp; request.confirm.equals("true") &amp;&amp; pingdomA
   def LIST_OP = "checks";
   def DETAILS_OP = "summary.average";
   def DETAILS_PARAMS = "includeuptime=true"
-  def START_DATE = "01/07/2019 00:00:00";
-  def END_DATE = "30/09/2019 23:59:59";
+  def START_DATE = "01/01/2021 00:00:00";
+  def END_DATE = "31/03/2021 23:59:59";
 
   def WITH_DATE_INTERVAL = true;
 
