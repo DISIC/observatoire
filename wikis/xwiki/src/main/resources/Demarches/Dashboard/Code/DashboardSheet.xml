@@ -383,6 +383,8 @@ var XWiki = (function (XWiki) {
       switch (value) {
         case 'oui':
           return "success";
+        case 'en cours de déploiement local':
+          return "success";
         case 'non':
           return "danger";
         case 'partiel':
@@ -393,8 +395,6 @@ var XWiki = (function (XWiki) {
           return 'info';
         case 'bêta':
           return 'info';
-        case 'en déploiement local':
-          return "semisuccess";
         default:
           return "default";
       }
@@ -1729,11 +1729,6 @@ input[name='title'] {
       .label-success {
         background-color: #62D2B0;
         border-color: #62D2B0;
-        color: #22493D;
-      }
-      .label-semisuccess {
-        background-color: #d1f7c4;
-        border-color: #d1f7c4;
         color: #22493D;
       }
       .label-danger {
