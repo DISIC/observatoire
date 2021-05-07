@@ -147,9 +147,7 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
             processFlagForProperty(data, DEMARCHE_PROPERTY_AVIS_EXEMPTION, "n/a", "1");
         }
 
-        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_EDI_ONLY))) {
-            processFlagForProperty(data, DEMARCHE_PROPERTY_EDI_ONLY, "EDI", "1");
-        }
+        processEdiOnlyFlag(data, mapping);
 
         logger.debug("New data after processing: " + data);
     }
@@ -458,6 +456,27 @@ public class DemarcheRowDataPostprocessor implements RowDataPostprocessor
         }
         logger.debug("Setting flag " + propertyName + ": " + valueToSet);
         data.put(propertyName, valueToSet);
+    }
+
+    protected void processEdiOnlyFlag(Map<String, String> data, Map<String, String> mapping)
+    {
+        if (StringUtils.isNotEmpty(mapping.get(DEMARCHE_PROPERTY_EDI_ONLY))) {
+            // ediOnly is set either from EDI values of the selected field or from the "checked" value when the selected
+            // column is coming from a checkbox column in Airtable
+            logger.debug("Processing ediOnly from  " + mapping.get(DEMARCHE_PROPERTY_EDI_ONLY));
+            // we'll not set any value if the flag is not to be set, by the principle that the data should be left "as
+            // is" if there is no flag to set. However, I think this import is done with "honor empty values" so in
+            // practice it is the same thing as setting 0.
+            String valueToSet = "";
+            String fileValue = data.get(DEMARCHE_PROPERTY_EDI_ONLY);
+            // test without whitespace, to try to cover a little more cases
+            String valueWithoutSpaces = fileValue.replaceAll("\\s", "");
+            if (valueWithoutSpaces.equalsIgnoreCase("EDI") || valueWithoutSpaces.equalsIgnoreCase("checked")) {
+                valueToSet = "1";
+            }
+            logger.debug("Setting ediOnly: " + valueToSet);
+            data.put(DEMARCHE_PROPERTY_EDI_ONLY, valueToSet);
+        }
     }
 
     /**
