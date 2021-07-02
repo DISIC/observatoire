@@ -91,8 +91,11 @@ dashboard.social-network.envelope=Par e-mail
 
 # Table
 dashboard.table.demarche=Les démarches
+dashboard.table.demarche.tableHeaderHtml=Les démarches
 dashboard.table.ministry=Ministère
+dashboard.table.ministry.tableHeaderHtml=Ministère
 dashboard.table.group=Regroupement
+dashboard.table.group.tableHeaderHtml=Regroupement
 dashboard.table.digitalization=Réalisable en ligne
 dashboard.table.digitalization.tableHeaderHtml=Réalisable&lt;br role="presentation"/&gt;en ligne
 dashboard.table.satisfaction=Usagers satisfaits (/10)
