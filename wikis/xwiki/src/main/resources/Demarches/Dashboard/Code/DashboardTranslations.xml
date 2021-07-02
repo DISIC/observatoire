@@ -93,15 +93,15 @@ dashboard.social-network.envelope=Par e-mail
 dashboard.table.demarche=Les démarches
 dashboard.table.ministry=Ministère
 dashboard.table.group=Regroupement
-dashboard.table.digitalization=Réalisable &lt;br/&gt;en ligne
-dashboard.table.satisfaction=Usagers &lt;br/&gt;satisfaits (/10)
+dashboard.table.digitalization=Réalisable&lt;br role="presentation"/&gt;en ligne
+dashboard.table.satisfaction=Usagers&lt;br role="presentation"/&gt;satisfaits (/10)
 dashboard.table.satisfaction.statslink=Graphes
-dashboard.table.mobile=Compatible &lt;br/&gt;mobile
-dashboard.table.support=Support &lt;br/&gt;accessible
-dashboard.table.performance=Disponibilité &lt;br/&gt;et rapidité
-dashboard.table.france-connect=Intégration &lt;br/&gt;FranceConnect
-dashboard.table.accessibility=Prise en compte&lt;br/&gt;handicaps
-dashboard.table.tell-us-once=Dites-le nous&lt;br/&gt;une fois
+dashboard.table.mobile=Compatible&lt;br role="presentation"/&gt;mobile
+dashboard.table.support=Support&lt;br role="presentation"/&gt;accessible
+dashboard.table.performance=Disponibilité&lt;br role="presentation"/&gt;et rapidité
+dashboard.table.france-connect=Intégration&lt;br role="presentation"/&gt;FranceConnect
+dashboard.table.accessibility=Prise en compte&lt;br role="presentation"/&gt;handicaps
+dashboard.table.tell-us-once=Dites-le nous&lt;br role="presentation"/&gt;une fois
 dashboard.table.open-date=Date d'ouverture du service dématérialisé
 dashboard.table.volumetry=Volumétrie totale de la démarche
 dashboard.table.digitalized-usage-percent=Pourcentage de recours à la voie dématérialisée

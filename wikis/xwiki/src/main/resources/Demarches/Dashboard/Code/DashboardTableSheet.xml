@@ -56,25 +56,24 @@ def properties = ['id', 'title', 'statutDemat', 'avisCount', 'satisfactionIndex'
 def propertyNames = new HashMap();
 propertyNames.put('id', "Id");
 propertyNames.put('direction' , "Direction");
-propertyNames.put('title', services.localization.render("dashboard.table.demarche").replace("&lt;br/&gt;", ""));
-propertyNames.put('ministere', services.localization.render("dashboard.table.ministry").replace("&lt;br/&gt;", ""));
-propertyNames.put('groupes', services.localization.render("dashboard.table.group").replace("&lt;br/&gt;", ""));
-propertyNames.put('statutDemat', services.localization.render("dashboard.table.digitalization").replace("&lt;br/&gt;", ""));
-propertyNames.put('satisfactionIndex', services.localization.render("dashboard.table.satisfaction").replace("&lt;br/&gt;", ""));
-propertyNames.put('adapteMobile', services.localization.render("dashboard.table.mobile").replace("&lt;br/&gt;", ""));
-propertyNames.put('qualiteSupport', services.localization.render("dashboard.table.support").replace("&lt;br/&gt;", ""));
-propertyNames.put('urlScore', services.localization.render("dashboard.table.performance").replace("&lt;br/&gt;", ""));
-propertyNames.put('franceConnect', services.localization.render("dashboard.table.france-connect").replace("&lt;br/&gt;", ""));
-propertyNames.put('accessibilityScore', services.localization.render("dashboard.table.accessibility").replace("&lt;br/&gt;", ""));
-propertyNames.put('ditesLeNousUneFois', services.localization.render("dashboard.table.tell-us-once").replace("&lt;br/&gt;", ""));
-propertyNames.put('dateMiseEnLigne', services.localization.render("dashboard.table.open-date").replace("&lt;br/&gt;", ""));
-propertyNames.put('volumetrie', services.localization.render("dashboard.table.volumetry").replace("&lt;br/&gt;", ""));
-propertyNames.put('pourcentageRecoursVoieDematerialisee', services.localization.render("dashboard.table.digitalized-usage-percent").replace("&lt;br/&gt;", ""));
-propertyNames.put('avisCount', services.localization.render("dashboard.table.avis-count").replace("&lt;br/&gt;", ""));
-propertyNames.put('urlDemarche', services.localization.render("dashboard.table.url-demarche").replace("&lt;br/&gt;", ""));
-propertyNames.put('categoriesPublics', services.localization.render("dashboard.table.categories-publics").replace("&lt;br/&gt;", ""));
-propertyNames.put('rgaaCompliancyLevel', services.localization.render("dashboard.table.rgaa-compliancy-level").replace("&lt;br/&gt;", ""));
-
+propertyNames.put('title', services.localization.render("dashboard.table.demarche").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('ministere', services.localization.render("dashboard.table.ministry").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('groupes', services.localization.render("dashboard.table.group").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('statutDemat', services.localization.render("dashboard.table.digitalization").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('satisfactionIndex', services.localization.render("dashboard.table.satisfaction").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('adapteMobile', services.localization.render("dashboard.table.mobile").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('qualiteSupport', services.localization.render("dashboard.table.support").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('urlScore', services.localization.render("dashboard.table.performance").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('franceConnect', services.localization.render("dashboard.table.france-connect").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('accessibilityScore', services.localization.render("dashboard.table.accessibility").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('ditesLeNousUneFois', services.localization.render("dashboard.table.tell-us-once").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('dateMiseEnLigne', services.localization.render("dashboard.table.open-date").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('volumetrie', services.localization.render("dashboard.table.volumetry").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('pourcentageRecoursVoieDematerialisee', services.localization.render("dashboard.table.digitalized-usage-percent").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('avisCount', services.localization.render("dashboard.table.avis-count").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('urlDemarche', services.localization.render("dashboard.table.url-demarche").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('categoriesPublics', services.localization.render("dashboard.table.categories-publics").replaceAll("&lt;br[^&gt;]*&gt;", " "));
+propertyNames.put('rgaaCompliancyLevel', services.localization.render("dashboard.table.rgaa-compliancy-level").replaceAll("&lt;br[^&gt;]*&gt;", " "));
 
 def propWithValues = ['dateMiseEnLigne', 'volumetrie', 'pourcentageRecoursVoieDematerialisee', 'franceConnect', 'adapteMobile', 'avisCount', 'satisfactionIndex', 'urlScore', 'ditesLeNousUneFois', 'categoriesPublics', 'rgaaCompliancyLevel', 'accessibilityScore'];
 

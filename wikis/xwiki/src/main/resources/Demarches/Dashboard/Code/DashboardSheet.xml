@@ -1641,28 +1641,28 @@ input[name='title'] {
       }
       /* Labels could alternatively be retrieved from a data attribute. */
       td:nth-of-type(2):before {
-        content: "$services.localization.render('dashboard.table.digitalization').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.digitalization').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(3):before {
-        content: "$services.localization.render('dashboard.table.satisfaction').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.satisfaction').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(4):before {
-        content: "$services.localization.render('dashboard.table.mobile').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.mobile').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(5):before {
-        content: "$services.localization.render('dashboard.table.support').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.support').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(6):before {
-        content: "$services.localization.render('dashboard.table.performance').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.performance').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(7):before {
-        content: "$services.localization.render('dashboard.table.france-connect').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.france-connect').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(8):before {
-        content: "$services.localization.render('dashboard.table.accessibility').replaceAll('&lt;br/&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.accessibility').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
       td:nth-of-type(9):before {
-        content: "$services.localization.render('dashboard.table.tell-us-once').replaceAll('&lt;br/&gt;', '')";
+        content: "$services.localization.render('dashboard.table.tell-us-once').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
       }
     }
   }
