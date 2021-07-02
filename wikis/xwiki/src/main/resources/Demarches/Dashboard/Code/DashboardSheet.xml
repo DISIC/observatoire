@@ -196,7 +196,7 @@
               &lt;tr&gt;
                 #foreach($thElt in $tableHeaderElements.entrySet())
                   #set($icon = $thElt.value)
-                  #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}"))
+                  #set($thLabel = $services.localization.render("dashboard.table.${thElt.key}.tableHeaderHtml"))
                   &lt;th scope="col"&gt;
                     #if("$!icon" != '')
                       &lt;span class='thead-icon'&gt;&lt;img src="$xwiki.getAttachmentURL('Demarches.Code.WikiDemarchesTheme', $icon)" alt='' /&gt;&lt;/span&gt;
@@ -1641,28 +1641,28 @@ input[name='title'] {
       }
       /* Labels could alternatively be retrieved from a data attribute. */
       td:nth-of-type(2):before {
-        content: "$services.localization.render('dashboard.table.digitalization').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.digitalization')";
       }
       td:nth-of-type(3):before {
-        content: "$services.localization.render('dashboard.table.satisfaction').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.satisfaction')";
       }
       td:nth-of-type(4):before {
-        content: "$services.localization.render('dashboard.table.mobile').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.mobile')";
       }
       td:nth-of-type(5):before {
-        content: "$services.localization.render('dashboard.table.support').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.support')";
       }
       td:nth-of-type(6):before {
-        content: "$services.localization.render('dashboard.table.performance').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.performance')";
       }
       td:nth-of-type(7):before {
-        content: "$services.localization.render('dashboard.table.france-connect').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.france-connect')";
       }
       td:nth-of-type(8):before {
-        content: "$services.localization.render('dashboard.table.accessibility').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.accessibility')";
       }
       td:nth-of-type(9):before {
-        content: "$services.localization.render('dashboard.table.tell-us-once').replaceAll('&lt;br[^&gt;]*&gt;', ' ')";
+        content: "$services.localization.render('dashboard.table.tell-us-once')";
       }
     }
   }

@@ -93,15 +93,23 @@ dashboard.social-network.envelope=Par e-mail
 dashboard.table.demarche=Les démarches
 dashboard.table.ministry=Ministère
 dashboard.table.group=Regroupement
-dashboard.table.digitalization=Réalisable&lt;br role="presentation"/&gt;en ligne
-dashboard.table.satisfaction=Usagers&lt;br role="presentation"/&gt;satisfaits (/10)
+dashboard.table.digitalization=Réalisable en ligne
+dashboard.table.digitalization.tableHeaderHtml=Réalisable&lt;br role="presentation"/&gt;en ligne
+dashboard.table.satisfaction=Usagers satisfaits (/10)
+dashboard.table.satisfaction.tableHeaderHtml=Usagers&lt;br role="presentation"/&gt;satisfaits (/10)
 dashboard.table.satisfaction.statslink=Graphes
-dashboard.table.mobile=Compatible&lt;br role="presentation"/&gt;mobile
-dashboard.table.support=Support&lt;br role="presentation"/&gt;accessible
-dashboard.table.performance=Disponibilité&lt;br role="presentation"/&gt;et rapidité
-dashboard.table.france-connect=Intégration&lt;br role="presentation"/&gt;FranceConnect
-dashboard.table.accessibility=Prise en compte&lt;br role="presentation"/&gt;handicaps
-dashboard.table.tell-us-once=Dites-le nous&lt;br role="presentation"/&gt;une fois
+dashboard.table.mobile=Compatible mobile
+dashboard.table.mobile.tableHeaderHtml=Compatible&lt;br role="presentation"/&gt;mobile
+dashboard.table.support=Support accessible
+dashboard.table.support.tableHeaderHtml=Support&lt;br role="presentation"/&gt;accessible
+dashboard.table.performance=Disponibilité et rapidité
+dashboard.table.performance.tableHeaderHtml=Disponibilité&lt;br role="presentation"/&gt;et rapidité
+dashboard.table.france-connect=Intégration FranceConnect
+dashboard.table.france-connect.tableHeaderHtml=Intégration&lt;br role="presentation"/&gt;FranceConnect
+dashboard.table.accessibility=Prise en compte handicaps
+dashboard.table.accessibility.tableHeaderHtml=Prise en compte&lt;br role="presentation"/&gt;handicaps
+dashboard.table.tell-us-once=Dites-le nous une fois
+dashboard.table.tell-us-once.tableHeaderHtml=Dites-le nous&lt;br role="presentation"/&gt;une fois
 dashboard.table.open-date=Date d'ouverture du service dématérialisé
 dashboard.table.volumetry=Volumétrie totale de la démarche
 dashboard.table.digitalized-usage-percent=Pourcentage de recours à la voie dématérialisée
