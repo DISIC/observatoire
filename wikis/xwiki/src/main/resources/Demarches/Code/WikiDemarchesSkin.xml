@@ -1908,7 +1908,11 @@ $services.localization.render('accountnotactive_email')
   &lt;header role="banner"&gt;
     &lt;ul class="skip-link"&gt;
       &lt;li&gt;&lt;a href="#menuview"&gt;$services.localization.render('wikidemarches.quick-links.menu')&lt;/a&gt;&lt;/li&gt;
+      #if ("$!xcontext.action" == 'view')
       &lt;li&gt;&lt;a href="#xwikicontent"&gt;$services.localization.render('wikidemarches.quick-links.content')&lt;/a&gt;&lt;/li&gt;
+      #else
+      &lt;li&gt;&lt;a href="#mainContentArea"&gt;$services.localization.render('wikidemarches.quick-links.content')&lt;/a&gt;&lt;/li&gt;
+      #end
       #if (!$isGuest)
         &lt;li&gt;&lt;a href="#search-input"&gt;$services.localization.render('wikidemarches.quick-links.search')&lt;/a&gt;&lt;/li&gt;
       #end
