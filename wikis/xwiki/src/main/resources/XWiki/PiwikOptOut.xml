@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1582723224000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>xwiki:XWiki.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1582727601000</date>
-  <contentUpdateDate>1582724447000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>PiwikOptOut</title>
   <comment/>
@@ -49,7 +49,7 @@
 #if ($piwikServer != '' &amp;&amp; $piwikId != '')
   #set($wikiLanguage = $xwiki.localePreference.language)
   {{html}}
-    &lt;iframe class='piwikoptout' src="${piwikServer}/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=${wikiLanguage}&amp;backgroundColor=ffffff&amp;fontColor=444444&amp;fontSize=1em&amp;fontFamily=Open%20Sans"&gt;&lt;/iframe&gt;
+    &lt;iframe class='piwikoptout' src="${piwikServer}/index.php?module=CoreAdminHome&amp;action=optOut&amp;language=${wikiLanguage}&amp;backgroundColor=ffffff&amp;fontColor=444444&amp;fontSize=1em&amp;fontFamily=Open%20Sans" title="$services.localization.render('wd.piwik.iframe.title')&gt;&lt;/iframe&gt;
   {{/html}}
 #else
   Piwik is not active.
