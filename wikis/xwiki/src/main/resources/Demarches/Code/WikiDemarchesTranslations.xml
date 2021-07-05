@@ -53,6 +53,8 @@ wd.login-button=Authentification
 wd.docdoesnotexist.title=Erreur 404
 wd.docdoesnotexist.message=La page n'existe pas ou n'est pas disponible. Nous vous invitions à retourner sur la &lt;a href='/'&gt;page d'accueil.&lt;/a&gt;
 wd.piwik.iframe.title=Refuser le suivi de votre navigation
+wd.login.username=Nom d'utilisateur (obligatoire)
+wd.login.password=Mot de passe (obligatoire)
 
 # Invalid account screen
 wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription.

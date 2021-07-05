@@ -1391,24 +1391,24 @@ window.docgeturl = "${doc.getURL('get')}";
     #end
     &lt;dl&gt;
       &lt;dt&gt;
-        &lt;label for="j_username"&gt;$services.localization.render('username')&lt;/label&gt;
+        &lt;label for="j_username"&gt;$services.localization.render('wd.login.username')&lt;/label&gt;
         #if($xwiki.exists('XWiki.ForgotUsername') &amp;&amp; $xwiki.hasAccessLevel('view', 'XWiki.ForgotUsername'))
           &lt;span class="xAdditional"&gt;&lt;a href="$xwiki.getURL('XWiki.ForgotUsername')" tabindex="500"&gt;$services.localization.render('xe.admin.forgotUsername.loginMessage')&lt;/a&gt;&lt;/span&gt;
         #end
       &lt;/dt&gt;
       &lt;dd class="input-group"&gt;
         &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('user')&lt;/span&gt;
-        &lt;input class="form-control" type="text" id="j_username" size="60" name="j_username" value="" autocomplete="username" tabindex="100"/&gt;
+        &lt;input class="form-control" type="text" id="j_username" size="60" name="j_username" value="" autocomplete="username" required tabindex="100"/&gt;
       &lt;/dd&gt;
       &lt;dt&gt;
-        &lt;label for="j_password"&gt;$services.localization.render('password')&lt;/label&gt;
+        &lt;label for="j_password"&gt;$services.localization.render('wd.login.password')&lt;/label&gt;
         #if($xwiki.exists('XWiki.ResetPassword') &amp;&amp; $xwiki.hasAccessLevel('view', 'XWiki.ResetPassword'))
           &lt;span class="xAdditional"&gt;&lt;a href="$xwiki.getURL('XWiki.ResetPassword')" tabindex="600"&gt;$services.localization.render('xe.admin.passwordReset.loginMessage')&lt;/a&gt;&lt;/span&gt;
         #end
       &lt;/dt&gt;
       &lt;dd class="input-group"&gt;
         &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('lock')&lt;/span&gt;
-        &lt;input type="password" id="j_password" size="60" name="j_password" value="" autocomplete="current-password" tabindex="200"/&gt;
+        &lt;input type="password" id="j_password" size="60" name="j_password" value="" autocomplete="current-password" required tabindex="200"/&gt;
       &lt;/dd&gt;
       &lt;dt&gt;&lt;/dt&gt;
       &lt;dd&gt;
