@@ -642,14 +642,14 @@ require(['jquery','xwiki-selectize'], function($) {
 .demarche-details-action {
   padding: 0.7em 0 0 0;
   a {
-    color: #666666;
+    color: @gray-light;
     text-decoration: none;
   }
 }
 .demarche-details {
   display: none;
   dt {
-    color: #7e8089;
+    color: @gray-light;
     font-weight: normal;
     padding-top: 0.5em;
     line-height: 1.3;
@@ -962,7 +962,7 @@ form {
   font-size: 0.9em;
 
   .lighter {
-    color: #777;
+    color: @gray-light;
   }
 
   h2 {
