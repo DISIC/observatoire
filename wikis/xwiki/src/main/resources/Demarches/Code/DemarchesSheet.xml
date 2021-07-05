@@ -975,7 +975,7 @@ form {
   }
 
   a.average-help {
-    color: lighten(@gray-light, 25%);
+    color: @gray-light;
     position: relative;
     font-size: 0.5em;
     top: -0.7em;
