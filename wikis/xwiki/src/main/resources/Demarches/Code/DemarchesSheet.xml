@@ -74,9 +74,9 @@
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche &amp;&amp; $xcontext.action == 'view' &amp;&amp; (($isGuest &amp;&amp; !$displayAvisFormOnly) || "$!viewMode" == 'cerfa-numerique'))
   &lt;div class="demarche-details-action"&gt;
-    &lt;a href="#"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/a&gt;
+    &lt;button class="btn btn-default" aria-controls="#demarche-details" aria-expanded="false"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/button&gt;
   &lt;/div&gt;
-  &lt;dl class="demarche-details"&gt;
+  &lt;dl id="demarche-details" class="demarche-details"&gt;
     #set ($nomComplet = $demarche.getValue('nomComplet'))
     #if ($nomComplet &amp;&amp; $nomComplet != $doc.title)
       &lt;dt&gt;$services.localization.render('wikidemarches.demarche.details.nomComplet')&lt;/dt&gt;
@@ -420,13 +420,18 @@ require(['jquery','xwiki-selectize'], function($) {
   }
 
   $(document).ready(function() {
-    $(".demarche-details-action a").click(function() {
-      var href = $(this);
-      href.parent().toggleClass("expanded");
+    $(".demarche-details-action button").click(function() {
+      var btn = $(this);
+      btn.parent().toggleClass("expanded");
       $(".demarche-details").toggle("slow");
-      href.find(".fa").toggleClass("fa-chevron-right").toggleClass("fa-chevron-down");
-      var label = href.find(".demarche-details-action-label");
-      if (href.parent().hasClass("expanded")) {
+      btn.attr('aria-expanded', function(index, value) {
+        if (value === 'false')
+          return 'true';
+        return 'false';
+      });
+      btn.find(".fa").toggleClass("fa-chevron-right").toggleClass("fa-chevron-down");
+      var label = btn.find(".demarche-details-action-label");
+      if (btn.parent().hasClass("expanded")) {
         label.text("$services.localization.render('wikidemarches.demarche.details-off')");
       } else {
         label.text("$services.localization.render('wikidemarches.demarche.details-on')")
@@ -641,7 +646,7 @@ require(['jquery','xwiki-selectize'], function($) {
 
 .demarche-details-action {
   padding: 0.7em 0 0 0;
-  a {
+  button {
     color: @gray-light;
     text-decoration: none;
   }
