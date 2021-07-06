@@ -335,7 +335,7 @@ $(document).ready(function(){
       font-weight: 600;
 	  background:#000 ;
 }
-#back-top:hover span{
+#back-top:hover span, #back-top:focus span{
       display:block;
 }
 #back-top a:hover{ /* arrow animation */
