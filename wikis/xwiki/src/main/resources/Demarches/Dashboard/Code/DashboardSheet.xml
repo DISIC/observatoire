@@ -979,7 +979,7 @@ var XWiki = (function (XWiki) {
           if (filtersContainer) {
             var jsonSchemaVersion = json.metadata.schema;
             if (jsonSchemaVersion != undefined &amp;&amp; jsonSchemaVersion != '1.0') {
-              var publicCategorySelect = $("&lt;select name='publicCategorySelect' aria-label='Filtrer par type de public'/&gt;");
+              var publicCategorySelect = $("&lt;select name='publicCategorySelect' aria-label='Filtrer par type de public' aria-controls='top-demarches'/&gt;");
               publicCategorySelect.empty();
               publicCategorySelect.append($("&lt;option /&gt;").val("tous").text("Tous les publics"));
               $.each(publicCategories, function() {
@@ -993,7 +993,7 @@ var XWiki = (function (XWiki) {
               filtersContainer.prepend(publicsSelectLabel);
             }
             // prepare the select of ministries
-            var ministriesSelect = $("&lt;select name='ministereSelect' aria-label='Filtrer par ministère'/&gt;");
+            var ministriesSelect = $("&lt;select name='ministereSelect' aria-label='Filtrer par ministère' aria-controls='top-demarches'/&gt;");
             ministriesSelect.empty();
             ministriesSelect.append($("&lt;option /&gt;").val("tous").text("Tous les ministères"));
             $.each(ministeres, function() {
