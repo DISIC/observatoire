@@ -963,7 +963,7 @@ var XWiki = (function (XWiki) {
         language: {
           info: "Total : _TOTAL_ démarches",
           infoEmpty: "Aucune démarche trouvée",
-          infoFiltered: "(filtrage appliqué sur _MAX_ total entrées)",
+          infoFiltered: "(filtrage appliqué sur _MAX_ entrées)",
           loadingRecords: "Chargement...",
           processing: "Traitement...",
           search: "",
@@ -971,7 +971,19 @@ var XWiki = (function (XWiki) {
           zeroRecords: "Aucune entrée trouvée"
         },
         infoCallback: function( settings, start, end, max, total, pre ) {
-          return '&lt;p&gt;' + pre + '&lt;/p&gt;';
+          var demarchesLabel = 'démarches';
+          var filterInfo = '';
+          if (total &lt;= 1) {
+            demarchesLabel = 'démarche';
+          }
+          if (total !== max) {
+            filterInfo = ' (filtrage appliqué à un total de ' + max + ' entrées)';
+          }
+          if (total &gt; 0) {
+            return '&lt;p&gt;Total : ' + total + ' ' + demarchesLabel + filterInfo + '&lt;/p&gt;';
+          } else {
+            return '&lt;p&gt;Aucune démarche trouvée' + filterInfo + '&lt;/p&gt;';
+          }
         },
         initComplete: function(settings, json ) {
           // add the publics filter in the filters
