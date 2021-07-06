@@ -1017,8 +1017,18 @@ var XWiki = (function (XWiki) {
               thisDataTable.draw();
             });
 
+            // Remove label tag with implicit labelling is not well supported by assistive technologies
+            // https://www.w3.org/WAI/tutorials/forms/labels/#associating-labels-implicitly
+            var label = $('#top-demarches_filter label');
+            var searchInput = label[0].innerHTML;
+            label.replaceWith('&lt;span class="label-textfilter"&gt;' + searchInput + '&lt;/span&gt;');
+            searchInput = $('#top-demarches_filter .label-textfilter input');
+            searchInput.on('keyup', function() {
+              thisDataTable.search(this.value).draw();
+            });
+
             // Add aria-label attribute dynamically to search input
-            $('#top-demarches_filter label input').attr('aria-label', 'Filtrer par mot clé');
+            searchInput.attr('aria-label', 'Filtrer par mot clé');
 
             var sort =  $('.observatoire-sort').on('click', function(event) {
               event.preventDefault();
@@ -1462,7 +1472,7 @@ input[name='title'] {
     -webkit-appearance: none;
     -moz-appearance: none;
   }
-  label, span.label-publicsfilter, span.label-ministriesfilter {
+  span.label-textfilter, span.label-publicsfilter, span.label-ministriesfilter {
     position: relative;
     display: inline-block;
     &amp;:before {
