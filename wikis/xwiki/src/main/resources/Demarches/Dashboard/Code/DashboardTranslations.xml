@@ -85,9 +85,13 @@ dashboard.tools.sort.label.other=Autre
 
 # Social networks
 dashboard.social-network.twitter=Via Twitter
+dashboard.social-network.twitter.ariaLabel=Partager via Twitter
 dashboard.social-network.facebook=Via Facebook
+dashboard.social-network.facebook.ariaLabel=Partager via Facebook
 dashboard.social-network.linkedin=Via LinkedIn
+dashboard.social-network.linkedin.ariaLabel=Partager via LinkedIn
 dashboard.social-network.envelope=Par e-mail
+dashboard.social-network.envelope.ariaLabel=Partager par e-mail
 
 # Table
 dashboard.table.demarche=Les démarches
