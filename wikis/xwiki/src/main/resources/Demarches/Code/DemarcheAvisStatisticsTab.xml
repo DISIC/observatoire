@@ -197,7 +197,7 @@
   &lt;div class="#if(!$fullWidth)col-lg-6 col-md-6#end col-xs-12" style="text-align: center; padding: 2em 0;"&gt;
     &lt;div class="lighter"&gt;Indice de satisfaction global&lt;/div&gt;
     #set($explanationDoc = $xwiki.getDocument('Main.Satisfaction'))
-    #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;/a&gt;")
+    #set($explanationLink = "&lt;a href='$escapetool.xml($explanationDoc.getURL())' title='$escapetool.xml($explanationDoc.title)' class='average-help'&gt;&lt;span class='fa fa-question-circle-o'&gt;&lt;/span&gt;&lt;span class='sr-only'&gt;$escapetool.xml($explanationDoc.title)&lt;/span&gt;&lt;/a&gt;")
     &lt;span style="font-size:400%"&gt;${formattedSatisfactionIndex}/10 #if($displayHelp)$explanationLink#end&lt;/span&gt;
     &lt;div&gt;#if($nbAvis &amp;&amp; $nbAvis &gt; 0)($numbertool.format("number", $nbAvis) avis)#end&lt;/div&gt;
   &lt;/div&gt;
