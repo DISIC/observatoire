@@ -74,7 +74,7 @@
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche &amp;&amp; $xcontext.action == 'view' &amp;&amp; (($isGuest &amp;&amp; !$displayAvisFormOnly) || "$!viewMode" == 'cerfa-numerique'))
   &lt;div class="demarche-details-action"&gt;
-    &lt;button class="btn btn-default" aria-controls="#demarche-details" aria-expanded="false"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/button&gt;
+    &lt;button class="btn btn-primary" aria-controls="#demarche-details" aria-expanded="false"&gt;&lt;span class="fa fa-chevron-right"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="demarche-details-action-label"&gt;$services.localization.render('wikidemarches.demarche.details-on')&lt;/span&gt;&lt;/button&gt;
   &lt;/div&gt;
   &lt;dl id="demarche-details" class="demarche-details"&gt;
     #set ($nomComplet = $demarche.getValue('nomComplet'))
@@ -646,9 +646,12 @@ require(['jquery','xwiki-selectize'], function($) {
 
 .demarche-details-action {
   padding: 0.7em 0 0 0;
-  button {
-    color: @gray-light;
-    text-decoration: none;
+  .btn-primary {
+    background-image: none;
+    background-color: #fff;
+    border: none;
+    border-radius: 0.25em;
+    background-color: @link-color;
   }
 }
 .demarche-details {
