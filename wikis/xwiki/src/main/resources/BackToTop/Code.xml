@@ -131,7 +131,7 @@ $(document).ready(function(){
         var displaymode=""; // If empty the button displays in all modes, if you want to display it for the view mode put "view" or                if you want to display it for the edit mode put "edit"  
 
 	// create #back-top button
-        $( 'body' ).append( '&lt;span id="back-top"&gt;&lt;a href="#top"&gt;&lt;/a&gt;&lt;span&gt;'+text+'&lt;/span&gt;&lt;/span&gt;' );
+        $( 'body' ).append( '&lt;span id="back-top"&gt;&lt;a href="#top"&gt;&lt;span class="sr-only"&gt;' + text + '&lt;/span&gt;&lt;/a&gt;&lt;span&gt;'+text+'&lt;/span&gt;&lt;/span&gt;' );
         
 	// hide text span if is empty 
         if(text==""){
