@@ -129,7 +129,7 @@
             }])
             {{html clean="false"}}
             #set ($url = $escapetool.xml($doc.getExternalURL()))
-            $services.localization.render('dashboard.share.label') :#foreach ($socialNetwork in $socialNetworks) &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank" aria-label="$services.localization.render("dashboard.social-network.${socialNetwork.icon}.ariaLabel")"&gt;&lt;span class="fa fa-$socialNetwork.icon" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="sr-only"&gt;$services.localization.render("dashboard.social-network.${socialNetwork.icon}")&lt;/span&gt;&lt;/a&gt; #end
+            $services.localization.render('dashboard.share.label') :#foreach ($socialNetwork in $socialNetworks) &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank" aria-label="$services.localization.render("dashboard.social-network.${socialNetwork.icon}")"&gt;&lt;span class="fa fa-$socialNetwork.icon" aria-hidden="true"&gt;&lt;/span&gt;&lt;/a&gt; #end
             {{/html}}
           )))
         )))

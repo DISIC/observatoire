@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
+  <creationDate>1569247833000</creationDate>
   <parent>xwiki:Demarches.Dashboard.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1569248840000</date>
+  <contentUpdateDate>1569248840000</contentUpdateDate>
   <version>1.1</version>
   <title>DashboardTemplate</title>
   <comment/>
@@ -54,20 +54,6 @@
       <defaultWeb/>
       <nameField/>
       <validationScript/>
-      <dataURL>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>dataURL</name>
-        <number>4</number>
-        <picker>0</picker>
-        <prettyName/>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </dataURL>
       <date>
         <customDisplay/>
         <dateFormat>dd/MM/yyyy</dateFormat>
@@ -84,29 +70,12 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
       </date>
-      <notes>
-        <contenttype>FullyRenderedText</contenttype>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <editor>Wysiwyg</editor>
-        <hint/>
-        <name>notes</name>
-        <number>6</number>
-        <picker>0</picker>
-        <prettyName/>
-        <rows>5</rows>
-        <size>40</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </notes>
       <pdf>
         <customDisplay>{{attachmentSelector classname="Demarches.Dashboard.Code.DashboardClass" property="pdf" filter="pdf" savemode="form" link="true"/}}</customDisplay>
         <disabled>0</disabled>
         <hint/>
         <name>pdf</name>
-        <number>5</number>
+        <number>4</number>
         <picker>0</picker>
         <prettyName/>
         <size>30</size>
