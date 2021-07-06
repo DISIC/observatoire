@@ -719,8 +719,12 @@ var XWiki = (function (XWiki) {
             data: "title",
             className: 'column-title',
             type: "french-string",
+            cellType: "th",
             render : function (data, type, row) {
               return data + ' &lt;span class="ministere-groupe"&gt;' + row['ministere'] + ((row['groupes'] &amp;&amp; row['groupes'] != row['ministere']) ? (' - ' + row['groupes']) : '') + '&lt;/span&gt;';
+            },
+            createdCell: function (td, cellData, rowData, row, col) {
+              $(td).attr('scope', 'row');
             }
           },
           {
@@ -1630,7 +1634,7 @@ input[name='title'] {
         padding-top: 1em;
       }
       border-bottom: 1px solid #eee;
-      td {
+      td, th[scope="row"] {
         /* override box-sizing: content-box of datatables because this causes some table cells to overflow their containing table (e.g. the column-title and the child-row cells) */
         box-sizing: inherit;
         display: inline-block;
@@ -1700,7 +1704,7 @@ input[name='title'] {
     &amp;:hover {
       background-color: transparent;
     }
-    td {
+    td, th[scope="row"] {
       vertical-align: middle;
       text-align: center;
       border: 1px solid #ddd;
