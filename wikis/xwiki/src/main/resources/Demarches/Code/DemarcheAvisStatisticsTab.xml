@@ -212,8 +212,8 @@
   &lt;caption&gt;Répartition des avis&lt;/caption&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Satisfaction&lt;/th&gt;
-      &lt;th&gt;Réponses&lt;/th&gt;
+      &lt;th scope="col"&gt;Satisfaction&lt;/th&gt;
+      &lt;th scope="col"&gt;Réponses&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
@@ -272,8 +272,8 @@
     &lt;caption&gt;$tableCaption&lt;/caption&gt;
     &lt;thead&gt;
       &lt;tr&gt;
-        &lt;th&gt;$dataTableLabel&lt;/th&gt;
-        &lt;th&gt;Réponses&lt;/th&gt;
+        &lt;th scope="col"&gt;$dataTableLabel&lt;/th&gt;
+        &lt;th scope="col"&gt;Réponses&lt;/th&gt;
       &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
@@ -339,8 +339,8 @@
     &lt;caption&gt;$tableCaption&lt;/caption&gt;
     &lt;thead&gt;
       &lt;tr&gt;
-        &lt;th&gt;$dataTableLabel&lt;/th&gt;
-        &lt;th&gt;Réponses&lt;/th&gt;
+        &lt;th scope="col"&gt;$dataTableLabel&lt;/th&gt;
+        &lt;th scope="col"&gt;Réponses&lt;/th&gt;
       &lt;/tr&gt;
     &lt;/thead&gt;
     ## get the possible values from the class, as they are there
@@ -482,8 +482,8 @@
     &lt;caption&gt;Historique de l'indice de satisfaction global (sur 10)&lt;/caption&gt;
     &lt;thead&gt;
       &lt;tr&gt;
-        &lt;th&gt;Période&lt;/th&gt;
-        &lt;th&gt;Indice de satisfaction&lt;/th&gt;
+        &lt;th scope="col"&gt;Période&lt;/th&gt;
+        &lt;th scope="col"&gt;Indice de satisfaction&lt;/th&gt;
       &lt;/tr&gt;
     &lt;/thead&gt;
     #set($statValues = $avisStatsResult.get('scorehistory_permonth'))
@@ -534,9 +534,9 @@
     &lt;caption&gt;Historique du nombre d'avis&lt;/caption&gt;
     &lt;thead&gt;
       &lt;tr&gt;
-        &lt;th&gt;Période&lt;/th&gt;
-        &lt;th&gt;Type d'avis&lt;/th&gt;
-        &lt;th&gt;Nombre d'avis&lt;/th&gt;
+        &lt;th scope="col"&gt;Période&lt;/th&gt;
+        &lt;th scope="col"&gt;Type d'avis&lt;/th&gt;
+        &lt;th scope="col"&gt;Nombre d'avis&lt;/th&gt;
       &lt;/tr&gt;
     &lt;/thead&gt;
     #set($avisLabels = {'1' : 'Avis négatifs', '2' : 'Avis moyens', '3' : 'Avis positifs'})
