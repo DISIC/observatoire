@@ -1648,6 +1648,9 @@ abbr.asterix {
  * Login screen
  */
 #loginForm {
+  input[type="submit"] {
+    margin-top: 1em;
+  }
   .wd-register {
     text-align: center;
     margin-top: 0.5em;

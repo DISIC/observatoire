@@ -1416,8 +1416,8 @@ window.docgeturl = "${doc.getURL('get')}";
           &lt;input id="rememberme" type="checkbox" name="j_rememberme" value="true" tabindex="300"/&gt; $services.localization.render('remembermeonthiscomp')
         &lt;/label&gt;
       &lt;/dd&gt;
-      &lt;dt&gt;&lt;input type="submit" class="btn btn-primary col-xs-12" value="$services.localization.render('login')" tabindex="400"/&gt;&lt;/dt&gt;
     &lt;/dl&gt;
+    &lt;input type="submit" class="btn btn-primary col-xs-12" value="$services.localization.render('login')" tabindex="400"/&gt;
     ## register link, if the guest has the right
     ## This div is a 12 column for the same reason for which the button above is a 12 column, which is one that my limited mind fails to grasp
     &lt;div class='wd-register col-xs-12'&gt;
