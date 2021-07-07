@@ -857,7 +857,7 @@
   #if ($currentDomainKey == 'voxusagers')
     #set ($siteTitleImageName = 'LogoVoxusagers.svg')
   #end
-  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="Logo République française"/&gt;&lt;span class='demarches-titlebar-sitename'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="Logo $escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
+  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
 &lt;/div&gt;
 </content>
     </property>
