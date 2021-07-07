@@ -1402,9 +1402,6 @@ input[name='title'] {
     background-color: #fff;
     border: none;
     border-radius: 0.25em;
-    &amp;.btn-primary {
-      background-color: @obs-blue;
-    }
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
   }
   /* Overwrite default button background colors to fix contrast */

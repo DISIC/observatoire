@@ -648,10 +648,8 @@ require(['jquery','xwiki-selectize'], function($) {
   padding: 0.7em 0 0 0;
   .btn-primary {
     background-image: none;
-    background-color: #fff;
     border: none;
     border-radius: 0.25em;
-    background-color: @link-color;
   }
 }
 .demarche-details {
