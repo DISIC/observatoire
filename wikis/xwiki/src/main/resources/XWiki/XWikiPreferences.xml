@@ -2917,7 +2917,7 @@ $services.localization.render('wikidemarches.sitename')</confirmation_email_cont
       <timezone/>
     </property>
     <property>
-      <title>#if ($xcontext.action == 'login')$services.localization.render('login')#elseif ($xcontext.action == 'register')$services.localization.render('register')#else$tdoc.getRenderedTitle('plain/1.0')#end – $services.localization.render('wikidemarches.sitename')</title>
+      <title>#set($l=$services.localization)#if($xcontext.action=='login'||$xcontext.action=='loginsubmit')$l.render('login')#elseif($xcontext.action=='register')$l.render('register')#else$tdoc.getRenderedTitle('plain/1.0')#end – $l.render('wikidemarches.sitename')</title>
     </property>
     <property>
       <upload_maxsize>33554432</upload_maxsize>
