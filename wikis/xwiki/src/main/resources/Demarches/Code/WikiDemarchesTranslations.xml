@@ -40,6 +40,7 @@
   <syntaxId>plain/1.0</syntaxId>
   <hidden>true</hidden>
   <content>#General
+wd.home=Accueil
 wd.legal-notice=Conditions générales d'utilisation
 wd.accessibilite=Accessibilité : non conforme
 wd.contact=Contact
