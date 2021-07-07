@@ -1399,10 +1399,12 @@ input[name='title'] {
   .btn {
     padding: 1em 1.8em 1em 1.8em;
     background-image: none;
-    background-color: #fff;
     border: none;
     border-radius: 0.25em;
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
+    &amp;.btn-default {
+      background-color: #fff;
+    }
   }
   /* Overwrite default button background colors to fix contrast */
   btn-default:active, .btn-default.active, .open &gt; .dropdown-toggle.btn-default, .open &gt; .dropdown-toggle.btn-default:hover {
