@@ -257,7 +257,7 @@
   })
   #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-  {{tableToChartJS type='pie' table='score' options='$options'/}}
+  {{tableToChartJS title='Répartition des avis' type='pie' table='score' options='$options'/}}
 
   &lt;div class="lighter"&gt;Répartition des avis&lt;/div&gt;
 #end
@@ -322,7 +322,7 @@
     })
     #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-    {{tableToChartJS type='horizontalBar' table='$propName' options='$options'/}}
+    {{tableToChartJS title="$tableCaption" type='horizontalBar' table='$propName' options='$options'/}}
 
   #else
     &lt;span style="text-align:center"&gt;Aucune réponse.&lt;/span&gt;
@@ -391,7 +391,7 @@
     })
     #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-    {{tableToChartJS type='horizontalBar' table='$propName' options='$options' cssClass='histo'/}}
+    {{tableToChartJS title="$tableCaption" type='horizontalBar' table='$propName' options='$options' cssClass='histo'/}}
 
   #else
     &lt;span style="text-align:center"&gt;Aucune réponse.&lt;/span&gt;
@@ -521,7 +521,7 @@
     ##
     #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-    {{tableToChartJS type='bar' table='satisfactionHistory' options='$options'/}}
+    {{tableToChartJS title="Historique de l'indice de satisfaction global (sur 10)" type='bar' table='satisfactionHistory' options='$options'/}}
 
   #end
   ##
@@ -580,7 +580,7 @@
     ##
     #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-    {{tableToChartJS type='bar' table='scoreHistory' multipleDataSets="true" dataSetLabel="1" options='$options'/}}
+    {{tableToChartJS title="Historique du nombre d'avis" type='bar' table='scoreHistory' multipleDataSets="true" dataSetLabel="1" options='$options'/}}
 
   #end
 #end
