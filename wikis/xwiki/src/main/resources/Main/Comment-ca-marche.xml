@@ -59,7 +59,7 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 
 === Démarche réalisable en ligne ===
 
-Encore 29% de ces 250 démarches ne sont pas faisables en ligne. L'objectif est de toutes les numériser d'ici 2022.
+À ce jour, 83% des 250 démarches les plus utilisées sont numérisées. L’objectif du gouvernement est d’atteindre les 100% à fin 2022.
 )))
 )))
 
@@ -71,7 +71,7 @@ Encore 29% de ces 250 démarches ne sont pas faisables en ligne. L'objectif est 
 
 === Usagers satisfaits ===
 
-La première mesure de la qualité d'une démarche c'est la satisfaction des usagers. Le bouton « [[Je donne mon avis&gt;&gt;Aide.Donner son avis||rel="noopener noreferrer" target="_blank"]] » apparaît au terme de chaque démarche pour recenser le niveau de satisfaction.
+À la fin des démarches, le bouton « [[Je donne mon avis&gt;&gt;url:https://observatoire.numerique.gouv.fr/Aide/Donner%20son%20avis]] » permet aux usagers d’indiquer leur niveau de satisfaction. Aujourd’hui, celui-ci est supérieur à 7/10 pour 65% des démarches.
 )))
 )))
 
@@ -83,7 +83,7 @@ La première mesure de la qualité d'une démarche c'est la satisfaction des usa
 
 === Compatible mobile ===
 
-59 % des démarches sont effectuées sur des smartphones. La compatibilité pour le mobile est un critère essentiel pour assurer la bonne expérience de nos usagers.
+Les démarches en ligne doivent pouvoir être effectuées aisément sur un téléphone portable. À ce jour, 77 % des démarches sont adaptées aux mobiles.
 )))
 )))
 
@@ -95,7 +95,7 @@ La première mesure de la qualité d'une démarche c'est la satisfaction des usa
 
 === Support accessible ===
 
-Chaque démarche en ligne doit proposer des moyens de contact humains personnalisés facilement accessibles.
+Les usagers doivent pouvoir se renseigner ou être accompagnés facilement : chaque démarche doit proposer au moins deux moyens de contact humains.
 )))
 )))
 
@@ -107,7 +107,7 @@ Chaque démarche en ligne doit proposer des moyens de contact humains personnali
 
 === Disponibilité et rapidité ===
 
-Nous vérifions 24h/24h la disponibilité et le temps de réponse de chacun des sites.
+Les démarches en ligne doivent être rapidement disponibles tous les jours à toute heure.
 )))
 )))
 
@@ -131,7 +131,7 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 
 === Prise en compte handicaps ===
 
-18 % des Français sont aujourd’hui en situation de handicap. Les services numériques de l’État sont soumis aux règles du [[référentiel général d’amélioration de l’accessibilité&gt;&gt;https://www.numerique.gouv.fr/publications/rgaa-accessibilite/||rel="noopener noreferrer" target="_blank"]] (RGAA). 
+Personne ne doit être pénalisé dans ses démarches en ligne en raison d’un handicap : pour s’en assurer, les services numériques de l’État sont soumis aux règles du [[référentiel général d’amélioration de l’accessibilité&gt;&gt;https://www.numerique.gouv.fr/publications/rgaa-accessibilite/||rel="noopener noreferrer" target="_blank"]] (RGAA). 
 )))
 )))
 
@@ -143,8 +143,9 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 
 === Dites-le nous une fois ===
 
-Plus de données partagées entre administrations permet aux usagers de ne pas avoir à se répéter et simplifie leur démarche. C'est la mise en œuvre du principe du Dites-le nous une fois.
+Le partage de données entre administrations permet d’éviter de redemander les mêmes informations et les mêmes pièces justificatives aux usagers. C’est le principe du “Dites-le nous une fois”.
 )))
 )))
-)))</content>
+)))
+</content>
 </xwikidoc>

@@ -43,10 +43,10 @@
 
 
 (% style="text-align:center" %)
-[[image:path:/static/bouton-bleu.svg]]
+[[image:path:/static/bouton-bleu.svg||alt=""]]
 
 (% style="text-align:center" %)
-[[image:presentation.tableau.de.bord_html_64b23a65.gif]]
+[[image:presentation.tableau.de.bord_html_64b23a65.gif||alt=""]]
 
 
 En cliquant sur le bouton, l’usager de la démarche a accès à un formulaire qui permet de donner son avis en répondant aux questions suivantes :
@@ -56,10 +56,10 @@ En cliquant sur le bouton, l’usager de la démarche a accès à un formulaire 
 
 
 (% style="text-align:center" %)
-[[image:1560787129323-495.png||style="box-shadow:0px 0px 10px #cccccc" width="600"]]
+[[image:1560787129323-495.png||alt="Dans la première étape du formulaire, l'utilisateur peut donner son avis sur la démarche via trois boutons : pas bien, moyen, très bien." width="600" height="348" style="box-shadow:0px 0px 10px #cccccc"]]
 
 (% style="text-align:center" %)
-[[image:presentation.tableau.de.bord_html_64b23a65.gif]]
+[[image:presentation.tableau.de.bord_html_64b23a65.gif||alt=""]]
 
 
 
@@ -67,7 +67,8 @@ En cliquant sur le bouton, l’usager de la démarche a accès à un formulaire 
 
 
 (% style="text-align:center" %)
-[[image:1560787097230-182.png||style="box-shadow:0px 0px 10px #cccccc" width="600"]]</content>
+[[image:1560787097230-182.png||alt="Dans la seconde étape, l'utilisateur peut répondre à des questions plus précises sur son utilisation de la démarche." width="600" height="1120" style="box-shadow:0px 0px 10px #cccccc"]]
+</content>
   <attachment>
     <filename>1560787097230-182.png</filename>
     <author>xwiki:XWiki.Admin</author>
