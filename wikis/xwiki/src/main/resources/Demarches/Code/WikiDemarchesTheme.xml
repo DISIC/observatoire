@@ -1618,19 +1618,17 @@ legend {
     }
   }
   .footer-col-sites {
-    text-align: center;
     margin-top: @grid-gutter-width / 2;
     font-size: 90%;
+    display: flex;
+    justify-content: center;
     a {
       display: inline-block;
       margin-left: 0.4em;
       margin-right: 0.4em;
     }
     ul.site-list {
-      display: inline;
-      li {
-        display: inline;
-      }
+      display: flex;
     }
   }
 }
