@@ -129,7 +129,17 @@
             }])
             {{html clean="false"}}
             #set ($url = $escapetool.xml($doc.getExternalURL()))
-            $services.localization.render('dashboard.share.label') :#foreach ($socialNetwork in $socialNetworks) &lt;a href="$socialNetwork.url$url" class="social-network" target="_blank" aria-label="$services.localization.render("dashboard.social-network.${socialNetwork.icon}.ariaLabel")"&gt;&lt;span class="fa fa-$socialNetwork.icon" aria-hidden="true"&gt;&lt;/span&gt;&lt;span class="sr-only"&gt;$services.localization.render("dashboard.social-network.${socialNetwork.icon}")&lt;/span&gt;&lt;/a&gt; #end
+            $services.localization.render('dashboard.share.label') :
+            &lt;ul class="social-networks"&gt;
+            #foreach ($socialNetwork in $socialNetworks)
+              &lt;li class="social-network"&gt;
+                &lt;a href="$socialNetwork.url$url" target="_blank" aria-label="$services.localization.render("dashboard.social-network.${socialNetwork.icon}.ariaLabel")"&gt;
+                  &lt;span class="fa fa-$socialNetwork.icon" aria-hidden="true"&gt;
+                  &lt;/span&gt;&lt;span class="sr-only"&gt;$services.localization.render("dashboard.social-network.${socialNetwork.icon}")&lt;/span&gt;
+                &lt;/a&gt;
+              &lt;/li&gt;
+            #end
+            &lt;/ul&gt;
             {{/html}}
           )))
         )))
@@ -161,9 +171,9 @@
           )))
           (%class='col-xs-12 col-sm-6 dashboard-filters'%)(((
             {{html clean='false'}}
-              &lt;div class="dashboard-filter-sort"&gt;
+              &lt;span class="dashboard-filter-sort"&gt;
                 &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
-                &lt;div class="btn-group controls"&gt;
+                &lt;span class="btn-group controls"&gt;
                   #set($sortButtonLabel = $services.localization.render('dashboard.tools.sort.label'))
                   #set($otherSortButtonLabel = $services.localization.render('dashboard.tools.sort.label.other'))
                   &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-default-label="$escapetool.xml($sortButtonLabel)" data-othersort-label="$escapetool.xml($otherSortButtonLabel)"&gt;${sortButtonLabel}&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
@@ -175,8 +185,8 @@
                       &lt;li&gt;&lt;a href="#sort-${$sortProp.key}-${sortProp.value}" class="observatoire-sort" data-key="$sortProp.key" data-order='$sortProp.value' aria-label="$sortLabel" title="$sortLabel"&gt;$thLabel&lt;/a&gt;&lt;/li&gt;
                     #end
                   &lt;/ul&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
+                &lt;/span&gt;
+              &lt;/span&gt;
             {{/html}}
           )))
         )))
@@ -1371,11 +1381,19 @@ input[name='title'] {
     .separator {
       color: #fff;
     }
-    .social-network {
-      margin-left: 0.5em;
+    display: flex;
+    justify-content: end;
+    ul.social-networks {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 0;
+      li.social-network {
+        margin-left: 0.8em;
+      }
     }
     @media (max-width: 768px) {
-      text-align: center;
+      justify-content: center;
       margin-top: 0.7em;
     }
   }
@@ -1422,13 +1440,13 @@ input[name='title'] {
     margin-left: 0.5em;
   }
   .dashboard-filters {
+    text-align: right;
     .btn-default.pushed {
       background-color: @obs-blue;
       color: #fff;
     }
   }
   .dashboard-filter-sort {
-    text-align: right;
     ul {
       a.observatoire-sort {
         display: block;
@@ -1441,7 +1459,7 @@ input[name='title'] {
     }
   }
   @media screen and (max-width: 768px) {
-    .dashboard-filter-sort, .dashboard-selector {
+    .dashboard-filters, .dashboard-selector {
       text-align: center;
     }
   }
