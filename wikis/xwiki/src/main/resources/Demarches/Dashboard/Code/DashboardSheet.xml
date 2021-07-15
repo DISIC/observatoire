@@ -1422,13 +1422,13 @@ input[name='title'] {
     margin-left: 0.5em;
   }
   .dashboard-filters {
-    text-align: right;
     .btn-default.pushed {
       background-color: @obs-blue;
       color: #fff;
     }
   }
   .dashboard-filter-sort {
+    text-align: right;
     ul {
       a.observatoire-sort {
         display: block;
