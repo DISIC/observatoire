@@ -1092,6 +1092,13 @@
 @line-height-base: 1.5;
 
 @gray-light: #666;
+.outline { 
+  outline: 2px solid @link-color; 
+}
+.outline-dotted {
+  outline : #ffffff dotted 2px; 
+  outline-offset: -4px;
+}
 
 /***************************************************/
 /* Bootstrap corrections to make the site          */
@@ -1317,6 +1324,9 @@ Visually, there's the title row and then all the rows from the document content,
     display: inline-block;
     vertical-align: top;
   }
+  &amp;:focus {
+    .outline;
+  }
 }
 
 /* Sizes for the logos and top menu, mobile first*/
@@ -1434,6 +1444,10 @@ Visually, there's the title row and then all the rows from the document content,
     margin-bottom: 0;
     border: 0;
     border-radius: 0;
+    &amp;:focus .fa-bars {
+      .outline;
+      outline-offset: 2px;
+    }
   }
   /* Reset some ugly styles */
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
@@ -1695,9 +1709,7 @@ span.wikiexternallink {
   a:focus {
     top:0;
   }
-}
-
-</lessCode>
+}</lessCode>
     </property>
     <property>
       <link-color>#006be6</link-color>

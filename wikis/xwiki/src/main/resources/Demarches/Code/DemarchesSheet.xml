@@ -985,6 +985,10 @@ form {
     position: relative;
     font-size: 0.5em;
     top: -0.7em;
+    &amp;:focus {
+      .outline;
+      outline-color: lighten(@gray-light, 25%);
+    }
   }
 
   .vertical-align {

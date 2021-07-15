@@ -339,6 +339,9 @@ $(document).ready(function(){
 #back-top a:hover + span,  #back-top a:focus + span {
   display:block;
 }
+#back-top a:focus + span {
+  .outline-dotted;
+}
 
 #back-top a:hover{ /* arrow animation */
       -webkit-animation-name: example; /* Chrome, Safari, Opera */
@@ -360,7 +363,7 @@ $(document).ready(function(){
 }</code>
     </property>
     <property>
-      <contentType>CSS</contentType>
+      <contentType>LESS</contentType>
     </property>
     <property>
       <name>Back to top CSS Style</name>

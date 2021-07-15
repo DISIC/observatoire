@@ -401,6 +401,9 @@
     &amp;:hover {
       background-color: #C40028;
     }
+    &amp;:focus {
+      .outline-dotted;
+    }
   }
 
   @media (min-width: @screen-md-min) {
@@ -535,6 +538,9 @@
     &amp;:hover {
       background-color: #fff;
       color: @link-color;
+    }
+    &amp;:focus {
+      .outline-dotted;
     }
   }
   h2 {

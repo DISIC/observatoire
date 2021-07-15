@@ -1390,6 +1390,11 @@ input[name='title'] {
       margin-bottom: 0;
       li.social-network {
         margin-left: 0.8em;
+        a:focus {
+          .outline;
+          outline-color: #fff;
+          outline-offset: 2px;
+        }
       }
     }
     @media (max-width: 768px) {
@@ -1422,6 +1427,14 @@ input[name='title'] {
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
     &amp;.btn-default {
       background-color: #fff;
+      &amp;:focus {
+        .outline;
+      }
+      &amp;.pushed {
+        &amp;:focus {
+          .outline-dotted;
+        }
+      }
     }
   }
   /* Overwrite default button background colors to fix contrast */
@@ -1434,6 +1447,11 @@ input[name='title'] {
   .dashboard-selector {
     .btn {
       font-weight: 600;
+      &amp;.btn-primary {
+        &amp;:focus {
+          .outline-dotted;
+        }
+      }
     }
   }
   .dropdown-toggle .caret {
@@ -1494,6 +1512,9 @@ input[name='title'] {
     border-radius: 0.25em;
     display: inline-block;
     background-color: #fff;
+    &amp;:focus {
+      .outline;
+    }
   }
   input {
     min-width: 20em;
