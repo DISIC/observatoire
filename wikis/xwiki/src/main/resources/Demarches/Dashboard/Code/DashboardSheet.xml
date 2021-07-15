@@ -138,7 +138,7 @@
     (%class='row table-tools'%)(((
       (% class='dashboard-container' %)(((
         (% class='row'%)(((
-          (%class='col-xs-12 col-sm-6 col-sm-push-6 dashboard-selector'%)(((
+          (%class='col-xs-12 col-sm-6 dashboard-selector'%)(((
             {{html clean="false"}}
             &lt;div class="btn-group controls"&gt;
               &lt;button type="button" class="btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-default #else btn-primary #end dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
@@ -159,7 +159,7 @@
             &lt;/div&gt;
             {{/html}}
           )))
-          (%class='col-xs-12 col-sm-6 col-sm-pull-6 dashboard-filters'%)(((
+          (%class='col-xs-12 col-sm-6 dashboard-filters'%)(((
             {{html clean='false'}}
               &lt;div class="dashboard-filter-sort"&gt;
                 &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
@@ -1414,7 +1414,6 @@ input[name='title'] {
     margin-top: 0.79em;
   }
   .dashboard-selector {
-    text-align: right;
     .btn {
       font-weight: 600;
     }
@@ -1423,6 +1422,7 @@ input[name='title'] {
     margin-left: 0.5em;
   }
   .dashboard-filters {
+    text-align: right;
     .btn-default.pushed {
       background-color: @obs-blue;
       color: #fff;
