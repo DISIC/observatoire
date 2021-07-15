@@ -1674,7 +1674,7 @@ $services.localization.render('accountnotactive_email')
         #end
         ## Fix for https://jira.xwiki.org/browse/XWIKI-17262
         #if($currentDomainKey == 'observatoire')
-          &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-expanded="false"&gt;
+          &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-controls="xwikimainmenu" aria-expanded="false"&gt;
             &lt;span class="sr-only"&gt;Ouvrir la navigation&lt;/span&gt;
             &lt;span class="fa fa-bars" /&gt;
           &lt;/button&gt;
