@@ -172,12 +172,12 @@
           (%class='col-xs-12 col-sm-6 dashboard-filters'%)(((
             {{html clean='false'}}
               &lt;span class="dashboard-filter-sort"&gt;
-                &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle'&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
+                &lt;button type='button' class='btn btn-default' id='top-demarches-filters-toggle' title="$services.localization.render('dashboard.tools.filters.hint')"&gt;&lt;span class='fa fa-filter'&gt;&lt;/span&gt; $services.localization.render('dashboard.tools.filters.label')&lt;/button&gt;
                 &lt;span class="btn-group controls"&gt;
                   #set($sortButtonLabel = $services.localization.render('dashboard.tools.sort.label'))
                   #set($otherSortButtonLabel = $services.localization.render('dashboard.tools.sort.label.other'))
-                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-default-label="$escapetool.xml($sortButtonLabel)" data-othersort-label="$escapetool.xml($otherSortButtonLabel)"&gt;${sortButtonLabel}&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
-                  &lt;ul class="dropdown-menu"&gt;
+                  &lt;button type='button' class='btn btn-default dropdown-toggle' id='top-demarches-sort-toggle' title="$services.localization.render('dashboard.tools.sort.hint')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-default-label="$escapetool.xml($sortButtonLabel)" data-othersort-label="$escapetool.xml($otherSortButtonLabel)"&gt;${sortButtonLabel}&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;&lt;/button&gt;
+                  &lt;ul class="dropdown-menu" aria-labelledby="top-demarches-sort-toggle"&gt;
                     #set($sortProps = {'statutDemat' : 'desc', 'satisfactionIndex' : 'desc', 'avisCount' : 'desc', 'volumetrie' : 'desc', 'accessibilityScore' : 'desc'})
                     #foreach($sortProp in $sortProps.entrySet())
                       #set($thLabel = $services.localization.render("dashboard.tools.sort.label.${sortProp.key}"))
