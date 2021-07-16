@@ -151,11 +151,11 @@
           (%class='col-xs-12 col-sm-6 dashboard-selector'%)(((
             {{html clean="false"}}
             &lt;div class="btn-group controls"&gt;
-              &lt;button type="button" class="btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-default #else btn-primary #end dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
+              &lt;button type="button" id="dashboard-date-selector" title="$services.localization.render('dashboard.tools.dateSelector.hint')" class="btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-default #else btn-primary #end dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"&gt;
               #if ($doc.fullName == $LIVE_DASHBOARD_ID)$services.localization.render('dashboard.previous-data')#else${doc.title}#end&amp;nbsp;&lt;span class="caret"&gt;&lt;/span&gt;
               &lt;/button&gt;
               #getPublishedDashboards()
-              &lt;ul class="dropdown-menu"&gt;
+              &lt;ul class="dropdown-menu" aria-labelledby="dashboard-date-selector"&gt;
                 #foreach ($entry in $publishedDashboards)
                   #set ($page = $xwiki.getDocument($entry))
                   &lt;li&gt;
@@ -164,7 +164,7 @@
                   #end
               &lt;/ul&gt;
               #if ($hasAdmin || $isAdministrateurMinisteriel)
-               &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-primary #else btn-default #end'&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
+               &lt;a href="$xwiki.getURL($LIVE_DASHBOARD_ID)" class='btn #if($doc.fullName == $LIVE_DASHBOARD_ID)btn-primary #else btn-default #end' title="$services.localization.render('dashboard.live.hint')"&gt;$services.localization.render('dashboard.live.name')&lt;/a&gt;
               #end
             &lt;/div&gt;
             {{/html}}
