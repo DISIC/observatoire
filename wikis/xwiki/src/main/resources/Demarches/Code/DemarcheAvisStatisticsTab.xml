@@ -218,6 +218,7 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     #set($labels =  {'1': 'avis&amp;#10;négatifs', '2':'avis&amp;#10;moyens', '3':'avis&amp;#10;positifs'})
+    #set ($chartLabel = 'Répartition des avis :')
     #foreach($v in ['1', '2', '3'])
       #set($valueToDisplay = 0)
       #if ($scores.get($v) != $NULL)
@@ -226,8 +227,13 @@
       ## compute percentage
       #set($valueToDisplay = $mathtool.round($mathtool.div($mathtool.mul($valueToDisplay, 100), $avisStatsResult.occurrences)))
       ## display this value
-      &lt;tr&gt;&lt;td&gt;$labels.get($v)&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+      #set ($label = $labels.get($v))
+      &lt;tr&gt;&lt;td&gt;$label&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+      #set ($chartLabel = "$chartLabel $label $valueToDisplay%,")
     #end
+    #set ($chartLabel = $chartLabel.replaceAll('&amp;#10;', ' '))
+    #set ($length = $mathtool.sub($chartLabel.length(), 1))
+    #set ($chartLabel = $chartLabel.substring(0, $length))
   &lt;/tbody&gt;
   &lt;/table&gt;
   ## prepare chart options and call macro to display the graph
@@ -257,7 +263,7 @@
   })
   #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-  {{tableToChartJS title='Répartition des avis' type='pie' table='score' options='$options'/}}
+  {{tableToChartJS title='$chartLabel' type='pie' table='score' options='$options'/}}
 
   &lt;div class="lighter"&gt;Répartition des avis&lt;/div&gt;
 #end
@@ -277,6 +283,7 @@
       &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
+      #set ($chartLabel = "$tableCaption :")
       #set($labels =  {'1': 'Mauvais', '2':'Moyen', '3':'Bon'})
       #foreach($v in ['1', '2', '3'])
         #set($valueToDisplay = 0)
@@ -284,8 +291,13 @@
           #set($valueToDisplay = $statValues.get($v))
         #end
         ## display this value
-        &lt;tr&gt;&lt;td&gt;$labels.get($v)&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+        #set ($label = $labels.get($v))
+        &lt;tr&gt;&lt;td&gt;$label&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+        #set ($label = $label.toLowerCase())
+        #set ($chartLabel = "$chartLabel $valueToDisplay pour $label,")
       #end
+      #set ($length = $mathtool.sub($chartLabel.length(), 1))
+      #set ($chartLabel = $chartLabel.substring(0, $length))
     &lt;/tbody&gt;
     &lt;/table&gt;
     #set($chartOptions = {
@@ -322,7 +334,7 @@
     })
     #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-    {{tableToChartJS title="$tableCaption" type='horizontalBar' table='$propName' options='$options'/}}
+    {{tableToChartJS title="$chartLabel" type='horizontalBar' table='$propName' options='$options'/}}
 
   #else
     &lt;span style="text-align:center"&gt;Aucune réponse.&lt;/span&gt;
@@ -686,7 +698,7 @@
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Compréhension&lt;/h3&gt;
-      #displaySmileyBarChart('comprehensible', "Répartition des réponse sur la compréhension", "Facilité de compréhension")
+      #displaySmileyBarChart('comprehensible', "Répartition des réponses sur la compréhension", "Facilité de compréhension")
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="row"&gt;
