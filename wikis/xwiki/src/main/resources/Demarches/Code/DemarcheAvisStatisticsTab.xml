@@ -358,15 +358,22 @@
     ## get the possible values from the class, as they are there
     #set ($possibleValues = $xwiki.getClass($AVIS_CLASS_ID).get($propName).listValues)
     &lt;tbody&gt;
+      #set ($chartLabel = "$tableCaption :")
       ## iterate and display whatever is in the $avisStatsResult
       #foreach($v in $possibleValues)
         #set($valueToDisplay = 0)
         #if ($statValues.get($v) != $NULL)
           #set($valueToDisplay = $statValues.get($v))
         #end
+        #set ($label = $escapetool.xml($services.localization.render("${AVIS_CLASS_ID}_${propName}_${v}")))
         ## display this value
-        &lt;tr&gt;&lt;td&gt;$escapetool.xml($services.localization.render("${AVIS_CLASS_ID}_${propName}_${v}"))&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;$label&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
+        ## Add value to chart label
+        #set ($chartLabel = "$chartLabel $valueToDisplay pour « $label »,")
       #end
+      ## Remove trailing comma from aria label
+      #set ($length = $mathtool.sub($chartLabel.length(), 1))
+      #set ($chartLabel = $chartLabel.substring(0, $length))
     &lt;/tbody&gt;
     &lt;/table&gt;
     #set($chartOptions = {
@@ -403,7 +410,7 @@
     })
     #set ($options = $jsontool.serialize($chartOptions).replaceAll("~","~~").replaceAll("'","~'"))
 
-    {{tableToChartJS title="$tableCaption" type='horizontalBar' table='$propName' options='$options' cssClass='histo'/}}
+    {{tableToChartJS title="$chartLabel" type='horizontalBar' table='$propName' options='$options' cssClass='histo'/}}
 
   #else
     &lt;span style="text-align:center"&gt;Aucune réponse.&lt;/span&gt;
@@ -704,11 +711,11 @@
   &lt;div class="row"&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Difficultés rencontrées&lt;/h3&gt;
-      #displayListValuesBarChart('difficultes', "Difficultés rencontrées", "Difficulté")
+      #displayListValuesBarChart('difficultes', "Répartition des réponses sur les difficultés rencontrées", "Difficulté")
     &lt;/div&gt;
     &lt;div class="col-lg-6 col-md-6 col-sm-12"&gt;
       &lt;h3&gt;Aides sollicitées&lt;/h3&gt;
-      #displayListValuesBarChart('aide', "Besoins d'aide", "Aide")
+      #displayListValuesBarChart('aide', "Répartition des réponses sur les aides sollicitées", "Aide")
     &lt;/div&gt;
   &lt;/div&gt;
 #else
