@@ -1874,7 +1874,7 @@ input[name='title'] {
     @media screen and (max-width: 768px) {
       background-color: rgba(0,107,230,0.05);
     }
-    td {
+    td, th {
       @media screen and (min-width: 768px) {
         background-color: fade(@obs-blue, 5%);
         border-bottom: 0;
