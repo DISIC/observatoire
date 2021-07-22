@@ -116,7 +116,6 @@ wikidemarches.demarche.embed.button.details=Code à intégrer dans un message é
 wikidemarches.demarche.embed.button.warning.volumetrieDemat=La volumétrie de cette démarche ({0} démarches par an) requiert des conditions particulières pour l''activation du formulaire d''avis par URL. Contactez-nous pour avoir plus d''informations, en utilisant le lien en bas de l''écran.
 wikidemarches.demarche.embed.button.warning.volumetrie=La volumétrie de cette démarche ({0} démarches par an) requiert des conditions particulières pour l''activation du formulaire d''avis par URL. Contactez-nous pour avoir plus d''informations, en utilisant le lien en bas de l''écran. &lt;br/&gt;Note: comme la volumétrie de la dématérialisation de cette démarche n''est pas renseignée, la volumétrie totale de la démarche a été utilisé pour ce calcul.
 wikidemarches.demarche.embed.button.code.alttext=Je donne mon avis
-wikidemarches.demarche.embed.button.code.title=Je donne mon avis sur cette démarche
 wikidemarches.demarche.embed.generate.details=Le code à intégrer est généré à la demande et n'est valable que pour cette démarche. Une clé d'API sera associée à votre compte et à tous les avis exprimés via ce code.
 wikidemarches.demarche.embed.generate.button=Générer le code
 

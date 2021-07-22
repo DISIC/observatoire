@@ -50,7 +50,6 @@
         &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
         ## some elements that will be used for the code but also for demo
         #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
-        #set ($buttonTitle = $services.localization.render('wikidemarches.demarche.embed.button.code.title'))
         ## check if current user has a key and this key is in the generated codes for this demarche
         #set ($userProfileDoc = $xwiki.getDocument($xcontext.userReference))
         #set($currentApiKey = "$!userProfileDoc.getObject('API.Code.APIKeyClass').getProperty('key').value")
@@ -111,7 +110,7 @@
                     #set($voxusagersButtonImgURL = $buttonImgURL.replace('://observatoire.numerique', '://voxusagers.numerique'))
                     &lt;textarea readonly='readonly' rows='5'&gt;
                       $escapetool.xml("&lt;a href=${escapetool.quote}$voxusagersVoteURL${escapetool.quote}&gt;")
-                        ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$voxusagersButtonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} title=${escapetool.quote}$escapetool.xml($buttonTitle)${escapetool.quote} /&gt;")
+                        ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$voxusagersButtonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} /&gt;")
                       $escapetool.xml("&lt;/a&gt;")
                     &lt;/textarea&gt;
                   #else
