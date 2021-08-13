@@ -40,6 +40,17 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{velocity}}
+## Import DSFR core styles
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/core.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/schemes.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/utilities.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/legacy.min.css'))
+## Import DSFR components styles used in the page
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/alerts.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/forms.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/buttons.min.css'))
+## Fix style conflicts and issues
+#set ($discard = $xwiki.ssx.use('Demarches.Code.DemarcheAvisFormTab'))
 {{html wiki="true"}}
 #maybeSetWarningBackground()
 &lt;div class="tab-pane fade #if($selectedTab == 'avis-tab')active in#end" role="tabpanel" id="avis-tab" aria-labelledby="avis-tab"&gt;
@@ -118,7 +129,7 @@
       &lt;/div&gt;
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
       &lt;div class="eval-container"&gt;
-        #displayObjectForm($avis,['facile','comprehensible','difficultes','aide','autre'])
+        #displayObjectForm($avis,['facile','comprehensible','difficultes','autreDifficulte','aide', 'autreAide','autre'])
       &lt;/div&gt;
     #elseif ($step == 'third-form-screen')
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
@@ -137,7 +148,6 @@
     #end
     &lt;input type="hidden" name="xredirect" value="$doc.getURL()?tab=avis-tab" /&gt;
     &lt;input type="hidden" name="avis-form-step" value="$step" /&gt;
-    &lt;div class='buttonwrapper'&gt;
     #if ($step == 'initial-step')
       #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.validate')))
     #elseif ($step == 'second-form-screen')
@@ -145,11 +155,138 @@
     #elseif ($step == 'third-form-screen')
       #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.complete')))
     #end
-    &lt;input class="button btn btn-primary" type="submit" name="submit" value="$submitLabel" disabled/&gt;
-    &lt;/div&gt;
+    &lt;input class="fr-btn fr-mt-6v" type="submit" name="submit" value="$submitLabel" disabled/&gt;
     &lt;/form&gt;
   #end
 #end
 {{/html}}
 {{/velocity}}</content>
+  <object>
+    <name>Demarches.Code.DemarcheAvisFormTab</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>f6cf80af-4fc6-421b-9612-d6b6cad37820</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>
+/* Fix style conflicts between bootstrap and dsfr */
+legend.fr-fieldset__legend {
+  border-bottom: none;
+}
+
+/* Rules to match the required style from the sketch specifications */
+#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__legend {
+  margin-bottom: 1.5rem !important;
+
+  .fr-hint-text {
+    margin-bottom: -1rem !important;
+  }
+}
+
+</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name>dsfr-form-fixes</name>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
 </xwikidoc>

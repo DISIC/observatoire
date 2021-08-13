@@ -41,54 +41,51 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html clean='false'}}
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/checkboxes.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/radios.min.css'))
 #if ($type == 'edit')
   #set ($validationRegExp = $field.getProperty('validationRegExp').value)
   #set ($isMandatory = $validationRegExp.trim().length() &gt; 0)
   #set ($clazz = $object.xWikiClass)
   #set ($displayType = $field.propertyClass.displayType)
-  &lt;fieldset class='listclass-group'&gt;
-  &lt;legend&gt;
-    $doc.displayPrettyName($name, false, false)
-    #if ($isMandatory)
-      &lt;abbr class='asterix' title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
-    #end
-  &lt;/legend&gt;
-  &lt;ul&gt;
-  ## If prop is "Avis.Code.AvisClass^aide", add the input 'Aucune' which won't get saved
-  ## in the database, since it corresponds to an empty answer.
-  #if (${clazz.name} == 'Avis.Code.AvisClass' &amp;&amp; $name == 'aide')
-    &lt;li class='form-listclass-item'&gt;
-      #set($optionId = "xwiki-form-${name}-${object.number}-aucune")
-      &lt;label for="$optionId"&gt;&lt;input id="$optionId" type="$displayType" #if("$!value" == '')checked="checked"#end /&gt;
-      $escapetool.xml($services.localization.render("${clazz.name}_${name}_aucune"))&lt;/label&gt;
-    &lt;/li&gt;
-  #end
-  #foreach($val in $field.listValues)
-    &lt;li class='form-listclass-item'&gt;
-      #set($optionId = "xwiki-form-${name}-${object.number}-${velocityCount}")
-      #if ($value == $val || $value.contains($val))
-        #set ($checked = 'checked')
-      #else
-        #set ($checked = '')
+  &lt;div class="fr-form-group"&gt;
+    &lt;fieldset class="fr-fieldset"&gt;
+      &lt;legend class="fr-fieldset__legend fr-text--lg"&gt;
+        $doc.displayPrettyName($name, false, false)
+        #if ($isMandatory)
+          &lt;abbr class='asterix' title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
+        #end
+      &lt;/legend&gt;
+      &lt;div class="fr-fieldset__content"&gt;
+      ## If prop is "Avis.Code.AvisClass^aide", add the input 'Aucune' which won't get saved
+      ## in the database, since it corresponds to an empty answer.
+      #if (${clazz.name} == 'Avis.Code.AvisClass' &amp;&amp; $name == 'aide')
+        &lt;div class="fr-${displayType}-group"&gt;
+          #set($optionId = "xwiki-form-${name}-${object.number}-aucune")
+          &lt;input type="$displayType" id="$optionId" #if("$!value" == '')checked="checked"#end&gt;
+          &lt;label class="fr-label" for="$optionId"&gt;
+            $escapetool.xml($services.localization.render("${clazz.name}_${name}_aucune"))
+          &lt;/label&gt;
+        &lt;/div&gt;
       #end
-      &lt;label for="$optionId"&gt;&lt;input name="${prefix}${name}" id="$optionId" type="$displayType" value="$val" $checked #if($isMandatory)required#end/&gt;
-      $escapetool.xml($services.localization.render("${clazz.name}_${name}_${val}"))&lt;/label&gt;
-    &lt;/li&gt;
-  #end
-  #if (${clazz.name} == 'Avis.Code.AvisClass')
-    #if ($name == 'difficultes')
-      &lt;span id="xwiki-form-autreDifficulte-0-container" style="display: none; padding-left: .5em;"&gt;
-        &lt;input id="xwiki-form-autreDifficulte-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreDifficulte"))" name='Avis.Code.AvisClass_0_autreDifficulte' maxlength="250" value='' size='40' style="max-width: 100%"/&gt; &lt;span class='small'&gt;$services.localization.render("${clazz.name}_autreDifficulte_maxhint")&lt;/span&gt;
-      &lt;/span&gt;
-    #elseif ($name == 'aide')
-      &lt;span id="xwiki-form-autreAide-0-container" style="display: none; padding-left: .5em;"&gt;
-        &lt;input id="xwiki-form-autreAide-0" title="$escapetool.xml($services.localization.render("${clazz.name}_autreAide"))" name='Avis.Code.AvisClass_0_autreAide' maxlength="250" value='' size='40' style="max-width: 100%"/&gt; &lt;span class='small'&gt;$services.localization.render("${clazz.name}_autreAide_maxhint")&lt;/span&gt;
-      &lt;/span&gt;
-    #end
-  #end
-  &lt;/ul&gt;
-  &lt;input name="${prefix}${name}" value="" type="hidden" /&gt;
-&lt;/fieldset&gt;
+      #foreach($val in $field.listValues)
+        &lt;div class="fr-${displayType}-group"&gt;
+          #set($optionId = "xwiki-form-${name}-${object.number}-${velocityCount}")
+          #if ($value == $val || $value.contains($val))
+            #set ($checked = 'checked')
+          #else
+            #set ($checked = '')
+          #end
+          &lt;input type="$displayType" id="$optionId" name="${prefix}${name}" value="$val" $checked #if($isMandatory)required#end&gt;
+          &lt;label class="fr-label" for="$optionId"&gt;
+            $escapetool.xml($services.localization.render("${clazz.name}_${name}_${val}"))
+          &lt;/label&gt;
+        &lt;/div&gt;
+      #end
+      &lt;/div&gt;
+      &lt;input name="${prefix}${name}" value="" type="hidden" /&gt;
+    &lt;/fieldset&gt;
+  &lt;/div&gt;
 #else
   #set ($propertyClass = $object.getxWikiClass().get($name))
   $doc.displayView($propertyClass, $prefix, $object)

@@ -77,11 +77,11 @@
   #end
   #if ($isBoolean &amp;&amp; $action == 'edit')
     &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$object.display($propName, $action)#if($isMandatory)(*) #end$propertyObject.prettyName &lt;/label&gt;
-      #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
+      #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;&lt;span class='xHint-text'&gt;$services.localization.render($hint)&lt;/span&gt;&lt;/span&gt;#end
     &lt;/dt&gt;
   #else
     &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;#if($isMandatory)(*) #end $propertyObject.prettyName&lt;/label&gt;
-    #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
+    #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;&lt;span class='xHint-text'&gt;$services.localization.render($hint)&lt;/span&gt;&lt;/span&gt;#end
     &lt;/dt&gt;
   #end
   &lt;dd class="property-value#if ($fieldIsInvalid) validation-failure#end"&gt;
@@ -158,17 +158,22 @@
 #macro (displayObjectForm $obj $showProperties)
 #foreach($prop in $obj.xWikiClass.properties)
   #if ($showProperties.contains($prop.name))
-    $doc.display($prop.name, 'edit', $obj)
+    &lt;div class="fr-mb-10v"&gt;
+      $doc.display($prop.name, 'edit', $obj)
+    &lt;/div&gt;
   #end
 #end
 #end
 
 #macro (displayMessage $key)
-(% id="wd-1" %)(((
-{{success}}
-    $services.localization.render($key)
-{{/success}}
-)))
+{{html clean="false"}}
+&lt;div class="fr-my-10v fr-my-md-16v"&gt;
+  &lt;div role="alert" class="fr-alert fr-alert--success"&gt;
+      &lt;p class="fr-alert__title"&gt;$services.localization.render("${key}.title")&lt;/p&gt;
+      &lt;p&gt;$services.localization.render($key)&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+{{/html}}
 #end
 
 #macro(displayScoreStats)

@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1537943740000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1537947377000</date>
-  <contentUpdateDate>1537947377000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>StringDisplayer</title>
   <comment/>
@@ -41,14 +41,29 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html clean='false'}}
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/inputs.min.css'))
 #if ($type == 'edit')
   #if (${object.xWikiClass.name} == 'Avis.Code.AvisClass')
     #if ($name == 'email')
       &lt;label for="xwiki-form-email"&gt;$doc.displayPrettyName($name, false, false)&lt;/label&gt;
       &lt;input id="xwiki-form-email" name="Avis.Code.AvisClass_0_email" value="$!value" size="40" /&gt;
     #elseif ($name == 'autreDifficulte' || $name == 'autreAide')
-     ## These fields must be absent from the form, because they're already included by the custom displayers of the "difficulte" and "aide" fields,
-     ## hence no input is generated for these, hence why we have an empty block.
+      ## We need to add an id attribute to be able to show / hide this optionnal field from js
+      &lt;div class="fr-form-group" id="xwiki-form-${name}-0-container" style="display: none"&gt;
+        &lt;fieldset class="fr-fieldset"&gt;
+          &lt;legend class="fr-fieldset__legend fr-text--lg"&gt;
+            $doc.displayPrettyName($name, false, false)
+            &lt;span class="fr-hint-text"&gt;
+              $escapetool.xml($services.localization.render("Avis.Code.AvisClass_${name}_maxhint"))
+            &lt;/span&gt;
+          &lt;/legend&gt;
+          &lt;div class="fr-fieldset__content"&gt;
+            &lt;div class="fr-input-group"&gt;
+              &lt;input class="fr-input" type="text" id="xwiki-form-${name}-0" name="${prefix}${name}"&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/fieldset&gt;
+      &lt;/div&gt;
     #end
   #end
 #else
