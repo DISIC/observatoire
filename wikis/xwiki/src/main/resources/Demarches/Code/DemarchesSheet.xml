@@ -453,13 +453,11 @@ require(['jquery','xwiki-selectize'], function($) {
     // Add an input field allowing the user to enter free text about
     // a difficulty he may have faced when the 'autre difficulté' is checked.
     $("input[name='Avis.Code.AvisClass_0_difficultes']").change(function() {
-      console.log("clicked autre difficulte"); // DEBUG
       showHideFreeTextInputField($(this), "autre", "xwiki-form-autreDifficulte-0");
     });
 
     // Same for 'autre aide'
     $("input[name='Avis.Code.AvisClass_0_aide']").change(function() {
-      console.log("clicked autre aide"); // DEBUG
       // Uncheck the 'Aucune aide' checkbox.
       $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
       showHideFreeTextInputField($(this), "autre", "xwiki-form-autreAide-0");
