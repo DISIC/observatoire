@@ -70,7 +70,5 @@ Execute the `index.js` file to produce the scoped files:
 $ node index.js
 ```
 
-If you encounter any issue at some point with this script, you can contact me at [clement.desableau@xwiki.com](mailto:clement.desableau@xwiki.com)
-
 
 
