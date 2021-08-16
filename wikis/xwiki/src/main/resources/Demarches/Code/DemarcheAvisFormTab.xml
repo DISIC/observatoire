@@ -286,7 +286,7 @@ legend.fr-fieldset__legend {
       <parse>0</parse>
     </property>
     <property>
-      <use>currentPage</use>
+      <use>onDemand</use>
     </property>
   </object>
 </xwikidoc>
