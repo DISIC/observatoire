@@ -51,6 +51,7 @@
 #set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/buttons.min.css'))
 ## Fix style conflicts and issues
 #set ($discard = $xwiki.ssx.use('Demarches.Code.DemarcheAvisFormTab'))
+## Import custom form jsx
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarcheAvisFormTab'))
 {{html wiki="true"}}
 #maybeSetWarningBackground()

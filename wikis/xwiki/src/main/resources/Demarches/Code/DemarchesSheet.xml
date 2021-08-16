@@ -369,56 +369,6 @@ require(['jquery','xwiki-selectize'], function($) {
 
   $('.suggest-propertyValues').suggestPropertyValues();
 
-  /** Avis functions */
-  function updateVoteAndSubmitButton() {
-    var modalite = $("input[name='Avis.Code.AvisClass_0_modalite']:checked").val();
-    //The "modalite" checkbox can be inexistent in case the form is displayed after a new demarche got submitted by the current user.
-    if (!modalite) {
-      modalite = $("input[name='Avis.Code.AvisClass_0_modalite']").val();
-    }
-
-    var score = $("input[name='Avis.Code.AvisClass_0_score']:checked").val();
-    if (score) {
-      if (modalite == 'autrement') {
-        $('.vote-container').show();
-      } else {
-        $('.vote-container').hide();
-      }
-      $('input[type="submit"]').prop('disabled', false);
-    }
-
-    var vote = $("input[name='Avis.Code.AvisClass_0_vote']:checked").val();
-    if (vote &amp;&amp; vote == 'true' &amp;&amp; modalite == 'autrement') {
-      $('.vote-input-container').show();
-    } else {
-      $('.vote-input-container').hide();
-    }
-  }
-
-  function updateEvaluationInputsVisibility() {
-    var step = $('input[name="avis-form-step"]').prop('value');
-    if (step == "second-form-screen") {
-      $('.eval-container').show();
-      $('input[type="submit"]').prop('disabled', false);
-    }
-  }
-  
-  function showHideFreeTextInputField(inputElement, propName, freeTextInputFieldId) {
-    var value = inputElement.val();
-    var checked = inputElement.prop("checked");
-    if (value == propName) {
-      if (checked) {
-        $("#" + freeTextInputFieldId + "-container").show();
-      } else {
-        // Make sure to empty the input before hiding it, so that only an empty
-        // value gets sent to the server, no value that the user may have entered
-        // before hiding the input.
-        $("#" + freeTextInputFieldId).val("");
-        $("#" + freeTextInputFieldId + "-container").hide();
-      }
-    }
-  }
-
   $(document).ready(function() {
     $(".demarche-details-action button").click(function() {
       var btn = $(this);
@@ -437,62 +387,6 @@ require(['jquery','xwiki-selectize'], function($) {
         label.text("$services.localization.render('wikidemarches.demarche.details-on')")
       }
     });
-
-    $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
-      updateVoteAndSubmitButton();
-    });
-
-    $("input[name='Avis.Code.AvisClass_0_score']").change(function() {
-      updateVoteAndSubmitButton();
-    });
-
-    $("input[name='Avis.Code.AvisClass_0_vote']").change(function() {
-      updateVoteAndSubmitButton();
-    });
-
-    // Add an input field allowing the user to enter free text about
-    // a difficulty he may have faced when the 'autre difficulté' is checked.
-    $("input[name='Avis.Code.AvisClass_0_difficultes']").change(function() {
-      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreDifficulte-0");
-    });
-
-    // Same for 'autre aide'
-    $("input[name='Avis.Code.AvisClass_0_aide']").change(function() {
-      // Uncheck the 'Aucune aide' checkbox.
-      $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
-      showHideFreeTextInputField($(this), "autre", "xwiki-form-autreAide-0");
-    });
-
-    // Uncheck all other options when 'aucune aide' is checked
-    $("input[id='xwiki-form-aide-0-aucune']").change(function() {
-      var input = $(this);
-      var checked = input.prop("checked");
-      if (checked) {
-        // Uncheck all other options
-        $("input[name='Avis.Code.AvisClass_0_aide']").each(function() {
-           var input = $(this);
-           var value = input.val();
-           input.prop("checked", false);
-           // Hide explicitely the "autreAide" field
-           // NB: this is not done automatically despite the listener above because
-           // the input for 'aucune aide' has no name (as we don't want to store its value
-           // in the database).
-           $("#xwiki-form-autreAide-0").val("");
-           $("#xwiki-form-autreAide-0-container").hide();
-        });
-      }
-    });
-
-    // The input 'Aucune aide' is checked by default, make sure this is not the case.
-    $("input[id='xwiki-form-aide-0-aucune']").prop("checked", false);
-
-    updateEvaluationInputsVisibility();
-
-    // For the third form screen, always enable the submit button
-    var step = $('input[name="avis-form-step"]').prop('value');
-    if (step == "third-form-screen") {
-      $('input[type="submit"]').prop('disabled', false);
-    }
 
     $('#tabs a').click(function (e) {
       //e.preventDefault();
