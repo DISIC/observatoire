@@ -77,11 +77,11 @@
   #end
   #if ($isBoolean &amp;&amp; $action == 'edit')
     &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;$object.display($propName, $action)#if($isMandatory)(*) #end$propertyObject.prettyName &lt;/label&gt;
-      #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
+      #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;&lt;span class='xHint-text'&gt;$services.localization.render($hint)&lt;/span&gt;&lt;/span&gt;#end
     &lt;/dt&gt;
   #else
     &lt;dt&gt;&lt;label#if ($action == 'edit') for="Demarches.Code.DemarchesClass_0_${propName}"#end&gt;#if($isMandatory)(*) #end $propertyObject.prettyName&lt;/label&gt;
-    #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;$services.localization.render($hint)&lt;/span&gt;#end
+    #if ($hint &amp;&amp; !$isRowEditor)&lt;span class="xHint"&gt;&lt;span class='xHint-text'&gt;$services.localization.render($hint)&lt;/span&gt;&lt;/span&gt;#end
     &lt;/dt&gt;
   #end
   &lt;dd class="property-value#if ($fieldIsInvalid) validation-failure#end"&gt;
