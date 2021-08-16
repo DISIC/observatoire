@@ -466,6 +466,20 @@
     </property>
     <property>
       <code>
+/* Make the width of the demarche avis form smaller */
+#body.hidelefthideright .main {
+  .make-md-column(8, @main-padding);
+  .make-md-column-push(2);
+
+  #mainContentArea {
+    @media (min-width: @screen-sm-min) {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+}
+
 /* Fix style conflicts between bootstrap and dsfr */
 legend.fr-fieldset__legend {
   border-bottom: none;

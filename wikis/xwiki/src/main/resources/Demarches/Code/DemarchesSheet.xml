@@ -538,12 +538,6 @@ require(['jquery','xwiki-selectize'], function($) {
   }
 }
 
-/* Make the width of the demarche avis form smaller */
-#body.hidelefthideright .main {
-  .make-md-column(8, @main-padding);
-  .make-md-column-push(2);
-}
-
 .demarche-details-action {
   padding: 0.7em 0 0 0;
   .btn-primary {
