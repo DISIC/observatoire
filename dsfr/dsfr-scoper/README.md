@@ -59,20 +59,16 @@ Inside the folder, fetch npm dependencies using:
 $ npm install
 ```
 
-The `index.js` file is used to prefix the given css file rules.
-The source files must be placed inside the `css/` folder. These should be the files inside the `dsfr/css/` folder.
-The dsfr version currently used is [1.1.0](https://gouvfr.atlassian.net/wiki/spaces/DB/pages/806912001/Version+1.1.0#T%C3%A9l%C3%A9chargements).
-The output files will be generated inside the `out/` folder. It will be created if it doesn't exists.
+The `index.js` file is used to scope the given css file rules:
+- The source files must be placed inside the `css/` folder. These should be the files inside the `dsfr/css/` folder.
+  The dsfr version currently used is [1.1.0](https://gouvfr.atlassian.net/wiki/spaces/DB/pages/806912001/Version+1.1.0#T%C3%A9l%C3%A9chargements).
+- The output files will be generated inside the `out/` folder. It will be created if it doesn't exists.
+  The content of this `out/` folder should be copied without modifications inside the `web/src/main/webapp/uicomponents/dsfr-scoped/css/` folder.
 
-Execute the `index.js` file:
+Execute the `index.js` file to produce the scoped files:
 ```bash
 $ node index.js
 ```
-
-You are now ready to copy-paste this `out/` folder inside the project instance using the `scp` command.
-
-Inside the xwiki directory of the instance, make a copy of the existing `/resources/uicomponents/dsfr/` folder, as `/resources/uicomponents/dsfr-scoped`.
-Inside this folder, replace the content of the `css/` folder with the files of your `out/` folder.
 
 If you encounter any issue at some point with this script, you can contact me at [clement.desableau@xwiki.com](mailto:clement.desableau@xwiki.com)
 
