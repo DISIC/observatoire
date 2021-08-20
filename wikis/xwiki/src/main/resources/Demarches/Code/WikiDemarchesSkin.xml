@@ -223,7 +223,7 @@
 ##   - or the view mode is set to 'formulaire-avis' and the request matches with the demarche embed API key,
 ##   - or nd_mode is present with valid value and nd_source is present
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
-#if ($demarche) 
+#if ($demarche)
   #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")
   #set ($avisId = $request.session.getAttribute($avisIdAttributeKey))
   #set ($providedDemarcheEmbedApiKeyIsPresent = false)
@@ -674,7 +674,7 @@
 #macro(xwikiDataAttribute $name $value)
   data-xwiki-${name}="$escapetool.xml($value)"
 #end
-&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="$xcontext.locale" xml:lang="$xcontext.locale" dir="ltr" 
+&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="$xcontext.locale" xml:lang="$xcontext.locale" dir="ltr"
   ## NOTE: you should not use these attributes in javascript directly, but via the 'xwiki-meta' module instead:
   ## http://platform.xwiki.org/xwiki/bin/view/DevGuide/JavaScriptAPI#HGetsomeinformationaboutthecurrentdocument
   #xwikiDataAttribute('reference', $services.model.serialize($doc.documentReference, 'default'))
@@ -709,7 +709,7 @@
     #end
     &lt;title&gt;$title&lt;/title&gt;
     ## ---------------------------------------------------------------------------------------------------------------
-    ## Force Compatibility mode for IE browsers to use the latest rendering mode. In order to work, the declaration 
+    ## Force Compatibility mode for IE browsers to use the latest rendering mode. In order to work, the declaration
     ## needs to be placed in the &lt;head&gt;, before all other elements except for the &lt;title&gt; and other &lt;meta&gt; elements
     ## See http://msdn.microsoft.com/en-us/library/jj676915(v=vs.85).aspx#SETMODE
     ## ---------------------------------------------------------------------------------------------------------------
@@ -742,7 +742,7 @@
     #end
     ## ---------------------------------------------------------------------------------------------------------------
     ## Make sure search engine spiders give the plain page instead of ?viewer=comments, ?viewer=code etc.
-    ## ---------------------------------------------------------------------------------------------------------------    
+    ## ---------------------------------------------------------------------------------------------------------------
     &lt;link rel="canonical" href="$doc.getURL('view')" /&gt;
     ## ---------------------------------------------------------------------------------------------------------------
     ## Add user-defined Meta directives.
@@ -1124,8 +1124,8 @@ if (Prototype.BrowserFeatures.ElementExtensions) {
             delete event.target[method];
         }, 0);
       };
-      pluginsToDisable.each(function (plugin) { 
-          $(window).on(method + '.bs.' + plugin, handler); 
+      pluginsToDisable.each(function (plugin) {
+          $(window).on(method + '.bs.' + plugin, handler);
       });
     },
     pluginsToDisable = ['collapse', 'dropdown', 'modal', 'tooltip', 'tab', 'popover'];
@@ -1494,7 +1494,7 @@ window.docgeturl = "${doc.getURL('get')}";
 #if ($cause == 'disabled')
   #xwikimessageboxstart($services.localization.render('notice') $services.localization.render('accountdisabled'))
 #else
-## compute the cause of the user account being disabled 
+## compute the cause of the user account being disabled
 #set($userEmail = "$!xwiki.user.email")
 #set ($BYPASS_DOMAIN = 'gouv.fr')
 ## custom validation message, that needs to talk about the account being not yet validated (by admin or email)
@@ -1680,7 +1680,7 @@ $services.localization.render('accountnotactive_email')
           &lt;/button&gt;
         #end
       &lt;/div&gt;
-      ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262 
+      ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262
       &lt;div id="xwikimainmenu" class="collapse navbar-collapse"&gt;
 #end
 
@@ -1733,7 +1733,7 @@ $services.localization.render('accountnotactive_email')
 #macro(xwikitopmenuentrystart $actionurl $linktext $id $class $icon $iconImg)
   #set($sep = '__SEPARATOR__')
   #set($linkName = $linktext)
-  #set($linkTitle = $linktext) 
+  #set($linkTitle = $linktext)
   #if ($linktext.contains($sep))
     #set($linkWords = $linktext.split($sep, 2))
     #set($linkName = $linkWords.get(1))
@@ -1777,7 +1777,7 @@ $services.localization.render('accountnotactive_email')
 #macro(submenuitem $actionurl $linktext $linkid $class $icon $extraAttributes)
   #set($sep = '__SEPARATOR__')
   #set($linkName = $linktext)
-  #set($linkTitle = $linktext) 
+  #set($linkTitle = $linktext)
   #if ($linktext.contains($sep))
     #set($linkWords = $linktext.split($sep))
     #set($linkName = $linkWords.get(1))
@@ -1917,7 +1917,7 @@ $services.localization.render('accountnotactive_email')
         &lt;li&gt;&lt;a href="#search-input"&gt;$services.localization.render('wikidemarches.quick-links.search')&lt;/a&gt;&lt;/li&gt;
       #end
       &lt;li&gt;&lt;a href="#footerglobal"&gt;$services.localization.render('wikidemarches.quick-links.footer')&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt; 
+    &lt;/ul&gt;
   &lt;div id="menuview"&gt;
     #template("menus_view.vm")
   &lt;/div&gt;

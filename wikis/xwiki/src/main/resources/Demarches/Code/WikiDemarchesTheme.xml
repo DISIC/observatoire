@@ -1092,11 +1092,11 @@
 @line-height-base: 1.5;
 
 @gray-light: #666;
-.outline { 
-  outline: 2px solid @link-color; 
+.outline {
+  outline: 2px solid @link-color;
 }
 .outline-dotted {
-  outline : #ffffff dotted 2px; 
+  outline : #ffffff dotted 2px;
   outline-offset: -4px;
 }
 
@@ -1134,11 +1134,11 @@ select[size="1"]{
   font-size: 80%;
 }
 
-/* nav-divider mixin is computing a negative margin for dividers, overwrite all places where the mixin is used to fix this: 
+/* nav-divider mixin is computing a negative margin for dividers, overwrite all places where the mixin is used to fix this:
   - bootstrap/dropdowns.less
   - bootstrap/navs.less
 */
-.dropdown-menu .divider, 
+.dropdown-menu .divider,
 .nav .nav-divider {
   margin: (@line-height-computed / 2) 0;
 }
@@ -1208,13 +1208,13 @@ select[size="1"]{
 
 /*    Start Totemize SSX                                 */
 
-/* 
-First of all, repair the margin of the mainContentArea so that the xwikicontent element is not spaced from the side of the browser. 
+/*
+First of all, repair the margin of the mainContentArea so that the xwikicontent element is not spaced from the side of the browser.
 This allows any row in the content of the document to start at the leftmost of the window _without_ breaking the gutter for the text in a standard page.
 */
 #mainContentArea,
 #xdocFooter,
-#docextrapanes, 
+#docextrapanes,
 #mainEditArea {
   padding-left: @grid-gutter-width / 2;
   padding-right: @grid-gutter-width / 2;
@@ -1281,7 +1281,7 @@ This allows any row in the content of the document to start at the leftmost of t
   margin-top: 0;
 }
 
-/* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows: 
+/* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows:
 - document header row
 - document content row - which contains the xwikicontent column which contains all the rows in the document content.
 
@@ -1422,7 +1422,7 @@ Visually, there's the title row and then all the rows from the document content,
   border-top: 0;
 }
 
-/* 
+/*
  * Navbar corrections for https://jira.xwiki.org/browse/XWIKI-17262
  * As long as the navbar is collapsed, display the header and menus completely different.
  * We're doing it like this and not mobile-first because we're already inheriting some desktop behaviour and I don't want to spend time resetting all that
@@ -1728,7 +1728,7 @@ legend {
  */
 abbr.asterix {
   color: @brand-danger;
-  border-bottom: 0; 
+  border-bottom: 0;
   text-decoration: none;
 }
 
