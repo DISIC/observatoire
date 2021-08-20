@@ -41,8 +41,10 @@
   <hidden>true</hidden>
   <content>#General
 wd.home=Accueil
-wd.legal-notice=Conditions générales d'utilisation
+wd.cgu=Conditions générales d'utilisation
 wd.accessibilite=Accessibilité : partiellement conforme
+wd.legal-notice=Mentions Légales
+wd.personal-data=Données personnelles
 wd.contact=Contact
 wd.about=À propos
 wikidemarches.obligatoire=(obligatoire)
@@ -68,16 +70,11 @@ wikidemarches.home.title=L’observatoire de la qualité des démarches en ligne
 wikidemarches.home.subtitle=Pour des services publics numériques de qualité
 wikidemarches.home.explanation=Des démarches en ligne simples, accessibles à tous et compréhensibles simplifient la vie des citoyennes et citoyens. L’Observatoire vous permet de suivre la qualité de la numérisation des 250 démarches les plus utilisées.
 wikidemarches.home.observatoire.title=Actuellement
-wikidemarches.home.observatoire.description=Pour donner une moyenne, voici les derniers chiffres sur la totalité des 250 démarches que nous suivons (mai 2019).  
+wikidemarches.home.observatoire.description=Pour donner une moyenne, voici les derniers chiffres sur la totalité des 250 démarches que nous suivons (mai 2019).
 wikidemarches.footer=Pied de page
 wikidemarches.sitemap=Plan du site
-wikidemarches.by-dinum=Un service proposé par la &lt;a href="https://numerique.gouv.fr"&gt;&lt;abbr title="Direction interministérielle du numérique"&gt;DINUM&lt;/abbr&gt;&lt;/a&gt;
 wikidemarches.dinum.twitter=La DINUM sur Twitter
 wikidemarches.dinum.linkedin=La DINUM sur LinkedIn
-wikidemarches.sitemap.observatoire=L'observatoire
-wikidemarches.sitemap.observatoire.help-link-observatoire=En savoir plus sur l'observatoire
-wikidemarches.sitemap.qui-sommes-nous=À propos
-wikidemarches.sitemap.donner-son-avis=Comment donner son avis ?
 wikidemarches.code-open-source=Code open source
 wikidemarches.search.label=Chercher une démarche
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
@@ -122,7 +119,7 @@ wikidemarches.demarche.embed.generate.button=Générer le code
 # Liste des avis tab
 wikidemarches.demarche.avisList.export.title=Exporter les avis
 wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également.
-wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter : 
+wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter :
 wikidemarches.demarche.avisList.export.excel=Exporter pour excel
 wikidemarches.demarche.avisList.export.csv=Exporter en CSV
 
@@ -148,10 +145,12 @@ wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également n
 wikidemarches.demande.newdemarche.warning=Cette démarche a été ajoutée par un(e) internaute le {0}. Elle est en cours de vérification par l''administration mais vous pouvez déjà donner votre avis.
 
 #Footer
-wikidemarches.footer.administrationlinks.intro=Les sites publics
+wikidemarches.footer.reseaux-sociaux=Suivez-nous sur nos réseaux sociaux
+wikidemarches.footer.administrationlinks.intro=Nos sites :
 wikidemarches.footer.administrationlinks.newwindow=nouvelle fenêtre
-wikidemarches.footer.nosunivers.title=Nos univers
-wikidemarches.footer.services.title=Services aux usagers
+wikidemarches.footer.description.voxusagers=Le bouton {0} est un service proposé par la direction interministérielle du numérique (DINUM) dans le cadre de la démarche Services publics +.
+wikidemarches.footer.description.voxusagers.button-name=Je donne mon avis
+wikidemarches.footer.description.observatoire=L’Observatoire de la qualité des démarches en ligne est un service proposé par l'équipe design des services numériques de la direction interministérielle du numérique (DINUM).
 
 # Tableau de bord
 wikidemarches.dematdashboard.title=Tableau de bord de la dématérialisation
