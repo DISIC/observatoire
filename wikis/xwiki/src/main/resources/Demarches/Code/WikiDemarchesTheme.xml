@@ -1312,7 +1312,8 @@ Visually, there's the title row and then all the rows from the document content,
 /*
  * Display site name next to logo
  */
-#menuview .navbar-brand {
+#menuview .navbar-brand,
+#footerglobal .navbar-brand {
   /* Reset padding that seems to be computed from the navbar size */
   padding: 0;
   padding-left: @grid-gutter-width/2;
@@ -1345,13 +1346,16 @@ Visually, there's the title row and then all the rows from the document content,
   min-height: @logo-height-mobile;
 }
 .navbar-brand,
-#menuview .navbar-brand img {
+#menuview .navbar-brand img,
+#footerglobal .navbar-brand img {
   height: @logo-height-mobile;
 }
-#menuview .navbar-brand img {
+#menuview .navbar-brand img,
+#footerglobal .navbar-brand img {
   margin-right: @logo-spacing-mobile;
 }
-#menuview .navbar-brand .demarches-titlebar-sitename {
+#menuview .navbar-brand .demarches-titlebar-sitename,
+#footerglobal .navbar-brand .demarches-titlebar-sitename {
   padding-top: @sitename-top-mobile;
   img {
     margin-right: 0;
@@ -1376,13 +1380,16 @@ Visually, there's the title row and then all the rows from the document content,
     min-height: @logo-height-desktop;
   }
   .navbar-brand,
-  #menuview .navbar-brand img {
+  #menuview .navbar-brand img,
+  #footerglobal .navbar-brand img {
     height: @logo-height-desktop;
   }
-  #menuview .navbar-brand img {
+  #menuview .navbar-brand img,
+  #footerglobal .navbar-brand img {
     margin-right: @logo-spacing-desktop;
   }
-  #menuview .navbar-brand .demarches-titlebar-sitename {
+  #menuview .navbar-brand .demarches-titlebar-sitename,
+  #footerglobal .navbar-brand .demarches-titlebar-sitename {
     padding-top: @sitename-top-desktop;
     img {
       height: @sitename-height-desktop;
@@ -1540,110 +1547,177 @@ legend {
 }
 
 
-/*
- * Footer is the inverse color of the nav and same text color, and aligned left on desktop &amp; tablet
- */
-@footer-color: darken(@navbar-default-bg, 10%);
-#footerglobal {
-  background-color: @navbar-default-color;
-  color: @footer-color;
-  /* Since footer is black now, we add some margin above it to make room between it and the content. 
-     If a page makes a stacked rows layout, it need to reset this */
-  margin-top: @grid-gutter-width;
-  h2, h3 {
-    color: @footer-color;
-  }
-}
-
-#footerglobal a, 
-#footerglobal a:hover {
-  color: @footer-color;
-}
 
 /* Styling of the custom footer */
+
+@dsfr-bf100: #f2f2f9;
+@dsfr-bf500: #000091;
+@dsfr-bf-icon: #00258e;
+@dsfr-g400: #cecece;
+@dsfr-g600: #6a6a6a;
+@dsfr-beige: #f9f8f6;
+
 #footerglobal {
-  font-size: 90%;
-  padding-top: @grid-gutter-width;
-  padding-bottom: @grid-gutter-width;
+  margin-top: 2rem;
+  font-family: Marianne, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
   text-align: left;
-  img {
-    width: 30%;
-    @media (min-width: @screen-md-min) {
-      width: 50%;
-    }
-  }
-  ul.social-networks {
-    margin-top: 2em;
-    li {
-      display: inline;
-      a {
-        display: inline-block;
-        height: 2em;
-        width: 2em;
-        line-height: 2em;
-        border-radius: 1em;
-        font-size: 1.5em;
-        background-color: @footer-color;
-        text-decoration: none;
-        color: black;
-        text-align: center;
-        margin-right: 0.3em;
-      }
-    }
-  }
+
   ul {
-    list-style-type: none;
-    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
     padding-left: 0;
-    &amp;.emphasis {
-      text-transform: uppercase;
+    margin: 0;
+    list-style-type: none;
+
+    a {
+     &amp;:hover {
+       text-decoration: none;
+     }
     }
-    margin-bottom: 2em;
-    margin-top: 0;
   }
-  /* The h2 heading in the footer is meant to be seen only by screen-readers. See also: 
+  /* The h2 heading in the footer is meant to be seen only by screen-readers. See also:
    * - https://webaim.org/techniques/css/invisiblecontent/
    * - https://www.w3.org/WAI/tutorials/page-structure/headings/
    * - https://www.drupal.org/docs/7/creating-accessible-themes/using-headings-to-improve-accessibility
    */
   h2 {
-    text-indent: -8888px;
-    float: left;
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
-  h3 {
-    font-weight: normal;
-    margin-bottom: 2em;
-    margin-top: 0;
-    line-height: 1.75em;
-  }
-  .footer-col-sitename {
-    h3 {
-      font-size: 1.4em;
-      line-height: 1.4em;
-      margin-bottom: 1.5em;
+
+  #footersocial {
+    background-color: @dsfr-bf100;
+
+    #footersocial-links {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
-    }
-    p {
-      font-size: 1.1em;
-      margin-bottom: 2em;
-      abbr {
-        text-decoration: none !important;
+
+      ul.social-networks {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2rem;
+
+        a span {
+          font-size: 1.8rem;
+          color: @dsfr-bf-icon;
+        }
       }
     }
   }
-  .footer-col-sites {
-    text-align: center;
-    margin-top: @grid-gutter-width / 2;
-    font-size: 90%;
-    a {
-      display: inline-block;
-      margin-left: 0.4em;
-      margin-right: 0.4em;
+
+  #footerborder {
+    height: 2px;
+    width: 100%;
+    background-color: @dsfr-bf500;
+  }
+
+  #footertop {
+    background-color: @dsfr-beige;
+
+    .row .col-xs-12 {
+      text-align: center;
     }
-    ul.site-list {
-      display: inline;
+
+    #footertop-sites {
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      row-gap: 0.5rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+
+      .footertop-sites-label {
+        font-weight: bold;
+        margin-right: 2rem;
+      }
+
+      ul {
+        justify-content: flex-start;
+
+        li {
+          margin-right: 2rem;
+          font-size: 90%;
+
+          a {
+            color: @dsfr-g600;
+          }
+        }
+      }
+    }
+  }
+
+  #footermaincontent {
+    padding-top: @grid-gutter-width;
+    padding-bottom: @grid-gutter-width;
+
+    .footer-col-sitename {
+      margin-left: -15px;
+      margin-right: -15px;
+      margin-bottom: 2rem;
+
+      .navbar-brand {
+        float: none;
+      }
+    }
+
+    .footer-col-services {
+      p {
+        margin-bottom: 1rem;
+      }
+
       li {
-        display: inline;
+        margin-right: 1.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+
+        a {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .footer-col-sites {
+      border-top: 1px solid @dsfr-g400;
+      margin-top: @grid-gutter-width / 2;
+      padding-top: 0.5rem;
+      text-align: center;
+      font-size: 90%;
+
+      li {
+        margin: 0.5rem 0.75rem 0rem 0rem;
+
+        &amp;:not(:last-child)::after {
+          content: "";
+          display: inline-block;
+          vertical-align: middle;
+          background-color: @dsfr-g400;
+          width: 1px;
+          height: 1rem;
+          margin-left: 0.75rem;
+        }
+
+        a {
+          color: @dsfr-g600;
+        }
       }
     }
   }
