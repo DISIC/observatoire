@@ -842,7 +842,7 @@
     #set($logourl = $prefdoc.getAttachmentURL($logo.filename))
   #end
 #end
-&lt;div id="companylogo"&gt;
+&lt;div class="companylogo"&gt;
   #set($logoElt = 'a')
   #set($url = "$!xwiki.getURL($services.wiki.currentWikiDescriptor.mainPageReference)")
   #set($siteName = $services.localization.render('wikidemarches.sitename'))

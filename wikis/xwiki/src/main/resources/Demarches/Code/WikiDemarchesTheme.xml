@@ -1460,7 +1460,7 @@ Visually, there's the title row and then all the rows from the document content,
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: transparent;
   }
-  #companylogo {
+  .companylogo {
     float: left;
   }
   /* Custom elements of the observatoire */
