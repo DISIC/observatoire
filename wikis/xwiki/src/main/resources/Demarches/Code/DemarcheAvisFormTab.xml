@@ -160,6 +160,22 @@
     &lt;input class="fr-btn fr-mt-6v" type="submit" name="submit" value="$submitLabel" disabled/&gt;
     &lt;/form&gt;
   #end
+#else
+  {{html clean="false"}}
+    &lt;div class="form-final-step-information"&gt;
+      &lt;h2&gt;$services.localization.render('avis.form.final-step.information.title')&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;span class='fr-fi-checkbox-circle-line fr-fi--lg' aria-hidden="true"&gt;&lt;/span&gt;
+          &lt;p&gt;$services.localization.render('avis.form.final-step.information.anonymity')&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;span class='fr-fi-information-line fr-fi--lg' aria-hidden="true"&gt;&lt;/span&gt;
+          &lt;p&gt;$services.localization.render('avis.form.final-step.information.follow', ["&lt;a href='https://observatoire.numerique.gouv.fr'&gt;$escapetool.xml($services.localization.render('avis.form.final-step.information.follow.link-title'))&lt;/a&gt;"])&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  {{/html}}
 #end
 {{/html}}
 {{/velocity}}</content>
@@ -491,6 +507,47 @@ legend.fr-fieldset__legend {
 
   .fr-hint-text {
     margin-bottom: -1rem !important;
+  }
+}
+
+
+/* Custom style for the final step of the form */
+
+// Unfortunately the less parser can't handle css variables
+@bf500: #000091; // var(--bf500);
+
+#xwikimaincontainer #mainContentArea #avis-tab .form-final-step-information {
+  margin-bottom: 3rem;
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  ul {
+    padding: 0;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      list-style-type: none;
+
+      /* the icons */
+      span[class^="fr-fi-"] {
+        font-size: 2rem;
+        margin-right: 1rem;
+        color: @bf500;
+      }
+
+      p {
+        margin-bottom: 1.5rem;
+
+        a {
+          color: @bf500;
+        }
+      }
+    }
   }
 }
 
