@@ -42,7 +42,6 @@
   <content/>
   <attachment>
     <filename>LogoObservatoire.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -52,7 +51,6 @@
   </attachment>
   <attachment>
     <filename>LogoRF.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -62,7 +60,6 @@
   </attachment>
   <attachment>
     <filename>LogoVoxusagers.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -1331,7 +1328,7 @@ Visually, there's the title row and then all the rows from the document content,
 }
 
 /* Sizes for the logos and top menu, mobile first*/
-@navbar-padding-mobile: 16px;
+@navbar-padding-mobile: 0.75rem;
 @logo-height-mobile: 64px;
 @logo-spacing-mobile: 24px;
 @sitename-height-mobile: 25px;
@@ -1368,11 +1365,11 @@ Visually, there's the title row and then all the rows from the document content,
 
 
 /* Custom size of the navbar on desktop */
-@navbar-padding-desktop: 30px;
-@logo-height-desktop: 115px;
+@navbar-padding-desktop: 1.5rem;
+@logo-height-desktop: 68px;
 @logo-spacing-desktop: 60px;
 @sitename-height-desktop: 44px;
-@sitename-top-desktop: 29px;
+@sitename-top-desktop: 14px;
 @media (min-width: @screen-md-min) {
   #menuview .navbar {
     padding-top: @navbar-padding-desktop;
@@ -1380,16 +1377,25 @@ Visually, there's the title row and then all the rows from the document content,
     min-height: @logo-height-desktop;
   }
   .navbar-brand,
-  #menuview .navbar-brand img,
+  #menuview .navbar-brand img {
+    height: @logo-height-desktop;
+  }
   #footerglobal .navbar-brand img {
+    @logo-height-desktop: 115px;
     height: @logo-height-desktop;
   }
   #menuview .navbar-brand img,
   #footerglobal .navbar-brand img {
     margin-right: @logo-spacing-desktop;
   }
-  #menuview .navbar-brand .demarches-titlebar-sitename,
+  #menuview .navbar-brand .demarches-titlebar-sitename {
+    padding-top: @sitename-top-desktop;
+    img {
+      height: @sitename-height-desktop;
+    }
+  }
   #footerglobal .navbar-brand .demarches-titlebar-sitename {
+    @sitename-top-desktop: 29px;
     padding-top: @sitename-top-desktop;
     img {
       height: @sitename-height-desktop;
