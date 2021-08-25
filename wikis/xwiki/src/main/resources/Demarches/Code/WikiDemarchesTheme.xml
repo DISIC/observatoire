@@ -1296,8 +1296,6 @@ Visually, there's the title row and then all the rows from the document content,
  * Make header span the entire width so that the bottom shadow display correctly 
  */
 #xwikimaincontainerinner header {
-  position: relative;
-  z-index: 100;
   margin-left: -15px;
   margin-right: -15px;
   padding-left: 15px;
