@@ -82,14 +82,14 @@ avis.score.totalnumber={0} avis
 avis.score.satisfactionscore=Taux de satisfaction sur {1} avis : {0} {2}
 avis.score.0votes=Aucun avis
 avis.entry.name=Avis
-avis.invite=Donnez votre avis
-avis.mandatory-info=Les champs marqués de &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
+avis.invite=Je donne mon avis
+avis.mandatory-info=Les champs signalés par un astérique &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
 avis.vote.button=Donner un avis
 # Form messages
 avis.form.initial-step.demarche-newly-submitted-by-current-user=La démarche a bien été ajoutée.
 avis.form.second-form-screen.title=Merci !
 avis.form.second-form-screen=Votre avis a bien été pris en compte.
-avis.form.second-form-screen.introduction=Pour terminer, pouvez-vous nous en dire plus ?
+avis.form.second-form-screen.introduction=Pouvez-vous nous en dire plus ?
 avis.form.third-form-screen=Merci d'avoir donné votre avis !\nVotre réponse nous aide à améliorer le service public.
 avis.form.final-step.title=Merci pour votre aide !
 avis.form.final-step=Votre avis a bien été transmis au service qui s’occupe de cette démarche.
@@ -119,7 +119,6 @@ Avis.Code.AvisClass_vote=Auriez-vous préféré faire cette démarche en ligne ?
 Avis.Code.AvisClass_vote_true=Oui
 Avis.Code.AvisClass_vote_false=Non
 Avis.Code.AvisClass_voteInput=Souhaitez-vous nous dire pourquoi ?
-Avis.Code.AvisClass_step-2=Pour terminer, pouvez-vous nous en dire plus ?
 Avis.Code.AvisClass_facile=Était-ce facile à utiliser ?
 Avis.Code.AvisClass_facile_1=Non
 Avis.Code.AvisClass_facile_2=Moyen
