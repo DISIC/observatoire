@@ -359,7 +359,7 @@
     margin-bottom: 0;
     line-height: 1.1em;
     font-weight: 800;
-    font-family: "Marianne", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Marianne", Arial, "Helvetica Neue", Helvetica, sans-serif;
   }
   @media (min-width: @screen-md-min) {
     padding-top: @section-padding-top-lg;

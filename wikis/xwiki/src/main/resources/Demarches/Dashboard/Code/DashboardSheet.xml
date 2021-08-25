@@ -1358,7 +1358,7 @@ input[name='title'] {
   #document-title h1 {
     color: #fff;
     font-weight: 800;
-    font-family: "Marianne", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Marianne", Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
   }

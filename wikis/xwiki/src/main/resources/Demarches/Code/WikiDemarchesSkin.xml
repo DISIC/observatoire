@@ -1208,8 +1208,8 @@ window.docgeturl = "${doc.getURL('get')}";
     </class>
     <property>
       <content>#template('colorThemeInit.vm')
-## include custom Inter font, that's packed as an ssx
-&lt;link href="$xwiki.getURL('Fonts.InterWebfontSSX', 'ssx')" rel="stylesheet" type="text/css" media="all" /&gt;
+## include custom Marianne font from DSFR, packed as an ssx
+&lt;link href="$xwiki.getURL('Fonts.MarianneWebfontSSX', 'ssx')" rel="stylesheet" type="text/css" media="all" /&gt;
 ## The default stylesheet configuration option allows to override the default style.css CSS
 #set ($defaultstyle = $xwiki.getSpacePreference('stylesheet'))
 #if ($defaultstyle == '')

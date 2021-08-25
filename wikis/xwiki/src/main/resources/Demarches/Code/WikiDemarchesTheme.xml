@@ -1047,7 +1047,7 @@
       <dropdown-link-hover-color/>
     </property>
     <property>
-      <font-family-base>Inter, "Helvetica Neue", Helvetica, Arial, sans-serif</font-family-base>
+      <font-family-base>Marianne, Arial, sans-serif</font-family-base>
     </property>
     <property>
       <font-family-monospace/>
@@ -1501,7 +1501,7 @@ li.wikidemarches-topmenu {
     display: inline-block;
     max-width: unset;
     line-height: unset;
-    font-family: Marianne, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Marianne, Arial, "Helvetica Neue", Helvetica, sans-serif;
   }
 }
 
@@ -1581,7 +1581,7 @@ legend {
 
 #footerglobal {
   margin-top: 2rem;
-  font-family: Marianne, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Marianne, Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 0.875rem;
   line-height: 1.5rem;
   text-align: left;
@@ -1807,7 +1807,8 @@ span.wikiexternallink {
   a:focus {
     top:0;
   }
-}</lessCode>
+}
+</lessCode>
     </property>
     <property>
       <link-color>#006be6</link-color>
