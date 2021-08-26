@@ -502,11 +502,48 @@ legend.fr-fieldset__legend {
 }
 
 /* Rules to match the required style from the sketch specifications */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__legend {
-  margin-bottom: 1.5rem !important;
+@bf500: #000091; // --fr-bf500
+#xwikimaincontainer #mainContentArea {
+  .document-info {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    @media (min-width: @screen-sm-min) {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
 
-  .fr-hint-text {
-    margin-bottom: -1rem !important;
+    h1 {
+      color: @bf500;
+      font-size: 2.5rem;
+    }
+  }
+
+  #xwikicontent {
+    margin-top: 1.5rem;
+    @media (min-width: @screen-sm-min) {
+      margin-top: 3rem;
+    }
+  }
+
+  #avis-tab {
+    .fr-fieldset__legend {
+      margin-bottom: 1.5rem !important;
+
+      .fr-hint-text {
+        margin-bottom: -1rem !important;
+      }
+    }
+
+    .form-preambule {
+      margin-bottom: 2rem;
+      @media (min-width: @screen-sm-min) {
+        margin-bottom: 2.5rem;
+      }
+
+      h2 {
+        margin-bottom: 0rem;
+      }
+    }
   }
 }
 

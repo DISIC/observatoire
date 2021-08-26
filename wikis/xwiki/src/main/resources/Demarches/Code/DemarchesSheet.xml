@@ -589,15 +589,6 @@ require(['jquery','xwiki-selectize'], function($) {
   padding: 0 0 1em 0;
 }
 
-.form-preambule {
-  margin-bottom: 3em;
-
-  h2 {
-    margin: 0;
-    font-weight: bold;
-  }
-}
-
 .subtitle, .info-box-mandatory {
   color: @gray-light;
 }
