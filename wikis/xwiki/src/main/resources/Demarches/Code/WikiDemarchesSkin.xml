@@ -854,7 +854,7 @@
   #end
   #set ($siteTitleImageName = 'LogoObservatoire.svg')
   ## special handling for voxusagers, to display a different site name
-  #if ($currentDomainKey == 'voxusagers')
+  #if ($displayAvisFormOnly)
     #set ($siteTitleImageName = 'services-plus.svg')
   #end
   &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
