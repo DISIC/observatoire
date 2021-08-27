@@ -42,7 +42,9 @@
   <content>#General
 wd.home=Accueil
 wd.cgu=Conditions générales d'utilisation
-wd.accessibilite=Accessibilité : partiellement conforme
+wd.accessibilite.conforme=Accessibilité : totalement conforme
+wd.accessibilite.partielle=Accessibilité : partiellement conforme
+wd.accessibilite.non-conforme=Accessibilité : non conforme
 wd.legal-notice=Mentions Légales
 wd.personal-data=Données personnelles
 wd.contact=Contact
@@ -73,6 +75,10 @@ wikidemarches.home.observatoire.title=Actuellement
 wikidemarches.home.observatoire.description=Pour donner une moyenne, voici les derniers chiffres sur la totalité des 250 démarches que nous suivons (mai 2019).
 wikidemarches.footer=Pied de page
 wikidemarches.sitemap=Plan du site
+wikidemarches.sitemap.observatoire=L'observatoire
+wikidemarches.sitemap.observatoire.help-link-observatoire=En savoir plus sur l'observatoire
+wikidemarches.sitemap.qui-sommes-nous=À propos
+wikidemarches.sitemap.donner-son-avis=Comment donner son avis ?
 wikidemarches.dinum.twitter=La DINUM sur Twitter
 wikidemarches.dinum.linkedin=La DINUM sur LinkedIn
 wikidemarches.code-open-source=Code open source
