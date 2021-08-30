@@ -61,9 +61,10 @@ $ npm install
 
 The `index.js` file is used to scope the given css file rules:
 - The source files must be placed inside the `css/` folder. These should be the files inside the `dsfr/css/` folder.
-  The dsfr version currently used is [1.1.0](https://gouvfr.atlassian.net/wiki/spaces/DB/pages/806912001/Version+1.1.0#T%C3%A9l%C3%A9chargements).
+  The dsfr version currently used is [1.1.0](https://github.com/GouvernementFR/dsfr/releases/download/v1.1.0/dsfr-v1.1.0.zip).
 - The output files will be generated inside the `out/` folder. It will be created if it doesn't exists.
   The content of this `out/` folder should be copied without modifications inside the `web/src/main/webapp/uicomponents/dsfr-scoped/css/` folder.
+  Please ensure that the `web/src/main/webapp/uicomponents/dsfr-scoped` folder matches the same version you used for generating the scoped files.
 
 Execute the `index.js` file to produce the scoped files:
 ```bash
