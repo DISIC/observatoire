@@ -358,7 +358,6 @@
     margin-bottom: 0;
     line-height: 1.1em;
     font-weight: 800;
-    font-family: "Marianne", Arial, "Helvetica Neue", Helvetica, sans-serif;
   }
   @media (min-width: @screen-md-min) {
     padding-top: @section-padding-top-lg;
@@ -388,7 +387,6 @@
     color: @headings-color;
     font-size: @headline-size-xs; /* ~59.4px for a 18px font */
     margin-bottom: 0.5em;
-    font-family: Marianne, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
   .seemore-button-container a.btn-default {
