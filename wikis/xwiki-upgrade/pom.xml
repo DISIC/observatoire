@@ -62,6 +62,8 @@
             <exclude>**/Main/Et-apres.xml</exclude>
             <exclude>**/Main/CGU.xml</exclude>
             <exclude>**/Main/Accessibilite.xml</exclude>
+            <exclude>**/Main/accessibilite-formulaire.xml</exclude>
+            <exclude>**/Main/plan-site.xml</exclude>
             <exclude>**/Aide/**</exclude>
             <exclude>**/Administration/Domaines autorisés</exclude>
           </excludes>
