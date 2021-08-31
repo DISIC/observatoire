@@ -48,7 +48,6 @@
 ## The Demarche sheet SSX and JSX are needed for editing a démarche in a modal dialog
 #set ($discard = $xwiki.ssx.use($DEMARCHE_SHEET))
 #set ($discard = $xwiki.ssx.use($DASHBOARD_SHEET))
-#set ($discard = $xwiki.ssx.use('Fonts.MarianneWebfontSSX'))
 ## include the back to top style and javascript
 #set ($discard = $xwiki.jsx.use("BackToTop.Code"))
 #set ($discard = $xwiki.ssx.use("BackToTop.Code"))
@@ -1358,7 +1357,6 @@ input[name='title'] {
   #document-title h1 {
     color: #fff;
     font-weight: 800;
-    font-family: "Marianne", Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
   }

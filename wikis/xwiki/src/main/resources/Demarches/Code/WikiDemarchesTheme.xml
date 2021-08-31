@@ -1499,7 +1499,6 @@ li.wikidemarches-topmenu {
     display: inline-block;
     max-width: unset;
     line-height: unset;
-    font-family: Marianne, Arial, "Helvetica Neue", Helvetica, sans-serif;
   }
 }
 
@@ -1579,7 +1578,6 @@ legend {
 
 #footerglobal {
   margin-top: 2rem;
-  font-family: Marianne, Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 0.875rem;
   line-height: 1.5rem;
   text-align: left;
@@ -1806,6 +1804,7 @@ span.wikiexternallink {
     top:0;
   }
 }
+
 </lessCode>
     </property>
     <property>

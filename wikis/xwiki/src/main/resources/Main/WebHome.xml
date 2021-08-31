@@ -44,7 +44,6 @@
 {{velocity}}
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
-  #set($discard = $xwiki.ssx.use('Fonts.MarianneWebfontSSX'))
   #set($discard = $xwiki.ssx.use($doc.fullName))
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
