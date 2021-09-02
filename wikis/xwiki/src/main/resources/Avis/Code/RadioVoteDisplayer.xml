@@ -272,6 +272,10 @@
           }
         }
       }
+      input:focus-visible + label {
+        outline: solid 2px #2a7ffe; // matching dsfr styles (color is: var(--focus))
+        outline-offset: 2px;
+      }
     }
   }
 
