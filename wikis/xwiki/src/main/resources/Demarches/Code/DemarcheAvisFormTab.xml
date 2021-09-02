@@ -166,11 +166,11 @@
       &lt;h2&gt;$services.localization.render('avis.form.final-step.information.title')&lt;/h2&gt;
       &lt;ul&gt;
         &lt;li&gt;
-          &lt;span class='fr-fi-checkbox-circle-line fr-fi--lg' aria-hidden="true"&gt;&lt;/span&gt;
+          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/check-circle.svg")"/&gt;
           &lt;p&gt;$services.localization.render('avis.form.final-step.information.anonymity')&lt;/p&gt;
         &lt;/li&gt;
         &lt;li&gt;
-          &lt;span class='fr-fi-information-line fr-fi--lg' aria-hidden="true"&gt;&lt;/span&gt;
+          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/award.svg")"/&gt;
           &lt;p&gt;$services.localization.render('avis.form.final-step.information.follow', ["&lt;a href='https://observatoire.numerique.gouv.fr'&gt;$escapetool.xml($services.localization.render('avis.form.final-step.information.follow.link-title'))&lt;/a&gt;"])&lt;/p&gt;
         &lt;/li&gt;
       &lt;/ul&gt;
@@ -571,10 +571,14 @@ legend.fr-fieldset__legend {
       list-style-type: none;
 
       /* the icons */
-      span[class^="fr-fi-"] {
+      .list-icon {
         font-size: 2rem;
         margin-right: 1rem;
-        color: @bf500;
+        margin-top: 0.25rem;
+        // We can't change the color of an svg from an img tag
+        // So we are using css filters hack to modify the color
+        // Reproducing the color @bf500 using the tool: https://codepen.io/sosuke/pen/Pjoqqp
+        filter: invert(13%) sepia(100%) saturate(5009%) hue-rotate(243deg) brightness(55%) contrast(134%);
       }
 
       p {

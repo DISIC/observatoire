@@ -74,8 +74,8 @@
             #if ($withIcons)
               #set($currSmiley = $smileys.get($mathtool.sub($velocityCount, 1)))
               &lt;span class='radiovote-icon'&gt;
-                &lt;img src="$xwiki.getSkinFile("/uicomponents/dsfr-smileys/${currSmiley}.svg")" alt="${currSmiley}" class="smiley smiley-default"/&gt;
-                &lt;img src="$xwiki.getSkinFile("/uicomponents/dsfr-smileys/${currSmiley}-selected.svg")" alt="${currSmiley}-selected" class="smiley smiley-selected"/&gt;
+                &lt;img src="$xwiki.getSkinFile("/uicomponents/custom-icons/dsfr-smileys/${currSmiley}.svg")" alt="${currSmiley}" class="smiley smiley-default"/&gt;
+                &lt;img src="$xwiki.getSkinFile("/uicomponents/custom-icons/dsfr-smileys/${currSmiley}-selected.svg")" alt="${currSmiley}-selected" class="smiley smiley-selected"/&gt;
               &lt;/span&gt;
             #end
             &lt;span class='radiovote-label'&gt;$escapetool.xml($services.localization.render("${theClass.name}_${name}_${v}"))&lt;/span&gt;
