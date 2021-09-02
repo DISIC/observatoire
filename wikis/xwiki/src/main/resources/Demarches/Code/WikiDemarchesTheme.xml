@@ -1450,11 +1450,6 @@ Visually, there's the title row and then all the rows from the document content,
   border-top: 0;
 }
 
-/* Change navbar links color to dsfr */
-.navbar-default .navbar-nav &gt; li &gt; a {
-  color: @dsfr-bf500;
-}
-
 /*
  * Navbar corrections for https://jira.xwiki.org/browse/XWIKI-17262
  * As long as the navbar is collapsed, display the header and menus completely different.
@@ -1829,16 +1824,16 @@ span.wikiexternallink {
       <navbar-default-link-active-bg>#ffffff</navbar-default-link-active-bg>
     </property>
     <property>
-      <navbar-default-link-active-color>#0a0a0a</navbar-default-link-active-color>
+      <navbar-default-link-active-color>#000091</navbar-default-link-active-color>
     </property>
     <property>
-      <navbar-default-link-color>#0a0a0a</navbar-default-link-color>
+      <navbar-default-link-color>#000091</navbar-default-link-color>
     </property>
     <property>
       <navbar-default-link-hover-bg>#ffffff</navbar-default-link-hover-bg>
     </property>
     <property>
-      <navbar-default-link-hover-color>#0a0a0a</navbar-default-link-hover-color>
+      <navbar-default-link-hover-color>#000091</navbar-default-link-hover-color>
     </property>
     <property>
       <navbar-height>25px</navbar-height>
