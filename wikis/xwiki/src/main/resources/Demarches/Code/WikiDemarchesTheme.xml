@@ -1098,6 +1098,14 @@
   outline-offset: -4px;
 }
 
+/* Reproducing DSFR variables declaration */
+@dsfr-bf100: #f2f2f9;
+@dsfr-bf500: #000091;
+@dsfr-bf-icon: #00258e;
+@dsfr-g400: #cecece;
+@dsfr-g600: #6a6a6a;
+@dsfr-beige: #f9f8f6;
+
 /***************************************************/
 /* Bootstrap corrections to make the site          */
 /* accessible: font-size in em                     */
@@ -1442,6 +1450,11 @@ Visually, there's the title row and then all the rows from the document content,
   border-top: 0;
 }
 
+/* Change navbar links color to dsfr */
+.navbar-default .navbar-nav &gt; li &gt; a {
+  color: @dsfr-bf500;
+}
+
 /*
  * Navbar corrections for https://jira.xwiki.org/browse/XWIKI-17262
  * As long as the navbar is collapsed, display the header and menus completely different.
@@ -1568,13 +1581,6 @@ legend {
 
 
 /* Styling of the custom footer */
-
-@dsfr-bf100: #f2f2f9;
-@dsfr-bf500: #000091;
-@dsfr-bf-icon: #00258e;
-@dsfr-g400: #cecece;
-@dsfr-g600: #6a6a6a;
-@dsfr-beige: #f9f8f6;
 
 #footerglobal {
   margin-top: 2rem;
