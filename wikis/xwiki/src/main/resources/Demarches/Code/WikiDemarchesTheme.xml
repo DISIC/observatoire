@@ -1301,7 +1301,7 @@ Visually, there's the title row and then all the rows from the document content,
 /***************************************************/
 
 /*
- * Make header span the entire width so that the bottom shadow display correctly 
+ * Make header span the entire width so that the bottom shadow display correctly
  */
 #xwikimaincontainerinner header {
   margin-left: -15px;
@@ -1327,6 +1327,7 @@ Visually, there's the title row and then all the rows from the document content,
 /*
  * Logo and navbar
  */
+
 /*
  * Display site name next to logo
  */
@@ -1348,85 +1349,100 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-/* Sizes for the logos and top menu, mobile first*/
-@navbar-padding-mobile: 0.75rem;
 @logo-height-mobile: 64px;
-@logo-spacing-mobile: 24px;
-@sitename-height-mobile: 25px;
-@sitename-top-mobile: 10px;
-
-/*
- * Make some room around the logo on the topbar
- */
-#menuview .navbar {
-  padding-top: @navbar-padding-mobile;
-  padding-bottom: @navbar-padding-mobile;
-  min-height: @logo-height-mobile;
-}
-.navbar-brand,
-#menuview .navbar-brand img,
-#footerglobal .navbar-brand img {
-  height: @logo-height-mobile;
-}
-#menuview .navbar-brand img,
-#footerglobal .navbar-brand img {
-  margin-right: @logo-spacing-mobile;
-}
-#menuview .navbar-brand .demarches-titlebar-sitename,
-#footerglobal .navbar-brand .demarches-titlebar-sitename {
-  padding-top: @sitename-top-mobile;
-  img {
-    margin-right: 0;
-    height: @sitename-height-mobile;
-  }
-}
-#menuview .navbar-right {
-  padding-top: @sitename-top-mobile;
-}
-
-
-/* Custom size of the navbar on desktop */
-@navbar-padding-desktop: 1.5rem;
 @logo-height-desktop: 68px;
-@logo-spacing-desktop: 60px;
-@sitename-height-desktop: 44px;
-@sitename-top-desktop: 13px;
 
-@media (min-width: @screen-md-min) {
-  #menuview .navbar {
-    padding-top: @navbar-padding-desktop;
-    padding-bottom: @navbar-padding-desktop;
+/* Make some room around the logo on the topbar */
+@logo-height-mobile: 64px;
+#menuview .navbar {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  min-height: @logo-height-mobile;
+
+  @media (min-width: @screen-md-min) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     min-height: @logo-height-desktop;
   }
-  .navbar-brand,
-  #menuview .navbar-brand img {
-    height: @logo-height-desktop;
+}
+
+@sitename-top-mobile: 10px;
+@sitename-top-desktop: 13px;
+@sitename-height-mobile: 25px;
+@sitename-height-desktop: 44px;
+/* Header */
+.navbar-brand,
+#menuview .navbar-brand &gt; img {
+  height: @logo-height-mobile;
+
+  /* Icon secondary: Observatoire / SP+ */
+  &amp; + .demarches-titlebar-sitename {
+    padding-top: @sitename-top-mobile;
+    img { height: @sitename-height-mobile; }
   }
-  #footerglobal .navbar-brand img {
-    @logo-height-desktop: 115px;
-    height: @logo-height-desktop;
-  }
-  #menuview .navbar-brand img,
-  #footerglobal .navbar-brand img {
-    margin-right: @logo-spacing-desktop;
-  }
-  #menuview .navbar-brand .demarches-titlebar-sitename {
-    padding-top: @sitename-top-desktop;
-    img {
-      height: @sitename-height-desktop;
+
+  @media (min-width: @screen-md-min) {
+    height: 68px;
+
+    &amp; + .demarches-titlebar-sitename {
+      padding-top: @sitename-top-desktop;
+      img { height: @sitename-height-desktop; }
     }
   }
-  #footerglobal .navbar-brand .demarches-titlebar-sitename {
-    @sitename-top-desktop: 28px;
-    padding-top: @sitename-top-desktop;
-    img {
-      height: @sitename-height-desktop;
+}
+
+/* Footer */
+#footerglobal .navbar-brand &gt; img {
+  height: @logo-height-mobile;
+
+  /* Icon secondary: Observatoire / SP+ */
+  &amp; + .demarches-titlebar-sitename {
+    padding-top: @sitename-top-mobile;
+    img { height: @sitename-height-mobile; }
+  }
+
+  @media (min-width: @screen-md-min) {
+    height: 115px;
+
+    &amp; + .demarches-titlebar-sitename {
+      padding-top: 28px;
+      img { height: @sitename-height-desktop; }
     }
   }
-  #menuview .navbar-right {
+
+  /* Fix logo Observatoire wrapping under logo fr under certain conditions */
+  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    height: 115px;
+
+    &amp; + .demarches-titlebar-sitename.observatoire {
+      padding-top: 32px;
+      img { height: 34px; }
+    }
+  }
+}
+
+/* Logos spacing */
+#menuview .navbar-brand &gt; img,
+#footerglobal .navbar-brand &gt; img {
+  margin-right: 24px;
+
+  @media (min-width: @screen-md-min) {
+    margin-right: 60px;
+  }
+
+}
+
+/* Vertically align the menu of the header */
+#menuview .navbar-right {
+  padding-top: @sitename-top-mobile;
+
+  @media (min-width: @screen-md-min) {
     padding-top: @sitename-top-desktop + 7px;
   }
 }
+
+/* --- End navbar and logo styles --- */
+
 
 /* Correction of the display of global search - undoing a rule from the skin which is increasing padding for the search button */
 @media (min-width: @grid-float-breakpoint) {

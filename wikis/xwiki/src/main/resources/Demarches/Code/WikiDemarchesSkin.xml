@@ -855,13 +855,14 @@
     #set($logoAttr = '')
   #end
   #set ($siteTitleImageName = 'LogoObservatoire.svg')
+  #set($siteClassName = 'observatoire')
   ## special handling for voxusagers, to display a different site name
   #if ($currentDomainKey == 'voxusagers')
     #set ($siteTitleImageName = 'services-plus.svg')
+    #set($siteClassName = 'service-plus')
   #end
-  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
-&lt;/div&gt;
-</content>
+  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename $siteClassName'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
+&lt;/div&gt;</content>
     </property>
     <property>
       <path>companylogo.vm</path>
