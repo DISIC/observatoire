@@ -157,7 +157,7 @@
     #elseif ($step == 'third-form-screen')
       #set ($submitLabel = $escapetool.xml($services.localization.render('avis.form.complete')))
     #end
-    &lt;input class="fr-btn fr-mt-6v" type="submit" name="submit" value="$submitLabel" disabled/&gt;
+    &lt;button class="fr-btn fr-mt-6v" type="submit" name="submit" disabled&gt;$submitLabel&lt;/button&gt;
     &lt;/form&gt;
   #end
 #else
@@ -279,7 +279,7 @@
       } else {
         $('.vote-container').hide();
       }
-      $('input[type="submit"]').prop('disabled', false);
+      $('button[type="submit"]').prop('disabled', false);
     }
 
     var vote = $("input[name='Avis.Code.AvisClass_0_vote']:checked").val();
@@ -294,7 +294,7 @@
     var step = $('input[name="avis-form-step"]').prop('value');
     if (step == "second-form-screen") {
       $('.eval-container').show();
-      $('input[type="submit"]').prop('disabled', false);
+      $('button[type="submit"]').prop('disabled', false);
     }
   }
 
@@ -368,7 +368,7 @@
     // For the third form screen, always enable the submit button
     var step = $('input[name="avis-form-step"]').prop('value');
     if (step == "third-form-screen") {
-      $('input[type="submit"]').prop('disabled', false);
+      $('button[type="submit"]').prop('disabled', false);
     }
   });
 });</code>
