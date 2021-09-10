@@ -503,13 +503,15 @@ legend.fr-fieldset__legend {
 
 /* Rules to match the required style from the sketch specifications */
 @bf500: #000091; // --fr-bf500
+@bf100: #f2f2f9; // --fr-bf100
+@document-title-margin-bottom: 1rem;
 #xwikimaincontainer #mainContentArea {
   .document-info {
-    margin-top: 2rem;
+    margin-top: 0rem;
     margin-bottom: 2rem;
     @media (min-width: @screen-sm-min) {
       margin-top: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: @document-title-margin-bottom;
     }
 
     h1 {
@@ -546,6 +548,45 @@ legend.fr-fieldset__legend {
     }
   }
 }
+
+
+/*
+ * Display the blue background for the form title
+ * This is using a `::before` element that span across the window
+ * This might not be the cleanest solution, but this surely is one of the simplest,
+ * considered how the layouts are structured in the wiki
+ */
+#contentcontainer .main {
+  @main-margin-top: 3.5rem;
+  @top-compensation: 4rem; // 4rem is enough to compensate the parent margins / paddings
+
+  @media (min-width: @screen-sm-min) {
+    margin-top: @main-margin-top;
+  }
+
+  .document-header {
+    @media (max-width: @screen-xs-max) {
+      background-color: @bf100;
+    }
+
+    #document-title {
+      &amp;::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: calc(-@main-margin-top - @top-compensation);
+        left: -50vw;
+        z-index: -10;
+        width: 200vw;
+        @height-compensation: @top-compensation  + @main-margin-top + @document-title-margin-bottom;
+        // Need to use minus signs, else the minifier will remove spaces (and it will break)
+        height: calc(~'100% - ' -@height-compensation);
+        background-color: @bf100;
+      }
+    }
+  }
+}
+
 
 
 /* Custom style for the final step of the form */

@@ -532,7 +532,7 @@ require(['jquery','xwiki-selectize'], function($) {
 /*
  * Add a little padding on desktop, so that it looks nicer
  */
-@media (min-width: @screen-md-min) {
+@media (min-width: @screen-sm-min) {
   .document-header {
     padding-top: 25px;
   }
