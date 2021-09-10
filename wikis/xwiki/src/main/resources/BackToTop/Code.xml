@@ -131,7 +131,7 @@ $(document).ready(function(){
         var displaymode=""; // If empty the button displays in all modes, if you want to display it for the view mode put "view" or                if you want to display it for the edit mode put "edit"  
 
 	// create #back-top button
-        $( 'body' ).append( '&lt;span id="back-top"&gt;&lt;a href="#top"&gt;&lt;span class="sr-only"&gt;' + text + '&lt;/span&gt;&lt;/a&gt;&lt;span&gt;'+text+'&lt;/span&gt;&lt;/span&gt;' );
+        $( '#footerglobal' ).before( '&lt;span id="back-top"&gt;&lt;a href="#top"&gt;&lt;span class="sr-only"&gt;' + text + '&lt;/span&gt;&lt;/a&gt;&lt;span&gt;'+text+'&lt;/span&gt;&lt;/span&gt;' );
         
 	// hide text span if is empty 
         if(text==""){
@@ -317,6 +317,7 @@ $(document).ready(function(){
   border-left: 10px solid #000;
   border-right: 10px solid #000;
   border-bottom: 15px solid #FFF;
+  margin-bottom: 2px;
 }
 #back-top span {
       position: absolute;
@@ -342,25 +343,7 @@ $(document).ready(function(){
 #back-top a:focus + span {
   .outline-dotted;
 }
-
-#back-top a:hover{ /* arrow animation */
-      -webkit-animation-name: example; /* Chrome, Safari, Opera */
-      -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
-      animation-name: arrow;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
-}
-/* animation */
-@-webkit-keyframes arrow { /* Chrome, Safari, Opera */
-  0%  {line-height: 70px;}
-  50%  {line-height: 48px;}
-  100%  {line-height: 70px;}
-}
-@keyframes arrow { /* Standard syntax */
-  0%  {line-height: 70px;}
-  50%  {line-height: 48px;}
-  100%  {line-height: 70px;}
-}</code>
+</code>
     </property>
     <property>
       <contentType>LESS</contentType>
