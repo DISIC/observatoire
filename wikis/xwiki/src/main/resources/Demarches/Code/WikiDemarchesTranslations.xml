@@ -67,6 +67,7 @@ wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car v
 
 #Démarches
 wikidemarches.sitename=L’observatoire de la qualité des démarches en ligne
+wikidemarches.sitename.servicesPubliquesPlus=Services Publics +
 wikidemarches.siteurl=observatoire.numerique.gouv.fr
 wikidemarches.home.title=L’observatoire de la qualité des démarches en ligne
 wikidemarches.home.subtitle=Pour des services publics numériques de qualité
