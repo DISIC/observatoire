@@ -204,13 +204,21 @@
     padding: 0 !important;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
 
     li {
       flex: 0 1 100%;
       display: block;
       text-align: center;
       vertical-align: top;
+
+      // Spacing betwen smileys
+      &amp;:not(:last-child) {
+        margin-bottom: 0.5rem;
+        @media (min-width: @screen-sm-min) {
+          margin-bottom: 0;
+          margin-right: 1.5rem;
+        }
+      }
 
       @media (min-width: @screen-sm-min) {
         flex: 0 1 7.5rem;
@@ -237,6 +245,11 @@
           font-size: @radiovote-iconsize;
           margin: 0.5rem;
           margin-right: 1rem;
+
+          // IE11 fix: be able to click on images on label to check radio button
+          img.smiley {
+            pointer-events: none;
+          }
 
           img.smiley-selected {
             display: none;
@@ -268,7 +281,7 @@
             display: none;
           }
           img.smiley-selected {
-            display: initial;
+            display: inline-block;
           }
         }
       }
