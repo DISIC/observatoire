@@ -373,11 +373,6 @@
   ## Top Menu
   #xwikitopmenustart()
 
-    ## Left menu
-    #xwikitopmenuleftstart()
-      #displaySimpleSecureUIX('org.xwiki.platform.topmenu.left')
-    #xwikitopmenuleftend()
-
     ## Right menu
     #xwikitopmenurightstart()
       #if ($displayDrawer)
@@ -1698,21 +1693,6 @@ $services.localization.render('accountnotactive_email')
 #end
 
 ###
-###    Toplevel Left Menu
-###
-#macro(xwikitopmenuleftstart)
-  &lt;ul class="nav navbar-nav navbar-left"&gt;
-    #submenuseparator()
-#end
-
-###
-###    Toplevel Left Menu
-###
-#macro(xwikitopmenuleftend)
-  &lt;/ul&gt;
-#end
-
-###
 ###    Toplevel Right Menu
 ###
 #macro(xwikitopmenurightstart)
@@ -1805,13 +1785,6 @@ $services.localization.render('accountnotactive_email')
 ###    Toplevel Menu entry separator
 ###
 #macro(xwikitopmenuseparator)
-  &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
-#end
-
-###
-###    Menu submenu separator
-###
-#macro(submenuseparator)
   &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
 #end
 
