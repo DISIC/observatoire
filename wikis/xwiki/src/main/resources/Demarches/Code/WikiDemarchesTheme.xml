@@ -1336,7 +1336,6 @@ Visually, there's the title row and then all the rows from the document content,
   /* Reset padding that seems to be computed from the navbar size */
   padding: 0;
   padding-left: @grid-gutter-width/2;
-  padding-right: @grid-gutter-width/2;
   img {
     display: inline-block;
   }
@@ -1422,14 +1421,22 @@ Visually, there's the title row and then all the rows from the document content,
 }
 
 /* Logos spacing */
+/* Always use 1rem (=16px) left padding from the secondary logo
+ * so that it stays aligned if it spans under the primary one
+ * Then complete with primary logo margin to have the expected spacing.
+ */ 
 #menuview .navbar-brand &gt; img,
 #footerglobal .navbar-brand &gt; img {
-  margin-right: 24px;
+  margin-right: 8px; // 24px with SP+ padding
 
   @media (min-width: @screen-md-min) {
-    margin-right: 60px;
+    margin-right: 44px; // 60px with SP+ padding
   }
 
+  /* Icon secondary: Observatoire / SP+ */
+  &amp; + .demarches-titlebar-sitename {
+    padding-left: 1rem;
+  }
 }
 
 /* Vertically align the menu of the header */
