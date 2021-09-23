@@ -2780,7 +2780,7 @@ Subject: Activation de votre compte sur le site ${wikiname}
 
 Bonjour ${xwiki.getUserName("$xwikiname", false)},
 
-Votre compte sur le site ${wikiname} a été activé avec succès. Vous pouvez à présent vous identifier à l'adresse ci-dessous en utilisant comme identifiant "${xwiki.getDocumentAsAuthor($xwikiname).name}" :
+Votre compte sur le site ${wikiname} a été activé avec succès. Vous pouvez à présent vous identifier à l'adresse ci-dessous en utilisant comme identifiant « ${xwiki.getDocumentAsAuthor($xwikiname).name} » :
 
 ${host}${xwiki.getURL('XWiki.XWikiLogin', 'login')}
 
@@ -2939,6 +2939,7 @@ Cette adresse e-mail a été utilisée pour enregistrer un nouveau compte sur le
 Afin de valider votre compte, cliquez sur le lient suivant :
 ${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&amp;xwikiname=${xwikiname}")}
 
+Vous pourrez ensuite vous connecter en utilisant votre identifiant « ${xwiki.getDocumentAsAuthor($xwikiname).name} ».
 --
 $services.localization.render('wikidemarches.sitename')
 
