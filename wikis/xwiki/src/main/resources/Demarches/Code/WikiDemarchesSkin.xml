@@ -594,17 +594,17 @@
       &lt;div class='col-xs-12 footer-col-sites'&gt;
         &lt;ul&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.cgu')&lt;/a&gt;&lt;/li&gt;
-          #if(!($displayAvisFormOnly))
+          #if($currentDomainKey != 'voxusagers')
             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
           #else
             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.accessibilite-formulaire')"&gt;$services.localization.render('wd.accessibilite.non-conforme')&lt;/a&gt;&lt;/li&gt;
           #end
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HMentionslE9gales"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HVieprivE9e"&gt;$services.localization.render('wd.personal-data')&lt;/a&gt;&lt;/li&gt;
-          #if(!($displayAvisFormOnly))&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
+          #if($currentDomainKey != 'voxusagers')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
           &lt;li&gt;&lt;a href="https://github.com/DISIC/wikidemarches" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
-          #if(!($displayAvisFormOnly))&lt;li&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
-          #if(!($displayAvisFormOnly))
+          #if($currentDomainKey != 'voxusagers')&lt;li&gt;&lt;a href='mailto:nosdemarches@modernisation.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
+          #if($currentDomainKey != 'voxusagers')
             #if ($isGuest)
               &lt;li&gt;&lt;a href="$xwiki.getURL($doc.fullName,'login')"&gt;$services.localization.render('wd.login')&lt;/a&gt;&lt;/li&gt;
             #else
