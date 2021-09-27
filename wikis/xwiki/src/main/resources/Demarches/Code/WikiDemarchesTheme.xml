@@ -1462,18 +1462,6 @@ Visually, there's the title row and then all the rows from the document content,
  * Done navbar and logo.
  */
 
-/* Change navbar links color to dsfr */
-.navbar-default .navbar-nav &gt; li {
-  a, a:hover, a:focus, a:active {
-    color: @dsfr-bf500;
-  }
-  #globalsearch {
-    button, button:active {
-      color: @dsfr-bf500;
-    }
-  }
-}
-
 /* The point of switch between a view and another is the md-min instead of sm-min, from bootstrap/variables.less */
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
@@ -1614,6 +1602,7 @@ legend {
 
 #footerglobal {
   margin-top: 2rem;
+  color: @text-color;
   font-size: 0.875rem;
   line-height: 1.5rem;
   text-align: left;
@@ -1628,11 +1617,15 @@ legend {
     list-style-type: none;
 
     a {
+     color: @text-color;
+
      &amp;:hover {
+       color: @text-color;
        text-decoration: none;
      }
     }
   }
+
   /* The h2 heading in the footer is meant to be seen only by screen-readers. See also:
    * - https://webaim.org/techniques/css/invisiblecontent/
    * - https://www.w3.org/WAI/tutorials/page-structure/headings/
@@ -1841,6 +1834,7 @@ span.wikiexternallink {
   }
 }
 
+
 </lessCode>
     </property>
     <property>
@@ -1859,16 +1853,16 @@ span.wikiexternallink {
       <navbar-default-link-active-bg>#ffffff</navbar-default-link-active-bg>
     </property>
     <property>
-      <navbar-default-link-active-color>#0a0a0a</navbar-default-link-active-color>
+      <navbar-default-link-active-color>#000091</navbar-default-link-active-color>
     </property>
     <property>
-      <navbar-default-link-color>#0a0a0a</navbar-default-link-color>
+      <navbar-default-link-color>#000091</navbar-default-link-color>
     </property>
     <property>
       <navbar-default-link-hover-bg>#ffffff</navbar-default-link-hover-bg>
     </property>
     <property>
-      <navbar-default-link-hover-color>#0a0a0a</navbar-default-link-hover-color>
+      <navbar-default-link-hover-color>#000091</navbar-default-link-hover-color>
     </property>
     <property>
       <navbar-height>25px</navbar-height>
