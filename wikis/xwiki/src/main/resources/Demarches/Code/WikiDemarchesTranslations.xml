@@ -211,7 +211,7 @@ wikidemarches.administration.avis.invalid-key=URL invalide.
 wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e-mail a bien été validée.\\\\Par contre, comme l'adresse utilisée n'est pas une adresse .gouv.fr, une **validation supplémentaire** par les administrateurs du site est nécessaire avant de pouvoir vous authentifier avec ce compte. Un e-mail de notification vous sera envoyé lors de cette validation.
 
 # Register translations
-wikidemarches.register.username.info=Votre nom d''utilisateur sera utilisé lors de l''inscription
+wikidemarches.register.username.info=Votre nom d'utilisateur sera utilisé lors de l'inscription
 
 # Standard translations overwritten.
 core.register.successful={0} ({1}) \: l''inscription a r\u00E9ussi. Un e-mail vous a été envoyé pour confirmer votre inscription.

@@ -91,7 +91,7 @@
    * Each field may have:
    *   label - this String will be written above the field.
    *
-   *   info - this String will display additionnal information about the field in a tooltip.
+   *   info - this String will display additionnal information about the field.
    *
    *   tag - the HTML tag which will be created, default is &lt;input&gt;, may also be a non form tag such as &lt;img&gt;
    *
@@ -761,10 +761,7 @@
           &gt;$services.localization.render('core.validation.required')&lt;/span&gt;
         #end
         #if($field.get('info'))
-        &lt;a href="#tooltip" data-toggle="popover" data-trigger="hover"
-          data-content="$escapetool.xml($field.get('info'))"&gt;
-          $services.icon.renderHTML('info')
-        &lt;/a&gt;
+        &lt;br/&gt;&lt;em class="xHint"&gt;$escapetool.xml($field.get('info'))&lt;/em&gt;
         #end
           &lt;/label&gt;
         &lt;/dt&gt;
@@ -801,14 +798,6 @@
     #end##if fieldName exists
   #end
   &lt;/dl&gt;
-  ## Enable tooltips
-  &lt;script type='text/javascript'&gt;
-    require(['jquery', 'bootstrap'], function($) {
-      $(function () {
-        $('[data-toggle="popover"]').popover();
-      });
-    });
-  &lt;/script&gt;
 #end
 #*
  * Generate the Javascript for interacting with LiveValidation.
