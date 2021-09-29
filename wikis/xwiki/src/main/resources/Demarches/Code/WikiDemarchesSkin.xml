@@ -1693,6 +1693,21 @@ $services.localization.render('accountnotactive_email')
 #end
 
 ###
+###    Toplevel Left Menu
+###
+#macro(xwikitopmenuleftstart)
+  &lt;ul class="nav navbar-nav navbar-left"&gt;
+    #submenuseparator()
+#end
+
+###
+###    Toplevel Left Menu
+###
+#macro(xwikitopmenuleftend)
+  &lt;/ul&gt;
+#end
+
+###
 ###    Toplevel Right Menu
 ###
 #macro(xwikitopmenurightstart)
@@ -1786,6 +1801,13 @@ $services.localization.render('accountnotactive_email')
 ###
 #macro(xwikitopmenuseparator)
   &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
+#end
+
+###
+###    Menu submenu separator
+###
+#macro(submenuseparator)
+  &amp;lt;li class="divider" role="separator"&amp;gt;&amp;lt;/li&amp;gt;
 #end
 
 ###
