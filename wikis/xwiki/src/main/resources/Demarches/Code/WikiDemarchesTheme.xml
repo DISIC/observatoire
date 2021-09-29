@@ -1435,7 +1435,7 @@ Visually, there's the title row and then all the rows from the document content,
 
   /* Icon secondary: Observatoire / SP+ */
   &amp; + .demarches-titlebar-sitename {
-    padding-left: 1rem;
+    padding-left: floor((@grid-gutter-width / 2)); // same padding than the existing one
   }
 }
 
