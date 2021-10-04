@@ -2763,7 +2763,7 @@
       <authenticate_view>0</authenticate_view>
     </property>
     <property>
-      <colorTheme>Demarches.Code.WikiDemarchesTheme</colorTheme>
+      <colorTheme>Demarches.Code.DSFRTheme</colorTheme>
     </property>
     <property>
       <comment_anonymous>---</comment_anonymous>
