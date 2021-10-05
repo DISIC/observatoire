@@ -41,11 +41,8 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 #set($discard = $xwiki.ssx.use('Main.WebHome'))
-{{/velocity}}
 
 Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
-
-
 
 
 
@@ -55,7 +52,9 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@cloud.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/cloud.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Démarche réalisable en ligne ===
 
@@ -67,7 +66,9 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@smiley.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/smiley.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Usagers satisfaits ===
 
@@ -79,7 +80,9 @@ Nous avons recensé les 250 démarches administratives les plus utilisées par l
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@mobile.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/mobile.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Compatible mobile ===
 
@@ -91,7 +94,9 @@ Les démarches en ligne doivent pouvoir être effectuées aisément sur un tél�
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@support.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/support.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Support accessible ===
 
@@ -103,7 +108,9 @@ Les usagers doivent pouvoir se renseigner ou être accompagnés facilement : cha
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@watch.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/watch.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Disponibilité et rapidité ===
 
@@ -115,7 +122,9 @@ Les démarches en ligne doivent être rapidement disponibles tous les jours à t
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@user.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/user.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === FranceConnect ===
 
@@ -127,7 +136,9 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@accessibility.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/accessibility.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Prise en compte handicaps ===
 
@@ -139,7 +150,9 @@ Personne ne doit être pénalisé dans ses démarches en ligne en raison d’un 
 (((
 (% class="evalrow-card" %)
 (((
-[[image:Demarches.Code.WikiDemarchesTheme@briefcase.svg||alt=""]]
+{{html clean="false"}}
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/briefcase.svg')" alt="" /&gt;&lt;/p&gt;
+{{/html}}
 
 === Dites-le nous une fois ===
 
@@ -147,5 +160,6 @@ Le partage de données entre administrations permet d’éviter de redemander le
 )))
 )))
 )))
+{{/velocity}}
 </content>
 </xwikidoc>

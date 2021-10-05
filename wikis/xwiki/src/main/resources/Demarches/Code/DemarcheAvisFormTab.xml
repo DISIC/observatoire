@@ -166,11 +166,11 @@
       &lt;h2&gt;$services.localization.render('avis.form.final-step.information.title')&lt;/h2&gt;
       &lt;ul&gt;
         &lt;li&gt;
-          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/check-circle.svg")"/&gt;
+          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/icons/check-circle.svg")"/&gt;
           &lt;p&gt;$services.localization.render('avis.form.final-step.information.anonymity')&lt;/p&gt;
         &lt;/li&gt;
         &lt;li&gt;
-          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/award.svg")"/&gt;
+          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/icons/award.svg")"/&gt;
           &lt;p&gt;$services.localization.render('avis.form.final-step.information.follow', ["&lt;a href='https://observatoire.numerique.gouv.fr'&gt;$escapetool.xml($services.localization.render('avis.form.final-step.information.follow.link-title'))&lt;/a&gt;"])&lt;/p&gt;
         &lt;/li&gt;
       &lt;/ul&gt;

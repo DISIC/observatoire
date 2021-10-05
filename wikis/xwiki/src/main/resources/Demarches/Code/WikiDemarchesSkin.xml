@@ -857,7 +857,7 @@
     #set($siteClassName = 'service-plus')
     #set($siteName = $services.localization.render('wikidemarches.sitename.servicesPubliquesPlus'))
   #end
-  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename $siteClassName'&gt;&lt;img src="$escapetool.xml($xwiki.getAttachmentURL($themeDocFullName, $siteTitleImageName))" alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
+  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename $siteClassName'&gt;&lt;img src='$escapetool.xml($xwiki.getSkinFile("uicomponents/custom-wikidemarches/$siteTitleImageName"))' alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
 &lt;/div&gt;</content>
     </property>
     <property>
