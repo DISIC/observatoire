@@ -2937,7 +2937,7 @@ Bonjour ${xwiki.getUserName("XWiki.$xwikiname", false)},
 Cette adresse e-mail a été utilisée pour créer un compte sur le site ${wikiname}. 
 
 Afin de valider votre compte, cliquez sur le lien suivant :
-${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&xwikiname=${xwikiname}")}
+${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&amp;xwikiname=${xwikiname}")}
 
 Votre nom d’utilisateur est « $xwikiname ». Il sera demandé à la connexion.
 --
