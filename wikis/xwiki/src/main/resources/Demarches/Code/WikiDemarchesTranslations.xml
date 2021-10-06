@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>WikiDemarchesTranslations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -66,17 +66,17 @@ wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-
 wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
 
 #Démarches
-wikidemarches.sitename=L’observatoire de la qualité des démarches en ligne
+wikidemarches.sitename=L’Observatoire de la qualité des démarches en ligne
 wikidemarches.sitename.servicesPubliquesPlus=Services Publics +
 wikidemarches.siteurl=observatoire.numerique.gouv.fr
-wikidemarches.home.title=L’observatoire de la qualité des démarches en ligne
+wikidemarches.home.title=L’Observatoire de la qualité des démarches en ligne
 wikidemarches.home.subtitle=Pour des services publics numériques de qualité
 wikidemarches.home.explanation=Des démarches en ligne simples, accessibles à tous et compréhensibles simplifient la vie des citoyennes et citoyens. L’Observatoire vous permet de suivre la qualité de la numérisation des 250 démarches les plus utilisées.
 wikidemarches.home.observatoire.title=Actuellement
 wikidemarches.home.observatoire.description=Pour donner une moyenne, voici les derniers chiffres sur la totalité des 250 démarches que nous suivons (mai 2019).
 wikidemarches.footer=Pied de page
 wikidemarches.sitemap=Plan du site
-wikidemarches.sitemap.observatoire=L'observatoire
+wikidemarches.sitemap.observatoire=L'Observatoire
 wikidemarches.sitemap.observatoire.help-link-observatoire=En savoir plus sur l'observatoire
 wikidemarches.sitemap.qui-sommes-nous=À propos
 wikidemarches.sitemap.donner-son-avis=Comment donner son avis ?
@@ -91,7 +91,7 @@ wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune 
 wikidemarches.evalrow.button=En savoir plus
 wikidemarches.observatoire.button=Consulter l’observatoire
 # Top menu
-wikidemarches.topmenu.observatoire=L'observatoire
+wikidemarches.topmenu.observatoire=L'Observatoire
 wikidemarches.topmenu.apropos=À propos
 # Quick links
 wikidemarches.quick-links.menu=Menu
