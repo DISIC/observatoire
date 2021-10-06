@@ -2934,12 +2934,12 @@ Subject: Validation de votre compte sur le site ${wikiname}
 
 Bonjour ${xwiki.getUserName("XWiki.$xwikiname", false)},
 
-Cette adresse e-mail a été utilisée pour enregistrer un nouveau compte sur le site ${wikiname}. Merci d'ignorer ce message si vous n'êtes pas à l'origine de la demande.
+Cette adresse e-mail a été utilisée pour créer un compte sur le site ${wikiname}. 
 
-Afin de valider votre compte, cliquez sur le lient suivant :
-${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&amp;xwikiname=${xwikiname}")}
+Afin de valider votre compte, cliquez sur le lien suivant :
+${host}${xwiki.getURL('XWiki.AccountValidation', 'view', "validkey=${validkey}&xwikiname=${xwikiname}")}
 
-Vous pourrez ensuite vous connecter en utilisant votre identifiant « ${xwiki.getDocumentAsAuthor($xwikiname).name} ».
+Votre nom d’utilisateur est « $xwikiname ». Il sera demandé à la connexion.
 --
 $services.localization.render('wikidemarches.sitename')
 
