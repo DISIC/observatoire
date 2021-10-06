@@ -99,12 +99,17 @@
     </class>
     <property>
       <html>&lt;p&gt;
-Madame, Monsieur,
+Bonjour ${xwiki.getUserName("$userName", false)},
 &lt;/p&gt;
 &lt;p&gt;
-Votre compte $services.localization.render('wikidemarches.siteurl') est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.&lt;/p&gt;
+Votre compte sur l’Observatoire de la qualité des démarches en ligne a bien été activé.
+&lt;/p&gt;
 
-&lt;a href="$homeUrl"&gt;$homeUrl&lt;/a&gt;
+&lt;p&gt;
+Votre nom d’utilisateur est « ${xwiki.getDocumentAsAuthor($userId).name} ».
+&lt;br/&gt;
+&lt;a href="$xwiki.getDocument("XWiki.XWikiLogin").getExternalURL("login")"&gt;Cliquez ici pour vous connecter à l’Observatoire&lt;/a&gt;.
+&lt;/p&gt;
 
 &lt;p&gt;
 &lt;hr/&gt;
@@ -118,12 +123,12 @@ $services.localization.render('wikidemarches.sitename')
       <subject>Votre compte $services.localization.render('wikidemarches.siteurl') est actif</subject>
     </property>
     <property>
-      <text>Madame, Monsieur,
+      <text>Bonjour ${xwiki.getUserName("$userName", false)},
 
+Votre compte sur l’Observatoire de la qualité des démarches en ligne a bien été activé.
 
-Votre compte $services.localization.render('wikidemarches.siteurl') est à présent actif. Vous pouvez vous authentifier depuis l'adresse ci-dessous.
-
-$homeUrl
+Votre nom d’utilisateur est « $userId ».
+Cliquez sur ce lien pour vous connecter à l’Observatoire: $xwiki.getDocument("XWiki.XWikiLogin").getExternalURL("login")
 
 --
 $services.localization.render('wikidemarches.sitename')

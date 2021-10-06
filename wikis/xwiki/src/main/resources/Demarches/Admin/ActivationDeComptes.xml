@@ -49,6 +49,7 @@
       #set ($userPage = $xwiki.getDocument($userId))
       #if ($action == 'activate')
         #set ($userObject = $userPage.getObject('XWiki.XWikiUsers'))
+        #set ($userName = $xwiki.getLocalUserName($userId, false))
         #set ($discard = $userObject.set('active', 1))
         #set ($email = $userObject.getProperty('email').value)
         #set ($discard = $userPage.save('Activation du compte'))
