@@ -846,13 +846,13 @@
       <brand-info>#0762c8</brand-info>
     </property>
     <property>
-      <brand-primary>#fff</brand-primary>
+      <brand-primary>#000091</brand-primary>
     </property>
     <property>
       <brand-success>#008941</brand-success>
     </property>
     <property>
-      <brand-warning>#e10600</brand-warning>
+      <brand-warning>#fa5c00</brand-warning>
     </property>
     <property>
       <breadcrumb-bg>#fff</breadcrumb-bg>
@@ -864,28 +864,28 @@
       <breadcrumb-separator> &gt; </breadcrumb-separator>
     </property>
     <property>
-      <btn-danger-bg/>
+      <btn-danger-bg>#fff</btn-danger-bg>
     </property>
     <property>
-      <btn-danger-color/>
+      <btn-danger-color>#e10600</btn-danger-color>
     </property>
     <property>
-      <btn-default-bg>#000091</btn-default-bg>
+      <btn-default-bg>#fff</btn-default-bg>
     </property>
     <property>
-      <btn-default-border/>
+      <btn-default-border>#000091</btn-default-border>
     </property>
     <property>
-      <btn-default-color>#fff</btn-default-color>
+      <btn-default-color>#000091</btn-default-color>
     </property>
     <property>
       <btn-font-weight>normal</btn-font-weight>
     </property>
     <property>
-      <btn-info-bg/>
+      <btn-info-bg>#fff</btn-info-bg>
     </property>
     <property>
-      <btn-info-color/>
+      <btn-info-color>#0762c8</btn-info-color>
     </property>
     <property>
       <btn-primary-bg>#000091</btn-primary-bg>
@@ -894,16 +894,16 @@
       <btn-primary-color>#fff</btn-primary-color>
     </property>
     <property>
-      <btn-success-bg/>
+      <btn-success-bg>#fff</btn-success-bg>
     </property>
     <property>
-      <btn-success-color/>
+      <btn-success-color>#008941</btn-success-color>
     </property>
     <property>
-      <btn-warning-bg/>
+      <btn-warning-bg>#fff</btn-warning-bg>
     </property>
     <property>
-      <btn-warning-color/>
+      <btn-warning-color>#fa5c00</btn-warning-color>
     </property>
     <property>
       <component-active-bg/>
@@ -969,10 +969,7 @@
       <legend-color/>
     </property>
     <property>
-      <lessCode>/* Extra Bootstrap variables / fixes */
-@line-height-base: 1.5;
-
-@gray-light: #666;
+      <lessCode>@gray-light: #666;
 .outline {
   outline: 2px solid @link-color;
 }
@@ -981,13 +978,14 @@
   outline-offset: -4px;
 }
 
-/* Reproducing DSFR variables declaration */
+/* Reproducing some of the DSFR variables declaration */
 @dsfr-bf100: #f2f2f9;
 @dsfr-bf500: #000091;
 @dsfr-bf-icon: #00258e;
 @dsfr-g400: #cecece;
 @dsfr-g600: #6a6a6a;
 @dsfr-beige: #f9f8f6;
+@dsfr-focus: #2a7ffe;
 
 /***************************************************/
 /* Bootstrap corrections to make the site          */
@@ -1078,6 +1076,245 @@ select[size="1"]{
   padding-right: 0;
 }
 
+
+
+
+/***************************************************/
+/* Custom DSFR Styles                              */
+/***************************************************/
+
+/* Remove bootstrap border-radius */
+@border-radius-base: 0px;
+@border-radius-small: 0px;
+@border-radius-large: 0px;
+
+/* Remove bootstrap gradients for buttons */
+.btn-gradient (@color) {
+  background-image: none;
+  filter: none;
+  background-color: @color;
+}
+
+.btn-border (@color) {
+  border: 1px solid @color;
+  border-bottom: 1px solid @color;
+  box-shadow: none;
+}
+
+/*
+ * Override button style so that they are as close as possible to dsfr style
+ * The problem is that DSFR does not have any success / info / warning / danger button
+ * but only primary and secondary buttons. On the other hand, bootstrap have all the previous,
+ * and a primary button but no secondary button.
+ * So in order to make everything look coherent and dsfr-like, the button variants are based
+ * on the dsfr secondary buttons style, with different border / font colors.
+ * The dsfr secondary style is associated to the bootstrap .btn-default class.
+ */
+
+@btn-default-border: @btn-default-color;
+@btn-primary-border: @btn-primary-bg;
+@btn-success-border: @btn-success-color;
+@btn-info-border: @btn-info-color;
+@btn-warning-border: @btn-warning-color;
+@btn-danger-border: @btn-danger-color;
+
+@btn-default-bg-hover: #efefef;
+@btn-primary-bg-hover: #0000b7;
+
+/* DSFR button style */
+.btn-dsfr-style (@name) {
+  @btn-color: "btn-@{name}-color";
+  @btn-bg: "btn-@{name}-bg";
+  @btn-border: "btn-@{name}-border";
+
+  color: @@btn-color;
+  .btn-gradient(@@btn-bg);
+  .btn-border(@@btn-border);
+
+  // Lighten the colored background of primary button
+  &amp; when (@name = "primary") {
+    &amp;:hover,
+    &amp;:focus {
+      .btn-gradient(@btn-primary-bg-hover);
+      .btn-border(@btn-primary-bg-hover);
+    }
+  }
+  // Darken the white background of other buttons
+  &amp; when not (@name = "primary") {
+    &amp;:hover,
+    &amp;:focus {
+      .btn-gradient(@btn-default-bg-hover);
+      .btn-border(@@btn-border);
+    }
+  }
+}
+
+/* Used to quickly generate button style overrides */
+.btn-dsfr-factory (@name) {
+  @selector: e(".btn.btn-@{name}");
+  @{selector} {
+    .btn-dsfr-style(@name);
+  }
+}
+
+/* Override style for every button variant */
+.btn-dsfr-factory("default");
+.btn-dsfr-factory("primary");
+.btn-dsfr-factory("success");
+.btn-dsfr-factory("info");
+.btn-dsfr-factory("warning");
+.btn-dsfr-factory("danger");
+
+/* Also take care of button wrapper and other specific cases */
+input.button, .buttonwrapper button, .buttonwrapper a {
+  .btn-dsfr-style("primary");
+}
+.buttonwrapper input.secondary, .buttonwrapper button.secondary, .buttonwrapper a.secondary, a.secondary {
+  .btn-dsfr-style("default");
+}
+
+
+
+/* DSFR sizes */
+h6 {
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+h5 {
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+h4 {
+  font-weight: bold;
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+legend {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@media (min-width: @screen-sm-min) {
+  h6 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+}
+
+
+/* DSFR focus outline */
+* {
+  outline-offset: 2px;
+  outline-width: 2px;
+  outline-color: @dsfr-focus;
+}
+
+
+
+/*
+ * Make header span the entire width so that the bottom shadow display correctly
+ */
+ #xwikimaincontainerinner header {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.1), 0 8px 16px -16px rgba(0, 0, 0, 0.32);
+}
+
+/*
+ * Custom layout, to make content fixed width as well - header and footer are done from the skin, with real containers.
+ */
+#contentcontainerinner, #xwikieditorinner {
+  .container();
+}
+/* But without padding, we already have this padding in the columns inside */
+#contentcontainerinner, #xwikieditorinner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /***************************************************/
 /* Layout                                          */
 /***************************************************/
@@ -1085,7 +1322,7 @@ select[size="1"]{
 /*
  * IMO, these 2 should be in layout.less, along with #mainContentArea, so there is some vague symmetry of containers between edit and view
  */
-#mainEditArea {
+ #mainEditArea {
   margin: 0 -@grid-gutter-width;
   padding: @line-height-computed @grid-gutter-width;
 }
@@ -1179,33 +1416,7 @@ Visually, there's the title row and then all the rows from the document content,
 
 /*    End of Totemize SSX                          */
 
-/***************************************************/
-/* Custom wikidemarches stuff!                     */
-/***************************************************/
 
-/*
- * Make header span the entire width so that the bottom shadow display correctly
- */
-#xwikimaincontainerinner header {
-  margin-left: -15px;
-  margin-right: -15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.1), 0 8px 16px -16px rgba(0, 0, 0, 0.32);
-}
-
-/*
- * Custom layout, to make content fixed width as well - header and footer are done from the skin, with real containers.
- */
-#contentcontainerinner, #xwikieditorinner {
-  .container();
-}
-/* But without padding, we already have this padding in the columns inside */
-#contentcontainerinner, #xwikieditorinner {
-  padding-left: 0;
-  padding-right: 0;
-}
 
 /*
  * Logo and navbar
@@ -1341,9 +1552,35 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-/*
- * Done navbar and logo.
- */
+
+
+/* section edit is the size of h1 which is too big and we never have h1 in the content of the pages, for accessibility reasons =&gt; make it borrow the size of h2 */
+.edit_section {
+  margin: -1.5em 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* The point of switch between a view and another is the md-min instead of sm-min, from bootstrap/variables.less */
 // Navbar collapse
@@ -1442,42 +1679,6 @@ li.wikidemarches-topmenu {
 }
 
 
-/*
- * Sizes of the titles and style
- */
-#document-title h1 {
-  font-size: 1.8em;
-  line-height: 1.25;
-  font-weight: 600;
-}
-
-/* Larger title on desktop */
-@media (min-width: @screen-sm-min) {
-  #document-title h1 {
-    font-size: 2.5em;
-  }
-}
-
-h2 {
-  font-size: 1.5em;
-  font-weight: 600;
-  line-height: 1.3em;
-}
-
-h3 {
-  font-size: 1.20em;
-  font-weight: 600;
-}
-
-
-legend {
-  font-size: 1.20em;
-}
-
-/* section edit is the size of h1 which is too big and we never have h1 in the content of the pages, for accessibility reasons =&gt; make it borrow the size of h2 */
-.edit_section {
-  margin: -1.5em 0 0;
-}
 
 
 
@@ -1749,13 +1950,13 @@ span.wikiexternallink {
       <navbar-default-link-hover-color>#000091</navbar-default-link-hover-color>
     </property>
     <property>
-      <navbar-height/>
+      <navbar-height>25px</navbar-height>
     </property>
     <property>
-      <panel-bg/>
+      <panel-bg>#fff</panel-bg>
     </property>
     <property>
-      <panel-default-text/>
+      <panel-default-text>#383838</panel-default-text>
     </property>
     <property>
       <table-bg/>
