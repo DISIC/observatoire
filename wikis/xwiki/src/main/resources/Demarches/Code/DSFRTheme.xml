@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DSFRTheme</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -991,6 +991,10 @@
 /* Bootstrap corrections to make the site          */
 /* accessible: font-size in em                     */
 /***************************************************/
+
+@font-size-base: 1rem;
+@line-height-base: 1.5rem;
+
 html {
   font-size: 100%;
 }
@@ -1001,7 +1005,6 @@ select,
 input[type="text"],
 input[type="password"] {
   height: auto;
-  border-radius: 0;
 }
 
 select[size="0"],
@@ -1011,10 +1014,6 @@ select[size="1"]{
 
 .input-group-btn {
   font-size: inherit;
-}
-
-.input-group-btn:last-child &gt; .btn {
-  border-radius: 0;
 }
 
 #footerglobal {
@@ -1220,11 +1219,6 @@ h1 {
   line-height: 2.5rem;
 }
 
-p {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
 legend {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -1261,6 +1255,42 @@ legend {
     line-height: 3rem;
   }
 }
+
+/* DSFR lists */
+ul, ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  li {
+    padding-bottom: 0.25rem;
+
+    &amp;::marker {
+      font-size: 0.9em;
+    }
+  }
+}
+
+ul {
+  list-style-type: "●\00a0\00a0";
+  padding-left: 1rem;
+}
+
+ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  counter-reset: li-counter;
+
+  &amp; &gt; li {
+    counter-increment: li-counter;
+
+    &amp;::marker {
+      content: counters(li-counter, ".") ".\00a0\00a0";
+      font-weight: bold;
+    }
+  }
+}
+
+
 
 /* DSFR focus outline */
 * {
