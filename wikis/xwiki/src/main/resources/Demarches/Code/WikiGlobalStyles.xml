@@ -267,11 +267,9 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-@logo-height-mobile: 64px;
-@logo-height-desktop: 68px;
-
 /* Make some room around the logo on the topbar */
 @logo-height-mobile: 64px;
+@logo-height-desktop: 68px;
 #menuview .navbar {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;

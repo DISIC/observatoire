@@ -1300,40 +1300,33 @@ ol {
 }
 
 
+/* Logo and navbar */
+@logo-height-mobile: 64px;
+@logo-height-desktop: 68px;
 
-/*
- * Logo and navbar
- */
+/* Make some room around the logo on the topbar */
+@logo-height-mobile: 64px;
+#menuview .navbar {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  min-height: @logo-height-mobile;
 
- @logo-height-mobile: 64px;
- @logo-height-desktop: 68px;
- 
- /* Make some room around the logo on the topbar */
- @logo-height-mobile: 64px;
- #menuview .navbar {
-   padding-top: 0.75rem;
-   padding-bottom: 0.75rem;
-   min-height: @logo-height-mobile;
- 
-   @media (min-width: @screen-md-min) {
-     padding-top: 1.5rem;
-     padding-bottom: 1.5rem;
-     min-height: @logo-height-desktop;
-   }
- }
- 
- /* Header */
- .navbar-brand,
- #menuview .navbar-brand &gt; img {
-   height: @logo-height-mobile;
- 
-   @media (min-width: @screen-md-min) {
-     height: 68px;
-   }
- }
+  @media (min-width: @screen-md-min) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    min-height: @logo-height-desktop;
+  }
+}
+/* Header logo size */
+.navbar-brand,
+#menuview .navbar-brand &gt; img {
+  height: @logo-height-mobile;
 
- 
- 
+  @media (min-width: @screen-md-min) {
+    height: 68px;
+  }
+}
+
 
 /*
  * Make header span the entire width so that the bottom shadow display correctly
