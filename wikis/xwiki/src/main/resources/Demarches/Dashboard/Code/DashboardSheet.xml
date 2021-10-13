@@ -1385,6 +1385,7 @@ input[name='title'] {
       display: flex;
       list-style-type: none;
       padding: 0;
+      margin-top: 0;
       margin-bottom: 0;
       li.social-network {
         margin-left: 0.8em;
