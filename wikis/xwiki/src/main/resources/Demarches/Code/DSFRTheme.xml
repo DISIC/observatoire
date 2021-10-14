@@ -1290,6 +1290,10 @@ ol {
   }
 }
 
+/* Remove lists margins / paddings at some unwanted places */
+#xwikimaincontainerinner #menuview .navbar-default li {
+  padding: 0;
+}
 
 
 /* DSFR focus outline */
