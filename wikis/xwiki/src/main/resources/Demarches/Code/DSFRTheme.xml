@@ -1329,15 +1329,14 @@ ol {
 
 
 /*
- * Make header span the entire width so that the bottom shadow display correctly
+ * Add shadow under the header
  */
- #xwikimaincontainerinner header {
-  margin-left: -15px;
-  margin-right: -15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.1), 0 8px 16px -16px rgba(0, 0, 0, 0.32);
+ #xwikimaincontainerinner #menuview .navbar-default {
+  position: relative;
+  z-index: 100;
+  box-shadow:
+    0 8px 8px 0 rgba(0, 0, 0, 0.1),
+    0 8px 16px -16px rgba(0, 0, 0, 0.32);
 }
 
 /*
