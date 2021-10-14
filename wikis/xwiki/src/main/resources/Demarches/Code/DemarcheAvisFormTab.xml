@@ -564,7 +564,7 @@ legend.fr-fieldset__legend {
   overflow-x: hidden;
 
   #contentcontainer .main {
-    @main-margin-top: 3.5rem;
+    @main-margin-top: 4.5rem;
     @top-compensation: 4rem; // 4rem is enough to compensate the parent margins / paddings
 
     @media (min-width: @screen-sm-min) {
