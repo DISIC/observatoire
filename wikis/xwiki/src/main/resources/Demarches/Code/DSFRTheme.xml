@@ -1146,7 +1146,8 @@ h2 {
   font-size: 1.75rem;
 }
 
-h1 {
+h1,
+#document-title h1 {
   font-weight: 700;
   font-size: 2rem;
 }
@@ -1173,7 +1174,8 @@ h1 {
     font-size: 2rem;
   }
 
-  h1 {
+  h1,
+  #document-title h1 {
     font-size: 2.5rem;
   }
 }
