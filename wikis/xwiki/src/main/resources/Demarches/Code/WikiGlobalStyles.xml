@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
+  <creationDate>1633989197000</creationDate>
   <parent>xwiki:Demarches.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1633989199000</date>
+  <contentUpdateDate>1633989199000</contentUpdateDate>
   <version>1.1</version>
   <title>WikiGlobalStyles</title>
   <comment/>
@@ -495,11 +495,6 @@ li.wikidemarches-topmenu {
     padding-left: 0;
     margin: 0;
     list-style-type: none;
-
-    li {
-      margin: 0;
-      padding: 0;
-    }
 
     a {
      color: @text-color;
