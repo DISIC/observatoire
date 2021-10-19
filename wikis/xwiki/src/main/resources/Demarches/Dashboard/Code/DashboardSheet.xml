@@ -1420,7 +1420,7 @@ input[name='title'] {
   .btn {
     padding: 1em 1.8em 1em 1.8em;
     background-image: none;
-    border: 1px solid transparent;
+    border: none;
     border-radius: 0.25em;
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
     &amp;.btn-default {
