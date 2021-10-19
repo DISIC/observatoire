@@ -24,7 +24,7 @@
   <web>Demarches.Code</web>
   <name>DSFRTheme</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -864,10 +864,10 @@
       <breadcrumb-separator> &gt; </breadcrumb-separator>
     </property>
     <property>
-      <btn-danger-bg>#fff</btn-danger-bg>
+      <btn-danger-bg>#000091</btn-danger-bg>
     </property>
     <property>
-      <btn-danger-color>#e10600</btn-danger-color>
+      <btn-danger-color>#fff</btn-danger-color>
     </property>
     <property>
       <btn-default-bg>#fff</btn-default-bg>
@@ -882,10 +882,10 @@
       <btn-font-weight>normal</btn-font-weight>
     </property>
     <property>
-      <btn-info-bg>#fff</btn-info-bg>
+      <btn-info-bg>#000091</btn-info-bg>
     </property>
     <property>
-      <btn-info-color>#0762c8</btn-info-color>
+      <btn-info-color>#fff</btn-info-color>
     </property>
     <property>
       <btn-primary-bg>#000091</btn-primary-bg>
@@ -894,16 +894,16 @@
       <btn-primary-color>#fff</btn-primary-color>
     </property>
     <property>
-      <btn-success-bg>#fff</btn-success-bg>
+      <btn-success-bg>#000091</btn-success-bg>
     </property>
     <property>
-      <btn-success-color>#008941</btn-success-color>
+      <btn-success-color>#fff</btn-success-color>
     </property>
     <property>
-      <btn-warning-bg>#fff</btn-warning-bg>
+      <btn-warning-bg>#000091</btn-warning-bg>
     </property>
     <property>
-      <btn-warning-color>#fa5c00</btn-warning-color>
+      <btn-warning-color>#fff</btn-warning-color>
     </property>
     <property>
       <component-active-bg/>
@@ -942,7 +942,7 @@
       <font-family-serif/>
     </property>
     <property>
-      <font-size-base>1rem</font-size-base>
+      <font-size-base>1em</font-size-base>
     </property>
     <property>
       <headings-color>#383838</headings-color>
@@ -991,6 +991,9 @@
 /* Bootstrap corrections to make the site          */
 /* accessible: font-size in em                     */
 /***************************************************/
+
+@line-height-base: 1.5;
+
 html {
   font-size: 100%;
 }
@@ -1001,7 +1004,6 @@ select,
 input[type="text"],
 input[type="password"] {
   height: auto;
-  border-radius: 0;
 }
 
 select[size="0"],
@@ -1011,10 +1013,6 @@ select[size="1"]{
 
 .input-group-btn {
   font-size: inherit;
-}
-
-.input-group-btn:last-child &gt; .btn {
-  border-radius: 0;
 }
 
 #footerglobal {
@@ -1110,155 +1108,73 @@ select[size="1"]{
   box-shadow: none;
 }
 
-/*
- * Override button style so that they are as close as possible to dsfr style
- * The problem is that DSFR does not have any success / info / warning / danger button
- * but only primary and secondary buttons. On the other hand, bootstrap have all the previous,
- * and a primary button but no secondary button.
- * So in order to make everything look coherent and dsfr-like, the button variants are based
- * on the dsfr secondary buttons style, with different border / font colors.
- * The dsfr secondary style is associated to the bootstrap .btn-default class.
- */
-
-@btn-default-border: @btn-default-color;
-@btn-primary-border: @btn-primary-bg;
-@btn-success-border: @btn-success-color;
-@btn-info-border: @btn-info-color;
-@btn-warning-border: @btn-warning-color;
-@btn-danger-border: @btn-danger-color;
-
+/* Add border to default button */
 @btn-default-bg-hover: #efefef;
-@btn-primary-bg-hover: #0000b7;
+.btn-default {
+  .btn-border(@btn-default-border);
 
-/* DSFR button style */
-.btn-dsfr-style (@name) {
-  @btn-color: "btn-@{name}-color";
-  @btn-bg: "btn-@{name}-bg";
-  @btn-border: "btn-@{name}-border";
-
-  color: @@btn-color;
-  .btn-gradient(@@btn-bg);
-  .btn-border(@@btn-border);
-
-  // Lighten the colored background of primary button
-  &amp; when (@name = "primary") {
-    &amp;:hover,
-    &amp;:focus {
-      .btn-gradient(@btn-primary-bg-hover);
-      .btn-border(@btn-primary-bg-hover);
-    }
-  }
-  // Darken the white background of other buttons
-  &amp; when not (@name = "primary") {
-    &amp;:hover,
-    &amp;:focus {
-      .btn-gradient(@btn-default-bg-hover);
-      .btn-border(@@btn-border);
-    }
+  &amp;:hover,
+  &amp;:focus {
+    .btn-gradient(@btn-default-bg-hover);
+    .btn-border(@btn-default-border);
   }
 }
-
-/* Used to quickly generate button style overrides */
-.btn-dsfr-factory (@name) {
-  @selector: e(".btn.btn-@{name}");
-  @{selector} {
-    .btn-dsfr-style(@name);
-  }
-}
-
-/* Override style for every button variant */
-.btn-dsfr-factory("default");
-.btn-dsfr-factory("primary");
-.btn-dsfr-factory("success");
-.btn-dsfr-factory("info");
-.btn-dsfr-factory("warning");
-.btn-dsfr-factory("danger");
-
-/* Also take care of button wrapper and other specific cases */
-input.button, .buttonwrapper button, .buttonwrapper a {
-  .btn-dsfr-style("primary");
-}
-.buttonwrapper input.secondary, .buttonwrapper button.secondary, .buttonwrapper a.secondary, a.secondary {
-  .btn-dsfr-style("default");
-}
-
 
 /* DSFR sizes */
 h6 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.125rem;
-  line-height: 1.5rem;
 }
 
 h5 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 h4 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.375rem;
-  line-height: 1.75rem;
 }
 
 h3 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 h2 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.75rem;
-  line-height: 2.25rem;
 }
 
 h1 {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 2rem;
-  line-height: 2.5rem;
 }
 
-p {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-legend {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
 
 @media (min-width: @screen-sm-min) {
   h6 {
     font-size: 1.25rem;
-    line-height: 1.75rem;
   }
 
   h5 {
     font-size: 1.375rem;
-    line-height: 1.75rem;
   }
 
   h4 {
     font-size: 1.5rem;
-    line-height: 2rem;
   }
 
   h3 {
     font-size: 1.75rem;
-    line-height: 2.25rem;
   }
 
   h2 {
     font-size: 2rem;
-    line-height: 2.5rem;
   }
 
   h1 {
     font-size: 2.5rem;
-    line-height: 3rem;
   }
 }
 
