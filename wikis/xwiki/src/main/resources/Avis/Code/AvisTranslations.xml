@@ -85,6 +85,10 @@ avis.entry.name=Avis
 avis.invite=Je donne mon avis
 avis.mandatory-info=Les champs signalés par un astérique &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
 avis.vote.button=Donner un avis
+# Form titles
+avis.form.initial-step.doctitle=Je donne mon avis
+avis.form.second-form-screen.doctitle=Merci !&lt;br /&gt;Pouvez-vous nous en dire plus ?
+avis.form.final-step.doctitle=Merci pour votre aide !
 # Form messages
 avis.form.initial-step.demarche-newly-submitted-by-current-user=La démarche a bien été ajoutée.
 avis.form.second-form-screen.title=Merci !

@@ -253,6 +253,16 @@
     #end
   #end
 #end
+
+## set a title overwrite if it's the avis form display, to be used for window title and for page title
+#if ($displayAvisFormOnly)
+  #set ($titleToDisplayOverwrite = $services.localization.render('avis.form.initial-step.doctitle'))
+  #set ($step = "$!request.session.getAttribute('avis-form-step')")
+  #if ($step != '')
+    #set ($titleToDisplayOverwrite = $services.localization.render("avis.form.${step}.doctitle"))
+  #end
+#end
+
 ## set the variables indicating how the app is accessed (through what domain name). Possible values: observatoire, voxusagers, cerfa. Defaults to observatoire
 #set($currentDomainKey = 'observatoire')
 ## test against the way a current external URL would resolve, since external URLs are using the current access URL.
@@ -447,7 +457,7 @@
     #foreach ($uix in $services.uix.getExtensions('org.xwiki.platform.template.title.before'))
       $services.rendering.render($uix.execute(), 'xhtml/1.0')
     #end
-    &lt;div id="document-title"&gt;&lt;h1&gt;$titleToDisplay&lt;/h1&gt;&lt;/div&gt;
+    &lt;div id="document-title"&gt;&lt;h1&gt;#if ("$!titleToDisplayOverwrite" == '')${titleToDisplay}#{else}${titleToDisplayOverwrite}#end&lt;/h1&gt;&lt;/div&gt;
     #if (!$doc.isNew() &amp;&amp; $displayDocChanges)
       &lt;div class="xdocLastModification"&gt;
         #if (!$doc.isMostRecent())
@@ -692,21 +702,28 @@
     ## Compute the title.
     ## ---------------------------------------------------------------------------------------------------------------
     #if (!$title)
-      ## Compute title document name
-      #set ($titleDoc = $tdoc.getRenderedTitle('plain/1.0'))
-      #if ($xcontext.action == 'login' || $xcontext.action == 'loginsubmit')
-        #set ($titleDoc = $services.localization.render('login'))
-      #elseif ($xcontext.action == 'register')
-        #set ($titleDoc = $services.localization.render('register'))
-      #end
       ## Compute title site name
       #if($currentDomainKey == 'voxusagers')
         #set($titleSite = $services.localization.render('wikidemarches.sitename.servicesPubliquesPlus'))
       #else
         #set($titleSite = $services.localization.render('wikidemarches.sitename'))
       #end
-      ## Compute whole title
-      #set ($title = "$titleDoc – $titleSite")
+      #if ("$!titleToDisplayOverwrite" == '')
+        ## Compute title document name
+        #set ($titleDoc = $tdoc.getRenderedTitle('plain/1.0'))
+        #if ($xcontext.action == 'login' || $xcontext.action == 'loginsubmit')
+          #set ($titleDoc = $services.localization.render('login'))
+        #elseif ($xcontext.action == 'register')
+          #set ($titleDoc = $services.localization.render('register'))
+        #end
+        ## Compute whole title
+        #set ($title = "$titleDoc – $titleSite")
+      #else
+        ## Compute whole title from the titleToDisplayOverwrite
+        ## This title may contain some markup, which doesn't display well in the html title. 
+        ## However, I'm removing here only the newlines, which are the only markup that appears, for now
+        #set ($title = "$titleToDisplayOverwrite.replaceAll('&lt;br /&gt;', ' ').replaceAll('&lt;br/&gt;', ' ') – $titleSite")
+      #end
     #end
     ## Escape the title
     #set ($title = $escapetool.xml($title))
