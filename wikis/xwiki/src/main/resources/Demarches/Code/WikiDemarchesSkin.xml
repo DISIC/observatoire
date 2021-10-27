@@ -1830,7 +1830,7 @@ $services.localization.render('accountnotactive_email')
 ###    Menu submenu separator
 ###
 #macro(submenuseparator)
-  &amp;lt;li class="divider" role="separator"&amp;gt;&amp;lt;/li&amp;gt;
+  &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
 #end
 
 ###
