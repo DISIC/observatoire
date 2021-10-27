@@ -69,9 +69,8 @@
 #end
 #if ($step != 'initial-step')
   ## The step is not the initial one, hence we:
-  ## - Display a message corresponding to the current step, and the step gets cleaned from the session.
+  ## - The step gets cleaned from the session.
   #set ($discard = $request.session.removeAttribute('avis-form-step'))
-  #displayMessage("avis.form.$step")
   #if ($step == 'final-step')
     ## At this step only, we remove the avis identifier from the session: we consider that the avis has been submitted and
     ## that any new form submission will result in a new avis.
@@ -89,9 +88,7 @@
     #if ($step == 'initial-step')
       ## The first step of the form gets displayed, either for an existing demarche, or for a demarche that got just submitted by the current user.
       &lt;div class='form-preambule'&gt;
-      ==$services.localization.render('avis.invite')==
-
-      &lt;span class="info-box-mandatory small"&gt;$services.localization.render('avis.mandatory-info')&lt;/span&gt;
+      ==$services.localization.render('avis.form.demarchename.label') (%class='form-demarchename'%)${doc.title}(%%)==
       &lt;/div&gt;
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
       #set ($presetModalite = "$!request.nd_mode")
@@ -126,9 +123,6 @@
       #set($avissource = "$!request.nd_source")
       &lt;input type="hidden" name="Avis.Code.AvisClass_0_source" value="$escapetool.xml($avissource)" /&gt;
     #elseif ($step == 'second-form-screen')
-      &lt;div class='form-preambule'&gt;
-      ==$services.localization.render('avis.form.second-form-screen.introduction')==
-      &lt;/div&gt;
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
       &lt;div class="eval-container"&gt;
         #displayObjectForm($avis,['facile','comprehensible','difficultes','autreDifficulte','aide', 'autreAide','autre'])
@@ -162,6 +156,11 @@
   #end
 #else
   {{html clean="false"}}
+    &lt;div class="fr-mb-10v fr-mb-md-16v"&gt;
+      &lt;div role="alert" class="fr-alert fr-alert--success fr-alert--sm"&gt;
+          &lt;p&gt;$services.localization.render('avis.form.final-step.confirmation')&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
     &lt;div class="form-final-step-information"&gt;
       &lt;h2&gt;$services.localization.render('avis.form.final-step.information.title')&lt;/h2&gt;
       &lt;ul&gt;
@@ -517,6 +516,7 @@ legend.fr-fieldset__legend {
     h1 {
       color: @bf500;
       font-size: 2.5rem;
+      text-align: center;
     }
   }
 
@@ -544,6 +544,9 @@ legend.fr-fieldset__legend {
 
       h2 {
         margin-bottom: 0rem;
+        .form-demarchename {
+          font-weight: normal;
+        }
       }
     }
   }

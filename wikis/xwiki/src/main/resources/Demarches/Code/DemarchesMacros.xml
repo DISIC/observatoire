@@ -165,17 +165,6 @@
 #end
 #end
 
-#macro (displayMessage $key)
-{{html clean="false"}}
-&lt;div class="fr-mb-10v fr-mb-md-16v"&gt;
-  &lt;div role="alert" class="fr-alert fr-alert--success"&gt;
-      &lt;p class="fr-alert__title"&gt;$services.localization.render("${key}.title")&lt;/p&gt;
-      &lt;p&gt;$services.localization.render($key)&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-{{/html}}
-#end
-
 #macro(displayScoreStats)
   #set($faicons = ['frown-o', 'meh-o', 'smile-o'])
   #set($voteResults = $services.query.hql("select sc.value, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj ,IntegerProperty as sc, StringProperty dp where doc.fullName=obj.name and obj.className='Avis.Code.AvisClass' and obj.id=sc.id.id and sc.id.name='score' and dp.id.id = obj.id and dp.id.name = 'demarche' and dp.value = :dem and sc.value &gt; 0 group by sc.value order by 1 asc").bindValue('dem', $doc.fullName).execute())

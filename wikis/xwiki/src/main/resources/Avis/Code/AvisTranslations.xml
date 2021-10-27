@@ -82,8 +82,7 @@ avis.score.totalnumber={0} avis
 avis.score.satisfactionscore=Taux de satisfaction sur {1} avis : {0} {2}
 avis.score.0votes=Aucun avis
 avis.entry.name=Avis
-avis.invite=Je donne mon avis
-avis.mandatory-info=Les champs signalés par un astérique &lt;abbr class="asterix" title="(obligatoire)"&gt;*&lt;/abbr&gt; sont obligatoires.
+avis.form.demarchename.label=Démarche :
 avis.vote.button=Donner un avis
 # Form titles
 avis.form.initial-step.doctitle=Je donne mon avis
@@ -91,12 +90,8 @@ avis.form.second-form-screen.doctitle=Merci !&lt;br /&gt;Pouvez-vous nous en di
 avis.form.final-step.doctitle=Merci pour votre aide !
 # Form messages
 avis.form.initial-step.demarche-newly-submitted-by-current-user=La démarche a bien été ajoutée.
-avis.form.second-form-screen.title=Merci !
-avis.form.second-form-screen=Votre avis a bien été pris en compte.
-avis.form.second-form-screen.introduction=Pouvez-vous nous en dire plus ?
 avis.form.third-form-screen=Merci d'avoir donné votre avis !\nVotre réponse nous aide à améliorer le service public.
-avis.form.final-step.title=Merci pour votre aide !
-avis.form.final-step=Votre avis a bien été transmis au service qui s’occupe de cette démarche.
+avis.form.final-step.confirmation=Votre avis a bien été transmis au service qui s’occupe de cette démarche.
 avis.form.final-step.homelink=Donner votre avis sur une autre démarche
 avis.form.final-step.information.title=À quoi va servir votre avis ?
 avis.form.final-step.information.anonymity=Il sera pris en compte de manière anonyme par le service qui s’occupe de cette démarche, afin d’améliorer sa qualité.
