@@ -114,6 +114,7 @@ Avis.Code.AvisClass_score=Comment s'est passée cette démarche pour vous ?
 Avis.Code.AvisClass_score_1=Pas bien
 Avis.Code.AvisClass_score_2=Moyen
 Avis.Code.AvisClass_score_3=Très bien
+Avis.Code.AvisClass_score.mandatoryhint=Ce champ est obligatoire.
 Avis.Code.AvisClass_vote=Auriez-vous préféré faire cette démarche en ligne ?
 Avis.Code.AvisClass_vote_true=Oui
 Avis.Code.AvisClass_vote_false=Non

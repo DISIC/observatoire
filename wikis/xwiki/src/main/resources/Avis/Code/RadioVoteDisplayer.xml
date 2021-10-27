@@ -61,7 +61,7 @@
       &lt;legend class="fr-fieldset__legend fr-text--lg"&gt;
         $doc.displayPrettyName($name, false, false)
         #if ($isMandatory)
-          &lt;abbr class='asterix' title="$services.localization.render('wikidemarches.obligatoire')"&gt;*&lt;/abbr&gt;
+          &lt;span id="${prefix}${name}_hint" class="fr-hint-text"&gt;$services.localization.render("${theClass.name}_${name}.mandatoryhint")&lt;/span&gt;
         #end
       &lt;/legend&gt;
       #set($colNumber = $maxValue - $minValue + 1)
