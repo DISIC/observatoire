@@ -523,7 +523,7 @@ legend.fr-fieldset__legend {
   #xwikicontent {
     margin-top: 1.5rem;
     @media (min-width: @screen-sm-min) {
-      margin-top: 3rem;
+      margin-top: 1rem;
     }
   }
 
@@ -531,6 +531,7 @@ legend.fr-fieldset__legend {
     .form-preambule {
       margin-bottom: 2rem;
       @media (min-width: @screen-sm-min) {
+        margin-top: 1em;
         margin-bottom: 2.5rem;
       }
 
@@ -539,6 +540,11 @@ legend.fr-fieldset__legend {
         .form-demarchename {
           font-weight: normal;
         }
+      }
+    }
+    @media (min-width: @screen-sm-min) {
+      .eval-container {
+        margin-top: 1.5rem;
       }
     }
   }
