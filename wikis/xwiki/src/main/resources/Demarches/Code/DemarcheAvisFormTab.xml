@@ -507,7 +507,7 @@ legend.fr-fieldset__legend {
 @document-title-margin-bottom: 1rem;
 #xwikimaincontainer #mainContentArea {
   .document-info {
-    margin-top: 0rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     @media (min-width: @screen-sm-min) {
       margin-top: 1rem;
