@@ -529,8 +529,6 @@
   #template($extraFooterTemplate)
 #end
 &lt;footer id="footerglobal" role="contentinfo"&gt;
-  &lt;h2&gt;$services.localization.render('wikidemarches.footer')&lt;/h2&gt;
-
   #if (!($displayAvisFormOnly))
     &lt;div id="footersocial" class='container-fluid'&gt;
       &lt;div class='container'&gt;
