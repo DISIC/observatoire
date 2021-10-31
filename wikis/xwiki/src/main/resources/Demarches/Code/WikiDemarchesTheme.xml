@@ -1531,7 +1531,14 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-/* top menu style */
+/*
+ * Top menu style
+ */
+/* smaller text, like dsfr */
+.navbar-right {
+  font-size: 0.875em;
+}
+/* layout of the wikidemarches menu entries */
 li.wikidemarches-topmenu {
   &gt; a {
     display: inline-block;
