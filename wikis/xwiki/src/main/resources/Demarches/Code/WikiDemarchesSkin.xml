@@ -718,7 +718,7 @@
         #set ($title = "$titleDoc – $titleSite")
       #else
         ## Compute whole title from the titleToDisplayOverwrite
-        ## This title may contain some markup, which doesn't display well in the html title. 
+        ## This title may contain some markup, which doesn't display well in the html title.
         ## However, I'm removing here only the newlines, which are the only markup that appears, for now
         #set ($title = "$titleToDisplayOverwrite.replaceAll('&lt;br /&gt;', ' ').replaceAll('&lt;br/&gt;', ' ') – $titleSite")
       #end
