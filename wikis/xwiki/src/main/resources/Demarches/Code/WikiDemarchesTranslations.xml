@@ -49,7 +49,7 @@ wd.legal-notice=Mentions Légales
 wd.personal-data=Données personnelles
 wd.contact=Contact
 wd.about=À propos
-wd.login=Accès administration
+wd.login=Connexion
 wd.logout=Déconnexion
 wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne. Il permet également de piloter le chantier de la dématérialisation en recensant les démarches administratives et en les restituant sous la forme de tableaux de bord.
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
@@ -90,8 +90,8 @@ wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune 
 wikidemarches.evalrow.button=En savoir plus
 wikidemarches.observatoire.button=Consulter l’observatoire
 # Top menu
-wikidemarches.topmenu.observatoire=L'Observatoire
-wikidemarches.topmenu.apropos=À propos
+wikidemarches.topmenu.observatoire=Les 250 démarches
+wikidemarches.topmenu.apropos=Le bouton Je donne mon avis
 # Quick links
 wikidemarches.quick-links.menu=Menu
 wikidemarches.quick-links.content=Contenu

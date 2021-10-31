@@ -126,7 +126,7 @@
 #if($currentDomainKey == 'observatoire')
 {{html clean="false"}}
   &lt;li class='wikidemarches-topmenu'&gt;
-    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('Main.A propos')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;
+    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('Main.A propos')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;#if($isGuest)&lt;a href="$xwiki.getURL($doc.fullName,'login')"&gt;$services.localization.render('wd.login')&lt;/a&gt;#else&lt;a href="$xwiki.getURL($doc.fullName,'logout')"&gt;$services.localization.render('wd.logout')&lt;/a&gt;#end
   &lt;/li&gt;
 {{/html}}
 #end
@@ -612,13 +612,6 @@
           #if($currentDomainKey != 'voxusagers')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
           &lt;li&gt;&lt;a href="https://github.com/DISIC/wikidemarches" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
           #if($currentDomainKey != 'voxusagers')&lt;li&gt;&lt;a href='mailto:contact@design.numerique.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
-          #if($currentDomainKey != 'voxusagers')
-            #if ($isGuest)
-              &lt;li&gt;&lt;a href="$xwiki.getURL($doc.fullName,'login')"&gt;$services.localization.render('wd.login')&lt;/a&gt;&lt;/li&gt;
-            #else
-              &lt;li&gt;&lt;a href="$xwiki.getURL($doc.fullName,'logout')"&gt;$services.localization.render('wd.logout')&lt;/a&gt;&lt;/li&gt;
-            #end
-          #end
         &lt;/ul&gt;
       &lt;/div&gt;
     &lt;/div&gt;

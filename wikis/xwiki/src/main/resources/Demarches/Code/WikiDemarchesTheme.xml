@@ -1444,7 +1444,7 @@ Visually, there's the title row and then all the rows from the document content,
   padding-top: @sitename-top-mobile;
 
   @media (min-width: @screen-md-min) {
-    padding-top: @sitename-top-desktop + 7px;
+    padding-top: @sitename-top-desktop;
   }
 }
 
@@ -1478,6 +1478,13 @@ Visually, there's the title row and then all the rows from the document content,
  * As long as the navbar is collapsed, display the header and menus completely different.
  * We're doing it like this and not mobile-first because we're already inheriting some desktop behaviour and I don't want to spend time resetting all that
  */
+@media (min-width: @grid-float-breakpoint) {
+  /* On desktop all the contents of the .navbar-collapse are floated so we'll cancel its standard padding from mobile where contents are not floated, to make it not take any room*/
+  #menuview .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
 @media (max-width: @grid-float-breakpoint-max) {
   #menuview {
     .navbar-header, .navbar-left, .navbar-right {
