@@ -529,7 +529,7 @@
   #template($extraFooterTemplate)
 #end
 &lt;footer id="footerglobal" role="contentinfo"&gt;
-    #if ($currentDomainKey != 'voxusagers')
+  #if ($currentDomainKey != 'voxusagers')
     &lt;div id="footersocial" class='container-fluid'&gt;
       &lt;div class='container'&gt;
         &lt;div class='row'&gt;
