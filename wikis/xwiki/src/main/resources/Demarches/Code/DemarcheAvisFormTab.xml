@@ -500,17 +500,6 @@ legend.fr-fieldset__legend {
   border-bottom: none;
 }
 
-/* Fix large text labels, to make them look like fieldsets
- * We're using here the same prefix as the one used for the contextualization of dsfr, to be sure to overwrite dsfr.
- */
-#xwikimaincontainer #mainContentArea #avis-tab label.fr-text--lg {
-  margin-bottom: 0;
-  font-weight: 700;
-  .fr-hint-text {
-    font-weight: 400;
-  }
-}
-
 /* Rules to match the required style from the sketch specifications */
 @bf500: #000091; // --fr-bf500
 @bf100: #f2f2f9; // --fr-bf100
@@ -557,6 +546,19 @@ legend.fr-fieldset__legend {
       .eval-container {
         margin-top: 1.5rem;
       }
+    }
+
+  	/* Fix large text labels, to make them look like fieldsets */
+  	.fr-label.fr-text--lg {
+      margin-bottom: 0;
+  	  font-weight: 700;
+  	  .fr-hint-text {
+  	    font-weight: 400;
+  	  }
+  	}
+  	/* Adjust margins of the second page legends that are large text */
+  	.eval-container .fr-fieldset__legend.fr-text--lg {
+  	  margin-bottom: 1.5rem;
     }
   }
 }
