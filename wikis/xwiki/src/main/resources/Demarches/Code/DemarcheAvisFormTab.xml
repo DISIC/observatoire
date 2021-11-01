@@ -548,17 +548,17 @@ legend.fr-fieldset__legend {
       }
     }
 
-  	/* Fix large text labels, to make them look like fieldsets */
-  	.fr-label.fr-text--lg {
+    /* Fix large text labels, to make them look like fieldsets */
+    .fr-label.fr-text--lg {
       margin-bottom: 0;
-  	  font-weight: 700;
-  	  .fr-hint-text {
-  	    font-weight: 400;
-  	  }
-  	}
-  	/* Adjust margins of the second page legends that are large text */
-  	.eval-container .fr-fieldset__legend.fr-text--lg {
-  	  margin-bottom: 1.5rem;
+      font-weight: 700;
+      .fr-hint-text {
+        font-weight: 400;
+      }
+    }
+    /* Adjust margins of the second page legends that are large text */
+    .eval-container .fr-fieldset__legend.fr-text--lg {
+      margin-bottom: 1.5rem;
     }
   }
 }
