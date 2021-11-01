@@ -50,19 +50,15 @@
     #elseif ($name == 'autreDifficulte' || $name == 'autreAide')
       ## We need to add an id attribute to be able to show / hide this optionnal field from js
       &lt;div class="fr-form-group" id="xwiki-form-${name}-0-container" style="display: none"&gt;
-        &lt;fieldset class="fr-fieldset"&gt;
-          &lt;legend class="fr-fieldset__legend fr-text--lg"&gt;
+        &lt;div class="fr-input-group"&gt;
+          &lt;label class="fr-label fr-text--lg" for="${prefix}${name}"&gt;
             $doc.displayPrettyName($name, false, false)
             &lt;span class="fr-hint-text"&gt;
               $escapetool.xml($services.localization.render("Avis.Code.AvisClass_${name}_maxhint"))
             &lt;/span&gt;
-          &lt;/legend&gt;
-          &lt;div class="fr-fieldset__content"&gt;
-            &lt;div class="fr-input-group"&gt;
-              &lt;input class="fr-input" type="text" id="xwiki-form-${name}-0" name="${prefix}${name}"&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/fieldset&gt;
+          &lt;/label&gt;
+          &lt;input class="fr-input" type="text" id="${prefix}${name}" name="${prefix}${name}"&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
     #end
   #end
