@@ -641,18 +641,6 @@ require(['jquery','xwiki-selectize'], function($) {
   cursor: default;
 }
 
-label.question {
-  font-size: 1.20em;
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 1em;
-  line-height: inherit;
-  color: #333333;
-  border: 0;
-  border-bottom: 1px solid #e5e5e5;
-}
-
 /** Demarche tab styles */
 #demarche-tab {
   dd.property-value {
