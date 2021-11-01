@@ -44,20 +44,16 @@
 #set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/inputs.min.css'))
 #if ($type == 'edit')
   &lt;div class="fr-form-group"&gt;
-    &lt;fieldset class="fr-fieldset"&gt;
-      &lt;legend class="fr-fieldset__legend fr-text--lg"&gt;
+    &lt;div class="fr-input-group"&gt;
+      &lt;label class="fr-label fr-text--lg" for="${prefix}$name"&gt;
         $doc.displayPrettyName($name, false, false)
-          #if ("$!field.hint" != '')
-            #set ($key = "${object.xWikiClass.name}_$name.${field.hint}")
-            &lt;span id="${prefix}${name}_hint" class="fr-hint-text"&gt;$services.localization.render($key)&lt;/span&gt;
-          #end
-      &lt;/legend&gt;
-      &lt;div class="fr-fieldset__content"&gt;
-        &lt;div class="fr-input-group"&gt;
-            &lt;textarea class="fr-input" id="${prefix}$name" name="${prefix}${name}" value="" rows="3" #if("$!field.hint" != '')aria-describedby="${prefix}${name}_hint"#end&gt;$!value&lt;/textarea&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/fieldset&gt;
+        #if ("$!field.hint" != '')
+          #set ($key = "${object.xWikiClass.name}_$name.${field.hint}")
+          &lt;span id="${prefix}${name}_hint" class="fr-hint-text"&gt;$services.localization.render($key)&lt;/span&gt;
+        #end
+      &lt;/label&gt;
+      &lt;textarea class="fr-input" id="${prefix}$name" name="${prefix}${name}" value="" rows="3" #if("$!field.hint" != '')aria-describedby="${prefix}${name}_hint"#end&gt;$!value&lt;/textarea&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 #else
   $!value
