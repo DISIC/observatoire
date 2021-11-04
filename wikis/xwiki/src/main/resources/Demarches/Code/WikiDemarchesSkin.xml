@@ -1694,7 +1694,7 @@ $services.localization.render('accountnotactive_email')
         #end
       &lt;/div&gt;
       ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262
-      &lt;nav id="xwikimainmenu" class="collapse navbar-collapse"&gt;
+      &lt;nav role="navigation" id="xwikimainmenu" class="collapse navbar-collapse"&gt;
 #end
 
 ###
