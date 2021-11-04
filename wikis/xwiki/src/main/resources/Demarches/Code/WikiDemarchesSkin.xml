@@ -1678,7 +1678,7 @@ $services.localization.render('accountnotactive_email')
 ###    Toplevel Menu
 ###
 #macro(xwikitopmenustart)
-  &lt;nav class="navbar navbar-default actionmenu"&gt;
+  &lt;div class="navbar navbar-default actionmenu"&gt;
     &lt;div class="container"&gt;
       ## Brand and toggle get grouped for better mobile display
       &lt;div class="navbar-header"&gt;
@@ -1694,16 +1694,16 @@ $services.localization.render('accountnotactive_email')
         #end
       &lt;/div&gt;
       ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262
-      &lt;div id="xwikimainmenu" class="collapse navbar-collapse"&gt;
+      &lt;nav id="xwikimainmenu" class="collapse navbar-collapse"&gt;
 #end
 
 ###
 ###    Toplevel Menu
 ###
 #macro(xwikitopmenuend)
-      &lt;/div&gt;## /.navbar-collapse
+      &lt;/nav&gt;## /.navbar-collapse
     &lt;/div&gt; ## / container-fluid
-  &lt;/nav&gt;
+  &lt;/div&gt;
 #end
 
 ###
