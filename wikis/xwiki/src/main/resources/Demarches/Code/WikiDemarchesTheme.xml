@@ -1513,6 +1513,37 @@ Visually, there's the title row and then all the rows from the document content,
       .outline;
       outline-offset: 2px;
     }
+    /* The toggle changes text and display following whether it's open or not: ... */
+    /* ... Open */
+    color: @navbar-default-link-color;
+    .navbar-toggle-name {
+      &amp;.navbar-toggle-name-closed {
+        display: none !important;
+      }
+      &amp;.navbar-toggle-name-open {
+        display: initial !important;
+        margin-right: 0.5em;
+      }
+    }
+    .fa::before {
+      content: "\f00d";
+      font-size: 1rem;
+    }
+    /* ... Closed */
+    &amp;.collapsed {
+      color: inherit;
+      .navbar-toggle-name {
+        &amp;.navbar-toggle-name-closed {
+          display: initial !important;
+        }
+        &amp;.navbar-toggle-name-open {
+          display: none !important;
+        }
+      }
+      .fa::before {
+        content: "\f0c9";
+      }
+    }
   }
   /* Reset some ugly styles */
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
@@ -1535,7 +1566,7 @@ Visually, there's the title row and then all the rows from the document content,
  * Top menu style
  */
 /* smaller text, like dsfr */
-.navbar-right {
+.navbar-right, .navbar-toggle {
   font-size: 0.875em;
 }
 /* layout of the wikidemarches menu entries */
