@@ -107,7 +107,7 @@
           #set ($modalite = $request.session.getAttribute('avis-modalite'))
           #set ($discard = $request.session.removeAttribute('avis-modalite'))
         #end
-        &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$modalite" /&gt;
+        &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$escapetool.xml($modalite)" /&gt;
       #end
       &lt;div class="rating-container"&gt;
         #displayObjectForm($avis,['score'])
