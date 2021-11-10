@@ -73,6 +73,10 @@
   #end
   #set ($validationMap[$prop.name] = $validated)
   ##* $prop.name $prop.type: $value - $authorizedValues $validated
+  ## if an invalid value was found, log for what property and what value (and the object)
+  #if (!$validated &amp;&amp; $logger != $NULL)
+    $logger.warn("Invalid value $value for property $prop.name #if($avisObject)for avis id $!avisId ($!uin) for demarche $avisObject.getProperty('demarche').value #end ")
+  #end
 #end
 
 #macro(validateAvis $avisObject)
