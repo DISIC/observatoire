@@ -161,20 +161,10 @@
           &lt;p&gt;$services.localization.render('avis.form.final-step.confirmation')&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class="form-final-step-information"&gt;
-      &lt;h2&gt;$services.localization.render('avis.form.final-step.information.title')&lt;/h2&gt;
-      &lt;ul&gt;
-        &lt;li&gt;
-          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/check-circle.svg")"/&gt;
-          &lt;p&gt;$services.localization.render('avis.form.final-step.information.anonymity')&lt;/p&gt;
-        &lt;/li&gt;
-        &lt;li&gt;
-          &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/award.svg")"/&gt;
-          &lt;p&gt;$services.localization.render('avis.form.final-step.information.follow', ["&lt;a href='https://observatoire.numerique.gouv.fr'&gt;$escapetool.xml($services.localization.render('avis.form.final-step.information.follow.link-title'))&lt;/a&gt;"])&lt;/p&gt;
-        &lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/div&gt;
   {{/html}}
+  (%class="form-final-step-information"%)(((
+    {{display reference='Demarches.Code.DemarcheAvisFormTab_Step3' /}}
+  )))
 #end
 {{/html}}
 {{/velocity}}</content>
@@ -619,10 +609,6 @@ legend.fr-fieldset__legend {
 #xwikimaincontainer #mainContentArea #avis-tab .form-final-step-information {
   margin-bottom: 3rem;
 
-  h2 {
-    margin-bottom: 2rem;
-  }
-
   ul {
     padding: 0;
 
@@ -643,15 +629,10 @@ legend.fr-fieldset__legend {
         // Reproducing the color @bf500 using the tool: https://codepen.io/sosuke/pen/Pjoqqp
         filter: invert(13%) sepia(100%) saturate(5009%) hue-rotate(243deg) brightness(55%) contrast(134%);
       }
-
-      p {
-        margin-bottom: 1.5rem;
-
-        a {
-          color: @bf500;
-        }
-      }
     }
+  }
+  p a {
+      color: @bf500;
   }
 }
 
