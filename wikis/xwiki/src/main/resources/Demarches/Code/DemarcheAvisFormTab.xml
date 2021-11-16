@@ -632,7 +632,7 @@ legend.fr-fieldset__legend {
     }
   }
   p a {
-      color: @bf500;
+    color: @bf500;
   }
 }
 
