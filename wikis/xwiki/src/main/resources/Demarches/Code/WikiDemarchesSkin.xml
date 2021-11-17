@@ -605,7 +605,7 @@
           #if($currentDomainKey != 'voxusagers')
             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
           #else
-            &lt;li&gt;&lt;a href="$xwiki.getURL('Main.accessibilite-formulaire')"&gt;$services.localization.render('wd.accessibilite.non-conforme')&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="$xwiki.getURL('Main.accessibilite-formulaire')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
           #end
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HMentionslE9gales"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HVieprivE9e"&gt;$services.localization.render('wd.personal-data')&lt;/a&gt;&lt;/li&gt;
