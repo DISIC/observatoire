@@ -27,7 +27,7 @@
   <parent>
     <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-    <version>4.9-SNAPSHOT</version>
+    <version>4.9</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-wikis-main</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - Main Wiki</name>
