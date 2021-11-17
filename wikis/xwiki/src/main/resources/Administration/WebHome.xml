@@ -108,6 +108,14 @@
       * Autres pages avec explications
       ** [[En savoir plus sur l'observatoire&gt;&gt;Aide.Observatoire]]
       ** [[Comment donner son avis&gt;&gt;Aide.Donner son avis]]
+
+      * Pied de page
+      ** Observatoire
+      *** [[Conditions générales&gt;&gt;Main.CGU]]
+      *** [[Accessibilité&gt;&gt;Main.Accessibilite]]
+      *** [[Plan du site&gt;&gt;Main.plan-site]]
+      ** Formulaire d'avis (voxusagers)
+      *** [[Accessiblité formulaire&gt;&gt;Main.accessibilite-formulaire]]
     ",'star')
   )))
   (% class="col-md-6 col-xs-12" %) (((
