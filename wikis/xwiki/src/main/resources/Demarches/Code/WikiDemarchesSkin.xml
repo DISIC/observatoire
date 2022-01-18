@@ -557,8 +557,8 @@
           &lt;div id="footertop-sites"&gt;
             &lt;span class="footertop-sites-label"&gt;$services.localization.render('wikidemarches.footer.administrationlinks.intro')&lt;/span&gt;
             &lt;ul&gt;
-              &lt;li&gt;&lt;a target="_blank" title="numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://www.numerique.gouv.fr/"&gt;numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a target="_blank" title="design.numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://www.design.numerique.gouv.fr/')"&gt;design.numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a target="_blank" title="numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://numerique.gouv.fr/"&gt;numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a target="_blank" title="design.numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://design.numerique.gouv.fr/"&gt;design.numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/div&gt;
         &lt;/div&gt;
