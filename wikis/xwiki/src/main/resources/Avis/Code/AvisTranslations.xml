@@ -24,7 +24,7 @@
   <web>Avis.Code</web>
   <name>AvisTranslations</name>
   <language/>
-  <defaultLanguage>fr</defaultLanguage>
+  <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
   <creationDate>1544396400000</creationDate>
@@ -131,7 +131,7 @@ Avis.Code.AvisClass_difficultes_pieces-jointes=Difficulté à joindre les pièce
 Avis.Code.AvisClass_difficultes_suite=Manque d'informations sur la suite, le délai...
 Avis.Code.AvisClass_difficultes_autre=Autre
 Avis.Code.AvisClass_autreDifficulte=Pouvez-vous préciser quelle autre difficulté vous avez rencontré ?
-Avis.Code.AvisClass_autreDifficulte_maxhint=Maximum 250 charactères.
+Avis.Code.AvisClass_autreDifficulte_maxhint=Maximum 250 caractères.
 Avis.Code.AvisClass_aide=De quelle aide avez-vous eu besoin ?
 Avis.Code.AvisClass_aide_aucune=Aucune
 Avis.Code.AvisClass_aide_proche=Un ou une proche
@@ -140,7 +140,7 @@ Avis.Code.AvisClass_aide_agent=Un agent administratif
 Avis.Code.AvisClass_aide_internet=Internet (site, forum…)
 Avis.Code.AvisClass_aide_autre=Autre
 Avis.Code.AvisClass_autreAide=Pouvez-vous préciser de quelle autre aide vous avez eu besoin ?
-Avis.Code.AvisClass_autreAide_maxhint=Maximum 250 charactères.
+Avis.Code.AvisClass_autreAide_maxhint=Maximum 250 caractères.
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
 Avis.Code.AvisClass_autre.hint=Ne communiquez aucune information personnelle ici.&lt;br/&gt;Ceci n’est pas un formulaire de contact. Si vous avez des questions sur cette démarche, contactez le service concerné.
 Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration concernant cette démarche, merci de nous indiquer votre adresse électronique :
