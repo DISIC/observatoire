@@ -61,7 +61,7 @@
 #set ($result = 'non')
 #if ("$!accessibilityStatement" == 'na')
   #set ($result = 'na')
-#elseif ("$!accessibilityStatement" == 'oui' &amp;&amp; $rgaaCompliancyLevel &gt; 75)
+#elseif ("$!accessibilityStatement" == 'oui' &amp;&amp; $rgaaCompliancyLevel &gt;= 75)
   #set ($result = 'oui')
 #elseif ("$!accessibilityStatement" == 'oui')
   #set ($result = 'partiel')
