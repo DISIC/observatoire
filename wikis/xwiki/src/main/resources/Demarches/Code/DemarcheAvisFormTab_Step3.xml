@@ -44,11 +44,11 @@
 &lt;h2 class='fr-mb-8v'&gt;À quoi va servir votre avis&amp;nbsp;?&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/check-circle.svg")"/&gt;
+    &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/icons/check-circle.svg")"/&gt;
     &lt;p class='fr-mb-6v'&gt;Il sera pris en compte de manière anonyme par le service qui s’occupe de cette démarche, afin d’améliorer sa qualité.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-icons/award.svg")"/&gt;
+    &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/icons/award.svg")"/&gt;
     &lt;p class='fr-mb-6v'&gt;Si cette démarche est suivie dans l’&lt;a href='https://observatoire.numerique.gouv.fr'&gt;Observatoire de la qualité des démarches en ligne&lt;/a&gt;, votre note de satisfaction sera prise en compte dans le résultat affiché dans la colonne « Usagers satisfaits ».&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;

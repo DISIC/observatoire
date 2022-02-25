@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="30"
+   height="30"
+   viewBox="0 0 30 30"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="smiley-white.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1403"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="7.8666667"
+     inkscape:cx="1.0805085"
+     inkscape:cy="15"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     fill="#006BE6"
+     fill-rule="nonzero"
+     id="g6"
+     style="fill:#fbfcfd;fill-opacity:1">
+    <path
+       d="M15.005 0A14.981 14.981 0 0 0 2.023 22.5L.07 28.353a1.25 1.25 0 0 0 1.582 1.581l5.853-1.953A15 15 0 1 0 15.005 0zm0 27.5a12.45 12.45 0 0 1-6.672-1.944 1.25 1.25 0 0 0-1.063-.128l-4.04 1.347 1.347-4.04a1.25 1.25 0 0 0-.129-1.063A12.5 12.5 0 1 1 15.005 27.5z"
+       id="path2"
+       style="fill:#fbfcfd;fill-opacity:1" />
+    <path
+       d="M10.005 11.25c.69 0 1.25.56 1.25 1.25a1.25 1.25 0 1 0 2.5 0 3.75 3.75 0 0 0-7.5 0 1.25 1.25 0 1 0 2.5 0c0-.69.56-1.25 1.25-1.25zM20.005 8.75a3.75 3.75 0 0 0-3.75 3.75 1.25 1.25 0 1 0 2.5 0 1.25 1.25 0 0 1 2.5 0 1.25 1.25 0 1 0 2.5 0 3.75 3.75 0 0 0-3.75-3.75zM19.12 17.866l-.731.734a4.906 4.906 0 0 1-6.769 0l-.731-.734a1.25 1.25 0 0 0-1.769 1.768l.735.732a7.281 7.281 0 0 0 10.312 0l.735-.732a1.25 1.25 0 0 0-1.77-1.768h-.012z"
+       id="path4"
+       style="fill:#fbfcfd;fill-opacity:1" />
+  </g>
+</svg>
