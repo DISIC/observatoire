@@ -382,7 +382,7 @@ Visually, there's the title row and then all the rows from the document content,
   padding-top: @sitename-top-mobile;
 
   @media (min-width: @screen-md-min) {
-    padding-top: @sitename-top-desktop + 7px;
+    padding-top: @sitename-top-desktop;
   }
 }
 
@@ -415,6 +415,13 @@ Visually, there's the title row and then all the rows from the document content,
  * As long as the navbar is collapsed, display the header and menus completely different.
  * We're doing it like this and not mobile-first because we're already inheriting some desktop behaviour and I don't want to spend time resetting all that
  */
+@media (min-width: @grid-float-breakpoint) {
+  /* On desktop all the contents of the .navbar-collapse are floated so we'll cancel its standard padding from mobile where contents are not floated, to make it not take any room*/
+  #menuview .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
 @media (max-width: @grid-float-breakpoint-max) {
   #menuview {
     .navbar-header, .navbar-left, .navbar-right {
@@ -443,6 +450,37 @@ Visually, there's the title row and then all the rows from the document content,
       .outline;
       outline-offset: 2px;
     }
+    /* The toggle changes text and display following whether it's open or not: ... */
+    /* ... Open */
+    color: @navbar-default-link-color;
+    .navbar-toggle-name {
+      &amp;.navbar-toggle-name-closed {
+        display: none !important;
+      }
+      &amp;.navbar-toggle-name-open {
+        display: initial !important;
+        margin-right: 0.5em;
+      }
+    }
+    .fa::before {
+      content: "\f00d";
+      font-size: 1rem;
+    }
+    /* ... Closed */
+    &amp;.collapsed {
+      color: inherit;
+      .navbar-toggle-name {
+        &amp;.navbar-toggle-name-closed {
+          display: initial !important;
+        }
+        &amp;.navbar-toggle-name-open {
+          display: none !important;
+        }
+      }
+      .fa::before {
+        content: "\f0c9";
+      }
+    }
   }
   /* Reset some ugly styles */
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
@@ -461,7 +499,14 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-/* top menu style */
+/*
+ * Top menu style
+ */
+/* smaller text, like dsfr */
+.navbar-right, .navbar-toggle {
+  font-size: 0.875em;
+}
+/* layout of the wikidemarches menu entries */
 li.wikidemarches-topmenu {
   &gt; a {
     display: inline-block;
@@ -525,20 +570,6 @@ li.wikidemarches-topmenu {
        text-decoration: none;
      }
     }
-  }
-
-  /* The h2 heading in the footer is meant to be seen only by screen-readers. See also:
-   * - https://webaim.org/techniques/css/invisiblecontent/
-   * - https://www.w3.org/WAI/tutorials/page-structure/headings/
-   * - https://www.drupal.org/docs/7/creating-accessible-themes/using-headings-to-improve-accessibility
-   */
-  h2 {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
   }
 
   #footersocial {
