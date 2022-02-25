@@ -1130,13 +1130,6 @@
     </property>
     <property>
       <lessCode>@gray-light: #666;
-.outline {
-  outline: 2px solid @link-color;
-}
-.outline-dotted {
-  outline : #ffffff dotted 2px;
-  outline-offset: -4px;
-}
 
 /* Reproducing some of the DSFR variables declaration */
 @dsfr-bf100: #f2f2f9;
@@ -1223,15 +1216,6 @@ select[size="1"]{
  */
 .small {
   font-size: 80%;
-}
-
-/*
- * Footerglobal is a row. It should not have padding as well... if we didn't put a proper column in it by default, we should have.
- * Now we have a container fixed so it's important to reset it.
- */
-#footerglobal {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 
@@ -1340,6 +1324,17 @@ h1,
   }
 }
 
+/*
+ * Mixin for outline styles used throughout the wiki
+ */
+.outline {
+  outline: 2px solid @link-color;
+}
+.outline-dotted {
+  outline : #ffffff dotted 2px;
+  outline-offset: -4px;
+}
+
 /* DSFR focus outline */
 * {
   outline-offset: 2px;
@@ -1385,18 +1380,6 @@ h1,
   box-shadow:
     0 8px 8px 0 rgba(0, 0, 0, 0.1),
     0 8px 16px -16px rgba(0, 0, 0, 0.32);
-}
-
-/*
- * Custom layout, to make content fixed width as well - header and footer are done from the skin, with real containers.
- */
-#contentcontainerinner, #xwikieditorinner {
-  .container();
-}
-/* But without padding, we already have this padding in the columns inside */
-#contentcontainerinner, #xwikieditorinner {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 
