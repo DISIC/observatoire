@@ -1,0 +1,537 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@charset "UTF-8";
+
+/* ¯¯¯¯¯¯¯¯¯ *\
+  TAG
+\* ˍˍˍˍˍˍˍˍˍ */
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag {
+  --link-underline: none;
+  --link-blank-font: none;
+  --link-blank-content: none;
+  --text-spacing: 0;
+  --title-spacing: 0;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 1;
+
+  --blend-full-size: 100%;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  color: var(--text-label-grey);
+
+  --blend: var(--background-contrast-grey-blend);
+  background-color: var(--background-contrast-grey);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class*=" fr-fi-"] {
+  flex-direction: row;
+  overflow: initial;
+  max-width: 100%;
+  max-height: none;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--icon-left[class*=" fr-fi-"]::before {
+  margin-left: -0.25rem;
+  margin-right: 0.25rem;
+  font-size: 1rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  min-height: 1.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class*=" fr-fi-"] {
+  flex-direction: row;
+  overflow: initial;
+  max-width: 100%;
+  max-height: none;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tag--sm.fr-tag--icon-left[class*=" fr-fi-"]::before {
+  margin-left: -0.1875rem;
+  margin-right: 0.25rem;
+  font-size: 0.75rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"] {
+  position: relative;
+  overflow: visible;
+  background-position: 100% 0, 100% 0;
+  background-size: var(--blend-size), 100% 100%;
+  color: var(--text-inverted-grey);
+  background-color: transparent;
+  background-image: radial-gradient(circle at 100% 0.25rem, transparent 0.57812rem, var(--hsla) 0.625rem), radial-gradient(circle at 100% 0.25rem, transparent 0.57812rem, var(--background-action-high-blue-france) 0.625rem);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"]::after {
+  font: normal 700 normal 1rem/1 dsfr-icon;
+  content: "";
+  font-weight: 400;
+  font-weight: 700;
+  position: absolute;
+  top: 4px;
+  right: 0;
+  margin: -0.5rem;
+  color: var(--text-action-high-blue-france);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"].fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"].fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"].fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"].fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"].fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"].fr-tag--sm::after {
+  font: normal 700 normal 0.75rem/1 dsfr-icon;
+  position: absolute;
+  top: 3px;
+  right: 0;
+  margin: -0.375rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--dismiss::before,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--dismiss::before,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--dismiss::before,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--dismiss::before,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--dismiss::before,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--dismiss::before {
+  content: none;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--dismiss::after {
+  font: normal 700 normal 1rem/1 dsfr-icon;
+  content: "";
+  font-weight: 400;
+  font-weight: 700;
+  margin-left: 0.25rem;
+  margin-right: -0.25rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--dismiss.fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--dismiss.fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--dismiss.fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--dismiss.fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--dismiss.fr-tag--sm::after,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--dismiss.fr-tag--sm::after {
+  font: normal 700 normal 0.75rem/1 dsfr-icon;
+  margin-right: -0.1875rem;
+  margin-left: 0.125rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group {
+  --ul-type: none;
+  --ol-type: none;
+  --ul-start: 0;
+  --ol-start: 0;
+  --xl-block: 0;
+  --li-bottom: 0;
+  --ol-content: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group > li {
+  display: inline-flex;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group .fr-tag {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm .fr-tag {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  min-height: 1.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.75rem;
+  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm .fr-tag::before {
+  font: normal 700 normal 1rem/1 dsfr-icon;
+  content: none;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm a.fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm button.fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="button"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="image"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="reset"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="submit"].fr-tag {
+  margin-right: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm a.fr-tag.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm button.fr-tag.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="button"].fr-tag.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="image"].fr-tag.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="reset"].fr-tag.fr-tag--dismiss::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="submit"].fr-tag.fr-tag--dismiss::after {
+  font: normal 700 normal 0.75rem/1 dsfr-icon;
+  margin-right: -0.1875rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm a.fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm button.fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="button"].fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="image"].fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="reset"].fr-tag[aria-pressed="true"]::after,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="submit"].fr-tag[aria-pressed="true"]::after {
+  font: normal 700 normal 0.75rem/1 dsfr-icon;
+  position: absolute;
+  top: 3px;
+  right: 0;
+  margin: -0.375rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group a.fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group button.fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="button"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="image"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="reset"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="submit"].fr-tag {
+  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group a.fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group button.fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="button"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="image"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="reset"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group input[type="submit"].fr-tag--sm {
+  margin-right: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag {
+  color: var(--text-action-high-blue-france);
+
+  --blend: var(--background-action-low-blue-france-blend);
+  background-color: var(--background-action-low-blue-france);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-tilleul-verveine,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-tilleul-verveine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-tilleul-verveine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-tilleul-verveine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-tilleul-verveine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-tilleul-verveine {
+  color: var(--text-action-high-green-tilleul-verveine);
+
+  --blend: var(--background-action-low-green-tilleul-verveine-blend);
+  background-color: var(--background-action-low-green-tilleul-verveine);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-bourgeon,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-bourgeon,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-bourgeon,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-bourgeon,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-bourgeon,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-bourgeon {
+  color: var(--text-action-high-green-bourgeon);
+
+  --blend: var(--background-action-low-green-bourgeon-blend);
+  background-color: var(--background-action-low-green-bourgeon);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-emeraude,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-emeraude,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-emeraude,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-emeraude,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-emeraude,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-emeraude {
+  color: var(--text-action-high-green-emeraude);
+
+  --blend: var(--background-action-low-green-emeraude-blend);
+  background-color: var(--background-action-low-green-emeraude);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-menthe,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-menthe,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-menthe,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-menthe,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-menthe,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-menthe {
+  color: var(--text-action-high-green-menthe);
+
+  --blend: var(--background-action-low-green-menthe-blend);
+  background-color: var(--background-action-low-green-menthe);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-archipel,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-archipel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-archipel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-archipel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-archipel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-archipel {
+  color: var(--text-action-high-green-archipel);
+
+  --blend: var(--background-action-low-green-archipel-blend);
+  background-color: var(--background-action-low-green-archipel);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--blue-ecume,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--blue-ecume,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--blue-ecume,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--blue-ecume,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--blue-ecume,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--blue-ecume {
+  color: var(--text-action-high-blue-ecume);
+
+  --blend: var(--background-action-low-blue-ecume-blend);
+  background-color: var(--background-action-low-blue-ecume);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--blue-cumulus,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--blue-cumulus,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--blue-cumulus,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--blue-cumulus,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--blue-cumulus,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--blue-cumulus {
+  color: var(--text-action-high-blue-cumulus);
+
+  --blend: var(--background-action-low-blue-cumulus-blend);
+  background-color: var(--background-action-low-blue-cumulus);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--purple-glycine,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--purple-glycine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--purple-glycine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--purple-glycine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--purple-glycine,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--purple-glycine {
+  color: var(--text-action-high-purple-glycine);
+
+  --blend: var(--background-action-low-purple-glycine-blend);
+  background-color: var(--background-action-low-purple-glycine);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--pink-macaron,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--pink-macaron,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--pink-macaron,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--pink-macaron,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--pink-macaron,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--pink-macaron {
+  color: var(--text-action-high-pink-macaron);
+
+  --blend: var(--background-action-low-pink-macaron-blend);
+  background-color: var(--background-action-low-pink-macaron);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--pink-tuile,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--pink-tuile,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--pink-tuile,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--pink-tuile,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--pink-tuile,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--pink-tuile {
+  color: var(--text-action-high-pink-tuile);
+
+  --blend: var(--background-action-low-pink-tuile-blend);
+  background-color: var(--background-action-low-pink-tuile);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--yellow-tournesol,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--yellow-tournesol,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--yellow-tournesol,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--yellow-tournesol,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--yellow-tournesol,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--yellow-tournesol {
+  color: var(--text-action-high-yellow-tournesol);
+
+  --blend: var(--background-action-low-yellow-tournesol-blend);
+  background-color: var(--background-action-low-yellow-tournesol);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--yellow-moutarde,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--yellow-moutarde,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--yellow-moutarde,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--yellow-moutarde,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--yellow-moutarde,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--yellow-moutarde {
+  color: var(--text-action-high-yellow-moutarde);
+
+  --blend: var(--background-action-low-yellow-moutarde-blend);
+  background-color: var(--background-action-low-yellow-moutarde);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--orange-terre-battue,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--orange-terre-battue,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--orange-terre-battue,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--orange-terre-battue,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--orange-terre-battue,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--orange-terre-battue {
+  color: var(--text-action-high-orange-terre-battue);
+
+  --blend: var(--background-action-low-orange-terre-battue-blend);
+  background-color: var(--background-action-low-orange-terre-battue);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--brown-cafe-creme,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--brown-cafe-creme,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--brown-cafe-creme,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--brown-cafe-creme,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--brown-cafe-creme,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--brown-cafe-creme {
+  color: var(--text-action-high-brown-cafe-creme);
+
+  --blend: var(--background-action-low-brown-cafe-creme-blend);
+  background-color: var(--background-action-low-brown-cafe-creme);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--brown-caramel,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--brown-caramel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--brown-caramel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--brown-caramel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--brown-caramel,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--brown-caramel {
+  color: var(--text-action-high-brown-caramel);
+
+  --blend: var(--background-action-low-brown-caramel-blend);
+  background-color: var(--background-action-low-brown-caramel);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--brown-opera,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--brown-opera,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--brown-opera,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--brown-opera,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--brown-opera,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--brown-opera {
+  color: var(--text-action-high-brown-opera);
+
+  --blend: var(--background-action-low-brown-opera-blend);
+  background-color: var(--background-action-low-brown-opera);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--beige-gris-galet,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--beige-gris-galet,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--beige-gris-galet,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--beige-gris-galet,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--beige-gris-galet,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--beige-gris-galet {
+  color: var(--text-action-high-beige-gris-galet);
+
+  --blend: var(--background-action-low-beige-gris-galet-blend);
+  background-color: var(--background-action-low-beige-gris-galet);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="false"],
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="false"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="false"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="false"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="false"],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="false"] {
+  color: var(--text-action-high-blue-france);
+
+  --blend: var(--background-action-low-blue-france-blend);
+  background-color: var(--background-action-low-blue-france);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"][disabled] {
+  background-image: none;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"].fr-tag--sm,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"].fr-tag--sm {
+  background-image: radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, var(--hsla) 0.5rem), radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, var(--background-action-high-blue-france) 0.5rem);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag.fr-tag--dismiss,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag.fr-tag--dismiss,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag.fr-tag--dismiss,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag.fr-tag--dismiss,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag.fr-tag--dismiss,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag.fr-tag--dismiss {
+  color: var(--text-inverted-grey);
+
+  --blend: var(--background-action-high-blue-france-blend);
+  background-color: var(--background-action-high-blue-france);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[disabled],
+#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag:not([href]),
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[disabled],
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag:disabled,
+#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[disabled] {
+  color: var(--text-disabled-grey);
+
+  --blend: var(--background-disabled-grey-blend);
+  background-color: var(--background-disabled-grey);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm a.fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm button.fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="button"].fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="image"].fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="reset"].fr-tag[aria-pressed="true"],
+#xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="submit"].fr-tag[aria-pressed="true"] {
+  background-image: radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, var(--hsla) 0.5rem), radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, var(--background-action-high-blue-france) 0.5rem);
+}

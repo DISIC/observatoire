@@ -1,0 +1,59 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@charset "UTF-8";
+/* stylelint-disable */
+#xwikimaincontainer #mainContentArea #avis-tab .fr-input {
+  /**
+    * Style du placeholder
+    */
+  /**
+    * Style pour l'état désactivé
+    */
+  /**
+    * Modificateur pour les champs validés
+    */
+  /**
+    * Modificateur pour les champs présentant des erreurs
+    */
+  /**
+    * On applique un style lorsque la valeur est automatiquement remplie par le navigateur
+    * sur les navigateurs webkit.
+    */
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input {
+    color: #161616;
+    background-color: #eee;
+    box-shadow: inset 0 -2px 0 0 #3a3a3a;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input::-webkit-input-placeholder {
+    color: #666;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input:-moz-placeholder {
+    color: #666;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input::-moz-placeholder {
+    color: #666;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input:-ms-input-placeholder {
+    color: #666;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input:disabled, #xwikimaincontainer #mainContentArea #avis-tab .fr-input[disabled] {
+    color: #929292;
+    box-shadow: inset 0 -2px 0 0 #e5e5e5;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input--valid {
+    box-shadow: inset 0 -2px 0 0 #18753c;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input--error {
+    box-shadow: inset 0 -2px 0 0 #ce0500;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input:autofill, #xwikimaincontainer #mainContentArea #avis-tab .fr-input:autofill:hover, #xwikimaincontainer #mainContentArea #avis-tab .fr-input:autofill:focus, #xwikimaincontainer #mainContentArea #avis-tab .fr-input:-webkit-autofill, #xwikimaincontainer #mainContentArea #avis-tab .fr-input:-webkit-autofill:hover, #xwikimaincontainer #mainContentArea #avis-tab .fr-input:-webkit-autofill:focus {
+    box-shadow: inset 0 -2px 0 0 #3a3a3a, inset 0 0 0 1000px #e8edff;
+    -webkit-text-fill-color: #161616;
+  }
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-wrap > *:not(:last-child).fr-input:not(.fr-input--valid):not(.fr-input--error) {
+    box-shadow: inset 0 -2px 0 0 #000091;
+  }
+}

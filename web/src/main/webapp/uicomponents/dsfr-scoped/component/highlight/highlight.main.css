@@ -1,0 +1,93 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@charset "UTF-8";
+
+/* ¯¯¯¯¯¯¯¯¯ *\
+  HIGHLIGHT
+\* ˍˍˍˍˍˍˍˍˍ */
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight {
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-blue-france);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight p {
+  margin-bottom: 0;
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--green-tilleul-verveine {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-tilleul-verveine);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--green-bourgeon {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-bourgeon);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--green-emeraude {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-emeraude);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--green-menthe {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-menthe);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--green-archipel {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-archipel);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--blue-ecume {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-blue-ecume);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--blue-cumulus {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-blue-cumulus);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--purple-glycine {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-purple-glycine);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--pink-macaron {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-pink-macaron);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--pink-tuile {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-pink-tuile);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--yellow-tournesol {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-yellow-tournesol);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--yellow-moutarde {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-yellow-moutarde);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--orange-terre-battue {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-orange-terre-battue);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--brown-cafe-creme {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-brown-cafe-creme);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--brown-caramel {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-brown-caramel);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--brown-opera {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-brown-opera);
+}
+
+#xwikimaincontainer #mainContentArea #avis-tab .fr-highlight--beige-gris-galet {
+  box-shadow: inset 0.25rem 0 0 0 var(--border-default-beige-gris-galet);
+}
+
+@media (min-width: 48em) {
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-highlight {
+    padding-left: 2rem;
+    margin-left: 2rem;
+  }
+}

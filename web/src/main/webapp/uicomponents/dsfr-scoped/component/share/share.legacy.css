@@ -1,0 +1,24 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@charset "UTF-8";
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /**
+  * Reset liste à puce
+  */
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__group > li {
+    list-style: none;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__link {
+    color: #000091;
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:disabled,
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__link[disabled],
+  #xwikimaincontainer #mainContentArea #avis-tab a.fr-share__link:not([href]) {
+    color: #929292;
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+}

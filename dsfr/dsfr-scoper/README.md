@@ -9,7 +9,7 @@ It is not guaranteed to be 100% effective, but has been tested in the scope of t
 
 This script is used to prefix every dsfr rules with a specific selector string.
 This has two advantages:
-- style scope: no dsfr styles are going to mess with existing styles outside of the form element
+- scoping: no dsfr styles are going to mess with existing styles outside of the form element
 - higher rule precedence: the dsfr rule gain more precedence, allowing to take over existing bootstrap rules
 
 The prefixer will also take care of `:root`, `html` and `body` rules, to some extent:
@@ -55,21 +55,16 @@ For this, first download this directory onto your machine.
 You need to have node.js installed, the latest LTS version should work.
 
 Inside the folder, fetch npm dependencies using:
-```bash
+```sh
 $ npm install
 ```
 
-The `index.js` file is used to scope the given css file rules:
-- The source files must be placed inside the `css/` folder. These should be the files inside the `dsfr/css/` folder.
-  The dsfr version currently used is [1.1.0](https://github.com/GouvernementFR/dsfr/releases/download/v1.1.0/dsfr-v1.1.0.zip).
-- The output files will be generated inside the `out/` folder. It will be created if it doesn't exists.
-  The content of this `out/` folder should be copied without modifications inside the `web/src/main/webapp/uicomponents/dsfr-scoped/css/` folder.
-  Please ensure that the `web/src/main/webapp/uicomponents/dsfr-scoped` folder matches the same version you used for generating the scoped files.
-
-Execute the `index.js` file to produce the scoped files:
-```bash
+Then simply execute `index.js` to generate the `dist/` folder of the dsfr, but with scoped styles:
+```sh
 $ node index.js
 ```
 
+The generated folder should be named `dsfr-scoped/`, and you can now copy it (without modification) inside the `web/src/main/webapp/uicomponents/` folder of the project.
 
-
+Note:
+The dsfr version currently used is 1.3.1. The version has been pinned inside `package.json`, to prevent unwanted breakage. You can change the version there if you want, at your own risk.

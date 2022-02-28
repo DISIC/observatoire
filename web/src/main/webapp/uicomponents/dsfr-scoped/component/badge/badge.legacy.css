@@ -1,0 +1,119 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge {
+    color: #3a3a3a;
+    background-color: #eee;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--info {
+    color: #0063cb;
+    background-color: #e8edff;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--error {
+    color: #ce0500;
+    background-color: #ffe9e9;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--success {
+    color: #18753c;
+    background-color: #b8fec9;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--warning {
+    color: #b34000;
+    background-color: #ffe9e6;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--new {
+    color: #695240;
+    background-color: #feebd0;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-tilleul-verveine {
+    color: #66673d;
+    background-color: #fceeac;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-bourgeon {
+    color: #447049;
+    background-color: #c9fcac;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-emeraude {
+    color: #297254;
+    background-color: #c3fad5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-menthe {
+    color: #37635f;
+    background-color: #bafaee;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-archipel {
+    color: #006a6f;
+    background-color: #c7f6fc;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--blue-ecume {
+    color: #2f4077;
+    background-color: #e9edfe;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--blue-cumulus {
+    color: #3558a2;
+    background-color: #e6eefe;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--purple-glycine {
+    color: #6e445a;
+    background-color: #fee7fc;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--pink-macaron {
+    color: #8d533e;
+    background-color: #fee9e6;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--pink-tuile {
+    color: #a94645;
+    background-color: #fee9e7;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--yellow-tournesol {
+    color: #716043;
+    background-color: #feecc2;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--yellow-moutarde {
+    color: #695240;
+    background-color: #feebd0;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--orange-terre-battue {
+    color: #755348;
+    background-color: #fee9e5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-cafe-creme {
+    color: #685c48;
+    background-color: #f7ecdb;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-caramel {
+    color: #845d48;
+    background-color: #f7ebe5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-opera {
+    color: #745b47;
+    background-color: #f7ece4;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--beige-gris-galet {
+    color: #6a6156;
+    background-color: #f3ede5;
+  }
+}

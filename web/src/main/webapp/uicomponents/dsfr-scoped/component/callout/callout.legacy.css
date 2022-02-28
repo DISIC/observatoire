@@ -1,0 +1,110 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /**
+  * Marge des titres et textes
+  */
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout__title {
+    margin: 0 0 0.5rem;
+    color: #161616;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout__text {
+    margin: 0;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout {
+    background-color: #eee;
+    box-shadow: inset 0.25rem 0 0 0 #6a6af4;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout::before {
+    color: #161616;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-tilleul-verveine {
+    box-shadow: inset 0.25rem 0 0 0 #b7a73f;
+    background-color: #fceeac;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-bourgeon {
+    box-shadow: inset 0.25rem 0 0 0 #68a532;
+    background-color: #c9fcac;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-emeraude {
+    box-shadow: inset 0.25rem 0 0 0 #00a95f;
+    background-color: #c3fad5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-menthe {
+    box-shadow: inset 0.25rem 0 0 0 #009081;
+    background-color: #bafaee;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-archipel {
+    box-shadow: inset 0.25rem 0 0 0 #009099;
+    background-color: #c7f6fc;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--blue-ecume {
+    box-shadow: inset 0.25rem 0 0 0 #465f9d;
+    background-color: #e9edfe;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--blue-cumulus {
+    box-shadow: inset 0.25rem 0 0 0 #417dc4;
+    background-color: #e6eefe;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--purple-glycine {
+    box-shadow: inset 0.25rem 0 0 0 #a558a0;
+    background-color: #fee7fc;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--pink-macaron {
+    box-shadow: inset 0.25rem 0 0 0 #e18b76;
+    background-color: #fee9e6;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--pink-tuile {
+    box-shadow: inset 0.25rem 0 0 0 #ce614a;
+    background-color: #fee9e7;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--yellow-tournesol {
+    box-shadow: inset 0.25rem 0 0 0 #c8aa39;
+    background-color: #feecc2;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--yellow-moutarde {
+    box-shadow: inset 0.25rem 0 0 0 #c3992a;
+    background-color: #feebd0;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--orange-terre-battue {
+    box-shadow: inset 0.25rem 0 0 0 #e4794a;
+    background-color: #fee9e5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-cafe-creme {
+    box-shadow: inset 0.25rem 0 0 0 #d1b781;
+    background-color: #f7ecdb;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-caramel {
+    box-shadow: inset 0.25rem 0 0 0 #c08c65;
+    background-color: #f7ebe5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-opera {
+    box-shadow: inset 0.25rem 0 0 0 #bd987a;
+    background-color: #f7ece4;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--beige-gris-galet {
+    box-shadow: inset 0.25rem 0 0 0 #aea397;
+    background-color: #f3ede5;
+  }
+}

@@ -1,0 +1,63 @@
+/*!
+ * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
+ */
+@media all and (min-width: 62em) and (-ms-high-contrast: none), (min-width: 62em) and (-ms-high-contrast: active) {
+  /**
+    * Correctif valeur 'initial' non prise en compte par IE
+    */
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__tools-links {
+    display: block;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header .fr-modal {
+    position: static;
+    overflow: visible;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header .fr-header__menu {
+    box-shadow: inset 0 1px 0 0 #e5e5e5;
+  }
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__tools-links .fr-link {
+    overflow: visible;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header {
+    background-color: #fff;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__service {
+    box-shadow: inset 0 1px 0 0 #e5e5e5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__menu-links .fr-link {
+    box-shadow: inset 0 -1px 0 0 #e5e5e5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__tools-links .fr-link::after {
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__navbar .fr-service__title {
+    color: #161616;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__navbar .fr-btn {
+    background-color: transparent;
+    color: #000091;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__navbar .fr-btn--menu {
+    color: #3a3a3a;
+  }
+
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header .fr-modal {
+    background-color: #fff;
+  }
+}
+@media (min-width: 62em) {
+  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__service {
+    box-shadow: none;
+  }
+}

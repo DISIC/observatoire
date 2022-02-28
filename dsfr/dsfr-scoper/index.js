@@ -1,16 +1,19 @@
 
-const fs = require('fs');
-const postcss = require('postcss')
-const prefixer = require('postcss-prefix-selector')
+import fs from 'fs/promises';
+import path from 'path';
+import postcss from 'postcss';
+import prefixer from 'postcss-prefix-selector';
 
-// Get input files
-const dir = './css';
-const files = fs.readdirSync(dir);
-const cssFiles = files.filter(file => file.endsWith('.css'));
+// Get source files from dsfr dependency
+const sourceDir = './node_modules/@gouvfr/dsfr/dist';
 
-// Create output dir if not exists
-const outDir = './out';
-fs.mkdirSync(outDir, { recursive: true });
+// Remove target dir if it exists
+const targetDir = './dsfr-scoped';
+try {
+  await fs.lstat(targetDir);
+    console.log(`Removing existing target dir "${targetDir}"`);
+    await fs.rm(targetDir, { recursive: true, force: true });
+} catch {};
 
 // The prfix to add for every rules
 const prefix = '#xwikimaincontainer #mainContentArea #avis-tab';
@@ -41,22 +44,53 @@ const transform = function (prefix, selector, prefixedSelector) {
   } else {
     return prefixedSelector;
   }
+};
+
+// For given input file, add prefix for every rules
+// Return css as string
+const transformFile = async (sourceFile, targetFile) => {
+  console.log(`Transforming: ${targetFile}`);
+  const css = await fs.readFile(sourceFile);
+  const result = await postcss()
+    .use(prefixer({ prefix, transform }))
+    .process(css, { from: sourceFile, to: targetFile});
+  return result.css;
+};
+
+
+// Recursively copy sourceDir to targetDir,
+// modifying every css file encountered
+const copyDirRecursive = async (sourceDir, targetDir) => {
+  // Create new target dir
+  await fs.mkdir(targetDir);
+
+  // Copy
+  const files = await fs.readdir(sourceDir);
+  files.forEach(async filename => {
+    const sourceFile = path.join(sourceDir, filename);
+    const sourceFileStat = await fs.lstat(sourceFile);
+    if (sourceFileStat.isDirectory()) {
+      const childTargetDir = path.join(targetDir, filename);
+      copyDirRecursive(sourceFile, childTargetDir);
+    } else {
+      copyFile(sourceFile, targetDir);
+    }
+  });
+};
+
+const copyFile = async (sourceFile, targetDir) => {
+  const targetFile = path.join(targetDir, path.basename(sourceFile));
+  if (sourceFile.endsWith('.css')) {
+    const css = await transformFile(sourceFile, targetFile);
+    fs.writeFile(targetFile, css);
+  } else {
+    const css = await fs.readFile(sourceFile);
+    fs.writeFile(targetFile, css);
+  }
 }
 
-// For every input files, add prefix for every rules
-for (const file of cssFiles) {
-  const srcFile = `./${dir}/${file}`;
-  const outFile = `./${outDir}/${file}`;
-  console.log(srcFile, ' --> ', outFile);
-  fs.readFile(srcFile, (err, css) => {
-    postcss()
-      .use(prefixer({
-        prefix,
-        transform,
-      }))
-      .process(css, { from: srcFile, to: outFile})
-      .then(result => {
-        fs.writeFile(outFile, result.css, () => true);
-      });
-  })
-}
+
+// Actually execute progam
+copyDirRecursive(sourceDir, targetDir);
+
+
