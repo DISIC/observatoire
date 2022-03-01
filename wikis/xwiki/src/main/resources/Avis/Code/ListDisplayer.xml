@@ -41,8 +41,10 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html clean='false'}}
-#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/checkboxes.min.css'))
-#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/radios.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/component/checkbox/checkbox.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/component/checkbox/checkbox.legacy.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/component/radio/radio.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/component/radio/radio.legacy.min.css'))
 #if ($type == 'edit')
   #set ($validationRegExp = $field.getProperty('validationRegExp').value)
   #set ($isMandatory = $validationRegExp.trim().length() &gt; 0)

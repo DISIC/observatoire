@@ -41,7 +41,8 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 {{html clean='false'}}
-#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/css/inputs.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/component/input/input.min.css'))
+#set ($discard = $xwiki.ssfx.use('uicomponents/dsfr-scoped/component/input/input.legacy.min.css'))
 #if ($type == 'edit')
   &lt;div class="fr-form-group"&gt;
     &lt;div class="fr-input-group"&gt;
