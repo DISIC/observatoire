@@ -101,6 +101,8 @@
             #set($discard = $LOGGER.warn("Done computing cache for demarche $d.id, storing the cache"))
             ## if some results were computed, save them
             #if($avisStatsResult != $NULL)
+              ## change the source name before storing, to be able to trace properly the source (although nobody yet reads this info)
+              #set($discard = $avisStatsResult.put('source', 'statscache'))
               #set($storeResult = $services.jsonstore.permdir.persistAsJson($avisStatsResult, $demarcheCacheKey, $overwriteCache))
               #if (!$storeResult)
                 #set($discard = $LOGGER.error("Cache for demarche $d.id was computed but could not be stored"))
