@@ -1,0 +1,157 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Code.DemarcheAvisStatisticsMacros" locale="">
+  <web>Demarches.Code</web>
+  <name>DemarcheAvisStatisticsMacros</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>Demarches.Code.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title>DemarcheAvisStatisticsMacros</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity output="false"}}
+#*
+  Gets the avis stats for the current demarche, in $avisStatsResult variable, the only global variable along with constants.
+
+  Expected format for stats:
+  {
+   'date_start' : java.util.Date object
+   'date_end' : java.util.Date object
+   'source' : 'live|pagecache|statscache',
+   'moyenne' : decimal from 1 to 3
+   'satisfaction' : percentage
+   'occurrences' : long number
+   'score' : {'1' : , '2' : , '3' : }, -&gt; long numbers, all
+   'facile' : {'1' : , '2' : , '3' : }, -&gt; long numbers, all
+   'comprehensible' : {'1' : , '2' : , '3' : }, -&gt; long numbers, all
+   'difficultes' : {'manque-d-informations' : , 'dysfonctionnement': , 'mobile' : , 'pieces-jointes' : , 'suite' : , 'autre' : }, -&gt; long numbers, all
+   'aide' : {'proche' : , 'association': , 'agent' : , 'internet' : , 'autre' : } -&gt; long numbers, all
+   'scorehistory_permonth' : {
+     year : {
+       month : {'1' : , '2' : , '3' : } -&gt; long numbers, all
+     } -&gt; one year object for each year in the period, one month object for each month in the year in the period. numeric format for both year and month, prefixed by 0 for the month
+   }
+  }
+*#
+#macro(computeAvisStats $demarcheFullName $minDate $maxDate $avisClassName)
+  ## first log when this is happening so that we can evaluate perf issues
+  #set ($discard = $services.logging.getLogger('Demarches.Code.DemarcheAvisStatisticsMacros').warn("Computing stats for dates $minDate and $maxDate for demarche $demarcheFullName"))
+  ## compute results
+  #set ($avisStatsResult = {'source' : 'live', 'date_start' : $minDate, 'date_end' : $maxDate, 'occurrences' : 0})
+  ## count each vote of each type, this allows to both compute the average and the total votes and also the each score individually
+  #set ($hql = 'select score.value, count(*) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by score.value')
+  #set ($entries = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheFullName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate).execute())
+  #set ($avisCount = 0)
+  #set ($totalSatisfactionPoints = 0)
+  #set ($scoreValuesMap = {})
+  #if ($entries.size() &gt; 0)
+    ## compute the total number of avis, and the score values map as well as the moyenne
+    #foreach($countRes in $entries)
+      #set ($discard = $scoreValuesMap.put("$countRes[0]", $countRes[1]))
+      #set ($avisCount = $avisCount + $countRes[1])
+      #set ($totalSatisfactionPoints = $totalSatisfactionPoints + $mathtool.mul($countRes[0], $countRes[1]))
+    #end
+  #end
+  #if ($avisCount &amp;&amp; $avisCount &gt; 0)
+    ## add the number of avis in the map
+    #set ($discard = $avisStatsResult.put('occurrences', $avisCount))
+    ## add the score values in the results
+    #set($discard = $avisStatsResult.put('score', $scoreValuesMap))
+    #set ($satisfactionIndex = $mathtool.div($totalSatisfactionPoints, $avisCount))
+    ## add moyenne and satisfaction in the map
+    #set ($discard = $avisStatsResult.put('moyenne', $satisfactionIndex))
+    #set ($discard = $avisStatsResult.put('satisfaction', $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50)))
+    ## Now that we know we have avis, let's go ahead and compute the rest of the elements of the map.
+    ##
+    ## 1. First, the integer properties
+    ##
+    #foreach($propName in ['facile', 'comprehensible'])
+      ## query the avis for this property
+      #set ($hql = "select prop.value, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche  and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate and prop.value &lt;&gt; '' group by prop.value")
+      #set ($query = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('demarche', $demarcheFullName).bindValue('propertyName', $propName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate))
+      #set($results = $query.execute())
+      #if ($results.size() &gt; 0)
+        #set($valuesMap = {})
+        #foreach($countRes in $results)
+          #set($discard = $valuesMap.put("$countRes[0]", $countRes[1]))
+        #end
+        ## add the values map in the results
+        #set($discard = $avisStatsResult.put($propName, $valuesMap))
+      #end
+    #end
+    ##
+    ## 2. Then the list properties
+    ##
+    #foreach($propName in ['difficultes', 'aide'])
+      #set ($hql = "select list, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, DBStringListProperty as prop join prop.list list, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by list")
+      #set ($query = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('demarche', $demarcheFullName).bindValue('propertyName', $propName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate))
+      #set($results = $query.execute())
+      #if ($results.size() &gt; 0)
+        #set($valuesMap = {})
+        #foreach($countRes in $results)
+          #set($discard = $valuesMap.put("$countRes[0]", $countRes[1]))
+        #end
+        ## add the values map in the results
+        #set($discard = $avisStatsResult.put($propName, $valuesMap))
+      #end
+    #end
+    ##
+    ## 3. And the history per month
+    ##
+    ## count each vote of each type, this allows to both compute the average and the total votes and also the each score individually
+    #set ($hql = 'select score.value, count(*), concat(year(doc.creationDate), month(doc.creationDate)) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by concat(year(doc.creationDate), month(doc.creationDate)), score.value')
+    #set ($entries = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheFullName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate).execute())
+    #set($historyPerMonthResults = $collectionstool.orderedMap)
+    #foreach($countRes in $entries)
+      #set($y = $countRes[2].substring(0, 4))
+      #set($yearMonths = $historyPerMonthResults.get($y))
+      #if ("$!yearMonths" == '')
+        #set($yearMonths = $collectionstool.orderedMap)
+        #set($discard = $historyPerMonthResults.put($y, $yearMonths))
+      #end
+      #set($M = $countRes[2].substring(4))
+      #if ($M.length() &lt; 2)
+        #set($M = "0${M}")
+      #end
+      #set($monthValues = $yearMonths.get($M))
+      #if ("$!monthValues" == '')
+        #set($monthValues = {})
+        #set($discard = $yearMonths.put($M, $monthValues))
+      #end
+      #set($discard = $monthValues.put("$countRes[0]", $countRes[1]))
+    #end
+    #set($discard = $avisStatsResult.put('scorehistory_permonth', $historyPerMonthResults))
+  #end
+#end
+{{/velocity}}</content>
+</xwikidoc>
