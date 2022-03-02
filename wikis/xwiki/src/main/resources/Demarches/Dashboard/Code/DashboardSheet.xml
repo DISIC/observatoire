@@ -1421,7 +1421,6 @@ input[name='title'] {
     padding: 1em 1.8em 1em 1.8em;
     background-image: none;
     border: none;
-    border-radius: 0.25em;
     box-shadow: 0 2px 4px 0 rgba(191, 191, 191, 0.3);
     &amp;.btn-default {
       background-color: #fff;
