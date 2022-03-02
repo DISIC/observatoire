@@ -1389,7 +1389,7 @@ h1,
  * (like bootstrap `a` tags used as buttons, or other XWiki `a` tags)
  */
 #xwikicontent {
-  a:not(.btn):not([type="button"]):not([role="button"]):not(ul.nav &gt; li &gt; a) {
+  a[href]:not(.btn):not([type="button"]):not([role="button"]):not(ul.nav &gt; li &gt; a):not(ul.dropdown-menu &gt; li &gt; a) {
     text-decoration: underline;
     text-underline-offset: 2px;
   }
