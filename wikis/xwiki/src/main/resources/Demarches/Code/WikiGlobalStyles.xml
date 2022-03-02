@@ -758,7 +758,7 @@ span.wikiexternallink {
     padding:.5em 1em;
     box-shadow:0 1px 5px rgba(0,0,0,.2);
     background-color:#0a0a0a;color:#fefefe;font-weight:700;
-    z-index: 10;
+    z-index: 10000;
   }
   a:focus {
     top:0;
