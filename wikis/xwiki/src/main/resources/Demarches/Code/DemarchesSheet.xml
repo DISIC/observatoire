@@ -544,11 +544,6 @@ require(['jquery','xwiki-selectize'], function($) {
 
 .demarche-details-action {
   padding: 0.7em 0 0 0;
-  .btn-primary {
-    background-image: none;
-    border: none;
-    border-radius: 0.25em;
-  }
 }
 .demarche-details {
   display: none;
