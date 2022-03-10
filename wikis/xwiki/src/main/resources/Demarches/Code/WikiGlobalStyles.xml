@@ -573,7 +573,7 @@ li.wikidemarches-topmenu {
   }
 
   #footersocial {
-    background-color: @dsfr-bf100;
+    background-color: @blue-france-950;
 
     #footersocial-links {
       display: flex;
@@ -595,7 +595,7 @@ li.wikidemarches-topmenu {
 
         a span {
           font-size: 1.8rem;
-          color: @dsfr-bf-icon;
+          color: @blue-france-sun-113;
         }
       }
     }
@@ -604,11 +604,11 @@ li.wikidemarches-topmenu {
   #footerborder {
     height: 2px;
     width: 100%;
-    background-color: @dsfr-bf500;
+    background-color: @blue-france-sun-113;
   }
 
   #footertop {
-    background-color: @dsfr-beige;
+    background-color: @grey-975;
 
     .row .col-xs-12 {
       text-align: center;
@@ -637,7 +637,7 @@ li.wikidemarches-topmenu {
           font-size: 90%;
 
           a {
-            color: @dsfr-g600;
+            color: @grey-425;
           }
         }
       }
@@ -675,7 +675,7 @@ li.wikidemarches-topmenu {
     }
 
     .footer-col-sites {
-      border-top: 1px solid @dsfr-g400;
+      border-top: 1px solid @grey-850;
       margin-top: @grid-gutter-width / 2;
       padding-top: 0.5rem;
       text-align: center;
@@ -688,14 +688,14 @@ li.wikidemarches-topmenu {
           content: "";
           display: inline-block;
           vertical-align: middle;
-          background-color: @dsfr-g400;
+          background-color: @grey-850;
           width: 1px;
           height: 1rem;
           margin-left: 0.75rem;
         }
 
         a {
-          color: @dsfr-g600;
+          color: @grey-425;
         }
       }
     }

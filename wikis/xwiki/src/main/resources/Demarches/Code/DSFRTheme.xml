@@ -1132,12 +1132,6 @@
       <lessCode>@gray-light: #666;
 
 /* Reproducing some of the DSFR variables declaration */
-@dsfr-bf100: #f2f2f9;
-@dsfr-bf500: #000091;
-@dsfr-bf-icon: #00258e;
-@dsfr-g400: #cecece;
-@dsfr-g600: #6a6a6a;
-@dsfr-beige: #f9f8f6;
 @dsfr-focus: #2a7ffe;
 
 
