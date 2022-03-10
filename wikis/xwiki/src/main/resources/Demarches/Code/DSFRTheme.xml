@@ -997,73 +997,73 @@
       </xwiki-page-content-bg>
     </class>
     <property>
-      <body-bg>#fff</body-bg>
+      <body-bg/>
     </property>
     <property>
-      <brand-danger>#e10600</brand-danger>
+      <brand-danger/>
     </property>
     <property>
-      <brand-info>#0762c8</brand-info>
+      <brand-info/>
     </property>
     <property>
-      <brand-primary>#000091</brand-primary>
+      <brand-primary/>
     </property>
     <property>
-      <brand-success>#008941</brand-success>
+      <brand-success/>
     </property>
     <property>
-      <brand-warning>#fa5c00</brand-warning>
+      <brand-warning/>
     </property>
     <property>
-      <breadcrumb-bg>#fff</breadcrumb-bg>
+      <breadcrumb-bg/>
     </property>
     <property>
-      <breadcrumb-color>#6a6a6a</breadcrumb-color>
+      <breadcrumb-color/>
     </property>
     <property>
       <breadcrumb-separator> &gt; </breadcrumb-separator>
     </property>
     <property>
-      <btn-danger-bg>#000091</btn-danger-bg>
+      <btn-danger-bg/>
     </property>
     <property>
-      <btn-danger-color>#fff</btn-danger-color>
+      <btn-danger-color/>
     </property>
     <property>
-      <btn-default-bg>#fff</btn-default-bg>
+      <btn-default-bg/>
     </property>
     <property>
-      <btn-default-border>#000091</btn-default-border>
+      <btn-default-border/>
     </property>
     <property>
-      <btn-default-color>#000091</btn-default-color>
+      <btn-default-color/>
     </property>
     <property>
       <btn-font-weight>normal</btn-font-weight>
     </property>
     <property>
-      <btn-info-bg>#000091</btn-info-bg>
+      <btn-info-bg/>
     </property>
     <property>
-      <btn-info-color>#fff</btn-info-color>
+      <btn-info-color/>
     </property>
     <property>
-      <btn-primary-bg>#000091</btn-primary-bg>
+      <btn-primary-bg/>
     </property>
     <property>
-      <btn-primary-color>#fff</btn-primary-color>
+      <btn-primary-color/>
     </property>
     <property>
-      <btn-success-bg>#000091</btn-success-bg>
+      <btn-success-bg/>
     </property>
     <property>
-      <btn-success-color>#fff</btn-success-color>
+      <btn-success-color/>
     </property>
     <property>
-      <btn-warning-bg>#000091</btn-warning-bg>
+      <btn-warning-bg/>
     </property>
     <property>
-      <btn-warning-color>#fff</btn-warning-color>
+      <btn-warning-color/>
     </property>
     <property>
       <component-active-bg/>
@@ -1105,7 +1105,7 @@
       <font-size-base>1em</font-size-base>
     </property>
     <property>
-      <headings-color>#383838</headings-color>
+      <headings-color/>
     </property>
     <property>
       <input-bg/>
@@ -1139,6 +1139,354 @@
 @dsfr-g600: #6a6a6a;
 @dsfr-beige: #f9f8f6;
 @dsfr-focus: #2a7ffe;
+
+
+/*
+ * DSFR colors
+ * These color have to be used as the base for every semantic color
+ * They are defined from https://gouvfr.atlassian.net/wiki/spaces/DB/pages/217186370/Couleurs+-+palette+-+Color
+ * They were copied (for convenience) from https://github.com/GouvernementFR/dsfr/blob/main/src/core/style/color/setting/_options.scss
+ */
+
+// grey
+@grey-50: #161616;
+@grey-75: #1e1e1e;
+@grey-100: #242424;
+@grey-125: #2a2a2a;
+@grey-200: #3a3a3a;
+@grey-425: #666;
+@grey-625: #929292;
+@grey-850: #cecece;
+@grey-925: #e5e5e5;
+@grey-950: #eee;
+@grey-975: #f6f6f6;
+@grey-1000: #fff;
+@grey-main-525: #7b7b7b;
+// blue-france
+@blue-france-75: #1b1b35;
+@blue-france-100: #21213f;
+@blue-france-125: #272747;
+@blue-france-200: #313178;
+@blue-france-625: #8585f6;
+@blue-france-850: #cacafb;
+@blue-france-925: #e3e3fd;
+@blue-france-950: #ececfe;
+@blue-france-975: #f5f5fe;
+@blue-france-sun-113: #000091;
+@blue-france-main-525: #6a6af4;
+// red-marianne
+@red-marianne-75: #2b1919;
+@red-marianne-100: #331f1f;
+@red-marianne-125: #3b2424;
+@red-marianne-200: #5e2a2b;
+@red-marianne-425: #c9191e;
+@red-marianne-625: #f95c5e;
+@red-marianne-850: #fcbfbf;
+@red-marianne-925: #fddede;
+@red-marianne-950: #fee9e9;
+@red-marianne-975: #fef4f4;
+@red-marianne-main-472: #e1000f;
+// info
+@info-75: #171d2e;
+@info-100: #1d2437;
+@info-125: #222a3f;
+@info-200: #273961;
+@info-425: #0063cb;
+@info-625: #518fff;
+@info-850: #bccdff;
+@info-925: #dde5ff;
+@info-950: #e8edff;
+@info-975: #f4f6ff;
+@info-main-525: #0078f3;
+// success
+@success-75: #142117;
+@success-100: #19271d;
+@success-125: #1e2e22;
+@success-200: #204129;
+@success-425: #18753c;
+@success-625: #27a658;
+@success-850: #3bea7e;
+@success-925: #88fdaa;
+@success-950: #b8fec9;
+@success-975: #dffee6;
+@success-main-525: #1f8d49;
+// warning
+@warning-75: #2d1814;
+@warning-100: #361e19;
+@warning-125: #3e231e;
+@warning-200: #5d2c20;
+@warning-425: #b34000;
+@warning-625: #fc5d00;
+@warning-850: #ffbeb4;
+@warning-925: #ffded9;
+@warning-950: #ffe9e6;
+@warning-975: #fff4f3;
+@warning-main-525: #d64d00;
+// error
+@error-75: #301717;
+@error-100: #391c1c;
+@error-125: #412121;
+@error-200: #642626;
+@error-425: #ce0500;
+@error-625: #ff5655;
+@error-850: #ffbdbd;
+@error-925: #fdd;
+@error-950: #ffe9e9;
+@error-975: #fff4f4;
+@error-main-525: #f60700;
+// green-tilleul-verveine
+@green-tilleul-verveine-75: #201e14;
+@green-tilleul-verveine-100: #272419;
+@green-tilleul-verveine-125: #2d2a1d;
+@green-tilleul-verveine-200: #3f3a20;
+@green-tilleul-verveine-850: #e2cf58;
+@green-tilleul-verveine-925: #fbe769;
+@green-tilleul-verveine-950: #fceeac;
+@green-tilleul-verveine-975: #fef7da;
+@green-tilleul-verveine-sun-418: #66673d;
+@green-tilleul-verveine-moon-817: #d8c634;
+@green-tilleul-verveine-main-707: #b7a73f;
+// green-bourgeon
+@green-bourgeon-75: #182014;
+@green-bourgeon-100: #1e2719;
+@green-bourgeon-125: #232d1d;
+@green-bourgeon-200: #2a401a;
+@green-bourgeon-850: #95e257;
+@green-bourgeon-925: #a9fb68;
+@green-bourgeon-950: #c9fcac;
+@green-bourgeon-975: #e6feda;
+@green-bourgeon-sun-425: #447049;
+@green-bourgeon-moon-759: #99c221;
+@green-bourgeon-main-640: #68a532;
+// green-emeraude
+@green-emeraude-75: #142018;
+@green-emeraude-100: #19271e;
+@green-emeraude-125: #1e2e23;
+@green-emeraude-200: #21402c;
+@green-emeraude-850: #6fe49d;
+@green-emeraude-925: #9ef9be;
+@green-emeraude-950: #c3fad5;
+@green-emeraude-975: #e3fdeb;
+@green-emeraude-sun-425: #297254;
+@green-emeraude-moon-753: #34cb6a;
+@green-emeraude-main-632: #00a95f;
+// green-menthe
+@green-menthe-75: #15201e;
+@green-menthe-100: #1a2624;
+@green-menthe-125: #1f2d2a;
+@green-menthe-200: #223f3a;
+@green-menthe-850: #73e0cf;
+@green-menthe-925: #8bf8e7;
+@green-menthe-950: #bafaee;
+@green-menthe-975: #dffdf7;
+@green-menthe-sun-373: #37635f;
+@green-menthe-moon-652: #21ab8e;
+@green-menthe-main-548: #009081;
+// green-archipel
+@green-archipel-75: #152021;
+@green-archipel-100: #1a2628;
+@green-archipel-125: #1f2c2e;
+@green-archipel-200: #233e41;
+@green-archipel-850: #60e0eb;
+@green-archipel-925: #a6f2fa;
+@green-archipel-950: #c7f6fc;
+@green-archipel-975: #e5fbfd;
+@green-archipel-sun-391: #006a6f;
+@green-archipel-moon-716: #34bab5;
+@green-archipel-main-557: #009099;
+// blue-ecume
+@blue-ecume-75: #171d2f;
+@blue-ecume-100: #1d2437;
+@blue-ecume-125: #222940;
+@blue-ecume-200: #273962;
+@blue-ecume-850: #bfccfb;
+@blue-ecume-925: #dee5fd;
+@blue-ecume-950: #e9edfe;
+@blue-ecume-975: #f4f6fe;
+@blue-ecume-sun-247: #2f4077;
+@blue-ecume-moon-675: #869ece;
+@blue-ecume-main-400: #465f9d;
+// blue-cumulus
+@blue-cumulus-75: #171e2b;
+@blue-cumulus-100: #1c2433;
+@blue-cumulus-125: #212a3a;
+@blue-cumulus-200: #263b58;
+@blue-cumulus-850: #b6cffb;
+@blue-cumulus-925: #dae6fd;
+@blue-cumulus-950: #e6eefe;
+@blue-cumulus-975: #f3f6fe;
+@blue-cumulus-sun-368: #3558a2;
+@blue-cumulus-moon-732: #7ab1e8;
+@blue-cumulus-main-526: #417dc4;
+// purple-glycine
+@purple-glycine-75: #251a24;
+@purple-glycine-100: #2c202b;
+@purple-glycine-125: #332632;
+@purple-glycine-200: #502e4d;
+@purple-glycine-850: #fbb8f6;
+@purple-glycine-925: #fddbfa;
+@purple-glycine-950: #fee7fc;
+@purple-glycine-975: #fef3fd;
+@purple-glycine-sun-319: #6e445a;
+@purple-glycine-moon-630: #ce70cc;
+@purple-glycine-main-494: #a558a0;
+// pink-macaron
+@pink-macaron-75: #261b19;
+@pink-macaron-100: #2e211f;
+@pink-macaron-125: #352724;
+@pink-macaron-200: #52312a;
+@pink-macaron-850: #fcc0b4;
+@pink-macaron-925: #fddfda;
+@pink-macaron-950: #fee9e6;
+@pink-macaron-975: #fef4f2;
+@pink-macaron-sun-406: #8d533e;
+@pink-macaron-moon-833: #ffb7ae;
+@pink-macaron-main-689: #e18b76;
+// pink-tuile
+@pink-tuile-75: #281b19;
+@pink-tuile-100: #2f211f;
+@pink-tuile-125: #372624;
+@pink-tuile-200: #55302a;
+@pink-tuile-850: #fcbfb7;
+@pink-tuile-925: #fddfdb;
+@pink-tuile-950: #fee9e7;
+@pink-tuile-975: #fef4f3;
+@pink-tuile-sun-425: #a94645;
+@pink-tuile-moon-750: #ff9575;
+@pink-tuile-main-556: #ce614a;
+// yellow-tournesol
+@yellow-tournesol-75: #221d11;
+@yellow-tournesol-100: #292416;
+@yellow-tournesol-125: #302a1a;
+@yellow-tournesol-200: #43391a;
+@yellow-tournesol-850: #efcb3a;
+@yellow-tournesol-925: #fde39c;
+@yellow-tournesol-950: #feecc2;
+@yellow-tournesol-975: #fef6e3;
+@yellow-tournesol-sun-407: #716043;
+@yellow-tournesol-moon-922: #ffe552;
+@yellow-tournesol-main-731: #c8aa39;
+// yellow-moutarde
+@yellow-moutarde-75: #231d14;
+@yellow-moutarde-100: #2a2319;
+@yellow-moutarde-125: #30291d;
+@yellow-moutarde-200: #453820;
+@yellow-moutarde-850: #fcc63a;
+@yellow-moutarde-925: #fde2b5;
+@yellow-moutarde-950: #feebd0;
+@yellow-moutarde-975: #fef5e8;
+@yellow-moutarde-sun-348: #695240;
+@yellow-moutarde-moon-860: #ffca00;
+@yellow-moutarde-main-679: #c3992a;
+// orange-terre-battue
+@orange-terre-battue-75: #281a16;
+@orange-terre-battue-100: #31201c;
+@orange-terre-battue-125: #382621;
+@orange-terre-battue-200: #543125;
+@orange-terre-battue-850: #fcc0b0;
+@orange-terre-battue-925: #fddfd8;
+@orange-terre-battue-950: #fee9e5;
+@orange-terre-battue-975: #fef4f2;
+@orange-terre-battue-sun-370: #755348;
+@orange-terre-battue-moon-672: #ff732c;
+@orange-terre-battue-main-645: #e4794a;
+// brown-cafe-creme
+@brown-cafe-creme-75: #211d16;
+@brown-cafe-creme-100: #28241c;
+@brown-cafe-creme-125: #2e2a21;
+@brown-cafe-creme-200: #423925;
+@brown-cafe-creme-850: #e7ca8e;
+@brown-cafe-creme-925: #f4e3c7;
+@brown-cafe-creme-950: #f7ecdb;
+@brown-cafe-creme-975: #fbf6ed;
+@brown-cafe-creme-sun-383: #685c48;
+@brown-cafe-creme-moon-885: #ecd7a2;
+@brown-cafe-creme-main-782: #d1b781;
+// brown-caramel
+@brown-caramel-75: #251c16;
+@brown-caramel-100: #2c221c;
+@brown-caramel-125: #332821;
+@brown-caramel-200: #4b3525;
+@brown-caramel-850: #eac7b2;
+@brown-caramel-925: #f3e2d9;
+@brown-caramel-950: #f7ebe5;
+@brown-caramel-975: #fbf5f2;
+@brown-caramel-sun-425: #845d48;
+@brown-caramel-moon-901: #fbd8ab;
+@brown-caramel-main-648: #c08c65;
+// brown-opera
+@brown-opera-75: #241c17;
+@brown-opera-100: #2b221c;
+@brown-opera-125: #322821;
+@brown-opera-200: #493625;
+@brown-opera-850: #eac7ad;
+@brown-opera-925: #f3e2d7;
+@brown-opera-950: #f7ece4;
+@brown-opera-975: #fbf5f2;
+@brown-opera-sun-395: #745b47;
+@brown-opera-moon-820: #e6be92;
+@brown-opera-main-680: #bd987a;
+// beige-gris-galet
+@beige-gris-galet-75: #211d19;
+@beige-gris-galet-100: #28231f;
+@beige-gris-galet-125: #2e2924;
+@beige-gris-galet-200: #433829;
+@beige-gris-galet-850: #e0cab0;
+@beige-gris-galet-925: #eee4d9;
+@beige-gris-galet-950: #f3ede5;
+@beige-gris-galet-975: #f9f6f2;
+@beige-gris-galet-sun-407: #6a6156;
+@beige-gris-galet-moon-821: #d0c3b7;
+@beige-gris-galet-main-702: #aea397;
+
+
+/*
+ * Semantic colors
+ * These color are based on DSFR colors
+ * They include bootstrap variable and color theme variables
+ * Color theme variable are defined over here (and not using the standard interface) so that we can associate DSFR colors variables to these semantic colors (and not just hexs)
+ */
+
+// Base colors
+@text-color: @grey-200;
+@body-bg: @grey-1000; 
+@xwiki-page-content-bg: @grey-1000;
+@link-color: @grey-200;
+@brand-primary: @blue-france-sun-113;
+@brand-success: @success-425;
+@brand-info: @info-425;
+@brand-warning: @warning-425;
+@brand-danger: @error-425;
+@headings-color: @grey-200;
+// Buttons
+@btn-default-color: @brand-primary;
+@btn-default-bg: @grey-1000;
+@btn-primary-color: @grey-1000;
+@btn-primary-bg: @brand-primary;
+@btn-success-color: @grey-1000;
+@btn-success-bg: @brand-primary;
+@btn-info-color: @grey-1000;
+@btn-info-bg: @brand-primary;
+@btn-warning-color: @grey-1000;
+@btn-warning-bg: @brand-primary;
+@btn-danger-color: @grey-1000;
+@btn-danger-bg: @brand-primary;
+@btn-default-border: @grey-1000;
+// Navbars
+@navbar-default-color: @text-color;
+@navbar-default-bg: @grey-1000;
+@navbar-default-link-color: @brand-primary;
+@navbar-default-link-hover-color: @brand-primary;
+@navbar-default-link-hover-bg: @grey-950;
+@navbar-default-link-active-color: @brand-primary;
+@navbar-default-link-active-bg: @grey-925;
+// Panels
+@panel-bg: @grey-1000;
+@panel-default-text: @text-color;
+// Breadcrumb
+@breadcrumb-bg: @grey-1000;
+@breadcrumb-color:@grey-425;
+
 
 /***************************************************/
 /* Bootstrap corrections to make the site          */
@@ -1399,40 +1747,40 @@ h1,
 </lessCode>
     </property>
     <property>
-      <link-color>#383838</link-color>
+      <link-color/>
     </property>
     <property>
       <logo>LogoRF.svg</logo>
     </property>
     <property>
-      <navbar-default-bg>#fff</navbar-default-bg>
+      <navbar-default-bg/>
     </property>
     <property>
-      <navbar-default-color>#383838</navbar-default-color>
+      <navbar-default-color/>
     </property>
     <property>
-      <navbar-default-link-active-bg>rgba(194, 194, 194, 0.5)</navbar-default-link-active-bg>
+      <navbar-default-link-active-bg/>
     </property>
     <property>
-      <navbar-default-link-active-color>#000091</navbar-default-link-active-color>
+      <navbar-default-link-active-color/>
     </property>
     <property>
-      <navbar-default-link-color>#000091</navbar-default-link-color>
+      <navbar-default-link-color/>
     </property>
     <property>
-      <navbar-default-link-hover-bg>rgba(224, 224, 224, 0.5)</navbar-default-link-hover-bg>
+      <navbar-default-link-hover-bg/>
     </property>
     <property>
-      <navbar-default-link-hover-color>#000091</navbar-default-link-hover-color>
+      <navbar-default-link-hover-color/>
     </property>
     <property>
       <navbar-height>25px</navbar-height>
     </property>
     <property>
-      <panel-bg>#fff</panel-bg>
+      <panel-bg/>
     </property>
     <property>
-      <panel-default-text>#383838</panel-default-text>
+      <panel-default-text/>
     </property>
     <property>
       <table-bg/>
@@ -1444,10 +1792,10 @@ h1,
       <table-border-color/>
     </property>
     <property>
-      <text-color>#383838</text-color>
+      <text-color/>
     </property>
     <property>
-      <xwiki-page-content-bg>#fff</xwiki-page-content-bg>
+      <xwiki-page-content-bg/>
     </property>
   </object>
   <object>
