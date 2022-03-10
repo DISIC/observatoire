@@ -548,7 +548,7 @@ require(['jquery','xwiki-selectize'], function($) {
 .demarche-details {
   display: none;
   dt {
-    color: @gray-light;
+    color: @grey-425;
     font-weight: normal;
     padding-top: 0.5em;
     line-height: 1.3;
@@ -589,7 +589,7 @@ require(['jquery','xwiki-selectize'], function($) {
 }
 
 .subtitle, .info-box-mandatory {
-  color: @gray-light;
+  color: @grey-425;
 }
 
 .subtitle + .avis-stats {
@@ -781,9 +781,9 @@ form {
 @averagebar-color : @navbar-default-bg;
 .avis-average-container {
   font-size: 80%;
-  color: @gray-light;
+  color: @grey-425;
   a.average-help {
-    color: lighten(@gray-light, 25%);
+    color: @grey-425;
   }
   .avis-average-visual {
     .avis-average-barcontainer {
@@ -840,7 +840,7 @@ form {
   font-size: 0.9em;
 
   .lighter {
-    color: @gray-light;
+    color: @grey-425;
   }
 
   h2 {
@@ -853,13 +853,13 @@ form {
   }
 
   a.average-help {
-    color: @gray-light;
+    color: @grey-425;
     position: relative;
     font-size: 0.5em;
     top: -0.7em;
     &amp;:focus {
       .outline;
-      outline-color: lighten(@gray-light, 25%);
+      outline-color: @grey-425;
     }
   }
 

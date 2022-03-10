@@ -1129,8 +1129,7 @@
       <legend-color/>
     </property>
     <property>
-      <lessCode>@gray-light: #666;
-
+      <lessCode>
 /* Reproducing some of the DSFR variables declaration */
 @dsfr-focus: #2a7ffe;
 
