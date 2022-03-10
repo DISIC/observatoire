@@ -573,7 +573,7 @@ li.wikidemarches-topmenu {
   }
 
   #footersocial {
-    background-color: @blue-france-950;
+    background-color: @blue-france-975;
 
     #footersocial-links {
       display: flex;

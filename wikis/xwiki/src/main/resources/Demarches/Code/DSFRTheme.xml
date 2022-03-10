@@ -1130,10 +1130,6 @@
     </property>
     <property>
       <lessCode>
-/* Reproducing some of the DSFR variables declaration */
-@dsfr-focus: #2a7ffe;
-
-
 /*
  * DSFR colors
  * These color have to be used as the base for every semantic color
@@ -1464,7 +1460,7 @@
 @btn-warning-bg: @brand-primary;
 @btn-danger-color: @grey-1000;
 @btn-danger-bg: @brand-primary;
-@btn-default-border: @grey-1000;
+@btn-default-border: @brand-primary;
 // Navbars
 @navbar-default-color: @text-color;
 @navbar-default-bg: @grey-1000;
@@ -1479,6 +1475,10 @@
 // Breadcrumb
 @breadcrumb-bg: @grey-1000;
 @breadcrumb-color:@grey-425;
+
+/* For some reason, the focus color of the dsfr implementation is hardcoded and does not match any of the dsfr colors  */
+@dsfr-focus: #0a76f6;
+
 
 
 /***************************************************/
