@@ -81,6 +81,14 @@
           &lt;input type="$displayType" id="$optionId" name="${prefix}${name}" value="$val" $checked #if($isMandatory)required#end&gt;
           &lt;label class="fr-label" for="$optionId"&gt;
             $escapetool.xml($services.localization.render("${clazz.name}_${name}_${val}"))
+            ## Display hint if translation key exist
+            #set ($translationKey = "${clazz.name}_${name}_${val}_hint")
+            #set ($hint = $services.localization.render($translationKey))
+            #if ("$hint" != "$translationKey")
+              &lt;span class="fr-hint-text"&gt;
+                $escapetool.xml($hint)
+              &lt;/span&gt;
+            #end
           &lt;/label&gt;
         &lt;/div&gt;
       #end
