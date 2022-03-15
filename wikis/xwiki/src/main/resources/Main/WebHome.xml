@@ -47,14 +47,14 @@
   #set($discard = $xwiki.ssx.use($doc.fullName))
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
-      (%class='demarches-headline narrow-width'%)
+      (%class='demarches-headline'%)
       = $services.localization.render('wikidemarches.home.subtitle') =
 
       (%class='demarches-explanation narrow-width'%)
       $services.localization.render('wikidemarches.home.explanation')
 
       (%class='seemore-button-container'%)
-      [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-default']]
+      [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
     )))
   )))
   #*
@@ -149,9 +149,14 @@
   #end
   (%class='row demarches-evalrow'%)(((
     #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
-    (%class='container narrow-width'%)(((
-       (%class='narrow-width'%)
-       ==${evalHelpDoc.title}==
+    (%class='container'%)(((
+      (% class='row evalrow-header' %) (((
+        (%class='col-xs-12 col-md-5 col-md-offset-1 col-lg-offset-0'%)
+        ==${evalHelpDoc.title}==
+
+        (%class='col-xs-12 col-md-5'%)
+        Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
+      )))
 
       {{display reference='$evalHelpDoc.fullName' /}}
 
@@ -159,6 +164,29 @@
       [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
     )))
   )))
+  #if ($isGuest)
+    (% class='row demarches-usagerow' %)(((
+      (% class='container' %)(((
+        (% class='row' %)(((
+          (% class='col-xs-12 col-md-6' %) (((
+            (% class='usagerow-header' %)
+            ==Vous êtes porteur ou porteuse d’un service public numérique ?==
+
+            (% class='usagerow-description' %)
+            Même si votre démarche n’est pas parmi les 250 suivies dans l’Observatoire, vous pouvez utiliser l’outil Je donne mon avis afin de suivre en temps réel la satisfaction des usagers.
+
+            (% class='seemore-button-container' %)
+            [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']] ## TODO: update link
+          )))
+          (% class='col-xs-12 col-md-6 usagerow-col-img' %) (((
+            {{html clean="false"}}
+              &lt;img src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/example-stats.svg")" alt="Example de statistiques" /&gt;
+            {{/html}}
+          )))
+        )))
+      )))
+    )))
+  #end
   (%class='row demarches-morerow'%)(((
     #set($afterHelpDoc = $xwiki.getDocument('Main.Et-apres'))
     (%class='container'%)(((
@@ -329,6 +357,7 @@
 /* This page is stacked layout, reset footer margin, we'll handle it */
 #footerglobal {
   margin-top: 0;
+  padding-top: 0;
 }
 
 /* Reset the bottom margin of paragraphs, we need everything clean */
@@ -336,107 +365,90 @@
   margin-bottom: 0;
 }
 
+@gap-mobile: 1.5rem;
+@gap-desktop: 2rem;
 
-@section-padding-top-lg: 5.5em; /* ~99px for a 18px font */
-@section-padding-bottom-lg: 5.9em; /* ~106.2 for a 18px font */
-@section-padding-top-xs: 2.8em; /* mobile section paddings = half of the desktop */
-@section-padding-bottom-xs: 2.9em; /* mobile section paddings = half of the desktop */
-
-@obs-blue: @link-color;
-
-@headline-size-lg: 3.0em; /* ~54px for a 18px font */
-@headline-size-xs: 2.3em;
-
-.demarches-titlerow, .demarches-observatoirerow,
-.demarches-evalrow, .demarches-morerow,
-.demarches-mydemarchesrow, .demarches-administrationrow {
+#xwikicontent &gt; .row {
+  padding-top: 3rem; /* mobile size */
+  padding-bottom: 3rem; /* mobile size */
   text-align: center;
-  padding-top: @section-padding-top-xs;
-  padding-bottom: @section-padding-bottom-xs;
+
   h1, h2 {
     margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.1em;
-    font-weight: 800;
+    margin-bottom: @gap-mobile;
+    color: @brand-primary;
   }
-  @media (min-width: @screen-md-min) {
-    padding-top: @section-padding-top-lg;
-    padding-bottom: @section-padding-bottom-lg;
-  }
-}
 
-.xcontent  a.btn-default {
-  background-image: none;
-  background-color: transparent;
-  color: @text-color;
-  border: 0.1em solid @text-color;
-  border-radius: 1.5em;
-  line-height: 2.8em;
-  padding: 0 1.4em;
-  margin-top: 0;
-  margin-bottom: 0;
-  transition: all 0.2s;
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.1em;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: @screen-md-min) {
+    padding-top: 3.5rem; /* desktop size */
+    padding-bottom: 3.5rem; /* desktop size */
+
+    h1, h2 {
+      margin-bottom: @gap-desktop;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+  }
 }
 
 .demarches-titlerow {
-  padding-top: 2em;
   background-color: #fff;
 
-  h1.demarches-headline {
-    line-height: 1.1em;
-    color: @headings-color;
-    font-size: @headline-size-xs; /* ~59.4px for a 18px font */
-    margin-bottom: 0.5em;
-  }
-
-  .seemore-button-container a.btn-default {
-    margin-top: 2.25em; /*~40px for a 18px font*/
-    border: none;
-    background-color: #E6004A;
-    color: #fff;
-    font-weight: 600;
-    &amp;:hover {
-      background-color: #C40028;
-    }
-    &amp;:focus {
-      .outline-dotted;
-    }
+  .seemore-button-container a.btn-primary {
+    margin-top: @gap-mobile; /* mobile size */
   }
 
   @media (min-width: @screen-md-min) {
-    p.demarches-subtitle, p.demarches-explanation {
+    padding-top: 4.5rem !important; /* desktop size */
+    padding-bottom: 4.5rem !important; /* desktop size */
+
+    p.demarches-subtitle,
+    p.demarches-explanation {
       width: 70%;
     }
-    h1.demarches-headline {
-      font-size: @headline-size-lg;
-    }
-  }
-}
 
-.demarches-mydemarchesrow, .demarches-observatoirerow,
-.demarches-evalrow, .demarches-morerow,
-.demarches-administrationrow {
-   h2 {
-    font-size: 2.0em; /* ~36px for a 18px font */
-    margin-bottom: 0.625em; /*~22.5 px*/
+    .seemore-button-container a.btn-primary {
+      margin-top: @gap-desktop; /* desktop size */
+    }
   }
 }
 
 .demarches-observatoirerow {
-  background-color: @obs-blue;
+  background-color: @grey-950;
   color: #fff;
+
   .obsstats {
     margin-top: 1.9em; /* 34.2px for a 18px font*/
+
     .obsstat-col {
       padding-left: @grid-gutter-width;
       padding-right: @grid-gutter-width;
       margin-bottom: @grid-gutter-width / 2;
-      .demat-stat, .sat-stat {
+
+      .demat-stat,
+      .sat-stat {
         border-radius: @grid-gutter-width * 2;
         padding: @grid-gutter-width * 1.5 @grid-gutter-width * 1.5;
+
         p {
           margin-bottom: 0;
         }
+
         .stat-statvalue {
           font-size: 6em;
           line-height: 1;
@@ -444,14 +456,18 @@
           font-weight: bold;
           text-align: left;
         }
+
         .stat-statdescription {
           text-align: left;
           &amp;::before {
             font: normal normal normal 14px/1 FontAwesome;
           }
-          .stat-statdescription-icon, .stat-statdescription-text {
+
+          .stat-statdescription-icon,
+          .stat-statdescription-text {
             display: table-cell;
           }
+
           .stat-statdescription-icon {
             width: 2.8em;
             height: 2.8em;
@@ -459,10 +475,12 @@
             border-radius: 1.5em;
             text-align: center;
             vertical-align: middle;
+
             img {
               max-width: 55%;
             }
           }
+
           .stat-statdescription-text {
             padding-left: 1em;
             font-size: 0.9em;
@@ -471,14 +489,17 @@
           }
         }
       }
+
       .demat-stat {
         #gradient &gt; .directional(#62d2b0; #4798f4; 131deg);
       }
+
       .sat-stat {
         #gradient &gt; .directional(#ff6bc2; #fdf54d; 131deg);
       }
     }
   }
+
   .obsstats-explanation-col {
     font-size: 0.6em;
     padding-left: @grid-gutter-width * 2.5;
@@ -489,8 +510,9 @@
 }
 
 .demarches-mydemarchesrow {
-  background-color: @gray-lighter;
+  background-color: @grey-950;
   text-align: left;
+
   ul {
     margin-left: 0;
     padding-left: 0;
@@ -503,16 +525,19 @@
       font-weight: normal;
       text-align: left;
     }
+
     input {
       /* Make a style comparable to the style of the default global search input */
       width: 100%;
       border-radius: 0;
     }
+
     /* Move loading graphic to the right */
     input[type="text"].loading {
       background-position: right 0.5em center;
       padding-left: @padding-base-horizontal;
     }
+
     button.btn {
       background-color: lighten(@navbar-default-bg, 10%);
       padding-top: @padding-base-vertical;
@@ -524,50 +549,51 @@
 }
 
 .demarches-evalrow {
-  background-color: @obs-blue;
-  color: #fff;
-  .seemore-button-container a.btn-default {
-    border-width: 2px;
-    border-color: #fff;
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.8em;
-    &amp;:hover {
-      background-color: #fff;
-      color: @link-color;
-    }
-    &amp;:focus {
-      .outline-dotted;
-    }
+  background-color: @blue-france-975;
+
+  .evalrow-header {
+    margin-bottom: @gap-mobile;
   }
-  h2 {
-    color: #fff;
+
+  @media (min-width: @screen-md-min) {
+    .evalrow-header {
+      text-align: left;
+      margin-bottom: @gap-desktop;
+    }
   }
 }
 
 .evalrow-cards {
   text-align: center;
-  margin-bottom: 2.2em; /*~40px*/
+  margin-bottom: 0.5rem;
+
+  // Modify bootstrap columns paddings so that there is 24px between cards
+  .col-xs-12 {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
   .evalrow-card {
-    margin-bottom: @grid-gutter-width * 1.5;
-    border-radius: @grid-gutter-width;
-    background-color: #fff;
-    color: #666;
-    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5em;
     padding: @grid-gutter-width @grid-gutter-width * 4/5;
+    border: 1px solid @grey-925;
+    border-bottom: 4px solid @brand-primary;
+    background-color: @grey-1000;
+
     p {
       width: 100%;
       font-size: 0.78em;
     }
+
     h3 {
       font-size: 0.90em;
       margin-top: 1.5em;
       font-weight: bold;
     }
+
     /* the icon p is the first paragraph in the card*/
     p:first-child {
-      background-color: fade(@obs-blue, 10%);
-      color: @obs-blue;
+      color: @brand-primary;
       line-height: 4em;
       width: 4em;
       height: 4em;
@@ -577,14 +603,56 @@
       vertical-align: middle;
       text-align: center;
     }
+
     img {
       line-height: 1.5em;
     }
   }
 }
 
+.demarches-usagerow {
+  .usagerow-header,
+  .usagerow-description,
+  .seemore-button-container {
+    margin-bottom: @gap-mobile;
+  }
+
+  img {
+    box-shadow: 0px 0px 64px rgba(154, 154, 255, 0.4);
+  }
+
+  @media (min-width: @screen-md-min) {
+    padding-top: 4.5rem !important; /* desktop size */
+    padding-bottom: 4.5rem !important; /* desktop size */
+
+    .usagerow-header,
+    .usagerow-description {
+      text-align: left;
+      margin-bottom: @gap-desktop;
+    }
+    .seemore-button-container {
+      text-align: left;
+      margin-bottom: 0px;
+    }
+
+    .usagerow-col-img {
+      text-align: right;
+    }
+  }
+}
+
+.demarches-morerow {
+  background-color: @grey-975;
+
+  a {
+    color: @brand-primary;
+    text-decoration: none !important;
+  }
+}
+
 .demarches-administrationrow {
-  background-color: @gray-lighter;
+  background-color: @grey-950;
+
   p {
     margin-bottom: 0.5em;
   }
@@ -604,7 +672,7 @@
 
   .evalrow-cards {
     .evalrow-card {
-      height: 17.5em;
+      height: 18.5em;
     }
   }
 
@@ -612,13 +680,15 @@
     font-size: 1.125em;
   }
 
-  p.narrow-width , div.narrow-width p {
+  p.narrow-width,
+  div.narrow-width p {
     width: 65%;
     margin-left: auto;
     margin-right: auto;
   }
 
-  h1.narrow-width, h2.narrow-width {
+  h1.narrow-width,
+  h2.narrow-width {
     width: 75%;
     margin-left: auto;
     margin-right: auto;

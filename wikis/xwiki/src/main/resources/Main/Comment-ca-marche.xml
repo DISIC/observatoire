@@ -42,10 +42,6 @@
   <content>{{velocity}}
 #set($discard = $xwiki.ssx.use('Main.WebHome'))
 
-Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
-
-
-
 (% class="row evalrow-cards" %)
 (((
 (% class="col-xs-12 col-md-5 col-lg-3 col-md-offset-1 col-lg-offset-0" %)
