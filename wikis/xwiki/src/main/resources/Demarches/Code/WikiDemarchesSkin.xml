@@ -263,12 +263,12 @@
   #end
 #end
 
-## set the variables indicating how the app is accessed (through what domain name). Possible values: observatoire, voxusagers, cerfa. Defaults to observatoire
+## set the variables indicating how the app is accessed (through what domain name). Possible values: observatoire, jedonnemonavis, cerfa. Defaults to observatoire
 #set($currentDomainKey = 'observatoire')
 ## test against the way a current external URL would resolve, since external URLs are using the current access URL.
 #set($testURL = $doc.externalURL)
-#if ($testURL.indexOf('://voxusagers.') &gt;= 0)
-  #set($currentDomainKey = 'voxusagers')
+#if ($testURL.indexOf('://jedonnemonavis.') &gt;= 0)
+  #set($currentDomainKey = 'jedonnemonavis')
 #elseif($testURL.indexOf('://cerfa.') &gt;= 0)
   #set($currentDomainKey = 'cerfa')
 #end</content>
@@ -529,7 +529,7 @@
   #template($extraFooterTemplate)
 #end
 &lt;footer id="footerglobal" role="contentinfo"&gt;
-  #if ($currentDomainKey != 'voxusagers')
+  #if ($currentDomainKey != 'jedonnemonavis')
     &lt;div id="footersocial" class='container-fluid'&gt;
       &lt;div class='container'&gt;
         &lt;div class='row'&gt;
@@ -550,7 +550,7 @@
 
   &lt;div id="footerborder"&gt;&lt;/div&gt;
 
-  #if ($currentDomainKey != 'voxusagers')
+  #if ($currentDomainKey != 'jedonnemonavis')
     &lt;div id="footertop" class='container-fluid'&gt;
       &lt;div class='row'&gt;
         &lt;div class="col-xs-12"&gt;
@@ -574,8 +574,8 @@
 
       &lt;div class="col-xs-12 col-md-6 footer-col-services"&gt;
         &lt;p&gt;
-          #if ($currentDomainKey == 'voxusagers')
-            $services.localization.render('wikidemarches.footer.description.voxusagers', ["&lt;i&gt;$services.localization.render('wikidemarches.footer.description.voxusagers.button-name')&lt;/i&gt;"])
+          #if ($currentDomainKey == 'jedonnemonavis')
+            $services.localization.render('wikidemarches.footer.description.jdma', ["&lt;i&gt;$services.localization.render('wikidemarches.footer.description.jdma.button-name')&lt;/i&gt;"])
           #else
             $services.localization.render('wikidemarches.footer.description.observatoire')
           #end
@@ -602,16 +602,16 @@
       &lt;div class='col-xs-12 footer-col-sites'&gt;
         &lt;ul&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.cgu')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'voxusagers')
+          #if($currentDomainKey != 'jedonnemonavis')
             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
           #else
             &lt;li&gt;&lt;a href="$xwiki.getURL('Main.accessibilite-formulaire')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
           #end
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HMentionslE9gales"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HVieprivE9e"&gt;$services.localization.render('wd.personal-data')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'voxusagers')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
+          #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
           &lt;li&gt;&lt;a href="https://github.com/DISIC/wikidemarches" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'voxusagers')&lt;li&gt;&lt;a href='mailto:contact@design.numerique.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
+          #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href='mailto:contact@design.numerique.gouv.fr'&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
         &lt;/ul&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -694,7 +694,7 @@
     ## ---------------------------------------------------------------------------------------------------------------
     #if (!$title)
       ## Compute title site name
-      #if($currentDomainKey == 'voxusagers')
+      #if($currentDomainKey == 'jedonnemonavis')
         #set($titleSite = $services.localization.render('wikidemarches.sitename.servicesPubliquesPlus'))
       #else
         #set($titleSite = $services.localization.render('wikidemarches.sitename'))
@@ -865,8 +865,8 @@
   #end
   #set ($siteTitleImageName = 'LogoObservatoire.svg')
   #set($siteClassName = 'observatoire')
-  ## special handling for voxusagers, to display a different site name
-  #if ($currentDomainKey == 'voxusagers')
+  ## special handling for jedonnemonavis, to display a different site name
+  #if ($currentDomainKey == 'jedonnemonavis')
     #set($siteTitleImageName = 'services-plus.svg')
     #set($siteClassName = 'service-plus')
     #set($siteName = $services.localization.render('wikidemarches.sitename.servicesPubliquesPlus'))
