@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <artifactId>xwiki-dinsic-wikidemarches-extensions</artifactId>
-    <version>4.9</version>
+    <version>4.9-SNAPSHOT</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-extensions-tools-api</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - Tools API</name>
