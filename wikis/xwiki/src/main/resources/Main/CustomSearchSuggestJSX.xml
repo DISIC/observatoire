@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1527598099000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1528970055000</date>
-  <contentUpdateDate>1527598099000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title/>
   <comment/>
@@ -201,24 +201,6 @@ var XWiki = (function (XWiki) {
   // When the document is loaded, install search suggestions
   (XWiki.isInitialized &amp;&amp; init())
   || document.observe('xwiki:dom:loading', init);
-  
-  // When suggestions are added, add a button at the bottom to let the user create a new demarche
-  document.observe("xwiki:suggest:updated", function(event) {
-    var addDemarcheBtn = $('add-demarche-btn');
-    if (addDemarcheBtn) {
-      addDemarcheBtn.remove();
-    }
-    var suggestContainer = event.memo.container;
-    var results = $$('.results');
-    var query = encodeURIComponent(event.memo.suggest.sInput);
-    $$('.results').each(function(object) {
-      #set ($ajouterDemarche = $services.localization.render('wikidemarches.demande.ajoutez-la'))
-      #set ($ajouterDemarcheHint = $services.localization.render('wikidemarches.demande.demarche-absente'))
-      #set ($xUrl = $xwiki.getURL('Demarches.Code.NewDemarche','view','text='))
-      object.insert('&lt;div id="add-demarche-btn"&gt;$ajouterDemarcheHint&amp;nbsp;&lt;span class="wikilink"&gt;&lt;a class="button btn btn-primary" href="$xUrl' + query + '"&gt;$ajouterDemarche&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;');
-      object.removeClassName('hidden');
-    });
-  });
 
   return XWiki;
 

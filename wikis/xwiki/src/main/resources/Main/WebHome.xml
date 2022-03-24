@@ -47,16 +47,20 @@
   #set($discard = $xwiki.ssx.use($doc.fullName))
   (%class='row demarches-titlerow'%)(((
     (%class='container'%)(((
-      (%class='demarches-headline'%)
+      (%class='demarches-headline #if (!$isGuest) no-margin #end'%)
       = $services.localization.render('wikidemarches.home.subtitle') =
 
-      (%class='demarches-explanation narrow-width'%)
-      $services.localization.render('wikidemarches.home.explanation')
+      #if ($isGuest)
+        (%class='demarches-explanation narrow-width'%)
+        $services.localization.render('wikidemarches.home.explanation')
 
-      (%class='seemore-button-container'%)
-      [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
+        (%class='seemore-button-container'%)
+        [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
+      #end
     )))
   )))
+  ##
+  ##
   #*
   (%class='row demarches-observatoirerow'%)(((
     (%class='container'%)(((
@@ -97,6 +101,41 @@
     )))
   )))
   *#
+  ##
+  ##
+  #if (!$isGuest)
+    (% class='row demarches-searchrow' %) (((
+      (% class='container' %) (((
+        (% class='row' %) (((
+          (% class='col-xs-12' %) (((
+            == Rechercher une démarche ==
+          )))
+          (% class='col-xs-12' %) (((
+            ## display the global search here:
+            {{html clean='false'}}
+            ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
+            ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
+            #set($discard = $xwiki.ssx.use('Main.CustomSearchSuggestSSX'))
+            #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
+            &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
+              &lt;div class="input-group"&gt;
+                &lt;input id="search-input" type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
+                &lt;span class='input-group-btn'&gt;
+                  &lt;button type="submit" class="btn btn-primary" title="$services.localization.render('wikidemarches.search.button')"&gt;
+                  $services.icon.renderHTML('search')
+                    &lt;span class="sr-only"&gt;$services.localization.render('wikidemarches.search.button')&lt;/span&gt;
+                  &lt;/button&gt;
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+            {{/html}}
+          )))
+        )))
+      )))
+    )))
+  #end
+  ##
+  ##
   #if (!$isGuest)
     (%class='row demarches-mydemarchesrow'%)(((
       (%class='container'%)(((
@@ -107,63 +146,65 @@
         #set ($userMatch2 = ",$services.model.serialize($xcontext.userReference, 'compact'),")
         #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2)")
         #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
-        (%class='row'%)(((
-          (%class='col-xs-12 col-md-4'%)(((
-            ==$services.localization.render('wikidemarches.owned-demarches')==
+        (% class='row' %) (((
+          (% class='col-xs-12 col-md-6' %) (((
+            == $services.localization.render('wikidemarches.owned-demarches') ==
           )))
-          (%class='col-xs-12 col-md-8'%)(((
+          (% class='col-xs-12 col-md-6' %) (((
+            (% class='howto-button-container' %) (((
+              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;Aide.Observatoire]] ## TODO: update url
+              (% class="fa fa-question-circle" aria-hidden="true" %) ((()))
+            )))
+          )))
+        )))
+        (% class='row' %) (((
+          (% class='col-xs-12 %) (((
             #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
               #foreach ($entry in $ownedDemarches)
                 #set ($demarchePage = $xwiki.getDocument($entry))
-                * [[$demarchePage.title&gt;&gt;$entry]]
+                * (% class="demarche" %) (((
+                  [[$demarchePage.title&gt;&gt;$entry]]
+                  #set ($demarcheObject = $demarchePage.getObject('Demarches.Code.DemarchesClass'))
+                  (% class='ministeres' %)
+                    $demarcheObject.ministeres
+                )))
               #end
             #else
-              $services.localization.render('wikidemarches.owned-demarches.none', [$services.localization.render('Demarches.Code.DemarchesClass_proprietaires_button')])
+              * $services.localization.render('wikidemarches.owned-demarches.none')
             #end
-
-            (%class='demarches-searchbox'%)(((
-              ## display the global search here:
-              {{html clean='false'}}
-              ## include custom search suggest, that is properly layouted WRT the form for which it's displayed
-              ## $searchSuggestConfigHash is computed in the skin, in javascript.vm
-              #set($discard = $xwiki.ssx.use('Main.CustomSearchSuggestSSX'))
-              #set($discard = $xwiki.jsx.use('Main.CustomSearchSuggestJSX', {'h' : $searchSuggestConfigHash.hashCode()}))
-              &lt;form class="globalsearch" id="globalsearch" action="#if($xwiki.exists('Main.Search'))$xwiki.getURL('Main.Search')#else$xwiki.getURL('Main.WebSearch')#end" role="search"&gt;
-                &lt;label for="search-input"&gt;$services.localization.render('wikidemarches.search.label')&lt;/label&gt;
-                &lt;div class="input-group"&gt;
-                  &lt;input id="search-input" type="text" class='form-control withsearchsuggest-input' name="text" placeholder="$services.localization.render('wikidemarches.search.inputText')" /&gt;
-                  &lt;span class='input-group-btn'&gt;
-                    &lt;button type="submit" class="btn" title="$services.localization.render('wikidemarches.search.button')"&gt;
-                    $services.icon.renderHTML('search')
-                      &lt;span class="sr-only"&gt;$services.localization.render('wikidemarches.search.button')&lt;/span&gt;
-                    &lt;/button&gt;
-                  &lt;/span&gt;
-                &lt;/div&gt;
-              &lt;/form&gt;
-              {{/html}}
-            )))
           )))
+        )))
+        (% class='row-flex' %) (((
+          $services.localization.render('wikidemarches.demande.demarche-absente')
+          (% class='button-container' %)
+            [[$services.localization.render('wikidemarches.demande.creation')&gt;&gt;Demarches.Code.NewDemarche||class='btn btn-default']]
         )))
       )))
     )))
   #end
-  (%class='row demarches-evalrow'%)(((
-    #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
-    (%class='container'%)(((
-      (% class='row evalrow-header' %) (((
-        (%class='col-xs-12 col-md-5 col-md-offset-1 col-lg-offset-0'%)
-        ==${evalHelpDoc.title}==
+  ##
+  ##
+  #if ($isGuest)
+    (% class='row demarches-evalrow' %) (((
+      #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
+      (% class='container' %) (((
+        (% class='row evalrow-header' %) (((
+          (% class='col-xs-12 col-md-5 col-md-offset-1 col-lg-6 col-lg-offset-0' %)
+          == ${evalHelpDoc.title} ==
 
-        (%class='col-xs-12 col-md-5'%)
-        Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
+          (% class='col-xs-12 col-md-5 col-lg-6' %)
+          Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
+        )))
+
+        {{display reference='$evalHelpDoc.fullName' /}}
+
+        (% class='seemore-button-container' %)
+        [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
       )))
-
-      {{display reference='$evalHelpDoc.fullName' /}}
-
-      (%class='seemore-button-container'%)
-      [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
     )))
-  )))
+  #end
+  ##
+  ##
   #if ($isGuest)
     (% class='row demarches-usagerow' %)(((
       (% class='container' %)(((
@@ -187,15 +228,22 @@
       )))
     )))
   #end
-  (%class='row demarches-morerow'%)(((
-    #set($afterHelpDoc = $xwiki.getDocument('Main.Et-apres'))
-    (%class='container'%)(((
-      (%class='row narrow-width'%)(((
-        (%class='col-xs-12'%)(((
-          (%class='narrow-width'%)
-          ==${afterHelpDoc.title}==
+  ##
+  ##
+  (% class='row demarches-indicatorsrow' %) (((
+    (% class='container' %) (((
+      (% class='row' %) (((
+        (% class='col-xs-12' %) (((
+          == Les 250 démarches suivies par l’Observatoire ==
 
-          {{display reference='$afterHelpDoc.fullName' /}}
+          Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
+
+          (% class='buttons-container' %) (((
+            (% class='boutton-container %)
+              [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
+            (% class='boutton-container %)
+              [[$services.localization.render('wikidemarches.indicatorsrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
+          )))
         )))
       )))
     )))
@@ -242,6 +290,21 @@
     )))
   )))
   #end
+  ##
+  ##
+  (%class='row demarches-morerow'%)(((
+    #set($afterHelpDoc = $xwiki.getDocument('Main.Et-apres'))
+    (%class='container'%)(((
+      (%class='row narrow-width'%)(((
+        (%class='col-xs-12'%)(((
+          (%class='narrow-width'%)
+          ==${afterHelpDoc.title}==
+
+          {{display reference='$afterHelpDoc.fullName' /}}
+        )))
+      )))
+    )))
+  )))
 {{/velocity}}</content>
   <object>
     <name>Main.WebHome</name>
@@ -368,10 +431,12 @@
 @gap-mobile: 1.5rem;
 @gap-desktop: 2rem;
 
-#xwikicontent &gt; .row {
-  padding-top: 3rem; /* mobile size */
-  padding-bottom: 3rem; /* mobile size */
-  text-align: center;
+#xwikicontent {
+  &amp; &gt; .row {
+    padding-top: 3rem; /* mobile size */
+    padding-bottom: 3rem; /* mobile size */
+    text-align: center;
+  }
 
   h1, h2 {
     margin-top: 0;
@@ -389,8 +454,10 @@
   }
 
   @media (min-width: @screen-md-min) {
-    padding-top: 3.5rem; /* desktop size */
-    padding-bottom: 3.5rem; /* desktop size */
+    &amp; &gt; .row {
+      padding-top: 3.5rem; /* desktop size */
+      padding-bottom: 3.5rem; /* desktop size */
+    }
 
     h1, h2 {
       margin-bottom: @gap-desktop;
@@ -406,270 +473,354 @@
   }
 }
 
-.demarches-titlerow {
-  background-color: #fff;
+#xwikicontent {
+  .demarches-titlerow {
+    background-color: #fff;
 
-  .seemore-button-container a.btn-primary {
-    margin-top: @gap-mobile; /* mobile size */
-  }
-
-  @media (min-width: @screen-md-min) {
-    padding-top: 4.5rem !important; /* desktop size */
-    padding-bottom: 4.5rem !important; /* desktop size */
-
-    p.demarches-subtitle,
-    p.demarches-explanation {
-      width: 70%;
+    h1.no-margin {
+      margin: 0rem;
     }
 
     .seemore-button-container a.btn-primary {
-      margin-top: @gap-desktop; /* desktop size */
+      margin-top: @gap-mobile; /* mobile size */
+    }
+
+    @media (min-width: @screen-md-min) {
+      padding-top: 4.5rem; /* desktop size */
+      padding-bottom: 4.5rem; /* desktop size */
+
+      p.demarches-subtitle,
+      p.demarches-explanation {
+        width: 70%;
+      }
+
+      .seemore-button-container a.btn-primary {
+        margin-top: @gap-desktop; /* desktop size */
+      }
     }
   }
-}
 
-.demarches-observatoirerow {
-  background-color: @grey-950;
-  color: #fff;
+  .demarches-observatoirerow {
+    background-color: @grey-950;
+    color: #fff;
 
-  .obsstats {
-    margin-top: 1.9em; /* 34.2px for a 18px font*/
+    .obsstats {
+      margin-top: 1.9em; /* 34.2px for a 18px font*/
 
-    .obsstat-col {
-      padding-left: @grid-gutter-width;
-      padding-right: @grid-gutter-width;
-      margin-bottom: @grid-gutter-width / 2;
+      .obsstat-col {
+        padding-left: @grid-gutter-width;
+        padding-right: @grid-gutter-width;
+        margin-bottom: @grid-gutter-width / 2;
 
-      .demat-stat,
-      .sat-stat {
-        border-radius: @grid-gutter-width * 2;
-        padding: @grid-gutter-width * 1.5 @grid-gutter-width * 1.5;
+        .demat-stat,
+        .sat-stat {
+          border-radius: @grid-gutter-width * 2;
+          padding: @grid-gutter-width * 1.5 @grid-gutter-width * 1.5;
 
-        p {
-          margin-bottom: 0;
-        }
-
-        .stat-statvalue {
-          font-size: 6em;
-          line-height: 1;
-          margin-bottom: 0.1em;
-          font-weight: bold;
-          text-align: left;
-        }
-
-        .stat-statdescription {
-          text-align: left;
-          &amp;::before {
-            font: normal normal normal 14px/1 FontAwesome;
+          p {
+            margin-bottom: 0;
           }
 
-          .stat-statdescription-icon,
-          .stat-statdescription-text {
-            display: table-cell;
+          .stat-statvalue {
+            font-size: 6em;
+            line-height: 1;
+            margin-bottom: 0.1em;
+            font-weight: bold;
+            text-align: left;
           }
 
-          .stat-statdescription-icon {
-            width: 2.8em;
-            height: 2.8em;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 1.5em;
-            text-align: center;
-            vertical-align: middle;
+          .stat-statdescription {
+            text-align: left;
+            &amp;::before {
+              font: normal normal normal 14px/1 FontAwesome;
+            }
 
-            img {
-              max-width: 55%;
+            .stat-statdescription-icon,
+            .stat-statdescription-text {
+              display: table-cell;
+            }
+
+            .stat-statdescription-icon {
+              width: 2.8em;
+              height: 2.8em;
+              background-color: rgba(255, 255, 255, 0.3);
+              border-radius: 1.5em;
+              text-align: center;
+              vertical-align: middle;
+
+              img {
+                max-width: 55%;
+              }
+            }
+
+            .stat-statdescription-text {
+              padding-left: 1em;
+              font-size: 0.9em;
+              font-weight: 600;
+              vertical-align: middle;
             }
           }
+        }
 
-          .stat-statdescription-text {
-            padding-left: 1em;
-            font-size: 0.9em;
-            font-weight: 600;
-            vertical-align: middle;
-          }
+        .demat-stat {
+          #gradient &gt; .directional(#62d2b0; #4798f4; 131deg);
+        }
+
+        .sat-stat {
+          #gradient &gt; .directional(#ff6bc2; #fdf54d; 131deg);
+        }
+      }
+    }
+
+    .obsstats-explanation-col {
+      font-size: 0.6em;
+      padding-left: @grid-gutter-width * 2.5;
+      padding-right: @grid-gutter-width * 2.5;
+      text-align: left;
+      opacity: 0.9;
+    }
+  }
+
+  .demarches-searchrow {
+    text-align: left;
+    background-color: @grey-950;
+
+    #globalsearch {
+      input,
+      input:hover,
+      input:focus {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border: none 0px transparent;
+        border-bottom: 2px solid @brand-primary !important;
+        color: @grey-50;
+        background-color: @grey-1000;
+        box-shadow: none;
+
+        &amp;::placeholder {
+          color: @grey-425;
+          font-style: italic;
         }
       }
 
-      .demat-stat {
-        #gradient &gt; .directional(#62d2b0; #4798f4; 131deg);
+      /* Move loading graphic to the right */
+      input[type="text"].loading {
+        background-position: right 0.5em center;
+        padding-left: @padding-base-horizontal;
       }
 
-      .sat-stat {
-        #gradient &gt; .directional(#ff6bc2; #fdf54d; 131deg);
+      button {
+        height: ~"calc(2.5rem - -2px)"; // We have to write '- -2px' else it does not work
+        padding-top: @padding-base-vertical;
+        padding-bottom: @padding-base-vertical;
+        background-color: @brand-primary;
+        color: @blue-france-975;
       }
     }
   }
 
-  .obsstats-explanation-col {
-    font-size: 0.6em;
-    padding-left: @grid-gutter-width * 2.5;
-    padding-right: @grid-gutter-width * 2.5;
+  .demarches-mydemarchesrow {
+    background-color: @blue-france-975;
     text-align: left;
-    opacity: 0.9;
-  }
-}
 
-.demarches-mydemarchesrow {
-  background-color: @grey-950;
-  text-align: left;
+    h2 {
+      margin-bottom: 0.5rem;
 
-  ul {
-    margin-left: 0;
-    padding-left: 0;
-    list-style-type: none;
-  }
-
-  #globalsearch {
-    label {
-      display: block;
-      font-weight: normal;
-      text-align: left;
+      @media (min-width: @screen-md-min) {
+        margin-bottom: 0;
+      }
     }
 
-    input {
-      /* Make a style comparable to the style of the default global search input */
-      width: 100%;
-      border-radius: 0;
+    .howto-button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: baseline;
+      gap: 0.25rem;
+      font-size: 0.9rem;
+      color: @grey-200;
+
+      @media (min-width: @screen-md-min) {
+        justify-content: flex-end;
+      }
     }
 
-    /* Move loading graphic to the right */
-    input[type="text"].loading {
-      background-position: right 0.5em center;
-      padding-left: @padding-base-horizontal;
+    ul {
+      margin: 1.5rem 0rem;
+      padding: 0rem;
+      list-style-type: none;
+
+      li {
+        padding: 1.75rem 1.5rem;
+        background-color: @grey-1000;
+
+        .demarche {
+          a {
+            color: @brand-primary;
+            font-size: 1.25rem;
+            font-weight: bold;
+          }
+
+          .ministeres {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: @grey-200;
+          }
+        }
+      }
     }
 
-    button.btn {
-      background-color: lighten(@navbar-default-bg, 10%);
-      padding-top: @padding-base-vertical;
-      padding-bottom: @padding-base-vertical;
-      border: 1px solid #ccc;
-      border-left: none;
+    .row-flex {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 0.75rem 3rem;
+
+      @media (min-width: @screen-md-min) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+      }
     }
   }
-}
 
-.demarches-evalrow {
-  background-color: @blue-france-975;
+  .demarches-evalrow {
+    background-color: @blue-france-975;
 
-  .evalrow-header {
-    margin-bottom: @gap-mobile;
-  }
-
-  @media (min-width: @screen-md-min) {
     .evalrow-header {
-      text-align: left;
-      margin-bottom: @gap-desktop;
+      margin-bottom: @gap-mobile;
+    }
+
+    @media (min-width: @screen-md-min) {
+      .evalrow-header {
+        text-align: left;
+        margin-bottom: @gap-desktop;
+      }
     }
   }
-}
 
-.evalrow-cards {
-  text-align: center;
-  margin-bottom: 0.5rem;
+  .evalrow-cards {
+    text-align: center;
+    margin-bottom: 0.5rem;
 
-  // Modify bootstrap columns paddings so that there is 24px between cards
-  .col-xs-12 {
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
+    // Modify bootstrap columns paddings so that there is 24px between cards
+    .col-xs-12 {
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+
+    .evalrow-card {
+      margin-bottom: 1.5em;
+      padding: @grid-gutter-width @grid-gutter-width * 4/5;
+      border: 1px solid @grey-925;
+      border-bottom: 4px solid @brand-primary;
+      background-color: @grey-1000;
+
+      p {
+        width: 100%;
+        font-size: 0.78em;
+      }
+
+      h3 {
+        font-size: 0.90em;
+        margin-top: 1.5em;
+        font-weight: bold;
+      }
+
+      /* the icon p is the first paragraph in the card*/
+      p:first-child {
+        color: @brand-primary;
+        line-height: 4em;
+        width: 4em;
+        height: 4em;
+        border-radius: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      img {
+        line-height: 1.5em;
+      }
+    }
   }
 
-  .evalrow-card {
-    margin-bottom: 1.5em;
-    padding: @grid-gutter-width @grid-gutter-width * 4/5;
-    border: 1px solid @grey-925;
-    border-bottom: 4px solid @brand-primary;
-    background-color: @grey-1000;
-
-    p {
-      width: 100%;
-      font-size: 0.78em;
-    }
-
-    h3 {
-      font-size: 0.90em;
-      margin-top: 1.5em;
-      font-weight: bold;
-    }
-
-    /* the icon p is the first paragraph in the card*/
-    p:first-child {
-      color: @brand-primary;
-      line-height: 4em;
-      width: 4em;
-      height: 4em;
-      border-radius: 2em;
-      margin-left: auto;
-      margin-right: auto;
-      vertical-align: middle;
-      text-align: center;
+  .demarches-usagerow {
+    .usagerow-header,
+    .usagerow-description,
+    .seemore-button-container {
+      margin-bottom: @gap-mobile;
     }
 
     img {
-      line-height: 1.5em;
-    }
-  }
-}
-
-.demarches-usagerow {
-  .usagerow-header,
-  .usagerow-description,
-  .seemore-button-container {
-    margin-bottom: @gap-mobile;
-  }
-
-  img {
-    box-shadow: 0px 0px 64px rgba(154, 154, 255, 0.4);
-  }
-
-  @media (min-width: @screen-md-min) {
-    padding-top: 4.5rem !important; /* desktop size */
-    padding-bottom: 4.5rem !important; /* desktop size */
-
-    .usagerow-header,
-    .usagerow-description {
-      text-align: left;
-      margin-bottom: @gap-desktop;
-    }
-    .seemore-button-container {
-      text-align: left;
-      margin-bottom: 0px;
+      box-shadow: 0px 0px 64px rgba(154, 154, 255, 0.4);
     }
 
-    .usagerow-col-img {
-      text-align: right;
+    @media (min-width: @screen-md-min) {
+      padding-top: 4.5rem; /* desktop size */
+      padding-bottom: 4.5rem; /* desktop size */
+
+      .usagerow-header,
+      .usagerow-description {
+        text-align: left;
+        margin-bottom: @gap-desktop;
+      }
+      .seemore-button-container {
+        text-align: left;
+        margin-bottom: 0px;
+      }
+
+      .usagerow-col-img {
+        text-align: right;
+      }
     }
   }
-}
 
-.demarches-morerow {
-  background-color: @grey-975;
+  .demarches-indicatorsrow {
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 0.75rem 3rem;
+      margin-top: @gap-mobile;
 
-  a {
-    color: @brand-primary;
-    text-decoration: none !important;
+      @media (min-width: @screen-md-min) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: @gap-desktop;
+      }
+    }
   }
-}
 
-.demarches-administrationrow {
-  background-color: @grey-950;
+  .demarches-morerow {
+    background-color: @grey-975;
 
-  p {
-    margin-bottom: 0.5em;
+    a {
+      color: @brand-primary;
+      text-decoration: none !important;
+    }
+  }
+
+  .demarches-administrationrow {
+    background-color: @grey-950;
+
+    p {
+      margin-bottom: 0.5em;
+    }
   }
 }
 
 /* Some adjustment on larger devices:
- * * add max width to the searchbox
  * * all cards explaining how demarche is evaluated get fixed height to display nicely.
  * * the paragraphs with explanations are limited in horizontal size
  */
 @media (min-width: @screen-md-min) {
-  .demarches-mydemarchesrow {
-    .demarches-searchbox {
-      max-width: 80%;
-    }
-  }
-
   .evalrow-cards {
     .evalrow-card {
       height: 18.5em;

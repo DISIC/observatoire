@@ -70,7 +70,7 @@ wikidemarches.sitename.servicesPubliquesPlus=Services Publics +
 wikidemarches.siteurl=observatoire.numerique.gouv.fr
 wikidemarches.home.title=L’Observatoire de la qualité des démarches en ligne
 wikidemarches.home.subtitle=Pour des services publics numériques de qualité
-wikidemarches.home.explanation= L’Observatoire vous permet de suivre la qualité de la numérisation des 250 démarches publiques les plus utilisées.
+wikidemarches.home.explanation=L’Observatoire vous permet de suivre la qualité de la numérisation des 250 démarches publiques les plus utilisées.
 wikidemarches.home.observatoire.title=Actuellement
 wikidemarches.home.observatoire.description=Pour donner une moyenne, voici les derniers chiffres sur la totalité des 250 démarches que nous suivons (mai 2019).
 wikidemarches.footer=Pied de page
@@ -85,9 +85,11 @@ wikidemarches.code-open-source=Code open source
 wikidemarches.search.label=Chercher une démarche
 wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
-wikidemarches.owned-demarches=Mes démarches
-wikidemarches.owned-demarches.none=Vous n''êtes actuellement porteur d''aucune démarche. Recherchez votre démarche ci-dessus, puis, cliquez sur le bouton «{0}» pour devenir porteur de la démarche.
+wikidemarches.owned-demarches=Suivre vos démarches
+wikidemarches.owned-demarches.none=Vous ne suivez pas encore de demarche
+wikidemarches.owned-demarches.howto=Comment ça marche ?
 wikidemarches.evalrow.button=En savoir plus
+wikidemarches.indicatorsrow.button=En savoir plus sur les indicateurs
 wikidemarches.observatoire.button=Consulter les 250 démarches
 # Top menu
 wikidemarches.topmenu.observatoire=Les 250 démarches
@@ -137,9 +139,8 @@ Demarches.Code.DemarchesClass_direction.validation=Une direction ou un établiss
 Demarches.Code.DemarchesClass.new=Créer une démarche
 
 # Demarche submission by visitor
-wikidemarches.demande.demarche-absente=Vous ne trouvez pas votre démarche ?
-wikidemarches.demande.creation=Ajouter une démarche manquante
-wikidemarches.demande.ajoutez-la=Ajoutez-la !
+wikidemarches.demande.demarche-absente=Votre démarche n’existe pas encore ?
+wikidemarches.demande.creation=Créer une nouvelle démarche
 wikidemarches.demande.referencer=Référencer une démarche manquante
 wikidemarches.demande.referencer.introduction=Si vous n'avez pas trouvé la démarche que vous avez faite, ajoutez-la ici afin de pouvoir donner votre avis.
 wikidemarches.demande.organisme=Auprès de quel organisme avez-vous fait cette démarche ?
