@@ -121,14 +121,23 @@
               #foreach ($entry in $ownedDemarches)
                 #set ($demarchePage = $xwiki.getDocument($entry))
                 * (% class="demarche" %) (((
-                  [[$demarchePage.title&gt;&gt;$entry]]
-                  #set ($demarcheObject = $demarchePage.getObject('Demarches.Code.DemarchesClass'))
-                  (% class='ministeres' %)
-                    $demarcheObject.ministeres
+                  (% class="demarche-content" %) (((
+                    [[$demarchePage.title&gt;&gt;$entry]]
+                    #set ($demarcheObject = $demarchePage.getObject('Demarches.Code.DemarchesClass'))
+                    (% class='ministeres' %)
+                      $demarcheObject.ministeres
+                  )))
+                  {{html clean="false"}}
+                    &lt;form action="/API/Code/GenerateDemarcheCode" class="xform" id="embed-generateform" method="post"&gt;
+                      &lt;input name="demarche" type="hidden" value="$entry"&gt;
+                      &lt;input name="xredirect" type="hidden" value="$xwiki.getURL("$entry", 'view', 'tab=embed-tab')"&gt;
+                      &lt;input class="demarche-install-button btn btn-default" name="dogenerate" type="submit" value="$services.localization.render('wikidemarches.owned-demarches.install')"&gt;
+                    &lt;/form&gt;
+                  {{/html}}
                 )))
               #end
             #else
-              * $services.localization.render('wikidemarches.owned-demarches.none')
+              * (% class="no-demarche" %) $services.localization.render('wikidemarches.owned-demarches.none')
             #end
           )))
         )))
@@ -529,21 +538,46 @@
       list-style-type: none;
 
       li {
-        padding: 1.75rem 1.5rem;
+        padding: 1rem 1.5rem;
         background-color: @grey-1000;
+        margin-bottom: 0.75rem;
 
         .demarche {
-          a {
-            color: @brand-primary;
-            font-size: 1.25rem;
-            font-weight: bold;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: stretch;
+          gap: 0.5rem 1rem;
+
+          @media (min-width: @screen-sm-min) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
           }
 
-          .ministeres {
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            color: @grey-200;
+          .demarche-content {
+            a {
+              color: @brand-primary;
+              font-size: 1.25rem;
+              font-weight: bold;
+            }
+
+            .ministeres {
+              margin-top: 0.5rem;
+              font-size: 0.75rem;
+              color: @grey-200;
+            }
           }
+
+          .demarche-install-button {
+            font-size: 0.9rem;
+          }
+        }
+
+        .no-demarche {
+          padding: 0.75rem 0rem;
         }
       }
     }
