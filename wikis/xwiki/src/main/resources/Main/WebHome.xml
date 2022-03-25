@@ -214,35 +214,29 @@
   (%class='row demarches-administrationrow'%)(((
     (%class='container' %)(((
       (%class='demarches-administration-link'%) (((
-        ==$services.localization.render('wikidemarches.administration.home-title')==
+        == $services.localization.render('wikidemarches.administration.home-title') ==
 
-        (%class='demarches-administration-subtitle'%)
-        $services.localization.render('wikidemarches.administration.home-subtitle')
+        (%class='row-flex' %)(((
+          [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default]]
 
-        (%class='row' %)(((
-          (%class='col-xs-12 col-sm-4' %) (((
-            [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default']]
-            #if ($hasAdmin)
+          #if ($hasAdmin)
+            [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
+          #end
 
-              [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
-            #end
-          )))
-          (%class='col-xs-12 col-sm-4' %) (((
-            [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
+          [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
 
-            [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']]
+          [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']]
 
-            [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='btn btn-default']]
+          [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='btn btn-default']]
 
-            [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
-          )))
-          (%class='col-xs-12 col-sm-4' %) (((
-            #if ($hasAdmin)
-              [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
+          [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
 
-            #end
-            [[$services.localization.render('wikidemarches.administration.tableaudebord')&gt;&gt;TableauDeBord.WebHome||class='btn btn-default']]
-          )))
+          #if ($hasAdmin)
+            [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
+          #end
+
+          [[$services.localization.render('wikidemarches.administration.tableaudebord')&gt;&gt;TableauDeBord.WebHome||class='btn btn-default']]
+
         )))
       )))
     )))
@@ -704,8 +698,36 @@
   .demarches-administrationrow {
     background-color: @grey-950;
 
-    p {
-      margin-bottom: 0.5em;
+    .row-flex {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 0.5rem 1rem;
+
+      p {
+        width: 100%;
+
+        .btn {
+          width: 100%;
+        }
+      }
+
+      @media (min-width: @screen-sm-min) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          width: auto;
+
+          .btn {
+            width: 15rem;
+          }
+        }
+      }
     }
   }
 }
