@@ -61,48 +61,6 @@
   )))
   ##
   ##
-  #*
-  (%class='row demarches-observatoirerow'%)(((
-    (%class='container'%)(((
-      (%class='row'%)(((
-        (%class='col-xs-12'%)(((
-          (%class='narrow-width'%)
-          == $services.localization.render('wikidemarches.home.observatoire.title') ==
-
-          (%class='narrow-width'%)
-          $services.localization.render('wikidemarches.home.observatoire.description')
-        )))
-      )))
-      (%class='row obsstats'%)(((
-        (%class='col-xs-12 col-sm-5 col-lg-4 col-sm-offset-1 col-lg-offset-2 obsstat-col'%)(((
-          (%class='demat-stat'%) (((
-            (%class='stat-statvalue'%)
-            {{html clean='false'}}67&amp;nbsp;%{{/html}}
-
-            (%class='stat-statdescription'%)
-            (%class='stat-statdescription-icon'%)[[image:Main.Comment-ca-marche@cloud-white.svg]](%%)(%class='stat-statdescription-text'%)Démarches\\numérisées(%%)
-          )))
-        )))
-        (%class='col-xs-12 col-sm-5 col-lg-4 obsstat-col'%)(((
-          (%class='sat-stat'%) (((
-            (%class='stat-statvalue'%)
-            {{html clean='false'}}65&amp;nbsp;%{{/html}}
-
-            (%class='stat-statdescription'%)
-            (%class='stat-statdescription-icon'%)[[image:Main.Comment-ca-marche@smiley-white.svg]](%%)(%class='stat-statdescription-text'%)Usagers\\satisfaits(%%)
-          )))
-        )))
-      )))
-      (%class='row'%)(((
-        (%class='col-xs-12 col-sm-5 col-lg-4 col-sm-offset-6 obsstats-explanation-col'%)(((
-           Donnée issue des démarches munies du bouton “Je donne mon avis” (2.37% des démarches).
-        )))
-      )))
-    )))
-  )))
-  *#
-  ##
-  ##
   #if (!$isGuest)
     (% class='row demarches-searchrow' %) (((
       (% class='container' %) (((
@@ -504,87 +462,6 @@
       .seemore-button-container a.btn-primary {
         margin-top: @gap-desktop; /* desktop size */
       }
-    }
-  }
-
-  .demarches-observatoirerow {
-    background-color: @grey-950;
-    color: #fff;
-
-    .obsstats {
-      margin-top: 1.9em; /* 34.2px for a 18px font*/
-
-      .obsstat-col {
-        padding-left: @grid-gutter-width;
-        padding-right: @grid-gutter-width;
-        margin-bottom: @grid-gutter-width / 2;
-
-        .demat-stat,
-        .sat-stat {
-          border-radius: @grid-gutter-width * 2;
-          padding: @grid-gutter-width * 1.5 @grid-gutter-width * 1.5;
-
-          p {
-            margin-bottom: 0;
-          }
-
-          .stat-statvalue {
-            font-size: 6em;
-            line-height: 1;
-            margin-bottom: 0.1em;
-            font-weight: bold;
-            text-align: left;
-          }
-
-          .stat-statdescription {
-            text-align: left;
-            &amp;::before {
-              font: normal normal normal 14px/1 FontAwesome;
-            }
-
-            .stat-statdescription-icon,
-            .stat-statdescription-text {
-              display: table-cell;
-            }
-
-            .stat-statdescription-icon {
-              width: 2.8em;
-              height: 2.8em;
-              background-color: rgba(255, 255, 255, 0.3);
-              border-radius: 1.5em;
-              text-align: center;
-              vertical-align: middle;
-
-              img {
-                max-width: 55%;
-              }
-            }
-
-            .stat-statdescription-text {
-              padding-left: 1em;
-              font-size: 0.9em;
-              font-weight: 600;
-              vertical-align: middle;
-            }
-          }
-        }
-
-        .demat-stat {
-          #gradient &gt; .directional(#62d2b0; #4798f4; 131deg);
-        }
-
-        .sat-stat {
-          #gradient &gt; .directional(#ff6bc2; #fdf54d; 131deg);
-        }
-      }
-    }
-
-    .obsstats-explanation-col {
-      font-size: 0.6em;
-      padding-left: @grid-gutter-width * 2.5;
-      padding-right: @grid-gutter-width * 2.5;
-      text-align: left;
-      opacity: 0.9;
     }
   }
 
