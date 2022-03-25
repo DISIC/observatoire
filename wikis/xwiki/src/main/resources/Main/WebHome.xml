@@ -74,7 +74,7 @@
         )))
       )))
       (%class='row obsstats'%)(((
-        (%class='col-xs-12 col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-2 obsstat-col'%)(((
+        (%class='col-xs-12 col-sm-5 col-lg-4 col-sm-offset-1 col-lg-offset-2 obsstat-col'%)(((
           (%class='demat-stat'%) (((
             (%class='stat-statvalue'%)
             {{html clean='false'}}67&amp;nbsp;%{{/html}}
@@ -83,7 +83,7 @@
             (%class='stat-statdescription-icon'%)[[image:Main.Comment-ca-marche@cloud-white.svg]](%%)(%class='stat-statdescription-text'%)Démarches\\numérisées(%%)
           )))
         )))
-        (%class='col-xs-12 col-md-5 col-lg-4 obsstat-col'%)(((
+        (%class='col-xs-12 col-sm-5 col-lg-4 obsstat-col'%)(((
           (%class='sat-stat'%) (((
             (%class='stat-statvalue'%)
             {{html clean='false'}}65&amp;nbsp;%{{/html}}
@@ -94,7 +94,7 @@
         )))
       )))
       (%class='row'%)(((
-        (%class='col-xs-12 col-md-5 col-lg-4 col-md-offset-6 obsstats-explanation-col'%)(((
+        (%class='col-xs-12 col-sm-5 col-lg-4 col-sm-offset-6 obsstats-explanation-col'%)(((
            Donnée issue des démarches munies du bouton “Je donne mon avis” (2.37% des démarches).
         )))
       )))
@@ -147,10 +147,10 @@
         #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2)")
         #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
         (% class='row' %) (((
-          (% class='col-xs-12 col-md-6' %) (((
+          (% class='col-xs-12 col-sm-6' %) (((
             == $services.localization.render('wikidemarches.owned-demarches') ==
           )))
-          (% class='col-xs-12 col-md-6' %) (((
+          (% class='col-xs-12 col-sm-6' %) (((
             (% class='howto-button-container' %) (((
               [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;Aide.Observatoire]] ## TODO: update url
               (% class="fa fa-question-circle" aria-hidden="true" %) ((()))
@@ -189,10 +189,10 @@
       #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
       (% class='container' %) (((
         (% class='row evalrow-header' %) (((
-          (% class='col-xs-12 col-md-5 col-md-offset-1 col-lg-6 col-lg-offset-0' %)
+          (% class='col-xs-12 col-sm-6' %)
           == ${evalHelpDoc.title} ==
 
-          (% class='col-xs-12 col-md-5 col-lg-6' %)
+          (% class='col-xs-12 col-sm-6' %)
           Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
         )))
 
@@ -209,7 +209,7 @@
     (% class='row demarches-usagerow' %)(((
       (% class='container' %)(((
         (% class='row' %)(((
-          (% class='col-xs-12 col-md-6' %) (((
+          (% class='col-xs-12 col-sm-6' %) (((
             (% class='usagerow-header' %)
             ==Vous êtes porteur ou porteuse d’un service public numérique ?==
 
@@ -219,7 +219,7 @@
             (% class='seemore-button-container' %)
             [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']] ## TODO: update link
           )))
-          (% class='col-xs-12 col-md-6 usagerow-col-img' %) (((
+          (% class='col-xs-12 col-sm-6 usagerow-col-img' %) (((
             {{html clean="false"}}
               &lt;img src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/example-stats.svg")" alt="Example de statistiques" /&gt;
             {{/html}}
@@ -262,14 +262,14 @@
         $services.localization.render('wikidemarches.administration.home-subtitle')
 
         (%class='row' %)(((
-          (%class='col-xs-12 col-md-4' %) (((
+          (%class='col-xs-12 col-sm-4' %) (((
             [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default']]
             #if ($hasAdmin)
 
               [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
             #end
           )))
-          (%class='col-xs-12 col-md-4' %) (((
+          (%class='col-xs-12 col-sm-4' %) (((
             [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
 
             [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']]
@@ -278,7 +278,7 @@
 
             [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
           )))
-          (%class='col-xs-12 col-md-4' %) (((
+          (%class='col-xs-12 col-sm-4' %) (((
             #if ($hasAdmin)
               [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
 
@@ -453,7 +453,7 @@
     font-size: 1.5rem;
   }
 
-  @media (min-width: @screen-md-min) {
+  @media (min-width: @screen-sm-min) {
     &amp; &gt; .row {
       padding-top: 3.5rem; /* desktop size */
       padding-bottom: 3.5rem; /* desktop size */
@@ -485,7 +485,7 @@
       margin-top: @gap-mobile; /* mobile size */
     }
 
-    @media (min-width: @screen-md-min) {
+    @media (min-width: @screen-sm-min) {
       padding-top: 4.5rem; /* desktop size */
       padding-bottom: 4.5rem; /* desktop size */
 
@@ -626,7 +626,7 @@
     h2 {
       margin-bottom: 0.5rem;
 
-      @media (min-width: @screen-md-min) {
+      @media (min-width: @screen-sm-min) {
         margin-bottom: 0;
       }
     }
@@ -640,7 +640,7 @@
       font-size: 0.9rem;
       color: @grey-200;
 
-      @media (min-width: @screen-md-min) {
+      @media (min-width: @screen-sm-min) {
         justify-content: flex-end;
       }
     }
@@ -677,7 +677,7 @@
       align-items: flex-start;
       gap: 0.75rem 3rem;
 
-      @media (min-width: @screen-md-min) {
+      @media (min-width: @screen-sm-min) {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
@@ -693,7 +693,7 @@
       margin-bottom: @gap-mobile;
     }
 
-    @media (min-width: @screen-md-min) {
+    @media (min-width: @screen-sm-min) {
       .evalrow-header {
         text-align: left;
         margin-bottom: @gap-desktop;
@@ -717,6 +717,16 @@
       border: 1px solid @grey-925;
       border-bottom: 4px solid @brand-primary;
       background-color: @grey-1000;
+
+      @media (min-width: @screen-sm-min) {
+        height: 16.5em;
+      }
+      @media (min-width: @screen-md-min) {
+        height: 14.5em;
+      }
+      @media (min-width: @screen-lg-min) {
+        height: 18.5em;
+      }
 
       p {
         width: 100%;
@@ -759,7 +769,7 @@
       box-shadow: 0px 0px 64px rgba(154, 154, 255, 0.4);
     }
 
-    @media (min-width: @screen-md-min) {
+    @media (min-width: @screen-sm-min) {
       padding-top: 4.5rem; /* desktop size */
       padding-bottom: 4.5rem; /* desktop size */
 
@@ -788,7 +798,7 @@
       gap: 0.75rem 3rem;
       margin-top: @gap-mobile;
 
-      @media (min-width: @screen-md-min) {
+      @media (min-width: @screen-sm-min) {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
@@ -817,16 +827,9 @@
 }
 
 /* Some adjustment on larger devices:
- * * all cards explaining how demarche is evaluated get fixed height to display nicely.
  * * the paragraphs with explanations are limited in horizontal size
  */
-@media (min-width: @screen-md-min) {
-  .evalrow-cards {
-    .evalrow-card {
-      height: 18.5em;
-    }
-  }
-
+@media (min-width: @screen-sm-min) {
   .xcontent {
     font-size: 1.125em;
   }

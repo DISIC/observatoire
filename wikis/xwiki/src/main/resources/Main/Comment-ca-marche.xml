@@ -44,7 +44,7 @@
 
 (% class="row evalrow-cards" %)
 (((
-(% class="col-xs-12 col-md-5 col-lg-3 col-md-offset-1 col-lg-offset-0" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -58,7 +58,7 @@
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -72,7 +72,7 @@
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3 col-md-offset-1 col-lg-offset-0" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -86,7 +86,7 @@ Les démarches en ligne doivent pouvoir être effectuées aisément sur un tél�
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -100,7 +100,7 @@ Les usagers doivent pouvoir se renseigner ou être accompagnés facilement : cha
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3 col-md-offset-1 col-lg-offset-0" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -114,7 +114,7 @@ Les démarches en ligne doivent être rapidement disponibles tous les jours à t
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -128,7 +128,7 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3 col-md-offset-1 col-lg-offset-0" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
@@ -142,7 +142,7 @@ Personne ne doit être pénalisé dans ses démarches en ligne en raison d’un 
 )))
 )))
 
-(% class="col-xs-12 col-md-5 col-lg-3" %)
+(% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
 (((
