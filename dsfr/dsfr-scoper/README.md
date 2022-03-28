@@ -7,9 +7,9 @@ It is not guaranteed to be 100% effective, but has been tested in the scope of t
 
 ## Presentation
 
-This script is used to prefix every dsfr rules with a specific selector string.
+This script is used to prefix every dsfr rules with the selector string: `#xwikimaincontainer #mainContentArea .use-dsfr`.
 This has two advantages:
-- scoping: no dsfr styles are going to mess with existing styles outside of the form element
+- scoping: no dsfr styles are going to mess with existing styles outside of an HTML element explicitly using it
 - higher rule precedence: the dsfr rule gain more precedence, allowing to take over existing bootstrap rules
 
 The prefixer will also take care of `:root`, `html` and `body` rules, to some extent:
@@ -20,7 +20,7 @@ The prefixer will also take care of `:root`, `html` and `body` rules, to some ex
 
 /* will be transformed into: */
 
-:root[data-theme="dark"] #specific-prefix .my-class {
+:root[data-theme="dark"] #xwikimaincontainer #mainContentArea .use-dsfr .my-class {
   /* ... */
 }
 ```
@@ -34,20 +34,20 @@ body > .direct-child {
 
 /* will be transformed into: */
 
-body #specific-prefix > .direct-child {
+body #xwikimaincontainer #mainContentArea .use-dsfr > .direct-child {
   /* ... */
 }
 
 /* instead of: */
 
-body > .direct-child #specific-prefix {
+body > .direct-child #xwikimaincontainer #mainContentArea .use-dsfr {
   /* ... */
 }
 ```
 
 However there are no such rules in the dsfr css files, so for the scope of this project this should not be a problem.
 
-## Installation & execution
+## Deployment
 
 The prefixing of dsfr styles is a manual step in the deployment of the project, as it is not meant to be a final solution.
 
@@ -68,3 +68,16 @@ The generated folder should be named `dsfr-scoped/`, and you can now copy it (wi
 
 Note:
 The dsfr version currently used is 1.3.1. The version has been pinned inside `package.json`, to prevent unwanted breakage. You can change the version there if you want, at your own risk.
+
+
+## Usage
+
+To use dsfr styles in the instance, simply add the `.use-dsfr` class to the HTML element you want to contain those styles:
+```html
+<div class="use-dsfr">
+  Use DSFR here
+</div>
+```
+
+This will only work for HTML element that are inside page content, more specifically inside the `#mainContentArea` HTML element.
+

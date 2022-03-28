@@ -15,8 +15,8 @@ try {
     await fs.rm(targetDir, { recursive: true, force: true });
 } catch {};
 
-// The prfix to add for every rules
-const prefix = '#xwikimaincontainer #mainContentArea #avis-tab';
+// The prefix to add for every rules
+const prefix = '#xwikimaincontainer #mainContentArea .use-dsfr';
 
 // Regex
 const createRegex = selector => new RegExp(`^(.*?)(${selector}[^\\s]*)(.*?)$`);
