@@ -57,7 +57,7 @@
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarcheAvisFormTab'))
 {{html wiki="true"}}
 #maybeSetWarningBackground()
-&lt;div class="tab-pane fade #if($selectedTab == 'avis-tab')active in#end" id="avis-tab" #if(!$isSingleTab)role="tabpanel" aria-labelledby="avis-tab"#end&gt;
+&lt;div class="tab-pane fade #if($selectedTab == 'avis-tab')active in#end use-dsfr" id="avis-tab" #if(!$isSingleTab)role="tabpanel" aria-labelledby="avis-tab"#end&gt;
 #set ($step = "$!request.session.getAttribute('avis-form-step')")
 
 ## This is a multi-steps form. The following exclusive and successive steps can happen:
