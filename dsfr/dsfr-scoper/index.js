@@ -19,10 +19,10 @@ try {
 const prefix = '#xwikimaincontainer #mainContentArea .use-dsfr';
 
 // Regex
-const createRegex = selector => new RegExp(`^(.*?)(\\b${selector}\\b[^\\s]*)(.*?)$`);
-const rootRegex = createRegex(":root");
-const htmlRegex = createRegex("html");
-const bodyRegex = createRegex("body");
+const createRegex = selector => new RegExp(`^(.*?)(${selector})(.*?)$`);
+const rootRegex = createRegex(":root\\b");
+const htmlRegex = createRegex("\\bhtml\\b");
+const bodyRegex = createRegex("\\bbody\\b");
 
 const replaceSpecialRule = (selector, regex) => selector.replace(regex, `$1$2 ${prefix}$3`);
 
