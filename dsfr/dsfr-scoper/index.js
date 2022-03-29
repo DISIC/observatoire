@@ -19,7 +19,7 @@ try {
 const prefix = '#xwikimaincontainer #mainContentArea .use-dsfr';
 
 // Regex
-const createRegex = selector => new RegExp(`^(.*?)(${selector}[^\\s]*)(.*?)$`);
+const createRegex = selector => new RegExp(`^(.*?)(\\b${selector}\\b[^\\s]*)(.*?)$`);
 const rootRegex = createRegex(":root");
 const htmlRegex = createRegex("html");
 const bodyRegex = createRegex("body");
