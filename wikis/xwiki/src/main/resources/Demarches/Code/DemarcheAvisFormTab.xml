@@ -493,8 +493,6 @@ legend.fr-fieldset__legend {
 }
 
 /* Rules to match the required style from the sketch specifications */
-@bf500: #000091; // --fr-bf500
-@bf100: #f2f2f9; // --fr-bf100
 @document-title-margin-bottom: 1rem;
 #xwikimaincontainer #mainContentArea {
   .document-info {
@@ -506,7 +504,7 @@ legend.fr-fieldset__legend {
     }
 
     h1 {
-      color: @bf500;
+      color: @brand-primary;
       font-size: 2.5rem;
       text-align: center;
     }
@@ -579,7 +577,7 @@ legend.fr-fieldset__legend {
 
     .document-header {
       @media (max-width: @screen-xs-max) {
-        background-color: @bf100;
+        background-color: @blue-france-975;
       }
 
       #document-title {
@@ -594,7 +592,7 @@ legend.fr-fieldset__legend {
           @height-compensation: @top-compensation  + @main-margin-top + @document-title-margin-bottom;
           // Need to use minus signs, else the minifier will remove spaces (and it will break)
           height: calc(~'100% - ' -@height-compensation);
-          background-color: @bf100;
+          background-color: @blue-france-975;
         }
       }
     }
@@ -604,9 +602,6 @@ legend.fr-fieldset__legend {
 
 
 /* Custom style for the final step of the form */
-
-// Unfortunately the less parser can't handle css variables
-@bf500: #000091; // var(--bf500);
 
 #xwikimaincontainer #mainContentArea #avis-tab .form-final-step-information {
   margin-bottom: 3rem;
@@ -628,13 +623,13 @@ legend.fr-fieldset__legend {
         margin-top: 0.25rem;
         // We can't change the color of an svg from an img tag
         // So we are using css filters hack to modify the color
-        // Reproducing the color @bf500 using the tool: https://codepen.io/sosuke/pen/Pjoqqp
+        // Reproducing the color @brand-primary using the tool: https://codepen.io/sosuke/pen/Pjoqqp
         filter: invert(13%) sepia(100%) saturate(5009%) hue-rotate(243deg) brightness(55%) contrast(134%);
       }
     }
   }
   p a {
-    color: @bf500;
+    color: @brand-primary;
   }
 }
 
