@@ -267,7 +267,7 @@
     &lt;/table&gt;
     #set($chartOptions = {
         "maintainAspectRatio": false,
-        "backgroundColors": ["#6b5f96"],
+        "backgroundColors": ["$colorDarkBlue"],
         "opacity": 1,
         "skipZeros": true,
         "scales": {
@@ -414,7 +414,7 @@
     &lt;/table&gt;
     #prepareHistoryBarChartOptions()
     #set ($extraChartOptions = {
-        "backgroundColors": ["$colorObservatoireBlue"],
+        "backgroundColors": ["$colorInfo"],
         "afterValue": "",
         "layout": {
           "padding": {
@@ -505,7 +505,8 @@
 #set ($colorDanger = $colorThemeObject.getValue('brand-danger'))
 #set ($colorWarning = $colorThemeObject.getValue('brand-warning'))
 #set ($colorGood = $colorThemeObject.getValue('brand-success'))
-#set ($colorObservatoireBlue = $colorThemeObject.getValue('link-color'))
+#set ($colorInfo = $colorThemeObject.getValue('brand-info'))
+#set ($colorDarkBlue = '#313178') ## blue-france-200
 ##
 ## Identification of the period for which avis need to be counted, this script needs to serve the following cases:
 ## 1/ no date parameters -&gt; the avis up to today will be counted and results for one year will be displayed (the previous year)

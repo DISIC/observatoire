@@ -1000,19 +1000,19 @@
       <body-bg/>
     </property>
     <property>
-      <brand-danger/>
+      <brand-danger>#ce0500</brand-danger>
     </property>
     <property>
-      <brand-info/>
+      <brand-info>#0063cb</brand-info>
     </property>
     <property>
-      <brand-primary/>
+      <brand-primary>#000091</brand-primary>
     </property>
     <property>
-      <brand-success/>
+      <brand-success>#18753c</brand-success>
     </property>
     <property>
-      <brand-warning/>
+      <brand-warning>#b34000</brand-warning>
     </property>
     <property>
       <breadcrumb-bg/>
