@@ -110,7 +110,7 @@
           )))
           (% class='col-xs-12 col-sm-6' %) (((
             (% class='howto-button-container' %) (((
-              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;Aide.Observatoire]] ## TODO: update url
+              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;JDMA.WebHome]]
               (% class="fa fa-question-circle" aria-hidden="true" %) ((()))
             )))
           )))
@@ -184,12 +184,10 @@
             Même si votre démarche n’est pas parmi les 250 suivies dans l’Observatoire, vous pouvez utiliser l’outil Je donne mon avis afin de suivre en temps réel la satisfaction des usagers.
 
             (% class='seemore-button-container' %)
-            [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']] ## TODO: update link
+            [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;JDMA.WebHome||class='btn btn-default']]
           )))
           (% class='col-xs-12 col-sm-6 usagerow-col-img' %) (((
-            {{html clean="false"}}
-              &lt;img src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/example-stats.svg")" alt="Example de statistiques" /&gt;
-            {{/html}}
+            image:JDMA.WebHome@example-stats.svg
           )))
         )))
       )))
