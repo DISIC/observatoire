@@ -93,24 +93,20 @@
       ==$services.localization.render('avis.form.demarchename.label') (%class='form-demarchename'%)${doc.title}(%%)==
       &lt;/div&gt;
       #set ($avis = $doc.newObject('Avis.Code.AvisClass'))
+      ## fill in the modalité (en ligne (jusqu'au bout), guichet)
+      ## in this version, the various values of this field are obsolete, 
+      ## all avis need to be registered with "en ligne entierement" value, 
+      ## we'll keep the value when otherwise specified on the URL but otherwise we'll just fill it in with en-ligne-entièrement without asking any question to the user
+      ## we could add a parameter to allow forcing the question to be asked to the user, but we don't need this for now
       #set ($presetModalite = "$!request.nd_mode")
       #if ($presetModalite == '')
-        ## We don't have a preset modalite received from request parameters, hence we display the 'modalite' question
-        #setDefaultModalite($avis)
-        &lt;div class="modalite"&gt;
-          #displayObjectForm($avis,['modalite'])
-        &lt;/div&gt;
+        ## We don't have a preset modalite received from request parameters, we fill in with the default value
+        #set($modalite = 'en-ligne-entièrement')
       #else
-        #if ($presetModalite != '')
-          ## a preset modalite was received on the request, use that modalite
-          #set ($modalite = $presetModalite)
-        #else
-          ## The user has just submitted a new demarche, hence we retrieve the 'modalite' value from the session, and we clean the session from this point of view.
-          #set ($modalite = $request.session.getAttribute('avis-modalite'))
-          #set ($discard = $request.session.removeAttribute('avis-modalite'))
-        #end
-        &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$escapetool.xml($modalite)" /&gt;
+        ## a preset modalite was received on the request, use that modalite
+        #set ($modalite = $presetModalite)
       #end
+      &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$escapetool.xml($modalite)" /&gt;
       &lt;div class="rating-container"&gt;
         #displayObjectForm($avis,['score'])
       &lt;/div&gt;

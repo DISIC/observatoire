@@ -141,20 +141,6 @@
 #end
 #end
 
-#macro(setDefaultModalite $avis)
-#set ($niveauDemat = $demarche.getProperty('niveauDemat'))
-#set ($discard = $avis.set('modalite','autrement'))
-#if ($niveauDemat &amp;&amp; $niveauDemat.value &amp;&amp; $niveauDemat.value.size() &gt; 0)
-  #set ($niveauDemat = $niveauDemat.value)
-  #set ($dematCriteres = ['teleprocedure', 'formulaire'])
-  #foreach ($niveau in $niveauDemat)
-    #if ($dematCriteres.contains($niveau))
-      #set ($discard = $avis.set('modalite','en-ligne-entièrement'))
-    #end
-  #end
-#end
-#end
-
 #macro (displayObjectForm $obj $showProperties)
 #foreach($prop in $obj.xWikiClass.properties)
   #if ($showProperties.contains($prop.name))

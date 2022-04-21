@@ -219,7 +219,7 @@
 ## - The requested page corresponds to a demarche page and:
 ##   - the avis submission form has started,
 ##   - or the view mode is set to 'formulaire-avis' and the request matches with the demarche embed API key,
-##   - or nd_mode is present with valid value and nd_source is present
+##   - or nd_mode is present with valid value and nd_source is present (only for preserving legacy URLs)
 #set ($demarche = $doc.getObject('Demarches.Code.DemarchesClass'))
 #if ($demarche)
   #set ($avisIdAttributeKey = "${doc.fullName}-avis-id")

@@ -100,8 +100,7 @@
                 &lt;div class='embed-code-button'&gt;
                   ## if the volumétrie is not too high
                   #if ($displayURL)
-                    #set ($defaultVoteMode = 'en-ligne-entièrement')
-                    #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_mode=$escapetool.url($defaultVoteMode)&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
+                    #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
                     #set ($indentSize = '  ')
                     &lt;p class='embed-code-button-hint'&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
                     ## transform the URLs before creating the button code, to use JDMA URLs
