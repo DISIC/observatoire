@@ -55,7 +55,7 @@
       &lt;legend class="fr-fieldset__legend fr-text--lg"&gt;
         $doc.displayPrettyName($name, false, false)
         #if ($isMandatory)
-          &lt;span id="${prefix}${name}_hint" class="fr-hint-text"&gt;$services.localization.render("${theClass.name}_${name}.mandatoryhint")&lt;/span&gt;
+          &lt;span id="${prefix}${name}_hint" class="fr-hint-text"&gt;$services.localization.render("${clazz.name}_${name}.mandatoryhint")&lt;/span&gt;
         #end
       &lt;/legend&gt;
       &lt;div class="fr-fieldset__content"&gt;
