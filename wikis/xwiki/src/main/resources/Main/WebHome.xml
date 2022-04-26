@@ -455,8 +455,8 @@
       padding-top: 4.5rem; /* desktop size */
       padding-bottom: 4.5rem; /* desktop size */
 
-      p.demarches-subtitle,
       p.demarches-explanation {
+        font-size: 1.4rem;
         width: 70%;
       }
 
@@ -522,7 +522,6 @@
       justify-content: flex-start;
       align-items: baseline;
       gap: 0.25rem;
-      font-size: 0.9rem;
       color: @grey-200;
 
       @media (min-width: @screen-sm-min) {
@@ -629,23 +628,23 @@
       background-color: @grey-1000;
 
       @media (min-width: @screen-sm-min) {
-        height: 16.5em;
+        height: 21.5em;
       }
       @media (min-width: @screen-md-min) {
-        height: 14.5em;
+        height: 18em;
       }
       @media (min-width: @screen-lg-min) {
-        height: 18.5em;
+        height: 26em;
       }
 
       p {
         width: 100%;
-        font-size: 0.78em;
       }
 
       h3 {
-        font-size: 0.90em;
+        font-size: 1rem;
         margin-top: 1.5em;
+        margin-bottom: 0.5em;
         font-weight: bold;
       }
 
@@ -768,10 +767,6 @@
  * * the paragraphs with explanations are limited in horizontal size
  */
 @media (min-width: @screen-sm-min) {
-  .xcontent {
-    font-size: 1.125em;
-  }
-
   p.narrow-width,
   div.narrow-width p {
     width: 65%;
