@@ -675,11 +675,17 @@ li.wikidemarches-topmenu {
     }
 
     .footer-col-sites {
-      border-top: 1px solid @grey-850;
       margin-top: @grid-gutter-width / 2;
       padding-top: 0.5rem;
       text-align: center;
       font-size: 90%;
+
+      &amp;::before {
+        content: "";
+        display: block;
+        width: 100%;
+        border-top: 1px solid @grey-925;
+      }
 
       li {
         margin: 0.5rem 0.75rem 0rem 0rem;
@@ -688,7 +694,7 @@ li.wikidemarches-topmenu {
           content: "";
           display: inline-block;
           vertical-align: middle;
-          background-color: @grey-850;
+          background-color: @grey-925;
           width: 1px;
           height: 1rem;
           margin-left: 0.75rem;
