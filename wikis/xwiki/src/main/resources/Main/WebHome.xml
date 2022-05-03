@@ -169,6 +169,25 @@
         [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
       )))
     )))
+  #else
+  (% class='row demarches-indicatorsrow' %) (((
+    (% class='container' %) (((
+      (% class='row' %) (((
+        (% class='col-xs-12' %) (((
+          == Les 250 démarches suivies par l’Observatoire ==
+
+          Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
+
+          (% class='buttons-container' %) (((
+            (% class='boutton-container %)
+              [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
+            (% class='boutton-container %)
+              [[$services.localization.render('wikidemarches.indicatorsrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
+          )))
+        )))
+      )))
+    )))
+  )))
   #end
   ##
   ##
@@ -193,26 +212,6 @@
       )))
     )))
   #end
-  ##
-  ##
-  (% class='row demarches-indicatorsrow' %) (((
-    (% class='container' %) (((
-      (% class='row' %) (((
-        (% class='col-xs-12' %) (((
-          == Les 250 démarches suivies par l’Observatoire ==
-
-          Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
-
-          (% class='buttons-container' %) (((
-            (% class='boutton-container %)
-              [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
-            (% class='boutton-container %)
-              [[$services.localization.render('wikidemarches.indicatorsrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
-          )))
-        )))
-      )))
-    )))
-  )))
   ##
   ##
   #set($isAdminMin = $hasAdmin || $isAdministrateurMinisteriel)
