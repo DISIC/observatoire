@@ -159,7 +159,7 @@
       &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
         &lt;div class="fr-col-12 fr-col-md-6"&gt;
           &lt;div class="step-icon fr-mb-4v"&gt;
-            &lt;span class="fr-icon-flashlight-line" aria-hidden="true"&gt;&lt;/span&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/award.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
           &lt;h2&gt;Suivez la qualité de vos services, gratuitement&lt;/h2&gt;
           &lt;div class="plain-text"&gt;
@@ -180,7 +180,7 @@
       &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
         &lt;div class="fr-col-12 fr-col-md-6"&gt;
           &lt;div class="step-icon fr-mb-4v"&gt;
-            &lt;span class="fr-icon-flashlight-line" aria-hidden="true"&gt;&lt;/span&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/coffee.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
           &lt;h2&gt;Installation facile, le temps de votre pause café&lt;/h2&gt;
           &lt;div class="plain-text"&gt;
@@ -201,7 +201,7 @@
       &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
         &lt;div class="fr-col-12 fr-col-md-6"&gt;
           &lt;div class="step-icon fr-mb-4v"&gt;
-            &lt;span class="fr-icon-flashlight-line" aria-hidden="true"&gt;&lt;/span&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/message-circle.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
           &lt;h2&gt;Récoltez des notes et des verbatims en temps réel&lt;/h2&gt;
           &lt;div class="plain-text"&gt;
@@ -222,7 +222,7 @@
       &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
         &lt;div class="fr-col-12 fr-col-md-6"&gt;
           &lt;div class="step-icon fr-mb-4v"&gt;
-            &lt;span class="fr-icon-flashlight-line" aria-hidden="true"&gt;&lt;/span&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/trending-up.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
           &lt;h2&gt;Suivez l’évolution grace à des graphiques pertinents&lt;/h2&gt;
           &lt;div class="plain-text"&gt;
@@ -629,8 +629,11 @@
       border-radius: 100vh;
       background-color: @grey-1000;
 
-      &amp; &gt; span {
-        color: @brand-primary;
+      &amp; &gt; img {
+        // We can't change the color of an svg from an img tag
+        // So we are using css filters hack to modify the color
+        // Reproducing the color @brand-primary using the tool: https://codepen.io/sosuke/pen/Pjoqqp
+        filter: invert(13%) sepia(100%) saturate(5009%) hue-rotate(243deg) brightness(55%) contrast(134%);
       }
     }
 
