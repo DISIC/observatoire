@@ -42,15 +42,8 @@
   <content>{{translation key="appWithinMinutes.codeSpace.description" /}}
 
 {{velocity}}
-#if ("$xwiki.getUserPreference('displayHiddenDocuments')" != '1')
-  {{info}}
-    {{translation key="appWithinMinutes.codeSpace.hiddenPagesInfo" /}}
-  {{/info}}
-#end
-
 #set ($escapedDocumentReference = $services.rendering.escape($services.model.serialize($doc.documentReference,
   'default'), 'xwiki/2.1'))
-{{documentTree showTranslations="false" showAttachments="false"
-  filterHiddenDocuments="false" root="document:$escapedDocumentReference" /}}
+{{documentTree showTranslations="false" showAttachments="false" root="document:$escapedDocumentReference" /}}
 {{/velocity}}</content>
 </xwikidoc>
