@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1514761200000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Publics.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1514761200000</date>
-  <contentUpdateDate>1514761200000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>$services.localization.render('appWithinMinutes.codeSpace.title')</title>
   <comment/>
@@ -42,15 +42,8 @@
   <content>{{translation key="appWithinMinutes.codeSpace.description" /}}
 
 {{velocity}}
-#if ("$xwiki.getUserPreference('displayHiddenDocuments')" != '1')
-  {{info}}
-    {{translation key="appWithinMinutes.codeSpace.hiddenPagesInfo" /}}
-  {{/info}}
-#end
-
 #set ($escapedDocumentReference = $services.rendering.escape($services.model.serialize($doc.documentReference,
   'default'), 'xwiki/2.1'))
-{{documentTree showTranslations="false" showAttachments="false"
-  filterHiddenDocuments="false" root="document:$escapedDocumentReference" /}}
+{{documentTree showTranslations="false" showAttachments="false" root="document:$escapedDocumentReference" /}}
 {{/velocity}}</content>
 </xwikidoc>
