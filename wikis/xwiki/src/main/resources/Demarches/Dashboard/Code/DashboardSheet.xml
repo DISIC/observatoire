@@ -504,7 +504,7 @@ var XWiki = (function (XWiki) {
     if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
       output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.categories-publics")" + '&lt;/span&gt;' + data.categoriesPublics.display + '&lt;/li&gt;';
     }
-    if (data.rgaaCompliancyLevel != undefined &amp;&amp; data.rgaaCompliancyLevel.display != undefined &amp;&amp; data.accessibilityScore.value != undefined &amp;&amp; ['oui', 'partiel'].includes(data.accessibilityScore.value.toLowerCase()) ) {
+    if (data.rgaaCompliancyLevel != undefined &amp;&amp; data.rgaaCompliancyLevel.value != undefined &amp;&amp; data.rgaaCompliancyLevel.display != undefined &amp;&amp; data.accessibilityScore.value != undefined &amp;&amp; ['oui', 'partiel'].includes(data.accessibilityScore.value.toLowerCase()) ) {
       output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.rgaa-compliancy-level")" + '&lt;/span&gt;' + data.rgaaCompliancyLevel.display + '&lt;/li&gt;';
     }
     output = output + '&lt;/ul&gt;&lt;/div&gt;';
