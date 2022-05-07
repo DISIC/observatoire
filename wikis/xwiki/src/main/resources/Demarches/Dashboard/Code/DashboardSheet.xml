@@ -483,35 +483,35 @@ var XWiki = (function (XWiki) {
 
   function addDetailsRow(data, withEditButton) {
     var output = '&lt;div class="row-details"&gt;&lt;ul&gt;';
-      var dateMiseEnLigne = data.dateMiseEnLigne.display;
-      if (dateMiseEnLigne != 'Ouvert') {
-        if (dateMiseEnLigne == 'n/c')
-          dateMiseEnLigne = 'Non disponible';
-        output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.open-date")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
-      }
-      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.volumetry")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
-      var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
-      if (data.statutDemat != 'Non') {
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.digitalized-usage-percent")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
-      }
-      if (data.avisCount.value &gt;= 100) {
-        var demarcheId = data.id;
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.avis-count")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
-      }
-      if (data.urlDemarche &amp;&amp; data.urlDemarche.length &gt; 0 &amp;&amp; data.urlDemarche != 'n/a') {
-        output = output + '&lt;li class="row-details-prop-urlDemarche"&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;&lt;span class="link-desktop"&gt;' + data.urlDemarche + '&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;';
-      }
-      if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.categories-publics")" + '&lt;/span&gt;' + data.categoriesPublics.display + '&lt;/li&gt;';
-      }
-      if (data.rgaaCompliancyLevel != undefined &amp;&amp; data.rgaaCompliancyLevel.display != undefined &amp;&amp; data.accessibilityScore.value != undefined &amp;&amp; ['oui', 'partiel'].includes(data.accessibilityScore.value.toLowerCase()) ) {
-        output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.rgaa-compliancy-level")" + '&lt;/span&gt;' + data.rgaaCompliancyLevel.display + '&lt;/li&gt;';
-      }
-      output = output + '&lt;/ul&gt;&lt;/div&gt;';
-      if (withEditButton) {
-        output += '&lt;div class="row-toolbar"&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;&lt;i class="fa fa-pencil"&gt;&lt;/i&gt; ' + "$services.localization.render("dashboard.edit-entry")" + '&lt;/a&gt;&lt;/div&gt;';
-      }
-      output += '&lt;/div&gt;&lt;/div&gt;';
+    var dateMiseEnLigne = data.dateMiseEnLigne.display;
+    if (dateMiseEnLigne != 'Ouvert') {
+      if (dateMiseEnLigne == 'n/c')
+        dateMiseEnLigne = 'Non disponible';
+      output += '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.open-date")" + '&lt;/span&gt;' + dateMiseEnLigne + '&lt;/li&gt;';
+    }
+    output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.volumetry")" + '&lt;/span&gt;' + data.volumetrie.display + '&lt;/li&gt;';
+    var pourcentage = data.pourcentageRecoursVoieDematerialisee.display;
+    if (data.statutDemat != 'Non') {
+      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.digitalized-usage-percent")" + '&lt;/span&gt;' + pourcentage + '&lt;/li&gt;';
+    }
+    if (data.avisCount.value &gt;= 100) {
+      var demarcheId = data.id;
+      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.avis-count")" + '&lt;/span&gt;' + data.avisCount.display + '&lt;/li&gt;';
+    }
+    if (data.urlDemarche &amp;&amp; data.urlDemarche.length &gt; 0 &amp;&amp; data.urlDemarche != 'n/a') {
+      output = output + '&lt;li class="row-details-prop-urlDemarche"&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.url-demarche")" + '&lt;/span&gt;&lt;a href="' + data.urlDemarche + '"&gt;&lt;span class="link-desktop"&gt;' + data.urlDemarche + '&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;';
+    }
+    if (data.categoriesPublics &amp;&amp; data.categoriesPublics.display) {
+      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.categories-publics")" + '&lt;/span&gt;' + data.categoriesPublics.display + '&lt;/li&gt;';
+    }
+    if (data.rgaaCompliancyLevel != undefined &amp;&amp; data.rgaaCompliancyLevel.display != undefined &amp;&amp; data.accessibilityScore.value != undefined &amp;&amp; ['oui', 'partiel'].includes(data.accessibilityScore.value.toLowerCase()) ) {
+      output = output + '&lt;li&gt;&lt;span class="row-details-key"&gt;' + "$services.localization.render("dashboard.table.rgaa-compliancy-level")" + '&lt;/span&gt;' + data.rgaaCompliancyLevel.display + '&lt;/li&gt;';
+    }
+    output = output + '&lt;/ul&gt;&lt;/div&gt;';
+    if (withEditButton) {
+      output += '&lt;div class="row-toolbar"&gt;&lt;a href="' + getURL(data.id, 'edit') + '#popup" class="row-edit-control" data-demarche-id=' + data.id + ' data-demarche-name="' + encodeURI(data.title) + '"&gt;&lt;i class="fa fa-pencil"&gt;&lt;/i&gt; ' + "$services.localization.render("dashboard.edit-entry")" + '&lt;/a&gt;&lt;/div&gt;';
+    }
+    output += '&lt;/div&gt;&lt;/div&gt;';
     return output;
   }
 
