@@ -104,14 +104,13 @@
         #set ($modalite = $presetModalite)
       #end
       &lt;input type="hidden" name="Avis.Code.AvisClass_0_modalite" value="$escapetool.xml($modalite)" /&gt;
+      ## Set the 'vote' and 'voteInput' fields for this demarche, to empty values 
+      ## (they used to be form elements related to the modalite, hidden. In order to keep backwards compat, we send them empty)
+      &lt;input type="hidden" name="Avis.Code.AvisClass_0_vote" value="" /&gt;
+      &lt;input type="hidden" name="Avis.Code.AvisClass_0_voteInput" value="" /&gt;
+      ## Finally, show the ratings question
       &lt;div class="rating-container"&gt;
         #displayObjectForm($avis,['score'])
-      &lt;/div&gt;
-      &lt;div class="vote-container"&gt;
-        #displayObjectForm($avis,['vote'])
-      &lt;/div&gt;
-      &lt;div class="vote-input-container"&gt;
-        #displayObjectForm($avis,['voteInput'])
       &lt;/div&gt;
       ## set the source of this avis, only in the first step.
       ## TODO: We'll need to figure out how to handle this properly when implementing the API / Embed, to make sure that no avis remains without source
@@ -249,28 +248,10 @@
   'use strict';
 
   /** Avis functions */
-  function updateVoteAndSubmitButton() {
-    var modalite = $("input[name='Avis.Code.AvisClass_0_modalite']:checked").val();
-    //The "modalite" checkbox can be inexistent in case the form is displayed after a new demarche got submitted by the current user.
-    if (!modalite) {
-      modalite = $("input[name='Avis.Code.AvisClass_0_modalite']").val();
-    }
-
+  function updateSubmitButton() {
     var score = $("input[name='Avis.Code.AvisClass_0_score']:checked").val();
     if (score) {
-      if (modalite == 'autrement') {
-        $('.vote-container').show();
-      } else {
-        $('.vote-container').hide();
-      }
       $('button[type="submit"]').prop('disabled', false);
-    }
-
-    var vote = $("input[name='Avis.Code.AvisClass_0_vote']:checked").val();
-    if (vote &amp;&amp; vote == 'true' &amp;&amp; modalite == 'autrement') {
-      $('.vote-input-container').show();
-    } else {
-      $('.vote-input-container').hide();
     }
   }
 
@@ -299,16 +280,8 @@
   }
 
   $(document).ready(function() {
-    $("input[name='Avis.Code.AvisClass_0_modalite']").change(function() {
-      updateVoteAndSubmitButton();
-    });
-
     $("input[name='Avis.Code.AvisClass_0_score']").change(function() {
-      updateVoteAndSubmitButton();
-    });
-
-    $("input[name='Avis.Code.AvisClass_0_vote']").change(function() {
-      updateVoteAndSubmitButton();
+      updateSubmitButton();
     });
 
     // Add an input field allowing the user to enter free text about

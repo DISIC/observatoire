@@ -562,14 +562,6 @@ require(['jquery','xwiki-selectize'], function($) {
   display: none;
 }
 
-.vote-container {
-  display: none;
-}
-
-.vote-input-container {
-  display: none;
-}
-
 .listclass-group ul {
   list-style-type: none;
   padding-left: 0;
