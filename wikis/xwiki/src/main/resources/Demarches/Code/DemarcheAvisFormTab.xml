@@ -56,7 +56,6 @@
 ## Import custom form jsx
 #set ($discard = $xwiki.jsx.use('Demarches.Code.DemarcheAvisFormTab'))
 {{html wiki="true"}}
-#maybeSetWarningBackground()
 &lt;div class="tab-pane fade #if($selectedTab == 'avis-tab')active in#end use-dsfr" id="avis-tab" #if(!$isSingleTab)role="tabpanel" aria-labelledby="avis-tab"#end&gt;
 #set ($step = "$!request.session.getAttribute('avis-form-step')")
 
@@ -78,8 +77,6 @@
     ## that any new form submission will result in a new avis.
     #set ($discard = $request.session.removeAttribute($avisIdAttributeKey))
   #end
-#else
-  #maybeDisplayStatusWarning()
 #end
 
 #if ($step != "final-step")
