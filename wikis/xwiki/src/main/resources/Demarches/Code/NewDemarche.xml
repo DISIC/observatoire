@@ -53,7 +53,7 @@
   #set ($isInvalidDemarche = ($isInvalidDemarche || $direction == ''))
   #if ($isInvalidDemarche)
     {{warning}}
-    Certains champs obligatoires (marqués par une étoile) n'ont pas été remplis.
+      Certains champs obligatoires (marqués par une étoile) n'ont pas été remplis.
     {{/warning}}
   #else
     #set ($discard = $target.setTitle($title))
@@ -68,41 +68,34 @@
     #set ($discard = $target.save())
     #set ($showForm = false)
     {{info}}
-    La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
+      La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
     {{/info}}
   #end
 #end
-## if form is still to be shown (because mandatory fields not filled in or other thing prevented save)
+## if form is still to be shown (because mandatory fields not filled in or other thing prevented save), show form
 #if ($showForm)
-
   #set ($selectedTab = 'demarche-tab')
   #set ($object = $doc.addObjectFromRequest('Demarches.Code.DemarchesClass'))
   #set ($action = 'edit')
   #set ($isSimplifiedForm = true)
 
   {{html}}
-
-  &lt;form action="" method="post"&gt;
-  #includeForm("Demarches.Code.DemarcheTab")
-  ## Initialize all fields to value 'nr' (non renseigné)
-  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'statutDemat', 'demarcheSimplifiee'])
-  #foreach ($propertyName in $propertyNames)
-    &lt;input type="hidden" id="Demarches.Code.DemarchesClass_0_$propertyName" name="Demarches.Code.DemarchesClass_0_$propertyName" value="nr"&gt;
-  #end
-  &lt;input type="hidden" name="csrf" value="$services.csrf.token"/&gt;
-  &lt;input type="hidden" name="language" value="fr"/&gt;
-  &lt;input type="hidden" name="xredirect" value=""/&gt;
-  &lt;input type="hidden" name="action" value="save"/&gt;
-  &lt;input class="button btn btn-primary" type="submit" value="Sauvegarder"&gt;
-  &lt;/form&gt;
-
+    &lt;form action="" method="post"&gt;
+    #includeForm("Demarches.Code.DemarcheTab")
+    ## Initialize all fields to value 'nr' (non renseigné)
+    #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'statutDemat', 'demarcheSimplifiee'])
+    #foreach ($propertyName in $propertyNames)
+      &lt;input type="hidden" id="Demarches.Code.DemarchesClass_0_$propertyName" name="Demarches.Code.DemarchesClass_0_$propertyName" value="nr"&gt;
+    #end
+    &lt;input type="hidden" name="csrf" value="$services.csrf.token"/&gt;
+    &lt;input type="hidden" name="language" value="fr"/&gt;
+    &lt;input type="hidden" name="xredirect" value=""/&gt;
+    &lt;input type="hidden" name="action" value="save"/&gt;
+    &lt;input class="button btn btn-primary" type="submit" value="Sauvegarder"&gt;
+    &lt;/form&gt;
   {{/html}}
 #end
-{{/velocity}}
-
-
-
-</content>
+{{/velocity}}</content>
   <object>
     <name>Demarches.Code.NewDemarche</name>
     <number>0</number>
