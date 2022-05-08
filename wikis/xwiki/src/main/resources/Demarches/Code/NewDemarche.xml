@@ -43,16 +43,14 @@
 
 {{velocity output="true"}}
 #set ($showForm = true)
-#if ("$!request.action" == 'save' &amp;&amp; $services.csrf.isTokenValid("$!request.csrf"))
+## handle save, if any and if all allows save
+#if ("$!request.action" == 'save' &amp;&amp; $services.csrf.isTokenValid("$!request.csrf") &amp;&amp; !$isGuest)
   #set ($uin = $services.uin.getNext('demarches'))
   #set ($target = $xwiki.getDocumentAsAuthor("Demarches.${uin}"))
   #set ($title = "$!request.title")
   #set ($isInvalidDemarche = ($title == ''))
-  ## for logged in users, the direction is also mandatory for a valid demarche
-  #if (!$isGuest)
-      #set ($direction = "$!request.get('Demarches.Code.DemarchesClass_0_direction')")
-      #set ($isInvalidDemarche = ($isInvalidDemarche || $direction == ''))
-  #end
+  #set ($direction = "$!request.get('Demarches.Code.DemarchesClass_0_direction')")
+  #set ($isInvalidDemarche = ($isInvalidDemarche || $direction == ''))
   #if ($isInvalidDemarche)
     {{warning}}
     Certains champs obligatoires (marqués par une étoile) n'ont pas été remplis.
@@ -60,31 +58,25 @@
   #else
     #set ($discard = $target.setTitle($title))
     #set ($object = $target.addObjectFromRequest('Demarches.Code.DemarchesClass'))
-    #if ($isGuest)
-      #set ($discard = $object.set('statut', 'demandeUtilisateur'))
-    #else
-      ## if there is a user logged in, set the owner to the logged in user and the status as demandePorteur
-      #set ($discard = $object.set('proprietaires', $xcontext.user))
-      #set ($discard = $object.set('statut', 'demandePorteur'))
-    #end
-    ## Create the document as script author so that the current user cannot delete the created page (a creator gets a delete right that is not deniable))
+    ## set the owner to the logged in user and the status as demandePorteur
+    #set ($discard = $object.set('proprietaires', $xcontext.user))
+    #set ($discard = $object.set('statut', 'demandePorteur'))
+    ## and save (as admin, since regular users cannot create pages in the Demarches space)
     #set ($discard = $target.saveAsAuthor())
-    #if (!$isGuest)
-      ## If the current user is an authenticated user, also save "normally" to mark the fact that the current user as a "co-author"
-      #set ($discard = $target.save())
-    #end
+    ## also save "normally" to mark the fact that the current user as a "co-author"
+    ## since current user was just set as porteur to this demarche, they will have rights to save
+    #set ($discard = $target.save())
     #set ($showForm = false)
     {{info}}
     La démarche a bien été sauvegardée, avec l'identifiant [[$target.name&gt;&gt;$target.fullName]].
     {{/info}}
   #end
 #end
-
+## if form is still to be shown (because mandatory fields not filled in or other thing prevented save)
 #if ($showForm)
 
   #set ($selectedTab = 'demarche-tab')
   #set ($object = $doc.addObjectFromRequest('Demarches.Code.DemarchesClass'))
-  ##set ($object = $doc.newObject('Demarches.Code.DemarchesClass'))
   #set ($action = 'edit')
   #set ($isSimplifiedForm = true)
 
