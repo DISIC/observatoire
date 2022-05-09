@@ -263,6 +263,13 @@ Visually, there's the title row and then all the rows from the document content,
   padding-right: 0;
 }
 
+/* 
+ * Message row, just above document-header in view mode.
+ * Add padding in order to have a proper display of the message box
+ */
+ .document-wdpagemessage {
+   padding-top: 2rem; // ~32px for a reference em of 16px
+ }
 
 /*
  * Logo and navbar

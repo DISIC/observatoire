@@ -448,7 +448,10 @@
       </path>
     </class>
     <property>
-      <content>#if($displayDocTitle)
+      <content>## display the message for this page, from session, if any
+#template("wdpagemessage.vm")
+## Go ahead with displaying doc title
+#if($displayDocTitle)
 &lt;div class="row document-header"&gt;
   &lt;div class="document-info col-xs-12 #if($displayContentMenu)col-md-7#end"&gt;
     ## --------------------------------------------------------
@@ -2186,6 +2189,69 @@ $services.localization.render('accountnotactive_email')
     </property>
     <property>
       <path>wdvars.vm</path>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiDemarchesSkin</name>
+    <number>22</number>
+    <className>XWiki.XWikiSkinFileOverrideClass</className>
+    <guid>92eb81c4-42d8-4b64-bde2-e26c46e13892</guid>
+    <class>
+      <name>XWiki.XWikiSkinFileOverrideClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <content>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>content</name>
+        <number>2</number>
+        <prettyName>Content</prettyName>
+        <rows>15</rows>
+        <size>80</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <path>
+        <disabled>0</disabled>
+        <name>path</name>
+        <number>1</number>
+        <prettyName>Path</prettyName>
+        <size>255</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </path>
+    </class>
+    <property>
+      <content>##get the message on the session for this page, if any
+#set($wdpagemessage_sessionMessageAttributeKey = "${doc.fullName}-message")
+#set($wdpagemessage_sessionMessageObject = $request.session.getAttribute($wdpagemessage_sessionMessageAttributeKey))
+#if ($wdpagemessage_sessionMessageObject &amp;&amp; "$!wdpagemessage_sessionMessageObject" != '' &amp;&amp; "$!wdpagemessage_sessionMessageObject.msghtml" != '')
+  &lt;div class="row document-wdpagemessage"&gt;
+    &lt;div class="col-xs-12"&gt;
+      #set ($wdpagemessage_extraBoxClass = '')
+      #if ("$!wdpagemessage_sessionMessageObject.type" == 'success')
+        #set ($wdpagemessage_extraBoxClass = 'successmessage')
+      #elseif("$!wdpagemessage_sessionMessageObject.type" == 'warning')
+        #set ($wdpagemessage_extraBoxClass = 'warningmessage')
+      #elseif("$!wdpagemessage_sessionMessageObject.type" == 'error')
+        #set ($wdpagemessage_extraBoxClass = 'errormessage')
+      #end
+      &lt;div class="box $wdpagemessage_extraBoxClass"&gt;
+        $!wdpagemessage_sessionMessageObject.msghtml
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  ## and clean it once it has been displayed, so that it's not displayed again
+  #set($discard = $request.session.removeAttribute($wdpagemessage_sessionMessageAttributeKey))
+#end</content>
+    </property>
+    <property>
+      <path>wdpagemessage.vm</path>
     </property>
   </object>
   <object>
