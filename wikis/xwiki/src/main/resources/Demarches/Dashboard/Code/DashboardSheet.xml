@@ -1295,7 +1295,6 @@ var XWiki = (function (XWiki) {
     </property>
     <property>
       <code>@obs-blue: @link-color;
-@obs-blue-dark: #175fc9;
 
 
 input[name='title'] {
@@ -1322,17 +1321,17 @@ input[name='title'] {
 
 .observatoire-explanation {
   text-align: center;
-  background-color: @obs-blue;
-  color: #fff;
+  background-color: @grey-1000;
+  color: @brand-primary;
   .nav-tabs.nav-dashboard {
     padding-top: 0;
     padding-bottom:0;
     margin-top: 0;
     margin-bottom: 0;
     &gt; li &gt; a {
-      background-color: lighten(@obs-blue, 40%);
-      border-color: lighten(@obs-blue, 40%);
-      color: @text-color;
+      background-color: @grey-1000;
+      border-color: @brand-primary;
+      color: @brand-primary;
       border-bottom: none;
       margin-right: 0.25em;
     }
@@ -1341,8 +1340,8 @@ input[name='title'] {
       color: @text-color;
     }
     &gt; .nav-view-dashboard-tab.active &gt; a {
-      border-color: @obs-blue-dark;
-      background-color: @obs-blue-dark;
+      border-color: @brand-primary;
+      background-color: @brand-primary;
       color: #fff;
     }
   }
@@ -1355,7 +1354,7 @@ input[name='title'] {
     padding: 0;
   }
   #document-title h1 {
-    color: #fff;
+    color: @brand-primary;
     font-weight: 800;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
@@ -1366,7 +1365,7 @@ input[name='title'] {
 }
 
 .download-share {
-  background-color: @obs-blue-dark;
+  background-color: @brand-primary;
   font-size: 0.75em;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
@@ -1457,8 +1456,8 @@ input[name='title'] {
   .dashboard-filters {
     text-align: right;
     .btn-default.pushed {
-      background-color: @obs-blue;
-      color: #fff;
+      background-color: @brand-primary;
+      color: @grey-1000;
     }
   }
   .dashboard-filter-sort {
@@ -1587,8 +1586,7 @@ input[name='title'] {
       }
       .thead-icon {
         display: block;
-        background-color: fade(@obs-blue, 10%);
-        color: @obs-blue;
+        background-color: @blue-france-975;
         line-height: 3.33em;
         width: 3.33em;
         height: 3.33em;
@@ -1796,33 +1794,34 @@ input[name='title'] {
         border-style: solid;
       }
       .label-success {
-        background-color: #62D2B0;
-        border-color: #62D2B0;
-        color: #22493D;
+        background-color: @success-950;
+        border-color: @success-950;
+        color: @success-425;
       }
       .label-danger {
-        background-color: #FF7777;
-        border-color: #FF7777;
-        color: #592929;
+        background-color: @error-950;
+        border-color: @error-950;
+        color: @error-425;
       }
       .label-warning {
-        background-color: #FE8D5E;
-        border-color: #FE8D5E;
-        color: #583120;
+        background-color: @warning-950;
+        border-color: @warning-950;
+        color: @warning-425;
       }
       .label-info {
-        background-color: #71B3FF;
-        border-color: #71B3FF;
-        color: #273E59;
+        background-color: @info-950;
+        border-color: @info-950;
+        color: @info-425;
       }
       .label-default {
-        background-color: #dedede;
-        border-color: #dedede;
-        color: #4d4d4d;
+        background-color: @grey-925;
+        border-color: @grey-925;
+        color: @grey-200;
       }
       &amp;.column-satisfaction-index {
         span.label {
-          background-color: #ffffff;
+          background-color: @grey-1000;
+          border-color: currentColor;
           a {
             color: inherit;
           }
