@@ -1412,7 +1412,7 @@ input[name='title'] {
 }
 
 .table-tools {
-  background-color: #fafafa;
+  background-color: @blue-france-975;
   padding-top: 0.79em;
   padding-bottom: 1.58em;
   font-size: 0.75em;
