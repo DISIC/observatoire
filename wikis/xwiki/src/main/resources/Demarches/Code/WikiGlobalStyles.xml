@@ -728,21 +728,43 @@ abbr.asterix {
  * Login screen
  */
 #loginForm {
-  input[type="submit"] {
-    margin-top: 1em;
-  }
-  .wd-register {
-    text-align: center;
-    margin-top: 0.5em;
-    a#tmRegister {
-      font-style: normal;
-      font-size: 0.9em;
-    }
-  }
   .panel {
     max-width: 100%;
+    margin-top: 4.5rem;
+
+    .panel-heading {
+      border-bottom: none;
+    }
+
+    .login-description {
+      margin-bottom: 2rem;
+
+      a#tmRegister {
+        font-style: normal;
+        color: @brand-primary;
+        text-decoration: underline;
+      }
+    }
+
+    input[type="submit"] {
+      margin-top: 1em;
+    }
   }
 }
+
+/*
+ * Register screen
+ */
+.register-welcome {
+  margin-bottom: 2rem;
+
+  a {
+    font-style: normal;
+    color: @brand-primary;
+    text-decoration: underline;
+  }
+}
+
 
 /* Get rid of the border of the login form panel &amp; all messages, as it's slightly ugly */
 .xwikimessage.panel-default {

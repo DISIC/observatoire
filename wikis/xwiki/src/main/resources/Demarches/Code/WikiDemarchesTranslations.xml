@@ -51,7 +51,8 @@ wd.contact=Contact
 wd.about=À propos
 wd.login=Connexion
 wd.logout=Déconnexion
-wd.login-description=Ce site permet aux administrations publiques de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne. Il permet également de piloter le chantier de la dématérialisation en recensant les démarches administratives et en les restituant sous la forme de tableaux de bord.
+wd.login-description=Connectez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.&lt;br/&gt;&lt;br/&gt; Vous n’avez pas un compte sur l’observatoire ?
+wd.login-description.register=Inscrivez-vous.
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
 wd.login-button=Authentification
 wd.docdoesnotexist.title=Erreur 404
@@ -59,6 +60,8 @@ wd.docdoesnotexist.message=La page n'existe pas ou n'est pas disponible. Nous vo
 wd.piwik.iframe.title=Refuser le suivi de votre navigation
 wd.login.username=Nom d'utilisateur (obligatoire)
 wd.login.password=Mot de passe (obligatoire)
+core.register.welcome=Inscrivez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.&lt;br/&gt;&lt;br/&gt;Vous avez déjà un compte sur l’observatoire ?
+core.register.welcome.login=Connectez-vous.
 
 # Invalid account screen
 wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription.

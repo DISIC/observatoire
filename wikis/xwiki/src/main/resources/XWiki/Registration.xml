@@ -448,9 +448,13 @@
   ## If the registration was not successful or if the user hasn't submitted the info yet
   ## Then we display the registration form.
   #if(!$registrationDone)
-    $welcomeMessage
 
     {{html wiki=false}}
+      &lt;p class="register-welcome"&gt;
+        $services.localization.render('core.register.welcome')
+        &lt;a href="$xwiki.getURL('XWiki.XWikiLogin', 'login')"&gt;$services.localization.render('core.register.welcome.login')&lt;/a&gt;
+      &lt;/p&gt;
+
       ## Customized username generation. The script is added inline rather than as a JavaScript extension, because the page "XWiki.Registration" is typically
       ## included from the Velocity file "registerinline.vm" and using a JavaScript extension would require to modify that Velocity file to activate it from there.
       &lt;script type="text/javascript"&gt;

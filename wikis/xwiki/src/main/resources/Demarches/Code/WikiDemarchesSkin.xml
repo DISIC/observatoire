@@ -1396,10 +1396,12 @@ window.docgeturl = "${doc.getURL('get')}";
 &lt;/div&gt;
 #xwikimessageboxstart($services.localization.render('login') '')
 &lt;div class='row'&gt;
-  &lt;div class='col-xs-12 col-md-6'&gt;
-    &lt;p&gt;$services.localization.render('wd.login-description')&lt;/p&gt;
+  &lt;div class='col-xs-12'&gt;
+    &lt;p class="login-description"&gt;$services.localization.render('wd.login-description')
+      &lt;a href="$xwiki.getURL('XWiki.XWikiRegister', 'register', "xredirect=$escapetool.url($xwiki.relativeRequestURL)")" id="tmRegister"&gt;$escapetool.xml($services.localization.render('wd.login-description.register'))&lt;/a&gt;
+    &lt;/p&gt;
   &lt;/div&gt;
-  &lt;div class='col-xs-12 col-md-6'&gt;
+  &lt;div class='col-xs-12 col-sm-7'&gt;
     #set($message = $xcontext.message)
     #if($message)
       &lt;!-- previous login errors --&gt;
@@ -1433,14 +1435,7 @@ window.docgeturl = "${doc.getURL('get')}";
         &lt;/label&gt;
       &lt;/dd&gt;
     &lt;/dl&gt;
-    &lt;input type="submit" class="btn btn-primary col-xs-12" value="$services.localization.render('login')" tabindex="400"/&gt;
-    ## register link, if the guest has the right
-    ## This div is a 12 column for the same reason for which the button above is a 12 column, which is one that my limited mind fails to grasp
-    &lt;div class='wd-register col-xs-12'&gt;
-      #if ($xwiki.hasAccessLevel('register', 'XWiki.XWikiPreferences'))
-        &lt;a href="$xwiki.getURL('XWiki.XWikiRegister', 'register', "xredirect=$escapetool.url($xwiki.relativeRequestURL)")" id="tmRegister"&gt;$escapetool.xml($services.localization.render('core.register.title'))&lt;/a&gt;
-      #end
-    &lt;/div&gt;
+    &lt;input type="submit" class="btn btn-primary" value="$services.localization.render('login')" tabindex="400"/&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 #xwikimessageboxend()
@@ -1454,8 +1449,7 @@ window.docgeturl = "${doc.getURL('get')}";
 //]]&gt;
 &lt;/script&gt;
 #template("endpage.vm")
-#end
-</content>
+#end</content>
     </property>
     <property>
       <path>login.vm</path>
