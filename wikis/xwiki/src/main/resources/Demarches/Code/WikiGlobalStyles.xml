@@ -519,6 +519,12 @@ li.wikidemarches-topmenu {
     display: inline-block;
     max-width: unset;
     line-height: unset;
+
+    &amp;:not(:last-child) {
+      border: 0px none transparent;
+      border-right: 1px solid transparent;
+      border-image: linear-gradient(to bottom, transparent 0% 30%, @grey-925 30% 70%, transparent 70% 100%) 1;
+    }
   }
 }
 
