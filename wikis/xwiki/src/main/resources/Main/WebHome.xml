@@ -166,7 +166,7 @@
         {{display reference='$evalHelpDoc.fullName' /}}
 
         (% class='seemore-button-container' %)
-        [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
+        [[$services.localization.render('wikidemarches.indicatorsrow.button')&gt;&gt;Aide.Observatoire||class='btn btn-default']]
       )))
     )))
   #else
@@ -203,7 +203,7 @@
             Même si votre démarche n’est pas parmi les 250 suivies dans l’Observatoire, vous pouvez utiliser l’outil Je donne mon avis afin de suivre en temps réel la satisfaction des usagers.
 
             (% class='seemore-button-container' %)
-            [[$services.localization.render('wikidemarches.evalrow.button')&gt;&gt;JDMA.WebHome||class='btn btn-default']]
+            [[$services.localization.render('wikidemarches.usagerow.button')&gt;&gt;JDMA.WebHome||class='btn btn-default']]
           )))
           (% class='col-xs-12 col-sm-6 usagerow-col-img' %) (((
             image:JDMA.WebHome@example-stats.svg
