@@ -1692,15 +1692,12 @@ h1,
 
 
 /* Alerts */
-.alert {
+.alert,
+.box {
   position: relative;
   padding: 1rem 2.25rem 1rem 3.5rem;
   border-color: @grey-200;
   box-shadow: inset 2.5rem 0 0 0 @grey-200;
-  &amp;.alert-success { box-shadow: inset 2.5rem 0 0 0 @brand-success; }
-  &amp;.alert-info { box-shadow: inset 2.5rem 0 0 0 @brand-info; }
-  &amp;.alert-warning { box-shadow: inset 2.5rem 0 0 0 @brand-warning; }
-  &amp;.alert-danger { box-shadow: inset 2.5rem 0 0 0 @brand-danger; }
 
   &amp;::before {
     position: absolute;
@@ -2151,12 +2148,33 @@ h1,
     </property>
     <property>
       <code>
-.alert-success::before { content: url("$doc.getAttachmentURL('success-fill')"); }
-.alert-info::before { content: url("$doc.getAttachmentURL('info-fill')"); }
-.alert-warning::before { content: url("$doc.getAttachmentURL('warning-fill')"); }
-.alert-danger::before { content: url("$doc.getAttachmentURL('error-fill')"); }
+.alert.alert-success,
+.box.successmessage {
+  border-color: @alert-success-border; 
+  box-shadow: inset 2.5rem 0 0 0 @alert-success-border;
+  &amp;::before {content: url("$doc.getAttachmentURL('success-fill')"); }
+}
 
-</code>
+.alert.alert-info,
+.box.infomessage {
+  border-color: @alert-info-border; 
+  box-shadow: inset 2.5rem 0 0 0 @alert-info-border;
+  &amp;::before {content: url("$doc.getAttachmentURL('info-fill')"); }
+}
+
+.alert.alert-warning,
+.box.warningmessage {
+  border-color: @alert-warning-border; 
+  box-shadow: inset 2.5rem 0 0 0 @alert-warning-border;
+  &amp;::before {content: url("$doc.getAttachmentURL('warning-fill')"); }
+}
+
+.alert.alert-danger,
+.box.errormessage {
+  border-color: @alert-danger-border; 
+  box-shadow: inset 2.5rem 0 0 0 @alert-danger-border;
+  &amp;::before {content: url("$doc.getAttachmentURL('error-fill')"); }
+}</code>
     </property>
     <property>
       <contentType>LESS</contentType>
