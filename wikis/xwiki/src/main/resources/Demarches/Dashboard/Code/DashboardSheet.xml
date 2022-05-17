@@ -1294,9 +1294,7 @@ var XWiki = (function (XWiki) {
       <cache>long</cache>
     </property>
     <property>
-      <code>@obs-blue: @link-color;
-
-
+      <code>
 input[name='title'] {
   width: 100%;
 }
@@ -1874,7 +1872,7 @@ input[name='title'] {
     }
     td, th {
       @media screen and (min-width: 768px) {
-        background-color: fade(@obs-blue, 5%);
+        background-color: @blue-france-975;
         border-bottom: 0;
         &amp;:last-child {
           border-bottom-right-radius: 0;
@@ -1890,7 +1888,7 @@ input[name='title'] {
   tr.shown + tr.child-row {
     margin-top: 0;
     td {
-      background-color: fade(@obs-blue, 5%);
+      background-color: @blue-france-975;
       @media screen and (max-width: 768px) {
         width: 100%;
         display: inline-block;
@@ -1966,14 +1964,10 @@ input[name='title'] {
     }
     .row-toolbar {
       text-align: right;
-      background-color: @obs-blue;
-      color: #fff;
+      background-color: @blue-france-975;
       font-size: 0.75em;
       padding: 1em;
       border-radius: 0 0 0.8em 0.8em;
-      a {
-        color: #fff;
-      }
     }
   }
 
