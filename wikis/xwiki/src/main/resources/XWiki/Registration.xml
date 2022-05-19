@@ -433,6 +433,8 @@
     #set($assumeLightbox = true)
   #end
   ##
+  (% class="row" %) (((
+  (% class="col-xs-12 col-md-8 col-md-offset-2" %) (((
   ## Display the heading
   $heading
   ## If the submit button has been pressed, then we test the input and maybe create the user.
@@ -478,7 +480,9 @@
         }
       &lt;/script&gt;
 
-      &lt;form id="register" action="$xwiki.relativeRequestURL" method="post" class="xform half"&gt;
+      &lt;div class="row"&gt;
+      &lt;div class="col-xs-12 col-md-8"&gt;
+      &lt;form id="register" action="$xwiki.relativeRequestURL" method="post" class="xform"&gt;
       &lt;div&gt;
       &lt;input type="hidden" name="form_token" value="$!{services.csrf.getToken()}" /&gt;
       #set ($userDirectoryReference = $services.model.createDocumentReference('', 'Main', 'UserDirectory'))
@@ -522,6 +526,8 @@
       &lt;/span&gt;## ButtonWrapper
       &lt;/div&gt;
       &lt;/form&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
       #if($useLiveValidation)
         #generateJavascript($fields)
       #end
@@ -551,6 +557,8 @@
       &lt;/script&gt;
     {{/html}}
   #end
+  ))) ## .col
+  ))) ## .row
 #else
   ## The registration is not allowed on the subwiki
   ## Redirecting to main wiki's registration page since local user registration is not allowed.
