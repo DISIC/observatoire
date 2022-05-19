@@ -649,6 +649,9 @@
 
       /* the icon p is the first paragraph in the card*/
       p:first-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: @brand-primary;
         line-height: 4em;
         width: 4em;
@@ -658,10 +661,12 @@
         margin-right: auto;
         vertical-align: middle;
         text-align: center;
+        background-color: @blue-france-975;
       }
 
       img {
         line-height: 1.5em;
+        width: 2.5rem;
       }
     }
   }

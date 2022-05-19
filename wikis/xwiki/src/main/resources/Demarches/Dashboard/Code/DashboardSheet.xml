@@ -55,14 +55,14 @@
   'demarche' : '',
   'ministry' : '',
   'group' : '',
-  'digitalization' : 'cloud.svg',
-  'satisfaction' : 'smiley.svg',
-  'mobile' : 'mobile.svg',
-  'support' : 'support.svg',
-  'performance' : 'watch.svg',
-  'france-connect' : 'user.svg',
-  'accessibility' : 'accessibility.svg',
-  'tell-us-once' : 'briefcase.svg'
+  'digitalization' : 'computer-line.svg',
+  'satisfaction' : 'emotion-happy-line.svg',
+  'mobile' : 'smartphone-line.svg',
+  'support' : 'customer-service-2-line.svg',
+  'performance' : 'timer-line.svg',
+  'france-connect' : 'shield-user-line.svg',
+  'accessibility' : 'open-arm-line.svg',
+  'tell-us-once' : 'chat-check-line.svg'
 })
 
 ## Dashboard header ##
@@ -1583,7 +1583,9 @@ input[name='title'] {
         width: 3em !important;
       }
       .thead-icon {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: @blue-france-975;
         line-height: 3.33em;
         width: 3.33em;
