@@ -1394,51 +1394,55 @@ window.docgeturl = "${doc.getURL('get')}";
 #end
   &lt;input type="hidden" name="form_token" value="$!{services.csrf.getToken()}"/&gt;
 &lt;/div&gt;
-#xwikimessageboxstart($services.localization.render('login') '')
 &lt;div class='row'&gt;
-  &lt;div class='col-xs-12'&gt;
-    &lt;p class="login-description"&gt;$services.localization.render('wd.login-description')
-      &lt;a href="$xwiki.getURL('XWiki.XWikiRegister', 'register', "xredirect=$escapetool.url($xwiki.relativeRequestURL)")" id="tmRegister"&gt;$escapetool.xml($services.localization.render('wd.login-description.register'))&lt;/a&gt;
-    &lt;/p&gt;
-  &lt;/div&gt;
-  &lt;div class='col-xs-12 col-sm-7'&gt;
-    #set($message = $xcontext.message)
-    #if($message)
-      &lt;!-- previous login errors --&gt;
-      #error($services.localization.render($message))
-    #end
-    &lt;dl&gt;
-      &lt;dt&gt;
-        &lt;label for="j_username"&gt;$services.localization.render('wd.login.username')&lt;/label&gt;
-        #if($xwiki.exists('XWiki.ForgotUsername') &amp;&amp; $xwiki.hasAccessLevel('view', 'XWiki.ForgotUsername'))
-          &lt;span class="xAdditional"&gt;&lt;a href="$xwiki.getURL('XWiki.ForgotUsername')" tabindex="500"&gt;$services.localization.render('xe.admin.forgotUsername.loginMessage')&lt;/a&gt;&lt;/span&gt;
+  &lt;div class='col-xs-12 col-md-8 col-md-offset-2'&gt;
+    #xwikimessageboxstart($services.localization.render('login') '')
+    &lt;div class='row'&gt;
+      &lt;div class='col-xs-12'&gt;
+        &lt;p class="login-description"&gt;$services.localization.render('wd.login-description')
+          &lt;a href="$xwiki.getURL('XWiki.XWikiRegister', 'register', "xredirect=$escapetool.url($xwiki.relativeRequestURL)")" id="tmRegister"&gt;$escapetool.xml($services.localization.render('wd.login-description.register'))&lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class='col-xs-12 col-md-8'&gt;
+        #set($message = $xcontext.message)
+        #if($message)
+          &lt;!-- previous login errors --&gt;
+          #error($services.localization.render($message))
         #end
-      &lt;/dt&gt;
-      &lt;dd class="input-group"&gt;
-        &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('user')&lt;/span&gt;
-        &lt;input class="form-control" type="text" id="j_username" size="60" name="j_username" value="" autocomplete="username" required tabindex="100"/&gt;
-      &lt;/dd&gt;
-      &lt;dt&gt;
-        &lt;label for="j_password"&gt;$services.localization.render('wd.login.password')&lt;/label&gt;
-        #if($xwiki.exists('XWiki.ResetPassword') &amp;&amp; $xwiki.hasAccessLevel('view', 'XWiki.ResetPassword'))
-          &lt;span class="xAdditional"&gt;&lt;a href="$xwiki.getURL('XWiki.ResetPassword')" tabindex="600"&gt;$services.localization.render('xe.admin.passwordReset.loginMessage')&lt;/a&gt;&lt;/span&gt;
-        #end
-      &lt;/dt&gt;
-      &lt;dd class="input-group"&gt;
-        &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('lock')&lt;/span&gt;
-        &lt;input type="password" id="j_password" size="60" name="j_password" value="" autocomplete="current-password" required tabindex="200"/&gt;
-      &lt;/dd&gt;
-      &lt;dt&gt;&lt;/dt&gt;
-      &lt;dd&gt;
-        &lt;label class="xHint" for="rememberme"&gt;
-          &lt;input id="rememberme" type="checkbox" name="j_rememberme" value="true" tabindex="300"/&gt; $services.localization.render('remembermeonthiscomp')
-        &lt;/label&gt;
-      &lt;/dd&gt;
-    &lt;/dl&gt;
-    &lt;input type="submit" class="btn btn-primary" value="$services.localization.render('login')" tabindex="400"/&gt;
+        &lt;dl&gt;
+          &lt;dt&gt;
+            &lt;label for="j_username"&gt;$services.localization.render('wd.login.username')&lt;/label&gt;
+            #if($xwiki.exists('XWiki.ForgotUsername') &amp;&amp; $xwiki.hasAccessLevel('view', 'XWiki.ForgotUsername'))
+              &lt;span class="xAdditional"&gt;&lt;a href="$xwiki.getURL('XWiki.ForgotUsername')" tabindex="500"&gt;$services.localization.render('xe.admin.forgotUsername.loginMessage')&lt;/a&gt;&lt;/span&gt;
+            #end
+          &lt;/dt&gt;
+          &lt;dd class="input-group"&gt;
+            &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('user')&lt;/span&gt;
+            &lt;input class="form-control" type="text" id="j_username" size="60" name="j_username" value="" autocomplete="username" required tabindex="100"/&gt;
+          &lt;/dd&gt;
+          &lt;dt&gt;
+            &lt;label for="j_password"&gt;$services.localization.render('wd.login.password')&lt;/label&gt;
+            #if($xwiki.exists('XWiki.ResetPassword') &amp;&amp; $xwiki.hasAccessLevel('view', 'XWiki.ResetPassword'))
+              &lt;span class="xAdditional"&gt;&lt;a href="$xwiki.getURL('XWiki.ResetPassword')" tabindex="600"&gt;$services.localization.render('xe.admin.passwordReset.loginMessage')&lt;/a&gt;&lt;/span&gt;
+            #end
+          &lt;/dt&gt;
+          &lt;dd class="input-group"&gt;
+            &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('lock')&lt;/span&gt;
+            &lt;input type="password" id="j_password" size="60" name="j_password" value="" autocomplete="current-password" required tabindex="200"/&gt;
+          &lt;/dd&gt;
+          &lt;dt&gt;&lt;/dt&gt;
+          &lt;dd&gt;
+            &lt;label class="xHint" for="rememberme"&gt;
+              &lt;input id="rememberme" type="checkbox" name="j_rememberme" value="true" tabindex="300"/&gt; $services.localization.render('remembermeonthiscomp')
+            &lt;/label&gt;
+          &lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;input type="submit" class="btn btn-primary" value="$services.localization.render('login')" tabindex="400"/&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    #xwikimessageboxend()
   &lt;/div&gt;
 &lt;/div&gt;
-#xwikimessageboxend()
 &lt;/form&gt;
 &lt;/div&gt;## mainContentArea
 &lt;/div&gt;## main
