@@ -101,184 +101,234 @@
 
 &lt;div class="row"&gt;
   &lt;div class="col-xs-12"&gt;
-    &lt;div class="panel panel-default"&gt;
-      &lt;div class="panel-heading"&gt;Informations générales&lt;/div&gt;
-      &lt;div class="panel-body"&gt;
-        (% class="xform" %)
-        (((
-        &lt;dl&gt;
-          #if ($action != 'view')
-            #displayProperty($object, 'title1', true, $action)
-          #end
-          #if ($action == 'view')
-            &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;$doc.name&lt;/dd&gt;
-          #end
-          #if (!$isRowEditor)
-            #set ($propList = ['nomComplet', 'proprietaires', 'objet', 'statut', 'champ', 'direction', 'ministeres', 'groupes', 'groupesExternes', 'organismesTraitement'])
-            #if ($isSimplifiedForm)
-              #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
-            #end
-            #foreach($propName in $propList)
-              #set ($mandatory = (!$isGuest &amp;&amp; $propName == 'direction'))
-              #displayProperty($object, $propName, $mandatory, $action)
-            #end
-          #end
-        &lt;/dl&gt;
-        )))
-      &lt;/div&gt;
-    &lt;/div&gt;
-    #if (!$isRowEditor)
+    &lt;div class="panel-group" id="demarche-accordeon" role="tablist" aria-multiselectable="true"&gt;
       &lt;div class="panel panel-default"&gt;
-        &lt;div class="panel-heading"&gt;Références&lt;/div&gt;
-        &lt;div class="panel-body"&gt;
-          (% class="xform" %)
-          (((
-          &lt;dl&gt;
-          #set ($propList = ['referenceServicePublic', 'formulaires', 'textes'])
-          #if ($isSimplifiedForm)
-            #set ($propList = ['referenceServicePublic'])
-          #end
-          #foreach($propName in $propList)
-            #displayProperty($object, $propName, false, $action)
-          #end
-          &lt;/dl&gt;
-          )))
+        &lt;div class="panel-heading" role="tab" id="informations-generales"&gt;
+          &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#informations-generales-collapse" aria-expanded="true" aria-controls="informations-generales-collapse"&gt;
+            Informations générales
+          &lt;/a&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class="panel panel-default"&gt;
-        &lt;div class="panel-heading"&gt;Adresses web&lt;/div&gt;
-        &lt;div class="panel-body"&gt;
-          (% class="xform" %)
-          (((
-          &lt;dl&gt;
-          #set ($propList = ['urlInfos', 'urlDemarche'])
-          #if ($isSimplifiedForm)
-            #set ($propList = ['urlDemarche'])
-          #end
-          #foreach($propName in $propList)
-            #displayProperty($object, $propName, false, $action)
-          #end
-          &lt;/dl&gt;
-          )))
-        &lt;/div&gt;
-      &lt;/div&gt;
-    #end
-    &lt;div class="panel panel-default"&gt;
-      &lt;div class="panel-heading"&gt;Catégorisation&lt;/div&gt;
-      &lt;div class="panel-body"&gt;
-        (% class="xform" %)
-        (((
-        &lt;dl&gt;
-        #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
-        #if ($isRowEditor)
-          #set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
-        #end
-        #if ($action == 'edit')
-          #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
-          ## Only administrators are allowed to edit property 'top'
-          #if (!$hasAdmin)
-            #set ($discard = $propList.remove('top'))
-          #end
-        #end
-        #if ($isSimplifiedForm)
-          #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
-        #end
-        #foreach($propName in $propList)
-          #displayProperty($object, $propName, false, $action)
-        #end
-        &lt;/dl&gt;
-        )))
-      &lt;/div&gt;
-    &lt;/div&gt;
-    ## The block below is shown only if "isSimplifiedForm" is false, and we're not in the case where "isRowEditor" is true (hence
-    ## also "isTop", in principle) and the user is not an administrator, because in that case, only property "statutDemat" would
-    ## be displayed, which is reserved to administrators.
-    #if (!$isSimplifiedForm &amp;&amp; !($isRowEditor &amp;&amp; $isTop &amp;&amp; !$hasAdmin))
-      &lt;div class="panel panel-default"&gt;
-        &lt;div class="panel-heading"&gt;Caractéristiques de la dématérialisation&lt;/div&gt;
+        &lt;div id="informations-generales-collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="informations-generales"&gt;
           &lt;div class="panel-body"&gt;
-          (% class="xform" %)
-          (((
-          &lt;dl&gt;
-          #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
-          #if ($isRowEditor)
-              #set ($caracteristiquesPropList = ['statutDemat'])
-          #end
-          ## If isTop, only administrators are allowed to edit 'statutDemat'
-          #if ($isTop &amp;&amp; !$hasAdmin)
-            #set ($discard = $caracteristiquesPropList.remove('statutDemat'))
-          #end
-          ## Don't display computed properties in edit mode
-          #if ($action == 'edit')
-            #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
-          #end
-          #foreach($propName in $caracteristiquesPropList)
-            #displayProperty($object, $propName, false, $action)
-          #end
-          &lt;/dl&gt;
-          )))
-      &lt;/div&gt;
-    &lt;/div&gt;
-    #end
-    #if (!$isSimplifiedForm &amp;&amp; !($isRowEditor &amp;&amp; $isTop &amp;&amp; !$hasAdmin))
-    &lt;div class="panel panel-default"&gt;
-      &lt;div class="panel-heading"&gt;Qualité de la dématérialisation&lt;/div&gt;
-      &lt;div class="panel-body"&gt;
-        (% class="xform" %)
-          (((
+            (% class="xform" %)
+            (((
             &lt;dl&gt;
-              #if ($action == 'edit')
-                ## If the demarche has property "top" set to true, some of its properties can be edited by administrators only
-                #if (!$isTop || $hasAdmin)
-                  #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'ditesLeNousUneFois', 'accessibilityStatement', 'rgaaCompliancyLevel', 'api', 'demarcheSimplifiee', 'avisIntegration'])
-                #else
-                  #set ($propertyNames = ['api', 'demarcheSimplifiee'])
+              #if ($action != 'view')
+                #displayProperty($object, 'title1', true, $action)
+              #end
+              #if ($action == 'view')
+                &lt;dt&gt;&lt;label&gt;Identifiant&lt;/label&gt;&lt;/dt&gt;
+                &lt;dd&gt;$doc.name&lt;/dd&gt;
+              #end
+              #if (!$isRowEditor)
+                #set ($propList = ['nomComplet', 'proprietaires', 'objet', 'statut', 'champ', 'direction', 'ministeres', 'groupes', 'groupesExternes', 'organismesTraitement'])
+                #if ($isSimplifiedForm)
+                  #set ($propList = ['formulaires', 'ministeres', 'direction', 'champ', 'organismesTraitement'])
                 #end
-                ## In all cases, remove 'api' and 'demarcheSimplifiee' in row-editor mode
-                #if ($isRowEditor)
-                  #set ($discard = $propertyNames.remove('api'))
-                  #set ($discard = $propertyNames.remove('demarcheSimplifiee'))
-                #end
-                #foreach($propName in $propertyNames)
-                  #displayProperty($object, $propName, false, $action)
-                #end
-              #else
-                ## in view mode, display all properties, including the computed one
-                #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'ditesLeNousUneFois', 'accessibilityStatement', 'rgaaCompliancyLevel', 'accessibilityScore', 'api', 'demarcheSimplifiee', 'urlScore', 'avisIntegration'])
-                  #displayProperty($object, $propName, false, $action)
+                #foreach($propName in $propList)
+                  #set ($mandatory = (!$isGuest &amp;&amp; $propName == 'direction'))
+                  #displayProperty($object, $propName, $mandatory, $action)
                 #end
               #end
             &lt;/dl&gt;
-          )))
-      &lt;/div&gt;
-    &lt;/div&gt;
-    #end
-    #if (!$isRowEditor)
-      &lt;div class="panel panel-default"&gt;
-        &lt;div class="panel-heading"&gt;Remarques&lt;/div&gt;
-        &lt;div class="panel-body"&gt;
-          (% class="xform" %)
-          (((
-          &lt;dl&gt;
-          #displayProperty($object, 'remarques', false, $action)
-          &lt;/dl&gt;
-          )))
+            )))
+          &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    #end
-    #if (!$isSimplifiedForm &amp;&amp; !$isRowEditor)
+      #if (!$isRowEditor)
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading" role="tab" id="references"&gt;
+            &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#references-collapse" aria-expanded="false" aria-controls="references-collapse"&gt;
+              Références
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div id="references-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="references"&gt;
+            &lt;div class="panel-body"&gt;
+              (% class="xform" %)
+              (((
+              &lt;dl&gt;
+              #set ($propList = ['referenceServicePublic', 'formulaires', 'textes'])
+              #if ($isSimplifiedForm)
+                #set ($propList = ['referenceServicePublic'])
+              #end
+              #foreach($propName in $propList)
+                #displayProperty($object, $propName, false, $action)
+              #end
+              &lt;/dl&gt;
+              )))
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading" role="tab" id="adresses-web"&gt;
+            &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#adresses-web-collapse" aria-expanded="false" aria-controls="adresses-web-collapse"&gt;
+              Adresses web
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div id="adresses-web-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="adresses-web"&gt;
+            &lt;div class="panel-body"&gt;
+              (% class="xform" %)
+              (((
+              &lt;dl&gt;
+              #set ($propList = ['urlInfos', 'urlDemarche'])
+              #if ($isSimplifiedForm)
+                #set ($propList = ['urlDemarche'])
+              #end
+              #foreach($propName in $propList)
+                #displayProperty($object, $propName, false, $action)
+              #end
+              &lt;/dl&gt;
+              )))
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      #end
       &lt;div class="panel panel-default"&gt;
-        &lt;div class="panel-heading"&gt;Projet de dématérialisation&lt;/div&gt;
-        &lt;div class="panel-body"&gt;
-          (% class="xform" %)
-          (((
-          &lt;dl&gt;
-          #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'dateMiseEnLigneTexte'])
-            #displayProperty($object, $propName, false, $action)
-          #end
-          &lt;/dl&gt;
-          )))
+        &lt;div class="panel-heading" role="tab" id="categorisation"&gt;
+          &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#categorisation-collapse" aria-expanded="false" aria-controls="categorisation-collapse"&gt;
+            Catégorisation
+          &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div id="categorisation-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="categorisation"&gt;
+          &lt;div class="panel-body"&gt;
+            (% class="xform" %)
+            (((
+            &lt;dl&gt;
+            #set ($propList = ['categoriesPublics', 'publics', 'evenements', 'volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee', 'top'])
+            #if ($isRowEditor)
+              #set ($propList = ['volumetrie', 'volumetrieDemat', 'pourcentageRecoursVoieDematerialisee'])
+            #end
+            #if ($action == 'edit')
+              #set ($discard = $propList.remove('pourcentageRecoursVoieDematerialisee'))
+              ## Only administrators are allowed to edit property 'top'
+              #if (!$hasAdmin)
+                #set ($discard = $propList.remove('top'))
+              #end
+            #end
+            #if ($isSimplifiedForm)
+              #set ($propList = ['categoriesPublics', 'volumetrie', 'volumetrieDemat'])
+            #end
+            #foreach($propName in $propList)
+              #displayProperty($object, $propName, false, $action)
+            #end
+            &lt;/dl&gt;
+            )))
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      ## The block below is shown only if "isSimplifiedForm" is false, and we're not in the case where "isRowEditor" is true (hence
+      ## also "isTop", in principle) and the user is not an administrator, because in that case, only property "statutDemat" would
+      ## be displayed, which is reserved to administrators.
+      #if (!$isSimplifiedForm &amp;&amp; !($isRowEditor &amp;&amp; $isTop &amp;&amp; !$hasAdmin))
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading" role="tab" id="caracteristiques-dematerialisation"&gt;
+            &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#caracteristiques-dematerialisation-collapse" aria-expanded="false" aria-controls="caracteristiques-dematerialisation-collapse"&gt;
+              Caractéristiques de la dématérialisation
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div id="caracteristiques-dematerialisation-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="caracteristiques-dematerialisation"&gt;
+            &lt;div class="panel-body"&gt;
+              (% class="xform" %)
+              (((
+              &lt;dl&gt;
+              #set ($caracteristiquesPropList = ['niveauDemat', 'statutDemat', 'pourcentageDematerialisation', 'dematObligatoire', 'exclusionSve'])
+              #if ($isRowEditor)
+                  #set ($caracteristiquesPropList = ['statutDemat'])
+              #end
+              ## If isTop, only administrators are allowed to edit 'statutDemat'
+              #if ($isTop &amp;&amp; !$hasAdmin)
+                #set ($discard = $caracteristiquesPropList.remove('statutDemat'))
+              #end
+              ## Don't display computed properties in edit mode
+              #if ($action == 'edit')
+                #set ($discard = $caracteristiquesPropList.remove('pourcentageDematerialisation'))
+              #end
+              #foreach($propName in $caracteristiquesPropList)
+                #displayProperty($object, $propName, false, $action)
+              #end
+              &lt;/dl&gt;
+              )))
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      #end
+      #if (!$isSimplifiedForm &amp;&amp; !($isRowEditor &amp;&amp; $isTop &amp;&amp; !$hasAdmin))
+      &lt;div class="panel panel-default"&gt;
+        &lt;div class="panel-heading" role="tab" id="qualite-dematerialisation"&gt;
+          &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#qualite-dematerialisation-collapse" aria-expanded="false" aria-controls="qualite-dematerialisation-collapse"&gt;
+            Qualité de la dématérialisation
+          &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div id="qualite-dematerialisation-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="qualite-dematerialisation"&gt;
+          &lt;div class="panel-body"&gt;
+            (% class="xform" %)
+              (((
+                &lt;dl&gt;
+                  #if ($action == 'edit')
+                    ## If the demarche has property "top" set to true, some of its properties can be edited by administrators only
+                    #if (!$isTop || $hasAdmin)
+                      #set ($propertyNames = ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'ditesLeNousUneFois', 'accessibilityStatement', 'rgaaCompliancyLevel', 'api', 'demarcheSimplifiee', 'avisIntegration'])
+                    #else
+                      #set ($propertyNames = ['api', 'demarcheSimplifiee'])
+                    #end
+                    ## In all cases, remove 'api' and 'demarcheSimplifiee' in row-editor mode
+                    #if ($isRowEditor)
+                      #set ($discard = $propertyNames.remove('api'))
+                      #set ($discard = $propertyNames.remove('demarcheSimplifiee'))
+                    #end
+                    #foreach($propName in $propertyNames)
+                      #displayProperty($object, $propName, false, $action)
+                    #end
+                  #else
+                    ## in view mode, display all properties, including the computed one
+                    #foreach($propName in ['franceConnect', 'adapteMobile', 'moyensDeContact', 'accompagnement', 'qualiteSupport', 'ditesLeNousUneFois', 'accessibilityStatement', 'rgaaCompliancyLevel', 'accessibilityScore', 'api', 'demarcheSimplifiee', 'urlScore', 'avisIntegration'])
+                      #displayProperty($object, $propName, false, $action)
+                    #end
+                  #end
+                &lt;/dl&gt;
+              )))
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      #end
+      #if (!$isRowEditor)
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading" role="tab" id="remarques"&gt;
+            &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#remarques-collapse" aria-expanded="false" aria-controls="remarques-collapse"&gt;
+              Remarques
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div id="remarques-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="remarques"&gt;
+            &lt;div class="panel-body"&gt;
+              (% class="xform" %)
+              (((
+              &lt;dl&gt;
+              #displayProperty($object, 'remarques', false, $action)
+              &lt;/dl&gt;
+              )))
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      #end
+      #if (!$isSimplifiedForm &amp;&amp; !$isRowEditor)
+        &lt;div class="panel panel-default"&gt;
+          &lt;div class="panel-heading" role="tab" id="projet-dematerialisation"&gt;
+            &lt;a role="button" data-toggle="collapse" data-parent="#demarche-accordeon" href="#projet-dematerialisation-collapse" aria-expanded="false" aria-controls="projet-dematerialisation-collapse"&gt;
+              Projet de dématérialisation
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div id="projet-dematerialisation-collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="projet-dematerialisation"&gt;
+            &lt;div class="panel-body"&gt;
+              (% class="xform" %)
+              (((
+              &lt;dl&gt;
+              #foreach($propName in ['nomProjet', 'statutProjetDemat', 'dateMiseEnLigne', 'dateMiseEnLigneTexte'])
+                #displayProperty($object, $propName, false, $action)
+              #end
+              &lt;/dl&gt;
+              )))
+            &lt;/div&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
