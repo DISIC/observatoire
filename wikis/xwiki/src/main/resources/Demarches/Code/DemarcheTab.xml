@@ -100,7 +100,7 @@
 #end
 
 &lt;div class="row"&gt;
-  &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
+  &lt;div class="col-xs-12"&gt;
     &lt;div class="panel panel-default"&gt;
       &lt;div class="panel-heading"&gt;Informations générales&lt;/div&gt;
       &lt;div class="panel-body"&gt;
@@ -164,8 +164,6 @@
         &lt;/div&gt;
       &lt;/div&gt;
     #end
-  &lt;/div&gt;
-  &lt;div class="col-lg-6 col-md-6 col-sm-6"&gt;
     &lt;div class="panel panel-default"&gt;
       &lt;div class="panel-heading"&gt;Catégorisation&lt;/div&gt;
       &lt;div class="panel-body"&gt;
@@ -269,11 +267,7 @@
         &lt;/div&gt;
       &lt;/div&gt;
     #end
-  &lt;/div&gt;
-&lt;/div&gt;
-#if (!$isSimplifiedForm &amp;&amp; !$isRowEditor)
-  &lt;div class="row"&gt;
-    &lt;div class="col-lg-12 col-md-12 col-sm-12"&gt;
+    #if (!$isSimplifiedForm &amp;&amp; !$isRowEditor)
       &lt;div class="panel panel-default"&gt;
         &lt;div class="panel-heading"&gt;Projet de dématérialisation&lt;/div&gt;
         &lt;div class="panel-body"&gt;
