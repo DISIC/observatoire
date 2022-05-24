@@ -1715,7 +1715,7 @@ h1,
 .alert,
 .box {
   position: relative;
-  padding: 1rem 2.25rem 1rem 3.5rem;
+  padding: 0.5rem 2.25rem 0.5rem 3rem;
   border-color: @grey-200;
   box-shadow: inset 2.5rem 0 0 0 @grey-200;
 
@@ -1724,10 +1724,11 @@ h1,
     top: 0;
     left: 0;
     height: 100%;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     filter: invert();
   }
 }
+
 
 /* Accordeons */
 .panel-group {
