@@ -211,6 +211,16 @@
     <filesize>79472</filesize>
   </attachment>
   <attachment>
+    <filename>add-line.svg</filename>
+    <mimetype>image/svg+xml</mimetype>
+    <author>xwiki:XWiki.Admin</author>
+    <date>1544396400000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xMSAxMVY1aDJ2Nmg2djJoLTZ2NmgtMnYtNkg1di0yeiIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+Cg==</content>
+    <filesize>175</filesize>
+  </attachment>
+  <attachment>
     <filename>error-fill.svg</filename>
     <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
@@ -229,6 +239,16 @@
     <comment/>
     <content>PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTkuNSwyLjVoLTE1Yy0xLjEsMC0yLDAuOS0yLDJ2MTVjMCwxLjEsMC45LDIsMiwyaDE1YzEuMSwwLDItMC45LDItMnYtMTVDMjEuNSwzLjQsMjAuNiwyLjUsMTkuNSwyLjV6IE0xMywxN2gtMnYtNmgyVjE3eiBNMTMsOWgtMlY3aDJWOXoiLz48L3N2Zz4K</content>
     <filesize>237</filesize>
+  </attachment>
+  <attachment>
+    <filename>subtract-line.svg</filename>
+    <mimetype>image/svg+xml</mimetype>
+    <author>xwiki:XWiki.Admin</author>
+    <date>1544396400000</date>
+    <version>1.1</version>
+    <comment/>
+    <content>PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01IDExaDE0djJINXoiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPgo=</content>
+    <filesize>155</filesize>
   </attachment>
   <attachment>
     <filename>success-fill.svg</filename>
@@ -1709,6 +1729,58 @@ h1,
   }
 }
 
+/* Accordeons */
+.panel-group {
+  .panel {
+    position: relative;
+    border: none;
+    background-color: transparent;
+    box-shadow: inset 0 1px 0 0 @grey-925, 0 1px 0 0 @grey-925;
+
+    &amp; + .panel {
+      margin-top: 0rem;
+    }
+
+    .panel-heading {
+      padding: 0rem;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+
+      &amp;:hover {
+       background-color: hsla(0deg, 0%, 75%, 0.3); // Not a dsfr color, but this is how it is implemented
+      }
+
+      &amp;:active {
+       background-color: hsla(0deg, 0%, 75%, 0.5); // Not a dsfr color, but this is how it is implemented
+      }
+
+      a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+
+        &amp;:not(.collapsed) {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .panel-collapse {
+      .panel-body {
+        margin: 0rem -0.25rem;
+        padding: 1rem;
+        padding-bottom: 1.5rem;
+        border: none;
+
+      }
+    }
+  }
+}
+
 
 @media (min-width: @screen-sm-min) {
   h6 {
@@ -2181,6 +2253,133 @@ h1,
     </property>
     <property>
       <name>Alert icons</name>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.DSFRTheme</name>
+    <number>2</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>bb62e5cc-725f-484f-a690-9a3a0b9c773a</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.panel-group {
+  .panel {
+    .panel-heading {
+      a::after {
+        content: url("$doc.getAttachmentURL('subtract-line.svg')");
+        display: flex;
+        width: 1rem;
+        height: 1rem;
+      }
+      a.collapsed::after {
+        content: url("$doc.getAttachmentURL('add-line.svg')");
+      }
+    }
+  }
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name>Accordeon icons</name>
     </property>
     <property>
       <parse>1</parse>

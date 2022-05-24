@@ -62,6 +62,7 @@
       id="${id}"&gt;
       &lt;a role="button"
         data-toggle="collapse"
+        #if (! $isOpened) class="collapsed" #end
         #if (! $keepOpened) data-parent="#demarche-accordeon" #end
         href="#${id}-collapse"
         aria-expanded="$isOpened"
