@@ -44,6 +44,7 @@
 
 (% class="row evalrow-cards" %)
 (((
+
 (% class="col-xs-12 col-sm-6 col-lg-3" %)
 (((
 (% class="evalrow-card" %)
@@ -77,12 +78,12 @@
 (% class="evalrow-card" %)
 (((
 {{html clean="false"}}
-&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/smartphone-line.svg')" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/open-arm-line.svg')" alt="" /&gt;&lt;/p&gt;
 {{/html}}
 
-=== Compatible mobile ===
+=== Prise en compte handicaps ===
 
-Les démarches en ligne doivent pouvoir être effectuées aisément sur un téléphone portable. À ce jour, 77 % des démarches sont adaptées aux mobiles.
+Personne ne doit être pénalisé dans ses démarches en ligne en raison d’un handicap : pour s’en assurer, les services numériques de l’État sont soumis aux règles du [[référentiel général d’amélioration de l’accessibilité&gt;&gt;https://www.numerique.gouv.fr/publications/rgaa-accessibilite/||rel="noopener noreferrer" target="_blank"]] (RGAA).
 )))
 )))
 
@@ -105,12 +106,12 @@ Les usagers doivent pouvoir se renseigner ou être accompagnés facilement : cha
 (% class="evalrow-card" %)
 (((
 {{html clean="false"}}
-&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/timer-line.svg')" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/smartphone-line.svg')" alt="" /&gt;&lt;/p&gt;
 {{/html}}
 
-=== Disponibilité et rapidité ===
+=== Compatible mobile ===
 
-Les démarches en ligne doivent être rapidement disponibles tous les jours à toute heure.
+Les démarches en ligne doivent pouvoir être effectuées aisément sur un téléphone portable. À ce jour, 77 % des démarches sont adaptées aux mobiles.
 )))
 )))
 
@@ -133,12 +134,12 @@ Le système d’authentification [[FranceConnect&gt;&gt;https://franceconnect.go
 (% class="evalrow-card" %)
 (((
 {{html clean="false"}}
-&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/open-arm-line.svg')" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/chat-check-line.svg')" alt="" /&gt;&lt;/p&gt;
 {{/html}}
 
-=== Prise en compte handicaps ===
+=== Dites-le nous une fois ===
 
-Personne ne doit être pénalisé dans ses démarches en ligne en raison d’un handicap : pour s’en assurer, les services numériques de l’État sont soumis aux règles du [[référentiel général d’amélioration de l’accessibilité&gt;&gt;https://www.numerique.gouv.fr/publications/rgaa-accessibilite/||rel="noopener noreferrer" target="_blank"]] (RGAA). 
+Le partage de données entre administrations permet d’éviter de redemander les mêmes informations et les mêmes pièces justificatives aux usagers. C’est le principe du “Dites-le nous une fois”.
 )))
 )))
 
@@ -147,12 +148,12 @@ Personne ne doit être pénalisé dans ses démarches en ligne en raison d’un 
 (% class="evalrow-card" %)
 (((
 {{html clean="false"}}
-&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/chat-check-line.svg')" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/timer-line.svg')" alt="" /&gt;&lt;/p&gt;
 {{/html}}
 
-=== Dites-le nous une fois ===
+=== Disponibilité et rapidité ===
 
-Le partage de données entre administrations permet d’éviter de redemander les mêmes informations et les mêmes pièces justificatives aux usagers. C’est le principe du “Dites-le nous une fois”.
+Les démarches en ligne doivent être rapidement disponibles tous les jours à toute heure.
 )))
 )))
 )))

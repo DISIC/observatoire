@@ -70,13 +70,14 @@ Les votes pris en compte sont ceux exprimés dans les 365 jours qui précèdent 
 
 Point d'attention : les indices de satisfaction des démarches de la CNAMTS sont récupérés à  partir des données de satisfaction collectées par la CNAMTS sur son site Ameli.fr (emoticones "notez votre démarche").
 
-=== **Compatible mobile** ===
+=== **Prise en compte handicaps** ===
 
-Ce critère permet de vérifier si le service est optimisé sur un smartphone :
+L'indicateur proposé permet de mesurer la conformité des démarches au regard des obligations d'accessibilité. Il se mesure à l'aide de deux sous critères :
 
-* « Oui » : démarche accessible sur smartphone ou application mobile
-* « Non » : démarche non accessible sur smartphone ou application mobile
-* « Partiel » : démarche accessible sur smartphone mais avec des défauts dans l'affichage, ou certaines pages ne sont pas accessibles sur smartphone
+* sous-critère 1 : Présence d'une déclaration d'accessibilité valide de moins de 3 ans
+* sous-critère 2 : Taux de conformité supérieur à 75% atteint dans la déclaration d’accessibilité
+
+La démarches est au vert (« oui ») si les deux critères sont respectés, à orange (« partiel ») si seul le premier critère est respecté et à rouge (« non ») si aucun des deux critères n'est respecté.
 
 === **Aide joignable** ===
 
@@ -89,6 +90,39 @@ Les résultats sont ensuite évalués :
 * « Partiel » : un seul moyen de contact humain facilement accessible
 
 Sont pris en compte dans l’évaluation : téléphone, courriel, adresse mail, tchat humain, adresse de guichet physique territorialisé.
+
+=== **Compatible mobile** ===
+
+Ce critère permet de vérifier si le service est optimisé sur un smartphone :
+
+* « Oui » : démarche accessible sur smartphone ou application mobile
+* « Non » : démarche non accessible sur smartphone ou application mobile
+* « Partiel » : démarche accessible sur smartphone mais avec des défauts dans l'affichage, ou certaines pages ne sont pas accessibles sur smartphone
+
+=== **Intégration FranceConnect** ===
+
+Ce critère mesure la possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise :
+
+* « Oui » si la démarche propose le bouton FranceConnect ;
+* « Non » si ce n’est pas le cas ;
+
+La valeur « n/a » est indiquée si le critère est sans objet (démarches de nécessitant pas l’identification de l’usager ou concernant un public entreprises) ;
+
+=== **Dites-le nous une fois** ===
+
+L'indicateur proposé est un indicateur d'effort pour les usagers. Il permet d'estimer l'effort de ressaisie de données que l'administration pourrait ne plus demander aux usagers en allant chercher elle-même ces informations. Il est calculé de la manière suivante :
+
+1. On définit un panier de données qu'on estime ne plus devoir être demandées aux usagers compte tenu du fait que ces informations sont déjà connues de l'administration. Ce panier est composé des données suivantes :
+1*. Données personnes physiques : identité, revenus, composition familiale, attestations de droit, adresse, scolarité
+1*. Données personnes morales : identité, attestations, liasse, données comptables
+1. On vérifie ensuite dans chaque procédure si les données de ce panier continuent à être demandées aux usagers, ou si au contraire elles ne sont plus demandées : soit la donnée pré-remplie et présentée à l'usager, soit la donnée récupérée auprès d'une autre administration qui possède la donnée de référence.
+1. Le score total est évalué en additionnant le nombre de données qui sont  redemandées aux utilisateurs. Toutes les données redemandées ne représentent pas toutefois le même degré de difficulté pour les usagers. La saisie de certaines données représente un effort modéré pour les usagers, alors que d'autres demandes d'information sont plus lourdes. Un coefficient vient donc pondérer la note pour chacune des données demandées. Exemple : ressaisie des données d'identité (nom-prénom-date et lieu de naissance : coefficient 1 ; fourniture des derniers bulletins de salaire : coefficient 3
+
+L'indicateur est présenté sur le barème suivant :
+
+* « Vert » : aucune ou une seule des données du panier n'est demandée aux usagers (indicateur de ressaisie entre 0 et 1) ;
+* « Orange » : effort modéré de ressaisie demandé aux usagers (indicateur entre 2 et 4) ;
+* « Rouge » : effort important de ressaisie demandé aux usagers (indicateur supérieur ou égal à 5) ;
 
 === **Disponibilité et rapidité** ===
 
@@ -125,40 +159,6 @@ Précisions complémentaires sur le mode de calcul :
 * ce sont les réglages standards qui sont utilisés (fréquence de polling par exemple)
 * la mesure de disponibilité est effectuée 24/7, sur 30 jours, check chaque minute
 * les valeurs rapportées dans le tableau de bord trimestriel sont des valeurs calculées sur les trois derniers mois
-
-=== **Intégration FranceConnect** ===
-
-Ce critère mesure la possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise :
-
-* « Oui » si la démarche propose le bouton FranceConnect ;
-* « Non » si ce n’est pas le cas ;
-
-La valeur « n/a » est indiquée si le critère est sans objet (démarches de nécessitant pas l’identification de l’usager ou concernant un public entreprises) ;
-
-=== **Prise en compte handicaps** ===
-
-L'indicateur proposé permet de mesurer la conformité des démarches au regard des obligations d'accessibilité. Il se mesure à l'aide de deux sous critères :
-
-* sous-critère 1 : Présence d'une déclaration d'accessibilité valide de moins de 3 ans
-* sous-critère 2 : Taux de conformité supérieur à 75% atteint dans la déclaration d’accessibilité
-
-La démarches est au vert (« oui ») si les deux critères sont respectés, à orange (« partiel ») si seul le premier critère est respecté et à rouge (« non ») si aucun des deux critères n'est respecté.
-
-=== **Dites-le nous une fois** ===
-
-L'indicateur proposé est un indicateur d'effort pour les usagers. Il permet d'estimer l'effort de ressaisie de données que l'administration pourrait ne plus demander aux usagers en allant chercher elle-même ces informations. Il est calculé de la manière suivante :
-
-1. On définit un panier de données qu'on estime ne plus devoir être demandées aux usagers compte tenu du fait que ces informations sont déjà connues de l'administration. Ce panier est composé des données suivantes :
-1*. Données personnes physiques : identité, revenus, composition familiale, attestations de droit, adresse, scolarité
-1*. Données personnes morales : identité, attestations, liasse, données comptables
-1. On vérifie ensuite dans chaque procédure si les données de ce panier continuent à être demandées aux usagers, ou si au contraire elles ne sont plus demandées : soit la donnée pré-remplie et présentée à l'usager, soit la donnée récupérée auprès d'une autre administration qui possède la donnée de référence.
-1. Le score total est évalué en additionnant le nombre de données qui sont  redemandées aux utilisateurs. Toutes les données redemandées ne représentent pas toutefois le même degré de difficulté pour les usagers. La saisie de certaines données représente un effort modéré pour les usagers, alors que d'autres demandes d'information sont plus lourdes. Un coefficient vient donc pondérer la note pour chacune des données demandées. Exemple : ressaisie des données d'identité (nom-prénom-date et lieu de naissance : coefficient 1 ; fourniture des derniers bulletins de salaire : coefficient 3
-
-L'indicateur est présenté sur le barème suivant :
-
-* « Vert » : aucune ou une seule des données du panier n'est demandée aux usagers (indicateur de ressaisie entre 0 et 1) ;
-* « Orange » : effort modéré de ressaisie demandé aux usagers (indicateur entre 2 et 4) ;
-* « Rouge » : effort important de ressaisie demandé aux usagers (indicateur supérieur ou égal à 5) ;
 
 == **Précisions sur la signification des valeurs « - », « n/a » et « En attente » ** ==
 

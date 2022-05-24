@@ -57,12 +57,12 @@
   'group' : '',
   'digitalization' : 'computer-line.svg',
   'satisfaction' : 'emotion-happy-line.svg',
-  'mobile' : 'smartphone-line.svg',
-  'support' : 'customer-service-2-line.svg',
-  'performance' : 'timer-line.svg',
-  'france-connect' : 'shield-user-line.svg',
   'accessibility' : 'open-arm-line.svg',
-  'tell-us-once' : 'chat-check-line.svg'
+  'support' : 'customer-service-2-line.svg',
+  'mobile' : 'smartphone-line.svg',
+  'france-connect' : 'shield-user-line.svg',
+  'tell-us-once' : 'chat-check-line.svg',
+  'performance' : 'timer-line.svg'
 })
 
 ## Dashboard header ##
@@ -785,69 +785,6 @@ var XWiki = (function (XWiki) {
             }
           },
           {
-            name: "adapteMobile",
-            data: "adapteMobile",
-            className: 'column-mobile',
-            render: function (data, type, row) {
-              var dataDisplay = data.display;
-              if (row.statutDemat.toLowerCase() == 'non') {
-                dataDisplay = '-';
-              }
-              if (type === "sort") {
-                return dataDisplay;
-              } else {
-                return format(data.value, dataDisplay, computeBadgeStyle, false);
-              }
-            }
-          },
-          {
-            name: "qualiteSupport",
-            data: "qualiteSupport",
-            className: 'column-support',
-            render: function (data, type, row) {
-              var dataDisplay = data;
-              if (row.statutDemat.toLowerCase() == 'non') {
-                dataDisplay = '-';
-              }
-              // replaceNa only for old versions of the observatoire
-              return format(data, dataDisplay, computeBadgeStyle, (jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2'));
-            }
-          },
-          {
-            name: "urlScore",
-            data: "urlScore",
-            className: 'column-url-score',
-            type: "num",
-            render: function (data, type, row) {
-              var dataDisplay = data.display;
-              if (row.statutDemat.toLowerCase() == 'non') {
-                dataDisplay = '-';
-              }
-              if (type === "sort") {
-                return data.value;
-              } else {
-                // replaceNa only for old versions of the observatoire
-                return format(data.value, dataDisplay, computeUrlScoreBadgeStyle, (jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2'));
-              }
-            }
-          },
-          {
-            name: "franceConnect",
-            data: "franceConnect",
-            className: 'column-france-connect',
-            render: function (data, type, row) {
-              var dataDisplay = data.display;
-              if (row.statutDemat.toLowerCase() == 'non') {
-                dataDisplay = '-';
-              }
-              if (type === "sort") {
-                return dataDisplay;
-              } else {
-                return format(data.value, dataDisplay, computeBadgeStyle, false);
-              }
-            }
-          },
-          {
             name: "accessibilityScore",
             data: "accessibilityScore",
             className: 'column-accessibility',
@@ -880,6 +817,51 @@ var XWiki = (function (XWiki) {
             }
           },
           {
+            name: "qualiteSupport",
+            data: "qualiteSupport",
+            className: 'column-support',
+            render: function (data, type, row) {
+              var dataDisplay = data;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
+              // replaceNa only for old versions of the observatoire
+              return format(data, dataDisplay, computeBadgeStyle, (jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2'));
+            }
+          },
+          {
+            name: "adapteMobile",
+            data: "adapteMobile",
+            className: 'column-mobile',
+            render: function (data, type, row) {
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
+              if (type === "sort") {
+                return dataDisplay;
+              } else {
+                return format(data.value, dataDisplay, computeBadgeStyle, false);
+              }
+            }
+          },
+          {
+            name: "franceConnect",
+            data: "franceConnect",
+            className: 'column-france-connect',
+            render: function (data, type, row) {
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
+              if (type === "sort") {
+                return dataDisplay;
+              } else {
+                return format(data.value, dataDisplay, computeBadgeStyle, false);
+              }
+            }
+          },
+          {
             name: "ditesLeNousUneFois",
             data: "ditesLeNousUneFois",
             className: 'column-tell-us-once',
@@ -902,6 +884,24 @@ var XWiki = (function (XWiki) {
                 }
               } else {
                 return format(data.value, dataDisplay, computeBadgeStyleDitesLeNousUneFois, false);
+              }
+            }
+          },
+          {
+            name: "urlScore",
+            data: "urlScore",
+            className: 'column-url-score',
+            type: "num",
+            render: function (data, type, row) {
+              var dataDisplay = data.display;
+              if (row.statutDemat.toLowerCase() == 'non') {
+                dataDisplay = '-';
+              }
+              if (type === "sort") {
+                return data.value;
+              } else {
+                // replaceNa only for old versions of the observatoire
+                return format(data.value, dataDisplay, computeUrlScoreBadgeStyle, (jsonSchemaVersion == '1.0' || jsonSchemaVersion == '1.1' || jsonSchemaVersion == '1.2'));
               }
             }
           },
