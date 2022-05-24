@@ -112,10 +112,10 @@ Indique si la démarche est intégrée à FranceConnect.
 )))|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %)Oui
 |=(% style="background-color: rgb(255, 255, 238);" %)Adapté mobile|(% style="background-color:#ffffee" %)Indique si la démarche dématérialisée est fonctionnelle sur écrans mobiles
 **Critère "Com(% style="background-color:transparent; font-size:1em" %)patible mobile(%%)".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), Partiel (##partiel##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %)Oui
-|=(% style="background-color: rgb(255, 255, 238);" %)Au moins deux moyens de contact différents, dont un formulaire de contact|(% style="background-color:#ffffee" %)**Utilisé pour calculer la valeur du critère "Support accessible".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %)Oui
-|=(% style="background-color: rgb(255, 255, 238);" %)Accompagnement humain personnalisé|(% style="background-color:#ffffee" %)**Utilisé pour calculer la valeur du critère "Support accessible".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %) 
+|=(% style="background-color: rgb(255, 255, 238);" %)Au moins deux moyens de contact différents, dont un formulaire de contact|(% style="background-color:#ffffee" %)**Utilisé pour calculer la valeur du critère "Aide joignable".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %)Oui
+|=(% style="background-color: rgb(255, 255, 238);" %)Accompagnement humain personnalisé|(% style="background-color:#ffffee" %)**Utilisé pour calculer la valeur du critère "Aide joignable".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %) 
 |=(% style="background-color: rgb(255, 255, 238);" %)Support de qualité|(% style="background-color:#ffffee" %)Champ calculé à partir des deux champs précédents
-**Critère "Support accessible".**|(% style="background-color:#ffffee" %)La règle de calcul est la suivante :(((
+**Critère "Aide joignable".**|(% style="background-color:#ffffee" %)La règle de calcul est la suivante :(((
 * 2 oui = oui
 * 2 non = non
 * 1 oui 1 non ou sans objet ou non renseigné = partiel

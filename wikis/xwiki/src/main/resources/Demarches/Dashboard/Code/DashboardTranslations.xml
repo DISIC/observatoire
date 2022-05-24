@@ -111,8 +111,8 @@ dashboard.table.satisfaction.tableHeaderHtml=Usagers&lt;br role="presentation"/&
 dashboard.table.satisfaction.statslink=Graphes
 dashboard.table.mobile=Compatible mobile
 dashboard.table.mobile.tableHeaderHtml=Compatible&lt;br role="presentation"/&gt;mobile
-dashboard.table.support=Support accessible
-dashboard.table.support.tableHeaderHtml=Support&lt;br role="presentation"/&gt;accessible
+dashboard.table.support=Aide joignable
+dashboard.table.support.tableHeaderHtml=Aide&lt;br role="presentation"/&gt;joignable
 dashboard.table.performance=Disponibilité et rapidité
 dashboard.table.performance.tableHeaderHtml=Disponibilité&lt;br role="presentation"/&gt;et rapidité
 dashboard.table.france-connect=Intégration FranceConnect

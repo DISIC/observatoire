@@ -94,7 +94,7 @@ Les démarches en ligne doivent pouvoir être effectuées aisément sur un tél�
 &lt;p&gt;&lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/customer-service-2-line.svg')" alt="" /&gt;&lt;/p&gt;
 {{/html}}
 
-=== Support accessible ===
+=== Aide joignable ===
 
 Les usagers doivent pouvoir se renseigner ou être accompagnés facilement : chaque démarche doit proposer au moins deux moyens de contact humains.
 )))
