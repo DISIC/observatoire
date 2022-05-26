@@ -152,11 +152,6 @@ div.suggestItems.searchSuggest {
 div.suggestItem {
   font-size: 1em;
 }
-
-#add-demarche-btn {
-  padding: 10px;
-  border-top: 0.5px @navbar-default-bg solid;
-}
 </code>
     </property>
     <property>
