@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>true</hidden>
+  <hidden>false</hidden>
   <content>{{html clean="false"}}
 &lt;!--
   Quand une nouvelle question-réponse doit être ajoutée, il faut copier le markup (bootstrap) d'une autre question, 
