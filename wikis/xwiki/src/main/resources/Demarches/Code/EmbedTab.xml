@@ -129,7 +129,9 @@
               &lt;input type='submit' class='button primary' name='dogenerate' value="$escapetool.xml($services.localization.render('wikidemarches.demarche.embed.generate.button'))" /&gt;
             &lt;/div&gt;
           &lt;/form&gt;
-        #else
+        #end
+        ## If there was some form of URL display, display the information about the provided embed code
+        #if($displayURL)
           &lt;p class='embed-footermessage'&gt;
           $services.localization.render('wikidemarches.demarche.embed.details.bottom')
           &lt;/p&gt;
@@ -273,6 +275,9 @@
     width: 100%;
     /* Reset this to standard page font */
     font-family: inherit;
+  }
+  .embed-code-button .warningmessage {
+    margin-bottom: 0;
   }
 }
 
