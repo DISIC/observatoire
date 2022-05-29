@@ -44,10 +44,10 @@
   Quand une nouvelle question-réponse doit être ajoutée, il faut copier le markup (bootstrap) d'une autre question, 
   en changeant le id "faq-1" partout où il aparait. Macro à créer si on se retrouve avec trop de manipulations à faire.
 --&gt;
-&lt;div class="panel-group" role="tablist" aria-multiselectable="true"&gt;
+&lt;div class="panel-group" id='embedfaq-accordion' role="tablist" aria-multiselectable="true"&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-heading" role="tab" id="faq-1-title"&gt;
-      &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#faq-1-content" aria-expanded="false" aria-controls="faq-1-content"&gt;
+      &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#embedfaq-accordion" href="#faq-1-content" aria-expanded="false" aria-controls="faq-1-content"&gt;
         Où placer le bouton ?
       &lt;/a&gt;
     &lt;/div&gt;
@@ -59,7 +59,7 @@
   &lt;/div&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-heading" role="tab" id="faq-2-title"&gt;
-      &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#faq-2-content" aria-expanded="false" aria-controls="faq-2-content"&gt;
+      &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#embedfaq-accordion" href="#faq-2-content" aria-expanded="false" aria-controls="faq-2-content"&gt;
         Comment presenter le bouton aux usagers ?
       &lt;/a&gt;
     &lt;/div&gt;
