@@ -108,18 +108,19 @@ wikidemarches.demarche.details-off=Masquer le détail
 wikidemarches.demarche.details.nomComplet=Nom complet de la démarche
 wikidemarches.demarche.details.plus=Pour en savoir plus
 wikidemarches.demarche.tabs.demarche=Informations
-wikidemarches.demarche.tabs.embed=Code à intégrer
+wikidemarches.demarche.tabs.embed=Le bouton Je donne mon avis
 wikidemarches.demarche.tabs.cerfaNumerique=Critères qualité Cerfa numérique
 wikidemarches.demarche.tabs.avisList=Liste des avis
 wikidemarches.demarche.tabs.avisForm=Donnez votre avis
 wikidemarches.demarche.tabs.avisStatistics=Synthèse des avis
 
 # Embed demarche tab
-wikidemarches.demarche.embed.details=Pour permettre à vos usagers de donner leur avis sur cette démarche, utilisez l'un de ces éléments :
-wikidemarches.demarche.embed.details.bottom=Attention, ces codes ne sont valables que pour cette démarche. Une clé d''API est associée à votre compte et à tous les avis exprimés via ces codes. Utilisez l''un de ces codes pour permettre aux usagers de donner leur avis sur la démarche «&amp;nbsp;{0}&amp;nbsp;». En cas de difficulté, consultez votre développeur web.
+wikidemarches.demarche.embed.details=Pour permettre à vos usagers de donner leur avis sur cette démarche, insérez l'un des deux boutons en copiant-collant le code source correspondant.&lt;br /&gt;&lt;br /&gt;Choissisez la couleur du bouton qui correspond le mieux à votre charte graphique.
+wikidemarches.demarche.embed.details.bottom=Attention, ces codes ne sont valables que pour cette démarche. Une clé d'API est associée à votre compte et à tous les avis exprimés via ces codes. En cas de difficulté, consultez votre développeur web.
 wikidemarches.demarche.embed.button-blanc.title=Bouton blanc
 wikidemarches.demarche.embed.button-bleu.title=Bouton bleu
-wikidemarches.demarche.embed.button.details=Code à intégrer dans un message électronique ou dans l'écran de fin de démarche :
+wikidemarches.demarche.embed.button-blanc.details=Code à intégrer pour le bouton blanc
+wikidemarches.demarche.embed.button-bleu.details=Code à intégrer pour le bouton bleu
 wikidemarches.demarche.embed.button.warning.volumetrieDemat=La volumétrie de cette démarche ({0} démarches par an) requiert des conditions particulières pour l''activation du formulaire d''avis par URL. Contactez-nous pour avoir plus d''informations, en utilisant le lien en bas de l''écran.
 wikidemarches.demarche.embed.button.warning.volumetrie=La volumétrie de cette démarche ({0} démarches par an) requiert des conditions particulières pour l''activation du formulaire d''avis par URL. Contactez-nous pour avoir plus d''informations, en utilisant le lien en bas de l''écran. &lt;br/&gt;Note: comme la volumétrie de la dématérialisation de cette démarche n''est pas renseignée, la volumétrie totale de la démarche a été utilisé pour ce calcul.
 wikidemarches.demarche.embed.button.code.alttext=Je donne mon avis

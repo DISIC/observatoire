@@ -47,7 +47,7 @@
     &lt;div class="col-xs-12"&gt;
       ## check current user, just in case a guest slides here
       #if ($xcontext.userReference != $NULL)
-        &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
+        &lt;p class='embed-introtext'&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
         ## some elements that will be used for the code but also for demo
         #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
         ## check if current user has a key and this key is in the generated codes for this demarche
@@ -89,7 +89,7 @@
         ## demo the intégrations that we propose
         &lt;div class='row embed-demos'&gt;
           #foreach($clr in ['bleu', 'blanc'])
-            &lt;div class='col-xs-12 col-sm-6'&gt;
+            &lt;div class='col-xs-12 col-sm-6 embed-demo-col'&gt;
               &lt;h2&gt;$services.localization.render("wikidemarches.demarche.embed.button-${clr}.title")&lt;/h2&gt;
               #set ($buttonImgURL = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/bouton-${clr}.svg")
               &lt;div class='embed-demo-button'&gt;
@@ -102,16 +102,14 @@
                   #if ($displayURL)
                     #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
                     #set ($indentSize = '  ')
-                    &lt;p class='embed-code-button-hint'&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
+                    &lt;p class='embed-code-button-hint'&gt;$services.localization.render("wikidemarches.demarche.embed.button-${clr}.details")&lt;/p&gt;
                     ## transform the URLs before creating the button code, to use JDMA URLs
                     ## use loose replacements so that they work also for dev / staging servers
                     #set($jdmaVoteURL = $voteURL.replace('://observatoire.numerique', '://jedonnemonavis.numerique'))
                     #set($jdmaButtonImgURL = $buttonImgURL.replace('://observatoire.numerique', '://jedonnemonavis.numerique'))
-                    &lt;textarea readonly='readonly' rows='5'&gt;
-                      $escapetool.xml("&lt;a href=${escapetool.quote}$jdmaVoteURL${escapetool.quote}&gt;")
+                    &lt;textarea readonly='readonly' rows='6'&gt;$escapetool.xml("&lt;a href=${escapetool.quote}$jdmaVoteURL${escapetool.quote}&gt;")
                         ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$jdmaButtonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} /&gt;")
-                      $escapetool.xml("&lt;/a&gt;")
-                    &lt;/textarea&gt;
+                      $escapetool.xml("&lt;/a&gt;")&lt;/textarea&gt;
                   #else
                     &lt;div class='box warningmessage'&gt;$volumetrieMsg&lt;/div&gt;
                   #end
@@ -132,9 +130,8 @@
             &lt;/div&gt;
           &lt;/form&gt;
         #else
-          &lt;hr /&gt;
           &lt;p class='embed-footermessage'&gt;
-          $services.localization.render('wikidemarches.demarche.embed.details.bottom', [$doc.title])
+          $services.localization.render('wikidemarches.demarche.embed.details.bottom')
           &lt;/p&gt;
         #end
       #else
@@ -243,55 +240,51 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>#embed-tab {
-  text-align: center;
-}
-
-#embed-tab .embed-footermessage, 
-#embed-tab .embed-code-button-hint {
-  text-align: left;
-}
-
-.embed-code-button .embed-code-button-hint {
-  font-size: 0.9em;
+      <code>@media (min-width: @screen-sm-min) {
+  .embed-introtext {
+    font-size: 1.25em;
+  }
 }
 
 .embed-demos {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-bottom: 2rem;
+
+  .embed-demo-col {
+    margin-top: 2rem;
+  }
+
+  h2 {
+    border-bottom: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.5em;
+  }
+
+  .embed-demo-button {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .embed-demo-button img {
+    vertical-align: middle;
+  }
+
+  .embed-code-button textarea {
+    width: 100%;
+    /* Reset this to standard page font */
+    font-family: inherit;
+  }
 }
 
-.embed-demos h2 {
-  border-bottom: none;
-  text-align: center;
-  margin-top: 0;
-}
-
-.embed-demos .embed-demo-button {
-  border: 1px solid #e5e5e5;
-  height: 160px;
-  line-height: 160px;
-  text-align: center;
-}
-
-.embed-demos .embed-demo-button img {
-  vertical-align: middle;
-}
-
-.embed-code-button {
-  margin-top: 1.5em;
-}
-
-.embed-code-button textarea {
-  width: 100%;
-  font-size: 0.8em;
+.embed-footermessage {
+  font-size: 0.75em;
 }</code>
     </property>
     <property>
       <contentType>LESS</contentType>
     </property>
     <property>
-      <name/>
+      <name>Embed tab style</name>
     </property>
     <property>
       <parse/>
