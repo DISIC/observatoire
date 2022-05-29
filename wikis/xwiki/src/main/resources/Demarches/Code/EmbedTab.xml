@@ -41,10 +41,13 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 #set($discard = $xwiki.ssx.use('Demarches.Code.EmbedTab'))
-{{html}}
+{{html clean='false'}}
 &lt;div class="tab-pane fade #if($selectedTab == 'embed-tab')active in#end" role="tabpanel" id="embed-tab" aria-labelledby="embed-tab"&gt;
-  ## check current user, just in case a guest slides here
-  #if ($xcontext.userReference != $NULL)
+{{/html}}
+
+## check current user, just in case a guest slides here
+#if ($xcontext.userReference != $NULL)
+  {{html}}
     &lt;p class='embed-introtext'&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
     ## some elements that will be used for the code but also for demo
     #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
@@ -134,9 +137,16 @@
       $services.localization.render('wikidemarches.demarche.embed.details.bottom')
       &lt;/p&gt;
     #end
-  #else
-    {{error}}$services.localization.render('notallowed'){{/error}}
-  #end
+  {{/html}}
+  ## include the faq document here, in a container
+  (%class='embed-faq-container'%)(((
+    {{include reference='Aide.EmbedFAQ' /}}
+  )))
+#else
+  {{error}}$services.localization.render('notallowed'){{/error}}
+#end
+
+{{html clean='false'}}
 &lt;/div&gt;
 {{/html}}
 {{/velocity}}</content>
@@ -279,6 +289,10 @@
 
 .embed-footermessage {
   font-size: 0.75em;
+}
+
+.embed-faq-container {
+  margin-top: 2rem;
 }</code>
     </property>
     <property>
