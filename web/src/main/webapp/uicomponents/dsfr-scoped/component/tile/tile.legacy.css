@@ -5,25 +5,25 @@
   /**
   * Correctif de la largeur du texte dans la tuile
   */
-  .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab,
-  .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab > * {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__body,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__body > * {
     max-width: 100%;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__title {
     margin: 0 0 0.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile__desc {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__desc {
     margin: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile {
     box-shadow: inset 0 0 0 1px #e5e5e5, inset 0 -0.25rem 0 0 #000091;
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--grey {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--grey {
     background-color: #eee;
   }
 }

@@ -10,7 +10,7 @@
 /**
 un padding de 4px et une marge négative en compensation sont mis en place afin d'éviter de couper le focus.
  */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb {
   margin: 1rem 0 2rem;
   font-size: 0.75rem;
   line-height: 1.25rem;
@@ -24,7 +24,7 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
   color: var(--text-mention-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__button {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__button {
   box-shadow: var(--link-underline);
   font-size: 0.75rem;
   line-height: 1.25rem;
@@ -33,11 +33,11 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
   color: inherit;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__button[aria-expanded="true"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__button[aria-expanded="true"] {
   display: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb .fr-collapse {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb .fr-collapse {
   margin-left: -4px;
   margin-right: -4px;
   padding-left: 4px;
@@ -45,7 +45,7 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
   transform: translateY(-4px);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__list {
   --ul-type: none;
   --ol-type: none;
   --ul-start: 0;
@@ -59,7 +59,7 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
   transform: translateY(4px);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__link {
   position: relative;
   display: inline-flex;
   font-size: 0.75rem;
@@ -71,11 +71,11 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
      */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__link:not([aria-current]) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__link:not([aria-current]) {
   margin-right: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__link:not([aria-current])::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__link:not([aria-current])::after {
   font: normal 700 normal 1rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -86,7 +86,7 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
   pointer-events: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__link[aria-current] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__link[aria-current] {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -96,15 +96,15 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb {
     margin-bottom: 2.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__button {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__button {
     display: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb .fr-collapse {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb .fr-collapse {
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
@@ -115,11 +115,11 @@ un padding de 4px et une marge négative en compensation sont mis en place afin 
     max-height: initial;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb .fr-collapse::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb .fr-collapse::before {
     content: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__list {
     transform: none;
   }
 }

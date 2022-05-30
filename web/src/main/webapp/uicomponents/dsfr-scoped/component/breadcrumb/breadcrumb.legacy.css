@@ -6,15 +6,15 @@
   /**
   * reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__list {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb {
     color: #666;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-breadcrumb__link[aria-current] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-breadcrumb__link[aria-current] {
     color: #161616;
   }
 }

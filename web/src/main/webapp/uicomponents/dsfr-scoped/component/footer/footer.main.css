@@ -7,7 +7,7 @@
   FOOTER
 \* ˍˍˍˍˍˍˍˍˍ */
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -96,7 +96,7 @@
   box-shadow: 0 -2px 0 0 var(--border-plain-blue-france), inset 0 -1px 0 0 var(--border-default-grey);
 }
 
-.fr-footer__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__body {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -104,11 +104,11 @@
   margin-bottom: 1rem;
 }
 
-.fr-footer__body #xwikimaincontainer #mainContentArea #avis-tab + .fr-footer__bottom {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__body + .fr-footer__bottom {
   margin-top: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -121,12 +121,12 @@
      */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo {
   font-size: 1.05rem;
   margin: -1em;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo::before {
   width: 2.75rem;
   height: 1rem;
   margin-bottom: 0.33333rem;
@@ -134,39 +134,39 @@
   background-position: 0 -0.0625rem, 0 0, 0 0;
 }
 
-:root[data-fr-mourning] #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo::before {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-mourning] .fr-footer__brand .fr-logo::before {
   background-size: 2.75rem 1.125rem, 0, 2.75rem 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo::after {
   min-width: 2.625rem;
   background-size: 5.25rem 3.75rem;
   background-position: 0 calc(100% + 1.875rem);
   padding-top: 2.20833rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab [data-fr-theme="dark"] .fr-footer__brand .fr-logo::after {
+#xwikimaincontainer #mainContentArea .use-dsfr [data-fr-theme="dark"] .fr-footer__brand .fr-logo::after {
   background-position: -2.625rem 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo + .fr-footer__brand-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo + .fr-footer__brand-link {
   margin-left: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__logo {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__logo {
   width: 200px;
   height: auto;
   max-height: 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content {
   display: flex;
   flex-wrap: wrap;
   flex-basis: 100%;
   margin-top: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-desc {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-desc {
   --link-underline: 0 1px 0 0 currentColor;
   --link-blank-font: normal 700 normal 1rem/1 dsfr-icon;
   --link-blank-content: "\00a0";
@@ -176,35 +176,35 @@
   line-height: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-list {
   display: flex;
   flex-direction: row;
   align-self: center;
   flex-wrap: wrap;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-list > li {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-list > li {
   margin-right: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-list > li::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-list > li::before {
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-list > li:last-child {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-list > li:last-child {
   margin-right: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-link {
   display: inline-flex;
   font-weight: bold;
   font-size: 0.875rem;
   line-height: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top {
   display: flex;
   margin: -2.5rem 0 1rem;
   padding: 2rem 0 1rem;
@@ -212,7 +212,7 @@
   background-color: var(--background-alt-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top-cat {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top-cat {
   margin: 0 0 0.75rem;
   font-size: 0.75rem;
   line-height: 1.25rem;
@@ -220,18 +220,18 @@
   text-align: left;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top-list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top-list {
   margin: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top-link {
   display: block;
   font-size: 0.75rem;
   line-height: 1.25rem;
   margin-bottom: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -240,7 +240,7 @@
   box-shadow: inset 0 1px 0 0 var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-list {
   flex-wrap: wrap;
   align-items: center;
   padding: 0.5rem 0 1rem;
@@ -248,13 +248,13 @@
   margin: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item {
   position: relative;
   margin: 0.5rem 0 0 0.25rem;
   display: inline;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item::before {
   content: "";
   display: inline-block;
   vertical-align: middle;
@@ -267,21 +267,21 @@
   box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item:first-child {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item:first-child {
   margin: 0.5rem 0 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item:first-child::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item:first-child::before {
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-link {
   font-size: 0.75rem;
   line-height: 1.25rem;
   color: var(--text-mention-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-copy * {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-copy * {
   --link-underline: 0 1px 0 0 currentColor;
   --link-blank-font: normal 700 normal 1rem/1 dsfr-icon;
   --link-blank-content: "\00a0";
@@ -291,7 +291,7 @@
   margin-top: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners {
   margin-top: 1rem;
   padding-top: 1rem;
 
@@ -305,7 +305,7 @@
   box-shadow: inset 0 1px 0 0 var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners a {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,17 +315,17 @@
   background: #fff;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners .fr-footer__logo {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners .fr-footer__logo {
   width: auto;
   height: auto;
   max-width: 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners + .fr-footer__bottom {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners + .fr-footer__bottom {
   margin-top: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-title {
   font-size: 0.875rem;
   line-height: 1.5rem;
   margin: 0;
@@ -333,12 +333,12 @@
   text-align: center;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-logos {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-logos {
   display: flex;
   flex-wrap: wrap;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main {
   flex-basis: 100%;
   padding-top: 0.5rem;
   display: flex;
@@ -346,18 +346,18 @@
   justify-content: center;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main + .fr-footer__partners-sub {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main + .fr-footer__partners-sub {
   padding-top: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub {
   /**
    * On surcharge le style du lien pour les logos secondaires
    */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub > ul {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub > ul {
   flex-basis: 100%;
   display: flex;
   flex-direction: column;
@@ -365,62 +365,62 @@
   flex-wrap: wrap;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub .fr-footer__partners-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub .fr-footer__partners-link {
   box-shadow: none;
   margin: 0;
   margin-bottom: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-link,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top-cat {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-link,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top-cat {
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-copy {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-copy {
   color: var(--text-mention-grey);
 }
 
 @media (min-width: 36em) {
   /*! media sm */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-list > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-list > li {
     margin-right: 1.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-title {
     text-align: left;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main {
     flex-basis: auto;
     padding-top: 0;
     margin-top: 0.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub {
     margin: 1rem -1rem 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub > ul {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub > ul {
     flex-direction: row;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub .fr-footer__partners-link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub .fr-footer__partners-link {
     margin: 0 0 0.5rem 1rem;
   }
 }
 
 @media (min-width: 48em) {
   /*! media md */
-  .fr-footer__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__body {
     margin-bottom: 1.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo {
     font-size: 1.3125rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo::before {
     width: 3.4375rem;
     height: 1.25rem;
     margin-bottom: 0.41667rem;
@@ -428,82 +428,82 @@
     background-position: 0 -0.07812rem, 0 0, 0 0;
   }
 
-  :root[data-fr-mourning] #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo::before {
+  :root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-mourning] .fr-footer__brand .fr-logo::before {
     background-size: 3.4375rem 1.40625rem, 0, 3.4375rem 1.25rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo::after {
     min-width: 3.28125rem;
     background-size: 6.5625rem 4.6875rem;
     background-position: 0 calc(100% + 2.34375rem);
     padding-top: 2.76042rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab [data-fr-theme="dark"] .fr-footer__brand .fr-logo::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr [data-fr-theme="dark"] .fr-footer__brand .fr-logo::after {
     background-position: -3.28125rem 100%;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand .fr-logo + .fr-footer__brand-link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand .fr-logo + .fr-footer__brand-link {
     margin-left: 3rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__brand {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__brand {
     flex-basis: auto;
     padding-right: 1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content {
     margin-left: auto;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top {
     margin: -2.5rem 0 2.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item {
     margin: 0.5rem 0 0 0.75rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item::before {
     margin-right: 0.75rem;
     margin-bottom: 0.25rem;
     margin-top: 0.25rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-logos {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-logos {
     flex-wrap: nowrap;
     margin: 0 -1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main a {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main a {
     margin: 0 0 0 1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main + .fr-footer__partners-sub {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main + .fr-footer__partners-sub {
     padding-left: 2rem;
     padding-top: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main + .fr-footer__partners-sub > ul {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main + .fr-footer__partners-sub > ul {
     justify-content: flex-end;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main + .fr-footer__partners-sub > ul > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main + .fr-footer__partners-sub > ul > li {
     margin: 0 1rem 0 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-main + .fr-footer__partners-sub > ul > li a {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-main + .fr-footer__partners-sub > ul > li a {
     margin-left: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub {
     margin: 0.5rem 0 0 0;
   }
 }
 
 @media (min-width: 62em) {
   /*! media lg */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content {
     margin-top: 0;
     flex-basis: calc(100% - (100% / 2));
   }

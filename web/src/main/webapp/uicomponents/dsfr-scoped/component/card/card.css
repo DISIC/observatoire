@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   CARD
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card {
   display: flex;
   flex-direction: column-reverse;
   position: relative;
@@ -18,11 +18,11 @@
   box-shadow: 0 0 0 1px var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-grid-row .fr-card {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-grid-row .fr-card {
   height: 100%;
 }
 
-.fr-card:not(.fr-card--no-arrow) .fr-card__body::after #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card:not(.fr-card--no-arrow) .fr-card__body::after {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -34,19 +34,19 @@
   color: var(--text-action-high-blue-france);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__img {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__img {
   position: relative;
   width: 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__img::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__img::before {
   content: "";
   display: block;
   width: 100%;
   padding-bottom: 56.25%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__img img {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__img img {
   position: absolute;
   top: 0;
   right: 0;
@@ -58,33 +58,33 @@
   object-position: 50% 50%;
 }
 
-.fr-card__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__body {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   padding: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__detail {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__detail {
   font-size: 0.75rem;
   line-height: 1.25rem;
   order: -1;
   color: var(--text-mention-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__title {
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 700;
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__desc {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__desc {
   font-size: 0.875rem;
   line-height: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card__link {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -93,22 +93,22 @@
   margin-top: auto;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-card--grey {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-card--grey {
   --blend: var(--background-contrast-grey-blend);
   background-color: var(--background-contrast-grey);
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card__title {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card--horizontal {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card--horizontal {
     flex-direction: row-reverse;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card--horizontal .fr-card__img {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card--horizontal .fr-card__img {
     max-width: 41.666%;
     flex: 1 0 auto;
   }
@@ -118,29 +118,29 @@
   /**
   * Correctif de la hauteur de la navigation latérale
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card__title {
     margin: 0;
     color: #161616;
   }
 
-  .fr-card--horizontal .fr-card__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card--horizontal .fr-card__body {
     flex-basis: 100%;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card {
     background-color: #fff;
     box-shadow: 0 0 0 1px #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card--grey {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card--grey {
     background-color: #eee;
   }
 
-  .fr-card:not(.fr-card--no-arrow) .fr-card__body::after #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card:not(.fr-card--no-arrow) .fr-card__body::after {
     color: #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-card__detail {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-card__detail {
     color: #666;
   }
 }

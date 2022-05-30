@@ -10,32 +10,32 @@
   /**
   * Correctif de la largeur max des textes
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow__newsletter > * {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow__newsletter > * {
     max-width: 100%;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow {
     background-color: #f5f5fe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow .fr-input {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow .fr-input {
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow__title {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow__newsletter-legal {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow__newsletter-legal {
     color: #666;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow .fr-grid-row > *:not(:first-child) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow .fr-grid-row > *:not(:first-child) {
     box-shadow: 0 -1px 0 0 #6a6af4;
   }
 }
 @media all and (min-width: 48em) and (-ms-high-contrast: none), (min-width: 48em) and (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-follow .fr-grid-row > *:not(:first-child) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-follow .fr-grid-row > *:not(:first-child) {
     box-shadow: -1px 0 0 0 #6a6af4;
   }
 }

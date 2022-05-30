@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   ALERT
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert {
   position: relative;
   padding: 1rem 2.25rem 0.75rem 3.5rem;
 
@@ -15,7 +15,7 @@
   box-shadow: inset 0 0 0 1px var(--border-plain-grey), inset 2.5rem 0 0 0 var(--background-flat-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   position: absolute;
   top: 0;
@@ -25,13 +25,13 @@
   color: var(--text-inverted-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert__title {
   font-weight: 700;
   font-size: 1.125rem;
   line-height: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert .fr-link--close {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert .fr-link--close {
   position: absolute;
   top: 0.25rem;
   right: 0.75rem;
@@ -49,63 +49,63 @@
   padding-right: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert .fr-link--close::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert .fr-link--close::before {
   font: normal 700 normal 1rem/1 dsfr-icon;
   margin-left: 0;
   margin-right: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert + .fr-alert {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert + .fr-alert {
   margin-top: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--info::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--info::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--success::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--success::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--error::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--error::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--warning::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--warning::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--sm {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--sm {
   padding: 0.5rem 2.25rem 0.25rem 3rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--sm::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--sm::before {
   padding: 0.5rem 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--info {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--info {
   box-shadow: inset 0 0 0 1px var(--border-plain-info), inset 2.5rem 0 0 0 var(--background-flat-info);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--error {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--error {
   box-shadow: inset 0 0 0 1px var(--border-plain-error), inset 2.5rem 0 0 0 var(--background-flat-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--success {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--success {
   box-shadow: inset 0 0 0 1px var(--border-plain-success), inset 2.5rem 0 0 0 var(--background-flat-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-alert--warning {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--warning {
   box-shadow: inset 0 0 0 1px var(--border-plain-warning), inset 2.5rem 0 0 0 var(--background-flat-warning);
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert__title {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
@@ -115,32 +115,32 @@
   /**
   * reset des marges dans l'alerte
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert__title,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert p {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert__title,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert p {
     margin: 0 0 0.25rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert {
     box-shadow: inset 0 0 0 1px #3a3a3a, inset 2.5rem 0 0 0 #3a3a3a;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert::before {
     color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert--info {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--info {
     box-shadow: inset 0 0 0 1px #0063cb, inset 2.5rem 0 0 0 #0063cb;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert--error {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--error {
     box-shadow: inset 0 0 0 1px #ce0500, inset 2.5rem 0 0 0 #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert--success {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--success {
     box-shadow: inset 0 0 0 1px #18753c, inset 2.5rem 0 0 0 #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-alert--warning {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-alert--warning {
     box-shadow: inset 0 0 0 1px #b34000, inset 2.5rem 0 0 0 #b34000;
   }
 }

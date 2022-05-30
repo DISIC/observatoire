@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   PAGINATION
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -29,7 +29,7 @@
   margin-bottom: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -43,7 +43,7 @@
   color: var(--text-action-high-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -51,24 +51,24 @@
   flex-wrap: wrap;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list > *:first-child,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list > *:first-child * {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list > *:first-child,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list > *:first-child * {
   margin-left: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list > *:last-child,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list > *:last-child * {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list > *:last-child,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list > *:last-child * {
   margin-right: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link[aria-current] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link[aria-current] {
   cursor: default !important;
   --blend: var(--background-active-blue-france-blend);
   background-color: var(--background-active-blue-france);
   color: var(--text-inverted-blue-france);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -83,7 +83,7 @@
   padding-right: 0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -93,7 +93,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -108,7 +108,7 @@
   padding-right: 0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -118,7 +118,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -133,7 +133,7 @@
   padding-right: 0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -143,7 +143,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -158,7 +158,7 @@
   padding-right: 0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -168,14 +168,14 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev {
   margin-right: 0.875rem;
   margin-left: -0.625rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first.fr-pagination__link--label,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev.fr-pagination__link--label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first.fr-pagination__link--label,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev.fr-pagination__link--label {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -187,22 +187,22 @@
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first.fr-pagination__link--label::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev.fr-pagination__link--label::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first.fr-pagination__link--label::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev.fr-pagination__link--label::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   margin-left: -0.375rem;
   margin-right: 0.5rem;
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last {
   margin-right: -0.625rem;
   margin-left: 0.875rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next.fr-pagination__link--label,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last.fr-pagination__link--label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next.fr-pagination__link--label,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last.fr-pagination__link--label {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -214,23 +214,23 @@
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next.fr-pagination__link--label::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last.fr-pagination__link--label::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next.fr-pagination__link--label::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last.fr-pagination__link--label::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   margin-right: -0.375rem;
   margin-left: 0.5rem;
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link:not([aria-current]):disabled,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link:not([aria-current])[disabled],
-#xwikimaincontainer #mainContentArea #avis-tab a.fr-pagination__link:not([aria-current]):not([href]) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link:not([aria-current]):disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link:not([aria-current])[disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr a.fr-pagination__link:not([aria-current]):not([href]) {
   color: var(--text-disabled-grey);
 }
 
 @media (min-width: 62em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first.fr-pagination__link--lg-label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev.fr-pagination__link--lg-label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first.fr-pagination__link--lg-label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev.fr-pagination__link--lg-label {
     font-size: 1rem;
     line-height: 1.5rem;
     min-height: 2rem;
@@ -242,16 +242,16 @@
     max-height: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--first.fr-pagination__link--lg-label::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--prev.fr-pagination__link--lg-label::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--first.fr-pagination__link--lg-label::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--prev.fr-pagination__link--lg-label::before {
     font: normal 700 normal 1.5rem/1 dsfr-icon;
     margin-left: -0.375rem;
     margin-right: 0.5rem;
     font-size: 1.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next.fr-pagination__link--lg-label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last.fr-pagination__link--lg-label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next.fr-pagination__link--lg-label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last.fr-pagination__link--lg-label {
     font-size: 1rem;
     line-height: 1.5rem;
     min-height: 2rem;
@@ -263,8 +263,8 @@
     max-height: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--next.fr-pagination__link--lg-label::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link--last.fr-pagination__link--lg-label::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--next.fr-pagination__link--lg-label::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link--last.fr-pagination__link--lg-label::before {
     font: normal 700 normal 1.5rem/1 dsfr-icon;
     margin-right: -0.375rem;
     margin-left: 0.5rem;
@@ -276,22 +276,22 @@
   /**
   * Correctif de la largeur de la légende d'un fieldset
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link[aria-current] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link[aria-current] {
     background-color: #000091;
     color: #f5f5fe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link:not([aria-current]):disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link:not([aria-current])[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-pagination__link:not([aria-current]):not([href]) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link:not([aria-current]):disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link:not([aria-current])[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-pagination__link:not([aria-current]):not([href]) {
     color: #929292;
   }
 }

@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   LINK
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -26,15 +26,15 @@
   color: var(--text-action-high-blue-france);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content {
   margin-left: -0.75rem;
   margin-right: -0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: hidden;
   white-space: nowrap;
@@ -44,78 +44,78 @@
   padding-right: 0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link:not([class*="fr-link--icon-"])[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link:not([class*="fr-link--icon-"])[class*=" fr-fi-"]::before {
   margin-left: 0;
   margin-right: 0.25rem;
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
   margin-left: -0.25rem;
   margin-right: -0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-left[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-left[class*=" fr-fi-"]::before {
   margin-left: -0.25rem;
   margin-right: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-left[class*=" fr-fi-"] {
   margin-left: -0.5rem;
   margin-right: -0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class*=" fr-fi-"] {
   flex-direction: row-reverse;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--icon-right[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--icon-right[class*=" fr-fi-"]::before {
   margin-right: -0.25rem;
   margin-left: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-right[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-right[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-right[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--align-on-content.fr-link--icon-right[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-right[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-right[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-right[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--align-on-content.fr-link--icon-right[class*=" fr-fi-"] {
   margin-left: -0.75rem;
   margin-right: -0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -123,15 +123,15 @@
   border-radius: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content {
   margin-left: -0.75rem;
   margin-right: -0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: hidden;
   white-space: nowrap;
@@ -141,78 +141,78 @@
   padding-right: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm:not([class*="fr-link--icon-"])[class*=" fr-fi-"]::before {
   margin-left: 0;
   margin-right: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
   margin-left: -0.5rem;
   margin-right: -0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-left[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-left[class*=" fr-fi-"]::before {
   margin-left: -0.25rem;
   margin-right: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-left[class*=" fr-fi-"] {
   margin-left: -0.5rem;
   margin-right: -0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class*=" fr-fi-"] {
   flex-direction: row-reverse;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--icon-right[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--icon-right[class*=" fr-fi-"]::before {
   margin-right: -0.25rem;
   margin-left: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--sm.fr-link--align-on-content.fr-link--icon-right[class*=" fr-fi-"] {
   margin-left: -0.75rem;
   margin-right: -0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg {
   font-size: 1.25rem;
   line-height: 2rem;
   min-height: 3rem;
@@ -220,15 +220,15 @@
   border-radius: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content {
   margin-left: -1rem;
   margin-right: -1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: hidden;
   white-space: nowrap;
@@ -238,78 +238,78 @@
   padding-right: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg:not([class*="fr-link--icon-"])[class*=" fr-fi-"]::before {
   margin-left: 0;
   margin-right: 0.5rem;
   font-size: 2rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content:not([class*="fr-link--icon-"])[class*=" fr-fi-"] {
   margin-left: -0.5rem;
   margin-right: -0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-left[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-left[class*=" fr-fi-"]::before {
   margin-left: -0.375rem;
   margin-right: 0.5rem;
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-left[class*=" fr-fi-"] {
   margin-left: -0.625rem;
   margin-right: -1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class*=" fr-fi-"] {
   flex-direction: row-reverse;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--icon-right[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--icon-right[class*=" fr-fi-"]::before {
   margin-right: -0.375rem;
   margin-left: 0.5rem;
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--lg.fr-link--align-on-content.fr-link--icon-right[class*=" fr-fi-"] {
   margin-left: -1rem;
   margin-right: -0.625rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--close {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--close {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -325,7 +325,7 @@
   margin-left: auto;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-link--close::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-link--close::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;

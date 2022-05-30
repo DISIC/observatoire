@@ -6,22 +6,22 @@
   /**
   * Correctif de la largeur de la légende d'un fieldset
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__list {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link[aria-current] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link[aria-current] {
     background-color: #000091;
     color: #f5f5fe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link:not([aria-current]):disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-pagination__link:not([aria-current])[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-pagination__link:not([aria-current]):not([href]) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link:not([aria-current]):disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-pagination__link:not([aria-current])[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-pagination__link:not([aria-current]):not([href]) {
     color: #929292;
   }
 }

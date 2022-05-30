@@ -6,31 +6,31 @@
   /**
   * Reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btns-group > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btns-group > li {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btn {
     background-color: #000091;
     color: #f5f5fe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btn:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btn[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-btn:not([href]) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btn:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btn[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-btn:not([href]) {
     color: #929292;
     background-color: #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btn--secondary {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btn--secondary {
     background-color: transparent;
     color: #000091;
     box-shadow: inset 0 0 0 1px #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btn--secondary:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-btn--secondary[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-btn--secondary:not([href]) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btn--secondary:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-btn--secondary[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-btn--secondary:not([href]) {
     color: #929292;
     box-shadow: inset 0 0 0 1px #e5e5e5;
     background-color: transparent;

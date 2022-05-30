@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   CALLOUT
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout {
   position: relative;
   padding: 1.5rem;
 
@@ -25,147 +25,147 @@
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-blue-france);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class*=" fr-fi-"]::before {
   display: block;
   margin: -0.5rem 0 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout__title {
   font-weight: 700;
   font-size: 1.375rem;
   line-height: 1.75rem;
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout__text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout__text {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout .fr-btn {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout .fr-btn {
   margin-top: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout::before {
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-tilleul-verveine {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-tilleul-verveine {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-tilleul-verveine);
 
   --blend: var(--background-contrast-green-tilleul-verveine-blend);
   background-color: var(--background-contrast-green-tilleul-verveine);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-bourgeon {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-bourgeon {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-bourgeon);
 
   --blend: var(--background-contrast-green-bourgeon-blend);
   background-color: var(--background-contrast-green-bourgeon);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-emeraude {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-emeraude {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-emeraude);
 
   --blend: var(--background-contrast-green-emeraude-blend);
   background-color: var(--background-contrast-green-emeraude);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-menthe {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-menthe {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-menthe);
 
   --blend: var(--background-contrast-green-menthe-blend);
   background-color: var(--background-contrast-green-menthe);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-archipel {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-archipel {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-green-archipel);
 
   --blend: var(--background-contrast-green-archipel-blend);
   background-color: var(--background-contrast-green-archipel);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--blue-ecume {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--blue-ecume {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-blue-ecume);
 
   --blend: var(--background-contrast-blue-ecume-blend);
   background-color: var(--background-contrast-blue-ecume);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--blue-cumulus {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--blue-cumulus {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-blue-cumulus);
 
   --blend: var(--background-contrast-blue-cumulus-blend);
   background-color: var(--background-contrast-blue-cumulus);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--purple-glycine {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--purple-glycine {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-purple-glycine);
 
   --blend: var(--background-contrast-purple-glycine-blend);
   background-color: var(--background-contrast-purple-glycine);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--pink-macaron {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--pink-macaron {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-pink-macaron);
 
   --blend: var(--background-contrast-pink-macaron-blend);
   background-color: var(--background-contrast-pink-macaron);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--pink-tuile {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--pink-tuile {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-pink-tuile);
 
   --blend: var(--background-contrast-pink-tuile-blend);
   background-color: var(--background-contrast-pink-tuile);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--yellow-tournesol {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--yellow-tournesol {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-yellow-tournesol);
 
   --blend: var(--background-contrast-yellow-tournesol-blend);
   background-color: var(--background-contrast-yellow-tournesol);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--yellow-moutarde {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--yellow-moutarde {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-yellow-moutarde);
 
   --blend: var(--background-contrast-yellow-moutarde-blend);
   background-color: var(--background-contrast-yellow-moutarde);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--orange-terre-battue {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--orange-terre-battue {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-orange-terre-battue);
 
   --blend: var(--background-contrast-orange-terre-battue-blend);
   background-color: var(--background-contrast-orange-terre-battue);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-cafe-creme {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--brown-cafe-creme {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-brown-cafe-creme);
 
   --blend: var(--background-contrast-brown-cafe-creme-blend);
   background-color: var(--background-contrast-brown-cafe-creme);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-caramel {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--brown-caramel {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-brown-caramel);
 
   --blend: var(--background-contrast-brown-caramel-blend);
   background-color: var(--background-contrast-brown-caramel);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-opera {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--brown-opera {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-brown-opera);
 
   --blend: var(--background-contrast-brown-opera-blend);
   background-color: var(--background-contrast-brown-opera);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-callout--beige-gris-galet {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--beige-gris-galet {
   box-shadow: inset 0.25rem 0 0 0 var(--border-default-beige-gris-galet);
 
   --blend: var(--background-contrast-beige-gris-galet-blend);
@@ -173,23 +173,23 @@
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout {
     padding: 2rem 3rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class^="fr-icon-"]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class*=" fr-icon-"]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class^="fr-fi-"]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout[class*=" fr-fi-"]::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class^="fr-icon-"]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class*=" fr-icon-"]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class^="fr-fi-"]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout[class*=" fr-fi-"]::before {
     margin: -1rem 0 1rem -2rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout__title {
     font-size: 1.5rem;
     line-height: 2rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout__text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout__text {
     font-size: 1.25rem;
     line-height: 2rem;
   }
@@ -199,105 +199,105 @@
   /**
   * Marge des titres et textes
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout__title {
     margin: 0 0 0.5rem;
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout__text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout__text {
     margin: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout {
     background-color: #eee;
     box-shadow: inset 0.25rem 0 0 0 #6a6af4;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout::before {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-tilleul-verveine {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-tilleul-verveine {
     box-shadow: inset 0.25rem 0 0 0 #b7a73f;
     background-color: #fceeac;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-bourgeon {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-bourgeon {
     box-shadow: inset 0.25rem 0 0 0 #68a532;
     background-color: #c9fcac;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-emeraude {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-emeraude {
     box-shadow: inset 0.25rem 0 0 0 #00a95f;
     background-color: #c3fad5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-menthe {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-menthe {
     box-shadow: inset 0.25rem 0 0 0 #009081;
     background-color: #bafaee;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--green-archipel {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--green-archipel {
     box-shadow: inset 0.25rem 0 0 0 #009099;
     background-color: #c7f6fc;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--blue-ecume {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--blue-ecume {
     box-shadow: inset 0.25rem 0 0 0 #465f9d;
     background-color: #e9edfe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--blue-cumulus {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--blue-cumulus {
     box-shadow: inset 0.25rem 0 0 0 #417dc4;
     background-color: #e6eefe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--purple-glycine {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--purple-glycine {
     box-shadow: inset 0.25rem 0 0 0 #a558a0;
     background-color: #fee7fc;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--pink-macaron {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--pink-macaron {
     box-shadow: inset 0.25rem 0 0 0 #e18b76;
     background-color: #fee9e6;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--pink-tuile {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--pink-tuile {
     box-shadow: inset 0.25rem 0 0 0 #ce614a;
     background-color: #fee9e7;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--yellow-tournesol {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--yellow-tournesol {
     box-shadow: inset 0.25rem 0 0 0 #c8aa39;
     background-color: #feecc2;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--yellow-moutarde {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--yellow-moutarde {
     box-shadow: inset 0.25rem 0 0 0 #c3992a;
     background-color: #feebd0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--orange-terre-battue {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--orange-terre-battue {
     box-shadow: inset 0.25rem 0 0 0 #e4794a;
     background-color: #fee9e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-cafe-creme {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--brown-cafe-creme {
     box-shadow: inset 0.25rem 0 0 0 #d1b781;
     background-color: #f7ecdb;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-caramel {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--brown-caramel {
     box-shadow: inset 0.25rem 0 0 0 #c08c65;
     background-color: #f7ebe5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--brown-opera {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--brown-opera {
     box-shadow: inset 0.25rem 0 0 0 #bd987a;
     background-color: #f7ece4;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-callout--beige-gris-galet {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-callout--beige-gris-galet {
     box-shadow: inset 0.25rem 0 0 0 #aea397;
     background-color: #f3ede5;
   }

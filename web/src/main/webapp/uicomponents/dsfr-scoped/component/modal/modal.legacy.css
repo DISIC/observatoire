@@ -2,23 +2,23 @@
  * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
  */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal {
     background-color: hsla(0deg, 0%, 8.6%, 0.375);
   }
 
-  .fr-modal__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__body {
     background-color: #fff;
   }
 
-  .fr-modal__body.fr-scroll-shadow #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__footer {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__body.fr-scroll-shadow .fr-modal__footer {
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__footer {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__footer {
     background-color: #fff;
   }
 }

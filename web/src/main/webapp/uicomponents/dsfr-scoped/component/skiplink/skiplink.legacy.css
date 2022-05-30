@@ -5,12 +5,12 @@
   /**
   * Correctif
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks.focus-within {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks.focus-within {
     position: relative;
     transform: translateY(0);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks {
     background-color: #eee;
   }
 }

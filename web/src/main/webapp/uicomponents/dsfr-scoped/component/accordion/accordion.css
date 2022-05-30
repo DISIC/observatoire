@@ -6,19 +6,19 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   ACCORDION
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion {
   position: relative;
   box-shadow: inset 0 1px 0 0 var(--border-default-grey), 0 1px 0 0 var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__title {
   margin: 0;
   display: block;
   font-size: unset;
   line-height: unset;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__btn {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__btn {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -45,7 +45,7 @@
   color: var(--text-action-high-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__btn::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__btn::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -57,17 +57,17 @@
   margin-left: auto;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__btn[aria-expanded="true"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__btn[aria-expanded="true"] {
   font-weight: 700;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__btn[aria-expanded="true"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__btn[aria-expanded="true"]::before {
   content: "";
   font-weight: 400;
   font-weight: 700;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion .fr-collapse {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion .fr-collapse {
   --ul-type: "●\00a0\00a0";
   --ol-type: decimal;
   --ul-start: 1rem;
@@ -79,12 +79,12 @@
   transition: visibility 0.3s, padding 0.3s;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordion .fr-collapse--expanded {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion .fr-collapse--expanded {
   padding-top: 1rem;
   padding-bottom: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-accordions-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-accordions-group {
   --ul-type: none;
   --ol-type: none;
   --ul-start: 0;
@@ -95,11 +95,11 @@
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__btn {
     padding: 0.75rem 1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-accordion .fr-collapse {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion .fr-collapse {
     margin: 0 -0.25rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -110,15 +110,15 @@
   /**
   * Reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-accordions-group > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-accordions-group > li {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-accordion {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion {
     box-shadow: inset 0 1px 0 0 #e5e5e5, 0 1px 0 0 #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-accordion__btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-accordion__btn {
     color: #161616;
   }
 }

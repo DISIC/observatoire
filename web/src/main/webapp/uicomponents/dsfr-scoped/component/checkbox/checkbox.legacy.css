@@ -7,7 +7,7 @@
  * L'input de type checkbox avec son label est contenu dans un groupe
  * Ce groupe contient également les textes de validation, d'erreur et d'aide (optionnels)
  */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group {
   /**
     * On cache l'input de type checkbox pour le styler via le label
     */
@@ -21,7 +21,7 @@
     */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"] {
   /**
       * On applique les styles au pseudo élément before du label quand l'input présente
       * un état check ou active
@@ -33,40 +33,40 @@
 }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"] + label::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"] + label::before {
     box-shadow: inset 0 0 0 1px #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"]:checked + label::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"]:active:not(:disabled) + label::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"]:checked + label::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"]:active:not(:disabled) + label::before {
     background-color: #000091;
     color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"]:disabled + label::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"][disabled] + label::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"]:disabled + label::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"][disabled] + label::before {
     box-shadow: inset 0 0 0 1px #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"]:disabled:checked + label::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group input[type="checkbox"][disabled]:checked + label::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"]:disabled:checked + label::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group input[type="checkbox"][disabled]:checked + label::before {
     color: #929292;
     background-color: #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group--error input[type="checkbox"] + label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group--error input[type="checkbox"] + label {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group--error::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group--error::before {
     box-shadow: inset 2px 0 0 0 #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group--valid input[type="checkbox"] + label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group--valid input[type="checkbox"] + label {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-checkbox-group--valid::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-checkbox-group--valid::before {
     box-shadow: inset 2px 0 0 0 #18753c;
   }
 }

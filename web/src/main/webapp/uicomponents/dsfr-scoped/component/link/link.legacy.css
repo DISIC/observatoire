@@ -6,11 +6,11 @@
   /**
   * Reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-links-group > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-links-group > li {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-link {
     color: #000091;
   }
 }

@@ -5,83 +5,83 @@
   /**
   * Correction largeur max du texte
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote blockquote {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote blockquote {
     max-width: 100%;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote::before {
     color: #6a6af4;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--green-tilleul-verveine::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--green-tilleul-verveine::before {
     color: #b7a73f;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--green-bourgeon::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--green-bourgeon::before {
     color: #68a532;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--green-emeraude::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--green-emeraude::before {
     color: #00a95f;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--green-menthe::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--green-menthe::before {
     color: #009081;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--green-archipel::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--green-archipel::before {
     color: #009099;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--blue-ecume::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--blue-ecume::before {
     color: #465f9d;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--blue-cumulus::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--blue-cumulus::before {
     color: #417dc4;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--purple-glycine::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--purple-glycine::before {
     color: #a558a0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--pink-macaron::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--pink-macaron::before {
     color: #e18b76;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--pink-tuile::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--pink-tuile::before {
     color: #ce614a;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--yellow-tournesol::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--yellow-tournesol::before {
     color: #c8aa39;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--yellow-moutarde::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--yellow-moutarde::before {
     color: #c3992a;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--orange-terre-battue::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--orange-terre-battue::before {
     color: #e4794a;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--brown-cafe-creme::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--brown-cafe-creme::before {
     color: #d1b781;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--brown-caramel::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--brown-caramel::before {
     color: #c08c65;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--brown-opera::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--brown-opera::before {
     color: #bd987a;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote--beige-gris-galet::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote--beige-gris-galet::before {
     color: #aea397;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-quote {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-quote {
     background-image: linear-gradient(0deg, #e5e5e5, #e5e5e5);
   }
 }

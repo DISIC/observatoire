@@ -6,18 +6,18 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   FORM
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group:not(:last-child),
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group:not(:last-child) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group:not(:last-child),
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group:not(:last-child) {
   margin-bottom: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group .fr-label .fr-hint-text,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group .fr-label .fr-hint-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group .fr-label .fr-hint-text,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group .fr-label .fr-hint-text {
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label {
   display: block;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -39,16 +39,16 @@
     */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label + .fr-input,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label + .fr-input-wrap,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label + .fr-select {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label + .fr-input,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label + .fr-input-wrap,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label + .fr-select {
   margin-top: 0.5rem;
 }
 
 /**
  * Style du texte d'aide
  */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-hint-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-hint-text {
   display: block;
   font-size: 0.75rem;
   line-height: 1.25rem;
@@ -57,16 +57,16 @@
   color: var(--text-mention-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-hint-text + .fr-input,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-hint-text + .fr-input-wrap,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-hint-text + .fr-select {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-hint-text + .fr-input,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-hint-text + .fr-input-wrap,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-hint-text + .fr-select {
   margin-top: 0.5rem;
 }
 
 /**
  * Style du texte d'erreur
  */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-error-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-error-text {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -77,7 +77,7 @@
   color: var(--text-default-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-error-text::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-error-text::before {
   font: normal normal normal 1rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -88,7 +88,7 @@
 /**
  * Style du texte de l'état validé
  */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-valid-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-valid-text {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -99,7 +99,7 @@
   color: var(--text-default-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-valid-text::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-valid-text::before {
   font: normal normal normal 1rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -107,14 +107,14 @@
   margin-right: 0.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-form-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-form-group {
   margin-bottom: 2rem;
 }
 
 /**
  * Style d'un ensemble de champs
  */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset {
   position: relative;
   margin: 0;
   padding: 0;
@@ -155,11 +155,11 @@
     */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset .fr-hint-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset .fr-hint-text {
   margin-bottom: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__legend {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset__legend {
   margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -167,17 +167,17 @@
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__legend .fr-hint-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset__legend .fr-hint-text {
   margin-top: 0.5rem;
   margin-bottom: 0;
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset__content {
   position: relative;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-fieldset__content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-fieldset__content {
   display: flex;
   align-items: baseline;
   justify-content: flex-start;
@@ -185,48 +185,48 @@
   margin: -0.75rem 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-checkbox-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-checkbox-group {
   display: inline-flex;
   margin-bottom: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-checkbox-group:first-child {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-checkbox-group:first-child {
   margin-top: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-checkbox-group:not(:last-child) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-checkbox-group:not(:last-child) {
   margin-right: 1.25rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-checkbox-group:last-child {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-checkbox-group:last-child {
   margin-bottom: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-radio-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-radio-group {
   display: inline-flex;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-radio-group:not(:last-child) input[type="radio"] + label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-radio-group:not(:last-child) input[type="radio"] + label {
   margin-right: 1.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-radio-group:first-child {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-radio-group:first-child {
   margin-top: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-radio-group:first-child input[type="radio"] + label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-radio-group:first-child input[type="radio"] + label {
   margin-top: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-radio-group:last-child {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-radio-group:last-child {
   margin-bottom: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--inline .fr-radio-group:last-child input[type="radio"] + label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--inline .fr-radio-group:last-child input[type="radio"] + label {
   margin-bottom: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--error .fr-fieldset__content::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--error .fr-fieldset__content::before {
   content: "";
   position: absolute;
   top: 0.75rem;
@@ -236,7 +236,7 @@
   box-shadow: inset 2px 0 0 0 var(--border-plain-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--valid .fr-fieldset__content::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--valid .fr-fieldset__content::before {
   content: "";
   position: absolute;
   top: 0.75rem;
@@ -246,8 +246,8 @@
   box-shadow: inset 2px 0 0 0 var(--border-plain-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group {
   /**
     * Modificateur au niveau du groupe pour appliquer un état validé aux labels
     */
@@ -272,26 +272,26 @@
     */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--valid label,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--valid label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--valid label,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--valid label {
   color: var(--text-default-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--error label,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--error label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--error label,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--error label {
   color: var(--text-default-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--disabled label,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--disabled label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--disabled label,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--disabled label {
   color: var(--text-disabled-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label--error {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label--error {
   color: var(--text-default-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label--success {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label--success {
   color: var(--text-default-success);
 }
 
@@ -311,16 +311,16 @@
   * Style d'un ensemble de champs
   */
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset:disabled label,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset[disabled] label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset:disabled label,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset[disabled] label {
   color: var(--text-disabled-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--error label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--error label {
   color: var(--text-default-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--valid label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--valid label {
   color: var(--text-default-success);
 }
 
@@ -343,68 +343,68 @@
   /**
   * Correctif de la largeur de la légende d'un fieldset
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__legend {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset__legend {
     max-width: 100%;
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--valid label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--valid label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--valid label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--valid label {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--error label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--error label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--error label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--error label {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--disabled label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--disabled label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--disabled label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--disabled label {
     color: #929292;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-label {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-label--error {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-label--error {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-label--success {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-label--success {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-hint-text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-hint-text {
     color: #666;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-error-text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-error-text {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-valid-text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-valid-text {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset:disabled label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset[disabled] label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset:disabled label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset[disabled] label {
     color: #929292;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--error .fr-fieldset__content::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--error .fr-fieldset__content::before {
     box-shadow: inset 2px 0 0 0 #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--error label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--error label {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--valid .fr-fieldset__content::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--valid .fr-fieldset__content::before {
     box-shadow: inset 2px 0 0 0 #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--valid label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--valid label {
     color: #18753c;
   }
 }

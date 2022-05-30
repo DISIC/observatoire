@@ -1,27 +1,27 @@
 /*!
  * DSFR v1.3.1 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
  */
-#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"]:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"][disabled],
-#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"]:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"][disabled],
-#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"]:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"][disabled],
-#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"]:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"][disabled],
-#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"]:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"][disabled],
-#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"]:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"][disabled] {
+#xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[aria-pressed="true"][disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[aria-pressed="true"]:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[aria-pressed="true"][disabled] {
   background-image: none;
 }
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"] {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[aria-pressed="true"] {
     background-size: 100% 100%, 100% 100%;
     background-image: radial-gradient(circle at 100% 0.25rem, transparent 0.57812rem, #000091 0.625rem) !important;
     color: #fff;
@@ -29,252 +29,252 @@
     background-image: radial-gradient(circle at 100% 0.25rem, transparent 0.57812rem, var(--hsla) 0.625rem), radial-gradient(circle at 100% 0.25rem, transparent 0.57812rem, #000091 0.625rem);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tag {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tag {
     color: #161616;
     background-color: #eee;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag {
     color: #000091;
     background-color: #e3e3fd;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-tilleul-verveine,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-tilleul-verveine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-tilleul-verveine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-tilleul-verveine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-tilleul-verveine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-tilleul-verveine {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--green-tilleul-verveine,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--green-tilleul-verveine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--green-tilleul-verveine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--green-tilleul-verveine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--green-tilleul-verveine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--green-tilleul-verveine {
     color: #66673d;
     background-color: #fbe769;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-bourgeon,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-bourgeon,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-bourgeon,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-bourgeon,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-bourgeon,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-bourgeon {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--green-bourgeon,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--green-bourgeon,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--green-bourgeon,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--green-bourgeon,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--green-bourgeon,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--green-bourgeon {
     color: #447049;
     background-color: #a9fb68;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-emeraude,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-emeraude,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-emeraude,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-emeraude,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-emeraude,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-emeraude {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--green-emeraude,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--green-emeraude,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--green-emeraude,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--green-emeraude,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--green-emeraude,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--green-emeraude {
     color: #297254;
     background-color: #9ef9be;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-menthe,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-menthe,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-menthe,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-menthe,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-menthe,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-menthe {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--green-menthe,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--green-menthe,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--green-menthe,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--green-menthe,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--green-menthe,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--green-menthe {
     color: #37635f;
     background-color: #8bf8e7;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--green-archipel,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--green-archipel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--green-archipel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--green-archipel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--green-archipel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--green-archipel {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--green-archipel,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--green-archipel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--green-archipel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--green-archipel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--green-archipel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--green-archipel {
     color: #006a6f;
     background-color: #a6f2fa;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--blue-ecume,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--blue-ecume,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--blue-ecume,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--blue-ecume,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--blue-ecume,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--blue-ecume {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--blue-ecume,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--blue-ecume,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--blue-ecume,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--blue-ecume,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--blue-ecume,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--blue-ecume {
     color: #2f4077;
     background-color: #dee5fd;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--blue-cumulus,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--blue-cumulus,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--blue-cumulus,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--blue-cumulus,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--blue-cumulus,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--blue-cumulus {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--blue-cumulus,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--blue-cumulus,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--blue-cumulus,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--blue-cumulus,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--blue-cumulus,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--blue-cumulus {
     color: #3558a2;
     background-color: #dae6fd;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--purple-glycine,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--purple-glycine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--purple-glycine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--purple-glycine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--purple-glycine,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--purple-glycine {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--purple-glycine,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--purple-glycine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--purple-glycine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--purple-glycine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--purple-glycine,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--purple-glycine {
     color: #6e445a;
     background-color: #fddbfa;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--pink-macaron,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--pink-macaron,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--pink-macaron,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--pink-macaron,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--pink-macaron,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--pink-macaron {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--pink-macaron,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--pink-macaron,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--pink-macaron,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--pink-macaron,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--pink-macaron,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--pink-macaron {
     color: #8d533e;
     background-color: #fddfda;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--pink-tuile,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--pink-tuile,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--pink-tuile,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--pink-tuile,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--pink-tuile,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--pink-tuile {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--pink-tuile,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--pink-tuile,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--pink-tuile,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--pink-tuile,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--pink-tuile,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--pink-tuile {
     color: #a94645;
     background-color: #fddfdb;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--yellow-tournesol,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--yellow-tournesol,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--yellow-tournesol,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--yellow-tournesol,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--yellow-tournesol,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--yellow-tournesol {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--yellow-tournesol,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--yellow-tournesol,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--yellow-tournesol,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--yellow-tournesol,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--yellow-tournesol,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--yellow-tournesol {
     color: #716043;
     background-color: #fde39c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--yellow-moutarde,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--yellow-moutarde,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--yellow-moutarde,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--yellow-moutarde,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--yellow-moutarde,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--yellow-moutarde {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--yellow-moutarde,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--yellow-moutarde,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--yellow-moutarde,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--yellow-moutarde,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--yellow-moutarde,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--yellow-moutarde {
     color: #695240;
     background-color: #fde2b5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--orange-terre-battue,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--orange-terre-battue,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--orange-terre-battue,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--orange-terre-battue,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--orange-terre-battue,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--orange-terre-battue {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--orange-terre-battue,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--orange-terre-battue,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--orange-terre-battue,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--orange-terre-battue,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--orange-terre-battue,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--orange-terre-battue {
     color: #755348;
     background-color: #fddfd8;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--brown-cafe-creme,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--brown-cafe-creme,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--brown-cafe-creme,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--brown-cafe-creme,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--brown-cafe-creme,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--brown-cafe-creme {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--brown-cafe-creme,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--brown-cafe-creme,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--brown-cafe-creme,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--brown-cafe-creme,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--brown-cafe-creme,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--brown-cafe-creme {
     color: #685c48;
     background-color: #f4e3c7;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--brown-caramel,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--brown-caramel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--brown-caramel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--brown-caramel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--brown-caramel,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--brown-caramel {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--brown-caramel,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--brown-caramel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--brown-caramel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--brown-caramel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--brown-caramel,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--brown-caramel {
     color: #845d48;
     background-color: #f3e2d9;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--brown-opera,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--brown-opera,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--brown-opera,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--brown-opera,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--brown-opera,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--brown-opera {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--brown-opera,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--brown-opera,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--brown-opera,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--brown-opera,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--brown-opera,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--brown-opera {
     color: #745b47;
     background-color: #f3e2d7;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag--beige-gris-galet,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag--beige-gris-galet,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag--beige-gris-galet,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag--beige-gris-galet,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag--beige-gris-galet,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag--beige-gris-galet {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag--beige-gris-galet,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag--beige-gris-galet,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag--beige-gris-galet,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag--beige-gris-galet,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag--beige-gris-galet,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag--beige-gris-galet {
     color: #6a6156;
     background-color: #eee4d9;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="false"],
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="false"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="false"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="false"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="false"],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="false"] {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[aria-pressed="false"],
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[aria-pressed="false"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[aria-pressed="false"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[aria-pressed="false"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[aria-pressed="false"],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[aria-pressed="false"] {
     color: #000091;
     background-color: #e3e3fd;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"]::after,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"]::after,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"]::after,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"]::after,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"]::after,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"]::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[aria-pressed="true"]::after,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[aria-pressed="true"]::after,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[aria-pressed="true"]::after,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[aria-pressed="true"]::after,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[aria-pressed="true"]::after,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[aria-pressed="true"]::after {
     color: #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[aria-pressed="true"].fr-tag--sm,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[aria-pressed="true"].fr-tag--sm,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[aria-pressed="true"].fr-tag--sm,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[aria-pressed="true"].fr-tag--sm,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[aria-pressed="true"].fr-tag--sm,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[aria-pressed="true"].fr-tag--sm {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[aria-pressed="true"].fr-tag--sm,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[aria-pressed="true"].fr-tag--sm,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[aria-pressed="true"].fr-tag--sm,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[aria-pressed="true"].fr-tag--sm,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[aria-pressed="true"].fr-tag--sm,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[aria-pressed="true"].fr-tag--sm {
     background-image: radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, var(--hsla) 0.5rem), radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, #000091 0.5rem);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag.fr-tag--dismiss,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag.fr-tag--dismiss,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag.fr-tag--dismiss,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag.fr-tag--dismiss,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag.fr-tag--dismiss,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag.fr-tag--dismiss {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag.fr-tag--dismiss,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag.fr-tag--dismiss,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag.fr-tag--dismiss,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag.fr-tag--dismiss,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag.fr-tag--dismiss,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag.fr-tag--dismiss {
     color: #fff;
     background-color: #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-tag:not([href]),
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab button.fr-tag[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="button"].fr-tag[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="image"].fr-tag[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="reset"].fr-tag[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab input[type="submit"].fr-tag[disabled] {
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-tag:not([href]),
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr button.fr-tag[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="button"].fr-tag[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="image"].fr-tag[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="reset"].fr-tag[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr input[type="submit"].fr-tag[disabled] {
     color: #929292;
     background-color: #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm a.fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm button.fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="button"].fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="image"].fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="reset"].fr-tag[aria-pressed="true"],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tags-group.fr-tags-group--sm input[type="submit"].fr-tag[aria-pressed="true"] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tags-group.fr-tags-group--sm a.fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tags-group.fr-tags-group--sm button.fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tags-group.fr-tags-group--sm input[type="button"].fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tags-group.fr-tags-group--sm input[type="image"].fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tags-group.fr-tags-group--sm input[type="reset"].fr-tag[aria-pressed="true"],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tags-group.fr-tags-group--sm input[type="submit"].fr-tag[aria-pressed="true"] {
     background-image: radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, var(--hsla) 0.5rem), radial-gradient(circle at 100% 0.1875rem, transparent 0.4475rem, #000091 0.5rem);
   }
 }

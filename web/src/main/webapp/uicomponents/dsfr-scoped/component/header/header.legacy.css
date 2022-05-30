@@ -5,59 +5,59 @@
   /**
     * Correctif valeur 'initial' non prise en compte par IE
     */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__tools-links {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__tools-links {
     display: block;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header .fr-modal {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header .fr-modal {
     position: static;
     overflow: visible;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header .fr-header__menu {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header .fr-header__menu {
     box-shadow: inset 0 1px 0 0 #e5e5e5;
   }
 }
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__tools-links .fr-link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__tools-links .fr-link {
     overflow: visible;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header {
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__service {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__service {
     box-shadow: inset 0 1px 0 0 #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__menu-links .fr-link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__menu-links .fr-link {
     box-shadow: inset 0 -1px 0 0 #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__tools-links .fr-link::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__tools-links .fr-link::after {
     box-shadow: inset 0 0 0 1px #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__navbar .fr-service__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__navbar .fr-service__title {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__navbar .fr-btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__navbar .fr-btn {
     background-color: transparent;
     color: #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__navbar .fr-btn--menu {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__navbar .fr-btn--menu {
     color: #3a3a3a;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header .fr-modal {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header .fr-modal {
     background-color: #fff;
   }
 }
 @media (min-width: 62em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-header__service {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-header__service {
     box-shadow: none;
   }
 }

@@ -3,7 +3,7 @@
  */
 @charset "UTF-8";
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners a {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners a {
   background: #fff;
 }
 
@@ -11,42 +11,42 @@
   /**
   * Reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-item,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top-list > li,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners-sub ul > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-item,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top-list > li,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners-sub ul > li {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer {
     box-shadow: 0 -2px 0 0 #000091, inset 0 -1px 0 0 #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__content-link,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top-cat {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__content-link,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top-cat {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__top {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__top {
     background-color: #f6f6f6;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom {
     box-shadow: inset 0 1px 0 0 #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-item::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-item::before {
     box-shadow: inset 0 0 0 1px #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-link {
     color: #666;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__bottom-copy {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__bottom-copy {
     color: #666;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-footer__partners {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-footer__partners {
     box-shadow: inset 0 1px 0 0 #e5e5e5;
   }
 }

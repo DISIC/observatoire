@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   SKIPLINK
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks {
   --ul-type: none;
   --ol-type: none;
   --ul-start: 0;
@@ -21,26 +21,26 @@
   background-color: var(--background-contrast-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks:focus-within {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks:focus-within {
   position: relative;
   transform: translateY(0);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list {
   display: flex;
   flex-direction: column;
   margin: 0 -1rem -1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list > li {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list > li {
   margin: 0 1rem 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list > li::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list > li::before {
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list > li .fr-link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list > li .fr-link {
   font-size: 1rem;
   line-height: 1.5rem;
   min-height: 2rem;
@@ -48,22 +48,22 @@
   border-radius: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list > li .fr-link::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list > li .fr-link::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list:focus-within {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list:focus-within {
   position: relative;
   transform: translateY(0);
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list > li {
     margin: 0 1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks__list {
     flex-direction: row;
     flex-wrap: wrap;
     margin: 0 -1rem;
@@ -74,12 +74,12 @@
   /**
   * Correctif
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks.focus-within {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks.focus-within {
     position: relative;
     transform: translateY(0);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-skiplinks {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-skiplinks {
     background-color: #eee;
   }
 }

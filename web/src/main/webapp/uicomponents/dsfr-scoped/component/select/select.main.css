@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   SELECT
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select {
   display: block;
   appearance: none;
   -moz-appearance: none;
@@ -46,20 +46,20 @@
     */
 }
 
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-select {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-select {
   --data-uri-svg: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%23fff' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select--error {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select--error {
   box-shadow: inset 0 -2px 0 0 var(--border-plain-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select--valid {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select--valid {
   box-shadow: inset 0 -2px 0 0 var(--border-plain-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select[disabled] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select[disabled] {
   color: var(--text-disabled-grey);
   box-shadow: inset 0 -2px 0 0 var(--border-disabled-grey);
 
@@ -67,14 +67,14 @@
   background-image: var(--data-uri-svg);
 }
 
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-select:disabled,
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-select[disabled] {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-select:disabled,
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-select[disabled] {
   --data-uri-svg: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%23666' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill:hover,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill:focus {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill:hover,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill:focus {
   box-shadow: inset 0 -2px 0 0 var(--border-plain-grey), inset 0 0 0 1000px var(--background-contrast-blue-france);
   -webkit-text-fill-color: var(--text-label-grey);
 }

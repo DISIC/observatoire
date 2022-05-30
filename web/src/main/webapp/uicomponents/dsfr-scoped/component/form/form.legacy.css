@@ -3,8 +3,8 @@
  */
 @charset "UTF-8";
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select-group,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-input-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group {
   /**
     * Modificateur au niveau du groupe pour appliquer un état validé aux labels
     */
@@ -18,7 +18,7 @@
     */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-label {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-label {
   /**
     * Modificateur au niveau du label pour appliquer un état d'erreur au label
     */
@@ -43,7 +43,7 @@
 /**
   * Style d'un ensemble de champs
   */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset {
   /**
     * Mixin disabled pour gérer l'état disabled
     */
@@ -60,68 +60,68 @@
   /**
   * Correctif de la largeur de la légende d'un fieldset
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset__legend {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset__legend {
     max-width: 100%;
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--valid label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--valid label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--valid label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--valid label {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--error label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--error label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--error label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--error label {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select-group--disabled label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-input-group--disabled label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select-group--disabled label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-input-group--disabled label {
     color: #929292;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-label {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-label--error {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-label--error {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-label--success {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-label--success {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-hint-text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-hint-text {
     color: #666;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-error-text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-error-text {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-valid-text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-valid-text {
     color: #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset:disabled label,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset[disabled] label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset:disabled label,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset[disabled] label {
     color: #929292;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--error .fr-fieldset__content::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--error .fr-fieldset__content::before {
     box-shadow: inset 2px 0 0 0 #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--error label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--error label {
     color: #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--valid .fr-fieldset__content::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--valid .fr-fieldset__content::before {
     box-shadow: inset 2px 0 0 0 #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-fieldset--valid label {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-fieldset--valid label {
     color: #18753c;
   }
 }

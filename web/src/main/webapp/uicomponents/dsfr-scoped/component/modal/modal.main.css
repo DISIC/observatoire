@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   MODAL
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal {
   border: none;
   color: inherit;
   visibility: hidden;
@@ -33,15 +33,15 @@
   background-color: var(--background-overlay-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal > .fr-container {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal > .fr-container {
   pointer-events: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal:focus {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal:focus {
   outline: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal::before {
   content: "";
   display: block;
   width: 0;
@@ -49,7 +49,7 @@
   flex: 1 0 2rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal::after {
   content: none;
   display: block;
   width: 0;
@@ -57,15 +57,15 @@
   flex: 1 0 2rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal--top::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal--top::before {
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal--top::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal--top::after {
   content: '';
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal--opened {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal--opened {
   visibility: inherit;
   opacity: 1;
   width: 100%;
@@ -73,7 +73,7 @@
   transition: opacity 0.3s, visibility 0.3s;
 }
 
-.fr-modal__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__body {
   pointer-events: all;
   overflow-y: auto;
   flex: 1 1 auto;
@@ -83,20 +83,20 @@
   background-color: var(--background-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__header {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__header {
   flex: auto 0 0;
   display: flex;
   align-items: center;
   padding: 1rem 1rem 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__content {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__content {
   padding-left: 1rem;
   padding-right: 1rem;
   margin-bottom: 3.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__footer {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__footer {
   flex: auto 0 0;
   display: flex;
   padding: 1rem;
@@ -108,12 +108,12 @@
   background-color: var(--background-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__footer .fr-btns-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__footer .fr-btns-group {
   margin-bottom: -1rem;
   width: calc(100% + 1rem);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title {
   font-size: 1.375rem;
   line-height: 1.75rem;
   font-weight: 700;
@@ -122,57 +122,57 @@
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title[class*=" fr-fi-"] {
   margin-right: 0.5rem;
 }
 
-.fr-modal__body.fr-scroll-shadow #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__footer {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__body.fr-scroll-shadow .fr-modal__footer {
   box-shadow: 0 -8px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 16px -16px rgba(0, 0, 0, 0.32);
   --blend: var(--background-elevated-grey-blend);
   background-color: var(--background-elevated-grey);
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal--top::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal--top::before {
     content: '';
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal::before {
     width: 0;
     height: 10vh;
     flex: 1 0 10vh;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal::after {
     content: "";
     width: 0;
     height: 10vh;
     flex: 1 0 10vh;
   }
 
-  .fr-modal__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__body {
     max-height: 80vh !important;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__header {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__header {
     padding: 1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__content {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__content {
     padding-left: 2rem;
     padding-right: 2rem;
     margin-bottom: 4rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__footer {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__footer {
     padding: 2rem;
     margin-top: -3rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-modal__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-modal__title {
     font-size: 1.5rem;
     line-height: 2rem;
   }

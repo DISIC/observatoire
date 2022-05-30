@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   SCHEME
 \* ˍˍˍˍˍˍˍˍˍ */
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] {
   --grey-1000-50: #161616;
   --grey-1000-75: #1e1e1e;
   --grey-975-75: #1e1e1e;

@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   SELECT
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select {
   display: block;
   appearance: none;
   -moz-appearance: none;
@@ -62,20 +62,20 @@
     */
 }
 
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-select {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-select {
   --data-uri-svg: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%23fff' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select--error {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select--error {
   box-shadow: inset 0 -2px 0 0 var(--border-plain-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select--valid {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select--valid {
   box-shadow: inset 0 -2px 0 0 var(--border-plain-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select[disabled] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select[disabled] {
   color: var(--text-disabled-grey);
   box-shadow: inset 0 -2px 0 0 var(--border-disabled-grey);
 
@@ -83,14 +83,14 @@
   background-image: var(--data-uri-svg);
 }
 
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-select:disabled,
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-select[disabled] {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-select:disabled,
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-select[disabled] {
   --data-uri-svg: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' ><path fill='%23666' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/></svg>");
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill:hover,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill:focus {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill:hover,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill:focus {
   box-shadow: inset 0 -2px 0 0 var(--border-plain-grey), inset 0 0 0 1000px var(--background-contrast-blue-france);
   -webkit-text-fill-color: var(--text-label-grey);
 }
@@ -99,35 +99,35 @@
   /**
   * Cache l'icone native du select sur IE
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select::-ms-expand {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select::-ms-expand {
     display: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select {
     color: #161616;
     background-color: #eee;
     box-shadow: inset 0 -2px 0 0 #3a3a3a;
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' %3E%3Cpath fill='%23161616' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/%3E%3C/svg%3E");
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select--error {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select--error {
     box-shadow: inset 0 -2px 0 0 #ce0500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select--valid {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select--valid {
     box-shadow: inset 0 -2px 0 0 #18753c;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select[disabled] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select[disabled] {
     color: #929292;
     box-shadow: inset 0 -2px 0 0 #e5e5e5;
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' %3E%3Cpath fill='%23929292' d='M12,13.1l5-4.9l1.4,1.4L12,15.9L5.6,9.5l1.4-1.4L12,13.1z'/%3E%3C/svg%3E");
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill:hover,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-select:-webkit-autofill:focus {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill:hover,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-select:-webkit-autofill:focus {
     box-shadow: inset 0 -2px 0 0 #3a3a3a, inset 0 0 0 1000px #ececfe;
     -webkit-text-fill-color: #161616;
   }

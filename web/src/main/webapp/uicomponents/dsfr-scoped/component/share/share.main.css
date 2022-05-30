@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   SHARE
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -30,10 +30,10 @@
   box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: hidden;
   white-space: nowrap;
@@ -43,16 +43,16 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:not([class*="fr-share__link--icon-"])[class*=" fr-fi-"]::before {
   margin-left: 0;
   margin-right: 0.75rem;
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share {
   display: flex;
   flex-direction: column;
 
@@ -60,19 +60,19 @@
   --title-spacing: 0 0 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__title {
   font-size: 1rem;
   line-height: 1.5rem;
   order: 1;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__text {
   font-size: 0.75rem;
   line-height: 1.25rem;
   order: 3;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__group {
   --ul-type: none;
   --ol-type: none;
   --ul-start: 0;
@@ -89,7 +89,7 @@
   order: 2;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--facebook {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--facebook {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 3rem;
@@ -104,7 +104,7 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--facebook::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--facebook::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -114,7 +114,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--twitter {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--twitter {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 3rem;
@@ -129,7 +129,7 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--twitter::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--twitter::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -139,7 +139,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--linkedin {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--linkedin {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 3rem;
@@ -154,7 +154,7 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--linkedin::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--linkedin::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -164,7 +164,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--mail {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--mail {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 3rem;
@@ -179,7 +179,7 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--mail::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--mail::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -189,7 +189,7 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--copy {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--copy {
   font-size: 0.875rem;
   line-height: 1.5rem;
   min-height: 3rem;
@@ -204,7 +204,7 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link--copy::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link--copy::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -214,15 +214,15 @@
   font-size: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-share__link[disabled],
-#xwikimaincontainer #mainContentArea #avis-tab a.fr-share__link:not([href]) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link[disabled],
+#xwikimaincontainer #mainContentArea .use-dsfr a.fr-share__link:not([href]) {
   color: var(--text-disabled-grey);
   box-shadow: inset 0 0 0 1px var(--border-disabled-grey);
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__text {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-share__text {
     max-width: 18rem;
   }
 }

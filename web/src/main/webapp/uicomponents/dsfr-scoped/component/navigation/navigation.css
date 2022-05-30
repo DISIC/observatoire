@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   NAVIGATION
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -22,26 +22,26 @@
   z-index: 3500;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav *:focus,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav *:focus-visible {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav *:focus,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav *:focus-visible {
   z-index: 4000;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__link,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__btn,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__link,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__btn {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__link,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__btn,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__link,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__btn {
   font-weight: bold;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__item {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__item {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -49,8 +49,8 @@
   box-shadow: inset 0 -1px 0 0 var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn {
   width: 100%;
   padding: 0.75rem 0;
   font-size: 1rem;
@@ -61,14 +61,14 @@
   color: var(--text-action-high-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link[aria-current],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-current] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link[aria-current],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-current] {
   position: relative;
   color: var(--text-active-blue-france);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link[aria-current]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-current]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link[aria-current]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-current]::before {
   content: "";
   display: block;
   position: absolute;
@@ -81,18 +81,18 @@
   background-color: var(--background-active-blue-france);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link {
   display: block;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn::after {
   font: normal 700 normal 1rem/1 dsfr-icon;
   content: "";
   font-weight: 400;
@@ -102,46 +102,46 @@
   transition: transform 0.3s;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-expanded="true"]::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-expanded="true"]::after {
   transform: rotate(-180deg);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu {
   z-index: 2500;
   margin: 0 -1rem;
   padding: 0 1rem;
   width: auto;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu *:focus,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu *:focus-visible {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu *:focus,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu *:focus-visible {
   z-index: 3000;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list {
   margin: 0;
   padding: 0.5rem 0 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list > *:first-child,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list > *:first-child > .fr-nav__link,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list > *:hover,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list > *:hover > .fr-nav__link,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list > *:hover + *,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list > *:hover + * > .fr-nav__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list > *:first-child,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list > *:first-child > .fr-nav__link,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list > *:hover,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list > *:hover > .fr-nav__link,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list > *:hover + *,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list > *:hover + * > .fr-nav__link {
   box-shadow: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu .fr-nav__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu .fr-nav__link {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-menu .fr-nav__link::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-menu .fr-nav__link::before {
   left: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu {
   z-index: 2500;
   margin: -0.25rem -1rem 1px;
   padding: 0.25rem 1rem 0;
@@ -149,29 +149,29 @@
   background-color: var(--background-elevated-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu *:focus,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu *:focus-visible {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu *:focus,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu *:focus-visible {
   z-index: 3000;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu:focus {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu:focus {
   outline: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu .fr-link--close {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu .fr-link--close {
   display: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu .fr-nav__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu .fr-nav__link {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu .fr-nav__link::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu .fr-nav__link::before {
   left: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__leader {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__leader {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 1rem;
@@ -180,32 +180,32 @@
   --title-spacing: 0 0 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__category {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__category {
   font-weight: 700;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__list {
   padding-bottom: 1.5rem;
   box-shadow: 0 1px 0 0 var(--border-default-grey);
 }
 
 @media (min-width: 62em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list {
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 0 -1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > *:first-child:nth-last-child(2) ~ *,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > *:first-child:nth-last-child(3) ~ *,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > *:first-child:nth-last-child(4) ~ * {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > *:first-child:nth-last-child(2) ~ *,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > *:first-child:nth-last-child(3) ~ *,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > *:first-child:nth-last-child(4) ~ * {
     margin-left: 1.25rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__link,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__btn,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__link,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__link,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__btn,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__link,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__btn {
     padding: 1rem;
     margin: 0;
     width: auto;
@@ -214,19 +214,19 @@
     font-weight: normal;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__link[aria-current],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__btn[aria-current],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__link[aria-current],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__btn[aria-current] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__link[aria-current],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__btn[aria-current],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__link[aria-current],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__btn[aria-current] {
     /**
              * Pour conserver le souligné de selection  par dessus la barre de mega-menu
              */
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__link[aria-current]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__btn[aria-current]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__link[aria-current]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__btn[aria-current]::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__link[aria-current]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__btn[aria-current]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__link[aria-current]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__btn[aria-current]::before {
     position: absolute;
     top: auto;
     bottom: 0;
@@ -236,41 +236,41 @@
     margin-top: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__link[aria-current]:not([aria-expanded="true"]),
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > .fr-nav__btn[aria-current]:not([aria-expanded="true"]),
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__link[aria-current]:not([aria-expanded="true"]),
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__list > * > .fr-nav__btn[aria-current]:not([aria-expanded="true"]) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__link[aria-current]:not([aria-expanded="true"]),
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > .fr-nav__btn[aria-current]:not([aria-expanded="true"]),
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__link[aria-current]:not([aria-expanded="true"]),
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__list > * > .fr-nav__btn[aria-current]:not([aria-expanded="true"]) {
     z-index: 3500;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__item {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__item {
     align-items: flex-start;
     box-shadow: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__item--align-right {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__item--align-right {
     align-items: flex-end;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn {
     font-size: 0.875rem;
     line-height: 1.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn {
     padding: 1rem 0.75rem 1rem 1rem;
     justify-content: flex-start;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu {
     position: absolute;
     top: 100%;
     margin-top: -0.25rem;
     padding-top: 0.25rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu::after {
     content: "";
     display: block;
     position: absolute;
@@ -284,21 +284,21 @@
     background-color: var(--background-elevated-grey);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list {
     padding: 0 0 2rem;
     width: 20rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu .fr-nav__link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu .fr-nav__link {
     padding: 0.75rem 1rem;
     box-shadow: 0 calc(-1rem - 1px) 0 -1rem var(--border-default-grey);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu .fr-nav__link::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu .fr-nav__link::before {
     left: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu {
     position: absolute;
     top: 100%;
     right: 0;
@@ -307,7 +307,7 @@
     padding: 0 0 2.25rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu > .fr-container::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu > .fr-container::before {
     content: "";
     display: block;
     height: 2px;
@@ -318,32 +318,32 @@
     background-color: var(--background-open-blue-france);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu .fr-link--close {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu .fr-link--close {
     display: flex;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu .fr-nav__link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu .fr-nav__link {
     padding: 0.75rem 1rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__leader {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__leader {
     padding-top: 0;
     padding-left: 0;
     padding-right: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-expanded="true"] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-expanded="true"] {
     color: var(--text-active-blue-france);
 
     --blend: var(--background-open-blue-france-blend);
     background-color: var(--background-open-blue-france);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__list {
     box-shadow: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__category {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__category {
     box-shadow: 0 calc(1rem + 1px) 0 -1rem var(--border-default-grey);
   }
 }
@@ -352,42 +352,42 @@
   /**
   * reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__list,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__list,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu__list {
     list-style: none;
   }
 
   /**
   * reset margin
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__category {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__category {
     margin: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link[aria-current],
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-current] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link[aria-current],
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-current] {
     color: #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__link[aria-current]::before,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-current]::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__link[aria-current]::before,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-current]::before {
     background-color: #000091;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__item {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__item {
     box-shadow: inset 0 -1px 0 0 #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu {
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__list {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__list {
     box-shadow: 0 1px 0 0 #e5e5e5;
   }
 }
@@ -396,28 +396,28 @@
   /**
     * Correctif de l'alignement des menus sur la droite
     */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__item--align-right .fr-collapse {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__item--align-right .fr-collapse {
     transform: translateX(-100%);
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-nav__btn[aria-expanded="true"] {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-nav__btn[aria-expanded="true"] {
     color: #000091;
     background-color: #e3e3fd;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu::after {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu::after {
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-menu .fr-nav__link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-menu .fr-nav__link {
     box-shadow: 0 calc(-1rem - 1px) 0 -1rem #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu > .fr-container::before {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu > .fr-container::before {
     background-color: #e3e3fd;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-mega-menu__category {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-mega-menu__category {
     box-shadow: 0 calc(1rem + 1px) 0 -1rem #e5e5e5;
   }
 }

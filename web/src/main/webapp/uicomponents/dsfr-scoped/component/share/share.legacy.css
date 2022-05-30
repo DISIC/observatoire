@@ -6,18 +6,18 @@
   /**
   * Reset liste à puce
   */
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__group > li {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-share__group > li {
     list-style: none;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__link {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link {
     color: #000091;
     box-shadow: inset 0 0 0 1px #e5e5e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__link:disabled,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-share__link[disabled],
-  #xwikimaincontainer #mainContentArea #avis-tab a.fr-share__link:not([href]) {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link:disabled,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-share__link[disabled],
+  #xwikimaincontainer #mainContentArea .use-dsfr a.fr-share__link:not([href]) {
     color: #929292;
     box-shadow: inset 0 0 0 1px #e5e5e5;
   }

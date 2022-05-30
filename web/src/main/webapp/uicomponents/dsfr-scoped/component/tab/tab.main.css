@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   TAB
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -29,10 +29,10 @@
   white-space: nowrap;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: hidden;
   white-space: nowrap;
@@ -42,35 +42,35 @@
   padding-right: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([class*="fr-tabs__tab--icon-"])[class*=" fr-fi-"]::before {
   margin-left: 0;
   margin-right: 0.75rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab--icon-left[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab--icon-left[class*=" fr-fi-"]::before {
   margin-left: -0.25rem;
   margin-right: 0.5rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs {
   --ul-type: none;
   --ol-type: none;
   --ul-start: 0;
@@ -112,12 +112,12 @@
     */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs--viewport-width {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs--viewport-width {
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs::after {
   content: "";
   display: block;
   position: absolute;
@@ -129,7 +129,7 @@
   box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__list {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__list {
   display: flex;
   align-items: flex-end;
   overflow-x: auto;
@@ -145,7 +145,7 @@
   padding: 4px 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab[aria-selected=true] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab[aria-selected=true] {
   pointer-events: none;
   color: var(--text-active-blue-france);
 
@@ -153,7 +153,7 @@
   background-color: var(--background-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab::after {
   content: "";
   display: block;
   position: absolute;
@@ -168,11 +168,11 @@
   background-image: linear-gradient(0deg, var(--border-active-blue-france), var(--border-active-blue-france)), linear-gradient(0deg, var(--border-default-grey), var(--border-default-grey)), linear-gradient(0deg, var(--border-default-grey), var(--border-default-grey)), linear-gradient(0deg, var(--background-default-grey), var(--background-default-grey));
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([aria-selected=true])::after {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([aria-selected=true])::after {
   background-size: 0 2px, 1px 0, 1px 0, 0 3px;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel {
   --link-underline: 0 1px 0 0 currentColor;
   --link-blank-font: normal 700 normal 1rem/1 dsfr-icon;
   --link-blank-content: "\00a0";
@@ -210,19 +210,19 @@
     **/
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel:focus,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel:focus-visible {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel:focus,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel:focus-visible {
   outline-offset: calc(-1rem + 2px);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel:not(.fr-tabs__panel--selected) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel:not(.fr-tabs__panel--selected) {
   visibility: hidden;
 }
 
 /*
 * Ombres ajoutées en Js si le contenu est plus grand que le conteneur
 */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__shadow {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__shadow {
   /**
   * Modifier ombre à gauche
   **/
@@ -236,7 +236,7 @@
   **/
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__shadow::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__shadow::before {
   content: "";
   display: block;
   position: absolute;
@@ -252,32 +252,32 @@
   transition: box-shadow 0.3s;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__shadow--left::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__shadow--left::before {
   box-shadow: inset 2rem 0 1.5rem -2rem #161616, inset 0 0 0 0 #161616;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__shadow--right::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__shadow--right::before {
   box-shadow: inset 0 0 0 0 #161616, inset -2rem 0 1.5rem -2rem #161616;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__shadow--left.fr-tabs__shadow--right::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__shadow--left.fr-tabs__shadow--right::before {
   content: "";
   display: block;
   box-shadow: inset 2rem 0 1.5rem -2rem #161616, inset -2rem 0 1.5rem -2rem #161616;
 }
 
-:root[data-fr-theme="dark"] #xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__shadow::before {
+:root #xwikimaincontainer #mainContentArea .use-dsfr[data-fr-theme="dark"] .fr-tabs__shadow::before {
   opacity: 1;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:not([aria-selected=true]) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:not([aria-selected=true]) {
   --blend: var(--background-action-low-blue-france-blend);
   background-color: var(--background-action-low-blue-france);
   color: var(--text-action-high-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab:disabled,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__tab[disabled] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab:disabled,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__tab[disabled] {
   color: var(--text-disabled-grey);
 
   --blend: var(--background-disabled-grey-blend);
@@ -285,17 +285,17 @@
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tabs--viewport-width {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs--viewport-width {
     margin-left: 0;
     margin-right: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel {
     padding: 2rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel:focus,
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tabs__panel:focus-visible {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel:focus,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tabs__panel:focus-visible {
     outline-offset: calc(-2rem + 2px);
   }
 }

@@ -6,15 +6,15 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   UPLOAD
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-upload-group .fr-label .fr-hint-text {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-upload-group .fr-label .fr-hint-text {
   margin-top: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-upload-group .fr-label + .fr-upload {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-upload-group .fr-label + .fr-upload {
   margin-top: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-upload {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-upload {
   font-size: 0.875rem;
   line-height: 1.5rem;
   width: 100%;
@@ -22,12 +22,12 @@
   margin: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-upload:disabled::-webkit-file-upload-button {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-upload:disabled::-webkit-file-upload-button {
   outline-style: none;
   cursor: not-allowed;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-upload::-webkit-file-upload-button {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-upload::-webkit-file-upload-button {
   -webkit-appearance: button;
   font: inherit;
   cursor: pointer;

@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   TILE
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile {
   position: relative;
   display: flex;
   flex-direction: column-reverse;
@@ -54,11 +54,11 @@
   background-color: var(--background-default-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-grid-row .fr-tile {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-grid-row .fr-tile {
   height: 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__link {
   display: inline-flex;
 
   --link-underline: none;
@@ -67,7 +67,7 @@
   width: 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile__img {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__img {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,11 +82,11 @@
      */
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile__img > svg {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__img > svg {
   width: 100%;
 }
 
-.fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,130 +96,130 @@
   text-align: center;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__title {
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 700;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile__desc {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__desc {
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal {
   flex-direction: row-reverse;
   align-items: center;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal .fr-tile__img {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal .fr-tile__img {
   width: 3rem;
   height: 3rem;
   margin: 1.5rem 0 1.5rem 1.5rem;
 }
 
-.fr-tile--horizontal .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal .fr-tile__body {
   align-items: flex-start;
   padding: 0;
   margin: 1.5rem;
   text-align: left;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--vertical-md {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--vertical-md {
   flex-direction: row-reverse;
   align-items: center;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--vertical-md .fr-tile__img {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--vertical-md .fr-tile__img {
   width: 3rem;
   height: 3rem;
   margin: 1.5rem 0 1.5rem 1.5rem;
 }
 
-.fr-tile--vertical-md .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--vertical-md .fr-tile__body {
   align-items: flex-start;
   padding: 0;
   margin: 1.5rem;
   text-align: left;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal-md {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md {
   flex-direction: column-reverse;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal-md .fr-tile__img {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md .fr-tile__img {
   width: 5rem;
   height: 5rem;
   margin: 2rem auto 0;
 }
 
-.fr-tile--horizontal-md .fr-tile__img + .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md .fr-tile__img + .fr-tile__body {
   min-height: initial;
 }
 
-.fr-tile--horizontal-md .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md .fr-tile__body {
   align-items: center;
   padding: 1rem;
   margin: 0;
   text-align: center;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-tile--grey {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--grey {
   --blend: var(--background-contrast-grey-blend);
   background-color: var(--background-contrast-grey);
 }
 
 @media (min-width: 48em) {
-  .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__body {
     padding: 1.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal .fr-tile__img {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal .fr-tile__img {
     width: 5rem;
     height: 5rem;
     margin: 2rem 0 2rem 2rem;
   }
 
-  .fr-tile--horizontal .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal .fr-tile__body {
     margin: 2rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--vertical-md .fr-tile__img {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--vertical-md .fr-tile__img {
     width: 5rem;
     height: 5rem;
     margin: 2rem auto 0;
   }
 
-  .fr-tile--vertical-md .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--vertical-md .fr-tile__body {
     align-items: center;
     padding: 1.5rem;
     margin: 0;
     text-align: center;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--vertical-md {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--vertical-md {
     flex-direction: column-reverse;
     align-items: initial;
   }
 
-  .fr-tile--horizontal-md .fr-tile__img + .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md .fr-tile__img + .fr-tile__body {
     padding: 0;
     margin: 2rem;
     min-height: 5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal-md .fr-tile__img {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md .fr-tile__img {
     margin: 2rem 0 2rem 2rem;
   }
 
-  .fr-tile--horizontal-md .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md .fr-tile__body {
     align-items: flex-start;
     padding: 0;
     margin: 2rem;
     text-align: left;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--horizontal-md {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--horizontal-md {
     flex-direction: row-reverse;
     align-items: center;
   }
@@ -229,25 +229,25 @@
   /**
   * Correctif de la largeur du texte dans la tuile
   */
-  .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab,
-  .fr-tile__body #xwikimaincontainer #mainContentArea #avis-tab > * {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__body,
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__body > * {
     max-width: 100%;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__title {
     margin: 0 0 0.5rem;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile__desc {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile__desc {
     margin: 0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile {
     box-shadow: inset 0 0 0 1px #e5e5e5, inset 0 -0.25rem 0 0 #000091;
     background-color: #fff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-tile--grey {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-tile--grey {
     background-color: #eee;
   }
 }

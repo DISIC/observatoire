@@ -6,7 +6,7 @@
 /* ¯¯¯¯¯¯¯¯¯ *\
   SUMMARY
 \* ˍˍˍˍˍˍˍˍˍ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -26,24 +26,24 @@
   background-color: var(--background-contrast-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary ol {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary ol {
   --summary-base: calc(var(--summary-offset) + 0.87);
   list-style-type: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary li {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary li {
   --summary-offset: var(--summary-base);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary li::marker {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary li::marker {
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary li:nth-of-type(1n + 10) {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary li:nth-of-type(1n + 10) {
   --summary-offset: calc(var(--summary-base) + 0.4);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary__title {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary__title {
   margin: 0 0 0.5rem;
   font-size: 0.75rem;
   line-height: 1.25rem;
@@ -52,7 +52,7 @@
   color: var(--text-title-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary__link {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary__link {
   display: inline-block;
   position: relative;
 
@@ -63,7 +63,7 @@
   margin: 0 -0.5rem -0.25rem calc(var(--summary-offset) * var(--xl-size) * -1 - 0.5rem);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary__link::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary__link::before {
   content: var(--ol-content);
   position: absolute;
   left: 0.5rem;
@@ -71,26 +71,26 @@
   font-weight: bold;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-summary li > a {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-summary li > a {
   color: var(--text-action-high-grey);
 }
 
 @media (min-width: 48em) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-summary {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-summary {
     padding: 2rem;
   }
 }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-summary {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-summary {
     background-color: #eee;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-summary__title {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-summary__title {
     color: #161616;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-summary li > a {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-summary li > a {
     color: #161616;
   }
 }

@@ -6,7 +6,7 @@
 /* ------------------------------------ *\
   Badge
 \* ------------------------------------ */
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge {
   --link-underline: none;
   --link-blank-font: none;
   --link-blank-content: none;
@@ -34,26 +34,26 @@
   background-color: var(--background-contrast-grey);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--icon-left[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--icon-left[class*=" fr-fi-"]::before {
   margin-left: -0.25rem;
   margin-right: 0.25rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm {
   font-size: 0.75rem;
   line-height: 1.25rem;
   min-height: 1.125rem;
@@ -64,75 +64,75 @@
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class^="fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class*=" fr-icon-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class^="fr-fi-"],
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class*=" fr-fi-"] {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class^="fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class*=" fr-icon-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class^="fr-fi-"],
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class*=" fr-fi-"] {
   flex-direction: row;
   overflow: initial;
   max-width: 100%;
   max-height: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class^="fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class*=" fr-icon-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class^="fr-fi-"]::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--icon-left[class*=" fr-fi-"]::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class^="fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class*=" fr-icon-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class^="fr-fi-"]::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--icon-left[class*=" fr-fi-"]::before {
   margin-left: -0.1875rem;
   margin-right: 0.25rem;
   font-size: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge::before {
   font: normal 700 normal 1.5rem/1 dsfr-icon;
   margin-left: -0.25rem;
   margin-right: 0.25rem;
   font-size: 1rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm::before {
   font: normal 700 normal 1rem/1 dsfr-icon;
   margin-left: -0.1875rem;
   margin-right: 0.25rem;
   font-size: 0.75rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge.fr-badge--info::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--info::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge.fr-badge--info::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--info::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge.fr-badge--success::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--success::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge.fr-badge--success::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--success::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge.fr-badge--error::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--error::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge.fr-badge--error::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--error::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge.fr-badge--warning::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--warning::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge.fr-badge--warning::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--warning::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge.fr-badge--new::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--new::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge.fr-badge--new::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--new::before {
   content: "";
   font-weight: 400;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge.fr-badge--no-icon::before,
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--sm.fr-badge--no-icon::before {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge.fr-badge--no-icon::before,
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--sm.fr-badge--no-icon::before {
   content: none;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge-group {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge-group {
   --ul-type: none;
   --ol-type: none;
   --ul-start: 0;
@@ -145,164 +145,164 @@
   margin-bottom: 0;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge-group > li {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge-group > li {
   display: inline-flex;
   max-width: 100%;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge-group .fr-badge {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge-group .fr-badge {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--info {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--info {
   color: var(--text-default-info);
 
   --blend: var(--background-contrast-info-blend);
   background-color: var(--background-contrast-info);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--error {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--error {
   color: var(--text-default-error);
 
   --blend: var(--background-contrast-error-blend);
   background-color: var(--background-contrast-error);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--success {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--success {
   color: var(--text-default-success);
 
   --blend: var(--background-contrast-success-blend);
   background-color: var(--background-contrast-success);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--warning {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--warning {
   color: var(--text-default-warning);
 
   --blend: var(--background-contrast-warning-blend);
   background-color: var(--background-contrast-warning);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--new {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--new {
   color: var(--text-action-high-yellow-moutarde);
 
   --blend: var(--background-contrast-yellow-moutarde-blend);
   background-color: var(--background-contrast-yellow-moutarde);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-tilleul-verveine {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-tilleul-verveine {
   color: var(--text-label-green-tilleul-verveine);
 
   --blend: var(--background-contrast-green-tilleul-verveine-blend);
   background-color: var(--background-contrast-green-tilleul-verveine);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-bourgeon {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-bourgeon {
   color: var(--text-label-green-bourgeon);
 
   --blend: var(--background-contrast-green-bourgeon-blend);
   background-color: var(--background-contrast-green-bourgeon);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-emeraude {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-emeraude {
   color: var(--text-label-green-emeraude);
 
   --blend: var(--background-contrast-green-emeraude-blend);
   background-color: var(--background-contrast-green-emeraude);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-menthe {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-menthe {
   color: var(--text-label-green-menthe);
 
   --blend: var(--background-contrast-green-menthe-blend);
   background-color: var(--background-contrast-green-menthe);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-archipel {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-archipel {
   color: var(--text-label-green-archipel);
 
   --blend: var(--background-contrast-green-archipel-blend);
   background-color: var(--background-contrast-green-archipel);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--blue-ecume {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--blue-ecume {
   color: var(--text-label-blue-ecume);
 
   --blend: var(--background-contrast-blue-ecume-blend);
   background-color: var(--background-contrast-blue-ecume);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--blue-cumulus {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--blue-cumulus {
   color: var(--text-label-blue-cumulus);
 
   --blend: var(--background-contrast-blue-cumulus-blend);
   background-color: var(--background-contrast-blue-cumulus);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--purple-glycine {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--purple-glycine {
   color: var(--text-label-purple-glycine);
 
   --blend: var(--background-contrast-purple-glycine-blend);
   background-color: var(--background-contrast-purple-glycine);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--pink-macaron {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--pink-macaron {
   color: var(--text-label-pink-macaron);
 
   --blend: var(--background-contrast-pink-macaron-blend);
   background-color: var(--background-contrast-pink-macaron);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--pink-tuile {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--pink-tuile {
   color: var(--text-label-pink-tuile);
 
   --blend: var(--background-contrast-pink-tuile-blend);
   background-color: var(--background-contrast-pink-tuile);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--yellow-tournesol {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--yellow-tournesol {
   color: var(--text-label-yellow-tournesol);
 
   --blend: var(--background-contrast-yellow-tournesol-blend);
   background-color: var(--background-contrast-yellow-tournesol);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--yellow-moutarde {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--yellow-moutarde {
   color: var(--text-label-yellow-moutarde);
 
   --blend: var(--background-contrast-yellow-moutarde-blend);
   background-color: var(--background-contrast-yellow-moutarde);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--orange-terre-battue {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--orange-terre-battue {
   color: var(--text-label-orange-terre-battue);
 
   --blend: var(--background-contrast-orange-terre-battue-blend);
   background-color: var(--background-contrast-orange-terre-battue);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-cafe-creme {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--brown-cafe-creme {
   color: var(--text-label-brown-cafe-creme);
 
   --blend: var(--background-contrast-brown-cafe-creme-blend);
   background-color: var(--background-contrast-brown-cafe-creme);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-caramel {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--brown-caramel {
   color: var(--text-label-brown-caramel);
 
   --blend: var(--background-contrast-brown-caramel-blend);
   background-color: var(--background-contrast-brown-caramel);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-opera {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--brown-opera {
   color: var(--text-label-brown-opera);
 
   --blend: var(--background-contrast-brown-opera-blend);
   background-color: var(--background-contrast-brown-opera);
 }
 
-#xwikimaincontainer #mainContentArea #avis-tab .fr-badge--beige-gris-galet {
+#xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--beige-gris-galet {
   color: var(--text-label-beige-gris-galet);
 
   --blend: var(--background-contrast-beige-gris-galet-blend);
@@ -310,117 +310,117 @@
 }
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge {
     color: #3a3a3a;
     background-color: #eee;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--info {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--info {
     color: #0063cb;
     background-color: #e8edff;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--error {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--error {
     color: #ce0500;
     background-color: #ffe9e9;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--success {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--success {
     color: #18753c;
     background-color: #b8fec9;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--warning {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--warning {
     color: #b34000;
     background-color: #ffe9e6;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--new {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--new {
     color: #695240;
     background-color: #feebd0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-tilleul-verveine {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-tilleul-verveine {
     color: #66673d;
     background-color: #fceeac;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-bourgeon {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-bourgeon {
     color: #447049;
     background-color: #c9fcac;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-emeraude {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-emeraude {
     color: #297254;
     background-color: #c3fad5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-menthe {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-menthe {
     color: #37635f;
     background-color: #bafaee;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--green-archipel {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--green-archipel {
     color: #006a6f;
     background-color: #c7f6fc;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--blue-ecume {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--blue-ecume {
     color: #2f4077;
     background-color: #e9edfe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--blue-cumulus {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--blue-cumulus {
     color: #3558a2;
     background-color: #e6eefe;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--purple-glycine {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--purple-glycine {
     color: #6e445a;
     background-color: #fee7fc;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--pink-macaron {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--pink-macaron {
     color: #8d533e;
     background-color: #fee9e6;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--pink-tuile {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--pink-tuile {
     color: #a94645;
     background-color: #fee9e7;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--yellow-tournesol {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--yellow-tournesol {
     color: #716043;
     background-color: #feecc2;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--yellow-moutarde {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--yellow-moutarde {
     color: #695240;
     background-color: #feebd0;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--orange-terre-battue {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--orange-terre-battue {
     color: #755348;
     background-color: #fee9e5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-cafe-creme {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--brown-cafe-creme {
     color: #685c48;
     background-color: #f7ecdb;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-caramel {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--brown-caramel {
     color: #845d48;
     background-color: #f7ebe5;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--brown-opera {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--brown-opera {
     color: #745b47;
     background-color: #f7ece4;
   }
 
-  #xwikimaincontainer #mainContentArea #avis-tab .fr-badge--beige-gris-galet {
+  #xwikimaincontainer #mainContentArea .use-dsfr .fr-badge--beige-gris-galet {
     color: #6a6156;
     background-color: #f3ede5;
   }
