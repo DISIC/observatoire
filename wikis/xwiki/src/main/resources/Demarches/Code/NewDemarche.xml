@@ -71,8 +71,9 @@
     #set ($demarcheMsgAttributeKey = "${target.fullName}-message")
     #set ($messageOnSession = {'type' : 'success', 'msghtml' : "La démarche &lt;strong&gt;${target.title}&lt;/strong&gt; a bien été ajoutée."})
     #set ($discard = $request.session.setAttribute($demarcheMsgAttributeKey, $messageOnSession))
-    ## and redirect to view mode of the démarche, which will display the success message
-    #set($discard = $response.sendRedirect($xwiki.getURL($target.fullName)))
+    ## then redirect to the generation code API, in order to generate the code for this demarche, with a redirect param to redirect back to the demarche view mode afterwards
+    #set ($generateCodeURL = $xwiki.getURL("API.Code.GenerateDemarcheCode", "view", "demarche=$escapetool.url($target.fullName)&amp;xredirect=$escapetool.url($target.getURL('view'))"))
+    #set($discard = $response.sendRedirect($generateCodeURL))
   #end
 #end
 ## if form is still to be shown (because mandatory fields not filled in or other thing prevented save), show form

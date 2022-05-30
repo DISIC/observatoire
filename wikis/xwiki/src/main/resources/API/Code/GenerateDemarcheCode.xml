@@ -61,6 +61,7 @@ if(xcontext.userReference) {
     userDocApiKey = newApiKey;
   }
   def withDemarche = false;
+  def withAlreadyExistingDemarche = false;
   // current user now has a key, let's register them with code in the demarche page, if a demarche was given to this script
   def demarche = request.get('demarche');
   try {
@@ -70,11 +71,18 @@ if(xcontext.userReference) {
         // compose the name of the doc holding the key
         def demarcheAPIDocRef = services.model.createDocumentReference(demarcheDoc.getDocumentReference().getWikiReference().name, ['Demarches', 'Embed'], demarcheDoc.getDocumentReference().name);
         def demarcheAPIDoc = xwiki.getDocumentAsAuthor(demarcheAPIDocRef);
-        // create an object of type "EmbedClass"
-        def embedObject = demarcheAPIDoc.newObject('API.Code.EmbedClass');
-        embedObject.set('key', userDocApiKey);
-        demarcheAPIDoc.saveAsAuthor(services.localization.render('api.generatecode.demarchepagecomment', [xwiki.getUserName(xcontext.user, false)]));
-        withDemarche = true;
+        // check if the object doesn't already exist for this key before adding it
+        def existingEmbedObject = demarcheAPIDoc.getObject('API.Code.EmbedClass', 'key', userDocApiKey);
+        if (existingEmbedObject != null) {
+          // do nothing, the key is already stored
+          withAlreadyExistingDemarche = true;
+        } else {
+          // doesn't exist, create an object of type "EmbedClass", fill it in with the key and save it
+          def embedObject = demarcheAPIDoc.newObject('API.Code.EmbedClass');
+          embedObject.set('key', userDocApiKey);
+          demarcheAPIDoc.saveAsAuthor(services.localization.render('api.generatecode.demarchepagecomment', [xwiki.getUserName(xcontext.user, false)]));
+          withDemarche = true;
+        }
       }
     }
     // redirect if a redirect was requested
@@ -83,6 +91,8 @@ if(xcontext.userReference) {
     } else {
       if (withDemarche) {
         println "{{success}}" + services.localization.render('api.generatecode.success.withdemarche', [demarche]) + "{{/success}}";
+      } else if (withAlreadyExistingDemarche) {
+        println "{{success}}" + services.localization.render('api.generatecode.success.withExistingDemarche', [demarche]) + "{{/success}}";
       } else {
         println "{{success}}" + services.localization.render('api.generatecode.success.withoutdemarche') + "{{/success}}";
       }

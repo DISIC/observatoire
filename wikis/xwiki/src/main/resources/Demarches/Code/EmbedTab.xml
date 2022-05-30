@@ -41,107 +41,112 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 #set($discard = $xwiki.ssx.use('Demarches.Code.EmbedTab'))
-{{html}}
+{{html clean='false'}}
 &lt;div class="tab-pane fade #if($selectedTab == 'embed-tab')active in#end" role="tabpanel" id="embed-tab" aria-labelledby="embed-tab"&gt;
-  &lt;div class="row"&gt;
-    &lt;div class="col-xs-12"&gt;
-      ## check current user, just in case a guest slides here
-      #if ($xcontext.userReference != $NULL)
-        &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
-        ## some elements that will be used for the code but also for demo
-        #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
-        ## check if current user has a key and this key is in the generated codes for this demarche
-        #set ($userProfileDoc = $xwiki.getDocument($xcontext.userReference))
-        #set($currentApiKey = "$!userProfileDoc.getObject('API.Code.APIKeyClass').getProperty('key').value")
-        #set($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $doc.documentReference.name))
-        ## avoid getDocumentAsAuthor() because it doesn't work
-        #set($hasEmbedCode = false)
-        #if ("$!currentApiKey" != '')
-          #set($demarcheAPIDoc = $xwiki.getXWiki().getDocument($demarcheAPIDocRef, $xcontext.context))
-          #set($EMBED_CLASS_REFERENCE = $services.model.resolveDocument('API.Code.EmbedClass'))
-          #set($demarcheAPIObject = $demarcheAPIDoc.getXObject($EMBED_CLASS_REFERENCE, 'key', $currentApiKey))
-          #set($hasEmbedCode = $demarcheAPIObject != $NULL)
-        #end
-        ## check if, in case we need to display the code, we can (because of volumétrie)
-        #if ($hasEmbedCode)
-          ## don't display the URL / button for démarches with too high volumetrie
-          ## too high = 5000000
-          #set($LIMIT_VOL = 5000000)
-          #set($LIMIT_BYPASS = ['Demarches.753', 'Demarches.763', 'Demarches.767', 'Demarches.813', 'Demarches.823', 'Demarches.824', 'Demarches.831', 'Demarches.840', 'Demarches.841', 'Demarches.1258', 'Demarches.1291', 'Demarches.1901', 'Demarches.1894', 'Demarches.997', 'Demarches.1081', 'Demarches.1662', 'Demarches.1293', 'Demarches.1868', 'Demarches.1690', 'Demarches.1963', 'Demarches.2161', 'Demarches.2374', 'Demarches.2435', 'Demarches.3251'])
-          #set($volumetrieDemat = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrieDemat').value)
-          #set($volumetrie = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrie').value)
-          #set ($displayURL = true)
-          #set ($volumetrieMsg = '')
-          #if (!$LIMIT_BYPASS.contains($doc.fullName))
-            #if ($volumetrieDemat)
-              #if ($volumetrieDemat &gt; $LIMIT_VOL)
-                #set ($displayURL = false)
-                #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrieDemat', [$volumetrieDemat]))
-              #end
-            #elseif ($volumetrie)
-              #if ($volumetrie &gt; $LIMIT_VOL)
-                #set ($displayURL = false)
-                #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrie', [$volumetrie]))
-              #end
-            #end
+{{/html}}
+
+## check current user, just in case a guest slides here
+#if ($xcontext.userReference != $NULL)
+  {{html}}
+    &lt;p class='embed-introtext'&gt;$services.localization.render('wikidemarches.demarche.embed.details')&lt;/p&gt;
+    ## some elements that will be used for the code but also for demo
+    #set ($buttonAltText = $services.localization.render('wikidemarches.demarche.embed.button.code.alttext'))
+    ## check if current user has a key and this key is in the generated codes for this demarche
+    #set ($userProfileDoc = $xwiki.getDocument($xcontext.userReference))
+    #set($currentApiKey = "$!userProfileDoc.getObject('API.Code.APIKeyClass').getProperty('key').value")
+    #set($demarcheAPIDocRef = $services.model.createDocumentReference($doc.documentReference.wikiReference.name, ['Demarches', 'Embed'], $doc.documentReference.name))
+    ## avoid getDocumentAsAuthor() because it doesn't work
+    #set($hasEmbedCode = false)
+    #if ("$!currentApiKey" != '')
+      #set($demarcheAPIDoc = $xwiki.getXWiki().getDocument($demarcheAPIDocRef, $xcontext.context))
+      #set($EMBED_CLASS_REFERENCE = $services.model.resolveDocument('API.Code.EmbedClass'))
+      #set($demarcheAPIObject = $demarcheAPIDoc.getXObject($EMBED_CLASS_REFERENCE, 'key', $currentApiKey))
+      #set($hasEmbedCode = $demarcheAPIObject != $NULL)
+    #end
+    ## check if, in case we need to display the code, we can (because of volumétrie)
+    #if ($hasEmbedCode)
+      ## don't display the URL / button for démarches with too high volumetrie
+      ## too high = 5000000
+      #set($LIMIT_VOL = 5000000)
+      #set($LIMIT_BYPASS = ['Demarches.753', 'Demarches.763', 'Demarches.767', 'Demarches.813', 'Demarches.823', 'Demarches.824', 'Demarches.831', 'Demarches.840', 'Demarches.841', 'Demarches.1258', 'Demarches.1291', 'Demarches.1901', 'Demarches.1894', 'Demarches.997', 'Demarches.1081', 'Demarches.1662', 'Demarches.1293', 'Demarches.1868', 'Demarches.1690', 'Demarches.1963', 'Demarches.2161', 'Demarches.2374', 'Demarches.2435', 'Demarches.3251'])
+      #set($volumetrieDemat = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrieDemat').value)
+      #set($volumetrie = $doc.getObject('Demarches.Code.DemarchesClass').getProperty('volumetrie').value)
+      #set ($displayURL = true)
+      #set ($volumetrieMsg = '')
+      #if (!$LIMIT_BYPASS.contains($doc.fullName))
+        #if ($volumetrieDemat)
+          #if ($volumetrieDemat &gt; $LIMIT_VOL)
+            #set ($displayURL = false)
+            #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrieDemat', [$volumetrieDemat]))
+          #end
+        #elseif ($volumetrie)
+          #if ($volumetrie &gt; $LIMIT_VOL)
+            #set ($displayURL = false)
+            #set ($volumetrieMsg = $services.localization.render('wikidemarches.demarche.embed.button.warning.volumetrie', [$volumetrie]))
           #end
         #end
-        ## demo the intégrations that we propose
-        &lt;div class='row embed-demos'&gt;
-          #foreach($clr in ['bleu', 'blanc'])
-            &lt;div class='col-xs-12 col-sm-6'&gt;
-              &lt;h2&gt;$services.localization.render("wikidemarches.demarche.embed.button-${clr}.title")&lt;/h2&gt;
-              #set ($buttonImgURL = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/bouton-${clr}.svg")
-              &lt;div class='embed-demo-button'&gt;
-                &lt;img src="$escapetool.xml($buttonImgURL)" alt="$escapetool.xml($buttonAltText)" /&gt;
-              &lt;/div&gt;
-              ## if code is generated, display code, in a disabled textarea
-              #if ($hasEmbedCode)
-                &lt;div class='embed-code-button'&gt;
-                  ## if the volumétrie is not too high
-                  #if ($displayURL)
-                    #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
-                    #set ($indentSize = '  ')
-                    &lt;p class='embed-code-button-hint'&gt;$services.localization.render('wikidemarches.demarche.embed.button.details')&lt;/p&gt;
-                    ## transform the URLs before creating the button code, to use JDMA URLs
-                    ## use loose replacements so that they work also for dev / staging servers
-                    #set($jdmaVoteURL = $voteURL.replace('://observatoire.numerique', '://jedonnemonavis.numerique'))
-                    #set($jdmaButtonImgURL = $buttonImgURL.replace('://observatoire.numerique', '://jedonnemonavis.numerique'))
-                    &lt;textarea readonly='readonly' rows='5'&gt;
-                      $escapetool.xml("&lt;a href=${escapetool.quote}$jdmaVoteURL${escapetool.quote}&gt;")
-                        ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$jdmaButtonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} /&gt;")
-                      $escapetool.xml("&lt;/a&gt;")
-                    &lt;/textarea&gt;
-                  #else
-                    &lt;div class='box warningmessage'&gt;$volumetrieMsg&lt;/div&gt;
-                  #end
-                &lt;/div&gt;
+      #end
+    #end
+    ## demo the intégrations that we propose
+    &lt;div class='row embed-demos'&gt;
+      #foreach($clr in ['bleu', 'blanc'])
+        &lt;div class='col-xs-12 col-sm-6 embed-demo-col'&gt;
+          &lt;h2&gt;$services.localization.render("wikidemarches.demarche.embed.button-${clr}.title")&lt;/h2&gt;
+          #set ($buttonImgURL = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/bouton-${clr}.svg")
+          &lt;div class='embed-demo-button'&gt;
+            &lt;img src="$escapetool.xml($buttonImgURL)" alt="$escapetool.xml($buttonAltText)" /&gt;
+          &lt;/div&gt;
+          ## if code is generated, display code, in a disabled textarea
+          #if ($hasEmbedCode)
+            &lt;div class='embed-code-button'&gt;
+              ## if the volumétrie is not too high
+              #if ($displayURL)
+                #set ($voteURL = $doc.getExternalURL('view', "&amp;view-mode=formulaire-avis&amp;nd_source=button&amp;key=$escapetool.url($currentApiKey)"))
+                #set ($indentSize = '  ')
+                &lt;p class='embed-code-button-hint'&gt;$services.localization.render("wikidemarches.demarche.embed.button-${clr}.details")&lt;/p&gt;
+                ## transform the URLs before creating the button code, to use JDMA URLs
+                ## use loose replacements so that they work also for dev / staging servers
+                #set($jdmaVoteURL = $voteURL.replace('://observatoire.numerique', '://jedonnemonavis.numerique'))
+                #set($jdmaButtonImgURL = $buttonImgURL.replace('://observatoire.numerique', '://jedonnemonavis.numerique'))
+                &lt;textarea readonly='readonly' rows='6'&gt;$escapetool.xml("&lt;a href=${escapetool.quote}$jdmaVoteURL${escapetool.quote}&gt;")
+                    ${indentSize}$escapetool.xml("&lt;img src=${escapetool.quote}$jdmaButtonImgURL${escapetool.quote} alt=${escapetool.quote}$escapetool.xml($buttonAltText)${escapetool.quote} /&gt;")
+                  $escapetool.xml("&lt;/a&gt;")&lt;/textarea&gt;
+              #else
+                &lt;div class='box warningmessage'&gt;$volumetrieMsg&lt;/div&gt;
               #end
             &lt;/div&gt;
           #end
         &lt;/div&gt;
-        ## after the demos block, form for when code is not there and no form when code is there
-        #if (!$hasEmbedCode)
-          ## generate the form to generate the button
-          &lt;form class='xform' id='embed-generateform' method='post' action="$escapetool.xml($xwiki.getURL("API.Code.GenerateDemarcheCode"))"&gt;
-            &lt;input type='hidden' name='demarche' value="$escapetool.xml($doc.fullName)" /&gt;
-            &lt;input type='hidden' name='xredirect' value="$escapetool.xml($doc.getURL('view', 'tab=embed-tab'))" /&gt;
-            &lt;div class='buttonwrapper'&gt;
-              &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.generate.details')&lt;/p&gt;
-              &lt;input type='submit' class='button primary' name='dogenerate' value="$escapetool.xml($services.localization.render('wikidemarches.demarche.embed.generate.button'))" /&gt;
-            &lt;/div&gt;
-          &lt;/form&gt;
-        #else
-          &lt;hr /&gt;
-          &lt;p class='embed-footermessage'&gt;
-          $services.localization.render('wikidemarches.demarche.embed.details.bottom', [$doc.title])
-          &lt;/p&gt;
-        #end
-      #else
-        {{error}}$services.localization.render('notallowed'){{/error}}
       #end
     &lt;/div&gt;
-  &lt;/div&gt;
+    ## after the demos block, form for when code is not there and no form when code is there
+    #if (!$hasEmbedCode)
+      ## generate the form to generate the button
+      &lt;form class='xform' id='embed-generateform' method='post' action="$escapetool.xml($xwiki.getURL("API.Code.GenerateDemarcheCode"))"&gt;
+        &lt;input type='hidden' name='demarche' value="$escapetool.xml($doc.fullName)" /&gt;
+        &lt;input type='hidden' name='xredirect' value="$escapetool.xml($doc.getURL('view', 'tab=embed-tab'))" /&gt;
+        &lt;div class='buttonwrapper'&gt;
+          &lt;p&gt;$services.localization.render('wikidemarches.demarche.embed.generate.details')&lt;/p&gt;
+          &lt;input type='submit' class='button primary' name='dogenerate' value="$escapetool.xml($services.localization.render('wikidemarches.demarche.embed.generate.button'))" /&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    #end
+    ## If there was some form of URL display, display the information about the provided embed code
+    #if($displayURL)
+      &lt;p class='embed-footermessage'&gt;
+      $services.localization.render('wikidemarches.demarche.embed.details.bottom')
+      &lt;/p&gt;
+    #end
+  {{/html}}
+  ## include the faq document here, in a container
+  (%class='embed-faq-container'%)(((
+    {{include reference='Aide.EmbedFAQ' /}}
+  )))
+#else
+  {{error}}$services.localization.render('notallowed'){{/error}}
+#end
+
+{{html clean='false'}}
 &lt;/div&gt;
 {{/html}}
 {{/velocity}}</content>
@@ -243,55 +248,58 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>#embed-tab {
-  text-align: center;
-}
-
-#embed-tab .embed-footermessage, 
-#embed-tab .embed-code-button-hint {
-  text-align: left;
-}
-
-.embed-code-button .embed-code-button-hint {
-  font-size: 0.9em;
+      <code>@media (min-width: @screen-sm-min) {
+  .embed-introtext {
+    font-size: 1.25em;
+  }
 }
 
 .embed-demos {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-bottom: 2rem;
+
+  .embed-demo-col {
+    margin-top: 2rem;
+  }
+
+  h2 {
+    border-bottom: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.5em;
+  }
+
+  .embed-demo-button {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .embed-demo-button img {
+    vertical-align: middle;
+  }
+
+  .embed-code-button textarea {
+    width: 100%;
+    /* Reset this to standard page font */
+    font-family: inherit;
+  }
+  .embed-code-button .warningmessage {
+    margin-bottom: 0;
+  }
 }
 
-.embed-demos h2 {
-  border-bottom: none;
-  text-align: center;
-  margin-top: 0;
+.embed-footermessage {
+  font-size: 0.75em;
 }
 
-.embed-demos .embed-demo-button {
-  border: 1px solid #e5e5e5;
-  height: 160px;
-  line-height: 160px;
-  text-align: center;
-}
-
-.embed-demos .embed-demo-button img {
-  vertical-align: middle;
-}
-
-.embed-code-button {
-  margin-top: 1.5em;
-}
-
-.embed-code-button textarea {
-  width: 100%;
-  font-size: 0.8em;
+.embed-faq-container {
+  margin-top: 2rem;
 }</code>
     </property>
     <property>
       <contentType>LESS</contentType>
     </property>
     <property>
-      <name/>
+      <name>Embed tab style</name>
     </property>
     <property>
       <parse/>

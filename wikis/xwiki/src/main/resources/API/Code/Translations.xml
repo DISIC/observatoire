@@ -43,6 +43,7 @@
 api.generatecode.userpagecomment=Nouvelle clé API générée
 api.generatecode.success.withoutdemarche=La clé d'API a été générée pour l'utilisateur courant.
 api.generatecode.success.withdemarche=La clé d''API et le code pour la démarche {0} ont été générés.
+api.generatecode.success.withExistingDemarche=La clé d''API a été générée (si nécessaire) mais la clé est déjà enregistrée pour la démarche {0}.
 api.generatecode.error.unknown=Un problème est survenu pendant la génération du code. Contactez les administrateurs si le problème persiste.
 api.generatecode.error.nouser=Il n'y a pas d'utilisateur connecté.</content>
   <object>
