@@ -175,12 +175,7 @@ This allows any row in the content of the document to start at the leftmost of t
   padding-bottom: 0;
 }
 
-/* Move document header bottom margin inside the document header row - as bottom padding, and remove xcontent top margin */
-.document-header {
-  margin-bottom:0;
-  padding-bottom: 20px;
-}
-
+/* Remove xcontent top margin */
 #mainContentArea &gt; .xcontent {
   margin-top: 0;
 }
@@ -201,8 +196,8 @@ This allows any row in the content of the document to start at the leftmost of t
   color: @breadcrumb-color;
   #hierarchy {
     display: block;
+    margin-bottom: 0;
   }
-  margin-top: -20px;
 }
 
 /*
@@ -214,22 +209,75 @@ This allows any row in the content of the document to start at the leftmost of t
 }
 
 /*
-  Clean up spacing between header and title / hierarchy / content rows - reset everything to 0
+  Clean up spacing between header and title / hierarchy / content rows
 */
 #mainContentArea, #mainEditArea {
   padding-top: 0px;
 }
 
-#hierarchy {
-  margin-bottom: 0;
-}
-
+// Ajust margins so that distance to the top stay the same with or without breadcrumbs
 .hierarchy-row {
-  margin-top: 0;
+  margin-top: 1.15rem;
+  margin-bottom: 1rem;
 }
 
-.document-header {
+.document-header,
+// If there is a .document-title without a .document-header as parent
+#document-title:not(.document-header #document-title) {
   margin-top: 0;
+  margin-bottom:0;
+  padding-top: 4.5rem;
+  padding-bottom: 2rem;
+
+   // compensate breadcrumbs height and margins
+  .hierarchy-row  &amp;,
+  .hierarchy-row + * &amp; {
+    padding-top: 0;
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Remove top margins of divs inside header / title
+.document-header {
+  .document-info,
+  .document-menu {
+    margin-top: 0;
+  }
+}
+
+// Margins for edit views
+#mainContentArea #inline,
+#mainEditArea {
+  .hierarchy-row + .row,
+  .row:first-child:not(.hierarchy-row) {
+    margin-top: 0;
+    margin-bottom:0;
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+
+    #document-title {
+      margin-top: 0;
+      margin-bottom:0;
+      padding-top: 0rem;
+      padding-bottom: 0rem;
+    }
+  }
+
+  // compensate breadcrumbs height and margins
+  .hierarchy-row + .row {
+    padding-top: 0;
+  }
+}
+
+// Add margin top for side panels
+#leftPanels,
+#rightPanels,
+#editPanels {
+  padding-top: 4.5rem;
 }
 
 /* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows:
@@ -736,9 +784,9 @@ abbr.asterix {
 #loginForm {
   .panel {
     max-width: 100%;
-    margin-top: 4.5rem;
 
     .panel-heading {
+      padding-top: 4.5rem;
       border-bottom: none;
     }
 
@@ -763,7 +811,6 @@ abbr.asterix {
  */
 .register-welcome {
   margin-bottom: 2rem;
-
   a {
     font-style: normal;
     color: @brand-primary;

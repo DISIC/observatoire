@@ -522,26 +522,7 @@ require(['jquery','xwiki-selectize'], function($) {
       <cache>default</cache>
     </property>
     <property>
-      <code>/*
- * Remove all distance between document title and content, to make the subtitle appear as subtitle.
- */
-.document-header {
-  padding-bottom: 0px;
-}
-
-.document-header #document-title h1 {
-    margin-bottom: 0;
-}
-
-/*
- * Add a little padding on desktop, so that it looks nicer
- */
-@media (min-width: @screen-sm-min) {
-  .document-header {
-    padding-top: 25px;
-  }
-}
-
+      <code>
 .demarche-details-action {
   padding: 0.7em 0 0 0;
 }

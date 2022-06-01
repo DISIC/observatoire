@@ -194,7 +194,8 @@
     #set ($displayContentMenu = false)
   #end
 #end
-#set ($displayBreadcrumbs = $hasGlobalAdmin &amp;&amp; $doc.fullName != 'Main.WebHome')
+#set ($pagesWithoutBreadcrumbs = ['Main.WebHome', 'JDMA.WebHome'])
+#set ($displayBreadcrumbs = !$isGuest &amp;&amp; !$pagesWithoutBreadcrumbs.contains($doc.fullName))
 #set ($displayDrawer = $hasGlobalAdmin)
 #set ($displayQuickSearch = !$isGuest &amp;&amp; $doc.fullName != 'Main.WebHome' &amp;&amp; $doc.fullName != 'Main.Search')
 #set ($discard = $xwiki.ssx.use('IconThemes.FontAwesome'))

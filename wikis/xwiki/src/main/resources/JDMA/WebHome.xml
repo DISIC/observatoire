@@ -476,10 +476,6 @@
   padding: 0;
 }
 
-#hierarchy {
-  display: none !important;
-}
-
 /* Done undoing container, custom style */
 
 /* This page is stacked layout, reset footer margin, we'll handle it */

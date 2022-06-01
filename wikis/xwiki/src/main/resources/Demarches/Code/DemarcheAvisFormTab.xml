@@ -461,18 +461,21 @@ legend.fr-fieldset__legend {
 /* Rules to match the required style from the sketch specifications */
 @document-title-margin-bottom: 1rem;
 #xwikimaincontainer #mainContentArea {
-  .document-info {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  .document-header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
     @media (min-width: @screen-sm-min) {
-      margin-top: 1rem;
-      margin-bottom: @document-title-margin-bottom;
+      padding-top: 2rem;
+      padding-bottom: 1.5rem;
     }
 
-    h1 {
-      color: @brand-primary;
-      font-size: 2.5rem;
-      text-align: center;
+    .document-info {
+      h1 {
+        color: @brand-primary;
+        font-size: 2.5rem;
+        text-align: center;
+      }
     }
   }
 
