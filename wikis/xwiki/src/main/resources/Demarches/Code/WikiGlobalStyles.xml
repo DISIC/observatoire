@@ -217,8 +217,13 @@ This allows any row in the content of the document to start at the leftmost of t
 
 // Ajust margins so that distance to the top stay the same with or without breadcrumbs
 .hierarchy-row {
-  margin-top: 1.15rem;
-  margin-bottom: 1rem;
+  margin-top: 0.55rem;
+  margin-bottom: 0.1rem;
+
+  @media (min-width: @screen-md-min) {
+    margin-top: 1.15rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .document-header,
@@ -226,8 +231,12 @@ This allows any row in the content of the document to start at the leftmost of t
 #document-title:not(.document-header #document-title) {
   margin-top: 0;
   margin-bottom:0;
-  padding-top: 4.5rem;
+  padding-top: 3rem;
   padding-bottom: 2rem;
+
+  @media (min-width: @screen-md-min) {
+    padding-top: 4.5rem;
+  }
 
    // compensate breadcrumbs height and margins
   .hierarchy-row + &amp;,
@@ -262,8 +271,12 @@ This allows any row in the content of the document to start at the leftmost of t
   .row:first-child:not(.hierarchy-row) {
     margin-top: 0;
     margin-bottom:0;
-    padding-top: 4.5rem;
+    padding-top: 3rem;
     padding-bottom: 2rem;
+
+    @media (min-width: @screen-md-min) {
+      padding-top: 4.5rem;
+    }
 
     #document-title {
       margin-top: 0;
@@ -283,7 +296,11 @@ This allows any row in the content of the document to start at the leftmost of t
 #leftPanels,
 #rightPanels,
 #editPanels {
-  padding-top: 4.5rem;
+  padding-top: 3rem;
+
+  @media (min-width: @screen-md-min) {
+    padding-top: 4.5rem;
+  }
 }
 
 /* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows:
