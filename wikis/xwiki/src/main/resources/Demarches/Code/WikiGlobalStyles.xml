@@ -230,8 +230,14 @@ This allows any row in the content of the document to start at the leftmost of t
   padding-bottom: 2rem;
 
    // compensate breadcrumbs height and margins
-  .hierarchy-row  &amp;,
+  .hierarchy-row + &amp;,
   .hierarchy-row + * &amp; {
+    padding-top: 0;
+  }
+
+  // compensate message box height and margins
+  .document-wdpagemessage + &amp;,
+  .document-wdpagemessage + * &amp; {
     padding-top: 0;
   }
 
@@ -317,7 +323,18 @@ Visually, there's the title row and then all the rows from the document content,
  */
  .document-wdpagemessage {
    padding-top: 2rem; // ~32px for a reference em of 16px
- }
+   padding-bottom: 2rem;
+
+   // compensate breadcrumbs height and margins
+  .hierarchy-row + &amp;,
+  .hierarchy-row + * &amp; {
+    padding-top: 0;
+  }
+
+  .box {
+    margin-bottom: 0rem;
+  }
+}
 
 /*
  * Logo and navbar
