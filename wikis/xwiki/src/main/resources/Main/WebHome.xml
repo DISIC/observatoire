@@ -102,7 +102,7 @@
         ##
         #set ($userMatch1 = ",$services.model.serialize($xcontext.userReference, 'default'),")
         #set ($userMatch2 = ",$services.model.serialize($xcontext.userReference, 'compact'),")
-        #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2)")
+        #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2) order by doc.title")
         #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
         (% class='row' %) (((
           (% class='col-xs-12 col-sm-6' %) (((
