@@ -506,7 +506,7 @@
 #set ($colorWarning = $colorThemeObject.getValue('brand-warning'))
 #set ($colorGood = $colorThemeObject.getValue('brand-success'))
 #set ($colorInfo = $colorThemeObject.getValue('brand-info'))
-#set ($colorDarkBlue = '#313178') ## blue-france-200
+#set ($colorDarkBlue = '#313178')## blue-france-200
 ##
 ## Identification of the period for which avis need to be counted, this script needs to serve the following cases:
 ## 1/ no date parameters -&gt; the avis up to today will be counted and results for one year will be displayed (the previous year)
