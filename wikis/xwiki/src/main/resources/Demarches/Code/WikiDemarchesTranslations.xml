@@ -187,7 +187,8 @@ wikidemarches.dematdashboard.table.moyenne=Taux de satisfaction (/10)
 wikidemarches.dematdashboard.table.emptyvalue=-
 
 # Demarche avis stats
-wikidemarches.demarche.avis.stats.noAvisYet=Aucun avis pour l'instant.
+wikidemarches.demarche.avis.stats.noAvisYet.title=Cette démarche n’a pas encore d’avis.
+wikidemarches.demarche.avis.stats.noAvisYet.body=Une fois qu’un utilisateur a donné un avis, vous verrez une synthèse ici.
 wikidemarches.demarche.avis.stats.recueil=Données recueillies en ligne sur ce site, depuis le {0}, auprès de {1} internautes.
 wikidemarches.demarche.avis.stats.recueil.between=Données recueillies en ligne sur ce site, entre le {0} et le {1}, auprès de {2} internautes.
 wikidemarches.demarche.avis.stats.external.between=Données recueillies entre le {0} et le {1}, auprès de {2} internautes.

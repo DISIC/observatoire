@@ -665,8 +665,10 @@
   ##
   #if (!$displayedStaticIndicator)
     #set($discard = $services.logging.getLogger('Demarches.Code.DemarcheAvisStatisticsTab').warn("No static indicator found either, displaying no avis."))
-    #set ($noAvisYet = $services.localization.render('wikidemarches.demarche.avis.stats.noAvisYet'))
-    &lt;div class="lighter" style="font-size: 1.3em; text-align: center; margin: 5em 0;"&gt;$noAvisYet&lt;/div&gt;
+    &lt;div class="box infomessage alert-withtitle"&gt;
+      &lt;p class='alert-title'&gt;$services.localization.render('wikidemarches.demarche.avis.stats.noAvisYet.title')&lt;/p&gt;
+      &lt;p class='alert-content'&gt;$services.localization.render('wikidemarches.demarche.avis.stats.noAvisYet.body')&lt;/p&gt;
+    &lt;/div&gt;
   #end
 #end
 &lt;/div&gt;
