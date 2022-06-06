@@ -1727,6 +1727,16 @@ h1,
     padding: 0.5rem 0.5rem;
     filter: invert();
   }
+  /* Large alerts, with titles (the default DSFR size) */
+  &amp;.alert-withtitle {
+    padding: 1rem 2.25rem 1rem 3.5rem;
+    .alert-title {
+      /* larger text &amp; bold */
+      font-size: 1.25em;
+      margin-bottom: 0.4em; /* Re-adjust the margin to stay the same after font size increase */
+      font-weight: 700;
+    }
+  }
 }
 
 
@@ -1879,12 +1889,7 @@ h1,
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-}
-
-
-
-
-</lessCode>
+}</lessCode>
     </property>
     <property>
       <link-color/>
