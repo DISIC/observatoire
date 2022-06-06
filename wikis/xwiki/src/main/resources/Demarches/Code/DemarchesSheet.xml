@@ -571,7 +571,7 @@ require(['jquery','xwiki-selectize'], function($) {
 
 .nav-tabs {
   margin-top: 0.5em;
-  margin-bottom: 1em;
+  margin-bottom: 2rem;
 }
 
 
