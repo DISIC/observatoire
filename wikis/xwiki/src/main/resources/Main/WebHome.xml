@@ -45,20 +45,19 @@
   #set($displayDocTitle = false)
   #set($displayTitleContentSeparator = false)
   #set($discard = $xwiki.ssx.use($doc.fullName))
-  (%class='row demarches-titlerow'%)(((
-    (%class='container'%)(((
-      (%class='demarches-headline #if (!$isGuest) no-margin #end'%)
-      = $services.localization.render('wikidemarches.home.subtitle') =
-
-      #if ($isGuest)
+  #if ($isGuest)
+    (%class='row demarches-titlerow'%)(((
+      (%class='container'%)(((
+        (%class='demarches-headline #if (!$isGuest) no-margin #end'%)
+        = $services.localization.render('wikidemarches.home.subtitle') =
         (%class='demarches-explanation narrow-width'%)
         $services.localization.render('wikidemarches.home.explanation')
 
         (%class='seemore-button-container'%)
         [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
-      #end
+      )))
     )))
-  )))
+  #end
   ##
   ##
   #if (!$isGuest)
@@ -151,6 +150,42 @@
   #end
   ##
   ##
+  #set($isAdminMin = $hasAdmin || $isAdministrateurMinisteriel)
+  #if ($isAdminMin)
+  #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
+  (%class='row demarches-administrationrow'%)(((
+    (%class='container' %)(((
+      (%class='demarches-administration-link'%) (((
+        == $services.localization.render('wikidemarches.administration.home-title') ==
+
+        (%class='row-flex' %)(((
+          [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default]]
+
+          #if ($hasAdmin)
+            [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
+          #end
+
+          [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
+
+          [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']]
+
+          [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='btn btn-default']]
+
+          [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
+
+          #if ($hasAdmin)
+            [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
+          #end
+
+          [[$services.localization.render('wikidemarches.administration.tableaudebord')&gt;&gt;TableauDeBord.WebHome||class='btn btn-default']]
+
+        )))
+      )))
+    )))
+  )))
+  #end
+  ##
+  ##
   #if ($isGuest)
     (% class='row demarches-evalrow' %) (((
       #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
@@ -211,42 +246,6 @@
         )))
       )))
     )))
-  #end
-  ##
-  ##
-  #set($isAdminMin = $hasAdmin || $isAdministrateurMinisteriel)
-  #if ($isAdminMin)
-  #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
-  (%class='row demarches-administrationrow'%)(((
-    (%class='container' %)(((
-      (%class='demarches-administration-link'%) (((
-        == $services.localization.render('wikidemarches.administration.home-title') ==
-
-        (%class='row-flex' %)(((
-          [[$services.localization.render('wikidemarches.administration.demarches.home-link')&gt;&gt;path:$demarchesListPage||class='btn btn-default]]
-
-          #if ($hasAdmin)
-            [[$services.localization.render('wikidemarches.administration.avis.home-link')&gt;&gt;Avis.WebHome||class='btn btn-default']]
-          #end
-
-          [[$services.localization.render('wikidemarches.administration.ministeres.home-link')&gt;&gt;Ministeres.WebHome||class='btn btn-default']]
-
-          [[$services.localization.render('wikidemarches.administration.directions.home-link')&gt;&gt;Directions.WebHome||class='btn btn-default']]
-
-          [[$services.localization.render('wikidemarches.administration.publics.home-link')&gt;&gt;Publics.WebHome||class='btn btn-default']]
-
-          [[$services.localization.render('wikidemarches.administration.evenements.home-link')&gt;&gt;Evenements.WebHome||class='btn btn-default']]
-
-          #if ($hasAdmin)
-            [[$services.localization.render('wikidemarches.administration.tools')&gt;&gt;Administration.WebHome||class='btn btn-default']]
-          #end
-
-          [[$services.localization.render('wikidemarches.administration.tableaudebord')&gt;&gt;TableauDeBord.WebHome||class='btn btn-default']]
-
-        )))
-      )))
-    )))
-  )))
   #end
   ##
   ##
@@ -429,7 +428,10 @@
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     h2 {
@@ -440,7 +442,7 @@
 
 #xwikicontent {
   .demarches-titlerow {
-    background-color: #fff;
+    background-color: @blue-france-975;
 
     h1.no-margin {
       margin: 0rem;
@@ -467,7 +469,7 @@
 
   .demarches-searchrow {
     text-align: left;
-    background-color: @grey-950;
+    background-color: #fff;
 
     #globalsearch {
       input,
@@ -594,144 +596,8 @@
     }
   }
 
-  .demarches-evalrow {
-    background-color: @blue-france-975;
-
-    .evalrow-header {
-      margin-bottom: @gap-mobile;
-    }
-
-    @media (min-width: @screen-sm-min) {
-      .evalrow-header {
-        text-align: left;
-        margin-bottom: @gap-desktop;
-      }
-    }
-  }
-
-  .evalrow-cards {
-    text-align: center;
-    margin-bottom: 0.5rem;
-
-    // Modify bootstrap columns paddings so that there is 24px between cards
-    .col-xs-12 {
-      padding-right: 0.75rem;
-      padding-left: 0.75rem;
-    }
-
-    .evalrow-card {
-      margin-bottom: 1.5em;
-      padding: @grid-gutter-width @grid-gutter-width * 4/5;
-      border: 1px solid @grey-925;
-      border-bottom: 4px solid @brand-primary;
-      background-color: @grey-1000;
-
-      @media (min-width: @screen-sm-min) {
-        height: 21.5em;
-      }
-      @media (min-width: @screen-md-min) {
-        height: 18em;
-      }
-      @media (min-width: @screen-lg-min) {
-        height: 26em;
-      }
-
-      p {
-        width: 100%;
-      }
-
-      h3 {
-        font-size: 1rem;
-        margin-top: 1.5em;
-        margin-bottom: 0.5em;
-        font-weight: bold;
-      }
-
-      /* the icon p is the first paragraph in the card*/
-      p:first-child {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: @brand-primary;
-        line-height: 4em;
-        width: 4em;
-        height: 4em;
-        border-radius: 2em;
-        margin-left: auto;
-        margin-right: auto;
-        vertical-align: middle;
-        text-align: center;
-        background-color: @blue-france-975;
-      }
-
-      img {
-        line-height: 1.5em;
-        width: 2.5rem;
-      }
-    }
-  }
-
-  .demarches-usagerow {
-    .usagerow-header,
-    .usagerow-description,
-    .seemore-button-container {
-      margin-bottom: @gap-mobile;
-    }
-
-    img {
-      box-shadow: 0px 0px 64px rgba(154, 154, 255, 0.4);
-    }
-
-    @media (min-width: @screen-sm-min) {
-      padding-top: 4.5rem; /* desktop size */
-      padding-bottom: 4.5rem; /* desktop size */
-
-      .usagerow-header,
-      .usagerow-description {
-        text-align: left;
-        margin-bottom: @gap-desktop;
-      }
-      .seemore-button-container {
-        text-align: left;
-        margin-bottom: 0px;
-      }
-
-      .usagerow-col-img {
-        text-align: right;
-      }
-    }
-  }
-
-  .demarches-indicatorsrow {
-    .buttons-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      gap: 0.75rem 3rem;
-      margin-top: @gap-mobile;
-
-      @media (min-width: @screen-sm-min) {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin-top: @gap-desktop;
-      }
-    }
-  }
-
-  .demarches-morerow {
-    background-color: @grey-975;
-
-    a {
-      color: @brand-primary;
-      text-decoration: none !important;
-    }
-  }
-
   .demarches-administrationrow {
-    background-color: @grey-950;
+    background-color: #fff;
 
     .row-flex {
       display: flex;
@@ -763,6 +629,138 @@
           }
         }
       }
+    }
+  }
+
+  .demarches-evalrow {
+    background-color: #fff;
+
+    .evalrow-header {
+      margin-bottom: @gap-mobile;
+    }
+
+    @media (min-width: @screen-sm-min) {
+      .evalrow-header {
+        text-align: left;
+        margin-bottom: @gap-desktop;
+      }
+    }
+  }
+
+  .evalrow-cards {
+    text-align: center;
+    margin-bottom: 0.5rem;
+
+    // Modify bootstrap columns paddings so that there is 24px between cards
+    .col-xs-12 {
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+
+    .evalrow-card {
+      height: 11rem;
+      margin-bottom: 1.5em;
+      padding: @grid-gutter-width @grid-gutter-width * 4/5;
+      border: 1px solid @grey-925;
+      border-bottom: 4px solid @brand-primary;
+      background-color: @grey-1000;
+
+      @media (min-width: @screen-lg-min) {
+        height: 12rem;
+      }
+
+      p {
+        width: 100%;
+      }
+
+      h3 {
+        font-size: 1rem;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        font-weight: bold;
+      }
+
+      /* the icon p is the first paragraph in the card*/
+      p:first-child {
+        color: @brand-primary;
+        line-height: 4em;
+        width: 4em;
+        height: 4em;
+        border-radius: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        vertical-align: middle;
+        text-align: center;
+        background-color: @blue-france-975;
+      }
+
+      img {
+        line-height: 1.5em;
+        width: 2.5rem;
+      }
+    }
+  }
+
+  .demarches-usagerow {
+    background-color: @blue-france-975;
+
+    .usagerow-header,
+    .usagerow-description,
+    .seemore-button-container {
+      margin-bottom: @gap-mobile;
+    }
+
+    img {
+      box-shadow: 0px 0px 64px rgba(154, 154, 255, 0.4);
+    }
+
+    @media (min-width: @screen-sm-min) {
+      padding-top: 4.5rem; /* desktop size */
+      padding-bottom: 4.5rem; /* desktop size */
+
+      .usagerow-header,
+      .usagerow-description {
+        text-align: left;
+        margin-bottom: @gap-desktop;
+      }
+      .seemore-button-container {
+        text-align: left;
+        margin-bottom: 0px;
+      }
+
+      .usagerow-col-img {
+        text-align: right;
+      }
+    }
+  }
+
+  .demarches-indicatorsrow {
+    background-color: @grey-975;
+
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 0.75rem 3rem;
+      margin-top: @gap-mobile;
+
+      @media (min-width: @screen-sm-min) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: @gap-desktop;
+      }
+    }
+  }
+
+  .demarches-morerow {
+    background-color: #fff;
+
+    a {
+      color: @brand-primary;
+      text-decoration: none !important;
     }
   }
 }
