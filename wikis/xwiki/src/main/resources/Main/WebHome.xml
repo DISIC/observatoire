@@ -109,8 +109,8 @@
           )))
           (% class='col-xs-12 col-sm-6' %) (((
             (% class='howto-button-container' %) (((
-              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;JDMA.WebHome]]
               (% class="fa fa-question-circle" aria-hidden="true" %) ((()))
+              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;JDMA.WebHome]]
             )))
           )))
         )))
@@ -593,14 +593,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
-      gap: 0.75rem 3rem;
-
-      @media (min-width: @screen-sm-min) {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: center;
-      }
+      gap: 1rem;
     }
   }
 
