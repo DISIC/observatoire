@@ -479,8 +479,9 @@
         padding: 0.5rem 1rem;
         border: none 0px transparent;
         border-bottom: 2px solid @brand-primary !important;
+        border-top-left-radius: 0.25rem;
         color: @grey-50;
-        background-color: @grey-1000;
+        background-color: @grey-950;
         box-shadow: none;
 
         &amp;::placeholder {
@@ -499,6 +500,7 @@
         height: ~"calc(2.5rem - -2px)"; // We have to write '- -2px' else it does not work
         padding-top: @padding-base-vertical;
         padding-bottom: @padding-base-vertical;
+        border-top-right-radius: 0.25rem;
         background-color: @brand-primary;
         color: @blue-france-975;
       }
