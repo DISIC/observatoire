@@ -1319,7 +1319,7 @@ input[name='title'] {
 
 .observatoire-explanation {
   text-align: center;
-  background-color: @grey-1000;
+  background-color: @blue-france-975;
   color: @brand-primary;
   .nav-tabs.nav-dashboard {
     padding-top: 0;
