@@ -1682,11 +1682,15 @@ select[size="1"]{
 .btn {
   padding: 0.5rem 1.5rem;
 }
+.btn.btn-lg {
+  padding: 0.75rem 2rem;
+}
 .btn.btn-sm {
   padding: 0.25rem 1rem;
 }
-.btn.btn-lg {
-  padding: 0.75rem 2rem;
+// `xs` size does not existe for dsfr, we fallback on size `sm`
+.btn.btn-xs {
+  padding: 0.25rem 1rem;
 }
 
 /* DSFR sizes */
