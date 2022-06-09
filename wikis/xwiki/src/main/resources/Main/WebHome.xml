@@ -450,6 +450,12 @@
 
     .seemore-button-container a.btn-primary {
       margin-top: @gap-mobile; /* mobile size */
+      width: auto;
+
+      // Make button large for desktop size
+      @media (min-width: @screen-sm-min) {
+        padding: 0.75rem 2rem;
+      }
     }
 
     @media (min-width: @screen-sm-min) {
