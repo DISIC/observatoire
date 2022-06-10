@@ -63,6 +63,11 @@
 ## Hide some xwiki layout parts
 #set($displayDocTitle = false)
 #set($displayTitleContentSeparator = false)
+##
+#set ($startURL = $xwiki.getURL('Main.WebHome'))
+#if ($isGuest)
+  #set ($startURL = $xwiki.getURL('XWiki.Registration'))
+#end
 
 {{html clean="false"}}
 &lt;div class="use-dsfr"&gt;
@@ -147,7 +152,7 @@
       &lt;/div&gt;
 
       &lt;div class="fr-grid-row fr-grid-row--center fr-mt-6v fr-mt-md-12v"&gt;
-        &lt;a class="fr-btn fr-btn--lg" href="#todo-implement"&gt;Commencer&lt;/a&gt;
+        &lt;a class="fr-btn fr-btn--lg" href="$startURL"&gt;Commencer&lt;/a&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/section&gt;
@@ -281,7 +286,7 @@
           &lt;h2&gt;Prêt à recueillir les avis des usagers ?&lt;/h2&gt;
         &lt;/div&gt;
         &lt;div class="fr-col-12"&gt;
-          &lt;a class="fr-btn" href=""&gt;Commencer&lt;/a&gt;
+          &lt;a class="fr-btn" href="$startURL"&gt;Commencer&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -311,7 +316,7 @@
           &lt;h2&gt;Vous avez d’autres questions ? Des doutes ? Contactez-nous !&lt;/h2&gt;
         &lt;/div&gt;
         &lt;div class="fr-col-12"&gt;
-          &lt;a class="fr-btn fr-btn--secondary" href=""&gt;Contacter notre équipe&lt;/a&gt;
+          &lt;a class="fr-btn fr-btn--secondary" href="mailto:contact@design.numerique.gouv.fr"&gt;Contacter notre équipe&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
