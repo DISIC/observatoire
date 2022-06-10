@@ -1194,6 +1194,10 @@
  * DSFR font for icons
  * This is temporary, waiting to have the font as a file
  * that we can provide as an attachment of the page
+ * It is done in the custom less code section of the theme,
+ * and not grouped with other font declaration in the ssx,
+ * because the minification step of the ssx (not used by the custom less code)
+ * throws a NPE caused by a stack overflow when parsing the base64 data. 
  */
 
 @font-face {
