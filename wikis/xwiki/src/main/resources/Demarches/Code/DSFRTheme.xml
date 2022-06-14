@@ -1717,35 +1717,62 @@ select[size="1"]{
 }
 
 /* DSFR sizes */
-h6 {
+h6, .h6 {
   font-weight: 700;
   font-size: 1.125rem;
 }
 
-h5 {
+h5, .h5 {
   font-weight: 700;
   font-size: 1.25rem;
 }
 
-h4 {
+h4, .h4 {
   font-weight: 700;
   font-size: 1.375rem;
 }
 
-h3 {
+h3, .h3 {
   font-weight: 700;
   font-size: 1.5rem;
 }
 
-h2 {
+h2, .h2 {
   font-weight: 700;
   font-size: 1.75rem;
 }
 
-h1,
+h1, .h1,
 #document-title h1 {
   font-weight: 700;
   font-size: 2rem;
+}
+
+@media (min-width: @screen-sm-min) {
+  h6, .h6 {
+    font-size: 1.25rem;
+  }
+
+  h5, .h5 {
+    font-size: 1.375rem;
+  }
+
+  h4, .h4 {
+    font-size: 1.5rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.75rem;
+  }
+
+  h2, .h2 {
+    font-size: 2rem;
+  }
+
+  h1, .h1,
+  #document-title h1 {
+    font-size: 2.5rem;
+  }
 }
 
 
@@ -1873,32 +1900,6 @@ h1,
   }
 }
 
-@media (min-width: @screen-sm-min) {
-  h6 {
-    font-size: 1.25rem;
-  }
-
-  h5 {
-    font-size: 1.375rem;
-  }
-
-  h4 {
-    font-size: 1.5rem;
-  }
-
-  h3 {
-    font-size: 1.75rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  h1,
-  #document-title h1 {
-    font-size: 2.5rem;
-  }
-}
 
 /*
  * Mixin for outline styles used throughout the wiki

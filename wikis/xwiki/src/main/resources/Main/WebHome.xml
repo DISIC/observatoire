@@ -48,7 +48,7 @@
   #if ($isGuest)
     (%class='row demarches-titlerow'%)(((
       (%class='container'%)(((
-        (%class='demarches-headline #if (!$isGuest) no-margin #end'%)
+        (%class='demarches-headline'%)
         = $services.localization.render('wikidemarches.home.subtitle') =
         (%class='demarches-explanation narrow-width'%)
         $services.localization.render('wikidemarches.home.explanation')
@@ -57,15 +57,14 @@
         [[$services.localization.render('wikidemarches.observatoire.button')&gt;&gt;observatoire.WebHome||class='btn btn-primary']]
       )))
     )))
-  #end
-  ##
-  ##
-  #if (!$isGuest)
+  #else
     (% class='row demarches-searchrow' %) (((
       (% class='container' %) (((
+        (%class='demarches-headline'%)
+        = Mon tableau de bord =
         (% class='row' %) (((
-          (% class='col-xs-12' %) (((
-            == Rechercher une démarche ==
+          (% class='col-xs-12 h4' %) (((
+            Rechercher une démarche existante
           )))
           (% class='col-xs-12' %) (((
             ## display the global search here:
@@ -428,10 +427,7 @@
     }
 
     h1 {
-      font-size: 3rem;
-      max-width: 48rem;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 2.5rem;
     }
 
     h2 {
@@ -444,8 +440,13 @@
   .demarches-titlerow {
     background-color: @blue-france-975;
 
-    h1.no-margin {
-      margin: 0rem;
+    h1 {
+      @media (min-width: @screen-sm-min) {
+        font-size: 3rem;
+        max-width: 48rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     .seemore-button-container a.btn-primary {
@@ -476,6 +477,16 @@
   .demarches-searchrow {
     text-align: left;
     background-color: #fff;
+
+    h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    .h4 {
+      margin-top: 0rem;
+      margin-bottom: 1.5rem;
+      color: black;
+    }
 
     #globalsearch {
       input,
