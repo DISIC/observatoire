@@ -413,6 +413,7 @@
   @media (max-width: @screen-sm-max) {
     .btn {
       width: 100%;
+      white-space: break-spaces;
     }
   }
 
