@@ -481,6 +481,7 @@
 
 #xwikicontent {
   padding: 0;
+  overflow-x: hidden;
 }
 
 /* Done undoing container, custom style */
