@@ -1880,6 +1880,7 @@ h1, .h1,
           width: 1rem;
           height: 1rem;
           font-family: "dsfr-icon";
+          font-weight: bold;
         }
 
         &amp;.collapsed::after {
