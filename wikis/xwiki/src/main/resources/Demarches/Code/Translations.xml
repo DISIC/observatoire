@@ -41,8 +41,8 @@
   <hidden>true</hidden>
   <content># Translations that are specific to the wikidemat project
 demarches.validation.error=Le formulaire n'a pas pu être validé en raison d'une ou plusieurs erreur(s) ci-dessous.
-Demarches.Code.DemarchesClass_title1.validation=Le champ « nom » ne doit pas être vide.
-Demarches.Code.DemarchesClass_dateMiseEnLigne.validation=Le champ « date de mise en ligne » doit être au format MM/YYYY.
+Demarches.Code.DemarchesClass_title1.validation=Le champ « nom » ne doit pas être vide.
+Demarches.Code.DemarchesClass_dateMiseEnLigne.validation=Le champ « date de mise en ligne » doit être au format MM/YYYY.
 Demarches.Code.DemarchesClass_direction.validation=Une direction ou un établissement doit être sélectionné(e).
 Demarches.Code.DemarchesClass.new=Créer une démarche
 
