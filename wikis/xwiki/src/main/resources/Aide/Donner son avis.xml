@@ -34,12 +34,12 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Comment donner votre avis sur une démarche ?</title>
+  <title>Comment donner votre avis sur une démarche ?</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>Chaque usager peut donner son avis sur la démarche administrative en ligne qu’il vient d’effectuer, accessible grâce à un bouton « Je donne mon avis » proposé en fin de parcours. 
+  <content>Chaque usager peut donner son avis sur la démarche administrative en ligne qu’il vient d’effectuer, accessible grâce à un bouton « Je donne mon avis » proposé en fin de parcours. 
 
 
 (% style="text-align:center" %)
@@ -49,14 +49,14 @@
 [[image:presentation.tableau.de.bord_html_64b23a65.gif||alt=""]]
 
 
-En cliquant sur le bouton, l’usager de la démarche a accès à un formulaire qui permet de donner son avis en répondant aux questions suivantes :
+En cliquant sur le bouton, l’usager de la démarche a accès à un formulaire qui permet de donner son avis en répondant aux questions suivantes :
 
 
-**~1. Comment s’est passée la démarche : pas bien, moyen ou très bien**
+**~1. Comment s’est passée la démarche : pas bien, moyen ou très bien**
 
 
 (% style="text-align:center" %)
-[[image:1560787129323-495.png||alt="Dans la première étape du formulaire, l'utilisateur peut donner son avis sur la démarche via trois boutons : pas bien, moyen, très bien." width="600" style="box-shadow:0px 0px 10px #cccccc"]]
+[[image:1560787129323-495.png||alt="Dans la première étape du formulaire, l'utilisateur peut donner son avis sur la démarche via trois boutons : pas bien, moyen, très bien." width="600" style="box-shadow:0px 0px 10px #cccccc"]]
 
 (% style="text-align:center" %)
 [[image:presentation.tableau.de.bord_html_64b23a65.gif||alt=""]]
