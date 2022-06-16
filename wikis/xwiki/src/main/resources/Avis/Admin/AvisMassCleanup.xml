@@ -81,7 +81,7 @@
     {{html clean='false'}}
     &lt;form method='post' action='$doc.getURL()' class='xform' &gt;
     {{/html}}
-    |=No|=À effacer ? (%class="cleanupdocs-togglselect"%)((((%class="all"%)Tout(%%) / (%class="none"%)Aucun(%%)))) |=Avis|=Date
+    |=No|=À effacer ? (%class="cleanupdocs-togglselect"%)((((%class="all"%)Tout(%%) / (%class="none"%)Aucun(%%)))) |=Avis|=Date
     #foreach($sD in $selectedDocsHQL.execute())
       #set($sDDoc = $xwiki.getDocument($sD))
       |$velocityCount|{{html clean='false'}}&lt;input type='checkbox' name='todelete' value='$escapetool.xml($sDDoc.fullName)' /&gt;{{/html}}|[[$sD]]|$xwiki.formatDate($sDDoc.creationDate, $dateFormat)
@@ -114,19 +114,19 @@
     &lt;form action='' method='get' class='xform'&gt;
       &lt;dl&gt;
         &lt;dt&gt;
-          &lt;label for='dtStart'&gt;Entre (début) :&lt;/label&gt;
+          &lt;label for='dtStart'&gt;Entre (début) :&lt;/label&gt;
         &lt;/dt&gt;
         &lt;dd&gt;
           &lt;input type="text" name='dtStart' id='dtStart' class="datetime t" title="$dateFormat"&gt;&lt;/input&gt;
         &lt;/dd&gt;
         &lt;dt&gt;
-          &lt;label for='dtEnd'&gt;Et (fin) : &lt;/label&gt;
+          &lt;label for='dtEnd'&gt;Et (fin) : &lt;/label&gt;
         &lt;/dt&gt;
         &lt;dd&gt;
           &lt;input type="text" name='dtEnd' id='dtEnd' class="datetime t" title="$dateFormat" &gt;&lt;/input&gt;
         &lt;/dd&gt;
         &lt;dt&gt;
-          &lt;label for='demarche'&gt;Démarche (optionnel) : &lt;/label&gt;
+          &lt;label for='demarche'&gt;Démarche (optionnel) : &lt;/label&gt;
           &lt;div class='xHint'&gt;Id de la démarche des avis à supprimer. Par exemple, 419 ou 2161. Si aucune valeur n'est remplie, tous les avis de la période sélectionnée seront supprimés, quelle que soit leur démarche.&lt;/div&gt;
         &lt;/dt&gt;
         &lt;dd&gt;
@@ -244,7 +244,7 @@
   //
   // If there is a form containing the doremove action, add a confirmation before submit
   $('input[name=action][value=doremove]').closest('form').submit(function(evt) {
-    if(!confirm('Êtes-vous sur(e) de vouloir effacer ces documents ? ')) {
+    if(!confirm('Êtes-vous sur(e) de vouloir effacer ces documents ? ')) {
       evt.preventDefault();
     }
   });

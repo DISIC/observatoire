@@ -301,7 +301,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
     <dateMiseEnLigneTexte>
       <customDisplay/>
       <disabled>0</disabled>
-      <hint>Ce champ indique une date d'ouverture approximative par opposition au champ « Date de mise en ligne » qui indique un mois et une année précis.</hint>
+      <hint>Ce champ indique une date d'ouverture approximative par opposition au champ « Date de mise en ligne » qui indique un mois et une année précis.</hint>
       <name>dateMiseEnLigneTexte</name>
       <number>41</number>
       <picker>0</picker>
@@ -514,7 +514,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <customDisplay/>
       <disabled>0</disabled>
       <displayType>input</displayType>
-      <hint>Groupe(s) interne(s) au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
+      <hint>Groupe(s) interne(s) au(x)quel(s) est rattachée la démarche (exemple : Portail des signalements)</hint>
       <idField/>
       <multiSelect>1</multiSelect>
       <name>groupes</name>
@@ -539,7 +539,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_dateMiseEnLigne_nr"
       <customDisplay/>
       <disabled>0</disabled>
       <displayType>input</displayType>
-      <hint>Groupe(s) externe(s) au(x)quel(s) est rattachée la démarche (exemple : Éducation)</hint>
+      <hint>Groupe(s) externe(s) au(x)quel(s) est rattachée la démarche (exemple : Éducation)</hint>
       <idField/>
       <multiSelect>1</multiSelect>
       <name>groupesExternes</name>
@@ -1015,7 +1015,7 @@ $services.localization.render("Demarches.Code.DemarchesClass_qualiteSupport_$res
 {{/html}}
 {{/velocity}}</customDisplay>
       <disabled>0</disabled>
-      <hint>Nom de la démarche (longueur maximale : 255 caractères)</hint>
+      <hint>Nom de la démarche (longueur maximale : 255 caractères)</hint>
       <name>title1</name>
       <number>1</number>
       <prettyName>Nom</prettyName>

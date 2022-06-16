@@ -66,8 +66,8 @@
     #set ($groupPage = $xwiki.getDocument("XWiki.Groups.Directions.$sigle"))
     #set ($member = $groupPage.newObject("XWiki.XWikiGroups"))
     #set ($discard = $groupPage.save())
-    * Direction créée : [[$page.fullName]]
-    * Groupe créé : [[$groupPage.fullName]]
+    * Direction créée : [[$page.fullName]]
+    * Groupe créé : [[$groupPage.fullName]]
   #else
     Une direction avec ce sigle existe déjà: [[$page.fullName]]
   #end

@@ -42,9 +42,9 @@
   <content>#General
 wd.home=Accueil
 wd.cgu=Conditions générales d'utilisation
-wd.accessibilite.conforme=Accessibilité : totalement conforme
-wd.accessibilite.partielle=Accessibilité : partiellement conforme
-wd.accessibilite.non-conforme=Accessibilité : non conforme
+wd.accessibilite.conforme=Accessibilité : totalement conforme
+wd.accessibilite.partielle=Accessibilité : partiellement conforme
+wd.accessibilite.non-conforme=Accessibilité : non conforme
 wd.legal-notice=Mentions Légales
 wd.personal-data=Données personnelles
 wd.contact=Contact
@@ -60,7 +60,7 @@ wd.docdoesnotexist.message=La page n'existe pas ou n'est pas disponible. Nous vo
 wd.piwik.iframe.title=Refuser le suivi de votre navigation
 wd.login.username=Nom d'utilisateur (obligatoire)
 wd.login.password=Mot de passe (obligatoire)
-core.register.welcome=Inscrivez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.&lt;br/&gt;&lt;br/&gt;Vous avez déjà un compte sur l’observatoire ?
+core.register.welcome=Inscrivez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.&lt;br/&gt;&lt;br/&gt;Vous avez déjà un compte sur l’observatoire ?
 core.register.welcome.login=Connectez-vous.
 
 # Invalid account screen
@@ -84,7 +84,7 @@ wikidemarches.dinum.twitter=La DINUM sur Twitter
 wikidemarches.dinum.linkedin=La DINUM sur LinkedIn
 wikidemarches.code-open-source=Code open source
 wikidemarches.search.label=Chercher une démarche
-wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
+wikidemarches.search.inputText=ex : Impôt, Acte de naissance, http://www…
 wikidemarches.search.button=Trouvez votre démarche
 wikidemarches.owned-demarches=Suivre vos démarches
 wikidemarches.owned-demarches.none=Vous ne suivez pas encore de demarche
@@ -129,8 +129,8 @@ wikidemarches.demarche.embed.generate.button=Générer le code
 
 # Liste des avis tab
 wikidemarches.demarche.avisList.export.title=Exporter les avis
-wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également.
-wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter :
+wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également.
+wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter :
 wikidemarches.demarche.avisList.export.excel=Exporter pour excel
 wikidemarches.demarche.avisList.export.csv=Exporter en CSV
 
@@ -146,16 +146,16 @@ wikidemarches.demande.demarche-absente=Votre démarche n’existe pas encore ?
 wikidemarches.demande.creation=Créer une nouvelle démarche
 wikidemarches.demande.referencer=Référencer une démarche manquante
 wikidemarches.demande.referencer.introduction=Si vous n'avez pas trouvé la démarche que vous avez faite, ajoutez-la ici afin de pouvoir donner votre avis.
-wikidemarches.demande.organisme=Auprès de quel organisme avez-vous fait cette démarche ?
+wikidemarches.demande.organisme=Auprès de quel organisme avez-vous fait cette démarche ?
 wikidemarches.demande.url=Adresse URL de la démarche
 wikidemarches.demande.nom=Nom de la démarche
-wikidemarches.demande.but=Quel est le but de cette démarche ?
+wikidemarches.demande.but=Quel est le but de cette démarche ?
 wikidemarches.demande.envoyer=Valider
-wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également nous donner votre avis sur cette démarche ?
+wikidemarches.demande.merci=Merci de votre proposition. Pouvez-vous également nous donner votre avis sur cette démarche ?
 
 #Footer
 wikidemarches.footer.reseaux-sociaux=Suivez-nous sur nos réseaux sociaux
-wikidemarches.footer.administrationlinks.intro=Nos sites :
+wikidemarches.footer.administrationlinks.intro=Nos sites :
 wikidemarches.footer.administrationlinks.newwindow=nouvelle fenêtre
 wikidemarches.footer.description.jdma=Le bouton {0} est un service proposé par la direction interministérielle du numérique (DINUM) dans le cadre de la démarche Services publics +.
 wikidemarches.footer.description.jdma.button-name=Je donne mon avis
@@ -165,7 +165,7 @@ wikidemarches.footer.description.observatoire=L’Observatoire de la qualité de
 wikidemarches.dematdashboard.title=Tableau de bord de la dématérialisation
 wikidemarches.dematdashboard.intro=
 # wikidemarches.dematdashboard.intro=Ce tableau recense plus d'un millier de démarches administratives dont 258 sont dématérialisées à ce jour, sous forme de formulaire en ligne ou de téléprocédure.
-wikidemarches.dematdashboard.warning=Le recensement est complété et fiabilisé en continu par les administrations et grâce à vos retours. \\\\Vous ne trouvez pas votre démarche ? [[Ajouter une démarche manquante&gt;&gt;Demarches.Code.NewDemarche]] !
+wikidemarches.dematdashboard.warning=Le recensement est complété et fiabilisé en continu par les administrations et grâce à vos retours. \\\\Vous ne trouvez pas votre démarche ? [[Ajouter une démarche manquante&gt;&gt;Demarches.Code.NewDemarche]] !
 wikidemarches.dematdashboard.download=Télécharger le fichier CSV
 wikidemarches.dematdashboard.download.xls=Télécharger le fichier Excel
 wikidemarches.dematdashboard.download.hint={0}

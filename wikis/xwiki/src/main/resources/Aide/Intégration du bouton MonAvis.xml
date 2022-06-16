@@ -42,18 +42,18 @@
   <content>
 **L’outil MonAvis est conçu pour rendre très simple l’intégration du bouton de vote à la fin des démarches administratives. Voici le mode opératoire.**
 
-== 1. Créer un compte sur MonAvis :==
+== 1. Créer un compte sur MonAvis :==
 
 * Accéder à [[monavis.numerique.gouv.fr&gt;&gt;https://monavis.numerique.gouv.fr]]   et cliquer sur le bouton « identification » situé en bas de la page ; vous arrivez sur une page de connexion ;
 * Cliquer sur le lien « inscription » ;
 * Remplir le formulaire d’inscription ;
 * Confirmer l’adresse mail en cliquant sur le lien reçu dans l’e-mail de confirmation ;
 
-NB : Si votre adresse ne se finit pas par « @(…).gouv.fr », une validation de votre compte par un administrateur est nécessaire.
+NB : Si votre adresse ne se finit pas par « @(…).gouv.fr », une validation de votre compte par un administrateur est nécessaire.
 
 == 2. Accéder à la page de sa démarche via le moteur de recherche ==
 
-=== 2b. Si elle est absente du référentiel, ajouter sa démarche (étape optionnelle) :===
+=== 2b. Si elle est absente du référentiel, ajouter sa démarche (étape optionnelle) :===
 
 * Cliquer sur le bouton « Ajouter une démarche manquante » ;
 * Remplir le formulaire de référencement d’une démarche.
@@ -64,7 +64,7 @@ NB : Si votre adresse ne se finit pas par « @(…).gouv.fr », une validation
 
 NB : lorsque vous référencez une démarche (étape 2b), vous devenez automatiquement « porteur de la démarche ».
 
-== 4. Obtenir le code du bouton :==
+== 4. Obtenir le code du bouton :==
 
 * Toujours sur la page de la démarche, accéder à l’onglet « code à intégrer » ;
 * Cliquer sur le bouton « générer le code » ;

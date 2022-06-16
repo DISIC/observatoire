@@ -43,86 +43,86 @@
 
 === **Réalisable en ligne** ===
 
-* « Oui » si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire
-* « Non » dans le cas contraire
-* « Bêta » si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier
-* « Partiel » si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès ou alors sur une partie seulement des cas métier)
+* « Oui » si l'utilisateur peut effectuer la démarche complètement via internet jusqu'au dépôt de la demande sur l’ensemble du territoire
+* « Non » dans le cas contraire
+* « Bêta » si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier
+* « Partiel » si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès ou alors sur une partie seulement des cas métier)
 
 Nota bene: Pour le calcul de taux de dématérialisation, les démarches réalisées en ligne complètement sont comptabilisées comme dématérialisées à 100%, en déploiement partiel à 50%, en expérimentation à 10%.
 
-Seules les démarches non réalisables en ligne ne sont pas évaluées : l'évaluation des critères s'applique aussi aux démarches partiellement déployées ou en expérimentation ("bêta").
+Seules les démarches non réalisables en ligne ne sont pas évaluées : l'évaluation des critères s'applique aussi aux démarches partiellement déployées ou en expérimentation ("bêta").
 
 === **Usagers satisfaits** ===
 
-Il est calculé à partir des réponses des usagers à la question « Comment s'est passée cette démarche pour vous ? » à la fin d'une démarche. Il n’est affiché que lorsque le nombre d'avis recueillis sur grâce au bouton "je donne mon avis" est supérieur à 100.
+Il est calculé à partir des réponses des usagers à la question « Comment s'est passée cette démarche pour vous ? » à la fin d'une démarche. Il n’est affiché que lorsque le nombre d'avis recueillis sur grâce au bouton "je donne mon avis" est supérieur à 100.
 
-Les réponses ayant reçu l'avis :
+Les réponses ayant reçu l'avis :
 
-* « Pas bien » comptent pour 0
-* « Moyen » comptent pour 1
-* « Très bien » comptent pour 2
+* « Pas bien » comptent pour 0
+* « Moyen » comptent pour 1
+* « Très bien » comptent pour 2
 
 Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne sur une échelle de 1 à 10.
 
-Si l’administration n’a pas encore placé le bouton "je donne mon avis" à la fin des démarches le tableau affiche l’information « En attente ». Si le bouton a été installé à la fin de la démarche mais n'a pas encore recueilli plus de 100 votes l'information "En cours" s'affiche
+Si l’administration n’a pas encore placé le bouton "je donne mon avis" à la fin des démarches le tableau affiche l’information « En attente ». Si le bouton a été installé à la fin de la démarche mais n'a pas encore recueilli plus de 100 votes l'information "En cours" s'affiche
 
 Les votes pris en compte sont ceux exprimés dans les 365 jours qui précèdent la date à laquelle est prise la mesure de l'indice.
 
-Point d'attention : les indices de satisfaction des démarches de la CNAMTS sont récupérés à  partir des données de satisfaction collectées par la CNAMTS sur son site Ameli.fr (emoticones "notez votre démarche").
+Point d'attention : les indices de satisfaction des démarches de la CNAMTS sont récupérés à  partir des données de satisfaction collectées par la CNAMTS sur son site Ameli.fr (emoticones "notez votre démarche").
 
 === **Prise en compte handicaps** ===
 
-L'indicateur proposé permet de mesurer la conformité des démarches au regard des obligations d'accessibilité. Il se mesure à l'aide de deux sous critères :
+L'indicateur proposé permet de mesurer la conformité des démarches au regard des obligations d'accessibilité. Il se mesure à l'aide de deux sous critères :
 
-* sous-critère 1 : Présence d'une déclaration d'accessibilité valide de moins de 3 ans
-* sous-critère 2 : Taux de conformité supérieur à 75% atteint dans la déclaration d’accessibilité
+* sous-critère 1 : Présence d'une déclaration d'accessibilité valide de moins de 3 ans
+* sous-critère 2 : Taux de conformité supérieur à 75% atteint dans la déclaration d’accessibilité
 
-La démarches est au vert (« oui ») si les deux critères sont respectés, à orange (« partiel ») si seul le premier critère est respecté et à rouge (« non ») si aucun des deux critères n'est respecté.
+La démarches est au vert (« oui ») si les deux critères sont respectés, à orange (« partiel ») si seul le premier critère est respecté et à rouge (« non ») si aucun des deux critères n'est respecté.
 
 === **Aide joignable** ===
 
 Ce critère permet de vérifier que  chaque démarche en ligne propose au moins deux moyens de contact différents et facilement accessibles. Par moyen de contact, on entend la possibilité d'échanger avec un humain (les robots, FAQ, etc. ne sont pas pris en compte).
 
-Les résultats sont ensuite évalués :  
+Les résultats sont ensuite évalués :  
 
-* « Oui » : deux moyens de contact humains facilement accessibles
-* « Non » : pas de moyen de contact humain
-* « Partiel » : un seul moyen de contact humain facilement accessible
+* « Oui » : deux moyens de contact humains facilement accessibles
+* « Non » : pas de moyen de contact humain
+* « Partiel » : un seul moyen de contact humain facilement accessible
 
-Sont pris en compte dans l’évaluation : téléphone, courriel, adresse mail, tchat humain, adresse de guichet physique territorialisé.
+Sont pris en compte dans l’évaluation : téléphone, courriel, adresse mail, tchat humain, adresse de guichet physique territorialisé.
 
 === **Compatible mobile** ===
 
-Ce critère permet de vérifier si le service est optimisé sur un smartphone :
+Ce critère permet de vérifier si le service est optimisé sur un smartphone :
 
-* « Oui » : démarche accessible sur smartphone ou application mobile
-* « Non » : démarche non accessible sur smartphone ou application mobile
-* « Partiel » : démarche accessible sur smartphone mais avec des défauts dans l'affichage, ou certaines pages ne sont pas accessibles sur smartphone
+* « Oui » : démarche accessible sur smartphone ou application mobile
+* « Non » : démarche non accessible sur smartphone ou application mobile
+* « Partiel » : démarche accessible sur smartphone mais avec des défauts dans l'affichage, ou certaines pages ne sont pas accessibles sur smartphone
 
 === **Intégration FranceConnect** ===
 
-Ce critère mesure la possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise :
+Ce critère mesure la possibilité de s’identifier avec FranceConnect quand une identification de l’usager est requise :
 
-* « Oui » si la démarche propose le bouton FranceConnect ;
-* « Non » si ce n’est pas le cas ;
+* « Oui » si la démarche propose le bouton FranceConnect ;
+* « Non » si ce n’est pas le cas ;
 
-La valeur « n/a » est indiquée si le critère est sans objet (démarches de nécessitant pas l’identification de l’usager ou concernant un public entreprises) ;
+La valeur « n/a » est indiquée si le critère est sans objet (démarches de nécessitant pas l’identification de l’usager ou concernant un public entreprises) ;
 
 === **Dites-le nous une fois** ===
 
-L'indicateur proposé est un indicateur d'effort pour les usagers. Il permet d'estimer l'effort de ressaisie de données que l'administration pourrait ne plus demander aux usagers en allant chercher elle-même ces informations. Il est calculé de la manière suivante :
+L'indicateur proposé est un indicateur d'effort pour les usagers. Il permet d'estimer l'effort de ressaisie de données que l'administration pourrait ne plus demander aux usagers en allant chercher elle-même ces informations. Il est calculé de la manière suivante :
 
-1. On définit un panier de données qu'on estime ne plus devoir être demandées aux usagers compte tenu du fait que ces informations sont déjà connues de l'administration. Ce panier est composé des données suivantes :
-1*. Données personnes physiques : identité, revenus, composition familiale, attestations de droit, adresse, scolarité
-1*. Données personnes morales : identité, attestations, liasse, données comptables
-1. On vérifie ensuite dans chaque procédure si les données de ce panier continuent à être demandées aux usagers, ou si au contraire elles ne sont plus demandées : soit la donnée pré-remplie et présentée à l'usager, soit la donnée récupérée auprès d'une autre administration qui possède la donnée de référence.
-1. Le score total est évalué en additionnant le nombre de données qui sont  redemandées aux utilisateurs. Toutes les données redemandées ne représentent pas toutefois le même degré de difficulté pour les usagers. La saisie de certaines données représente un effort modéré pour les usagers, alors que d'autres demandes d'information sont plus lourdes. Un coefficient vient donc pondérer la note pour chacune des données demandées. Exemple : ressaisie des données d'identité (nom-prénom-date et lieu de naissance : coefficient 1 ; fourniture des derniers bulletins de salaire : coefficient 3
+1. On définit un panier de données qu'on estime ne plus devoir être demandées aux usagers compte tenu du fait que ces informations sont déjà connues de l'administration. Ce panier est composé des données suivantes :
+1*. Données personnes physiques : identité, revenus, composition familiale, attestations de droit, adresse, scolarité
+1*. Données personnes morales : identité, attestations, liasse, données comptables
+1. On vérifie ensuite dans chaque procédure si les données de ce panier continuent à être demandées aux usagers, ou si au contraire elles ne sont plus demandées : soit la donnée pré-remplie et présentée à l'usager, soit la donnée récupérée auprès d'une autre administration qui possède la donnée de référence.
+1. Le score total est évalué en additionnant le nombre de données qui sont  redemandées aux utilisateurs. Toutes les données redemandées ne représentent pas toutefois le même degré de difficulté pour les usagers. La saisie de certaines données représente un effort modéré pour les usagers, alors que d'autres demandes d'information sont plus lourdes. Un coefficient vient donc pondérer la note pour chacune des données demandées. Exemple : ressaisie des données d'identité (nom-prénom-date et lieu de naissance : coefficient 1 ; fourniture des derniers bulletins de salaire : coefficient 3
 
-L'indicateur est présenté sur le barème suivant :
+L'indicateur est présenté sur le barème suivant :
 
-* « Vert » : aucune ou une seule des données du panier n'est demandée aux usagers (indicateur de ressaisie entre 0 et 1) ;
-* « Orange » : effort modéré de ressaisie demandé aux usagers (indicateur entre 2 et 4) ;
-* « Rouge » : effort important de ressaisie demandé aux usagers (indicateur supérieur ou égal à 5) ;
+* « Vert » : aucune ou une seule des données du panier n'est demandée aux usagers (indicateur de ressaisie entre 0 et 1) ;
+* « Orange » : effort modéré de ressaisie demandé aux usagers (indicateur entre 2 et 4) ;
+* « Rouge » : effort important de ressaisie demandé aux usagers (indicateur supérieur ou égal à 5) ;
 
 === **Disponibilité et rapidité** ===
 
@@ -130,14 +130,14 @@ Les tests sont réalisés par un outil qui interroge 24 heures sur 24 les adress
 
 Ce critère est évalué dynamiquement en prenant en compte la disponibilité du site (sur 6 points) et le temps de réponse (sur 4 points).
 
-* Critère 1 : disponibilité
+* Critère 1 : disponibilité
 ** Supérieure à 99.9% = 6
 ** Entre 99.9% et 99.5% = 4
 ** Entre 99,5% et 99% = 3
 ** Entre 99% et 98% = 2
 ** Entre 98% et 95% = 0
 ** Inférieure à 95% = -6
-* Critère 2 : temps de réponse
+* Critère 2 : temps de réponse
 ** Inférieure à 0.2 s = 4
 ** Entre 0.2s et 0.4s = 3
 ** Entre 0.4s et 0.6s = 2
@@ -145,26 +145,26 @@ Ce critère est évalué dynamiquement en prenant en compte la disponibilité du
 ** Entre 0.8s et 1s = 0
 ** Supérieure à 1s = -4
 
-Sur une échelle de 10, le site est :
+Sur une échelle de 10, le site est :
 
-* « Vert » si le score total est supérieur ou égal à 8 ;
-* « Orange » pour un score entre 5 (compris) et 7 (compris) ;
-* « Rouge » si le score total est inférieur ou égal à 4 ; 
+* « Vert » si le score total est supérieur ou égal à 8 ;
+* « Orange » pour un score entre 5 (compris) et 7 (compris) ;
+* « Rouge » si le score total est inférieur ou égal à 4 ; 
 
 Ce critère ne prend en compte que la disponibilité et rapidité de la page d'accueil.
 
-Précisions complémentaires sur le mode de calcul :
+Précisions complémentaires sur le mode de calcul :
 
 * Les tests des ouvertures de session HTTP/HTTPS sont employées, afin de mesurer la disponibilité et le temps de  réponse de la page sur l’URL renseignée (aucun parcours utilisateur n’est configuré=&gt; le mesure peut donner un  résultat meilleur que la réalité)
 * ce sont les réglages standards qui sont utilisés (fréquence de polling par exemple)
 * la mesure de disponibilité est effectuée 24/7, sur 30 jours, check chaque minute
 * les valeurs rapportées dans le tableau de bord trimestriel sont des valeurs calculées sur les trois derniers mois
 
-== **Précisions sur la signification des valeurs « - », « n/a » et « En attente » ** ==
+== **Précisions sur la signification des valeurs « - », « n/a » et « En attente » ** ==
 
-* Si la démarche n'est pas été dématérialisée, les critères ne sont pas évalués et sont marqués d’un tiret moyen : « – »
-* Si un critère n'est pas applicable à une démarche, non applicable « n/a » est affiché (ex : absence d'interface utilisateur dans les démarches fonctionnant sur la base d'Echanges de Données Informatisées par exemple)
-* Si une information n'est pas disponible sur un critère, « En attente » est affiché (Ex : pas de présence du bouton « Je donne mon avis », critère DLNUF non mesuré, etc.)
+* Si la démarche n'est pas été dématérialisée, les critères ne sont pas évalués et sont marqués d’un tiret moyen : « – »
+* Si un critère n'est pas applicable à une démarche, non applicable « n/a » est affiché (ex : absence d'interface utilisateur dans les démarches fonctionnant sur la base d'Echanges de Données Informatisées par exemple)
+* Si une information n'est pas disponible sur un critère, « En attente » est affiché (Ex : pas de présence du bouton « Je donne mon avis », critère DLNUF non mesuré, etc.)
 
 == **Les autres données présentes** ==
 
@@ -190,7 +190,7 @@ Adresse URL démarche permettant d'accéder à la démarche
 
 === **Catégories de publics concernés** ===
 
-Publics auxquels s'adresse la démarche : particuliers, professionnels, associations, collectivités locales
+Publics auxquels s'adresse la démarche : particuliers, professionnels, associations, collectivités locales
 
 === **Pourcentage de conformité RGAA** ===
 

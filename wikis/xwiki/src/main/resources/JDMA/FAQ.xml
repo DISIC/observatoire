@@ -45,7 +45,7 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="quelles-sont-les-question-posees-aux-usagers"&gt;
-          Quelles sont les question posées aux usagers ?
+          Quelles sont les question posées aux usagers ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="quelles-sont-les-question-posees-aux-usagers"&gt;
@@ -57,7 +57,7 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-ajouter-des-questions-personnalisees"&gt;
-          Puis-je ajouter des questions personnalisées ?
+          Puis-je ajouter des questions personnalisées ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="puis-je-ajouter-des-questions-personnalisees"&gt;
@@ -69,7 +69,7 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="faut-il-vous-contacter-pour-utiliser-le-bouton-je-donne-mon-avis"&gt;
-          Faut-il vous contacter pour utiliser le bouton Je donne mon avis ?
+          Faut-il vous contacter pour utiliser le bouton Je donne mon avis ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="faut-il-vous-contacter-pour-utiliser-le-bouton-je-donne-mon-avis"&gt;
@@ -81,7 +81,7 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-utiliser-le-bouton-je-donne-mon-avis-si-ma-demache-ne-fait-pas-partie-de-lobservatoire-de-la-qualite-des-demarches-en-ligne"&gt;
-          Puis-je utiliser le bouton Je donne mon avis si ma démache ne fait pas partie de l'Observatoire de la qualité des démarches en ligne ?
+          Puis-je utiliser le bouton Je donne mon avis si ma démache ne fait pas partie de l'Observatoire de la qualité des démarches en ligne ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="puis-je-utiliser-le-bouton-je-donne-mon-avis-si-ma-demache-ne-fait-pas-partie-de-lobservatoire-de-la-qualite-des-demarches-en-ligne"&gt;
@@ -93,7 +93,7 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-utiliser-le-bouton-je-donne-mon-avis-sur-plusieurs-demarches-en-meme-temps"&gt;
-          Puis-je utiliser le bouton Je donne mon avis sur plusieurs démarches en même temps ?
+          Puis-je utiliser le bouton Je donne mon avis sur plusieurs démarches en même temps ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="puis-je-utiliser-le-bouton-je-donne-mon-avis-sur-plusieurs-demarches-en-meme-temps"&gt;
@@ -105,7 +105,7 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="existe-t-il-un-guide-pour-mindiquer-comment-proceder"&gt;
-          Existe-t-il un guide pour m'indiquer comment procéder ?
+          Existe-t-il un guide pour m'indiquer comment procéder ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="existe-t-il-un-guide-pour-mindiquer-comment-proceder"&gt;

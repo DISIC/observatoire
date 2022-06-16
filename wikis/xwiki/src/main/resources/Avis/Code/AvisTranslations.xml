@@ -79,7 +79,7 @@ avis.livetable.emptyvalue=-
 # Other keys
 avis.score.title=Satisfaction globale
 avis.score.totalnumber={0} avis
-avis.score.satisfactionscore=Taux de satisfaction sur {1} avis : {0} {2}
+avis.score.satisfactionscore=Taux de satisfaction sur {1} avis : {0} {2}
 avis.score.0votes=Aucun avis
 avis.entry.name=Avis
 avis.form.demarchename.label=Démarche :
@@ -90,7 +90,7 @@ avis.form.second-form-screen.doctitle=Merci !&lt;br /&gt;Pouvez-vous nous en di
 avis.form.final-step.doctitle=Merci pour votre aide !
 # Form messages
 avis.form.initial-step.demarche-newly-submitted-by-current-user=La démarche a bien été ajoutée.
-avis.form.third-form-screen=Merci d'avoir donné votre avis !\nVotre réponse nous aide à améliorer le service public.
+avis.form.third-form-screen=Merci d'avoir donné votre avis !\nVotre réponse nous aide à améliorer le service public.
 avis.form.final-step.confirmation=Votre avis a bien été transmis au service qui s’occupe de cette démarche.
 avis.form.final-step.homelink=Donner votre avis sur une autre démarche
 avis.form.validate=Valider
@@ -147,7 +147,7 @@ Avis.Code.AvisClass_autreAide=Pouvez-vous préciser de quelle autre aide vous av
 Avis.Code.AvisClass_autreAide_maxhint=Maximum 250 caractères.
 Avis.Code.AvisClass_autre=Souhaitez-vous nous en dire davantage ?
 Avis.Code.AvisClass_autre.hint=Ne communiquez aucune information personnelle ici.&lt;br/&gt;Ceci n’est pas un formulaire de contact. Si vous avez des questions sur cette démarche, contactez le service concerné.
-Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration concernant cette démarche, merci de nous indiquer votre adresse électronique :
+Avis.Code.AvisClass_email=Si vous souhaitez participer aux futures enquêtes de satisfaction de l'administration concernant cette démarche, merci de nous indiquer votre adresse électronique :
 Avis.Code.AvisClass_source=Source
 
 </content>

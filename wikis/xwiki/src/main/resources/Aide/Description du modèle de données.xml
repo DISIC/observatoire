@@ -54,11 +54,11 @@
 |=Champ de la démarche|Champ national ou territorial|National, territorial (une seule option possible)|National
 |=Direction ou établissement|Direction ou établissement à laquelle / auquel est rattachée la démarche. Ce champ est obligatoire.|Direction référencée dans la plateforme.|Directions.DGS
 |=Ministère(s)|Ministère(s) {{html}}au(x)quel(s){{/html}} est rattachée la démarche|Ministère(s) référencé(s) dans la plateforme|Ministeres.MASS
-|=Regroupement interne|Groupe(s) {{html}}au(x)quel(s){{/html}} est rattachée la démarche (exemple : Portail des signalements)|Groupe référencé sur la plateforme ou nouveau groupe| 
+|=Regroupement interne|Groupe(s) {{html}}au(x)quel(s){{/html}} est rattachée la démarche (exemple : Portail des signalements)|Groupe référencé sur la plateforme ou nouveau groupe| 
 |=(((
 Regroupement externe
 )))|Groupe(s) externe(s) {{{au(x)quel(s)}}} est rattachée la démarche|Texte libre|Éducation
-|=Organismes de traitement|Organisme(s) ou type(s) d'organisme recevant la démarche et la gérant|Texte libre|Professionnels :
+|=Organismes de traitement|Organisme(s) ou type(s) d'organisme recevant la démarche et la gérant|Texte libre|Professionnels :
 collecteurs de déchets
 
 == Références ==
@@ -115,7 +115,7 @@ Indique si la démarche est intégrée à FranceConnect.
 |=(% style="background-color: rgb(255, 255, 238);" %)Au moins deux moyens de contact différents, dont un formulaire de contact|(% style="background-color:#ffffee" %)**Utilisé pour calculer la valeur du critère "Aide joignable".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %)Oui
 |=(% style="background-color: rgb(255, 255, 238);" %)Accompagnement humain personnalisé|(% style="background-color:#ffffee" %)**Utilisé pour calculer la valeur du critère "Aide joignable".**|(% style="background-color:#ffffee" %)Oui (##oui##), Non (##non##), sans objet (##na##), non renseigné (##nr##)|(% style="background-color:#ffffee" %) 
 |=(% style="background-color: rgb(255, 255, 238);" %)Support de qualité|(% style="background-color:#ffffee" %)Champ calculé à partir des deux champs précédents
-**Critère "Aide joignable".**|(% style="background-color:#ffffee" %)La règle de calcul est la suivante :(((
+**Critère "Aide joignable".**|(% style="background-color:#ffffee" %)La règle de calcul est la suivante :(((
 * 2 oui = oui
 * 2 non = non
 * 1 oui 1 non ou sans objet ou non renseigné = partiel

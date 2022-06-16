@@ -107,7 +107,7 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     #set($labels =  {'1': 'avis&amp;#10;négatifs', '2':'avis&amp;#10;moyens', '3':'avis&amp;#10;positifs'})
-    #set ($chartLabel = 'Répartition des avis :')
+    #set ($chartLabel = 'Répartition des avis :')
     #foreach($v in ['1', '2', '3'])
       #set($valueToDisplay = 0)
       #if ($scores.get($v) != $NULL)
@@ -172,7 +172,7 @@
       &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
-      #set ($chartLabel = "$tableCaption :")
+      #set ($chartLabel = "$tableCaption :")
       #set($labels =  {'1': 'Mauvais', '2':'Moyen', '3':'Bon'})
       #foreach($v in ['1', '2', '3'])
         #set($valueToDisplay = 0)
@@ -247,7 +247,7 @@
     ## get the possible values from the class, as they are there
     #set ($possibleValues = $xwiki.getClass($AVIS_CLASS_ID).get($propName).listValues)
     &lt;tbody&gt;
-      #set ($chartLabel = "$tableCaption :")
+      #set ($chartLabel = "$tableCaption :")
       ## iterate and display whatever is in the $avisStatsResult
       #foreach($v in $possibleValues)
         #set($valueToDisplay = 0)
@@ -258,7 +258,7 @@
         ## display this value
         &lt;tr&gt;&lt;td&gt;$label&lt;/td&gt;&lt;td&gt;$valueToDisplay&lt;/td&gt;&lt;/tr&gt;
         ## Add value to chart label
-        #set ($chartLabel = "$chartLabel $valueToDisplay pour « $label »,")
+        #set ($chartLabel = "$chartLabel $valueToDisplay pour « $label »,")
       #end
       ## Remove trailing comma from aria label
       #set ($length = $mathtool.sub($chartLabel.length(), 1))

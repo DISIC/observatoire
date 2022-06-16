@@ -41,7 +41,7 @@
   <hidden>true</hidden>
   <content># DashboardClass
 Demarches.Dashboard.Code.DashboardClass_title=Nom
-Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord (exemple : « À décembre 2019 »)
+Demarches.Dashboard.Code.DashboardClass_title_hint=Nom du tableau de bord (exemple : « À décembre 2019 »)
 Demarches.Dashboard.Code.DashboardClass_date=Date
 Demarches.Dashboard.Code.DashboardClass_date_hint=Date utilisée pour le calcul des statistiques (laisser ce champ vide pour des statistiques calculées au moment de la consultation)
 Demarches.Dashboard.Code.DashboardClass_pdf=Fichier PDF
@@ -49,7 +49,7 @@ Demarches.Dashboard.Code.DashboardClass_pdf_hint=Fichier à rendre disponible au
 Demarches.Dashboard.Code.DashboardClass_dataURL=URL data.gouv.fr
 Demarches.Dashboard.Code.DashboardClass_dataURL_hint=URL vers les données du tableau de bord publiées sur data.gouv.fr
 Demarches.Dashboard.Code.DashboardClass_status=Statut
-Demarches.Dashboard.Code.DashboardClass_status_hint=Seuls les tableaux de bord ayant le statut « publié » sont accessibles depuis la page principale de l'observatoire.
+Demarches.Dashboard.Code.DashboardClass_status_hint=Seuls les tableaux de bord ayant le statut « publié » sont accessibles depuis la page principale de l'observatoire.
 Demarches.Dashboard.Code.DashboardClass_status_draft=Brouillon
 Demarches.Dashboard.Code.DashboardClass_status_published=Publié
 Demarches.Dashboard.Code.DashboardClass_notes=Notes

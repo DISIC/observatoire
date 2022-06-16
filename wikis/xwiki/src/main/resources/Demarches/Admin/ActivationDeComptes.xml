@@ -44,7 +44,7 @@
 #if (($action == 'activate' || $action == 'delete') &amp;&amp; $services.csrf.isTokenValid($request.csrf))
   #set ($userIds = $request.getParameterValues('id'))
   #if ($userIds.size() &gt; 0)
-    Le(s) compte(s) suivant(s) a(ont) été#if ($action == 'activate') activé(s)#else supprimés#end :
+    Le(s) compte(s) suivant(s) a(ont) été#if ($action == 'activate') activé(s)#else supprimés#end :
     #foreach ($userId in $userIds)
       #set ($userPage = $xwiki.getDocument($userId))
       #if ($action == 'activate')

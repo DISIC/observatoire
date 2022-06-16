@@ -79,7 +79,7 @@
         &lt;div class="fr-col-12 fr-col-md-10"&gt;
           &lt;div class="fr-grid-row fr-grid-row--gutters"&gt;
             &lt;div class="fr-col-12 fr-col-md-8"&gt;
-              &lt;h1&gt;Comment suivre la satisfaction de vos usagers ?&lt;/h1&gt;
+              &lt;h1&gt;Comment suivre la satisfaction de vos usagers ?&lt;/h1&gt;
               &lt;div class="jdma-subtitle"&gt;
                 Avec le bouton Je donne mon avis, suivez-vous en temps réel la satisfaction des usagers de vos services publics numériques.
               &lt;/div&gt;
@@ -98,7 +98,7 @@
       &lt;div class="fr-grid-row fr-grid-row--center"&gt;
         &lt;div class="fr-col-12 fr-col-md-10"&gt;
           &lt;div class="fr-grid-row"&gt;
-            &lt;h2&gt;Commencer à récolter des avis en 4 étapes faciles :&lt;/h2&gt;
+            &lt;h2&gt;Commencer à récolter des avis en 4 étapes faciles :&lt;/h2&gt;
           &lt;/div&gt;
 
           &lt;div class="fr-grid-row fr-grid-row--gutters"&gt;
@@ -203,7 +203,7 @@
               &lt;/div&gt;
               &lt;h2&gt;Installation facile, le temps de votre pause café&lt;/h2&gt;
               &lt;div class="plain-text"&gt;
-                Le bouton Je donne mon avis s’installe en un rien de temps sur votre site ! Vous n’avez qu’à insérer une petite portion de code HTML, ce qui ne vous prendra pas plus de 5 minutes. Notre plateforme s’occupe ensuite de récolter les avis pour vous.
+                Le bouton Je donne mon avis s’installe en un rien de temps sur votre site ! Vous n’avez qu’à insérer une petite portion de code HTML, ce qui ne vous prendra pas plus de 5 minutes. Notre plateforme s’occupe ensuite de récolter les avis pour vous.
               &lt;/div&gt;
             &lt;/div&gt;
             &lt;div class="step-image step-image-left fr-col-12 fr-col-md-6"&gt;
@@ -313,7 +313,7 @@
         &lt;div class="fr-col-12 fr-col-md-10"&gt;
           &lt;div class="fr-grid-row fr-grid-row--center"&gt;
             &lt;div class="fr-col-12"&gt;
-              &lt;h2&gt;Prêt à recueillir les avis des usagers ?&lt;/h2&gt;
+              &lt;h2&gt;Prêt à recueillir les avis des usagers ?&lt;/h2&gt;
             &lt;/div&gt;
             &lt;div class="fr-col-12"&gt;
               &lt;a class="fr-btn" href="$startURL"&gt;Commencer&lt;/a&gt;
@@ -351,7 +351,7 @@
         &lt;div class="fr-col-12 fr-col-md-10"&gt;
           &lt;div class="fr-grid-row fr-grid-row--center"&gt;
             &lt;div class="fr-col-12"&gt;
-              &lt;h2&gt;Vous avez d’autres questions ? Des doutes ? Contactez-nous !&lt;/h2&gt;
+              &lt;h2&gt;Vous avez d’autres questions ? Des doutes ? Contactez-nous !&lt;/h2&gt;
             &lt;/div&gt;
             &lt;div class="fr-col-12"&gt;
               &lt;a class="fr-btn fr-btn--secondary" href="mailto:contact@design.numerique.gouv.fr"&gt;Contacter notre équipe&lt;/a&gt;

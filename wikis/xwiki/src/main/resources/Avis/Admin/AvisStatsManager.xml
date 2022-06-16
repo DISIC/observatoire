@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1537366406000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1537367378000</date>
-  <contentUpdateDate>1537367378000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>AvisStats Manager</title>
   <comment/>
@@ -65,7 +65,7 @@ Cette page permet d'initialiser ou de mettre à jour les statistiques d'avis (Av
 
 {{html}}
 &lt;form action='' method='GET'&gt;
-Nom complet de la démarche : &lt;input name='demarche' value='' /&gt;
+Nom complet de la démarche : &lt;input name='demarche' value='' /&gt;
 &lt;input type='hidden' name='operation' value='compute-stats-for-demarche' /&gt;
 &lt;input type='submit' value='Initialiser les statistiques' /&gt;
 &lt;/form&gt;

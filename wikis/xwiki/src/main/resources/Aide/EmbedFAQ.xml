@@ -48,7 +48,7 @@
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-heading" role="tab" id="faq-1-title"&gt;
       &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#embedfaq-accordion" href="#faq-1-content" aria-expanded="false" aria-controls="faq-1-content"&gt;
-        Où placer le bouton ?
+        Où placer le bouton ?
       &lt;/a&gt;
     &lt;/div&gt;
     &lt;div id="faq-1-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="faq-1-title"&gt;
@@ -60,7 +60,7 @@
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-heading" role="tab" id="faq-2-title"&gt;
       &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#embedfaq-accordion" href="#faq-2-content" aria-expanded="false" aria-controls="faq-2-content"&gt;
-        Comment presenter le bouton aux usagers ?
+        Comment presenter le bouton aux usagers ?
       &lt;/a&gt;
     &lt;/div&gt;
     &lt;div id="faq-2-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="faq-2-title"&gt;

@@ -27,29 +27,29 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1541075819000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Main.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1541083303000</date>
-  <contentUpdateDate>1541083232000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>À propos du format CSV</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>== Qu'est-ce que le format CSV ?
+  <content>== Qu'est-ce que le format CSV ?
 
-« //Comma-separated values//, connu sous le sigle CSV, est un format informatique ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Un fichier CSV est un fichier texte, par opposition aux formats dits « binaires ». Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau. » Source: [[Wikipédia&gt;&gt;https://fr.wikipedia.org/wiki/Comma-separated_values]]
+« //Comma-separated values//, connu sous le sigle CSV, est un format informatique ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules. Un fichier CSV est un fichier texte, par opposition aux formats dits « binaires ». Chaque ligne du texte correspond à une ligne du tableau et les virgules correspondent aux séparations entre les colonnes. Les portions de texte séparées par une virgule correspondent ainsi aux contenus des cellules du tableau. » Source : [[Wikipédia&gt;&gt;https://fr.wikipedia.org/wiki/Comma-separated_values]]
 
 == À propos des fichiers de ce site au format CSV ==
 
-Les fichiers au format CSV disponibles sur ce site sont conformes aux recommandations d'interopérabilité émises par l'État. Ils ont les caractéristiques techniques suivantes :
+Les fichiers au format CSV disponibles sur ce site sont conformes aux recommandations d'interopérabilité émises par l'État. Ils ont les caractéristiques techniques suivantes :
 * Le caractère utilisé pour séparer les colonnes est la virgule.
 * Le texte utilise la norme de codage de caractères [[UTF-8&gt;&gt;https://fr.wikipedia.org/wiki/UTF-8]].
 
-== Comment utiliser un fichier au format CSV ?
+== Comment utiliser un fichier au format CSV ?
 
 Un fichier CSV peut être lu soit directement avec un éditeur de texte tel que Notepad, soit à l'aide d'un éditeur de feuilles de calcul, tel que LibreOffice ou Microsoft Excel. Pour savoir comment ouvrir un fichier CSV depuis un éditeur de feuilles de calcul, se reporter aux instructions d'aide du logiciel utilisé.
 
