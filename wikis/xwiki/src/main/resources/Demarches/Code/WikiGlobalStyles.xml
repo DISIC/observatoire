@@ -996,27 +996,18 @@ abbr.asterix {
  * Login screen
  */
 #loginForm {
-  .panel {
-    max-width: 100%;
+  .login-description {
+    margin-bottom: 2rem;
 
-    .panel-heading {
-      padding-top: 4.5rem;
-      border-bottom: none;
+    a#tmRegister {
+      font-style: normal;
+      color: @brand-primary;
+      text-decoration: underline;
     }
+  }
 
-    .login-description {
-      margin-bottom: 2rem;
-
-      a#tmRegister {
-        font-style: normal;
-        color: @brand-primary;
-        text-decoration: underline;
-      }
-    }
-
-    input[type="submit"] {
-      margin-top: 1em;
-    }
+  input[type="submit"] {
+    margin-top: 1em;
   }
 }
 

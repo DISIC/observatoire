@@ -1395,7 +1395,9 @@ window.docgeturl = "${doc.getURL('get')}";
 &lt;/div&gt;
 &lt;div class='row'&gt;
   &lt;div class='col-xs-12 col-md-8 col-md-offset-2'&gt;
-    #xwikimessageboxstart($services.localization.render('login') '')
+    &lt;div id="document-title"&gt;
+      &lt;h1&gt;$services.localization.render('login')&lt;/h1&gt;
+    &lt;/div&gt;
     &lt;div class='row'&gt;
       &lt;div class='col-xs-12'&gt;
         &lt;p class="login-description"&gt;$services.localization.render('wd.login-description')
@@ -1439,7 +1441,6 @@ window.docgeturl = "${doc.getURL('get')}";
         &lt;input type="submit" class="btn btn-primary" value="$services.localization.render('login')" tabindex="400"/&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    #xwikimessageboxend()
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/form&gt;
