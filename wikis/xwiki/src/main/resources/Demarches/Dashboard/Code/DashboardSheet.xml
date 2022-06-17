@@ -1371,6 +1371,9 @@ input[name='title'] {
   a {
     color: #fff;
   }
+  .downloadcol a {
+    text-decoration: none !important;
+  }
   .sharecol {
     text-align: right;
     .separator {
