@@ -81,6 +81,9 @@
   &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 #end
 ##
+## make sure whenever this is used, the demarche sheet style is included (although demarche sheet is larger than this)
+#set ($discard = $xwiki.ssx.use('Demarches.Code.DemarchesSheet'))
+## display the tab
 {{html wiki="true"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'demarche-tab')active in#end" role="tabpanel" id="demarche-tab" aria-labelledby="demarche-tab"&gt;
   ## "object" and "action" can be set already if the page is included from NewDemarche
