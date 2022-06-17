@@ -577,9 +577,9 @@ require(['jquery','xwiki-selectize'], function($) {
 
 /** Avoid horizontal scrollbars on demarches due to long URLs. */
 .wikigeneratedlinkcontent {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 /** Add margin top the docextra tabs 
