@@ -67,7 +67,7 @@
         href="#${id}-collapse"
         aria-expanded="$isOpened"
         aria-controls="${id}-collapse"&gt;
-        $title
+        &lt;h2&gt;$title&lt;/h2&gt;
       &lt;/a&gt;
     &lt;/div&gt;
     &lt;div
