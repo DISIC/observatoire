@@ -1601,6 +1601,10 @@ select[size="1"]{
   height: auto;
 }
 
+p {
+  margin-bottom: 1.5rem;
+}
+
 .input-group-btn {
   font-size: inherit;
 }

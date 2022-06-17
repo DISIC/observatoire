@@ -996,14 +996,10 @@ abbr.asterix {
  * Login screen
  */
 #loginForm {
-  .login-description {
-    margin-bottom: 2rem;
-
-    a#tmRegister {
-      font-style: normal;
-      color: @brand-primary;
-      text-decoration: underline;
-    }
+  a#tmRegister {
+    font-style: normal;
+    color: @brand-primary;
+    text-decoration: underline;
   }
 
   input[type="submit"] {
@@ -1014,13 +1010,10 @@ abbr.asterix {
 /*
  * Register screen
  */
-.register-welcome {
-  margin-bottom: 2rem;
-  a {
-    font-style: normal;
-    color: @brand-primary;
-    text-decoration: underline;
-  }
+a#tmLogin {
+  font-style: normal;
+  color: @brand-primary;
+  text-decoration: underline;
 }
 
 

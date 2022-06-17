@@ -51,8 +51,9 @@ wd.contact=Contact
 wd.about=À propos
 wd.login=Connexion
 wd.logout=Déconnexion
-wd.login-description=Connectez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.&lt;br/&gt;&lt;br/&gt; Vous n’avez pas un compte sur l’observatoire ?
-wd.login-description.register=Inscrivez-vous.
+wd.login-description=Connectez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.
+wd.login-description.register.question=Vous n’avez pas un compte sur l’observatoire ?
+wd.login-description.register.link=Inscrivez-vous.
 wd.login-notice=L'authentification est requise pour accéder à davantage d'informations.
 wd.login-button=Authentification
 wd.docdoesnotexist.title=Erreur 404
@@ -60,8 +61,9 @@ wd.docdoesnotexist.message=La page n'existe pas ou n'est pas disponible. Nous vo
 wd.piwik.iframe.title=Refuser le suivi de votre navigation
 wd.login.username=Nom d'utilisateur (obligatoire)
 wd.login.password=Mot de passe (obligatoire)
-core.register.welcome=Inscrivez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.&lt;br/&gt;&lt;br/&gt;Vous avez déjà un compte sur l’observatoire ?
-core.register.welcome.login=Connectez-vous.
+core.register.welcome=Inscrivez-vous afin de mettre en place des outils de mesure de la satisfaction des usagers sur les services en ligne.
+core.register.welcome.login.question=Vous avez déjà un compte sur l’observatoire ?
+core.register.welcome.login.link=Connectez-vous.
 
 # Invalid account screen
 wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé.&lt;br/&gt;Vous devriez avoir reçu un e-mail avec un lien vous permettant de confirmer votre inscription.
