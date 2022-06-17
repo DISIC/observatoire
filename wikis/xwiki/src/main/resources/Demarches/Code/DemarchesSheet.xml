@@ -615,6 +615,12 @@ require(['jquery','xwiki-selectize'], function($) {
 
 /** Demarche tab styles */
 #demarche-tab {
+  .xform dl dt label {
+    /* Apply all known h6 style */
+    .h6();
+    .dsfr-h6();
+    text-transform: none;
+  }
   dd.property-value {
     label {
       display: inline-block;
