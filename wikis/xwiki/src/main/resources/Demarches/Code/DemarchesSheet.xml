@@ -620,6 +620,22 @@ require(['jquery','xwiki-selectize'], function($) {
       display: inline-block;
       margin-right: 0.8em;
     }
+
+    .user {
+      margin-top: 0.5rem;
+      padding-left: 3.5rem;
+
+      .user-avatar-wrapper {
+        height: 2.5rem;
+        width: 2.5rem;
+
+        img {
+          // needed to overwrite existing rules
+          max-height: 100%;
+          max-width: 100%;
+        }
+      }
+    }
   }
 }
 
