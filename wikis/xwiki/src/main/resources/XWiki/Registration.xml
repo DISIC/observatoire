@@ -452,9 +452,12 @@
   #if(!$registrationDone)
 
     {{html wiki=false}}
-      &lt;p class="register-welcome"&gt;
+      &lt;p&gt;
         $services.localization.render('core.register.welcome')
-        &lt;a href="$xwiki.getURL('XWiki.XWikiLogin', 'login')"&gt;$services.localization.render('core.register.welcome.login')&lt;/a&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        $services.localization.render('core.register.welcome.login.question')
+        &lt;a id="tmLogin" href="$xwiki.getURL('XWiki.XWikiLogin', 'login')"&gt;$services.localization.render('core.register.welcome.login.link')&lt;/a&gt;
       &lt;/p&gt;
 
       ## Customized username generation. The script is added inline rather than as a JavaScript extension, because the page "XWiki.Registration" is typically
