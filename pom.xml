@@ -25,7 +25,7 @@
     <connection>scm:git:git://github.com/DISIC/wikidemarches.git</connection>
     <developerConnection>scm:git:git@github.com:DISIC/wikidemarches.git</developerConnection>
     <url>https://github.com/DISIC/wikidemarches/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>stable-4.10</tag>
   </scm>
   <developers>
     <developer>
