@@ -521,6 +521,7 @@
         border-top-right-radius: 0.25rem;
         background-color: @brand-primary;
         color: @blue-france-975;
+        white-space: nowrap;
       }
     }
   }
