@@ -918,7 +918,7 @@
   #else
     #set($configObject = $configDocument.getObject($configurationClassName))
     #if ($xcontext.action == 'register')
-      #set ($heading = "(% id='document-title'%)((( = #evaluate($configObject.getProperty('heading').getValue()) = )))(%%)")
+      #set ($heading = "(% id='document-title'%)((( = #evaluate($configObject.getProperty('heading').getValue()) = )))")
     #else
       #set ($heading = "= #evaluate($configObject.getProperty('heading').getValue()) =")
     #end
