@@ -146,7 +146,7 @@
               &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
                 &lt;div class="fr-tile__body"&gt;
                   &lt;p class="fr-tile__desc"&gt;
-                    Retrouvez des avis et des graphiques pertinents sur la page de votre démarche.
+                    Retrouvez les avis et leur analyse sur la page de votre démarche.
                   &lt;/p&gt;
                 &lt;/div&gt;
                 &lt;div class="fr-tile__img"&gt;
@@ -271,7 +271,7 @@
         &lt;div class="fr-col-12 fr-col-md-10"&gt;
           &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
 
-            &lt;div class="fr-col-12 fr-col-md-4"&gt;
+            &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
               &lt;div class="criteria"&gt;
                 &lt;div class="criteria-title"&gt;
                   &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
@@ -281,7 +281,7 @@
               &lt;/div&gt;
             &lt;/div&gt;
 
-            &lt;div class="fr-col-12 fr-col-md-4"&gt;
+            &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
               &lt;div class="criteria"&gt;
                 &lt;div class="criteria-title"&gt;
                   &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
@@ -291,7 +291,7 @@
               &lt;/div&gt;
             &lt;/div&gt;
 
-            &lt;div class="fr-col-12 fr-col-md-4"&gt;
+            &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
               &lt;div class="criteria"&gt;
                 &lt;div class="criteria-title"&gt;
                   &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
@@ -585,6 +585,13 @@
 
 #xwikimaincontainer #mainContentArea #xwikicontent section {
   &amp;.header {
+    h1 {
+      text-align: center;
+
+      @media (min-width: @screen-sm-min) {
+        text-align: left;
+      }
+    }
 
     h2 {
       text-align: center;
@@ -723,44 +730,58 @@
   &amp;.criterias {
     text-align: center;
 
-    .criteria {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      max-width: 17rem;
-      margin: auto;
+    @media (max-width: @screen-xs-max) {
+      padding-bottom: 4.5rem;
+    }
 
-      .criteria-title {
-        position: relative;
-        width: 12.5rem;
-        padding: 0rem;
-        padding-top: 0.6rem;
-        padding-bottom: 0.9rem;
-        margin-bottom: 1.5rem;
-        border-radius: 1.5rem;
-        color: @brand-primary;
-        font-size: 2rem;
-        line-height: 2.5rem;
-        font-weight: bold;
-        background-color: @blue-france-975;
+    .criteria-col {
+      &amp;:not(:last-child) {
+        margin-bottom: 4rem;
 
-        .fr-icon-success-fill {
-          position: absolute;
-          top: 0;
-          right: 0;
-          transform: translate(33%, -33%);
-          color: @brand-success;
-
-          &amp;::before {
-            font-size: 3rem;
-          }
+        @media (min-width: @screen-sm-min) {
+          margin-bottom: 0rem;
         }
       }
 
-      .criteria-text {
-        font-size: 1.25rem;
-        font-weight: bold;
+      .criteria {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        max-width: 17rem;
+        margin: auto;
+
+        .criteria-title {
+          position: relative;
+          width: 12.5rem;
+          padding: 0rem;
+          padding-top: 0.6rem;
+          padding-bottom: 0.9rem;
+          margin-bottom: 1.5rem;
+          border-radius: 1.5rem;
+          color: @brand-primary;
+          font-size: 2rem;
+          line-height: 2.5rem;
+          font-weight: bold;
+          background-color: @blue-france-975;
+
+          .fr-icon-success-fill {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(33%, -33%);
+            color: @brand-success;
+
+            &amp;::before {
+              font-size: 3rem;
+            }
+          }
+        }
+
+        .criteria-text {
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
       }
     }
   }
