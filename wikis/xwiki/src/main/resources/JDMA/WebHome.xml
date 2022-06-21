@@ -66,7 +66,7 @@
 ##
 #set ($startURL = $xwiki.getURL('Main.WebHome'))
 #if ($isGuest)
-  #set ($startURL = $xwiki.getURL('XWiki.Registration'))
+  #set ($startURL = $xwiki.getURL('XWiki.XWikiRegister', 'register', "xredirect=$escapetool.url($startURL)"))
 #end
 
 {{html clean="false"}}
@@ -366,7 +366,6 @@
 {{/velocity}}</content>
   <attachment>
     <filename>example-availability.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -376,7 +375,6 @@
   </attachment>
   <attachment>
     <filename>example-code.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -386,7 +384,6 @@
   </attachment>
   <attachment>
     <filename>example-feedback.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -405,7 +402,6 @@
   </attachment>
   <attachment>
     <filename>example-stats.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
