@@ -100,7 +100,7 @@
         ##
         #set ($userMatch1 = ",$services.model.serialize($xcontext.userReference, 'default'),")
         #set ($userMatch2 = ",$services.model.serialize($xcontext.userReference, 'compact'),")
-        #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2) order by doc.title")
+        #set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, LargeStringProperty as owners where obj.name = doc.fullName and obj.className='Demarches.Code.DemarchesClass' and owners.id.id = obj.id and owners.id.name = 'proprietaires' and (concat(',', owners.value, ',') like :um1 or concat(',', owners.value, ',') like :um2)")
         #set ($ownedDemarches = $services.query.hql($hql).bindValue('um1', "%${userMatch1}%").bindValue('um2', "%${userMatch2}%").execute())
         (% class='row' %) (((
           (% class='col-xs-12 col-sm-6' %) (((
@@ -116,14 +116,19 @@
         (% class='row' %) (((
           (% class='col-xs-12 %) (((
             #if ($ownedDemarches &amp;&amp; $ownedDemarches.size() &gt; 0)
+              ## prepare the demarches map, with sort key, case insensitive and accents insensitive
+              #set ($ownedDemarchesToDisplay = [])
               #foreach ($entry in $ownedDemarches)
                 #set ($demarchePage = $xwiki.getDocument($entry))
+                #set ($demarcheObject = $demarchePage.getObject('Demarches.Code.DemarchesClass'))
+                #set ($discard = $ownedDemarchesToDisplay.add({'fullname' : $entry, 'title' : $demarchePage.title, 'ministeres' : $demarcheObject.ministeres, 'sortkey' : $stringtool.stripAccents($demarchePage.title.toLowerCase())}))
+              #end
+              #foreach ($entry in $sorttool.sort($ownedDemarchesToDisplay, 'sortkey'))
                 * (% class="demarche" %) (((
                   (% class="demarche-content" %) (((
-                    [[$demarchePage.title&gt;&gt;$entry]]
-                    #set ($demarcheObject = $demarchePage.getObject('Demarches.Code.DemarchesClass'))
+                    [[$entry.title&gt;&gt;$entry.fullname]]
                     (% class='ministeres' %)
-                      $demarcheObject.ministeres
+                      $entry.ministeres
                   )))
                   {{html clean="false"}}
                     &lt;form action="/API/Code/GenerateDemarcheCode" class="xform" id="embed-generateform" method="post"&gt;
