@@ -138,202 +138,8 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>/*    Start Totemize SSX                                 */
-
-/*
-First of all, repair the margin of the mainContentArea so that the xwikicontent element is not spaced from the side of the browser.
-This allows any row in the content of the document to start at the leftmost of the window _without_ breaking the gutter for the text in a standard page.
-*/
-#mainContentArea,
-#xdocFooter,
-#docextrapanes,
-#mainEditArea {
-  padding-left: @grid-gutter-width / 2;
-  padding-right: @grid-gutter-width / 2;
-}
-
-#mainContentArea, #mainEditArea {
-  padding-bottom: 0;
-}
-
-/* Move document header bottom margin inside the document header row - as bottom padding, and remove xcontent top margin */
-.document-header {
-  margin-bottom:0;
-  padding-bottom: 20px;
-}
-
-#mainContentArea &gt; .xcontent {
-  margin-top: 0;
-}
-
-/* Remove the breadcrumb - because it's not a row - and the hr between title and content. If you want to keep breadcrumb customize the skin to put it in a row and in a column. */
-#hierarchy, .xcontent &gt; hr {
-  display:none;
-}
-
-/*
- * If the breadcrumb was fixed (from custom skin) and displayed as a row, we'll do the following:
- * * display in navbar color
- * * re-show the actual breadcrumb (hidden above)
- * * move it up over the padding of the main content area, like the title row is
- */
-.hierarchy-row {
-  margin-top: -20px;
-  background-color: @breadcrumb-bg;
-  color: @breadcrumb-color;
-  #hierarchy {
-    display: block;
-  }
-}
-
-/*
- * Cleanup box shadows which make it difficult to visually unify consecutive rows - esp main menu and title row
- */
-
-#mainContentArea, #xdocFooter, #docextrapanes, #xwikieditor .main {
-  box-shadow: none;
-}
-
-/*
-  Clean up spacing between header and title / hierarchy / content rows - reset everything to 0
-*/
-#mainContentArea, #mainEditArea {
-  padding-top: 0px;
-}
-
-#hierarchy {
-  margin-bottom: 0;
-}
-
-.hierarchy-row {
-  margin-top: 0;
-}
-
-.document-header {
-  margin-top: 0;
-}
-
-/* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows:
-- document header row
-- document content row - which contains the xwikicontent column which contains all the rows in the document content.
-
-Visually, there's the title row and then all the rows from the document content, stacked.
-*/
-
-/*    End of Totemize SSX                          */</code>
-    </property>
-    <property>
-      <contentType>LESS</contentType>
-    </property>
-    <property>
-      <name>Totemize</name>
-    </property>
-    <property>
-      <parse>0</parse>
-    </property>
-    <property>
-      <use>always</use>
-    </property>
-  </object>
-  <object>
-    <name>Demarches.Code.WikiGlobalStyles</name>
-    <number>1</number>
-    <className>XWiki.StyleSheetExtension</className>
-    <guid>494b5408-dd5d-45e9-a539-d0ee3d25e8b1</guid>
-    <class>
-      <name>XWiki.StyleSheetExtension</name>
-      <customClass/>
-      <customMapping/>
-      <defaultViewSheet/>
-      <defaultEditSheet/>
-      <defaultWeb/>
-      <nameField/>
-      <validationScript/>
-      <cache>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>cache</name>
-        <number>5</number>
-        <prettyName>Caching policy</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>long|short|default|forbid</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </cache>
       <code>
-        <contenttype>PureText</contenttype>
-        <disabled>0</disabled>
-        <editor>PureText</editor>
-        <name>code</name>
-        <number>2</number>
-        <prettyName>Code</prettyName>
-        <rows>20</rows>
-        <size>50</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
-      </code>
-      <contentType>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>contentType</name>
-        <number>6</number>
-        <prettyName>Content Type</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>CSS|LESS</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </contentType>
-      <name>
-        <disabled>0</disabled>
-        <name>name</name>
-        <number>1</number>
-        <prettyName>Name</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </name>
-      <parse>
-        <disabled>0</disabled>
-        <displayFormType>select</displayFormType>
-        <displayType>yesno</displayType>
-        <name>parse</name>
-        <number>4</number>
-        <prettyName>Parse content</prettyName>
-        <unmodifiable>0</unmodifiable>
-        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
-      </parse>
-      <use>
-        <cache>0</cache>
-        <disabled>0</disabled>
-        <displayType>select</displayType>
-        <multiSelect>0</multiSelect>
-        <name>use</name>
-        <number>3</number>
-        <prettyName>Use this extension</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators>|, </separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>currentPage|onDemand|always</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </use>
-    </class>
-    <property>
-      <cache>long</cache>
-    </property>
-    <property>
-      <code>
+
 /***************************************************/
 /* Layout                                          */
 /***************************************************/
@@ -351,9 +157,63 @@ Visually, there's the title row and then all the rows from the document content,
   padding-bottom: 0;
 }
 
+/*    Start Totemize SSX                                 */
+
 /*
- * Start top margin standardization
+First of all, repair the margin of the mainContentArea so that the xwikicontent element is not spaced from the side of the browser.
+This allows any row in the content of the document to start at the leftmost of the window _without_ breaking the gutter for the text in a standard page.
+*/
+#mainContentArea,
+#xdocFooter,
+#docextrapanes,
+#mainEditArea {
+  padding-left: @grid-gutter-width / 2;
+  padding-right: @grid-gutter-width / 2;
+}
+
+#mainContentArea, #mainEditArea {
+  padding-bottom: 0;
+}
+
+/* Remove xcontent top margin */
+#mainContentArea &gt; .xcontent {
+  margin-top: 0;
+}
+
+/* Remove the breadcrumb - because it's not a row - and the hr between title and content. If you want to keep breadcrumb customize the skin to put it in a row and in a column. */
+#hierarchy, .xcontent &gt; hr {
+  display:none;
+}
+
+/*
+ * If the breadcrumb was fixed (from custom skin) and displayed as a row, we'll do the following:
+ * * display in navbar color
+ * * re-show the actual breadcrumb (hidden above)
+ * * move it up over the padding of the main content area, like the title row is
  */
+.hierarchy-row {
+  background-color: @breadcrumb-bg;
+  color: @breadcrumb-color;
+  #hierarchy {
+    display: block;
+    margin-bottom: 0;
+  }
+}
+
+/*
+ * Cleanup box shadows which make it difficult to visually unify consecutive rows - esp main menu and title row
+ */
+
+#mainContentArea, #xdocFooter, #docextrapanes, #xwikieditor .main {
+  box-shadow: none;
+}
+
+/*
+  Clean up spacing between header and title / hierarchy / content rows
+*/
+#mainContentArea, #mainEditArea {
+  padding-top: 0px;
+}
 
 // Ajust margins so that distance to the top stay the same with or without breadcrumbs
 .hierarchy-row {
@@ -443,9 +303,14 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-/*
- * End top margin harmonization
- */
+/* At this point, we have a nice nice stack of rows in #mainContentArea (xcontent), as follows:
+- document header row
+- document content row - which contains the xwikicontent column which contains all the rows in the document content.
+
+Visually, there's the title row and then all the rows from the document content, stacked.
+*/
+
+/*    End of Totemize SSX                          */
 
 
 /*
@@ -500,11 +365,17 @@ Visually, there's the title row and then all the rows from the document content,
   /* Reset padding that seems to be computed from the navbar size */
   padding: 0;
   padding-left: @grid-gutter-width/2;
+  img {
+    display: inline-block;
+  }
+  .demarches-titlebar-sitename {
+    display: inline-block;
+    vertical-align: top;
+  }
   &amp;:focus {
     .outline;
   }
 }
-
 
 /* Make some room around the logo on the topbar */
 @logo-height-mobile: 64px;
@@ -521,8 +392,8 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-@sitename-top-mobile: 14px;
-@sitename-top-desktop: 12px;
+@sitename-top-mobile: 10px;
+@sitename-top-desktop: 13px;
 @sitename-height-mobile: 25px;
 @sitename-height-desktop: 44px;
 /* Header */
@@ -531,15 +402,17 @@ Visually, there's the title row and then all the rows from the document content,
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename.service-plus img {
-    height: @sitename-height-mobile;
+  &amp; + .demarches-titlebar-sitename {
+    padding-top: @sitename-top-mobile;
+    img { height: @sitename-height-mobile; }
   }
 
   @media (min-width: @screen-md-min) {
     height: 68px;
 
-    &amp; + .demarches-titlebar-sitename.service-plus img {
-      height: @sitename-height-desktop;
+    &amp; + .demarches-titlebar-sitename {
+      padding-top: @sitename-top-desktop;
+      img { height: @sitename-height-desktop; }
     }
   }
 }
@@ -549,15 +422,17 @@ Visually, there's the title row and then all the rows from the document content,
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename.service-plus img {
-    height: @sitename-height-mobile;
+  &amp; + .demarches-titlebar-sitename {
+    padding-top: @sitename-top-mobile;
+    img { height: @sitename-height-mobile; }
   }
 
   @media (min-width: @screen-md-min) {
     height: 115px;
 
-    &amp; + .demarches-titlebar-sitename.service-plus img {
-      height: @sitename-height-desktop;
+    &amp; + .demarches-titlebar-sitename {
+      padding-top: 28px;
+      img { height: @sitename-height-desktop; }
     }
   }
 
@@ -599,61 +474,6 @@ Visually, there's the title row and then all the rows from the document content,
     padding-top: @sitename-top-desktop;
   }
 }
-
-/* Main logo */
-.companylogo .navbar-brand {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  .brand-logo {
-    height: 4rem;
-
-    @media (min-width: @screen-md-min) {
-      height: 4.25rem;
-    }
-  }
-}
-
-/* Secondary logo */
-.companylogo .navbar-brand {
-
-  /* Observatoire */
-  .demarches-titlebar-sitename.observatoire {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    color: black;
-    font-weight: bold;
-
-    span:first-child {
-      font-size: 0.7rem;
-      line-height: 1rem;
-    }
-
-    span:last-child {
-      font-size: 0.6rem;
-      line-height: 0.7rem;
-      margin-bottom: 0.7rem;
-    }
-
-    @media (min-width: @screen-md-min) {
-      span:first-child {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-
-      span:last-child {
-        font-size: 0.825rem;
-        line-height: 1.5rem;
-        margin-bottom: 0rem;
-      }
-    }
-  }
-}
-
 
 /* --- End navbar and logo styles --- */
 
@@ -1057,7 +877,7 @@ span.wikiexternallink {
       <contentType>LESS</contentType>
     </property>
     <property>
-      <name>Global wiki styles</name>
+      <name/>
     </property>
     <property>
       <parse>0</parse>
