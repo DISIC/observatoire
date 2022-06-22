@@ -401,8 +401,8 @@
   #######################################################################
   ##
   #if($useLiveValidation)
-    $xwiki.get('jsfx').use('uicomponents/widgets/validation/livevalidation_prototype.js')
-    $xwiki.get('ssfx').use('uicomponents/widgets/validation/livevalidation.css', true)
+    #set ($discard = $xwiki.get('jsfx').use('uicomponents/widgets/validation/livevalidation_prototype.js'))
+    #set ($discard = $xwiki.get('ssfx').use('uicomponents/widgets/validation/livevalidation.css', true))
   #end
   ## This application's HTML is dynamically generated and editing in WYSIWYG would not work
   #if($xcontext.getAction() == 'edit')
@@ -716,11 +716,11 @@
       #set($redirect = $defaultRedirect)
     #end
     ## Display a "registration successful" message
-
+    ##
     #evaluate($registrationSuccessMessage)
-
+    ##
     ## Empty line prevents message from being forced into a &lt;p&gt; block.
-
+    ##
     ## Give the user a login button which posts their username and password to loginsubmit
     #if($loginButton)
 
@@ -745,7 +745,6 @@
           &lt;/script&gt;
         #end
       {{/html}}
-
     #end
   #end
   ##
@@ -918,7 +917,7 @@
   #else
     #set($configObject = $configDocument.getObject($configurationClassName))
     #if ($xcontext.action == 'register')
-      #set ($heading = "(% id='document-title'%)((( = #evaluate($configObject.getProperty('heading').getValue()) = )))(%%)")
+      #set ($heading = "(% id='document-title'%)((( = #evaluate($configObject.getProperty('heading').getValue()) = )))")
     #else
       #set ($heading = "= #evaluate($configObject.getProperty('heading').getValue()) =")
     #end

@@ -500,11 +500,17 @@ Visually, there's the title row and then all the rows from the document content,
   /* Reset padding that seems to be computed from the navbar size */
   padding: 0;
   padding-left: @grid-gutter-width/2;
+  img {
+    display: inline-block;
+  }
+  .demarches-titlebar-sitename {
+    display: inline-block;
+    vertical-align: top;
+  }
   &amp;:focus {
     .outline;
   }
 }
-
 
 /* Make some room around the logo on the topbar */
 @logo-height-mobile: 64px;
@@ -521,8 +527,8 @@ Visually, there's the title row and then all the rows from the document content,
   }
 }
 
-@sitename-top-mobile: 14px;
-@sitename-top-desktop: 12px;
+@sitename-top-mobile: 10px;
+@sitename-top-desktop: 13px;
 @sitename-height-mobile: 25px;
 @sitename-height-desktop: 44px;
 /* Header */
@@ -531,15 +537,17 @@ Visually, there's the title row and then all the rows from the document content,
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename.service-plus img {
-    height: @sitename-height-mobile;
+  &amp; + .demarches-titlebar-sitename {
+    padding-top: @sitename-top-mobile;
+    img { height: @sitename-height-mobile; }
   }
 
   @media (min-width: @screen-md-min) {
     height: 68px;
 
-    &amp; + .demarches-titlebar-sitename.service-plus img {
-      height: @sitename-height-desktop;
+    &amp; + .demarches-titlebar-sitename {
+      padding-top: @sitename-top-desktop;
+      img { height: @sitename-height-desktop; }
     }
   }
 }
@@ -549,15 +557,17 @@ Visually, there's the title row and then all the rows from the document content,
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename.service-plus img {
-    height: @sitename-height-mobile;
+  &amp; + .demarches-titlebar-sitename {
+    padding-top: @sitename-top-mobile;
+    img { height: @sitename-height-mobile; }
   }
 
   @media (min-width: @screen-md-min) {
     height: 115px;
 
-    &amp; + .demarches-titlebar-sitename.service-plus img {
-      height: @sitename-height-desktop;
+    &amp; + .demarches-titlebar-sitename {
+      padding-top: 28px;
+      img { height: @sitename-height-desktop; }
     }
   }
 
@@ -599,61 +609,6 @@ Visually, there's the title row and then all the rows from the document content,
     padding-top: @sitename-top-desktop;
   }
 }
-
-/* Main logo */
-.companylogo .navbar-brand {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  .brand-logo {
-    height: 4rem;
-
-    @media (min-width: @screen-md-min) {
-      height: 4.25rem;
-    }
-  }
-}
-
-/* Secondary logo */
-.companylogo .navbar-brand {
-
-  /* Observatoire */
-  .demarches-titlebar-sitename.observatoire {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    color: black;
-    font-weight: bold;
-
-    span:first-child {
-      font-size: 0.7rem;
-      line-height: 1rem;
-    }
-
-    span:last-child {
-      font-size: 0.6rem;
-      line-height: 0.7rem;
-      margin-bottom: 0.7rem;
-    }
-
-    @media (min-width: @screen-md-min) {
-      span:first-child {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-
-      span:last-child {
-        font-size: 0.825rem;
-        line-height: 1.5rem;
-        margin-bottom: 0rem;
-      }
-    }
-  }
-}
-
 
 /* --- End navbar and logo styles --- */
 
