@@ -469,7 +469,7 @@ Visually, there's the title row and then all the rows from the document content,
   padding-right: 0;
 }
 
-/* 
+/*
  * Message row, just above document-header in view mode.
  * Add padding in order to have a proper display of the message box
  */
@@ -499,116 +499,110 @@ Visually, there's the title row and then all the rows from the document content,
 #footerglobal .navbar-brand {
   /* Reset padding that seems to be computed from the navbar size */
   padding: 0;
-  padding-left: @grid-gutter-width/2;
-  img {
-    display: inline-block;
-  }
-  .demarches-titlebar-sitename {
-    display: inline-block;
-    vertical-align: top;
-  }
   &amp;:focus {
     .outline;
   }
 }
 
-/* Make some room around the logo on the topbar */
-@logo-height-mobile: 64px;
-@logo-height-desktop: 68px;
-#menuview .navbar {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  min-height: @logo-height-mobile;
 
-  @media (min-width: @screen-md-min) {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    min-height: @logo-height-desktop;
-  }
-}
-
-@sitename-top-mobile: 10px;
-@sitename-top-desktop: 13px;
+@sitename-top-mobile: 14px;
+@sitename-top-desktop: 12px;
 @sitename-height-mobile: 25px;
 @sitename-height-desktop: 44px;
-/* Header */
-.navbar-brand,
+/* Taille logos header */
 #menuview .navbar-brand &gt; img {
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename {
-    padding-top: @sitename-top-mobile;
-    img { height: @sitename-height-mobile; }
+  &amp; + .demarches-titlebar-sitename.service-plus img {
+    height: @sitename-height-mobile;
   }
 
   @media (min-width: @screen-md-min) {
     height: 68px;
 
-    &amp; + .demarches-titlebar-sitename {
-      padding-top: @sitename-top-desktop;
-      img { height: @sitename-height-desktop; }
+    &amp; + .demarches-titlebar-sitename.service-plus img {
+      height: @sitename-height-desktop;
     }
   }
 }
 
-/* Footer */
+/* Taille logos footer */
 #footerglobal .navbar-brand &gt; img {
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename {
-    padding-top: @sitename-top-mobile;
-    img { height: @sitename-height-mobile; }
+  &amp; + .demarches-titlebar-sitename.service-plus img {
+    height: @sitename-height-mobile;
   }
 
   @media (min-width: @screen-md-min) {
     height: 115px;
 
-    &amp; + .demarches-titlebar-sitename {
-      padding-top: 28px;
-      img { height: @sitename-height-desktop; }
-    }
-  }
-
-  /* Fix logo Observatoire wrapping under logo fr under certain conditions */
-  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-    height: 115px;
-
-    &amp; + .demarches-titlebar-sitename.observatoire {
-      padding-top: 32px;
-      img { height: 34px; }
+    &amp; + .demarches-titlebar-sitename.service-plus img {
+      height: @sitename-height-desktop;
     }
   }
 }
 
-/* Logos spacing */
-/* Always use 1rem (=16px) left padding from the secondary logo
- * so that it stays aligned if it spans under the primary one
- * Then complete with primary logo margin to have the expected spacing.
- */
-#menuview .navbar-brand &gt; img,
-#footerglobal .navbar-brand &gt; img {
-  margin-right: 8px; // 24px with SP+ padding
 
-  @media (min-width: @screen-md-min) {
-    margin-right: 44px; // 60px with SP+ padding
+/* Observatoire logo appearance styles */
+.companylogo .demarches-titlebar-sitename.observatoire {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: black;
+  font-weight: bold;
+
+  span:first-child {
+    font-size: 0.7rem;
+    line-height: 1rem;
   }
 
-  /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename {
-    padding-left: floor((@grid-gutter-width / 2)); // same padding than the existing one
+  span:last-child {
+    font-size: 0.6rem;
+    line-height: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+
+  @media (min-width: @screen-md-min) {
+    span:first-child {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+
+    span:last-child {
+      font-size: 0.825rem;
+      line-height: 1.5rem;
+      margin-bottom: 0rem;
+    }
   }
 }
 
-/* Vertically align the menu of the header */
-#menuview .navbar-right {
-  padding-top: @sitename-top-mobile;
+// Logos alignment and sizes
+.companylogo {
+  .navbar-brand {
+    float: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    height: 100%;
 
-  @media (min-width: @screen-md-min) {
-    padding-top: @sitename-top-desktop;
+    @media (min-width: @screen-md-min) {
+      gap: 2.5rem;
+    }
+
+    // Secondary icon
+    .demarches-titlebar-sitename {
+      display: flex;
+    }
   }
 }
+
+
 
 /* --- End navbar and logo styles --- */
 
@@ -634,42 +628,23 @@ Visually, there's the title row and then all the rows from the document content,
   border-top: 0;
 }
 
-/*
- * Navbar corrections for https://jira.xwiki.org/browse/XWIKI-17262
- * As long as the navbar is collapsed, display the header and menus completely different.
- * We're doing it like this and not mobile-first because we're already inheriting some desktop behaviour and I don't want to spend time resetting all that
- */
-@media (min-width: @grid-float-breakpoint) {
-  /* On desktop all the contents of the .navbar-collapse are floated so we'll cancel its standard padding from mobile where contents are not floated, to make it not take any room*/
-  #menuview .navbar-collapse {
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-@media (max-width: @grid-float-breakpoint-max) {
-  #menuview {
-    .navbar-header, .navbar-left, .navbar-right {
-      float: none;
-    }
-    .navbar-left, .navbar-right {
-      margin-top: 0;
-      margin-bottom: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
-  /* Correction of the toggle display along with some customization */
+
+
+/* Correction of the toggle display along with some customization */
+.navbar-default {
   .navbar-toggle {
-    /* Custom size of the toggle for the observatoire */
-    height: @logo-height-mobile;
-    /* Try to align the burger with the text from the logo */
-    padding-top: 0;
-    padding-bottom: 12px;
-    /* Reset some ugly styles */
-    margin-top: 0;
-    margin-bottom: 0;
+    float: none;
+    height: 100%;
+    margin: 0;
+    margin-left: auto;
+    padding: 0.75rem;
     border: 0;
-    border-radius: 0;
+
+    &amp;:hover,
+    &amp;:focus {
+      background-color: transparent;
+    }
+
     &amp;:focus .fa-bars {
       .outline;
       outline-offset: 2px;
@@ -706,44 +681,19 @@ Visually, there's the title row and then all the rows from the document content,
       }
     }
   }
-  /* Reset some ugly styles */
-  .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: transparent;
-  }
-  .companylogo {
-    float: left;
-  }
-  /* Custom elements of the observatoire */
-  #menuview .wikidemarches-topmenu {
-    clear: right;
-    &amp; &gt; a {
-      display: block;
-      text-align: right;
+}
+
+/* Correction of navbar avatar icon alignment */
+.navbar-avatar {
+  &amp; &gt; a {
+    max-height: unset;
+
+    img {
+      vertical-align: baseline;
     }
   }
 }
 
-/*
- * Top menu style
- */
-/* smaller text, like dsfr */
-.navbar-right, .navbar-toggle {
-  font-size: 0.875em;
-}
-/* layout of the wikidemarches menu entries */
-li.wikidemarches-topmenu {
-  &gt; a {
-    display: inline-block;
-    max-width: unset;
-    line-height: unset;
-
-    &amp;:not(:last-child) {
-      border: 0px none transparent;
-      border-right: 1px solid transparent;
-      border-image: linear-gradient(to bottom, transparent 0% 30%, @grey-925 30% 70%, transparent 70% 100%) 1;
-    }
-  }
-}
 
 /*
  * A couple of adjustments on the search suggest, related to the fact that there is a single source of results. Easier to hack from CSS than to modify the source of results.
@@ -879,8 +829,6 @@ li.wikidemarches-topmenu {
     padding-bottom: @grid-gutter-width;
 
     .footer-col-sitename {
-      margin-left: -15px;
-      margin-right: -15px;
       margin-bottom: 2rem;
 
       .navbar-brand {
@@ -1013,6 +961,220 @@ span.wikiexternallink {
     </property>
     <property>
       <name>Global wiki styles</name>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>always</use>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.WikiGlobalStyles</name>
+    <number>2</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>18bbc3b0-7fc5-45a8-9d71-e4edb603ce69</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>
+/*
+ * Make the navbar use flex instead of floats
+ * It should be responsive and also includes navbar corrections for https://jira.xwiki.org/browse/XWIKI-17262
+ */
+#menuview {
+  .navbar.actionmenu {
+    .container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 0.875em;
+
+
+      .navbar-header {
+        float: none;
+        margin: 0;
+      }
+
+      #xwikimainmenu {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin-left: auto;
+        width: 100%;
+        padding: 0;
+
+        @media (min-width: @screen-md-min) {
+          width: auto;
+        }
+
+        // have to do that else the element is never hidden
+        &amp;:not(.collapse) {
+          display: flex;
+        }
+
+        .navbar-left {
+          float: none !important;
+          margin: 0;
+          padding: 0;
+        }
+
+        .navbar-right {
+          // have to use !important to override other !important
+          float: none !important;
+          display: flex !important;
+          flex-direction: row-reverse;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: center;
+          margin: 0;
+          padding: 0;
+
+          li {
+            float: none;
+
+            /* Custom elements of the observatoire */
+            &amp;.wikidemarches-topmenu {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-end;
+              width: 100%;
+
+              @media (min-width: @screen-md-min) {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                width: unset;
+              }
+
+              &amp; &gt; a {
+                max-width: unset;
+                line-height: unset;
+                border: 0px none transparent;
+
+                @media (min-width: @screen-md-min) {
+                  display: inline-block;
+                }
+
+                // Display separator between items in desktop layout
+                &amp;:not(:last-child) {
+                  @media (min-width: @screen-md-min) {
+                    border-right: 1px solid transparent;
+                    border-image: linear-gradient(to bottom, transparent 0% 30%, @grey-925 30% 70%, transparent 70% 100%) 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name>Header flex</name>
     </property>
     <property>
       <parse>0</parse>

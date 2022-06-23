@@ -53,7 +53,7 @@
     <filename>icons.xwiki.noavatar.png</filename>
     <mimetype>image/png</mimetype>
     <author>xwiki:XWiki.Admin</author>
-    <date>1655476006000</date>
+    <date>1544396400000</date>
     <version>1.1</version>
     <comment/>
     <content>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</content>
@@ -877,15 +877,25 @@
     #set($logoElt = 'span')
     #set($logoAttr = '')
   #end
-  #set ($siteTitleImageName = 'LogoObservatoire.svg')
-  #set($siteClassName = 'observatoire')
   ## special handling for jedonnemonavis, to display a different site name
   #if ($currentDomainKey == 'jedonnemonavis')
-    #set($siteTitleImageName = 'services-plus.svg')
-    #set($siteClassName = 'service-plus')
-    #set($siteName = $services.localization.render('wikidemarches.sitename.servicesPubliquesPlus'))
+    &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;
+      &lt;img src="$!logourl" alt="République française"/&gt;
+      &lt;span class='demarches-titlebar-sitename service-plus'&gt;
+        &lt;img
+          src='$escapetool.xml($xwiki.getSkinFile("uicomponents/custom-wikidemarches/services-plus.svg"))'
+          alt="$escapetool.xml($services.localization.render('wikidemarches.sitename.servicesPubliquesPlus'))" /&gt;
+      &lt;/span&gt;
+    &lt;/$logoElt&gt;
+  #else
+    &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;
+      &lt;img class="brand-logo" src="$!logourl" alt="République française"/&gt;
+      &lt;span class='demarches-titlebar-sitename observatoire'&gt;
+        &lt;span&gt;L'Observatoire de la qualité&lt;/span&gt;
+        &lt;span&gt;des démarches en ligne&lt;/span&gt;
+      &lt;/span&gt;
+    &lt;/$logoElt&gt;
   #end
-  &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;&lt;img src="$!logourl" alt="République française"/&gt;&lt;span class='demarches-titlebar-sitename $siteClassName'&gt;&lt;img src='$escapetool.xml($xwiki.getSkinFile("uicomponents/custom-wikidemarches/$siteTitleImageName"))' alt="$escapetool.xml($siteName)" /&gt;&lt;/span&gt;&lt;/$logoElt&gt;
 &lt;/div&gt;</content>
     </property>
     <property>
@@ -1702,13 +1712,13 @@ $services.localization.render('accountnotactive_email')
         #if (!$displayPageHeader)
           #template("companylogo.vm")
         #end
-        ## Fix for https://jira.xwiki.org/browse/XWIKI-17262
-        #if($currentDomainKey == 'observatoire')
-          &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-controls="xwikimainmenu" aria-expanded="false"&gt;
-            &lt;span class="navbar-toggle-name navbar-toggle-name-closed sr-only"&gt;Ouvrir la navigation&lt;/span&gt;&lt;span class="navbar-toggle-name navbar-toggle-name-open"&gt;Fermer&lt;/span&gt;&lt;span class="fa fa-bars" /&gt;
-          &lt;/button&gt;
-        #end
       &lt;/div&gt;
+      ## Fix for https://jira.xwiki.org/browse/XWIKI-17262
+      #if($currentDomainKey == 'observatoire')
+        &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#xwikimainmenu" aria-controls="xwikimainmenu" aria-expanded="false"&gt;
+          &lt;span class="navbar-toggle-name navbar-toggle-name-closed sr-only"&gt;Ouvrir la navigation&lt;/span&gt;&lt;span class="navbar-toggle-name navbar-toggle-name-open"&gt;Fermer&lt;/span&gt;&lt;span class="fa fa-bars" /&gt;
+        &lt;/button&gt;
+      #end
       ## Collect the nav links, forms, and other content for toggling with fix for https://jira.xwiki.org/browse/XWIKI-17262
       &lt;nav role="navigation" id="xwikimainmenu" class="collapse navbar-collapse"&gt;
 #end
