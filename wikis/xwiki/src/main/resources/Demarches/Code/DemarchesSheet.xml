@@ -667,7 +667,7 @@ form {
 }
 
 @bad : @brand-danger;
-@medium : @brand-warning;
+@medium : @warning-625;
 @good : @brand-success;
 
 .avis-stats-container {
