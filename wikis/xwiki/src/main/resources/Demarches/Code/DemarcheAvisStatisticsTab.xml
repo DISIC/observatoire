@@ -503,7 +503,7 @@
 #set ($colorThemePage = $xwiki.getDocument($services.model.resolveDocument($colorThemeId)))
 #set ($colorThemeObject = $colorThemePage.getObject('FlamingoThemesCode.ThemeClass'))
 #set ($colorDanger = $colorThemeObject.getValue('brand-danger'))
-#set ($colorWarning = $colorThemeObject.getValue('brand-warning'))
+#set ($colorWarning = '#fc5d00') ## warning-625
 #set ($colorGood = $colorThemeObject.getValue('brand-success'))
 #set ($colorInfo = $colorThemeObject.getValue('brand-info'))
 #set ($colorDarkBlue = '#313178')## blue-france-200
