@@ -417,7 +417,6 @@
   /* Rules only for mobile styles */
   @media (max-width: @screen-sm-max) {
     .btn {
-      width: 100%;
       white-space: break-spaces;
     }
   }
@@ -619,7 +618,7 @@
     background-color: #fff;
 
     .row-flex {
-      display: flex;
+      display: inline-flex;
       flex-direction: column;
       flex-wrap: nowrap;
       justify-content: flex-start;
@@ -757,7 +756,7 @@
     background-color: @grey-975;
 
     .buttons-container {
-      display: flex;
+      display: inline-flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
@@ -770,6 +769,10 @@
         justify-content: center;
         align-items: center;
         margin-top: @gap-desktop;
+      }
+
+      .btn {
+        width: 100%;
       }
     }
   }
