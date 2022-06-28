@@ -39,17 +39,22 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{html clean='false'}}
+  <content>{{html clean="false"}}
 &lt;ul class="fr-accordions-group"&gt;
   &lt;li&gt;
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="quelles-sont-les-question-posees-aux-usagers"&gt;
-          Quelles sont les question posées aux usagers ?
+          Comment puis-je récupérer le bouton à installer ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="quelles-sont-les-question-posees-aux-usagers"&gt;
-        ...
+        &lt;p&gt;En cliquant sur un des boutons “Commencer” sur cette page ! Ensuite la récupération du bouton se fera en trois étapes :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Votre inscription sur le site observatoire.numerique.gouv.fr (si vous n’avez pas encore de compte, sinon, il vous suffira de vous connecter) ;&lt;/li&gt;
+&lt;li&gt;La création votre démarche si elle n’existe pas dans notre base (sinon la sélectionner) ;&lt;/li&gt;
+&lt;li&gt;La récupération du code du bouton généré automatiquement dès la création de la démarche.&lt;/li&gt;
+&lt;/ol&gt;
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/li&gt;
@@ -57,11 +62,11 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-ajouter-des-questions-personnalisees"&gt;
-          Puis-je ajouter des questions personnalisées ?
+          Quelles sont les données auxquelles j’ai accès ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="puis-je-ajouter-des-questions-personnalisees"&gt;
-        ...
+        &lt;p&gt;L’installation du bouton vous donne accès aux réponses des utilisateurs &lt;a href="https://observatoire.numerique.gouv.fr/Aide/Donner%20son%20avis" title="Les différentes questions présentes sur le formulaire - nouvelle fenêtre" target="_blank"&gt;aux différentes questions présentes sur le formulaire&lt;/a&gt;. L’usager peut choisir les questions auxquelles répondre. Aucune donnée personnelle n’est recueillie.&lt;/p&gt;
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/li&gt;
@@ -69,11 +74,11 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="faut-il-vous-contacter-pour-utiliser-le-bouton-je-donne-mon-avis"&gt;
-          Faut-il vous contacter pour utiliser le bouton Je donne mon avis ?
+          Les données recueillies sont-elles partagées ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="faut-il-vous-contacter-pour-utiliser-le-bouton-je-donne-mon-avis"&gt;
-        ...
+        &lt;p&gt;Il est important de préciser que les données personnelles ne sont pas recueillies et que les informations demandées concernent exclusivement la manière dont s’est déroulée la démarche pour l’usager. Les données recueillies, anonymement donc, restent dans l’administration. Seules les synthèses des avis sont publiques, uniquement pour les démarches inscrites dans le &lt;a href="https://observatoire.numerique.gouv.fr/observatoire/" title="Top 250 - nouvelle fenêtre" target="_blank"&gt;Top 250&lt;/a&gt; (exemple avec la &lt;a href="https://observatoire.numerique.gouv.fr/Demarches/1223?view-mode=statistics&amp;date-debut=2021-04-01&amp;date-fin=2022-03-31" Title="Démarche d’Établissement d’une procuration - nouvelle fenêtre" target="_blank"&gt;démarche d’Établissement d’une procuration&lt;/a&gt;).&lt;/p&gt;
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/li&gt;
@@ -81,11 +86,11 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-utiliser-le-bouton-je-donne-mon-avis-si-ma-demache-ne-fait-pas-partie-de-lobservatoire-de-la-qualite-des-demarches-en-ligne"&gt;
-          Puis-je utiliser le bouton Je donne mon avis si ma démache ne fait pas partie de l'Observatoire de la qualité des démarches en ligne ?
+          Est-ce que je peux faire mes propres analyses ? 
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="puis-je-utiliser-le-bouton-je-donne-mon-avis-si-ma-demache-ne-fait-pas-partie-de-lobservatoire-de-la-qualite-des-demarches-en-ligne"&gt;
-        ...
+       &lt;p&gt;Par défaut, vous avez accès dans votre espace à des graphiques de synthèse (vous pouvez consulter des exemples publics des démarches inscrites dans le &lt;a href="https://observatoire.numerique.gouv.fr/observatoire/" title="Top 250 - nouvelle fenêtre" target="_blank"&gt;Top 250&lt;/a&gt;, par exemple avec la &lt;a href="https://observatoire.numerique.gouv.fr/Demarches/1223?view-mode=statistics&amp;date-debut=2021-04-01&amp;date-fin=2022-03-31" Title="Démarche d’Établissement d’une procuration - nouvelle fenêtre" target="_blank"&gt;démarche d’Établissement d’une procuration&lt;/a&gt;). Vous pouvez également extraire les données aux formats .xls et .csv afin de réaliser vos propres analyses.&lt;/p&gt;
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/li&gt;
@@ -93,11 +98,11 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-utiliser-le-bouton-je-donne-mon-avis-sur-plusieurs-demarches-en-meme-temps"&gt;
-          Puis-je utiliser le bouton Je donne mon avis sur plusieurs démarches en même temps ?
+          Puis-je créer des questions additionnelles ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="puis-je-utiliser-le-bouton-je-donne-mon-avis-sur-plusieurs-demarches-en-meme-temps"&gt;
-        ...
+        Malheureusement, non. Pour l’instant, le formulaire est le même pour tous, quelle que soit la démarche. 
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/li&gt;
@@ -105,14 +110,15 @@
     &lt;section class="fr-accordion"&gt;
       &lt;h3 class="fr-accordion__title"&gt;
         &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="existe-t-il-un-guide-pour-mindiquer-comment-proceder"&gt;
-          Existe-t-il un guide pour m'indiquer comment procéder ?
+          Le formulaire de questions existe-il dans une autre langue ?
         &lt;/button&gt;
       &lt;/h3&gt;
       &lt;div class="fr-collapse" id="existe-t-il-un-guide-pour-mindiquer-comment-proceder"&gt;
-        ...
+        Pas encore, mais nous travaillons sur une version en anglais !
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-{{/html}}</content>
+{{/html}}
+</content>
 </xwikidoc>
