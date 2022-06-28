@@ -53,22 +53,25 @@
     &lt;/div&gt;
     &lt;div id="faq-1-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="faq-1-title"&gt;
       &lt;div class="panel-body"&gt;
-        TODO: réponse à écrire
+        &lt;p&gt;Le bouton Je Donne Mon Avis est une enquête ‘à chaud’ de la satisfaction des usagers. Le bouton est à placer en fin de démarche, afin que l’usager puisse cliquer dessus immédiatement après qu’il a réalisé sa démarche, idéalement sur site lui-même.&lt;/p&gt;
+&lt;p&gt;Dans les autres cas, des biais peuvent perturber le recueil des avis. En effet, si le bouton reste accessible tout au long de la démarche, les usagers pourront se prononcer sans avoir pris connaissance de la totalité ; si le bouton reste accessible en dehors de la démarche, les avis sont ’à froid’ et ne représentent plus la qualité de la dématérialisation de la démarche.&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-heading" role="tab" id="faq-2-title"&gt;
       &lt;a class="collapsed" role="button" data-toggle="collapse" data-parent="#embedfaq-accordion" href="#faq-2-content" aria-expanded="false" aria-controls="faq-2-content"&gt;
-        Comment presenter le bouton aux usagers ?
+        Comment présenter la démarche aux usagers ?
       &lt;/a&gt;
     &lt;/div&gt;
     &lt;div id="faq-2-content" class="panel-collapse collapse" role="tabpanel" aria-labelledby="faq-2-title"&gt;
       &lt;div class="panel-body"&gt;
-        TODO: réponse à écrire
+        &lt;p&gt;Ajouter une phrase explicative au-dessus du bouton, en ajoutant par exemple :
+“Aidez-nous à améliorer cette démarche ! Donnez-nous votre avis, cela ne prend que 2 minutes.”&lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-{{/html}}</content>
+{{/html}}
+</content>
 </xwikidoc>
