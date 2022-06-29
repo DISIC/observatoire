@@ -47,8 +47,9 @@
 * « Non » dans le cas contraire
 * « Bêta » si la solution est en cours d’expérimentation sur un échantillon restreint d’utilisateurs ou de cas métier
 * « Partiel » si la solution est en cours de déploiement (l’ensemble des usagers n’y a pas encore accès ou alors sur une partie seulement des cas métier)
+* « En cours de déploiement local » si la responsabilité du déploiement effectif de la démarche est assuré par les collectivités territoriales. L'Etat a totalement réalisé la partie du service qui lui incombait
 
-Nota bene: Pour le calcul de taux de dématérialisation, les démarches réalisées en ligne complètement sont comptabilisées comme dématérialisées à 100%, en déploiement partiel à 50%, en expérimentation à 10%.
+Nota bene: Pour le calcul de taux de dématérialisation, les démarches réalisées en ligne complètement et « en cours de déploiement local » sont comptabilisées comme dématérialisées à 100%, en déploiement partiel à 50%, en expérimentation à 10%.
 
 Seules les démarches non réalisables en ligne ne sont pas évaluées : l'évaluation des critères s'applique aussi aux démarches partiellement déployées ou en expérimentation ("bêta").
 
@@ -59,8 +60,8 @@ Il est calculé à partir des réponses des usagers à la question « Comment s'
 Les réponses ayant reçu l'avis :
 
 * « Pas bien » comptent pour 0
-* « Moyen » comptent pour 1
-* « Très bien » comptent pour 2
+* « Moyen » comptent pour 5
+* « Très bien » comptent pour 10
 
 Le taux de satisfaction est calculé en effectuant la moyenne de tous les avis recueillis et en rapportant cette moyenne sur une échelle de 1 à 10.
 
@@ -77,7 +78,7 @@ L'indicateur proposé permet de mesurer la conformité des démarches au regard 
 * sous-critère 1 : Présence d'une déclaration d'accessibilité valide de moins de 3 ans
 * sous-critère 2 : Taux de conformité supérieur à 75% atteint dans la déclaration d’accessibilité
 
-La démarches est au vert (« oui ») si les deux critères sont respectés, à orange (« partiel ») si seul le premier critère est respecté et à rouge (« non ») si aucun des deux critères n'est respecté.
+La démarche est au vert (« oui ») si les deux critères sont respectés, à orange (« partiel ») si seul le premier critère est respecté et à rouge (« non ») si aucun des deux critères n'est respecté.
 
 === **Aide joignable** ===
 
@@ -157,7 +158,7 @@ Précisions complémentaires sur le mode de calcul :
 
 * Les tests des ouvertures de session HTTP/HTTPS sont employées, afin de mesurer la disponibilité et le temps de  réponse de la page sur l’URL renseignée (aucun parcours utilisateur n’est configuré=&gt; le mesure peut donner un  résultat meilleur que la réalité)
 * ce sont les réglages standards qui sont utilisés (fréquence de polling par exemple)
-* la mesure de disponibilité est effectuée 24/7, sur 30 jours, check chaque minute
+* la mesure de disponibilité est effectuée 24/7, check chaque minute
 * les valeurs rapportées dans le tableau de bord trimestriel sont des valeurs calculées sur les trois derniers mois
 
 == **Précisions sur la signification des valeurs « - », « n/a » et « En attente » ** ==
