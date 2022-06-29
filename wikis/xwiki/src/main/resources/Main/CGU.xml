@@ -45,14 +45,14 @@ Ce site permet de suivre l’avancée et la qualité de la dématérialisation d
 
 Il permet également aux usagers de donner leurs avis sur les démarches en ligne qu’ils viennent d’effectuer, et en affiche les résultats de manière transparente. Un bouton/lien situé à la fin de la démarche permet d’accéder à ce service.
 
-Lorsque vous donnez un avis détaillé sur une démarche (espace d’expression libre), nous vous prions de :
+Lorsque vous donnez un avis détaillé sur une démarche (espace d’expression libre), nous vous prions de :
 
 * ne pas nous communiquer d’informations personnelles, permettant de vous identifier ou d’identifier une autre personne (identité, date de naissance, adresse, courriel, y compris professionnel, identifiant administratif, etc.) ;
 * ne pas inclure d’insultes ou de propos dénigrants ou diffamatoires à l’encontre d’une personne.
 
 Vous ne pouvez en tant qu’usager ou accompagnant évaluer qu’une seule fois la démarche. Vous pouvez néanmoins formuler un nouvel avis à chaque fois que vous effectuez à nouveau la même démarche.
 
-L'adresse URL qui permet d'accéder à l'observatoire de la qualité des démarches en ligne est la suivante : [[https:~~/~~/observatoire.numerique.gouv.fr&gt;&gt;https://observatoire.numerique.gouv.fr]]. L'adresse url vers laquelle sont dirigés les usagers qui donnent leurs avis à la fin d'une démarche est la suivante : [[https:~~/~~/jedonnemonavis.numerique.gouv.fr&gt;&gt;https://jedonnemonavis.numerique.gouv.fr]].
+L'adresse URL qui permet d'accéder à l'observatoire de la qualité des démarches en ligne est la suivante : [[https:~~/~~/observatoire.numerique.gouv.fr&gt;&gt;https://observatoire.numerique.gouv.fr]]. L'adresse URL vers laquelle sont dirigés les usagers qui donnent leurs avis à la fin d'une démarche est la suivante dépend de la démarche en question mais commence systématiquement par : [[https:~~/~~/jedonnemonavis.numerique.gouv.fr&gt;&gt;https://jedonnemonavis.numerique.gouv.fr]].
 
 == Vie privée ==
 
@@ -63,7 +63,7 @@ Nous stockons votre adresse IP de façon temporaire pour des raisons d'analyse t
 
 === Cookies ===
 
-Nous collectons des données anonymes d’audience du site, dans le respect des conditions définies par la recommandation « Cookies » de la Commission nationale informatique et libertés (CNIL).
+Nous collectons des données anonymes d’audience du site, dans le respect des conditions définies par la recommandation « Cookies » de la Commission nationale informatique et libertés (CNIL).
 L’outil de mesure d’audience que nous utilisons (Matomo) est paramétré de façon à ce que les informations recueillies soient anonymisées.
 
 === Vos données à caractère personnel ===
@@ -74,7 +74,7 @@ Conformément aux dispositions de la loi n° 78-17 du 6 janvier 1978 relative à
 
 Malgré tout, si vous le souhaitez, vous avez la possibilité de refuser que votre navigation sur notre site soit enregistrée, en cochant la case ci-dessous.
 
-{{display reference="XWiki.PiwikOptOut" /}}
+{{display reference="XWiki.PiwikOptOut"/}}
 
 == Mentions légales ==
 
@@ -93,9 +93,9 @@ Monsieur Nadi Bou Hanna, Directeur interministériel du numérique (DINUM).
 XWiki SAS
 
 RCS Paris n° 477 865 281
-Code APE : 6311Z
-N°TVA : FR 69 477 865 281
-Siège social : XWiki SAS, 35/37 rue Beaubourg
+Code APE : 6311Z
+N°TVA : FR 69 477 865 281
+Siège social : XWiki SAS, 35/37 rue Beaubourg
 75003 Paris
 France
 
@@ -103,8 +103,8 @@ France
 OVH
 RCS Roubaix – Tourcoing 424 761 419 00045
 Code APE 6202A
-N° TVA : FR 22 424 761 419
-Siège social : 2 rue Kellermann
+N° TVA : FR 22 424 761 419
+Siège social : 2 rue Kellermann
 59100 Roubaix
 France</content>
 </xwikidoc>

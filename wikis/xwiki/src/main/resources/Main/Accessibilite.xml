@@ -39,9 +39,114 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>== Déclaration de conformité - RGAA 4.0 ==
+  <content>== Déclaration d'accessibilité ==
 
-L'audit de conformité du site observatoire.numerique.gouv.fr sera effectué prochainement et la déclaration publiée. Nous travaillons actuellement à l'amélioration de l'accessibilité du tableau et des graphiques.
+La direction interministérielle du numérique (DINUM) s’engage à rendre ses sites internet accessibles conformément à l’article 47 de la loi n° 2005-102 du 11 février 2005.
+
+A cette fin, il met en œuvre la stratégie et les actions suivantes :
+
+* [[Consulter le schéma pluriannuel d’accessibilité 2020-2022 (pdf - 1,7 Mo)&gt;&gt;url:https://www.numerique.gouv.fr/uploads/DINUM_SchemaPluriannuel_2020.pdf]]
+* [[Consulter le plan annuel d’accessibilité 2021 (pdf - 900 Ko)&gt;&gt;url:https://www.numerique.gouv.fr/uploads/DINUM-plan-annuel-2021.pdf]]
+
+Cette déclaration d’accessibilité s’applique à L’observatoire de la qualité des démarches en ligne.
+
+=== État de conformité ===
+
+L’observatoire de la qualité des démarches en ligne est en conformité partielle avec le référentiel général d'amélioration de l'accessibilité (RGAA), version 4.1. Les non-conformités sont énumérées ci-dessous.
+
+=== Résultats des tests ===
+
+L’audit de conformité finalisé le 1er juillet 2021 en interne révèle que :
+
+* 53,4 % des critères RGAA sont respectés.
+* Le taux moyen de conformité du service en ligne s’élève à 78,2%.
+
+=== Contenus non accessibles ===
+
+Les contenus listés ci-dessous ne sont pas accessibles pour les raisons suivantes :
+
+Images
+
+* Le logo "L'observatoire de la qualité des démarches en ligne" est une image avec du texte incorporé.
+* Des images informatives n’ont pas une alternative textuelle pertinente. 
+* Sur les pages dédiées aux démarches, certains graphiques n’ont pas les descriptions détaillées nécessaires pour retranscrire les données chiffrées affichées.
+
+Couleurs
+
+* Certains boutons de formulaire et certains textes présentent des problèmes de contraste.
+
+Scripts
+
+Dans la page “Observatoire” :
+
+* Des attributs ARIA manquent pour les sous-menus, le tableau listant les démarches et enfin les boutons affichant les détails sur une démarche.
+* Lorsqu'on active les boutons "Trier par" et "Édition avril 2021" avec la touche Espace, les sous-menus sont affichés durant un court instant seulement.
+
+Dans la page “Conditions générales d’utilisation” : 
+
+* Lorsqu’on active le bouton “Refuser le suivi de votre navigation”, la page se recharge sans que l’utilisateur en ait été averti au préalable. 
+
+Structuration
+
+* La zone de contenu principal n’est pas indiquée dans le code. 
+* La zone de navigation principale n’est pas bien indiquée dans le code pour les lecteurs d’écran.
+* Certaines listes sont mal structurées, dans le menu de navigation et sur les pages de connexion (“Accès administration”) et d’inscription.
+
+Présentation de l’information
+
+* La prise de focus est peu ou non visible sur certains liens et boutons sur Safari. 
+* Dans la page “Observatoire”, le tableau n’est pas adapté aux tailles d’écrans mobiles. De même, sur les pages dédiées aux démarches, certains graphiques ne sont pas adaptés.
+* Dans la page d’accueil, lorsque l’on zoome à 200%, certains textes débordent des cadres et ne sont plus lisibles. 
+
+Formulaires
+
+* Les messages d’erreurs n’indiquent pas nommément les champs erronés ou ne sont pas assez précis.
+
+Navigation
+
+* Le site propose un seul moyen de navigation, à savoir le menu principal. 
+
+=== Dérogations pour charge disproportionnée ===
+
+Pas de contenu concerné
+
+=== Contenus non soumis à l'obligation d'accessibilité ===
+
+Pas de contenu concerné
+
+=== Établissement de cette déclaration d'accessibilité ===
+
+Cette déclaration a été établie le 01/07/2021.
+
+Technologies utilisées pour la réalisation du site web :
+
+* HTML5
+* CSS
+* JavaScript
+* jQuery
+
+Les tests des pages web ont été effectués avec les combinaisons de navigateurs web et lecteurs d’écran suivants :
+
+* NVDA 2021.4 et Firefox 89.0.2
+* Jaws 2021 et Firefox 89.0.2
+* VoiceOver et Safari, OS 11.0.1
+
+Les outils suivants ont été utilisés lors de l’évaluation :
+
+* Barre d’outil Web Developer
+* Extensions : WAVE, WCAG Color contrast checker et HeadingsMaps
+
+Pages du site ayant fait l’objet de la vérification de conformité:
+
+* [[Accueil&gt;&gt;url:https://observatoire.numerique.gouv.fr/]] 
+* [[Conditions générales d’utilisation &gt;&gt;url:https://observatoire.numerique.gouv.fr/Main/CGU]]
+* [[Accessibilité&gt;&gt;url:https://observatoire.numerique.gouv.fr/Main/Accessibilite]] 
+* [[L’observatoire &gt;&gt;url:https://observatoire.numerique.gouv.fr/observatoire/]]
+* [[Synthèse "Déclaration trimestrielle de prime d’activité pour les assurés du régime agricole" &gt;&gt;url:https://observatoire.numerique.gouv.fr/Demarches/2033?view-mode=statistics&amp;date-debut=2020-04-01&amp;date-fin=2021-03-31]]
+* [[Accès administration &gt;&gt;url:https://observatoire.numerique.gouv.fr/login/XWiki/XWikiLogin?xredirect=%2FDemarches%2F2033]]
+* [[Inscription &gt;&gt;url:https://observatoire.numerique.gouv.fr/register/XWiki/XWikiRegister?xredirect=%2Flogin%2FXWiki%2FXWikiLogin%3Fxredirect%3D%252FMain%252FAccessibilite]]
+* [[Comment donner votre avis sur une démarche ? &gt;&gt;url:https://observatoire.numerique.gouv.fr/Aide/Donner%20son%20avis]]
+* [[En savoir plus sur nos critères d'évaluation&gt;&gt;url:https://observatoire.numerique.gouv.fr/Aide/Observatoire]]
 
 == Droit à compensation ==
 
@@ -53,10 +158,10 @@ Vous pouvez nous aider à améliorer l’accessibilité du site en nous signalan
 
 == Défenseur des droits ==
 
-Si vous constatez un défaut d'accessibilité vous empêchant d'accéder à un contenu ou une fonctionnalité du site, que vous nous le signalez et que vous ne parvenez pas à obtenir une réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits. Plusieurs moyens sont à votre disposition :
+Si vous constatez un défaut d'accessibilité vous empêchant d'accéder à un contenu ou une fonctionnalité du site, que vous nous le signalez et que vous ne parvenez pas à obtenir une réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits. Plusieurs moyens sont à votre disposition :
 
 * un [[formulaire de contact&gt;&gt;url:https://www.defenseurdesdroits.fr/nous-contacter]]  ;
 * la [[liste des délégués de votre région&gt;&gt;url:https://www.defenseurdesdroits.fr/fr/saisir/delegues]] avec leurs informations de contact directs ;
-* un numéro de téléphone : le 09 69 39 00 00 du lundi au vendredi de 8h00 à 20h00 (coût d'un appel local) ;
-* une adresse postale dans l'[[annuaire de l'administration&gt;&gt;url:https://lannuaire.service-public.fr/autorites-independantes/autorite-administrative-independante_195381]]</content>
+* un numéro de téléphone : le 09 69 39 00 00 du lundi au vendredi de 8h00 à 20h00 (coût d'un appel local) ;
+* une adresse postal (envoi de courrier gratuit, ne pas mettre de timbre) : Défenseur des droits - Libre réponse 71120 - 75342 Paris CEDEX 07</content>
 </xwikidoc>
