@@ -34,25 +34,60 @@
   <date>1544396400000</date>
   <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
-  <title>Accessibilite du formulaire d'avis</title>
+  <title>Accessibilite du formulaire "Je donne mon avis"</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>== Déclaration de conformité - RGAA 4.0 ==
+  <content>== Déclaration de conformité ==
 
-L'audit de conformité du site jedonnemonavis.numerique.gouv.fr sera effectué prochainement et la déclaration publiée.
+=== État de conformité ===
 
-== Amélioration et contact ==
+Le formulaire "Je donne mon avis" est **partiellement conforme** avec le référentiel général d’amélioration de l’accessibilité.
 
-Vous pouvez nous aider à améliorer l’accessibilité du site en nous signalant les problèmes éventuels que vous rencontrez. Pour ce faire, envoyez-nous un courriel à communication.dinum@modernisation.gouv.fr.
+==== Résultat des tests ====
+
+L’audit de conformité du 10 novembre 2021 révèle que 83% des 106 critères du RGAA sont respectés.
+
+== Établissement de cette déclaration d’accessibilité ==
+
+Cette déclaration a été établie le 19/11/2021.
+
+=== Technologies utilisées ===
+
+* HTML
+* CSS
+* Javascript
+
+=== Environnement de test ===
+
+Les vérifications de restitution de contenus ont été réalisées sur la base de la combinaison fournie par la base de référence du RGAA, avec les versions suivantes :
+
+* MacOS Catalina 10.15.7
+* Brave 1.31.91 Chromium: 95.0.4638.69
+* Safari Version 14.1.2 (15611.3.10.1.5, 15611)
+
+=== Outils pour évaluer l’accessibilité ===
+
+* Inspecteur de code Chrome
+* Inspecteur de code Safari
+* Extension Chrome Assistant RGAA
+* Extension Chrome HeadingsMap
+* Extension Chrome Web Developer
+* Extension Chrome Wave
+* Color Contrast Analyser
+* The W3C Markup Validation Service (validator.w3.org)
+
+== Retour d’information et contact ==
+
+Si vous n’arrivez pas à accéder à un contenu ou à un service ou si vous pouvez nous aider à améliorer l’accessibilité du site en nous signalant les problèmes éventuels que vous rencontrez. Pour ce faire, envoyez-nous un courriel à communication.dinum@modernisation.gouv.fr.
 
 == Défenseur des droits ==
 
-Si vous constatez un défaut d'accessibilité vous empêchant d'accéder à un contenu ou une fonctionnalité du site, que vous nous le signalez et que vous ne parvenez pas à obtenir une réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits. Plusieurs moyens sont à votre disposition :
+Si vous constatez un défaut d'accessibilité vous empêchant d'accéder à un contenu ou une fonctionnalité du site, que vous nous le signalez et que vous ne parvenez pas à obtenir une réponse rapide de notre part, vous êtes en droit de faire parvenir vos doléances ou une demande de saisine au Défenseur des droits. Plusieurs moyens sont à votre disposition :
 
 * un [[formulaire de contact&gt;&gt;url:https://www.defenseurdesdroits.fr/nous-contacter]]  ;
 * la [[liste des délégués de votre région&gt;&gt;url:https://www.defenseurdesdroits.fr/fr/saisir/delegues]] avec leurs informations de contact directs ;
-* un numéro de téléphone : le 09 69 39 00 00 du lundi au vendredi de 8h00 à 20h00 (coût d'un appel local) ;
+* un numéro de téléphone : le 09 69 39 00 00 du lundi au vendredi de 8h00 à 20h00 (coût d'un appel local) ;
 * une adresse postale dans l'[[annuaire de l'administration&gt;&gt;url:https://lannuaire.service-public.fr/autorites-independantes/autorite-administrative-independante_195381]]</content>
 </xwikidoc>
