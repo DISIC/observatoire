@@ -146,16 +146,16 @@
     #end
     #set ($isSingleTab = false)
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
-      &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
+      &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab" role="tab" data-toggle="tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
       #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
-        &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
+        &lt;li role="presentation" #if($selectedTab == 'embed-tab')class="active"#end&gt;&lt;a href="#embed-tab" role="tab" data-toggle="tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.embed')&lt;/a&gt;&lt;/li&gt;
       #end
       #if ($hasAdmin || ($isAdministrateurMinisteriel &amp;&amp; $isInDemarcheDirection) || $isDemarcheOwner)
-        &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
+        &lt;li role="presentation" #if($selectedTab == 'liste-avis-tab')class="active"#end&gt;&lt;a href="#liste-avis-tab" role="tab" data-toggle="tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisList')&lt;/a&gt;&lt;/li&gt;
       #end
-      &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
+      &lt;li role="presentation" #if($selectedTab == 'statistics-tab')class="active"#end&gt;&lt;a href="#statistics-tab" role="tab" data-toggle="tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.avisStatistics')&lt;/a&gt;&lt;/li&gt;
       #if ($cerfaNumerique != $NULL)
-        &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
+        &lt;li role="presentation" #if($selectedTab == 'cerfa-numerique-tab')class="active"#end&gt;&lt;a href="#cerfa-numerique-tab" role="tab" data-toggle="tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.cerfaNumerique')&lt;/a&gt;&lt;/li&gt;
       #end
     &lt;/ul&gt;
     &lt;div class="tab-content"&gt;
@@ -416,6 +416,201 @@ require(['jquery','xwiki-selectize'], function($) {
     </property>
     <property>
       <name>JSX</name>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <name>Demarches.Code.DemarchesSheet</name>
+    <number>1</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>e7069962-04ad-4763-82bf-226d1a940a3f</guid>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>/*
+ * This script fixes keyboard navigation accessibility for bootstrap tabs
+ * It provides 'ArrowLeft', 'ArrowRight', 'Home' and 'End' key navigation
+ * It also make only the current tab focusable using tabindex,
+ * and makes tab panel focusable too
+ */
+require(['jquery'], function($) {
+  'use strict';
+
+  const TAB_SELECTOR = '[data-toggle="tab"]';
+  const TABPANEL_SELECTOR = '.tab-pane[role="tabpanel"]';
+
+  $(function () {
+    /*
+     * Utils functions
+     */
+    const getTabIndex = function ($tabs, tab) {
+      return $tabs.toArray().findIndex(function (_tab) {
+        return _tab === tab;
+      });
+    }
+
+    const focusTabAtIndex = function ($tabs, index) {
+      const $tab = $tabs.eq(index);
+      $tab.tab('show');
+      $tab.focus();
+    }
+
+    const focusTabLeft = function ($tabs, tab) {
+      const tabIndex = getTabIndex($tabs, tab);
+      focusTabAtIndex($tabs, tabIndex - 1);
+    };
+
+    const focusTabRight = function ($tabs, tab) {
+      const tabIndex = getTabIndex($tabs, tab);
+      focusTabAtIndex($tabs, (tabIndex + 1) % $tabs.length);
+    };
+
+    const focusFirstTab = function ($tabs) {
+      focusTabAtIndex($tabs, 0);
+    };
+
+    const focusLastTab = function ($tabs) {
+      focusTabAtIndex($tabs, -1);
+    };
+
+    /*
+     * Handle keyboard navigation
+     */
+    $(TAB_SELECTOR).on('keydown', function (event) {
+      const tab = event.currentTarget;
+      const $tabs = $(tab)
+        .closest('.nav-tabs')
+        .find(TAB_SELECTOR);
+      let actionFlag = false;
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          focusTabLeft($tabs, tab);
+          actionFlag = true;
+          break;
+
+        case 'ArrowRight':
+          focusTabRight($tabs, tab);
+          actionFlag = true;
+          break;
+
+        case 'Home':
+          focusFirstTab($tabs);
+          actionFlag = true;
+          break;
+
+        case 'End':
+          focusLastTab($tabs);
+          actionFlag = true;
+          break;
+
+        default:
+          break;
+      }
+
+      if (actionFlag) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+
+    /*
+     * Modify tab and tabpanels focusability
+     */
+    // Make tab panels focusable
+    $(TABPANEL_SELECTOR).attr('tabindex', 0);
+    // Make only current tab focusable
+    $(TAB_SELECTOR).not('.active &gt; ' + TAB_SELECTOR).attr('tabindex', -1);
+    $(TAB_SELECTOR).on('show.bs.tab', function (event) {
+      $(event.currentTarget).attr('tabindex', 0)
+    });
+    $(TAB_SELECTOR).on('hide.bs.tab', function (event) {
+      $(event.currentTarget).attr('tabindex', -1)
+    });
+  });
+});</code>
+    </property>
+    <property>
+      <name>Tab accessibility</name>
     </property>
     <property>
       <parse>1</parse>
