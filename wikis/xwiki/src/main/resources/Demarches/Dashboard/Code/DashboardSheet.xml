@@ -1807,8 +1807,8 @@ input[name='title'] {
         color: @error-425;
       }
       .label-warning {
-        background-color: @warning-950;
-        border-color: @warning-950;
+        background-color: #ffdecb; // not a dsfr color, see issue #1173
+        border-color: #ffdecb; // not a dsfr color, see issue #1173
         color: @warning-425;
       }
       .label-info {
