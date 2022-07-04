@@ -27,7 +27,7 @@
   <parent>
     <artifactId>xwiki-dinsic-wikidemarches-wikis</artifactId>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
-    <version>4.11-SNAPSHOT</version>
+    <version>5.0-SNAPSHOT</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-wikis-statssolr</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - Solr statistics</name>
