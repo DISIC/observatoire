@@ -1822,13 +1822,6 @@ input[name='title'] {
         color: @grey-200;
       }
       &amp;.column-satisfaction-index {
-        span.label {
-          background-color: @grey-1000;
-          border-color: currentColor;
-          a {
-            color: inherit;
-          }
-        }
         .row-details-value .satisfaction-details {
           display: inline-block;
           padding: .375em .7em .375em .7em;
