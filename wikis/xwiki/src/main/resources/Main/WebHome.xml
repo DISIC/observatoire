@@ -109,7 +109,7 @@
           (% class='col-xs-12 col-sm-6' %) (((
             (% class='howto-button-container' %) (((
               (% class="fa fa-question-circle" aria-hidden="true" %) ((()))
-              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;JDMA.WebHome]]
+              [[$services.localization.render('wikidemarches.owned-demarches.howto')&gt;&gt;je-donne-mon-avis.WebHome]]
             )))
           )))
         )))
@@ -242,10 +242,10 @@
             Même si votre démarche n’est pas parmi les 250 suivies dans l’Observatoire, vous pouvez utiliser l’outil Je donne mon avis afin de suivre en temps réel la satisfaction des usagers.
 
             (% class='seemore-button-container' %)
-            [[$services.localization.render('wikidemarches.usagerow.button')&gt;&gt;JDMA.WebHome||class='btn btn-default']]
+            [[$services.localization.render('wikidemarches.usagerow.button')&gt;&gt;je-donne-mon-avis.WebHome||class='btn btn-default']]
           )))
           (% class='col-xs-12 col-sm-6 usagerow-col-img' %) (((
-            image:JDMA.WebHome@example-stats.svg
+            image:je-donne-mon-avis.WebHome@example-stats.svg
           )))
         )))
       )))
