@@ -1,0 +1,124 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="je-donne-mon-avis.FAQ" locale="">
+  <web>je-donne-mon-avis</web>
+  <name>FAQ</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>xwiki:je-donne-mon-avis.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title>FAQ</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{html clean="false"}}
+&lt;ul class="fr-accordions-group"&gt;
+  &lt;li&gt;
+    &lt;section class="fr-accordion"&gt;
+      &lt;h3 class="fr-accordion__title"&gt;
+        &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="quelles-sont-les-question-posees-aux-usagers"&gt;
+          Comment puis-je récupérer le bouton à installer ?
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div class="fr-collapse" id="quelles-sont-les-question-posees-aux-usagers"&gt;
+        &lt;p&gt;En cliquant sur un des boutons “Commencer” sur cette page ! Ensuite la récupération du bouton se fera en trois étapes :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Votre inscription sur le site observatoire.numerique.gouv.fr (si vous n’avez pas encore de compte, sinon, il vous suffira de vous connecter) ;&lt;/li&gt;
+&lt;li&gt;La création votre démarche si elle n’existe pas dans notre base (sinon la sélectionner) ;&lt;/li&gt;
+&lt;li&gt;La récupération du code du bouton généré automatiquement dès la création de la démarche.&lt;/li&gt;
+&lt;/ol&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;section class="fr-accordion"&gt;
+      &lt;h3 class="fr-accordion__title"&gt;
+        &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-ajouter-des-questions-personnalisees"&gt;
+          Quelles sont les données auxquelles j’ai accès ?
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div class="fr-collapse" id="puis-je-ajouter-des-questions-personnalisees"&gt;
+        &lt;p&gt;L’installation du bouton vous donne accès aux réponses des utilisateurs &lt;a href="https://observatoire.numerique.gouv.fr/Aide/Donner%20son%20avis" title="Les différentes questions présentes sur le formulaire - nouvelle fenêtre" target="_blank"&gt;aux différentes questions présentes sur le formulaire&lt;/a&gt;. L’usager peut choisir les questions auxquelles répondre. Aucune donnée personnelle n’est recueillie.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;section class="fr-accordion"&gt;
+      &lt;h3 class="fr-accordion__title"&gt;
+        &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="faut-il-vous-contacter-pour-utiliser-le-bouton-je-donne-mon-avis"&gt;
+          Les données recueillies sont-elles partagées ?
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div class="fr-collapse" id="faut-il-vous-contacter-pour-utiliser-le-bouton-je-donne-mon-avis"&gt;
+        &lt;p&gt;Il est important de préciser que les données personnelles ne sont pas recueillies et que les informations demandées concernent exclusivement la manière dont s’est déroulée la démarche pour l’usager. Les données recueillies, anonymement donc, restent dans l’administration. Seules les synthèses des avis sont publiques, uniquement pour les démarches inscrites dans le &lt;a href="https://observatoire.numerique.gouv.fr/observatoire/" title="Top 250 - nouvelle fenêtre" target="_blank"&gt;Top 250&lt;/a&gt; (exemple avec la &lt;a href="https://observatoire.numerique.gouv.fr/Demarches/1223?view-mode=statistics&amp;date-debut=2021-04-01&amp;date-fin=2022-03-31" Title="Démarche d’Établissement d’une procuration - nouvelle fenêtre" target="_blank"&gt;démarche d’Établissement d’une procuration&lt;/a&gt;).&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;section class="fr-accordion"&gt;
+      &lt;h3 class="fr-accordion__title"&gt;
+        &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-utiliser-le-bouton-je-donne-mon-avis-si-ma-demache-ne-fait-pas-partie-de-lobservatoire-de-la-qualite-des-demarches-en-ligne"&gt;
+          Est-ce que je peux faire mes propres analyses ? 
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div class="fr-collapse" id="puis-je-utiliser-le-bouton-je-donne-mon-avis-si-ma-demache-ne-fait-pas-partie-de-lobservatoire-de-la-qualite-des-demarches-en-ligne"&gt;
+       &lt;p&gt;Par défaut, vous avez accès dans votre espace à des graphiques de synthèse (vous pouvez consulter des exemples publics des démarches inscrites dans le &lt;a href="https://observatoire.numerique.gouv.fr/observatoire/" title="Top 250 - nouvelle fenêtre" target="_blank"&gt;Top 250&lt;/a&gt;, par exemple avec la &lt;a href="https://observatoire.numerique.gouv.fr/Demarches/1223?view-mode=statistics&amp;date-debut=2021-04-01&amp;date-fin=2022-03-31" Title="Démarche d’Établissement d’une procuration - nouvelle fenêtre" target="_blank"&gt;démarche d’Établissement d’une procuration&lt;/a&gt;). Vous pouvez également extraire les données aux formats .xls et .csv afin de réaliser vos propres analyses.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;section class="fr-accordion"&gt;
+      &lt;h3 class="fr-accordion__title"&gt;
+        &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="puis-je-utiliser-le-bouton-je-donne-mon-avis-sur-plusieurs-demarches-en-meme-temps"&gt;
+          Puis-je créer des questions additionnelles ?
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div class="fr-collapse" id="puis-je-utiliser-le-bouton-je-donne-mon-avis-sur-plusieurs-demarches-en-meme-temps"&gt;
+        Malheureusement, non. Pour l’instant, le formulaire est le même pour tous, quelle que soit la démarche. 
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;section class="fr-accordion"&gt;
+      &lt;h3 class="fr-accordion__title"&gt;
+        &lt;button class="fr-accordion__btn" aria-expanded="false" aria-controls="existe-t-il-un-guide-pour-mindiquer-comment-proceder"&gt;
+          Le formulaire de questions existe-il dans une autre langue ?
+        &lt;/button&gt;
+      &lt;/h3&gt;
+      &lt;div class="fr-collapse" id="existe-t-il-un-guide-pour-mindiquer-comment-proceder"&gt;
+        Pas encore, mais nous travaillons sur une version en anglais !
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+{{/html}}
+</content>
+</xwikidoc>

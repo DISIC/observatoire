@@ -136,7 +136,7 @@
 #if($currentDomainKey == 'observatoire')
 {{html clean="false"}}
   &lt;li class='wikidemarches-topmenu'&gt;
-    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('JDMA.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;#if($isGuest)&lt;a href="$xwiki.getURL($doc.fullName,'login')"&gt;$services.localization.render('wd.login')&lt;/a&gt;#else&lt;a href="$xwiki.getURL($doc.fullName,'logout')"&gt;$services.localization.render('wd.logout')&lt;/a&gt;#end
+    &lt;a href="$xwiki.getURL('observatoire.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.observatoire')&lt;/a&gt;&lt;a href="$xwiki.getURL('je-donne-mon-avis.WebHome')" class="icon-navbar"&gt;$services.localization.render('wikidemarches.topmenu.apropos')&lt;/a&gt;#if($isGuest)&lt;a href="$xwiki.getURL($doc.fullName,'login')"&gt;$services.localization.render('wd.login')&lt;/a&gt;#else&lt;a href="$xwiki.getURL($doc.fullName,'logout')"&gt;$services.localization.render('wd.logout')&lt;/a&gt;#end
   &lt;/li&gt;
 {{/html}}
 #end
@@ -204,7 +204,7 @@
     #set ($displayContentMenu = false)
   #end
 #end
-#set ($pagesWithoutBreadcrumbs = ['Main.WebHome', 'JDMA.WebHome'])
+#set ($pagesWithoutBreadcrumbs = ['Main.WebHome', 'je-donne-mon-avis.WebHome'])
 #set ($displayBreadcrumbs = $hasGlobalAdmin &amp;&amp; !$pagesWithoutBreadcrumbs.contains($doc.fullName))
 #set ($displayDrawer = $hasGlobalAdmin)
 #set ($displayQuickSearch = !$isGuest &amp;&amp; $doc.fullName != 'Main.WebHome' &amp;&amp; $doc.fullName != 'Main.Search')
