@@ -66,7 +66,7 @@
             <exclude>**/Main/plan-site.xml</exclude>
             <exclude>**/je-donne-mon-avis/FAQ.xml</exclude>
             <exclude>**/Aide/**</exclude>
-            <exclude>**/Administration/Domaines autorisés</exclude>
+            <exclude>**/Administration/Domaines autorisés.xml</exclude>
           </excludes>
         </configuration>
       </plugin>
