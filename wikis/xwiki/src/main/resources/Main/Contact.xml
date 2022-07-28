@@ -44,16 +44,20 @@
 {{html clean="false"}}
 
 &lt;div class="row"&gt;
-  &lt;div class="col-xs-12 col-lg-10 col-lg-offset-1 col-flex"&gt;
-    &lt;div class="contact-text"&gt;
-      &lt;h1&gt;$doc.title&lt;/h1&gt;
-      &lt;p&gt;
-        Vous pouvez nous contacter à l’adresse e-mail suivante :
-        &lt;br/&gt;
-        &lt;strong&gt;observatoire@design.numerique.gouv.fr&lt;/strong&gt;
-      &lt;/p&gt;
+  &lt;div class="col-xs-12 col-md-10 col-md-offset-1"&gt;
+    &lt;div class="row row-flex"&gt;
+      &lt;div class="contact-text col-xs-12 col-sm-8"&gt;
+        &lt;h1&gt;$doc.title&lt;/h1&gt;
+        &lt;p&gt;
+          Vous pouvez nous contacter à l’adresse e-mail suivante :
+          &lt;br/&gt;
+          &lt;strong&gt;observatoire@design.numerique.gouv.fr&lt;/strong&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="contact-image col-xs-12 col-sm-4"&gt;
+        &lt;img src="$doc.getAttachmentURL('mailto')" /&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-    &lt;img src="$doc.getAttachmentURL('mailto')" /&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -171,19 +175,22 @@
   display: none;
 }
 
-.col-flex {
+.row-flex {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
 
   .contact-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     margin-right: auto;
 
     h1 {
-      margin-top: 0;
+      margin-top: 0rem;
     }
 
     p {
@@ -194,10 +201,12 @@
     }
   }
 
-  img {
-    width: ~"min(100%, auto)";
+  .contact-image {
+    text-align: center;
   }
-}</code>
+
+}
+</code>
     </property>
     <property>
       <contentType>LESS</contentType>
