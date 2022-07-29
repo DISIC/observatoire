@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.3" reference="Main.Contact" locale="">
-  <web>Main</web>
-  <name>Contact</name>
+<xwikidoc version="1.3" reference="contact.WebHome" locale="">
+  <web>contact</web>
+  <name>WebHome</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -74,7 +74,7 @@
     <filesize>68706</filesize>
   </attachment>
   <object>
-    <name>Main.Contact</name>
+    <name>contact.WebHome</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
     <guid>2accba7c-472a-4955-b7cb-9aa555f97444</guid>
