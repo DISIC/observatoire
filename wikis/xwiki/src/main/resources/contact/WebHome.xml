@@ -65,7 +65,6 @@
 {{/velocity}}</content>
   <attachment>
     <filename>mailto.svg</filename>
-    <mimetype>image/svg+xml</mimetype>
     <author>xwiki:XWiki.Admin</author>
     <date>1544396400000</date>
     <version>1.1</version>
@@ -171,11 +170,18 @@
       <cache>long</cache>
     </property>
     <property>
-      <code>.document-info {
+      <code>.document-header {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.document-info {
   display: none;
 }
 
 .row-flex {
+  @media (min-width: @screen-sm-min) {
+    padding-top: 2.5rem;
+  }
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -191,6 +197,11 @@
 
     h1 {
       margin-top: 0rem;
+      margin-bottom: 1.5rem;
+      padding-top: 3rem;
+      @media (min-width: @screen-sm-min) {
+        padding-top: 0;
+      }
     }
 
     p {
@@ -203,6 +214,10 @@
 
   .contact-image {
     text-align: center;
+    padding-top: 1rem;
+    @media (min-width: @screen-sm-min) {
+      padding-top: 0;
+    }
   }
 
 }
