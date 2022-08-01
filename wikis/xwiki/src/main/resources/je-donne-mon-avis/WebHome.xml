@@ -354,7 +354,7 @@
               &lt;h2&gt;Vous avez d’autres questions ? Des doutes ? Contactez-nous !&lt;/h2&gt;
             &lt;/div&gt;
             &lt;div class="fr-col-12"&gt;
-              &lt;a class="fr-btn fr-btn--secondary" href="mailto:contact@design.numerique.gouv.fr"&gt;Contacter notre équipe&lt;/a&gt;
+              &lt;a class="fr-btn fr-btn--secondary" href="$xwiki.getURL('contact.WebHome')"&gt;Contacter notre équipe&lt;/a&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;

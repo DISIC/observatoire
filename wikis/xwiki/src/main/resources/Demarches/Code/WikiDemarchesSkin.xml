@@ -625,7 +625,7 @@
           &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HVieprivE9e"&gt;$services.localization.render('wd.personal-data')&lt;/a&gt;&lt;/li&gt;
           #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
           &lt;li&gt;&lt;a href="https://github.com/DISIC/observatoire" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.Contact')"&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
+          #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('contact.WebHome')"&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
         &lt;/ul&gt;
       &lt;/div&gt;
     &lt;/div&gt;
