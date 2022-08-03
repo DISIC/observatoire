@@ -19,13 +19,14 @@
  */
 package com.xwiki.projects.dinsic.wikidemarches.aggregates;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * Class describing an aggregate entry in the database.
+ * 
  * @version $Id$
  */
-public class AvisAggregateByDay implements Serializable
+public class AvisAggregateByDay
 {
     private String demarche;
 
@@ -71,7 +72,7 @@ public class AvisAggregateByDay implements Serializable
 
     private int aideAgent;
 
-    private int aideInternet;   
+    private int aideInternet;
 
     private int aideAutre;
 
