@@ -20,8 +20,11 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
+
   <class name="com.xwiki.projects.dinsic.wikidemarches.aggregates.AvisAggregateByDay" table="avis_byday">
     <composite-id>
       <key-property name="day" type="date">
