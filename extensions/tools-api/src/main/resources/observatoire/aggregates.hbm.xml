@@ -22,123 +22,123 @@
 
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.xwiki.projects.dinsic.wikidemarches.aggregates.AvisAggregateByDay" table="avis_byday">
-		<composite-id>
-			<key-property name="day" type="date">
-				<column name="day" index="avis_byday_day" />
-			</key-property>
-			<key-property name="demarche" type="string">
-				<column name="demarche" index="avis_byday_demarche" length="255" />
-			</key-property>
-		</composite-id>
+  <class name="com.xwiki.projects.dinsic.wikidemarches.aggregates.AvisAggregateByDay" table="avis_byday">
+    <composite-id>
+      <key-property name="day" type="date">
+        <column name="day" index="avis_byday_day" />
+      </key-property>
+      <key-property name="demarche" type="string">
+        <column name="demarche" index="avis_byday_demarche" length="255" />
+      </key-property>
+    </composite-id>
 
-		<property name="nbAvis" type="int">
-			<column name="count" not-null="false" />
-		</property>
+    <property name="nbAvis" type="int">
+      <column name="count" not-null="false" />
+    </property>
 
-		<property name="avis3" type="int">
-			<column name="avis3" not-null="false" />
-		</property>
+    <property name="avis3" type="int">
+      <column name="avis3" not-null="false" />
+    </property>
 
-		<property name="avis2" type="int">
-			<column name="avis2" not-null="false" />
-		</property>
+    <property name="avis2" type="int">
+      <column name="avis2" not-null="false" />
+    </property>
 
-		<property name="avis1" type="int">
-			<column name="avis1" not-null="false" />
-		</property>
+    <property name="avis1" type="int">
+      <column name="avis1" not-null="false" />
+    </property>
 
-		<property name="facile3" type="int">
-			<column name="facile3" not-null="false" />
-		</property>
+    <property name="facile3" type="int">
+      <column name="facile3" not-null="false" />
+    </property>
 
-		<property name="facile2" type="int">
-			<column name="facile2" not-null="false" />
-		</property>
+    <property name="facile2" type="int">
+      <column name="facile2" not-null="false" />
+    </property>
 
-		<property name="facile1" type="int">
-			<column name="facile1" not-null="false" />
-		</property>
+    <property name="facile1" type="int">
+      <column name="facile1" not-null="false" />
+    </property>
 
-		<property name="comprehension3" type="int">
-			<column name="compr3" not-null="false" />
-		</property>
+    <property name="comprehension3" type="int">
+      <column name="compr3" not-null="false" />
+    </property>
 
-		<property name="comprehension2" type="int">
-			<column name="compr2" not-null="false" />
-		</property>
+    <property name="comprehension2" type="int">
+      <column name="compr2" not-null="false" />
+    </property>
 
-		<property name="comprehension1" type="int">
-			<column name="compr1" not-null="false" />
-		</property>
+    <property name="comprehension1" type="int">
+      <column name="compr1" not-null="false" />
+    </property>
 
-		<property name="diffManquedinformations" type="int">
-			<column name="diff_manquedinformations" not-null="false" />
-		</property>
+    <property name="diffManquedinformations" type="int">
+      <column name="diff_manquedinformations" not-null="false" />
+    </property>
 
-		<property name="diffDysfonctionnement" type="int">
-			<column name="diff_dysfonctionnement" not-null="false" />
-		</property>
+    <property name="diffDysfonctionnement" type="int">
+      <column name="diff_dysfonctionnement" not-null="false" />
+    </property>
 
-		<property name="diffMobile" type="int">
-			<column name="diff_mobile" not-null="false" />
-		</property>
+    <property name="diffMobile" type="int">
+      <column name="diff_mobile" not-null="false" />
+    </property>
 
-		<property name="diffPiecesjointes" type="int">
-			<column name="diff_piecesjointes" not-null="false" />
-		</property>
+    <property name="diffPiecesjointes" type="int">
+      <column name="diff_piecesjointes" not-null="false" />
+    </property>
 
-		<property name="diffSuite" type="int">
-			<column name="diff_suite" not-null="false" />
-		</property>
+    <property name="diffSuite" type="int">
+      <column name="diff_suite" not-null="false" />
+    </property>
 
-		<property name="diffAutre" type="int">
-			<column name="diff_autre" not-null="false" />
-		</property>
+    <property name="diffAutre" type="int">
+      <column name="diff_autre" not-null="false" />
+    </property>
 
-		<property name="diffAucune" type="int">
-			<column name="diff_aucune" not-null="false" />
-		</property>
+    <property name="diffAucune" type="int">
+      <column name="diff_aucune" not-null="false" />
+    </property>
 
-		<property name="aideProche" type="int">
-			<column name="aide_proche" not-null="false" />
-		</property>
+    <property name="aideProche" type="int">
+      <column name="aide_proche" not-null="false" />
+    </property>
 
-		<property name="aideAssociation" type="int">
-			<column name="aide_association" not-null="false" />
-		</property>
+    <property name="aideAssociation" type="int">
+      <column name="aide_association" not-null="false" />
+    </property>
 
-		<property name="aideAgent" type="int">
-			<column name="aide_agent" not-null="false" />
-		</property>
+    <property name="aideAgent" type="int">
+      <column name="aide_agent" not-null="false" />
+    </property>
 
-		<property name="aideInternet" type="int">
-			<column name="aide_internet" not-null="false" />
-		</property>
+    <property name="aideInternet" type="int">
+      <column name="aide_internet" not-null="false" />
+    </property>
 
-		<property name="aideAutre" type="int">
-			<column name="aide_autre" not-null="false" />
-		</property>
+    <property name="aideAutre" type="int">
+      <column name="aide_autre" not-null="false" />
+    </property>
 
-		<property name="aideAucune" type="int">
-			<column name="aide_aucune" not-null="false" />
-		</property>
+    <property name="aideAucune" type="int">
+      <column name="aide_aucune" not-null="false" />
+    </property>
 
-		<property name="modaliteEnligneentierement" type="int">
-			<column name="modalite_enligneentierement" not-null="false" />
-		</property>
+    <property name="modaliteEnligneentierement" type="int">
+      <column name="modalite_enligneentierement" not-null="false" />
+    </property>
 
-		<property name="modaliteEnlignepartielement" type="int">
-			<column name="modalite_enlignepartielement" not-null="false" />
-		</property>
+    <property name="modaliteEnlignepartielement" type="int">
+      <column name="modalite_enlignepartielement" not-null="false" />
+    </property>
 
-		<property name="modaliteAutrement" type="int">
-			<column name="modalite_autrement" not-null="false" />
-		</property>
+    <property name="modaliteAutrement" type="int">
+      <column name="modalite_autrement" not-null="false" />
+    </property>
 
-		<property name="commentaire" type="int">
-			<column name="commentaire" not-null="false" />
-		</property>
+    <property name="commentaire" type="int">
+      <column name="commentaire" not-null="false" />
+    </property>
 
-	</class>
+  </class>
 </hibernate-mapping>

@@ -38,7 +38,7 @@ public class AvisAggregateByDay implements Serializable
     private int avis2;
 
     private int avis1;
-    
+
     private int facile3;
 
     private int facile2;
@@ -50,41 +50,41 @@ public class AvisAggregateByDay implements Serializable
     private int comprehension2;
 
     private int comprehension1;
-    
+
     private int diffManquedinformations;
 
     private int diffDysfonctionnement;
-    
+
     private int diffMobile;
 
     private int diffPiecesjointes;
-    
+
     private int diffSuite;
-    
+
     private int diffAutre;
-    
+
     private int diffAucune;
-    
+
     private int aideProche;
-    
+
     private int aideAssociation;
 
     private int aideAgent;
 
-    private int aideInternet;
+    private int aideInternet;   
 
     private int aideAutre;
-    
+
     private int aideAucune;
 
     private int modaliteEnligneentierement;
-    
+
     private int modaliteEnlignepartielement;
-    
+
     private int modaliteAutrement;
-    
+
     private int commentaire;
-    
+
     public String getDemarche()
     {
         return demarche;
@@ -94,7 +94,7 @@ public class AvisAggregateByDay implements Serializable
     {
         this.demarche = demarche;
     }
-    
+
     public Date getDay()
     {
         return day;
