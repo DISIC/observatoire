@@ -44,7 +44,7 @@
 #if (($action == 'activate' || $action == 'delete') &amp;&amp; $services.csrf.isTokenValid($request.csrf))
   #set ($userIds = $request.getParameterValues('id'))
   #if ($userIds.size() &gt; 0)
-    Le(s) compte(s) suivant(s) a(ont) été#if ($action == 'activate') activé(s)#else supprimés#end :
+    Le(s) compte(s) suivant(s) a(ont) été#if ($action == 'activate') activé(s)#else supprimés#end :
     #foreach ($userId in $userIds)
       #set ($userPage = $xwiki.getDocument($userId))
       #if ($action == 'activate')
@@ -85,14 +85,14 @@
   #end
 #end
 {{html clean="false"}}
-#set ($hql = "select doc.fullName from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop where obj.name = doc.fullName and obj.className = 'XWiki.XWikiUsers' and prop.id.id = obj.id and prop.id.name='active' and prop.value = 0 ")
+#set ($hql = "select doc.fullName, doc.creationDate from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop where obj.name = doc.fullName and obj.className = 'XWiki.XWikiUsers' and prop.id.id = obj.id and prop.id.name='active' and prop.value = 0 order by doc.creationDate desc")
 #set ($entries = $services.query.hql($hql).execute())
 &lt;form action="" method="post"&gt;
   #if ($entries.size() &gt; 0)
     &lt;h2&gt;Comptes utilisateurs inactifs&lt;/h2&gt;
     &lt;ul&gt;
       #foreach ($entry in $entries)
-        &lt;li&gt;&lt;input type="checkbox" name="id" value="$escapetool.url($entry)"/&gt;&lt;a href="$xwiki.getURL($entry)"&gt;$entry&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;input type="checkbox" name="id" value="$escapetool.url($entry[0])"/&gt;&lt;a href="$xwiki.getURL($entry[0])"&gt;$entry[0]&lt;/a&gt; - créé le $entry[1]&lt;/li&gt;
       #end
     &lt;/ul&gt;
     &lt;div&gt;&lt;input type="checkbox" name="check-all"/&gt;Tout sélectionner&lt;/div&gt;
