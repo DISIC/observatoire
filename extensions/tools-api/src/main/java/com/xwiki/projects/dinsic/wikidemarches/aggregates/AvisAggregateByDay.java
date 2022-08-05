@@ -19,6 +19,7 @@
  */
 package com.xwiki.projects.dinsic.wikidemarches.aggregates;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -26,8 +27,10 @@ import java.util.Date;
  * 
  * @version $Id$
  */
-public class AvisAggregateByDay
+public class AvisAggregateByDay implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+
     private String demarche;
 
     private Date day;
