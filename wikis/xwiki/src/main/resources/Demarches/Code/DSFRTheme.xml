@@ -1856,6 +1856,17 @@ h1, .h1,
   &amp;::before {content: ""; }
 }
 
+/*
+ * Override bad inline styles from Livetable exporter macro
+ * Fixes https://github.com/DISIC/observatoire/issues/1177
+ */
+.job-status .box {
+  padding: 0.5rem 2.25rem 0.5rem 3rem !important;
+  &amp;.alert-withtitle {
+    padding: 1rem 2.25rem 1rem 3.5rem !important;
+  }
+}
+
 
 /* Accordeons */
 .panel-group {
