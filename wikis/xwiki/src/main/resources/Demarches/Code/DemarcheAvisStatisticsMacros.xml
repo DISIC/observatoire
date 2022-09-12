@@ -64,6 +64,114 @@
   }
 *#
 #macro(computeAvisStats $demarcheFullName $minDate $maxDate $avisClassName)
+  #if($request.new)
+    #computeAvisStatsAggregateData($demarcheFullName $minDate $maxDate $avisClassName)
+  #else
+    #computeAvisStatsDetailedData($demarcheFullName $minDate $maxDate $avisClassName)
+ #end
+#end
+
+#macro(addToMap $map $name $value)
+ #if($value &amp;&amp; $value!=0)
+   #set ($discard = $map.put($name, $value))
+ #end
+#end
+
+#macro(computeAvisStatsAggregateData $demarcheFullName $minDate $maxDate $avisClassName)
+  #set ($avisStatsResult = {'source' : 'aggregates', 'date_start' : $minDate, 'date_end' : $maxDate, 'occurrences' : 0})
+  #set ($results = $services.query.hql("select demarche, sum(nbAvis), sum(avis1), sum(avis2), sum(avis3), sum(comprehension1), sum(comprehension2), sum(comprehension3), sum(facile1), sum(facile2), sum(facile3), sum(diffManquedinformations), sum(diffDysfonctionnement), sum(diffMobile), sum(diffPiecesjointes), sum(diffSuite), sum(diffAutre), sum(diffAucune), sum(aideProche), sum(aideAssociation), sum(aideAgent), sum(aideInternet), sum(aideAutre), sum(aideAucune), sum(modaliteEnligneentierement), sum(modaliteEnlignepartielement), sum(modaliteAutrement)  from AvisAggregateByDay where demarche=:demarche and day&gt;=:minDate and day&lt;=:maxDate group by demarche").bindValue("demarche", $demarcheFullName).bindValue("minDate", $minDate).bindValue("maxDate", $maxDate).execute())
+  #if ($results &amp;&amp; $results.size()==1)
+    #set ($avisCount = 0)
+    #set ($totalSatisfactionPoints = 0)
+    #set ($scoreValuesMap = {})
+    #set ($result = $results[0])
+    #set ($entries = [ [1, $result[2]], [2, $result[3]], [3, $result[4]]])
+    #foreach($countRes in $entries)
+      #set ($value = $countRes[1])
+      #if($value!=0)
+        #set ($discard = $scoreValuesMap.put("$countRes[0]", $value))
+        #set ($avisCount = $avisCount + $value)
+        #set ($totalSatisfactionPoints = $totalSatisfactionPoints + $mathtool.mul($countRes[0], $value))
+      #end 
+    #end
+    #if ($avisCount &amp;&amp; $avisCount &gt; 0)
+      ## add the number of avis in the map
+      #set ($discard = $avisStatsResult.put('occurrences', $avisCount))
+      ## add the score values in the results
+      #set($discard = $avisStatsResult.put('score', $scoreValuesMap))
+      #set ($satisfactionIndex = $mathtool.div($totalSatisfactionPoints, $avisCount))
+      ## add moyenne and satisfaction in the map
+      #set ($discard = $avisStatsResult.put('moyenne', $satisfactionIndex))
+      #set ($discard = $avisStatsResult.put('satisfaction', $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50)))
+    #end
+    ## retrieve facile
+    #set($valuesMap = {})
+    #addToMap($valuesMap, "1", $result[8])
+    #addToMap($valuesMap, "2", $result[9])
+    #addToMap($valuesMap, "3", $result[10])
+    #if($valuesMap.size()&gt;0)
+      #set($discard = $avisStatsResult.put('facile', $valuesMap)) 
+    #end
+    ## retrieve comprehension
+    #set($valuesMap = {})
+    #addToMap($valuesMap, "1", $result[5])
+    #addToMap($valuesMap, "2", $result[6])
+    #addToMap($valuesMap, "3", $result[7])
+    #if($valuesMap.size()&gt;0)
+      #set($discard = $avisStatsResult.put('comprehensible', $valuesMap)) 
+    #end
+    ## retrieve difficultes
+    #set($valuesMap = {})
+    #addToMap($valuesMap, "autre", $result[16])
+    #addToMap($valuesMap, "dysfonctionnement", $result[12])
+    #addToMap($valuesMap, "manque-d-informations", $result[11])
+    #addToMap($valuesMap, "mobile", $result[13])
+    #addToMap($valuesMap, "pieces-jointes", $result[14])
+    #addToMap($valuesMap, "suite", $result[15])
+    #addToMap($valuesMap, "aucune", $result[17])
+    #if($valuesMap.size()&gt;0)
+      #set($discard = $avisStatsResult.put('difficultes', $valuesMap))
+    #end 
+    ## retrieve aide
+    #set($valuesMap = {})
+    #addToMap($valuesMap, "agent", $result[20])
+    #addToMap($valuesMap, "association", $result[19])
+    #addToMap($valuesMap, "autre", $result[22])
+    #addToMap($valuesMap, "internet", $result[21])
+    #addToMap($valuesMap, "proche", $result[18])
+    #addToMap($valuesMap, "aucune", $result[23])
+    #if($valuesMap.size()&gt;0)
+      #set($discard = $avisStatsResult.put('aide', $valuesMap))
+    #end
+    ## score history
+    #set ($results = $services.query.hql("select concat(year(day), month(day)), sum(nbAvis), sum(avis1), sum(avis2), sum(avis3) from AvisAggregateByDay where demarche=:demarche and day&gt;=:minDate and day&lt;=:maxDate group by 1").bindValue("demarche", $demarcheFullName).bindValue("minDate", $minDate).bindValue("maxDate", $maxDate).execute())
+    #set($historyPerMonthResults = $collectionstool.orderedMap)
+    #foreach($result in $results)
+      #set($period = $result[0])
+      #set($y = $period.substring(0, 4))
+      #set($yearMonths = $historyPerMonthResults.get($y))
+      #if ("$!yearMonths" == '')
+        #set($yearMonths = $collectionstool.orderedMap)
+        #set($discard = $historyPerMonthResults.put($y, $yearMonths))
+      #end
+      #set($M = $period.substring(4))
+      #if ($M.length() &lt; 2)
+        #set($M = "0${M}")
+      #end
+      #set($monthValues = $yearMonths.get($M))
+      #if ("$!monthValues" == '')
+        #set($monthValues = {})
+        #set($discard = $yearMonths.put($M, $monthValues))
+      #end
+      #addToMap($monthValues, "1", $result[2])
+      #addToMap($monthValues, "2", $result[3])
+      #addToMap($monthValues, "3", $result[4])
+      #set($discard = $avisStatsResult.put('scorehistory_permonth', $historyPerMonthResults))
+    #end
+ #end
+#end
+
+#macro(computeAvisStatsDetailedData $demarcheFullName $minDate $maxDate $avisClassName)
   ## first log when this is happening so that we can evaluate perf issues
   #set ($discard = $services.logging.getLogger('Demarches.Code.DemarcheAvisStatisticsMacros').warn("Computing stats for dates $minDate and $maxDate for demarche $demarcheFullName"))
   ## compute results
