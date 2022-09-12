@@ -64,11 +64,7 @@
   }
 *#
 #macro(computeAvisStats $demarcheFullName $minDate $maxDate $avisClassName)
-  #if($request.new)
-    #computeAvisStatsAggregateData($demarcheFullName $minDate $maxDate $avisClassName)
-  #else
-    #computeAvisStatsDetailedData($demarcheFullName $minDate $maxDate $avisClassName)
- #end
+  #computeAvisStatsAggregateData($demarcheFullName $minDate $maxDate $avisClassName)
 #end
 
 #macro(addToMap $map $name $value)
@@ -77,6 +73,11 @@
  #end
 #end
 
+#*
+  Fetches the avis stats data based on the aggregates data &amp; API.
+  Current method for all avis stats data. 
+  Check this file's SCM history for previous data stats computing method, based on individual avis counting, too slow.
+*#
 #macro(computeAvisStatsAggregateData $demarcheFullName $minDate $maxDate $avisClassName)
   #set ($avisStatsResult = {'source' : 'aggregates', 'date_start' : $minDate, 'date_end' : $maxDate, 'occurrences' : 0})
   #set ($results = $services.query.hql("select demarche, sum(nbAvis), sum(avis1), sum(avis2), sum(avis3), sum(comprehension1), sum(comprehension2), sum(comprehension3), sum(facile1), sum(facile2), sum(facile3), sum(diffManquedinformations), sum(diffDysfonctionnement), sum(diffMobile), sum(diffPiecesjointes), sum(diffSuite), sum(diffAutre), sum(diffAucune), sum(aideProche), sum(aideAssociation), sum(aideAgent), sum(aideInternet), sum(aideAutre), sum(aideAucune), sum(modaliteEnligneentierement), sum(modaliteEnlignepartielement), sum(modaliteAutrement)  from AvisAggregateByDay where demarche=:demarche and day&gt;=:minDate and day&lt;=:maxDate group by demarche").bindValue("demarche", $demarcheFullName).bindValue("minDate", $minDate).bindValue("maxDate", $maxDate).execute())
@@ -168,97 +169,6 @@
       #addToMap($monthValues, "3", $result[4])
       #set($discard = $avisStatsResult.put('scorehistory_permonth', $historyPerMonthResults))
     #end
- #end
-#end
-
-#macro(computeAvisStatsDetailedData $demarcheFullName $minDate $maxDate $avisClassName)
-  ## first log when this is happening so that we can evaluate perf issues
-  #set ($discard = $services.logging.getLogger('Demarches.Code.DemarcheAvisStatisticsMacros').warn("Computing stats for dates $minDate and $maxDate for demarche $demarcheFullName"))
-  ## compute results
-  #set ($avisStatsResult = {'source' : 'live', 'date_start' : $minDate, 'date_end' : $maxDate, 'occurrences' : 0})
-  ## count each vote of each type, this allows to both compute the average and the total votes and also the each score individually
-  #set ($hql = 'select score.value, count(*) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by score.value')
-  #set ($entries = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheFullName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate).execute())
-  #set ($avisCount = 0)
-  #set ($totalSatisfactionPoints = 0)
-  #set ($scoreValuesMap = {})
-  #if ($entries.size() &gt; 0)
-    ## compute the total number of avis, and the score values map as well as the moyenne
-    #foreach($countRes in $entries)
-      #set ($discard = $scoreValuesMap.put("$countRes[0]", $countRes[1]))
-      #set ($avisCount = $avisCount + $countRes[1])
-      #set ($totalSatisfactionPoints = $totalSatisfactionPoints + $mathtool.mul($countRes[0], $countRes[1]))
-    #end
-  #end
-  #if ($avisCount &amp;&amp; $avisCount &gt; 0)
-    ## add the number of avis in the map
-    #set ($discard = $avisStatsResult.put('occurrences', $avisCount))
-    ## add the score values in the results
-    #set($discard = $avisStatsResult.put('score', $scoreValuesMap))
-    #set ($satisfactionIndex = $mathtool.div($totalSatisfactionPoints, $avisCount))
-    ## add moyenne and satisfaction in the map
-    #set ($discard = $avisStatsResult.put('moyenne', $satisfactionIndex))
-    #set ($discard = $avisStatsResult.put('satisfaction', $mathtool.mul($mathtool.sub($satisfactionIndex, 1), 50)))
-    ## Now that we know we have avis, let's go ahead and compute the rest of the elements of the map.
-    ##
-    ## 1. First, the integer properties
-    ##
-    #foreach($propName in ['facile', 'comprehensible'])
-      ## query the avis for this property
-      #set ($hql = "select prop.value, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, IntegerProperty as prop, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche  and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate and prop.value &lt;&gt; '' group by prop.value")
-      #set ($query = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('demarche', $demarcheFullName).bindValue('propertyName', $propName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate))
-      #set($results = $query.execute())
-      #if ($results.size() &gt; 0)
-        #set($valuesMap = {})
-        #foreach($countRes in $results)
-          #set($discard = $valuesMap.put("$countRes[0]", $countRes[1]))
-        #end
-        ## add the values map in the results
-        #set($discard = $avisStatsResult.put($propName, $valuesMap))
-      #end
-    #end
-    ##
-    ## 2. Then the list properties
-    ##
-    #foreach($propName in ['difficultes', 'aide'])
-      #set ($hql = "select list, count(doc.fullName) from XWikiDocument as doc, BaseObject as obj, DBStringListProperty as prop join prop.list list, StringProperty demarche where doc.fullName = obj.name and obj.className = :className and obj.id = prop.id.id and prop.id.name = :propertyName and demarche.id.id = obj.id and demarche.id.name = 'demarche' and demarche.value = :demarche and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by list")
-      #set ($query = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('demarche', $demarcheFullName).bindValue('propertyName', $propName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate))
-      #set($results = $query.execute())
-      #if ($results.size() &gt; 0)
-        #set($valuesMap = {})
-        #foreach($countRes in $results)
-          #set($discard = $valuesMap.put("$countRes[0]", $countRes[1]))
-        #end
-        ## add the values map in the results
-        #set($discard = $avisStatsResult.put($propName, $valuesMap))
-      #end
-    #end
-    ##
-    ## 3. And the history per month
-    ##
-    ## count each vote of each type, this allows to both compute the average and the total votes and also the each score individually
-    #set ($hql = 'select score.value, count(*), concat(year(doc.creationDate), month(doc.creationDate)) from XWikiDocument as doc, BaseObject as avis, IntegerProperty as score, StringProperty as demarche where avis.name = doc.fullName and avis.className = :className and avis.id = score.id.id and score.id.name = :scoreProperty and demarche.id.id = avis.id and demarche.id.name = :demarcheProperty and demarche.value = :demarche and score.value &gt; 0 and doc.creationDate &gt;= :minDate and doc.creationDate &lt;= :maxDate group by concat(year(doc.creationDate), month(doc.creationDate)), score.value')
-    #set ($entries = $services.query.hql($hql).bindValue('className', $avisClassName).bindValue('scoreProperty', 'score').bindValue('demarcheProperty', 'demarche').bindValue('demarche', $demarcheFullName).bindValue('minDate', $minDate).bindValue('maxDate', $maxDate).execute())
-    #set($historyPerMonthResults = $collectionstool.orderedMap)
-    #foreach($countRes in $entries)
-      #set($y = $countRes[2].substring(0, 4))
-      #set($yearMonths = $historyPerMonthResults.get($y))
-      #if ("$!yearMonths" == '')
-        #set($yearMonths = $collectionstool.orderedMap)
-        #set($discard = $historyPerMonthResults.put($y, $yearMonths))
-      #end
-      #set($M = $countRes[2].substring(4))
-      #if ($M.length() &lt; 2)
-        #set($M = "0${M}")
-      #end
-      #set($monthValues = $yearMonths.get($M))
-      #if ("$!monthValues" == '')
-        #set($monthValues = {})
-        #set($discard = $yearMonths.put($M, $monthValues))
-      #end
-      #set($discard = $monthValues.put("$countRes[0]", $countRes[1]))
-    #end
-    #set($discard = $avisStatsResult.put('scorehistory_permonth', $historyPerMonthResults))
   #end
 #end
 {{/velocity}}</content>
