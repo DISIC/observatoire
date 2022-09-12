@@ -39,7 +39,14 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{info}}
+  <content>{{warning}}Attention: ce script ne met pas à jour les données agrégées qui ont été déjà calculées à base de ces avis. Ainsi, ce script peut introduire des inconsistances entre les données détaillées des avis et les données affichées à l'écran pour les usages suivants:
+* observatoire - si les avis réaffectés sont liées à une ou plusieurs démarches du Top250 et la modification concerne une période déjà captée par un observatoire publié, les données de l'observatoire ne vont pas être mises à jour automatiquement pour prendre en compte le changement;
+* données agrégées - tous les écrans qui affichent et fonctionnalités qui utilisent des données agrégées des avis d'une démarche (graphes, etc.) seront faux suite à cette opération.
+
+Ainsi, l'utilisation de ce script est désormais déconseillée.
+Néanmoins, si cette opération est nécessaire, il faut prévoir une mise à jour des données agrégées (manuelle ou par un autre script à créer).{{/warning}}
+
+{{info}}
 Cette page permet de réaffecter des avis d'une démarche à une autre. Éditer la page pour définir la démarche d'origine et la démarche cible, puis ajouter "?execute=1" à l'URL pour exécuter l'action.
 {{/info}}
 

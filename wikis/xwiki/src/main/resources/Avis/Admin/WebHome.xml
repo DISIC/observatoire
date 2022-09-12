@@ -39,10 +39,18 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>* [[Effacer les avis sans score du tout&gt;&gt;doc:AvisNoScore]]
+  <content>{{warning}}Attention: les scripts ci-dessous qui modifient les données des avis (effacement et réaffectation) ne mettent pas à jour les données agrégées qui ont été déjà calculées à base de ces avis. Ainsi, ces scripts peuvent introduire des inconsistances entre les données détaillées des avis et les données affichées à l'écran pour les usages suivants:
+* observatoire - si les données modifiées sont liées à une ou plusieurs démarches du Top250 et la modification concerne une période déjà captée par un observatoire publié, les données de l'observatoire ne vont pas être mises à jour automatiquement pour prendre en compte le changement;
+* données agrégées - tous les écrans qui affichent et fonctionnalités qui utilisent des données agrégées des avis d'une démarche (graphes, etc.) seront faux suite à une opération sur les avis, effacement ou réaffectation.
+
+Ainsi, l'utilisation de ces scripts est désormais déconseillée.
+Néanmoins, si ces opérations sont nécessaires, il faut prévoir une mise à jour des données agrégées (manuelle ou par un autre script à créer).
+{{/warning}}
+
+* [[Effacer les avis sans score du tout&gt;&gt;doc:AvisNoScore]]
 * [[Effacer les avis invalides&gt;&gt;doc:AvisScoreInvalide]]
 * [[Effacer les avis par date de création&gt;&gt;doc:AvisMassCleanup]]
+* [[Réaffection d'avis d'une démarche à une autre&gt;&gt;doc:AvisReassigner]]
 * [[Afficher les avis ayant été édités par un utilisateur identifié&gt;&gt;doc:AvisEdited]]
-* [[Afficher le nombre d'avis par session et par démarche&gt;&gt;doc:AvisSessionManager]]
-* [[Réaffection d'avis d'une démarche à une autre&gt;&gt;doc:AvisReassigner]]</content>
+* [[Afficher le nombre d'avis par session et par démarche&gt;&gt;doc:AvisSessionManager]]</content>
 </xwikidoc>

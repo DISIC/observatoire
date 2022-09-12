@@ -27,19 +27,26 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1530638037000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>Avis.Admin.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1530639158000</date>
-  <contentUpdateDate>1530639158000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Effacer les avis invalides</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>{{velocity}}
+  <content>{{warning}}Attention: ce script ne met pas à jour les données agrégées qui ont été déjà calculées à base de ces avis. Ainsi, ce script peut introduire des inconsistances entre les données détaillées des avis et les données affichées à l'écran pour les usages suivants:
+* observatoire - si les avis effacés sont liées à une ou plusieurs démarches du Top250 et la modification concerne une période déjà captée par un observatoire publié, les données de l'observatoire ne vont pas être mises à jour automatiquement pour prendre en compte le changement;
+* données agrégées - tous les écrans qui affichent et fonctionnalités qui utilisent des données agrégées des avis d'une démarche (graphes, etc.) seront faux suite à cette opération.
+
+Ainsi, l'utilisation de ce script est désormais déconseillée.
+Néanmoins, si cette opération est nécessaire, il faut prévoir une mise à jour des données agrégées (manuelle ou par un autre script à créer).{{/warning}}
+
+{{velocity}}
 {{info}}Ce script cherche et permet de nettoyer tous les avis n'ayant pas de score valide: soit null, soit au dessus de 3 ou en dessous de 1.{{/info}}
 
 #set($isConfirmed = "$!request.confirm" == 'true')
