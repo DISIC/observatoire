@@ -1661,6 +1661,33 @@ p {
 
 
 
+/***************************************************/
+/* Custom fluid container sizes                    */
+/***************************************************/
+
+.container-fluid-sized(@size) {
+  .container-fixed();
+  width: @size;
+  max-width: 100%;
+}
+
+.container-fluid-sm {
+  .container-fluid-sized(770px);
+}
+
+.container-fluid-md {
+  .container-fluid-sized(970px);
+}
+
+.container-fluid-lg {
+  .container-fluid-sized(1170px);
+}
+
+.container-fluid-xl {
+  .container-fluid-sized(1370px);
+}
+
+
 
 /***************************************************/
 /* Custom DSFR Styles                              */
