@@ -556,8 +556,8 @@ Visually, there's the title row and then all the rows from the document content,
   font-weight: bold;
 
   span:first-child {
-    font-size: 0.7rem;
-    line-height: 1rem;
+    font-size: 0.75rem;
+    line-height: 0.9rem;
   }
 
   span:last-child {
@@ -568,12 +568,12 @@ Visually, there's the title row and then all the rows from the document content,
 
   @media (min-width: @screen-md-min) {
     span:first-child {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
+      font-size: 1.4rem;
+      line-height: 1.55rem;
     }
 
     span:last-child {
-      font-size: 0.825rem;
+      font-size: 1.05rem;
       line-height: 1.5rem;
       margin-bottom: 0rem;
     }
