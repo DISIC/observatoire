@@ -1665,26 +1665,36 @@ p {
 /* Custom fluid container sizes                    */
 /***************************************************/
 
+// left &amp; right margins being implemented using `padding` property,
+// they are part of the element size (because of `box-sizing: border-box`).
+// So from the sized defined in https://github.com/DISIC/observatoire/issues/1126
+// that only apply for the content of the container, also need to add the 2 * 15px margins, 
+// so that it has the correct size
+@container-fluid-sm: 800px;
+@container-fluid-md: 1000px;
+@container-fluid-lg: 1200px;
+@container-fluid-xl: 1400px;
+
 .container-fluid-sized(@size) {
   .container-fixed();
-  width: @size;
-  max-width: 100%;
+  width: 100%;
+  max-width: @size;
 }
 
 .container-fluid-sm {
-  .container-fluid-sized(770px);
+  .container-fluid-sized(@container-fluid-sm);
 }
 
 .container-fluid-md {
-  .container-fluid-sized(970px);
+  .container-fluid-sized(@container-fluid-md);
 }
 
 .container-fluid-lg {
-  .container-fluid-sized(1170px);
+  .container-fluid-sized(@container-fluid-lg);
 }
 
 .container-fluid-xl {
-  .container-fluid-sized(1370px);
+  .container-fluid-sized(@container-fluid-xl);
 }
 
 

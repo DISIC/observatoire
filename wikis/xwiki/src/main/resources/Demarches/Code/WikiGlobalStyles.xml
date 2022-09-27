@@ -895,30 +895,6 @@ abbr.asterix {
   text-decoration: none;
 }
 
-/*
- * Login screen
- */
-#loginForm {
-  a#tmRegister {
-    font-style: normal;
-    color: @brand-primary;
-    text-decoration: underline;
-  }
-
-  input[type="submit"] {
-    margin-top: 1em;
-  }
-}
-
-/*
- * Register screen
- */
-a#tmLogin {
-  font-style: normal;
-  color: @brand-primary;
-  text-decoration: underline;
-}
-
 
 /* Get rid of the border of the login form panel &amp; all messages, as it's slightly ugly */
 .xwikimessage.panel-default {

@@ -47,7 +47,7 @@
   #set($discard = $xwiki.ssx.use($doc.fullName))
   #if ($isGuest)
     (%class='row demarches-titlerow'%)(((
-      (%class='container'%)(((
+      (%class='container-fluid-md'%)(((
         (%class='demarches-headline'%)
         = $services.localization.render('wikidemarches.home.subtitle') =
         (%class='demarches-explanation narrow-width'%)
@@ -59,7 +59,7 @@
     )))
   #else
     (% class='row demarches-searchrow' %) (((
-      (% class='container' %) (((
+      (% class='container-fluid-md' %) (((
         (%class='demarches-headline'%)
         = Mon tableau de bord =
         (% class='row' %) (((
@@ -94,7 +94,7 @@
   ##
   #if (!$isGuest)
     (%class='row demarches-mydemarchesrow'%)(((
-      (%class='container'%)(((
+      (%class='container-fluid-md'%)(((
         ##
         ## regular logged in users see the demarches they're porteurs of
         ##
@@ -158,7 +158,7 @@
   #if ($isAdminMin)
   #set ($demarchesListPage = $xwiki.getDocument('Demarches.WebHome').URL + "?statut=active#|t=demarches&amp;statut=active$directionFilter")
   (%class='row demarches-administrationrow'%)(((
-    (%class='container' %)(((
+    (%class='container-fluid-md' %)(((
       (%class='demarches-administration-link'%) (((
         == $services.localization.render('wikidemarches.administration.home-title') ==
 
@@ -193,7 +193,7 @@
   #if ($isGuest)
     (% class='row demarches-evalrow' %) (((
       #set($evalHelpDoc = $xwiki.getDocument('Main.Comment-ca-marche'))
-      (% class='container' %) (((
+      (% class='container-fluid-md' %) (((
         (% class='row evalrow-header' %) (((
           (% class='col-xs-12 col-sm-6' %)
           == ${evalHelpDoc.title} ==
@@ -210,7 +210,7 @@
     )))
   #else
   (% class='row demarches-indicatorsrow' %) (((
-    (% class='container' %) (((
+    (% class='container-fluid-md' %) (((
       (% class='row' %) (((
         (% class='col-xs-12' %) (((
           == Les 250 démarches suivies par l’Observatoire ==
@@ -232,7 +232,7 @@
   ##
   #if ($isGuest)
     (% class='row demarches-usagerow' %)(((
-      (% class='container' %)(((
+      (% class='container-fluid-md' %)(((
         (% class='row' %)(((
           (% class='col-xs-12 col-sm-6' %) (((
             (% class='usagerow-header' %)
@@ -255,7 +255,7 @@
   ##
   (%class='row demarches-morerow'%)(((
     #set($afterHelpDoc = $xwiki.getDocument('Main.Et-apres'))
-    (%class='container'%)(((
+    (%class='container-fluid-md'%)(((
       (%class='row narrow-width'%)(((
         (%class='col-xs-12'%)(((
           (%class='narrow-width'%)

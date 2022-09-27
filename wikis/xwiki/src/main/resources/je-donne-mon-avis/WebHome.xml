@@ -75,19 +75,15 @@
     &lt;div class="blue-background from-top"&gt;&lt;/div&gt;
 
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--gutters"&gt;
-            &lt;div class="fr-col-12 fr-col-md-8"&gt;
-              &lt;h1&gt;Comment suivre la satisfaction de vos usagers ?&lt;/h1&gt;
-              &lt;div class="jdma-subtitle"&gt;
-                Avec l'outil Je donne mon avis, suivez en temps réel la satisfaction des usagers de vos services publics numériques.
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="image-wrapper fr-col-12 fr-col-md-4"&gt;
-              &lt;img class="example" src="$doc.getAttachmentURL('example-form')" alt="" /&gt;
-            &lt;/div&gt;
+      &lt;div class="fr-grid-row fr-grid-row--gutters"&gt;
+        &lt;div class="fr-col-12 fr-col-md-8"&gt;
+          &lt;h1&gt;Comment suivre la satisfaction de vos usagers ?&lt;/h1&gt;
+          &lt;div class="jdma-subtitle"&gt;
+            Avec l'outil Je donne mon avis, suivez en temps réel la satisfaction des usagers de vos services publics numériques.
           &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="image-wrapper fr-col-12 fr-col-md-4"&gt;
+          &lt;img class="example" src="$doc.getAttachmentURL('example-form')" alt="" /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -95,72 +91,68 @@
 
   &lt;section class="steps"&gt;
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row"&gt;
-            &lt;h2&gt;Commencez à récolter des avis en 4 étapes faciles :&lt;/h2&gt;
-          &lt;/div&gt;
+      &lt;div class="fr-grid-row"&gt;
+        &lt;h2&gt;Commencez à récolter des avis en 4 étapes faciles :&lt;/h2&gt;
+      &lt;/div&gt;
 
-          &lt;div class="fr-grid-row fr-grid-row--gutters"&gt;
+      &lt;div class="fr-grid-row fr-grid-row--gutters"&gt;
 
-            &lt;div class="fr-col-12 fr-col-md-3"&gt;
-              &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
-                &lt;div class="fr-tile__body"&gt;
-                  &lt;p class="fr-tile__desc"&gt;
-                    Inscrivez-vous ou connectez-vous à l’Observatoire.
-                  &lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="fr-tile__img"&gt;
-                  &lt;h4&gt;1&lt;/h4&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
+        &lt;div class="fr-col-12 fr-col-md-3"&gt;
+          &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
+            &lt;div class="fr-tile__body"&gt;
+              &lt;p class="fr-tile__desc"&gt;
+                Inscrivez-vous ou connectez-vous à l’Observatoire.
+              &lt;/p&gt;
             &lt;/div&gt;
-
-            &lt;div class="fr-col-12 fr-col-md-3"&gt;
-              &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
-                &lt;div class="fr-tile__body"&gt;
-                  &lt;p class="fr-tile__desc"&gt;
-                    Trouvez ou ajoutez votre démarche.
-                  &lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="fr-tile__img"&gt;
-                  &lt;h4&gt;2&lt;/h4&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
+            &lt;div class="fr-tile__img"&gt;
+              &lt;h4&gt;1&lt;/h4&gt;
             &lt;/div&gt;
-
-            &lt;div class="fr-col-12 fr-col-md-3"&gt;
-              &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
-                &lt;div class="fr-tile__body"&gt;
-                  &lt;p class="fr-tile__desc"&gt;
-                    Installez le bouton Je donne mon avis sur votre site.
-                  &lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="fr-tile__img"&gt;
-                  &lt;h4&gt;3&lt;/h4&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;div class="fr-col-12 fr-col-md-3"&gt;
-              &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
-                &lt;div class="fr-tile__body"&gt;
-                  &lt;p class="fr-tile__desc"&gt;
-                    Retrouvez les avis et leur analyse sur la page de votre démarche.
-                  &lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="fr-tile__img"&gt;
-                  &lt;h4&gt;4&lt;/h4&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-          &lt;/div&gt;
-
-          &lt;div class="fr-grid-row fr-grid-row--center fr-mt-6v fr-mt-md-12v"&gt;
-            &lt;a class="fr-btn fr-btn--lg" href="$startURL"&gt;Commencer&lt;/a&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
+        &lt;div class="fr-col-12 fr-col-md-3"&gt;
+          &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
+            &lt;div class="fr-tile__body"&gt;
+              &lt;p class="fr-tile__desc"&gt;
+                Trouvez ou ajoutez votre démarche.
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="fr-tile__img"&gt;
+              &lt;h4&gt;2&lt;/h4&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="fr-col-12 fr-col-md-3"&gt;
+          &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
+            &lt;div class="fr-tile__body"&gt;
+              &lt;p class="fr-tile__desc"&gt;
+                Installez le bouton Je donne mon avis sur votre site.
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="fr-tile__img"&gt;
+              &lt;h4&gt;3&lt;/h4&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="fr-col-12 fr-col-md-3"&gt;
+          &lt;div class="fr-tile fr-tile--vertical fr-tile--grey"&gt;
+            &lt;div class="fr-tile__body"&gt;
+              &lt;p class="fr-tile__desc"&gt;
+                Retrouvez les avis et leur analyse sur la page de votre démarche.
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="fr-tile__img"&gt;
+              &lt;h4&gt;4&lt;/h4&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+
+      &lt;div class="fr-grid-row fr-grid-row--center fr-mt-6v fr-mt-md-12v"&gt;
+        &lt;a class="fr-btn fr-btn--lg" href="$startURL"&gt;Commencer&lt;/a&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/section&gt;
@@ -169,22 +161,18 @@
     &lt;div class="blue-background from-left"&gt;&lt;/div&gt;
 
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
-            &lt;div class="fr-col-12 fr-col-md-6"&gt;
-              &lt;div class="step-icon fr-mb-4v"&gt;
-                &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/award.svg')" aria-hidden="true" /&gt;
-              &lt;/div&gt;
-              &lt;h2&gt;Suivez la qualité de vos services, gratuitement&lt;/h2&gt;
-              &lt;div class="plain-text"&gt;
-                L'outil Je donne mon avis est disponible pour toute administration publique, gratuitement. Il se place à la fin de vos démarches administratives, pour récolter l’avis de vos usagers et suivre la qualité de vos services et son évolution dans le temps.
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="step-image fr-col-12 fr-col-md-6"&gt;
-              &lt;img class="example" src="$doc.getAttachmentURL('example-availability')" alt="" /&gt;
-            &lt;/div&gt;
+      &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
+        &lt;div class="fr-col-12 fr-col-md-6"&gt;
+          &lt;div class="step-icon fr-mb-4v"&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/award.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
+          &lt;h2&gt;Suivez la qualité de vos services, gratuitement&lt;/h2&gt;
+          &lt;div class="plain-text"&gt;
+            L'outil Je donne mon avis est disponible pour toute administration publique, gratuitement. Il se place à la fin de vos démarches administratives, pour récolter l’avis de vos usagers et suivre la qualité de vos services et son évolution dans le temps.
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="step-image fr-col-12 fr-col-md-6"&gt;
+          &lt;img class="example" src="$doc.getAttachmentURL('example-availability')" alt="" /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -194,22 +182,18 @@
     &lt;div class="blue-background from-right"&gt;&lt;/div&gt;
 
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
-            &lt;div class="fr-col-12 fr-col-md-6"&gt;
-              &lt;div class="step-icon fr-mb-4v"&gt;
-                &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/coffee.svg')" aria-hidden="true" /&gt;
-              &lt;/div&gt;
-              &lt;h2&gt;Installation facile, le temps de votre pause café&lt;/h2&gt;
-              &lt;div class="plain-text"&gt;
-                Le bouton Je donne mon avis s’installe en un rien de temps sur votre site ! Vous n’avez qu’à insérer une petite portion de code HTML, ce qui ne vous prendra pas plus de 5 minutes. Notre plateforme s’occupe ensuite de récolter les avis pour vous.
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="step-image step-image-left fr-col-12 fr-col-md-6"&gt;
-              &lt;img class="example" src="$doc.getAttachmentURL('example-code')" alt="" /&gt;
-            &lt;/div&gt;
+      &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
+        &lt;div class="fr-col-12 fr-col-md-6"&gt;
+          &lt;div class="step-icon fr-mb-4v"&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/coffee.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
+          &lt;h2&gt;Installation facile, le temps de votre pause café&lt;/h2&gt;
+          &lt;div class="plain-text"&gt;
+            Le bouton Je donne mon avis s’installe en un rien de temps sur votre site ! Vous n’avez qu’à insérer une petite portion de code HTML, ce qui ne vous prendra pas plus de 5 minutes. Notre plateforme s’occupe ensuite de récolter les avis pour vous.
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="step-image step-image-left fr-col-12 fr-col-md-6"&gt;
+          &lt;img class="example" src="$doc.getAttachmentURL('example-code')" alt="" /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -219,22 +203,18 @@
     &lt;div class="blue-background from-left"&gt;&lt;/div&gt;
 
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
-            &lt;div class="fr-col-12 fr-col-md-6"&gt;
-              &lt;div class="step-icon fr-mb-4v"&gt;
-                &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/message-circle.svg')" aria-hidden="true" /&gt;
-              &lt;/div&gt;
-              &lt;h2&gt;Récoltez des notes et des verbatims en temps réel&lt;/h2&gt;
-              &lt;div class="plain-text"&gt;
-                L'outil Je donne mon avis permet aux usagers de vos démarches en ligne de noter la qualité globale du service, ainsi que la facilité d’usage et la simplicité du langage. Il leur permet également de vous transmettre des retours écrits détaillés.
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="step-image fr-col-12 fr-col-md-6"&gt;
-              &lt;img class="example" src="$doc.getAttachmentURL('example-feedback')" alt="" /&gt;
-            &lt;/div&gt;
+      &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
+        &lt;div class="fr-col-12 fr-col-md-6"&gt;
+          &lt;div class="step-icon fr-mb-4v"&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/message-circle.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
+          &lt;h2&gt;Récoltez des notes et des verbatims en temps réel&lt;/h2&gt;
+          &lt;div class="plain-text"&gt;
+            L'outil Je donne mon avis permet aux usagers de vos démarches en ligne de noter la qualité globale du service, ainsi que la facilité d’usage et la simplicité du langage. Il leur permet également de vous transmettre des retours écrits détaillés.
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="step-image fr-col-12 fr-col-md-6"&gt;
+          &lt;img class="example" src="$doc.getAttachmentURL('example-feedback')" alt="" /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -244,22 +224,18 @@
     &lt;div class="blue-background from-right"&gt;&lt;/div&gt;
 
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
-            &lt;div class="fr-col-12 fr-col-md-6"&gt;
-              &lt;div class="step-icon fr-mb-4v"&gt;
-                &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/trending-up.svg')" aria-hidden="true" /&gt;
-              &lt;/div&gt;
-              &lt;h2&gt;Suivez l’évolution grâce à des graphiques&lt;/h2&gt;
-              &lt;div class="plain-text"&gt;
-                En plus de vous permettre de consulter chacun des avis, notre plateforme met à votre disposition des graphiques pour suivre avec précision le niveau et la variation dans le temps des indicateurs clés de qualité de vos services numériques.
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="step-image step-image-left fr-col-12 fr-col-md-6"&gt;
-              &lt;img class="example" src="$doc.getAttachmentURL('example-stats')" alt="" /&gt;
-            &lt;/div&gt;
+      &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
+        &lt;div class="fr-col-12 fr-col-md-6"&gt;
+          &lt;div class="step-icon fr-mb-4v"&gt;
+            &lt;img src="$xwiki.getSkinFile('uicomponents/custom-wikidemarches/icons/trending-up.svg')" aria-hidden="true" /&gt;
           &lt;/div&gt;
+          &lt;h2&gt;Suivez l’évolution grâce à des graphiques&lt;/h2&gt;
+          &lt;div class="plain-text"&gt;
+            En plus de vous permettre de consulter chacun des avis, notre plateforme met à votre disposition des graphiques pour suivre avec précision le niveau et la variation dans le temps des indicateurs clés de qualité de vos services numériques.
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="step-image step-image-left fr-col-12 fr-col-md-6"&gt;
+          &lt;img class="example" src="$doc.getAttachmentURL('example-stats')" alt="" /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -267,42 +243,38 @@
 
   &lt;section class="criterias"&gt;
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
+      &lt;div class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters"&gt;
 
-            &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
-              &lt;div class="criteria"&gt;
-                &lt;div class="criteria-title"&gt;
-                  &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
-                  Gratuit
-                &lt;/div&gt;
-                &lt;div class="criteria-text"&gt;Gratuit, conçu pour les administrations publiques&lt;/div&gt;
-              &lt;/div&gt;
+        &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
+          &lt;div class="criteria"&gt;
+            &lt;div class="criteria-title"&gt;
+              &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
+              Gratuit
             &lt;/div&gt;
-
-            &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
-              &lt;div class="criteria"&gt;
-                &lt;div class="criteria-title"&gt;
-                  &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
-                  RGAA
-                &lt;/div&gt;
-                &lt;div class="criteria-text"&gt;Accessible à toutes et tous, conforme au RGAA&lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
-              &lt;div class="criteria"&gt;
-                &lt;div class="criteria-title"&gt;
-                  &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
-                  RGPD
-                &lt;/div&gt;
-                &lt;div class="criteria-text"&gt;Respectueux de la vie privée, conforme au RGPD&lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-
+            &lt;div class="criteria-text"&gt;Gratuit, conçu pour les administrations publiques&lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
+
+        &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
+          &lt;div class="criteria"&gt;
+            &lt;div class="criteria-title"&gt;
+              &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
+              RGAA
+            &lt;/div&gt;
+            &lt;div class="criteria-text"&gt;Accessible à toutes et tous, conforme au RGAA&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="criteria-col fr-col-12 fr-col-md-4"&gt;
+          &lt;div class="criteria"&gt;
+            &lt;div class="criteria-title"&gt;
+              &lt;span class="fr-icon-success-fill" aria-hidden="true"&gt;&lt;/span&gt;
+              RGPD
+            &lt;/div&gt;
+            &lt;div class="criteria-text"&gt;Respectueux de la vie privée, conforme au RGPD&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/section&gt;
@@ -310,15 +282,11 @@
   &lt;section class="begin"&gt;
     &lt;div class="fr-container"&gt;
       &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-            &lt;div class="fr-col-12"&gt;
-              &lt;h2&gt;Prêt à recueillir les avis des usagers ?&lt;/h2&gt;
-            &lt;/div&gt;
-            &lt;div class="fr-col-12"&gt;
-              &lt;a class="fr-btn" href="$startURL"&gt;Commencer&lt;/a&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
+        &lt;div class="fr-col-12"&gt;
+          &lt;h2&gt;Prêt à recueillir les avis des usagers ?&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div class="fr-col-12"&gt;
+          &lt;a class="fr-btn" href="$startURL"&gt;Commencer&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -326,20 +294,16 @@
 
   &lt;section class="faq"&gt;
     &lt;div class="fr-container"&gt;
-      &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row"&gt;
-            &lt;h2&gt;Foire aux questions&lt;/h2&gt;
-          &lt;/div&gt;
-          &lt;div class="fr-grid-row "&gt;
-            &lt;div class="fr-col-12"&gt;
+      &lt;div class="fr-grid-row"&gt;
+        &lt;h2&gt;Foire aux questions&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;div class="fr-grid-row "&gt;
+        &lt;div class="fr-col-12"&gt;
     {{/html}}
 
-                {{include reference='je-donne-mon-avis.FAQ' /}}
+            {{include reference='je-donne-mon-avis.FAQ' /}}
 
     {{html clean="false"}}
-            &lt;/div&gt;
-          &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -348,15 +312,11 @@
   &lt;section class="contact"&gt;
     &lt;div class="fr-container"&gt;
       &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-        &lt;div class="fr-col-12 fr-col-md-10"&gt;
-          &lt;div class="fr-grid-row fr-grid-row--center"&gt;
-            &lt;div class="fr-col-12"&gt;
-              &lt;h2&gt;Vous avez d’autres questions ? Des doutes ? Contactez-nous !&lt;/h2&gt;
-            &lt;/div&gt;
-            &lt;div class="fr-col-12"&gt;
-              &lt;a class="fr-btn fr-btn--secondary" href="$xwiki.getURL('contact.WebHome')"&gt;Contacter notre équipe&lt;/a&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
+        &lt;div class="fr-col-12"&gt;
+          &lt;h2&gt;Vous avez d’autres questions ? Des doutes ? Contactez-nous !&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div class="fr-col-12"&gt;
+          &lt;a class="fr-btn fr-btn--secondary" href="$xwiki.getURL('contact.WebHome')"&gt;Contacter notre équipe&lt;/a&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -538,6 +498,10 @@
   z-index: 0;
   padding-top: 3rem;
   padding-bottom: 3rem;
+
+  .fr-container {
+    max-width: @container-fluid-md;
+  }
 
   @media (min-width: @screen-sm-min) {
     padding-top: 3.5rem; /* desktop size */

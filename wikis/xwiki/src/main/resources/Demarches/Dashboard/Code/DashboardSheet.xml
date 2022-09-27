@@ -1306,7 +1306,7 @@ input[name='title'] {
   }
 }
 
-@max-width-dashboard: 1440px;
+@max-width-dashboard: @container-fluid-xl;
 
 .dashboard-container {
   .container-fixed();
