@@ -400,6 +400,7 @@
   ## The Code.
   #######################################################################
   ##
+  #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'sm' }))
   #if($useLiveValidation)
     #set ($discard = $xwiki.get('jsfx').use('uicomponents/widgets/validation/livevalidation_prototype.js'))
     #set ($discard = $xwiki.get('ssfx').use('uicomponents/widgets/validation/livevalidation.css', true))
@@ -434,7 +435,7 @@
   #end
   ##
   (% class="row" %) (((
-  (% class="col-xs-12 col-md-8 col-md-offset-2" %) (((
+  (% class="col-xs-12" %) (((
   ## Display the heading
   $heading
   ## If the submit button has been pressed, then we test the input and maybe create the user.
