@@ -1677,8 +1677,8 @@ p {
 
 .container-fluid-sized(@size) {
   .container-fixed();
-  width: 100%;
-  max-width: @size;
+  width: @size;
+  max-width: 100%;
 }
 
 .container-fluid-sm {

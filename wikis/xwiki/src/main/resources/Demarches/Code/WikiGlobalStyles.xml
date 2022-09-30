@@ -452,7 +452,7 @@ Visually, there's the title row and then all the rows from the document content,
  * Custom layout, to make content fixed width as well - header and footer are done from the skin, with real containers.
  */
 #contentcontainerinner, #xwikieditorinner {
-  .container();
+  .container-fluid-lg();
 }
 /* But without padding, we already have this padding in the columns inside */
 #contentcontainerinner, #xwikieditorinner {
@@ -893,6 +893,30 @@ abbr.asterix {
   color: @brand-danger;
   border-bottom: 0;
   text-decoration: none;
+}
+
+/*
+ * Login screen
+ */
+#loginForm {
+  a#tmRegister {
+    font-style: normal;
+    color: @brand-primary;
+    text-decoration: underline;
+  }
+
+  input[type="submit"] {
+    margin-top: 1em;
+  }
+}
+
+/*
+ * Register screen
+ */
+a#tmLogin {
+  font-style: normal;
+  color: @brand-primary;
+  text-decoration: underline;
 }
 
 
