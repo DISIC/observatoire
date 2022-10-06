@@ -155,6 +155,8 @@
 #end
 
 #contentcontainerinner, #xwikieditorinner {
+  ## We can't use the .container LESS mixin here
+  ## so we have to hardcode its rules
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
