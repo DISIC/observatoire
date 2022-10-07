@@ -1,0 +1,279 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc version="1.3" reference="Demarches.Admin.CompareStoredJsonWithAggregateData" locale="">
+  <web>Demarches.Admin</web>
+  <name>CompareStoredJsonWithAggregateData</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <creationDate>1544396400000</creationDate>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Comparaison du Json stocké avec les données agrégees</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{include reference="Demarches.Code.DemarcheAvisStatisticsMacros" /}}
+
+{{velocity}}
+#set($LOGGER = $services.logging.getLogger('Demarches.Admin.CompareStoredJsonWithAggregateData'))
+#set($cacheKeyPrefix = 'observatoire-aviscache')
+#set($formatter = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd'))
+#set($formatterWithHour = $xwiki.jodatime.getDateTimeFormatterForPattern('yyyy-MM-dd HH:mm:ss'))
+#set($defaultStartDate = '2018-06-15')
+#if("$!request.observatoire" != '')
+  #set($observatoireDoc = $xwiki.getDocument("$!request.observatoire"))
+  #set($observatoireObj = $observatoireDoc.getObject('Demarches.Dashboard.Code.DashboardClass'))
+  #set($obsJsonAttachment = $observatoireDoc.getAttachment('data.json'))
+  #if (!$observatoireDoc.isNew() &amp;&amp; $observatoireObj &amp;&amp; $obsJsonAttachment)
+    ## It's an observatoire, load the json as object
+    #set($obsData = $jsontool.fromString($obsJsonAttachment.contentAsString))
+    #if ($obsData)
+      ==Observatoire $observatoireDoc.title ==
+      [[Voir l'observatoire (nouvel onglet)&gt;&gt;$observatoireDoc.fullName||target='_blank']]
+      #set($obsVersion = $obsData.metadata.schema)
+      |=Version|$obsVersion
+      ## old versions of observatoire don't have sliding year data but all period data
+      #if($obsVersion == '1.0' || $obsVersion == '1.1')
+        #set($minDateString = $defaultStartDate)
+        #set($maxDateString = $obsData.metadata.date)
+      #else
+        #set($minDateString = $obsData.metadata.get('avis-start-date'))
+        #set($maxDateString = $obsData.metadata.get('avis-end-date'))  
+      #end
+      #set ($maxDateTime = $formatter.parseDateTime($maxDateString).withHourOfDay(23).withMinuteOfHour(59).withSecondOfMinute(59))
+      #set ($minDateTime = $formatter.parseDateTime($minDateString).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
+      |=Période|$formatterWithHour.print($minDateTime) - $formatterWithHour.print($maxDateTime)
+      #set($cacheId = "${formatter.print($minDateTime)}-${formatter.print($maxDateTime)}")
+      |=Id de cache|$cacheId
+
+      ==Démarches==
+
+      Les données des avis dans le tableau ci-dessous contiennent les données stockées dans le json de l'observatoire séléctionné. Ainsi, le nombre d'avis et l'indice de satisfaction contiennent aussi les données configurées par les indicateurs de sources externes car il n'y pas de distinction au niveaue de l'observatoire par rapport à la source de la donnée. Le calcul d'un cache pour ces démarches est une limitation de cet outil.
+      
+      ## decoration for the demarches table
+      #set($discard = $xwiki.jsfx.use("js/xwiki/table/tablefilterNsort.js", true))
+      #set($discard = $xwiki.ssfx.use("js/xwiki/table/table.css"))
+      (% class='grid sortable filterable doOddEven' id='obstable' style='width: 100%'%)
+      #foreach($t in ["No.", "Id démarche", "Démarche", "Nombre d'avis - obs json", "Nombre d'avis (cache)", "Nombre d'avis (aggregats)", "Is same avis number?", "Is same data?"])
+        (% class='sortHeader'%)|=${t}##
+      #end
+
+      #foreach($d in $obsData.data)
+        #set($demarcheCacheKey = "${cacheKeyPrefix}/${cacheId}/$d.id.substring(10)")
+        #set($demarcheCacheExists = $services.jsonstore.permdir.exists($demarcheCacheKey, false))
+        ## get demarche cache in json on disk
+        #set($demarcheCache = $NULL)
+        #set($nbAvisCache = "0")
+        #if ($demarcheCacheExists)
+          #set($demarcheCache = $services.jsonstore.permdir.getFromJsonStore($demarcheCacheKey))
+          #set($nbAvisCache = "$demarcheCache.occurrences")
+        #end
+        ## get the aggregates results from database
+        #set($nbAvisAggregates = "0")
+        #set($avisStatsResult = $NULL)
+        #computeAvisStatsAggregateData($d.id, $minDateTime.toDate(), $maxDateTime.toDate(), 'Avis.Code.AvisClass')
+        #if($avisStatsResult != $NULL)
+          #set($nbAvisAggregates = "$avisStatsResult.occurrences")
+        #end
+        ## and do some comparisons
+        #set($isSameAvisNumber = false)
+        #set($isSameResultsData = "-")
+        #if ($nbAvisCache == $nbAvisAggregates)
+          #set($isSameAvisNumber = true)
+          #if ($nbAvisCache != 0)
+            #set($demarcheCache.source = 'comparison')
+            #set($avisStatsResult.source = 'comparison')
+            ## normalize the dates in the $avisStatsResult
+            #set($avisStatsResult.date_start = $avisStatsResult.date_start.time)
+            #set($avisStatsResult.date_end = $avisStatsResult.date_end.time)
+            #if ($demarcheCache.toString().equals($avisStatsResult.toString()))
+              #set($isSameResultsData = "true")
+            #else
+              #set($isSameResultsData = "false")
+            #end
+          #end
+        #end
+        ##
+        |$foreach.count|$d.id|$d.title|$d.avisCount.get('value')|$nbAvisCache|$nbAvisAggregates|$isSameAvisNumber|$isSameResultsData #if($isSameResultsData == 'false')(((
+----
+**JSON sur disk**
+$demarcheCache
+----
+**Agregates**
+$avisStatsResult
+)))
+#end
+
+      #end
+    #else
+      {{error}}Données de l'observatoire pas trouvées.{{/error}}
+    #end
+  #end
+#else
+  Séléctionner un observatoire ci-dessous pour comparer les données agrégées avec les données stockées en json pour l'observatoire.
+
+  {{html clean='false' wiki='false'}}
+    &lt;form action="$doc.getURL('view')" method="get" class='xform'&gt;
+      &lt;dl&gt;
+        &lt;dt&gt;&lt;label&gt;Observatoire&lt;/label&gt;&lt;/dt&gt;
+        &lt;dd&gt;
+          &lt;select name="observatoire"&gt;
+            &lt;option label="" value="" /&gt;
+            #foreach($obs in $services.query.xwql("select doc.title, doc.fullName from Document doc, doc.object(Demarches.Dashboard.Code.DashboardClass) as observatoire where doc.space &lt;&gt; 'Demarches.Dashboard.Code' order by observatoire.date desc").execute())
+                &lt;option label="$escapetool.xml($obs[0])" value="$escapetool.xml($obs[1])" /&gt;
+            #end
+          &lt;/select&gt;
+        &lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;div class='buttonwrapper'&gt;
+        &lt;input type='submit' class='btn btn-primary' name='previewobs' value='Prévisualisation' /&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  {{/html}}
+#end
+{{/velocity}}</content>
+  <object>
+    <name>Demarches.Admin.CompareStoredJsonWithAggregateData</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>b6738641-b531-432b-a66c-980bbc20f38a</guid>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>6</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>/* smaller font and 100% width so that we can see the full table */
+#contentcontainerinner {
+  font-size: 14px;
+  width: 100%;
+}</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>0</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+</xwikidoc>

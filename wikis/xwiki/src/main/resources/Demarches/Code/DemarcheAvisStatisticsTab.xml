@@ -539,8 +539,12 @@
     #set ($minDateTime = $maxDateTime.minusYears(1).plusDays(1).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0))
   #end
 #end
-## HTML cache id, to be used for the cache macro for caching HTML
-#set($cacheId = "${doc.name}-${formatter.print($minDateTime)}-${formatter.print($maxDateTime)}")
+#if ("$!request.cache" == 'false')
+  #set($cacheId = "${doc.name}-${formatter.print($minDateTime)}-${formatter.print($maxDateTime)}-$mathtool.mul(2144231, $mathtool.random)")
+#else
+  ## HTML cache id, to be used for the cache macro for caching HTML
+  #set($cacheId = "${doc.name}-${formatter.print($minDateTime)}-${formatter.print($maxDateTime)}")
+#end
 ## JSON cache id, to be used for looking up data cached as JSON on disk
 #set($jsonCachePath = "observatoire-aviscache/${formatter.print($minDateTime)}-${formatter.print($maxDateTime)}")
 #set ($discard = $services.logging.getLogger('Demarches.Code.DemarcheAvisStatisticsTab').warn("Working with HTML cache $cacheId"))
@@ -570,8 +574,12 @@
 ## (this can happen if some error happened during storage) then the data from disk is not usable.
 ##
 #set($avisDataNotFoundOnDisk = $avisStatsResult == $NULL || "$!avisStatsResult.occurrences" == '')
-#if ($avisDataNotFoundOnDisk)
-  #computeAvisStats($doc.fullName, $minDateTime.toDate(), $maxDateTime.toDate(), $AVIS_CLASS_ID)
+#if ($avisDataNotFoundOnDisk || "$!request.datasource" != '')
+  #if ("$!request.datasource" == 'aggregates' || "$!request.datasource" == 'aggregate')
+    #computeAvisStatsAggregateData($doc.fullName, $minDateTime.toDate(), $maxDateTime.toDate(), $AVIS_CLASS_ID)
+  #else
+    #computeAvisStats($doc.fullName, $minDateTime.toDate(), $maxDateTime.toDate(), $AVIS_CLASS_ID)
+  #end
   #set($discard = $services.logging.getLogger('Demarches.Code.DemarcheAvisStatisticsTab').warn("Computed stats $avisStatsResult"))
 #end
 ##
