@@ -1,0 +1,5 @@
+# Depend on the main CI configuration, that will provide most of the environment configuration and jobs definition
+include:
+  - project: ci/resources
+    ref: stable-2.x
+    file: /ci.yml
