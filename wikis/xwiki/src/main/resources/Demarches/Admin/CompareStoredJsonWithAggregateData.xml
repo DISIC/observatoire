@@ -76,7 +76,7 @@
       ==Démarches==
 
       Les données des avis dans le tableau ci-dessous contiennent les données stockées dans le json de l'observatoire séléctionné. Ainsi, le nombre d'avis et l'indice de satisfaction contiennent aussi les données configurées par les indicateurs de sources externes car il n'y pas de distinction au niveaue de l'observatoire par rapport à la source de la donnée. Le calcul d'un cache pour ces démarches est une limitation de cet outil.
-      
+
       ## decoration for the demarches table
       #set($discard = $xwiki.jsfx.use("js/xwiki/table/tablefilterNsort.js", true))
       #set($discard = $xwiki.ssfx.use("js/xwiki/table/table.css"))
@@ -107,17 +107,17 @@
         #set($isSameResultsData = "-")
         #if ($nbAvisCache == $nbAvisAggregates)
           #set($isSameAvisNumber = true)
-          #if ($nbAvisCache != 0)
-            #set($demarcheCache.source = 'comparison')
-            #set($avisStatsResult.source = 'comparison')
-            ## normalize the dates in the $avisStatsResult
-            #set($avisStatsResult.date_start = $avisStatsResult.date_start.time)
-            #set($avisStatsResult.date_end = $avisStatsResult.date_end.time)
-            #if ($demarcheCache.toString().equals($avisStatsResult.toString()))
-              #set($isSameResultsData = "true")
-            #else
-              #set($isSameResultsData = "false")
-            #end
+        #end
+        #if ($nbAvisCache != 0)
+          #set($demarcheCache.source = 'comparison')
+          #set($avisStatsResult.source = 'comparison')
+          ## normalize the dates in the $avisStatsResult
+          #set($avisStatsResult.date_start = $avisStatsResult.date_start.time)
+          #set($avisStatsResult.date_end = $avisStatsResult.date_end.time)
+          #if ($demarcheCache.toString().equals($avisStatsResult.toString()))
+            #set($isSameResultsData = "true")
+          #else
+            #set($isSameResultsData = "false")
           #end
         #end
         ##
@@ -129,8 +129,9 @@ $demarcheCache
 **Agregates**
 $avisStatsResult
 )))
-#end
+#else
 
+#end
       #end
     #else
       {{error}}Données de l'observatoire pas trouvées.{{/error}}
