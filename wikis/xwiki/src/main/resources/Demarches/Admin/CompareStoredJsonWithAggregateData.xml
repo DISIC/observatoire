@@ -121,7 +121,7 @@
           #end
         #end
         ##
-        |$foreach.count|$d.id|$d.title|$d.avisCount.get('value')|$nbAvisCache|$nbAvisAggregates|$isSameAvisNumber|$isSameResultsData #if($isSameResultsData == 'false')(((
+        |$foreach.count|$d.id|$d.title|$d.avisCount.get('value')|#if($demarcheCacheExists)$nbAvisCache#{else}-#{end}|$nbAvisAggregates|$isSameAvisNumber|$isSameResultsData #if($isSameResultsData == 'false')(((
 ----
 **JSON sur disk**
 $demarcheCache
@@ -154,7 +154,7 @@ $avisStatsResult
         &lt;/dd&gt;
       &lt;/dl&gt;
       &lt;div class='buttonwrapper'&gt;
-        &lt;input type='submit' class='btn btn-primary' name='previewobs' value='Prévisualisation' /&gt;
+        &lt;input type='submit' class='btn btn-primary' name='compareobs' value='Comparer' /&gt;
       &lt;/div&gt;
     &lt;/form&gt;
   {{/html}}
