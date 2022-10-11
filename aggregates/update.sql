@@ -20,7 +20,7 @@ left outer join xwikiintegers facile on (xwo_id=facile.xwi_id and facile.xwi_nam
 left outer join xwikiintegers compr on (xwo_id=compr.xwi_id and compr.xwi_name='comprehensible')
 where xwd_fullname=xwo_name and xwo_classname='Avis.Code.AvisClass' 
 and xwo_id=xws_id and xws_name='demarche' 
-and xwd_creation_date > date_add(now(), interval -2 day) 
+and date_format(xwd_creation_date,'%Y%m%d') in (date_format(now(), '%Y%m%d'), date_format(date_add(now(), interval -1 day), '%Y%m%d')) 
 group by 1,2;
 update avis_byday agg JOIN (
 select cast(xwd_creation_date as date) as day, xws_value as demarche,
@@ -34,7 +34,7 @@ from xwikidoc use index (doc_creation_date), xwikistrings demarche,
 xwikiobjects avis left outer join xwikilistitems diff on (xwo_id=xwl_id and xwl_name='difficultes')
 where xwd_fullname=xwo_name and xwo_classname='Avis.Code.AvisClass'
 and xwo_id=xws_id and xws_name='demarche'
-and xwd_creation_date > date_add(now(), interval -2 day) 
+and date_format(xwd_creation_date,'%Y%m%d') in (date_format(now(), '%Y%m%d'), date_format(date_add(now(), interval -1 day), '%Y%m%d'))  
 group by 1,2) data ON agg.day = data.day AND agg.demarche = data.demarche
 SET agg.diff_manquedinformations = data.diff_manquedinformations,
 agg.diff_dysfonctionnement = data.diff_dysfonctionnement,
@@ -54,7 +54,7 @@ from xwikidoc use index (doc_creation_date), xwikistrings demarche,
 xwikiobjects avis left outer join xwikilistitems aide on (xwo_id=xwl_id and xwl_name='aide')
 where xwd_fullname=xwo_name and xwo_classname='Avis.Code.AvisClass'
 and xwo_id=xws_id and xws_name='demarche'
-and xwd_creation_date > date_add(now(), interval -2 day) 
+and date_format(xwd_creation_date,'%Y%m%d') in (date_format(now(), '%Y%m%d'), date_format(date_add(now(), interval -1 day), '%Y%m%d')) 
 group by 1,2) data ON agg.day = data.day AND agg.demarche = data.demarche
 SET agg.aide_proche = data.aide_proche,
 agg.aide_association = data.aide_association,
