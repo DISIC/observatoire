@@ -1404,7 +1404,7 @@ window.docgeturl = "${doc.getURL('get')}";
 ###
 ###
 #template("startpage.vm")
-#set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'sm' }))
+#set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'sm' }))
 &lt;div class="main layoutsubsection"&gt;
 &lt;div id="mainContentArea"&gt;
 &lt;form id="loginForm" action="$doc.getURL('loginsubmit')" method="post" class="xform"&gt;

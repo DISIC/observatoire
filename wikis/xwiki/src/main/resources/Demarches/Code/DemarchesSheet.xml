@@ -127,7 +127,7 @@
     == $services.localization.render('wikidemarches.demarche.tabs.avisStatistics') ==
     #set ($selectedTab = 'statistics-tab')
     #set ($isSingleTab = true)
-    #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'md' }))
+    #set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'md' }))
     {{include reference="Demarches.Code.DemarcheAvisStatisticsTab" /}}
   #elseif ($displayInvalidKeyMessage)
     {{info}}
@@ -137,7 +137,7 @@
     == Critères qualité Cerfa numérique ==
     #set ($selectedTab = 'cerfa-numerique-tab')
     #set ($isSingleTab = true)
-    #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'md' }))
+    #set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'md' }))
     {{include reference="cerfa-numerique.Code.DemarcheCerfaNumeriqueTab" /}}
   #elseif (!$isGuest)
     #set ($selectedTab = "$!request['tab']")
@@ -147,7 +147,7 @@
       #set ($selectedTab = 'demarche-tab')
     #end
     #set ($isSingleTab = false)
-    #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'md' }))
+    #set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'md' }))
     &lt;ul class="nav nav-tabs" id="tabs"&gt;
       &lt;li role="presentation" #if($selectedTab == 'demarche-tab')class="active"#end&gt;&lt;a href="#demarche-tab" role="tab" data-toggle="tab"&gt;$services.localization.render('wikidemarches.demarche.tabs.demarche')&lt;/a&gt;&lt;/li&gt;
       #if ($hasAdmin || $isAdministrateurMinisteriel || $isDemarcheOwner)
@@ -186,7 +186,7 @@
 #elseif ($xcontext.action == 'edit')
   ## There's just one tab, but we need to make it visible.
   #set ($selectedTab = 'demarche-tab')
-  #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'sm' }))
+  #set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'sm' }))
   {{include reference="Demarches.Code.DemarcheTab" /}}
 #end
 {{/html}}

@@ -78,7 +78,7 @@
 #end
 ## if form is still to be shown (because mandatory fields not filled in or other thing prevented save), show form
 #if ($showForm)
-  #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'sm' }))
+  #set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'sm' }))
   #set ($selectedTab = 'demarche-tab')
   #set ($object = $doc.addObjectFromRequest('Demarches.Code.DemarchesClass'))
   #set ($action = 'edit')

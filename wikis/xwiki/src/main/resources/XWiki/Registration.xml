@@ -400,7 +400,7 @@
   ## The Code.
   #######################################################################
   ##
-  #set ($discard = $xwiki.ssx.use('Demarches.Code.setLayoutContainerWidthSSX', { 'size': 'sm' }))
+  #set ($discard = $xwiki.ssx.use('Demarches.Code.SetLayoutContainerWidthSSX', { 'size': 'sm' }))
   #if($useLiveValidation)
     #set ($discard = $xwiki.get('jsfx').use('uicomponents/widgets/validation/livevalidation_prototype.js'))
     #set ($discard = $xwiki.get('ssfx').use('uicomponents/widgets/validation/livevalidation.css', true))
