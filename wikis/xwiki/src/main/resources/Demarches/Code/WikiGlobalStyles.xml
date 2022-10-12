@@ -1074,7 +1074,7 @@ span.wikiexternallink {
  */
 #menuview {
   .navbar.actionmenu {
-    .container {
+    .container-fluid-lg {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
