@@ -543,93 +543,99 @@
   #template($extraFooterTemplate)
 #end
 &lt;footer id="footerglobal" role="contentinfo"&gt;
-  #if ($currentDomainKey != 'jedonnemonavis')
-    &lt;div id="footersocial" class='container-fluid'&gt;
-      &lt;div class='container-fluid-lg'&gt;
-        &lt;div class='row'&gt;
-          &lt;div class="col-xs-12"&gt;
-            &lt;div id="footersocial-links"&gt;
-              &lt;span class="footersocial-links-label"&gt;$services.localization.render('wikidemarches.footer.reseaux-sociaux')&lt;/span&gt;
-              &lt;ul class="social-networks"&gt;
-                &lt;li&gt;&lt;a href="https://twitter.com/_DINUM" class="twitter" target="_blank"&gt;&lt;span class="fa fa-twitter"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="https://www.linkedin.com/company/direction-interministerielle-du-numerique-dinum/" class="linkedin" target="_blank"&gt;&lt;span class="fa fa-linkedin-square"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-                &lt;li&gt;&lt;a href="#" class="youtube" target="_blank"&gt;&lt;span class="fa fa-youtube-play"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-              &lt;/ul&gt;
+  &lt;div class="col-xs-12"&gt;
+    #if ($currentDomainKey != 'jedonnemonavis')
+      &lt;div id="footersocial" class='row'&gt;
+        &lt;div class='container-fluid-lg'&gt;
+          &lt;div class='row'&gt;
+            &lt;div class="col-xs-12"&gt;
+              &lt;div id="footersocial-links"&gt;
+                &lt;span class="footersocial-links-label"&gt;$services.localization.render('wikidemarches.footer.reseaux-sociaux')&lt;/span&gt;
+                &lt;ul class="social-networks"&gt;
+                  &lt;li&gt;&lt;a href="https://twitter.com/_DINUM" class="twitter" target="_blank"&gt;&lt;span class="fa fa-twitter"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href="https://www.linkedin.com/company/direction-interministerielle-du-numerique-dinum/" class="linkedin" target="_blank"&gt;&lt;span class="fa fa-linkedin-square"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a href="#" class="youtube" target="_blank"&gt;&lt;span class="fa fa-youtube-play"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-  #end
+    #end
 
-  &lt;div id="footerborder"&gt;&lt;/div&gt;
+    &lt;div id="footerborder"&gt;&lt;/div&gt;
 
-  #if ($currentDomainKey != 'jedonnemonavis')
-    &lt;div id="footertop" class='container-fluid'&gt;
-      &lt;div class='row'&gt;
-        &lt;div class="col-xs-12"&gt;
-          &lt;div id="footertop-sites"&gt;
-            &lt;span class="footertop-sites-label"&gt;$services.localization.render('wikidemarches.footer.administrationlinks.intro')&lt;/span&gt;
-            &lt;ul&gt;
-              &lt;li&gt;&lt;a target="_blank" title="numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://numerique.gouv.fr/"&gt;numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a target="_blank" title="design.numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://design.numerique.gouv.fr/"&gt;design.numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
-            &lt;/ul&gt;
+    #if ($currentDomainKey != 'jedonnemonavis')
+      &lt;div id="footertop" class='row'&gt;
+        &lt;div class="container-fluid-lg"&gt;
+          &lt;div class='row'&gt;
+            &lt;div class="col-xs-12"&gt;
+              &lt;div id="footertop-sites"&gt;
+                &lt;span class="footertop-sites-label"&gt;$services.localization.render('wikidemarches.footer.administrationlinks.intro')&lt;/span&gt;
+                &lt;ul&gt;
+                  &lt;li&gt;&lt;a target="_blank" title="numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://numerique.gouv.fr/"&gt;numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;a target="_blank" title="design.numerique.gouv.fr ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))" href="https://design.numerique.gouv.fr/"&gt;design.numerique.gouv.fr&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/div&gt;
-  #end
+    #end
 
-  &lt;div id="footermaincontent" class='container-fluid-lg'&gt;
-    &lt;div class='row'&gt;
-      &lt;div class='col-xs-12 col-md-6 footer-col-sitename'&gt;
-        #template("companylogo.vm")
-      &lt;/div&gt;
+    &lt;div id="footermaincontent" class='row'&gt;
+      &lt;div class="container-fluid-lg"&gt;
+        &lt;div class='row'&gt;
+          &lt;div class='col-xs-12 col-md-6 footer-col-sitename'&gt;
+            #template("companylogo.vm")
+          &lt;/div&gt;
 
-      &lt;div class="col-xs-12 col-md-6 footer-col-services"&gt;
-        &lt;p&gt;
-          #if ($currentDomainKey == 'jedonnemonavis')
-            $services.localization.render('wikidemarches.footer.description.jdma', ["&lt;i&gt;$services.localization.render('wikidemarches.footer.description.jdma.button-name')&lt;/i&gt;"])
-          #else
-            $services.localization.render('wikidemarches.footer.description.observatoire')
-          #end
-        &lt;/p&gt;
+          &lt;div class="col-xs-12 col-md-6 footer-col-services"&gt;
+            &lt;p&gt;
+              #if ($currentDomainKey == 'jedonnemonavis')
+                $services.localization.render('wikidemarches.footer.description.jdma', ["&lt;i&gt;$services.localization.render('wikidemarches.footer.description.jdma.button-name')&lt;/i&gt;"])
+              #else
+                $services.localization.render('wikidemarches.footer.description.observatoire')
+              #end
+            &lt;/p&gt;
 
-        &lt;ul&gt;
-          #set($nosUnivers = {
-            'legifrance.gouv.fr' : 'https://www.legifrance.gouv.fr/',
-            'gouvernement.fr' : 'https://gouvernement.fr/',
-            'service-public.fr' : 'https://www.service-public.fr/',
-            'data.gouv.fr' : 'https://data.gouv.fr/'
-          })
-          #set($nosUniversOrdre = ['legifrance.gouv.fr', 'gouvernement.fr', 'service-public.fr', 'data.gouv.fr'])
-          #foreach($nu in $nosUniversOrdre)
-            &lt;li&gt;
-              &lt;a href="$nosUnivers.get($nu)" target="_blank" title="$nu ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$nu&lt;/a&gt;
-            &lt;/li&gt;
-          #end
-        &lt;/ul&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+            &lt;ul&gt;
+              #set($nosUnivers = {
+                'legifrance.gouv.fr' : 'https://www.legifrance.gouv.fr/',
+                'gouvernement.fr' : 'https://gouvernement.fr/',
+                'service-public.fr' : 'https://www.service-public.fr/',
+                'data.gouv.fr' : 'https://data.gouv.fr/'
+              })
+              #set($nosUniversOrdre = ['legifrance.gouv.fr', 'gouvernement.fr', 'service-public.fr', 'data.gouv.fr'])
+              #foreach($nu in $nosUniversOrdre)
+                &lt;li&gt;
+                  &lt;a href="$nosUnivers.get($nu)" target="_blank" title="$nu ($services.localization.render('wikidemarches.footer.administrationlinks.newwindow'))"&gt;$nu&lt;/a&gt;
+                &lt;/li&gt;
+              #end
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
 
-    &lt;div class='row'&gt;
-      &lt;div class='col-xs-12 footer-col-sites'&gt;
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.cgu')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'jedonnemonavis')
-            &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
-          #else
-            &lt;li&gt;&lt;a href="$xwiki.getURL('Main.accessibilite-formulaire')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
-          #end
-          &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HMentionslE9gales"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HVieprivE9e"&gt;$services.localization.render('wd.personal-data')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
-          &lt;li&gt;&lt;a href="https://github.com/DISIC/observatoire" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
-          #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('contact.WebHome')"&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
-        &lt;/ul&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+        &lt;div class='row'&gt;
+          &lt;div class='col-xs-12 footer-col-sites'&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')"&gt;$services.localization.render('wd.cgu')&lt;/a&gt;&lt;/li&gt;
+              #if($currentDomainKey != 'jedonnemonavis')
+                &lt;li&gt;&lt;a href="$xwiki.getURL('Main.Accessibilite')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
+              #else
+                &lt;li&gt;&lt;a href="$xwiki.getURL('Main.accessibilite-formulaire')"&gt;$services.localization.render('wd.accessibilite.partielle')&lt;/a&gt;&lt;/li&gt;
+              #end
+              &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HMentionslE9gales"&gt;$services.localization.render('wd.legal-notice')&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="$xwiki.getURL('Main.CGU')#HVieprivE9e"&gt;$services.localization.render('wd.personal-data')&lt;/a&gt;&lt;/li&gt;
+              #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('Main.plan-site')"&gt;$services.localization.render('wikidemarches.sitemap')&lt;/a&gt;&lt;/li&gt;#end
+              &lt;li&gt;&lt;a href="https://github.com/DISIC/observatoire" target="_blank"&gt;$services.localization.render('wikidemarches.code-open-source')&lt;/a&gt;&lt;/li&gt;
+              #if($currentDomainKey != 'jedonnemonavis')&lt;li&gt;&lt;a href="$xwiki.getURL('contact.WebHome')"&gt;$services.localization.render('wd.contact')&lt;/a&gt;&lt;/li&gt;#end
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt; ## .container-fluid-lg
+    &lt;/div&gt; ## #footermaincontent
+  &lt;/div&gt; ## .col-xs-12
 &lt;/footer&gt;
 #end
 ### TODO: Format the footer for pdf output</content>
