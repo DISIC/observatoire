@@ -783,7 +783,6 @@ Visually, there's the title row and then all the rows from the document content,
 
   #footerborder {
     height: 2px;
-    width: 100%;
     background-color: @blue-france-sun-113;
   }
 
