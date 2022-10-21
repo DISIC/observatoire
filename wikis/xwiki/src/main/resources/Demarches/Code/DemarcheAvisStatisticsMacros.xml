@@ -64,7 +64,7 @@
   }
 *#
 #macro(computeAvisStats $demarcheFullName $minDate $maxDate $avisClassName)
-  #computeAvisStatsDetailedData($demarcheFullName $minDate $maxDate $avisClassName)
+  #computeAvisStatsAggregateData($demarcheFullName $minDate $maxDate $avisClassName)
 #end
 
 #macro(addToMap $map $name $value)

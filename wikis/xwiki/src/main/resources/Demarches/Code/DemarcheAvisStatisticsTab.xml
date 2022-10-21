@@ -575,8 +575,8 @@
 ##
 #set($avisDataNotFoundOnDisk = $avisStatsResult == $NULL || "$!avisStatsResult.occurrences" == '')
 #if ($avisDataNotFoundOnDisk || "$!request.datasource" != '')
-  #if ("$!request.datasource" == 'aggregates' || "$!request.datasource" == 'aggregate')
-    #computeAvisStatsAggregateData($doc.fullName, $minDateTime.toDate(), $maxDateTime.toDate(), $AVIS_CLASS_ID)
+  #if ("$!request.datasource" == 'live')
+    #computeAvisStatsDetailedData($doc.fullName, $minDateTime.toDate(), $maxDateTime.toDate(), $AVIS_CLASS_ID)
   #else
     #computeAvisStats($doc.fullName, $minDateTime.toDate(), $maxDateTime.toDate(), $AVIS_CLASS_ID)
   #end
