@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.xwiki.projects.dinsic.wikidemarches</groupId>
     <artifactId>xwiki-dinsic-wikidemarches-extensions</artifactId>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.0</version>
   </parent>
   <artifactId>xwiki-dinsic-wikidemarches-extensions-batch-imports</artifactId>
   <name>XWiki Projects - DINSIC Wiki Demarches - BatchImports</name>
