@@ -7,28 +7,28 @@
       <column name="xwo_id" not-null="true" />
       <generator class="assigned" />
     </id>
-    <property name="sessionId" type="string"><column name="avis_session_id" /></property>
-    <property name="apiKey" type="string"><column name="avis_api_key" /></property>
-    <property name="demarche" type="string"><column name="avis_demarche" /></property>
-    <property name="modalite" type="string"><column name="avis_modalite" /></property>
-    <property name="score" type="integer"><column name="avis_score" /></property>
-    <property name="vote" type="string"><column name="avis_vote" /></property>
-    <property name="voteInput" type="text"><column name="avis_vote_input" /></property>
-    <property name="facile" type="integer"><column name="avis_facile" /></property>
-    <property name="comprehensible" type="integer"><column name="avis_comprehensible" /></property>
+    <property name="sessionId" type="string" column="avis_session_id" />
+    <property name="apiKey" type="string" column="avis_api_key" />
+    <property name="demarche" type="string" column="avis_demarche" />
+    <property name="modalite" type="string" column="avis_modalite" />
+    <property name="score" type="integer" column="avis_score" />
+    <property name="vote" type="string" column="avis_vote" />
+    <property name="voteInput" type="text" column="avis_vote_input" />
+    <property name="facile" type="integer" column="avis_facile" />
+    <property name="comprehensible" type="integer" column="avis_comprehensible" />
     <list name="difficultes" table="avis_difficultes" lazy="false">
       <key><column name="avis_id" /></key>
       <index column="idx"/>
       <element column="value" type="string" />
     </list>
-    <property name="autreDifficulte" type="string"><column name="avis_autre_difficulte" /></property>
-      <list name="aide" table="avis_aide" lazy="false">
-        <key><column name="avis_id" /></key>
-        <index column="idx"/>
-        <element column="value" type="string" />
-      </list>
-    <property name="autreAide" type="string"><column name="avis_autre_aide" /></property>
-    <property name="email" type="string"><column name="avis_email" /></property>
-    <property name="source" type="string"><column name="avis_source" /></property>
+    <property name="autreDifficulte" type="string" column="avis_autre_difficulte" />
+    <list name="aide" table="avis_aide" lazy="false">
+      <key><column name="avis_id" /></key>
+      <index column="idx"/>
+      <element column="value" type="string" />
+    </list>
+    <property name="autreAide" type="string" column="avis_autre_aide" />
+    <property name="email" type="string" column="avis_email" />
+    <property name="source" type="string" column="avis_source" />
   </class>
 </hibernate-mapping>
