@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class entity-name="Avis.Code.AvisClass" table="avis">
+        <id name="id" type="long" unsaved-value="undefined">
+            <column name="xwo_id" not-null="true" />
+            <generator class="assigned" />
+        </id>
+        <property name="sessionId" type="string"><column name="avis_session_id" /></property>
+        <property name="apiKey" type="string"><column name="avis_api_key" /></property>
+        <property name="demarche" type="string"><column name="avis_demarche" /></property>
+        <property name="modalite" type="string"><column name="avis_modalite" /></property>
+        <property name="score" type="integer"><column name="avis_score" /></property>
+        <property name="vote" type="string"><column name="avis_vote" /></property>
+        <property name="voteInput" type="text"><column name="avis_vote_input" /></property>
+        <property name="facile" type="integer"><column name="avis_facile" /></property>
+        <property name="comprehensible" type="integer"><column name="avis_comprehensible" /></property>
+        <list name="difficultes" table="avis_difficultes" lazy="false">
+          <key><column name="avis_id" /></key>
+          <index column="idx"/>
+          <element column="value" type="string" />
+        </list>
+        <property name="autreDifficulte" type="string"><column name="avis_autre_difficulte" /></property>
+        <list name="aide" table="avis_aide" lazy="false">
+          <key><column name="avis_id" /></key>
+          <index column="idx"/>
+          <element column="value" type="string" />
+        </list>
+        <property name="autreAide" type="string"><column name="avis_autre_aide" /></property>
+        <property name="email" type="string"><column name="avis_email" /></property>
+        <property name="source" type="string"><column name="avis_source" /></property>
+    </class>
+</hibernate-mapping>

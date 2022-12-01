@@ -43,7 +43,7 @@
   <class>
     <name>Avis.Code.AvisClass</name>
     <customClass/>
-    <customMapping/>
+    <customMapping>internal</customMapping>
     <defaultViewSheet/>
     <defaultEditSheet/>
     <defaultWeb/>
