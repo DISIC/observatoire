@@ -36,7 +36,6 @@
     <module>xwiki</module>
     <module>xwiki-upgrade</module>
     <module>devtools</module>
-    <module>statssolr</module>
   </modules>
   <build>
     <extensions>
