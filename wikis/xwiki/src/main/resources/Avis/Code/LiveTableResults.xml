@@ -51,7 +51,7 @@
   #if($xcontext.action == 'get' &amp;&amp; "$!{request.outputSyntaxType}" == 'excel')
     #set($calc = $xwiki.calc)
     #if ($calc)
-      ## get the columns to export. If the all the class properties are asked for, then force add all the properties of the class in the export
+      ## get the columns to export. If all the class properties are requested, then force add all the properties of the class in the export
       #if("$!{request.withAllFields}" == 'true')
         #set($excelLtCollist = [])
         #foreach($e in $collist)

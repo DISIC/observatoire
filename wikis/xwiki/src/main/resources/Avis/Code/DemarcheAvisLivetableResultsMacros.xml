@@ -65,16 +65,10 @@
 ## - the property 'doc_viewable' is set to 'true'
 ## - each page is retrieved via 'getDocumentAsAuthor' to bypass the rights
 #macro(gridresult_buildRowJSON $item $rows)
-  ## Handle both the case where the "language" filter is used and thus languages are returned too and the case where
-  ## only the document name is returned. When more than the document name is returned the $item variable is a list.
-  #if($item.size())
-    ## Extract doc name and doc language from $item
-    #set($docName = $item[0])
-    #set($docLanguage = $item[1])
-  #else
-    #set($docName = $item)
-    #set($docLanguage = '')
-  #end
+  #set($queryDoc = $item[0])
+  #set($avis = $item[1])
+  #set($docName = $queryDoc.fullName)
+  #set($docLanguage = $queryDoc.language)
   #set ($docReference = $services.model.resolveDocument($docName))
   ##'doc_viewable': $services.security.authorization.hasAccess('view', $docReference),
   #set ($row = {
@@ -111,8 +105,8 @@
   #end
   #if ($row.doc_viewable)
     ## Customization
-    ##set ($itemDoc = $xwiki.getDocument($docReference))
-    #set ($itemDoc = $xwiki.getDocumentAsAuthor($docReference))
+    #set ($itemDoc = $xwiki.getDocument($docReference))
+    ##set ($itemDoc = $xwiki.getDocumentAsAuthor($docReference))
     ## Handle translations. We need to make sure we display the data associated to the correct document if the returned
     ## result is a translation.
     #if ($isTranslation)
@@ -120,7 +114,6 @@
     #else
       #set ($translatedDoc = $itemDoc.translatedDocument)
     #end
-    #set($discard = $itemDoc.use($className))
     #set($discard = $row.put('doc_edit_url', $itemDoc.getURL($itemDoc.defaultEditMode)))
     #set($discard = $row.put('doc_author_url', $xwiki.getURL($translatedDoc.author)))
     #set($discard = $row.put('doc_date', $xwiki.formatDate($translatedDoc.date)))
@@ -153,22 +146,27 @@
     #livetable_getImagesList($itemDoc)
     #set($discard = $row.put($colname, $imagesList))
   #else
-    #livetable_getPropertyClassAndType($colname)
-    #if(!$propClass.equals($class))
-      #set($discard = $itemDoc.use($propClassName))
-    #end
-    #set($fieldValue = "$!itemDoc.getValue($colname)")
     ##
     ## Custom livetable for avis: get the display values from the cached map or other sources, just avoid calling displayers here, to save performance (custom displayers are a bomb)
     ##
-    #if($propClass.name == 'Avis.Code.AvisClass')
-      #set($fieldRawValue = $itemDoc.getValue($colname))
-      ## property class and colname  $propClass.name $colname $fieldValue $fieldRawValue.getClass().getName() 
+    #if($avis.containsKey($colname))
+      #set($fieldValue = $avis.get($colname))
+      #if ($fieldValue == $NULL)
+        #set($fieldValue = "")
+      #end
+      #set($fieldRawValue = $fieldValue)
+      ## property class and colname  $propClass.name $colname $fieldValue $fieldRawValue.getClass().getName()
       ## initialize with the raw value...
-      #set($fieldDisplayValue = $fieldValue)
+      #set($fieldDisplayValue = "$!fieldRawValue")
       ## ... and then try to find it in the cached map
       ## check first if it's a list of values
-      #if($fieldRawValue.getClass().getName().endsWith('List'))
+      #if ($colname == 'demarche')
+        ## if the column is the 'demarche' column, cheat and get the name of the document from the $demarchePage param, that is loaded by the caller (in DemarcheAvisLivetableResultsAsync and DemarcheAvisLivetableResults to check the rights)
+        #set($fieldDisplayValue = "$!demarchePage.title")
+        #if($fieldDisplayValue == '')
+          #set($fieldDisplayValue = $fieldValue)
+        #end
+      #elseif($fieldRawValue.getClass().getName().endsWith('List'))
         #set($fieldDisplayValue = '')
         #foreach($fv in $fieldRawValue)
           #if($foreach.index &gt; 0)
@@ -181,17 +179,9 @@
           #end
         #end
       #else
-        ## if the column is the 'demarche' column, cheat and get the name of the document from the $demarchePage param, that is loaded by the caller (in DemarcheAvisLivetableResultsAsync and DemarcheAvisLivetableResults to check the rights)
-        #if ($colname == 'demarche')
-          #set($fieldDisplayValue = "$!demarchePage.title")
-          #if($fieldDisplayValue == '')
-            #set($fieldDisplayValue = $fieldValue)
-          #end
-        #else
-          ## is not a list and not the demarche, just try to find it in the cached values map and replace the raw value if found
-          #if($avisPropertyValues.get($colname).get($fieldRawValue))
-            #set($fieldDisplayValue = $avisPropertyValues.get($colname).get($fieldRawValue))
-          #end
+        ## is not a list and not the demarche, just try to find it in the cached values map and replace the raw value if found
+        #if($avisPropertyValues.get($colname).get($fieldRawValue))
+          #set($fieldDisplayValue = $avisPropertyValues.get($colname).get($fieldRawValue))
         #end
       #end
       #if($fieldDisplayValue == '')
@@ -205,18 +195,162 @@
       #end
     #end
     #set($fieldUrl = '')
-    ## Only retrieve an URL for a DBListClass item
-    #if(($propType == 'DBListClass' || $propType == 'PageClass') &amp;&amp; $propClass.get($colname).getProperty('multiSelect').value != 1)
+    #if($colname == "demarche")
       #set($fieldUrl = $xwiki.getURL($fieldValue))
       #if($fieldUrl == $xwiki.getURL($services.model.resolveDocument('', 'default', $doc.documentReference.extractReference('WIKI'))))
         #set($fieldUrl = '')
       #end
     #end
+    #if("$!fieldDisplayValue" == '[]')
+      #set($fieldDisplayValue = '')
+    #end
     #set($discard = $row.put($colname, $fieldDisplayValue.replaceFirst($regextool.quote('{{html clean="false" wiki="false"}}'), '').replaceAll("$regextool.quote('{{/html}}')$", '')))
-    #set($discard = $row.put("${colname}_value", $fieldValue))
+    #set($discard = $row.put("${colname}_value", "$!fieldValue"))
     #set($discard = $row.put("${colname}_url", $fieldUrl))
     ## Reset to the default class
     #set($discard = $itemDoc.use($className))
+  #end
+#end
+
+#macro(gridresultwithfilter_buildQuery $className $collist $filterfrom $filterwhere $filterParams)
+  #set($fromSql = ", BaseObject obj, Avis.Code.AvisClass avis")
+  #set($whereSql = "doc.fullName &lt;&gt; 'Avis.Code.AvisClass' and doc.fullName &lt;&gt; 'Avis.Code.AvisClassTemplate' and obj.id = avis.id and doc.fullName = obj.name")
+  #set($whereParams = [])
+
+  ## From the original gridresultwithfilter_buildQuery
+  #if($request.tag)
+    #set($fromSql = "${fromSql}, BaseObject as tobject, DBStringListProperty as tagprop")
+    #set($whereSql = "${whereSql} and tobject.className='XWiki.TagClass' and tobject.name=doc.fullName and tobject.id=tagprop.id.id and tagprop.id.name='tags' and (")
+    #foreach($tag in $request.getParameterValues('tag'))
+      #if($velocityCount &gt; 1) #set($whereSql = "${whereSql} and ") #end
+      ## Tags are case insensitive but they are stored unchanged which means we have to normalize them when performing
+      ## a query. Unfortunately there's no simple way to match multiple tags (AND operator). If we join the list of
+      ## tags in the FROM clause then we match at least one of the tags (OR operator). The only remaining option is to
+      ## check that the list of tags contains each of the desired tags. HQL doesn't help us to lower-case the entire
+      ## list of tags so we use an inner select for this.
+      #set($whereSql = "${whereSql} lower(?) in (select lower(tag) from tagprop.list tag)")
+      #set($discard = $whereParams.add("${tag}"))
+    #end
+    #set($whereSql = "${whereSql})")
+  #end
+  #macro(setOrderClause $fieldName $direction $useRawValue)
+    #if ($useRawValue)
+      #set($orderSql = " order by ${fieldName} ${direction}")
+    #else
+      #set($orderSql = " order by lower(${fieldName}) ${direction}, ${fieldName} ${direction}")
+    #end
+  #end
+  #set($order = "$!request.sort")
+  #if ($order == 'doc.location')
+    #set ($order = 'doc.fullName')
+  #end
+  #set ($orderSql = '')
+  #if($order != '')
+    #set($orderDirection = "$!{request.get('dir').toLowerCase()}")
+    #if("$!orderDirection" != '' &amp;&amp; "$!orderDirection" != 'asc')
+      #set($orderDirection = 'desc')
+    #end
+    #if($order.startsWith('doc.'))
+      ## The column is a document field.
+      ##
+      ## These document fields need to be ordered as raw values and not as strings.
+      #set($rawDocumentFields = ['translation', 'date', 'contentUpdateDate', 'creationDate', 'elements', 'minorEdit1', 'hidden'])
+      #set($saveDocumentField = $stringtool.removeStart($order, 'doc.').replaceAll('\W', ''))
+      #setOrderClause("doc.$saveDocumentField", $orderDirection,  $rawDocumentFields.contains($saveDocumentField))
+    #else
+      #set($safeOrderField = $order.replaceAll('\W', ''))
+      #set($rawProperties = ['id', 'score', 'facile', 'comprehensible', 'aide'])
+      #set($isRaw = $rawProperties.contains($safeOrderField))
+      #if ($safeOrderField == 'aide' || $safeOrderField == 'difficultes')
+        #set($safeOrderField = "${safeOrderField}[0]")
+      #end
+      #setOrderClause("avis.$safeOrderField", $orderDirection, $isRaw)
+    #end
+  #end
+  #foreach ($colName in $collist)
+    #if($colName.startsWith("doc."))
+      ## NOTE: In XWiki 9, livetable_addColumnToQuery uses $colname
+      ## even though its parameter is named $colName
+      ## it works when the macro is called from livetable_filterProperty
+      ## because this one uses the $colname variable
+      ## we need to define it ourselves
+      ## By looking at the code, this issue is fixed in later versions of XWiki.
+      #set($colname = $colName)
+      #livetable_addColumnToQuery($colName)
+    #else
+      ## avis column
+      #set($colName = $colName.replaceAll('\W', ''))
+      #set ($filterValue = "$!request.getParameter($colName)")
+      #if ("$!filterValue" != '')
+        #if ($colName == "difficultes" || $colName == "aide")
+          ## these columns are lists, stored in other tables
+          #foreach ($v in $request.getParameterValues($colName))
+            #set($whereSql = "${whereSql} and avis.id in (select avis.id from Avis.Code.AvisClass avis join avis.$colName $colName where $colName = ?)")
+            #set($discard = $whereParams.add($v))
+          #end
+          #set($colMatch = "${colName}_match")
+          #if ("$!request.getParameterValue($colMatch)" == "exact")
+            #set($w = "1=1")
+            #foreach ($v in $request.getParameterValues($colName))
+              #set($w = "$w and $colName != ?")
+              #set($discard = $whereParams.add($v))
+            #end
+            #set($whereSql = "${whereSql} and avis.id not in (select avis.id from Avis.Code.AvisClass avis join avis.$colName $colName where $w)")
+          #end
+        #elseif ($colName == "id" || $colName == "score" || $colName == "facile" || $colName == "comprehensible")
+          ## these columns are integers
+          #set($whereSql = "${whereSql} and (")
+          #foreach ($v in $request.getParameterValues($colName))
+            #set($vInt = $mathtool.toInteger($v))
+            #if(!$foreach.first)
+              #set($whereSql = "$whereSql or ")
+            #end
+            #set($whereSql = "${whereSql}avis.$colName = ?")
+            #set($discard = $whereParams.add($vInt))
+          #end
+          #set($whereSql = "${whereSql})")
+        #elseif ($colName == "demarche")
+            #set($whereSql = "${whereSql} and avis.demarche = ?")
+            #set($discard = $whereParams.add($filterValue))
+        #else
+          #set($whereSql = "${whereSql} and (")
+          #foreach ($v in $request.getParameterValues($colName))
+            #if(!$foreach.first)
+              #set($whereSql = "$whereSql or ")
+            #end
+            #set($whereSql = "${whereSql}avis.$colName like ?")
+            #set($discard = $whereParams.add("%$v%"))
+          #end
+          #set($whereSql = "${whereSql})")
+        #end
+      #end
+    #end
+  #end
+  ##
+  ##
+  ## Compute the final queries
+  ##
+  #set($sqlParams = [])
+  #set($tagsMatchingParams = [])
+  #set($allMatchingParams = [])
+  ## NOTE: doc.fullName needs to be in the selected fields for count() to work
+  #set($sql = "select doc, avis, doc.fullName from XWikiDocument doc$fromSql $!filterfrom where $!whereSql $!filterwhere")
+  #set($discard = $sqlParams.addAll($whereParams))
+  ##
+  #set($tagsMatchingFiltersFrom = "$!fromSql $!filterfrom")
+  #set($tagsMatchingFiltersWhere = "$!whereSql $!filterwhere")
+  #set($discard = $tagsMatchingParams.addAll($whereParams))
+  ##
+  #set($allMatchingTagsFrom = "$!filterfrom")
+  #set($allMatchingTagsWhere = "1=1 $!filterwhere")
+  ##
+  #if($filterParams)
+    #set($discard = $sqlParams.addAll($filterParams))
+    #set($discard = $tagsMatchingParams.addAll($filterParams))
+    #set($discard = $allMatchingParams.addAll($filterParams))
+  #end
+  #if($orderSql != '')
+    #set($sql = "$sql $!{orderSql}")
   #end
 #end
 {{/velocity}}</content>
