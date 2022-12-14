@@ -65,11 +65,8 @@
 ## - the property 'doc_viewable' is set to 'true'
 ## - each page is retrieved via 'getDocumentAsAuthor' to bypass the rights
 #macro(gridresult_buildRowJSON $item $rows)
-  #set($queryDoc = $item[0])
-  #set($avis = $item[1])
-  #set($docName = $queryDoc.fullName)
-  #set($docLanguage = $queryDoc.language)
-  #set ($docReference = $services.model.resolveDocument($docName))
+  #set($avis = $item)
+  #set($docReference = $services.model.createDocumentReference($xcontext.database, "Avis", "$avis.avisId"))
   ##'doc_viewable': $services.security.authorization.hasAccess('view', $docReference),
   #set ($row = {
     'doc_viewable': true,
@@ -94,15 +91,7 @@
   #set ($row.doc_hascopy = $row.doc_viewable)
   #set ($row.doc_hasrename = $row.doc_hasdelete)
   #set ($row.doc_hasrights = $row.doc_hasedit &amp;&amp; $isAdvancedUser)
-  #if ($docReference.name == 'WebHome')
-    ## For nested pages, use the page administration.
-    #set ($webPreferencesReference = $services.model.createDocumentReference('WebPreferences', $docReference.lastSpaceReference))
-    #set ($row.doc_rights_url = $xwiki.getURL($webPreferencesReference, 'admin', 'editor=spaceadmin&amp;section=PageRights'))
-  #else
-    ## For terminal pages, use the old rights editor.
-    ## TODO: We should create a page administration for terminal pages too.
-    #set ($row.doc_rights_url = $xwiki.getURL($docReference, 'edit', 'editor=rights'))
-  #end
+  #set ($row.doc_rights_url = $xwiki.getURL($docReference, 'edit', 'editor=rights'))
   #if ($row.doc_viewable)
     ## Customization
     #set ($itemDoc = $xwiki.getDocument($docReference))
@@ -213,8 +202,8 @@
 #end
 
 #macro(gridresultwithfilter_buildQuery $className $collist $filterfrom $filterwhere $filterParams)
-  #set($fromSql = ", BaseObject obj, Avis.Code.AvisClass avis")
-  #set($whereSql = "doc.fullName &lt;&gt; 'Avis.Code.AvisClass' and doc.fullName &lt;&gt; 'Avis.Code.AvisClassTemplate' and obj.id = avis.id and doc.fullName = obj.name")
+  #set($fromSql = "Avis.Code.AvisClass avis")
+  #set($whereSql = "1=1")
   #set($whereParams = [])
 
   ## From the original gridresultwithfilter_buildQuery
@@ -259,7 +248,7 @@
       #setOrderClause("doc.$saveDocumentField", $orderDirection,  $rawDocumentFields.contains($saveDocumentField))
     #else
       #set($safeOrderField = $order.replaceAll('\W', ''))
-      #set($rawProperties = ['id', 'score', 'facile', 'comprehensible', 'aide'])
+      #set($rawProperties = ['id', 'score', 'facile', 'comprehensible', 'aide', 'date'])
       #set($isRaw = $rawProperties.contains($safeOrderField))
       #if ($safeOrderField == 'aide' || $safeOrderField == 'difficultes')
         #set($safeOrderField = "${safeOrderField}[0]")
@@ -312,6 +301,19 @@
         #elseif ($colName == "demarche")
             #set($whereSql = "${whereSql} and avis.demarche = ?")
             #set($discard = $whereParams.add($filterValue))
+        #elseif ($colName == "date")
+          #set ($dateProperty = "avis.date")
+          ## Copied and adapted from livetable_filterDateProperty
+          #set ($timestamps = $filterValue.split('-'))
+          #if ($timestamps.size() == 2)
+            #set ($whereSql = "${whereSql} and $dateProperty &gt;= ? and $dateProperty &lt;= ?")
+            #set ($discard = $whereParams.add($datetool.toDate($numbertool.toNumber($timestamps[0]))))
+            #set ($discard = $whereParams.add($datetool.toDate($numbertool.toNumber($timestamps[1]))))
+          #else
+            ## Fall back to the older string matching
+            #set ($whereSql = "${whereSql} and upper(str($dateProperty)) like upper(?)")
+            #set ($discard = $whereParams.add("%$filterValue%"))
+          #end
         #else
           #set($whereSql = "${whereSql} and (")
           #foreach ($v in $request.getParameterValues($colName))
@@ -333,11 +335,11 @@
   #set($sqlParams = [])
   #set($tagsMatchingParams = [])
   #set($allMatchingParams = [])
-  ## NOTE: doc.fullName needs to be in the selected fields for count() to work
-  #set($sql = "select doc, avis, doc.fullName from XWikiDocument doc$fromSql $!filterfrom where $!whereSql $!filterwhere")
+  #set($sql = "select avis from $fromSql $!filterfrom where $!whereSql $!filterwhere")
+  #set($sqlCount = "select count(avis.avisId) from $fromSql $!filterfrom where $!whereSql $!filterwhere")
   #set($discard = $sqlParams.addAll($whereParams))
   ##
-  #set($tagsMatchingFiltersFrom = "$!fromSql $!filterfrom")
+  #set($tagsMatchingFiltersFrom = ", $!fromSql $!filterfrom")
   #set($tagsMatchingFiltersWhere = "$!whereSql $!filterwhere")
   #set($discard = $tagsMatchingParams.addAll($whereParams))
   ##
@@ -352,6 +354,40 @@
   #if($orderSql != '')
     #set($sql = "$sql $!{orderSql}")
   #end
+#end
+
+## We replace gridresult_buildRowsJSON to use the right count query.
+## query.count() is defined in xwiki-platform's CountDocumentFilter.java file
+## and only counts documents.
+## Since we don't want to join documents to make queries faster, we have to
+## make our own count query.
+## This is the only change to this macro.
+#macro(gridresult_buildRowsJSON $map)
+  #set($offset = $mathtool.toInteger($request.get('offset')))
+  ## Offset starts from 0 in velocity and 1 in javascript
+  #set($offset = $offset - 1)
+  #if(!$offset || $offset &lt; 0)
+    #set($offset = 0)
+  #end
+  #set($limit = $mathtool.toInteger($request.get('limit')))
+  #if(!$limit)
+    #set ($limit = 15)
+  #end
+  #set($query = $services.query.hql($sql))
+  ## Apply query filters if defined. Otherwise use default.
+  #foreach ($queryFilter in $stringtool.split($!request.queryFilters, ', '))
+    #set ($query = $query.addFilter($queryFilter))
+  #end
+  #set ($query = $query.setLimit($limit).setOffset($offset).bindValues($sqlParams))
+  #set($items = $query.execute())
+  #set($discard = $map.put('totalrows', $services.query.hql($sqlCount).bindValues($sqlParams).execute()))
+  #set($discard = $map.put('returnedrows', $mathtool.min($items.size(), $limit)))
+  #set($discard = $map.put('offset', $mathtool.add($offset, 1)))
+  #set($rows = [])
+  #foreach($item in $items)
+    #gridresult_buildRowJSON($item $rows)
+  #end
+  #set($discard = $map.put('rows', $rows))
 #end
 {{/velocity}}</content>
 </xwikidoc>

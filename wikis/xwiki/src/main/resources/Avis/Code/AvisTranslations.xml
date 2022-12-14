@@ -44,6 +44,7 @@
 # Live table generic keys
 avis.livetable.doc.title=Titre de la page
 avis.livetable.doc.name=Identifiant
+avis.livetable.avisId=Identifiant
 avis.livetable.doc.space=Espace
 avis.livetable.sessionId=ID de session
 avis.livetable.demarche=Démarche
@@ -66,6 +67,7 @@ avis.livetable.doc.author=Dernier auteur
 avis.livetable.doc.creator=Créateur
 avis.livetable.doc.date=Date de dernière mise à jour
 avis.livetable.doc.creationDate=Date
+avis.livetable.date=Date
 avis.livetable._avatar=Avatar
 avis.livetable._images=Images
 avis.livetable._attachments=Pièces jointes

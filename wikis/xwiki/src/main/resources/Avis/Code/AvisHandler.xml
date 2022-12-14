@@ -74,15 +74,15 @@
     #end
     ## Create new avis only if target has not been set already
     #if (!$target)
-      #set ($uin = $services.uin.getNext('avis'))
-      #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
+      #set ($avisId = $services.uin.getNext('avis'))
+      #set ($target = $xwiki.getDocumentAsAuthor("Avis.${avisId}"))
       #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
       #if ($request.session &amp;&amp; $request.session.id)
         #set ($sessionId = $request.session.id)
         #set ($discard = $object.set("sessionId", $sessionId))
       #end
     #end
-    #validateAvis($object)
+    #validateAvis($object, $avisId)
     #if ($validated)
       ## Save with programming rights as the current user will not have the right to edit the Avis document
       #set ($discard = $target.saveWithProgrammingRights())
@@ -99,7 +99,7 @@
     #set ($target = $xwiki.getDocumentAsAuthor("Avis.${avisId}"))
     #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
     #set ($object = $target.getObject('Avis.Code.AvisClass'))
-    #validateAvis($object)
+    #validateAvis($object, $avisId)
     #if($validated)
       #set ($discard = $target.saveWithProgrammingRights())
     #else

@@ -46,8 +46,8 @@
 #set($discard = $xwiki.ssx.use("Demarches.Code.DemarcheAvisListTab"))
 #set ($columnsProperties = {
   'demarche': {'type': 'hidden'},
-  'doc.creationDate': {'filterable': true, 'type': 'date'},
-  'doc.name': {'filterable': true},
+  'date': {'filterable': true, 'type': 'date'},
+  'avisId': {'filterable': true},
   'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
   'score': {'html': true},
   'facile': {'type': 'number'},
@@ -64,13 +64,13 @@
   'tagCloud': false,
   'rowCount': 10,
   'maxPages': 10,
-  'selectedColumn': 'doc.creationDate',
+  'selectedColumn': 'date',
   'defaultOrder': 'desc',
   'resultPage': 'Avis.Code.DemarcheAvisLivetableResults',
   'extraParams': "demarche=$escapetool.url($doc.fullName)"
 })
 
-#set ($columns = ['demarche', 'doc.creationDate', 'doc.name', 'score', 'autre', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'source'])
+#set ($columns = ['demarche', 'date', 'avisId', 'score', 'autre', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'source'])
 
 #livetable('avis' $columns $columnsProperties $options)
 ## Add the HTML structure for the export buttons

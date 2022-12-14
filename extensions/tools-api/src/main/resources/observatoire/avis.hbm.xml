@@ -7,6 +7,8 @@
       <column name="xwo_id" not-null="true" />
       <generator class="assigned" />
     </id>
+    <property name="avisId" type="string" column="avis_id" length="255" index="id_idx" />
+    <property name="date" type="timestamp" column="avis_date" index="date_idx" />
     <property name="sessionId" type="string" column="avis_session_id" length="255" index="sessionid_idx" />
     <property name="apiKey" type="string" column="avis_api_key" length="255" index="apikey_idx" />
     <property name="demarche" type="string" column="avis_demarche" length="255" index="demarche_idx" />
