@@ -42,7 +42,7 @@
   <content>{{velocity output="false"}}
 ## We are generating a jobId but it should not include the request number otherwise it will be a different ID all the time. The objective is to get the same jobId for the same livetable request parameters
 #set ($hashCode = $request.getQueryString().replaceAll("filename=.*?&amp;","").replaceAll("reqNo=[0-9]+?&amp;","").hashCode())
-#if ($hashCode&lt;0)
+#if ($hashCode &lt; 0)
  #set ($hashCode = 0 - $hashCode)
 #end
 #set ($jobId = "livetableexport/$hashCode")
@@ -56,7 +56,7 @@
   $services.progress.pushLevel(1)
   #set($discard = $services.localization.use('document', 'Macros.LivetableExporterMacroLabels'))
 {{/velocity}}
-  
+
 {{include reference="XWiki.LiveTableResultsMacros" /}}
 
 {{include reference="Macros.LivetableExporterResultsMacros" /}}
@@ -99,7 +99,5 @@
   ## End of the 100 steps
   $services.progress.popLevel()
 {{/velocity}}
-{{/job}}
-
-</content>
+{{/job}}</content>
 </xwikidoc>
