@@ -338,6 +338,7 @@
 #**
  * Customization of this livetable API for two purposes:
  * - to add progress when exporting in async mode
+ * - limit Excel exports to 65000 rows
  * - to make count work with the custom avis query.
  *   query.count() is defined in xwiki-platform's CountDocumentFilter.java file
  *   and only counts documents. Since we don't want to join documents to make queries faster,
@@ -358,6 +359,9 @@
   #if(!$limit)
     #set ($limit = 15)
   #end
+  #if ($extension == 'xls' &amp;&amp; ($limit == 0 || $limit &gt; 65000))
+    #set($limit = 65000)
+  #end
   #set($query = $services.query.hql($sql))
   ## Apply query filters if defined. Otherwise use default.
   #foreach ($queryFilter in $stringtool.split($!request.queryFilters, ', '))
@@ -369,7 +373,6 @@
   #set($items = $query.execute())
   #set($totalrows = $services.query.hql($sqlCount).bindValues($sqlParams).execute()[0])
   #set($discard = $map.put('totalrows', $totalrows))
-  #set($ok = $log.warn("Limit: $limit, $totalrows"))
   #if ((($limit == 0) || ($limit &gt;= $totalrows)) &amp;&amp; $offset == 0)
     #set($returnedrows = $totalrows)
   #else

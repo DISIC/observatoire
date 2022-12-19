@@ -131,7 +131,7 @@ wikidemarches.demarche.embed.generate.button=Générer le code
 
 # Liste des avis tab
 wikidemarches.demarche.avisList.export.title=Exporter les avis
-wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également.
+wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également. Pour des raisons de compatibilité et de performance, l'export au format Excel est limité à 65 000 lignes.
 wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter :
 wikidemarches.demarche.avisList.export.excel=Exporter pour excel
 wikidemarches.demarche.avisList.export.csv=Exporter en CSV
@@ -217,8 +217,7 @@ wikidemarches.administration.accounts.should-be-activated-notice=Votre adresse e
 # Register translations
 wikidemarches.register.username.info=Votre nom d'utilisateur sera demandé pour vous connecter
 # Standard translations overwritten.
-core.register.successful={0} ({1}) \: l''inscription a r\u00E9ussi. Un e-mail vous a été envoyé pour confirmer votre inscription.
-</content>
+core.register.successful={0} ({1}) \: l''inscription a r\u00E9ussi. Un e-mail vous a été envoyé pour confirmer votre inscription.</content>
   <object>
     <name>Demarches.Code.WikiDemarchesTranslations</name>
     <number>0</number>
