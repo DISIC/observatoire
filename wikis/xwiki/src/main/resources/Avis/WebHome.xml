@@ -40,55 +40,60 @@
   <syntaxId>xwiki/2.0</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity}}
-#set ($columnsProperties = {
-  'doc.creationDate': {'filterable': true, 'type': 'date'},
-  'doc.name': {"displayName": 'No.', "link":"view"},
-  'session': {},
-  'demarche': {},
-  'source' : {'type' : 'text', 'html' : false, 'sortable' : true, 'filterable' : true},
-  'score': {'displayName' : 'Avis', "html":true},
-  'ministeres': {'sortable': true, 'filterable': true},
-  'direction': {'sortable': true, 'filterable': true},
-  'autreAide': {'displayName': 'Autre aide'},
-  'autreDifficulte': {'displayName': 'Autre difficulté'},
-  'autre': {'displayName': 'Verbatim'},
-  'suggestion': {"filterable":false,"sortable":false,"html":true},
-  '_actions': {"sortable":false,"filterable":false,"html":true,"actions":["edit","delete"]}
-})
-#set ($options = {
-  'className': 'Avis.Code.AvisClass',
-  'translationPrefix': 'avis.livetable.',
-  'tagCloud': true,
-  'rowCount': 10,
-  'maxPages': 10,
-  'selectedColumn': 'doc.creationDate',
-  'defaultOrder': 'desc',
-  'resultPage': 'Avis.Code.LiveTableResults'
-})
-#* Two situations:
-- default: display the full list of avis
-- use this page as an include (e.g. from DemarchesSheet): extraParams are set, don't the same columns.
-*#
-#if (!$extraParams)
-  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'ministeres', 'direction', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', 'sessionId', '_actions'])
-#else
-  #set ($discard = $options.put('extraParams', $extraParams))
-  #set ($discard = $columnsProperties.put('demarche', {'type': 'hidden'}))
-  #set ($columns = ['doc.creationDate', 'doc.name', 'source', 'demarche', 'score', 'vote', 'autreAide', 'autreDifficulte', 'autre', '_actions'])
-#end
-#livetable('avis' $columns $columnsProperties $options)
+#set($query = "select sum(nbAvis) from  AvisAggregateByDay where day&gt;'2018-01-01'")
+#set($results = $services.query.hql($query).execute())
+== Avis totaux $results[0]==
 
-{{livetableExporter livetable="avis" withAllFields="true" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.LiveTableResults" limit="$LIVETABLE_EXPORTER_LIMIT"/}}
+(% class="row" %)
+(((
+(% class="col-sm-6" %)
+(((
+== Avis par an ==
 
-#* Display the link to Avis administration only when no extraParams are set, that is when this
-page is not used as an include (e.g. from DemarchesSheet). *#
-#if (!$extraParams)
-  {{html clean="false" wiki="true"}}
-  [[$services.localization.render('wikidemarches.administration.avis.statistiques')&gt;&gt;Avis.Admin.Statistiques.WebHome||class='button btn btn-primary']]
-  {{/html}}
+#set($query = "select date_format(day, '%Y') as Année, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2020-01-01' group by 1")
+#set($results = $services.query.hql($query).execute())
+
+{{tableToChartJS type="bar" title="Avis par an" table="tableByYear" /}}
+
+(% id="tableByYear" style="display: none;" %)
+|= Année |= Nombre d'Avis
+#foreach($item in $results)
+| $item[0] | $item[1]
 #end
+)))
+(% class="col-sm-6" %)
+(((
+== Avis par mois ==
+
+#set($query = "select date_format(day, '%Y%m') as Mois, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2020-01-01' group by 1")
+#set($results = $services.query.hql($query).execute())
+
+{{tableToChartJS type="bar" title="Avis par mois" table="tableByMonth" /}}
+
+(% id="tableByMonth"  style="display: none;" %)
+|= Mois |= Nombre d'Avis
+#foreach($item in $results)
+| $item[0] | $item[1]
+#end
+)))
+)))
+
+== Avis par jour ==
+
+#set($query = "select day as Jour, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2020-01-01' group by 1")
+#set($results = $services.query.hql($query).execute())
+
+{{tableToChartJS type="bar" title="Avis par jour" table="tableByDay" /}}
+
+(% id="tableByDay"  style="display: none;" %)
+|= Jour |= Nombre d'Avis
+#foreach($item in $results)
+| $item[0] | $item[1]
+#end
+
+[[$services.localization.render('wikidemarches.administration.avis.statistiques')&gt;&gt;Avis.Admin.Statistiques.ComptagesAggregats.WebHome||class="button btn btn-primary"]]
+
 {{/velocity}}
-
 </content>
   <object>
     <name>Avis.WebHome</name>
