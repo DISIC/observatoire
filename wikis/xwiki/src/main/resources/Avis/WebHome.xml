@@ -50,7 +50,7 @@
 (((
 == Avis par an ==
 
-#set($query = "select date_format(day, '%Y') as Année, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2020-01-01' group by 1")
+#set($query = "select date_format(day, '%Y') as Année, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2018-01-01' group by 1")
 #set($results = $services.query.hql($query).execute())
 
 {{tableToChartJS type="bar" title="Avis par an" table="tableByYear" /}}
@@ -80,7 +80,7 @@
 
 == Avis par jour ==
 
-#set($query = "select day as Jour, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2020-01-01' group by 1")
+#set($query = "select day as Jour, sum(nbAvis) as nbAvis from AvisAggregateByDay where day&gt;'2022-01-01' group by 1")
 #set($results = $services.query.hql($query).execute())
 
 {{tableToChartJS type="bar" title="Avis par jour" table="tableByDay" /}}
