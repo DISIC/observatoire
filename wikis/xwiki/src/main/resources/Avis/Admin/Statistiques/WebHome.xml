@@ -39,13 +39,33 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
-  <content>* Comptages
-** [[Par jour, heure&gt;&gt;Comptages]]
-** [[Par semaine, mois&gt;&gt;.Comptages.AllTime]] (toute période)
-** [[Par Type&gt;&gt;.Comptages.ParType]]
-* [[Scores par date&gt;&gt;doc:ScoresByDate]]
-* [[Votes par date&gt;&gt;VotesByDate]]
-* [[Statistiques par Ministères&gt;&gt;Ministeres]]
-* [[Scores&gt;&gt;Scores]] (toute période)
-</content>
+  <content/>
+  <object>
+    <name>Avis.Admin.Statistiques.WebHome</name>
+    <number>0</number>
+    <className>XWiki.RedirectClass</className>
+    <guid>305d3458-f9f0-4bd6-8737-2293b58b25f5</guid>
+    <class>
+      <name>XWiki.RedirectClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <location>
+        <disabled>0</disabled>
+        <name>location</name>
+        <number>1</number>
+        <prettyName>Location</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </location>
+    </class>
+    <property>
+      <location>Avis.Admin.Statistiques.ComptagesAggregats</location>
+    </property>
+  </object>
 </xwikidoc>
