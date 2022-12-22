@@ -91,7 +91,7 @@
 | $item[0] | $item[1]
 #end
 
-[[$services.localization.render('wikidemarches.administration.avis.statistiques')&gt;&gt;Avis.Admin.Statistiques.ComptagesAggregats.WebHome||class="button btn btn-primary"]]
+[[$services.localization.render('wikidemarches.administration.avis.statistiques')&gt;&gt;Avis.Admin.Statistiques.WebHome||class="button btn btn-primary"]]
 
 {{/velocity}}
 </content>
