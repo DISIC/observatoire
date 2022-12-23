@@ -1,6 +1,8 @@
 INSERT IGNORE INTO avis 
 SELECT
   xwikiobjects.XWO_ID AS xwo_id,
+  doc.XWD_NAME AS avis_id,
+  doc.XWD_CREATION_DATE AS avis_date,
   sessionId.XWS_VALUE AS avis_session_id,
   apiKey.XWS_VALUE AS avis_api_key,
   dem.XWS_VALUE AS avis_demarche,
@@ -14,9 +16,7 @@ SELECT
   autreAide.XWS_VALUE AS avis_autre_aide,
   autre.XWL_VALUE AS avis_autre,
   email.XWS_VALUE AS avis_email,
-  src.XWS_VALUE AS avis_source,
-  doc.XWD_CREATION_DATE AS avis_date,
-  doc.XWD_NAME AS avis_id
+  src.XWS_VALUE AS avis_source
 FROM
   xwoids, xwikiobjects
 JOIN xwikistrings AS dem ON
