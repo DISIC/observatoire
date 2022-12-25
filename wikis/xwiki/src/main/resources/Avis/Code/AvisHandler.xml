@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1544396400000</creationDate>
+  <creationDate>1543348795000</creationDate>
   <parent>xwiki:Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1544396400000</date>
-  <contentUpdateDate>1544396400000</contentUpdateDate>
+  <date>1671996547000</date>
+  <contentUpdateDate>1671996547000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Handler</title>
   <comment/>
@@ -67,22 +67,28 @@
     ## in case there is, the existing avis will get updated.
     #if ($avisId &amp;&amp; $xwiki.exists("Avis.$avisId"))
       ## Get avis document with programming rights, because Avis are not available to guests.
-      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId}")
+      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId} (browser back button was used?)")
       #set ($target = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
       #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
       #set ($object = $target.getObject('Avis.Code.AvisClass'))
+      ## we don't know in what state this avis object is, so let's set the redundant date and the avisId in the object, important for having all data in the same table
+      #set ($discard = $object.set("date", $target.creationDate))
+      #set ($discard = $object.set("avisId", $target.name))
     #end
     ## Create new avis only if target has not been set already
     #if (!$target)
-      #set ($avisId = $services.uin.getNext('avis'))
-      #set ($target = $xwiki.getDocumentAsAuthor("Avis.${avisId}"))
+      #set ($uin = $services.uin.getNext('avis'))
+      #set ($target = $xwiki.getDocumentAsAuthor("Avis.${uin}"))
       #set ($object = $target.addObjectFromRequest('Avis.Code.AvisClass'))
+      ## set the redundant date and the avisId in the object, important for having all data in the same table
+      #set ($discard = $object.set("date", $target.creationDate))
+      #set ($discard = $object.set("avisId", $target.name))
       #if ($request.session &amp;&amp; $request.session.id)
         #set ($sessionId = $request.session.id)
         #set ($discard = $object.set("sessionId", $sessionId))
       #end
     #end
-    #validateAvis($object, $avisId)
+    #validateAvis($object)
     #if ($validated)
       ## Save with programming rights as the current user will not have the right to edit the Avis document
       #set ($discard = $target.saveWithProgrammingRights())
@@ -99,7 +105,7 @@
     #set ($target = $xwiki.getDocumentAsAuthor("Avis.${avisId}"))
     #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
     #set ($object = $target.getObject('Avis.Code.AvisClass'))
-    #validateAvis($object, $avisId)
+    #validateAvis($object)
     #if($validated)
       #set ($discard = $target.saveWithProgrammingRights())
     #else
@@ -138,7 +144,7 @@
     <name>Avis.Code.AvisHandler</name>
     <number>0</number>
     <className>XWiki.RequiredRightClass</className>
-    <guid>bdad7635-ce88-4f9c-a592-d61f0b648f36</guid>
+    <guid>272297a0-c706-42ec-b87f-d30477d32439</guid>
     <class>
       <name>XWiki.RequiredRightClass</name>
       <customClass/>

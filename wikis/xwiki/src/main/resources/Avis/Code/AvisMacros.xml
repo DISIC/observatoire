@@ -79,7 +79,7 @@
   #end
 #end
 
-#macro(validateAvis $avisObject $avisId)
+#macro(validateAvis $avisObject)
   #set ($clazz = $xwiki.getClass('Avis.Code.AvisClass'))
   #set ($validationMap = {})
   #foreach($prop in $clazz.properties)
@@ -89,13 +89,6 @@
   #set ($validated = true)
   #foreach ($value in $validationMap.values())
     #set ($validated = $validated &amp;&amp; $value)
-  #end
-  #if ("$!avisObject.get('date')" == "")
-    $avisObject.set("date", $datetool.getSystemDate())
-  #end
-  #if ("$!avisObject.get('avisId')" == "")
-    ## quotes are important to cast $avisId to String
-    $avisObject.set("avisId", "$avisId")
   #end
 #end
 {{/velocity}}</content>
