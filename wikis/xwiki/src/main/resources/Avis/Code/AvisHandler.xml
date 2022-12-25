@@ -67,7 +67,7 @@
     ## in case there is, the existing avis will get updated.
     #if ($avisId &amp;&amp; $xwiki.exists("Avis.$avisId"))
       ## Get avis document with programming rights, because Avis are not available to guests.
-      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId} (browser back button was used?)")
+      $logger.warn("An existing avis was found in the session for demarche ${demarcheId}: ${avisId} (browser back button was used or refresh of second step?)")
       #set ($target = $xwiki.getDocumentAsAuthor("Avis.$avisId"))
       #set ($discard = $target.updateObjectFromRequest('Avis.Code.AvisClass'))
       #set ($object = $target.getObject('Avis.Code.AvisClass'))
