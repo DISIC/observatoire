@@ -27,12 +27,12 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <creationDate>1543348795000</creationDate>
+  <creationDate>1544396400000</creationDate>
   <parent>xwiki:Avis.Code.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
-  <date>1671996547000</date>
-  <contentUpdateDate>1671996547000</contentUpdateDate>
+  <date>1544396400000</date>
+  <contentUpdateDate>1544396400000</contentUpdateDate>
   <version>1.1</version>
   <title>Avis Handler</title>
   <comment/>
@@ -144,7 +144,7 @@
     <name>Avis.Code.AvisHandler</name>
     <number>0</number>
     <className>XWiki.RequiredRightClass</className>
-    <guid>272297a0-c706-42ec-b87f-d30477d32439</guid>
+    <guid>bdad7635-ce88-4f9c-a592-d61f0b648f36</guid>
     <class>
       <name>XWiki.RequiredRightClass</name>
       <customClass/>
