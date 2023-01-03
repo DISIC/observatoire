@@ -131,7 +131,12 @@ wikidemarches.demarche.embed.generate.button=Générer le code
 
 # Liste des avis tab
 wikidemarches.demarche.avisList.export.title=Exporter les avis
-wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également. Pour des raisons de compatibilité et de performance, l'export au format Excel est limité à 65 000 lignes.
+wikidemarches.demarche.avisList.export.explanation=Attention : si vous avez appliqué des règles de filtre ou de tri ci-dessus, elles seront appliquées lors de l'export également.
+wikidemarches.demarche.avisList.export.limit.start=Pour des raisons de compatibilité et de performance,
+wikidemarches.demarche.avisList.export.limit.body=l'export FORMAT ne restitue que les NOMBRE premières occurrences
+wikidemarches.demarche.avisList.export.limit.end=Pour obtenir les données au-delà de ces limites, il convient d'appliquer des filtres au tableau ci-dessus et de procéder à plusieurs exports.
+wikidemarches.demarche.avisList.export.format.csv=CSV
+wikidemarches.demarche.avisList.export.format.xls=Excel
 wikidemarches.demarche.avisList.export.nbAvis=Nombre d'avis à exporter :
 wikidemarches.demarche.avisList.export.excel=Exporter pour excel
 wikidemarches.demarche.avisList.export.csv=Exporter en CSV

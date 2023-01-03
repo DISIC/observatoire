@@ -39,7 +39,9 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity output="false"}}
+  <content>{{include reference="Demarches.Code.Parametres" /}}
+
+{{velocity output="false"}}
 ##
 ## Maps of avis values, as global variables, so that we can reuse them in macros to produce display value results without calling the expensive display function every time.
 ##
@@ -338,7 +340,7 @@
 #**
  * Customization of this livetable API for two purposes:
  * - to add progress when exporting in async mode
- * - limit Excel exports to 65000 rows
+ * - limit Excel and CSV exports to a specified number of rows
  * - to make count work with the custom avis query.
  *   query.count() is defined in xwiki-platform's CountDocumentFilter.java file
  *   and only counts documents. Since we don't want to join documents to make queries faster,
@@ -359,8 +361,10 @@
   #if(!$limit)
     #set ($limit = 15)
   #end
-  #if ($extension == 'xls' &amp;&amp; ($limit == 0 || $limit &gt; 65000))
-    #set($limit = 65000)
+  #if ($extension == 'xls' &amp;&amp; ($limit == 0 || $limit &gt; $EXPORT_LIMIT_XLS))
+    #set($limit = $EXPORT_LIMIT_XLS)
+  #elseif ($limit == 0 || $limit &gt; $EXPORT_LIMIT_CSV)
+    #set($limit = $EXPORT_LIMIT_CSV)
   #end
   #set($query = $services.query.hql($sql))
   ## Apply query filters if defined. Otherwise use default.

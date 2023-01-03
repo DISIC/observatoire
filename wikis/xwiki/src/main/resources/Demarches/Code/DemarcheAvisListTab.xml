@@ -39,7 +39,9 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{velocity}}
+  <content>{{include reference="Demarches.Code.Parametres" /}}
+
+{{velocity}}
 {{html wiki="true" clean="false"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
 #set($discard = $xwiki.jsx.use("Demarches.Code.DemarcheAvisListTab"))
@@ -77,6 +79,13 @@
 &lt;div id="xwiki-livetable-tools-exporter-div"&gt;
   &lt;h2&gt;$services.localization.render('wikidemarches.demarche.avisList.export.title')&lt;/h2&gt;
   &lt;p&gt;$services.localization.render('wikidemarches.demarche.avisList.export.explanation')&lt;/p&gt;
+  &lt;div id="warning-limits" class="box warningmessage" hidden="hidden" data-limit-csv="$EXPORT_LIMIT_CSV" data-limit-xls="$EXPORT_LIMIT_XLS"&gt;
+    &lt;p&gt;
+      $services.localization.render('wikidemarches.demarche.avisList.export.limit.start')
+      &lt;span id="warning-limits-details"&gt;&lt;/span&gt;.
+      $services.localization.render('wikidemarches.demarche.avisList.export.limit.end')
+    &lt;/p&gt;
+  &lt;/div&gt;
   &lt;div class='avis-livetable-tools-exporter-aviscountcontainer'&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="xwiki-livetable-tools-exporter-status"&gt;&lt;/div&gt;
@@ -171,6 +180,53 @@
     </property>
     <property>
       <code>require(['jquery'], function($) {
+  var totalRows = -1;
+
+  var NumberFormat = window.Intl &amp;&amp; window.Intl.NumberFormat;
+  if (!NumberFormat) {
+    // Bare minimum polyfill for browsers that don't have
+    // Intl.NumberFormat (in short, IE)
+    // In other browsers, numbers will be neatly displayed by packets of three
+    // figures separated by narrow non breaking spaces.
+    NumberFormat = function() {};
+    NumberFormat.prototype.format = function(n) { return "" + n; };
+  }
+
+  function updateLimitWarnings() {
+    var warningLimits = document.getElementById("warning-limits");
+    var xlsLimit = parseInt(warningLimits.dataset.limitXls);
+    var csvLimit = parseInt(warningLimits.dataset.limitCsv);
+    var withinXLSLimit = totalRows &lt;=  xlsLimit;
+    var withinCSVLimit = totalRows &lt;= csvLimit;
+    var withinLimits = withinXLSLimit &amp;&amp; withinCSVLimit;
+
+    warningLimits.hidden = withinLimits;
+    if (withinLimits) {
+      return;
+    }
+
+    var details = "";
+
+    var numberFormatter = new NumberFormat('fr-FR');
+
+    if (!withinXLSLimit) {
+      details += "$services.localization.render('wikidemarches.demarche.avisList.export.limit.body')"
+        .replace("FORMAT", "$services.localization.render('wikidemarches.demarche.avisList.export.format.xls')")
+        .replace("NOMBRE", numberFormatter.format(xlsLimit));
+      if (!withinCSVLimit) {
+        details += " et ";
+      }
+    }
+
+    if (!withinCSVLimit) {
+      details += "$services.localization.render('wikidemarches.demarche.avisList.export.limit.body')"
+        .replace("FORMAT", "$services.localization.render('wikidemarches.demarche.avisList.export.format.csv')")
+        .replace("NOMBRE", numberFormatter.format(csvLimit));
+    }
+
+    document.getElementById("warning-limits-details").textContent = details;
+  }
+
   $(document).ready(function() {
     ## generate, from velocity, the maps of values for the 3 columns
     var listOptions = {};
@@ -211,6 +267,14 @@
       filterInput.after(select);
       filterInput.hide();
     });
+    updateLimitWarnings();
+  });
+
+  $(document).on("xwiki:livetable:receivedEntries", function(e, d) {
+    if (d &amp;&amp; d.data &amp;&amp; d.data.hasOwnProperty('totalrows')) {
+      totalRows = d.data.totalrows;
+      updateLimitWarnings();
+    }
   });
 });</code>
     </property>
