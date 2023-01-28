@@ -40,7 +40,7 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>false</hidden>
   <content>{{velocity output="false"}}
-#set($EXPORT_LIMIT_XLS =  100)
-#set($EXPORT_LIMIT_CSV =10000)
+#set($EXPORT_LIMIT_XLS = 65000)
+#set($EXPORT_LIMIT_CSV =150000)
 {{/velocity}}</content>
 </xwikidoc>
