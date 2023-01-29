@@ -39,7 +39,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{include reference="Demarches.Code.Parametres" /}}
+  <content>{{include reference="Demarches.Code.ParametresExport" /}}
 
 {{velocity output="false"}}
 ##
