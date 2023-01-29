@@ -39,9 +39,7 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{include reference="Demarches.Code.ParametresExport" /}}
-
-{{velocity}}
+  <content>{{velocity}}
 {{html wiki="true" clean="false"}}
 &lt;div class="tab-pane fade #if($selectedTab == 'liste-avis-tab')active in#end" role="tabpanel" id="liste-avis-tab" aria-labelledby="liste-avis-tab"&gt;
 #set($discard = $xwiki.jsx.use("Demarches.Code.DemarcheAvisListTab"))
@@ -75,6 +73,8 @@
 #set ($columns = ['demarche', 'date', 'avisId', 'score', 'autre', 'facile', 'comprehensible', 'difficultes', 'autreDifficulte', 'aide', 'autreAide', 'source'])
 
 #livetable('avis' $columns $columnsProperties $options)
+#set($EXPORT_LIMIT_XLS =  65000)
+#set($EXPORT_LIMIT_CSV = 150000)
 ## Add the HTML structure for the export buttons
 &lt;div id="xwiki-livetable-tools-exporter-div"&gt;
   &lt;h2&gt;$services.localization.render('wikidemarches.demarche.avisList.export.title')&lt;/h2&gt;
@@ -90,9 +90,9 @@
 &lt;/div&gt;
 &lt;div id="xwiki-livetable-tools-exporter-status"&gt;&lt;/div&gt;
 ## Add the buttons
-{{livetableExporter livetable="avis" withAllFields="false" withPageName="false" withPageURL="false" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResultsAsync" async='true' label="$services.localization.render('wikidemarches.demarche.avisList.export.excel')" format="excel"/}}
+{{livetableExporter livetable="avis" withAllFields="false" withPageName="false" withPageURL="false" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResultsAsync" async='true' label="$services.localization.render('wikidemarches.demarche.avisList.export.excel')" format="excel" limit="$EXPORT_LIMIT_XLS" displayLimitMessage='false'/}}
 ##
-{{livetableExporter livetable="avis" withAllFields="false" withPageName="false" withPageURL="false" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResultsAsync" async='true' label="$services.localization.render('wikidemarches.demarche.avisList.export.csv')" format="csv"/}}
+{{livetableExporter livetable="avis" withAllFields="false" withPageName="false" withPageURL="false" filename="avis_$datetool.get('ddMMyyyyHHmmss')" customResults="Avis.Code.DemarcheAvisLivetableResultsAsync" async='true' label="$services.localization.render('wikidemarches.demarche.avisList.export.csv')" format="csv" limit="$EXPORT_LIMIT_CSV" displayLimitMessage='false'/}}
 
 &lt;/div&gt;
 {{/html}}
