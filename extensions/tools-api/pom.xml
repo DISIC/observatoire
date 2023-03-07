@@ -22,6 +22,26 @@
       <artifactId>xwiki-commons-script</artifactId>
       <version>${commons.version}</version>
     </dependency>
+    <!-- REST API dependencies -->
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-rest-server</artifactId>
+      <version>${platform.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-rest-model</artifactId>
+      <version>${platform.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.9.2</version>
+    </dependency>
     <!-- Testing dependencies -->
     <dependency>
       <groupId>org.xwiki.commons</groupId>
@@ -36,4 +56,58 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jvnet.jaxb2.maven2</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <configuration>
+          <generatePackage>com.xwiki.projects.dinsic.wikidemarches.rest.model.jaxb</generatePackage>
+          <extension>true</extension>
+          <args>
+            <!-- Copied from effective pom, to inherit configuration -->
+            <arg>-Xfluent-api</arg>
+            <!-- Added config, to generate annotations to exclude null values from JSON serialization
+                 See https://github.com/highsource/jaxb2-annotate-plugin/blob/master/README.md -->
+            <arg>-Xannotate</arg>
+          </args>
+          <!-- Copied from effective pom, to inherit configuration -->
+          <verbose>true</verbose>
+          <removeOldOutput>false</removeOldOutput>
+          <plugins>
+            <!-- Copied from effective pom, to inherit configuration -->
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-fluent-api</artifactId>
+              <version>3.0</version>
+            </plugin>
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-default-value</artifactId>
+              <version>1.1</version>
+            </plugin>
+            <!-- Added config, to generate annotations to exclude null values from JSON serialization
+                 See https://github.com/highsource/jaxb2-annotate-plugin/blob/master/README.md -->
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-basics-annotate</artifactId>
+              <version>1.1.0</version>
+            </plugin>
+            <plugin>
+              <groupId>com.fasterxml.jackson.core</groupId>
+              <artifactId>jackson-annotations</artifactId>
+              <version>2.9.2</version>
+            </plugin>
+          </plugins>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

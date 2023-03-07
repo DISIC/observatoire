@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://observatoire.numerique.gouv.fr/observatoire"
+  xmlns:observatoire="https://observatoire.numerique.gouv.fr/observatoire" elementFormDefault="qualified">
+  <xs:complexType name="SmileyQuestionAnswerStats">
+    <xs:sequence>
+      <xs:element name='negative' type='xs:long' />
+      <xs:element name='neutral' type='xs:long' />
+      <xs:element name='positive' type='xs:long' />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:group name="AvisStatsPeriod">
+    <xs:sequence>
+      <xs:element name="date_start" type='xs:long' />
+      <xs:element name="date_end" type='xs:long' />
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="AvisStats">
+    <xs:sequence>
+      <xs:element name='answers_total' minOccurs="0" type='xs:long' />
+      <xs:element name='satisfaction' minOccurs="0" type="observatoire:SmileyQuestionAnswerStats" />
+      <xs:element name='easy' minOccurs="0" type="observatoire:SmileyQuestionAnswerStats" />
+      <xs:element name='comprehensible' minOccurs="0" type="observatoire:SmileyQuestionAnswerStats" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DemarcheAvisStats">
+    <xs:complexContent>
+      <xs:extension base="observatoire:AvisStats">
+        <xs:sequence>
+          <xs:element name="id" type='xs:string' />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- Elements: list of demarches and their stats -->
+  <xs:element name="demarches_avisstats">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="demarche" maxOccurs="unbounded" type="observatoire:DemarcheAvisStats" />
+        <xs:group ref="observatoire:AvisStatsPeriod" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- Elements: single demarche its stats -->
+  <xs:element name="demarche_avisstats">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="observatoire:AvisStats">
+          <xs:group ref="observatoire:AvisStatsPeriod" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
