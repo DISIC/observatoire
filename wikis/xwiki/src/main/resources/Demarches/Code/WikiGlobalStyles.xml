@@ -553,28 +553,28 @@ Visually, there's the title row and then all the rows from the document content,
   justify-content: center;
   align-items: flex-start;
   color: black;
-  font-weight: bold;
 
   span:first-child {
     font-size: 0.75rem;
     line-height: 0.9rem;
+    font-weight: bold;
   }
 
   span:last-child {
     font-size: 0.6rem;
     line-height: 0.7rem;
-    margin-bottom: 0.7rem;
+    font-size: 1rem;
   }
 
   @media (min-width: @screen-md-min) {
     span:first-child {
-      font-size: 1.4rem;
-      line-height: 1.55rem;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
     }
 
     span:last-child {
-      font-size: 1.05rem;
       line-height: 1.5rem;
+      margin-bottom: 0.7rem;
       margin-bottom: 0rem;
     }
   }
@@ -690,6 +690,30 @@ Visually, there's the title row and then all the rows from the document content,
 
     img {
       vertical-align: baseline;
+    }
+  }
+}
+
+/* change hover style of main title logos */
+.navbar-header {
+  &amp;:hover {
+    // new dsfr uses --grey-1000-75-active, which is #f6f6f6
+    // this variable does not exist in our version
+    // but we have a variable with the same value: @grey-975
+    background-color: @grey-975;
+  }
+}
+
+/* customize display of navbar quick links */
+#xwikimainmenu .wikidemarches-topmenu {
+  a {
+    font-weight: 500;
+
+    &amp;:hover {
+      // new dsfr uses --grey-1000-75-active, which is #f6f6f6
+      // this variable does not exist in our version
+      // but we have a variable with the same value: @grey-975
+      background-color: @grey-975;
     }
   }
 }
@@ -1084,7 +1108,8 @@ span.wikiexternallink {
 
       .navbar-header {
         float: none;
-        margin: 0;
+        margin: -1rem;
+        padding: 1rem;
       }
 
       #xwikimainmenu {
@@ -1146,14 +1171,6 @@ span.wikiexternallink {
 
                 @media (min-width: @screen-md-min) {
                   display: inline-block;
-                }
-
-                // Display separator between items in desktop layout
-                &amp;:not(:last-child) {
-                  @media (min-width: @screen-md-min) {
-                    border-right: 1px solid transparent;
-                    border-image: linear-gradient(to bottom, transparent 0% 30%, @grey-925 30% 70%, transparent 70% 100%) 1;
-                  }
                 }
               }
             }
