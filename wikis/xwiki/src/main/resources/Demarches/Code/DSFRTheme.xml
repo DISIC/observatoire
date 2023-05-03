@@ -1583,6 +1583,7 @@
 /***************************************************/
 
 @line-height-base: 1.5;
+@grid-gutter-width: 48px;
 
 html {
   font-size: 100%;

@@ -159,8 +159,8 @@
   ## so we have to hardcode its rules
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 24px;
+  padding-right: 24px;
   width: 100%;
   max-width: ${size}px;
 }
