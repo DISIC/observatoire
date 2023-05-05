@@ -102,7 +102,7 @@
 Bonjour ${xwiki.getUserName("$userName", false)},
 &lt;/p&gt;
 &lt;p&gt;
-Votre compte sur l’Observatoire de la qualité des démarches en ligne a bien été activé.
+Votre compte sur l’Observatoire de la qualité des services numériques a bien été activé.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -125,7 +125,7 @@ $services.localization.render('wikidemarches.sitename')
     <property>
       <text>Bonjour ${xwiki.getUserName("$userName", false)},
 
-Votre compte sur l’Observatoire de la qualité des démarches en ligne a bien été activé.
+Votre compte sur l’Observatoire de la qualité des services numériques a bien été activé.
 
 Votre nom d’utilisateur est « $userId ».
 Cliquez sur ce lien pour vous connecter à l’Observatoire: $xwiki.getDocument("XWiki.XWikiLogin").getExternalURL("login")

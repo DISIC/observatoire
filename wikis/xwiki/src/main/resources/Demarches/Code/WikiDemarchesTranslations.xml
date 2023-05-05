@@ -70,10 +70,10 @@ wikidemarches.accountnotactive=Votre compte n'est pas encore actif, car votre e-
 wikidemarches.accountmailnotvalidated=Votre compte n'est pas encore actif, car votre e-mail n'a pas été confirmé ou votre compte n'a pas encore été validée par un administrateur.&lt;br/&gt;Si vous avez déjà confirmé votre adresse e-mail (en utilisant le lien envoyé à l'adresse e-mail utilisée lors de l'inscription), attendez la validation de votre compte par un administrateur. Vous serez notifié par e-mail de la validation.
 
 #Démarches
-wikidemarches.sitename=L’Observatoire de la qualité des démarches en ligne
+wikidemarches.sitename=L’Observatoire de la qualité des services numériques
 wikidemarches.sitename.servicesPubliquesPlus=Services Publics +
 wikidemarches.siteurl=observatoire.numerique.gouv.fr
-wikidemarches.home.title=L’Observatoire de la qualité des démarches en ligne
+wikidemarches.home.title=L’Observatoire de la qualité des services numériques
 wikidemarches.home.subtitle=Pour des services publics numériques de qualité
 wikidemarches.home.explanation=L’Observatoire vous permet de suivre la qualité de la numérisation des 250 démarches publiques les plus utilisées.
 wikidemarches.footer=Pied de page
@@ -166,7 +166,7 @@ wikidemarches.footer.administrationlinks.intro=Nos sites :
 wikidemarches.footer.administrationlinks.newwindow=nouvelle fenêtre
 wikidemarches.footer.description.jdma=Le bouton {0} est un service proposé par la direction interministérielle du numérique (DINUM) dans le cadre de la démarche Services publics +.
 wikidemarches.footer.description.jdma.button-name=Je donne mon avis
-wikidemarches.footer.description.observatoire=L’Observatoire de la qualité des démarches en ligne est un service proposé par l'équipe design des services numériques de la direction interministérielle du numérique (DINUM).
+wikidemarches.footer.description.observatoire=L’Observatoire de la qualité des services numériques est un service proposé par l'équipe design des services numériques de la direction interministérielle du numérique (DINUM).
 
 # Tableau de bord
 wikidemarches.dematdashboard.title=Tableau de bord de la dématérialisation

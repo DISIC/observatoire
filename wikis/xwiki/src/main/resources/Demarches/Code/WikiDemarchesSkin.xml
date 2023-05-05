@@ -898,7 +898,7 @@
       &lt;img class="brand-logo" src="$!logourl" alt="République française"/&gt;
       &lt;span class='demarches-titlebar-sitename observatoire'&gt;
         &lt;span&gt;L’Observatoire de la qualité&lt;/span&gt;
-        &lt;span&gt;des démarches en ligne&lt;/span&gt;
+        &lt;span&gt;des services numériques&lt;/span&gt;
       &lt;/span&gt;
     &lt;/$logoElt&gt;
   #end
