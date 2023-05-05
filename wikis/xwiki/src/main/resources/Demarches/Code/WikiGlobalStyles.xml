@@ -532,16 +532,12 @@ Visually, there's the title row and then all the rows from the document content,
   height: @logo-height-mobile;
 
   /* Icon secondary: Observatoire / SP+ */
-  &amp; + .demarches-titlebar-sitename.service-plus img {
-    height: @sitename-height-mobile;
+  &amp; + .demarches-titlebar-sitename {
+    display: none;
   }
 
   @media (min-width: @screen-md-min) {
     height: 115px;
-
-    &amp; + .demarches-titlebar-sitename.service-plus img {
-      height: @sitename-height-desktop;
-    }
   }
 }
 
