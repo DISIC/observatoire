@@ -499,8 +499,9 @@ Visually, there's the title row and then all the rows from the document content,
 #footerglobal .navbar-brand {
   /* Reset padding that seems to be computed from the navbar size */
   padding: 0;
-  &amp;:focus {
-    .outline;
+  &amp;:focus-visible {
+    outline: auto;
+    outline-offset: 1rem;
   }
 }
 
@@ -693,10 +694,17 @@ Visually, there's the title row and then all the rows from the document content,
 /* change hover style of main title logos */
 .navbar-header {
   &amp;:hover {
-    // new dsfr uses --grey-1000-75-active, which is #f6f6f6
+    // new dsfr uses --grey-1000-75-hover, which is #f6f6f6
     // this variable does not exist in our version
     // but we have a variable with the same value: @grey-975
     background-color: @grey-975;
+  }
+  &amp;:active {
+    outline: none;
+    // new dsfr uses --grey-1000-75-active, which is #ededed
+    // this variable does not exist in our version
+    // the closest one is: @grey-950, with value #eee
+    background-color: @grey-950;
   }
 }
 
@@ -706,10 +714,16 @@ Visually, there's the title row and then all the rows from the document content,
     font-weight: 500;
 
     &amp;:hover {
-      // new dsfr uses --grey-1000-75-active, which is #f6f6f6
+      // new dsfr uses --grey-1000-75-hover, which is #f6f6f6
       // this variable does not exist in our version
       // but we have a variable with the same value: @grey-975
       background-color: @grey-975;
+    }
+    &amp;:active {
+      // new dsfr uses --grey-1000-75-active, which is #ededed
+      // this variable does not exist in our version
+      // the closest one is: @grey-950, with value #eee
+      background-color: @grey-950;
     }
   }
 }
