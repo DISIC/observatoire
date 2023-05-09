@@ -1118,8 +1118,13 @@ span.wikiexternallink {
 
       .navbar-header {
         float: none;
-        margin: -1rem;
-        padding: 1rem;
+        margin: -0.5rem;
+        padding: 0.5rem;
+
+        @media (min-width: @screen-md-min) {
+          margin: -1rem;
+          padding: 1rem;
+        }
       }
 
       #xwikimainmenu {
