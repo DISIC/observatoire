@@ -1668,13 +1668,15 @@ p {
 
 // left &amp; right margins being implemented using `padding` property,
 // they are part of the element size (because of `box-sizing: border-box`).
-// So from the sized defined in https://github.com/DISIC/observatoire/issues/1126
-// that only apply for the content of the container, also need to add the 2 * 15px margins, 
+// So from the sized defined in the dsfr documentation
+// (https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/grille-et-points-de-rupture)
+// that only apply for the content of the container, we also need to add the 1.5rem (24px) * 2 margins, 
 // so that it has the correct size
-@container-fluid-sm: 800px;
-@container-fluid-md: 1000px;
-@container-fluid-lg: 1200px;
-@container-fluid-xl: 1400px;
+// (These sizes need to be aligned with Demarches.Code.SetLayoutContainerWidthSSX)
+@container-fluid-sm: 800px + @grid-gutter-width;
+@container-fluid-md: 1000px + @grid-gutter-width;
+@container-fluid-lg: 1200px + @grid-gutter-width;
+@container-fluid-xl: 1400px + @grid-gutter-width;
 
 .container-fluid-sized(@size) {
   .container-fixed();

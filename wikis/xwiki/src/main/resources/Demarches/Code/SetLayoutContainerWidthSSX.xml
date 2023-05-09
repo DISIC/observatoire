@@ -145,13 +145,15 @@
 
 ## Hardcoded layout sizes (taken from Demarches.Code.DSFRTheme)
 ## By default we use 'lg'
-#set ($size = 1200)
+#set ($gridColumnWidth = 48)
+#set ($halfGridColumnWidth = $gridColumnWidth / 2)
+#set ($size = 1200 + $gridColumnWidth)
 #if ($request.size == 'sm')
-  #set ($size = 800)
+  #set ($size = 800 + $gridColumnWidth)
 #elseif ($request.size == 'md')
-  #set ($size = 1000)
+  #set ($size = 1000 + $gridColumnWidth)
 #elseif ($request.size == 'xl')
-  #set ($size = 1400)
+  #set ($size = 1400 + $gridColumnWidth)
 #end
 
 #contentcontainerinner, #xwikieditorinner {
@@ -159,8 +161,8 @@
   ## so we have to hardcode its rules
   margin-right: auto;
   margin-left: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: ${halfGridColumnWidth}px;
+  padding-right: ${halfGridColumnWidth}px;
   width: 100%;
   max-width: ${size}px;
 }
