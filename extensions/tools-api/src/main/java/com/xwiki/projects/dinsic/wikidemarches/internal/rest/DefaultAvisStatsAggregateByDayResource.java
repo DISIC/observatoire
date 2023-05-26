@@ -12,10 +12,11 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
+import org.xwiki.bridge.DocumentAccessBridge;
 import org.xwiki.component.annotation.Component;
 import org.xwiki.component.phase.InitializationException;
+import org.xwiki.model.reference.DocumentReference;
 import org.xwiki.model.reference.DocumentReferenceResolver;
-import org.xwiki.model.reference.EntityReference;
 import org.xwiki.query.Query;
 import org.xwiki.query.QueryException;
 import org.xwiki.query.QueryManager;
@@ -61,6 +62,9 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
     @Inject
     protected DocumentReferenceResolver<String> documentReferenceResolver;
 
+    @Inject
+    protected DocumentAccessBridge docAccessBridge;
+
     @Override
     public void initialize() throws InitializationException
     {
@@ -82,8 +86,15 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
     public DemarcheAvisstats getAvisStats(String demarcheId, Long dateStart, Long dateEnd, List<String> questions)
         throws XWikiRestException
     {
+        DocumentReference demarcheReference = documentReferenceResolver.resolve(DEMARCHES_SPACE_PREFIX + demarcheId);
+
+        if (!docAccessBridge.exists(demarcheReference)) {
+            logger.warn("An access was attempted to the stats rest service for an inexistent demarche " + demarcheId);
+            throw new WebApplicationException(Status.NOT_FOUND);
+        }
+
         // check access to avis of demarche before anything
-        if (!canReadAvisForDemarche(demarcheId)) {
+        if (!canReadAvisForDemarche(demarcheReference)) {
             logger.warn("An access was attempted to the stats rest service with an unauthorized user "
                 + this.xcontextProvider.get().getUserReference() + " to demarche " + demarcheId);
             throw new WebApplicationException(Status.FORBIDDEN);
@@ -128,27 +139,27 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
             List results = demarchesQuery.execute();
             for (Object result : results) {
                 Object[] values = (Object[]) result;
-                long totalAvis = (long) values[0];
+                long totalAvis = getValueOr0(values, 0);
                 demarcheStats.withAnswersTotal(totalAvis);
                 int valuesRead = 1;
                 if (questions.contains(QUESTION_SATISFACTION)) {
-                    long bads = (long) values[valuesRead++];
-                    long mediums = (long) values[valuesRead++];
-                    long goods = (long) values[valuesRead++];
+                    long bads = getValueOr0(values, valuesRead++);
+                    long mediums = getValueOr0(values, valuesRead++);
+                    long goods = getValueOr0(values, valuesRead++);
                     demarcheStats.withSatisfaction(objFactory.createSmileyQuestionAnswerStats().withNegative(bads)
                         .withNeutral(mediums).withPositive(goods));
                 }
                 if (questions.contains(QUESTION_EASY)) {
-                    long bads = (long) values[valuesRead++];
-                    long mediums = (long) values[valuesRead++];
-                    long goods = (long) values[valuesRead++];
+                    long bads = getValueOr0(values, valuesRead++);
+                    long mediums = getValueOr0(values, valuesRead++);
+                    long goods = getValueOr0(values, valuesRead++);
                     demarcheStats.withEasy(objFactory.createSmileyQuestionAnswerStats().withNegative(bads)
                         .withNeutral(mediums).withPositive(goods));
                 }
                 if (questions.contains(QUESTION_COMPREHENSIBLE)) {
-                    long bads = (long) values[valuesRead++];
-                    long mediums = (long) values[valuesRead++];
-                    long goods = (long) values[valuesRead++];
+                    long bads = getValueOr0(values, valuesRead++);
+                    long mediums = getValueOr0(values, valuesRead++);
+                    long goods = getValueOr0(values, valuesRead++);
                     demarcheStats.withComprehensible(objFactory.createSmileyQuestionAnswerStats().withNegative(bads)
                         .withNeutral(mediums).withPositive(goods));
                 }
@@ -158,6 +169,16 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
             logger.error("Error while fetching aggregate data from the database ", e);
             throw new XWikiRestException("Error while fetching aggregate data from the database", e);
         }
+    }
+
+    /**
+     * @param resultsArray the array of results to fetch the value from, with null check
+     * @param index the index from the values array to get the value from
+     * @return 0 if the value in the array is null, or the conversion to null otherwise.
+     */
+    private long getValueOr0(Object[] resultsArray, int index)
+    {
+        return resultsArray[index] == null ? 0 : (long) resultsArray[index];
     }
 
     /**
@@ -206,12 +227,11 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
     /**
      * Implements rights verification on the avis of a demarche, for the purpose of this service.
      * 
-     * @param demarcheId the id of the demarche (without the "Demarches." part)
+     * @param demarcheReference the reference of the demarche
      * @return true if the current user can read the avis, false otherwise
      */
-    protected boolean canReadAvisForDemarche(String demarcheId)
+    protected boolean canReadAvisForDemarche(DocumentReference demarcheReference)
     {
-        EntityReference demarcheReference = documentReferenceResolver.resolve(DEMARCHES_SPACE_PREFIX + demarcheId);
         // simple implementation for now, check admin right only.
         // TODO: implement proper check by checking porteurs and admin ministeriel
         return authorizationManager.hasAccess(Right.ADMIN, demarcheReference);
