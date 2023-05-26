@@ -22,8 +22,6 @@ import org.xwiki.query.QueryException;
 import org.xwiki.query.QueryManager;
 import org.xwiki.rest.XWikiResource;
 import org.xwiki.rest.XWikiRestException;
-import org.xwiki.security.authorization.ContextualAuthorizationManager;
-import org.xwiki.security.authorization.Right;
 
 import com.xwiki.projects.dinsic.wikidemarches.rest.AvisStatsAggregateByDayResource;
 import com.xwiki.projects.dinsic.wikidemarches.rest.model.jaxb.DemarcheAvisstats;
@@ -55,9 +53,6 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
 
     @Inject
     protected QueryManager queryManager;
-
-    @Inject
-    ContextualAuthorizationManager authorizationManager;
 
     @Inject
     protected DocumentReferenceResolver<String> documentReferenceResolver;
@@ -232,8 +227,10 @@ public class DefaultAvisStatsAggregateByDayResource extends XWikiResource implem
      */
     protected boolean canReadAvisForDemarche(DocumentReference demarcheReference)
     {
-        // simple implementation for now, check admin right only.
-        // TODO: implement proper check by checking porteurs and admin ministeriel
-        return authorizationManager.hasAccess(Right.ADMIN, demarcheReference);
+        // the aggregated data is public, can be accessed by the stats URLs which are public and all parameters are
+        // accepted.
+        // So we could give access to anyone, however, we'll restrict it to only logged in users, to control the
+        // performance of the REST service.
+        return this.xcontextProvider.get().getUserReference() != null;
     }
 }
