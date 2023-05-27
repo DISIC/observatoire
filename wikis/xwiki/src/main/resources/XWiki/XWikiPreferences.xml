@@ -2841,11 +2841,11 @@ $services.localization.render('wikidemarches.sitename')</confirmation_email_cont
 ## compute OpenGraph metadata, depending on the page
 #set($ogMetaTitle = $services.localization.render('wikidemarches.og.title'))
 #set($ogMetaDescription = $services.localization.render('wikidemarches.og.description'))
-#set($ogMetaImage = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/observatoire.svg")
+#set($ogMetaImage = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/observatoire.png")
 #if($doc.space == 'je-donne-mon-avis')
   #set($ogMetaTitle = $services.localization.render('wikidemarches.og.title.je-donne-mon-avis'))
   #set($ogMetaDescription = $services.localization.render('wikidemarches.og.description.je-donne-mon-avis'))
-  #set($ogMetaImage = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/je-donne-mon-avis.svg")
+  #set($ogMetaImage = "${xcontext.context.getURLFactory().getServerURL($xcontext.context)}/static/je-donne-mon-avis.png")
 #end
 #if($doc.documentReference.spaceReferences.get(0).name == 'observatoire')
   #set($ogMetaTitle = $services.localization.render('wikidemarches.og.title.observatoire'))
