@@ -149,7 +149,7 @@
 </content>
     </property>
     <property>
-      <extensionPointId>org.xwiki.platform.topmenu.right</extensionPointId>
+      <extensionPointId>org.xwiki.platform.topmenu.right.disabled</extensionPointId>
     </property>
     <property>
       <name>org.xwiki.plaftorm.notifications.ui</name>
