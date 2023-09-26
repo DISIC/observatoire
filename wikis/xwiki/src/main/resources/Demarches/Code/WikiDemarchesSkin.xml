@@ -897,8 +897,7 @@
     &lt;$logoElt $logoAttr #if(!$displayPageHeader)class="navbar-brand"#end&gt;
       &lt;img class="brand-logo" src="$!logourl" alt="République française"/&gt;
       &lt;span class='demarches-titlebar-sitename observatoire'&gt;
-        &lt;span&gt;Vos démarches numériques essentielles&lt;/span&gt;
-        ## &lt;span&gt; &lt;/span&gt;
+        &lt;span&gt;$services.localization.render('wikidemarches.sitename')&lt;/span&gt;
       &lt;/span&gt;
     &lt;/$logoElt&gt;
   #end
