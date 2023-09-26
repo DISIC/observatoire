@@ -213,7 +213,7 @@
     (% class='container-fluid-md' %) (((
       (% class='row' %) (((
         (% class='col-xs-12' %) (((
-          == Les 250 démarches suivies par l’Observatoire ==
+          == Les 250 démarches suivies ==
 
           Nous avons recensé les 250 démarches administratives les plus utilisées par les usagers et nous avons établi des indicateurs qui nous permettent de suivre l’avancée de la dématérialisation, et l'expérience usager de façon très concrète.
 
@@ -239,7 +239,7 @@
             ==Vous êtes porteur ou porteuse d’un service public numérique ?==
 
             (% class='usagerow-description' %)
-            Même si votre démarche n’est pas parmi les 250 suivies dans l’Observatoire, vous pouvez utiliser l’outil Je donne mon avis afin de suivre en temps réel la satisfaction des usagers.
+            Même si votre démarche n’est pas parmi les 250 suivies par le service Vos démarches essentielles, vous pouvez utiliser l’outil Je donne mon avis afin de suivre en temps réel la satisfaction des usagers.
 
             (% class='seemore-button-container' %)
             [[$services.localization.render('wikidemarches.usagerow.button')&gt;&gt;je-donne-mon-avis.WebHome||class='btn btn-default']]
