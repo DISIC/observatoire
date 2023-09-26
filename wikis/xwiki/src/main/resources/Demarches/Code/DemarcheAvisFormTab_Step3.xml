@@ -49,7 +49,7 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;img class='list-icon' aria-hidden="true" src="$xwiki.getSkinFile("uicomponents/custom-wikidemarches/icons/award.svg")"/&gt;
-    &lt;p class='fr-mb-6v'&gt;Si cette démarche est suivie dans l’&lt;a href='https://observatoire.numerique.gouv.fr'&gt;Observatoire de la qualité des services numériques&lt;/a&gt;, votre note de satisfaction sera prise en compte dans le résultat affiché dans la colonne « Usagers satisfaits ».&lt;/p&gt;
+    &lt;p class='fr-mb-6v'&gt;Si cette démarche est suivie dans le &lt;a href='https://observatoire.numerique.gouv.fr'&gt;service Vos démarches essentielles&lt;/a&gt;, votre note de satisfaction sera prise en compte dans le résultat affiché dans la colonne « Usagers satisfaits ».&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p class='fr-text--lg fr-text--bold fr-mb-4v'&gt;Vous souhaitez aller plus loin ?&lt;/p&gt;
